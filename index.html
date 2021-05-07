@@ -10,16 +10,16 @@
   <input type="file" name="aaronimage" id="aaronimage">
   <canvas id="canvas" width="1920" height=1080 style="filter: FlipV; transform: scale(1, -1);"></canvas>
 </body>
-<script src="aa11test.js" type="text/javascript"></script>
+<script src="test.js" type="text/javascript"></script>
 <script src="script.js"></script>
 <script>
-  renderImage(imgtest)
+  renderImage(test_img);
 </script>
 <script type="text/javascript">
   document.getElementById('aaronimage').addEventListener('change', function() { 
     let fr = new FileReader();
     fr.onload = function(event) {
-        renderImage(fr.result)
+        renderImage(fr.result);
     }
     fr.readAsText(this.files[0]); 
   }) 

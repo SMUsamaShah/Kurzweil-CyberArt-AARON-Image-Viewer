@@ -1,3 +1,3 @@
-# web-platform-tezyub
+# Kurzweil CyberArt AARON Image Viewer
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-tezyub)
+View image files generate by AARON. These are saved as aa0, aa1, aa2, aa3, ...., aa15 in C:\temp\
