@@ -69,28 +69,28 @@ function renderImage(imgFileText) {
         ctx.lineWidth = brush_size;
         break;
       case 'e':
-        moveBrush(++x, y);
+        line(++x, y);
         break;
       case 'f':
-        moveBrush(++x, ++y);
+        line(++x, ++y);
         break;
       case 'g':
-        moveBrush(x, ++y);
+        line(x, ++y);
         break;
       case 'h':
-        moveBrush(--x, ++y);
+        line(--x, ++y);
         break;
       case 'i':
-        moveBrush(--x, y);
+        line(--x, y);
         break;
       case 'j':
-        moveBrush(--x, --y);
+        line(--x, --y);
         break;
       case 'k':
-        moveBrush(x, --y);
+        line(x, --y);
         break;
       case 'l':
-        moveBrush(++x, --y);
+        line(++x, --y);
         break;
       case 'am':
         // ctx.stroke();
@@ -128,14 +128,6 @@ function renderImage(imgFileText) {
         ctx.stroke();
         ctx.closePath();
     }
-  }
-
-  function moveBrush(x, y) {
-    // ctx.beginPath();
-    // ctx.lineTo(x, y);
-    // ctx.stroke();
-    // ctx.closePath();
-    line(x, y);
   }
 
   function line(x, y) {
