@@ -136,7 +136,7 @@ function renderImage(imgFileText) {
     ctx.moveTo(px, py);
     ctx.lineTo(x, y);
     ctx.stroke();
-    ctx.closePath();
+    //ctx.closePath();
     px = x;
     py = y;
   }
