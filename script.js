@@ -30,6 +30,9 @@ function renderImage(imgFileText) {
   ctx.canvas.height = res_y;
   ctx.lineCap = 'round';
 
+  ctx.translate(0, res_y);
+  ctx.scale(1, -1);
+
   ctx.fillStyle = '#C8C8C8';
   ctx.fillRect(0, 0, res_x, res_y);
 
