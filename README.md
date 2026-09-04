@@ -14,6 +14,14 @@ The images it generates can not be saved/exported normally and you can only take
 
 This viewer can be used to view and save those files.
 
+## Engine reimplementation
+
+The active reverse-engineering work lives in [`engine/`](engine/) and
+[`research/`](research/). The goal is a clean-room JavaScript implementation of
+the 2001 KCAT AARON generator, tested against observable output from the
+archived Windows program. Proprietary runtime binaries and bulk generated
+corpora are deliberately not committed.
+
 ## Links about AARON
 
 - https://en.wikipedia.org/wiki/AARON

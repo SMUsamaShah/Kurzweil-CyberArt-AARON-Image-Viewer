@@ -1,0 +1,93 @@
+name: AARON original-engine oracle
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Original host mode
+        required: true
+        default: direct-screensaver
+        type: choice
+        options:
+          - direct-screensaver
+          - screensaver
+          - application
+      run_seconds:
+        description: Maximum seconds per probe
+        required: true
+        default: '360'
+        type: string
+      target_paintings:
+        description: Stop after this many complete files
+        required: true
+        default: '1'
+        type: string
+  push:
+    branches:
+      - reverse-engineer-aaron-js
+    paths:
+      - '.github/workflows/aaron-oracle.yml'
+      - 'research/oracle/**'
+      - 'research/tools/extract-installer.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: ${{ matrix.variant }}
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - variant: normal
+            kcat_debug: false
+          - variant: kcat-debug
+            kcat_debug: true
+    env:
+      ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
+      ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
+      ORACLE_TARGET_PAINTINGS: ${{ inputs.target_paintings || '1' }}
+
+    steps:
+      - name: Check out research harness without credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download and verify the archived installer
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+
+      - name: Run isolated original-engine probe
+        shell: pwsh
+        run: |
+          $parameters = @{
+            ExtractedRoot = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+            OutputRoot = Join-Path $PWD 'research\artifacts\oracle'
+            Mode = $env:ORACLE_MODE
+            RunSeconds = [int]$env:ORACLE_RUN_SECONDS
+            TargetPaintings = [int]$env:ORACLE_TARGET_PAINTINGS
+          }
+          if ('${{ matrix.kcat_debug }}' -eq 'true') {
+            $parameters.KcatDebug = $true
+          }
+          & research/oracle/run-oracle.ps1 @parameters
+
+      - name: Upload oracle evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aaron-oracle-${{ matrix.variant }}
+          path: research/artifacts/oracle
+          if-no-files-found: warn
+          retention-days: 14
+
