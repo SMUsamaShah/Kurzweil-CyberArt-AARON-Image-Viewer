@@ -36,16 +36,27 @@ permissions:
 jobs:
   probe:
     name: ${{ matrix.variant }}
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         include:
-          - variant: normal
+          - variant: win2022-normal
+            os: windows-2022
             kcat_debug: false
-          - variant: kcat-debug
-            kcat_debug: true
+            acl_debug: false
+            compatibility: ''
+          - variant: win2022-xp-compat
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: WINXPSP3
+          - variant: win2022-acl-debug
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: true
+            compatibility: ''
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -80,6 +91,10 @@ jobs:
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
             $parameters.KcatDebug = $true
           }
+          if ('${{ matrix.acl_debug }}' -eq 'true') {
+            $parameters.AclStartupDebug = $true
+          }
+          $parameters.CompatibilityLayer = '${{ matrix.compatibility }}'
           & research/oracle/run-oracle.ps1 @parameters
 
       - name: Upload oracle evidence
@@ -90,4 +105,3 @@ jobs:
           path: research/artifacts/oracle
           if-no-files-found: warn
           retention-days: 14
-

@@ -21,3 +21,11 @@ Run the current tests with:
 cd engine
 npm test
 ```
+
+Create machine-readable structural measurements for one or more original
+outputs with:
+
+```sh
+cd engine
+npm run analyze -- ../aa0 ../aa7
+```

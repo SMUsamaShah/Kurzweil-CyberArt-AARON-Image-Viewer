@@ -63,5 +63,7 @@ than storing a small set of prerecorded paintings.
 
 The screensaver host checks the environment variable `KCAT_AARON_DEBUG` using
 the C runtime `getenv` function. The launcher separately checks
-`ACL_STARTUP_DEBUG`. Their exact effects still require dynamic confirmation;
-neither should yet be described as a hidden-quality switch.
+`ACL_STARTUP_DEBUG`. Static control-flow analysis establishes that the former
+changes a normally off-screen helper window and the latter changes Allegro
+runtime startup diagnostics. See [`host-protocol.md`](host-protocol.md) for the
+address-level evidence. Neither is a hidden-quality switch.

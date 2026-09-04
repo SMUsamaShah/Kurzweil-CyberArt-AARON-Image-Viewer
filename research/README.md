@@ -42,6 +42,8 @@ screenshots.
   the archived installer.
 - [`aa-format.md`](aa-format.md) — current specification of the interchange
   format.
+- [`host-protocol.md`](host-protocol.md) — screensaver launch behavior and
+  exact scope of the two discovered diagnostic environment variables.
 - [`oracle.md`](oracle.md) — dynamic-analysis and corpus protocol.
 
 ## Tools

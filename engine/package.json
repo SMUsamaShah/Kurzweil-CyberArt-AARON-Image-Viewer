@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "analyze": "node bin/analyze-aa.js",
     "test": "node --test"
   }
 }

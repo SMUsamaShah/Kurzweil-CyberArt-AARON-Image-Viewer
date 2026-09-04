@@ -59,5 +59,17 @@ implements the first reproducible probe. It verifies every extracted runtime
 file, silently installs the MSI to initialize legitimate trial state, removes
 runner credentials from the child-process environment, blocks the original
 executables from outbound network access, captures registry/process evidence,
-and uploads only logs plus generated AA files. Its two variants compare the
-default environment with `KCAT_AARON_DEBUG=1`.
+and uploads only logs plus generated AA files. Probe variants can compare OS
+compatibility layers and Allegro startup diagnostics. The screensaver-host
+debug switch is tested only when host lifecycle evidence is needed.
+
+## First probe result
+
+Run 1 on Windows Server 2025 established that silent installation and trial
+registry initialization work. Both direct-engine variants exited after about
+six seconds with `0xC00000FD` (`STATUS_STACK_OVERFLOW`) before producing an AA
+file. The identical results with and without `KCAT_AARON_DEBUG` are consistent
+with the static finding that the variable is read by the screensaver host, not
+the engine. Follow-up probes target Windows Server 2022, the Windows XP
+compatibility layer, and `ACL_STARTUP_DEBUG`, and now capture Application event
+log records for fault-module evidence.

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+import { analyzeAaDocument } from '../src/aa-analysis.js';
 import { AaFormatError, parseAaFile } from '../src/aa-format.js';
 
 async function sample(name) {
@@ -44,4 +45,20 @@ test('requires both phase markers', () => {
     () => parseAaFile('10 10 1\n0 0 0\nam 0 0\nend\n'),
     /end appears before color/,
   );
+});
+
+test('produces comparable corpus measurements', async () => {
+  const analysis = analyzeAaDocument(parseAaFile(await sample('aa0')));
+  assert.deepEqual(analysis.canvas, { width: 1920, height: 1080 });
+  assert.equal(analysis.outline.commands.am, 280);
+  assert.equal(analysis.outline.commands.ad, 3_267);
+  assert.equal(analysis.paint.commands.nb, 99);
+  assert.equal(analysis.paint.commands.nc, 3_853);
+  assert.equal(analysis.paint.chainSegments, 220_793);
+  assert.deepEqual(analysis.paint.bounds, {
+    minX: 3,
+    maxX: 1_920,
+    minY: 5,
+    maxY: 1_080,
+  });
 });

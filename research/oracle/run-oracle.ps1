@@ -17,6 +17,7 @@ param(
 
     [switch]$KcatDebug,
     [switch]$AclStartupDebug,
+    [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
 )
 
@@ -166,12 +167,13 @@ try {
         [Environment]::SetEnvironmentVariable($name, $null, 'Process')
     }
 
-    foreach ($name in @('KCAT_AARON_DEBUG', 'ACL_STARTUP_DEBUG')) {
+    foreach ($name in @('KCAT_AARON_DEBUG', 'ACL_STARTUP_DEBUG', '__COMPAT_LAYER')) {
         $OriginalEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
         [Environment]::SetEnvironmentVariable($name, $null, 'Process')
     }
     if ($KcatDebug) { $env:KCAT_AARON_DEBUG = '1' }
     if ($AclStartupDebug) { $env:ACL_STARTUP_DEBUG = '1' }
+    if ($CompatibilityLayer) { $env:__COMPAT_LAYER = $CompatibilityLayer }
 
     @($aaronExe, $screenSaver, $portableExe, $portableScreenSaver) |
         Select-Object -Unique |
@@ -226,6 +228,17 @@ try {
     }
 
     Write-ProcessSnapshot (Join-Path $LogRoot 'processes-before-stop.json')
+    Get-WinEvent -FilterHashtable @{
+        LogName = 'Application'
+        StartTime = $startedAt.UtcDateTime.AddSeconds(-5)
+    } -ErrorAction SilentlyContinue |
+        Where-Object {
+            $_.ProviderName -match 'Application Error|Windows Error Reporting' -and
+            $_.Message -match 'AARON'
+        } |
+        Select-Object TimeCreated, ProviderName, Id, LevelDisplayName, Message |
+        ConvertTo-Json -Depth 4 |
+        Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'windows-errors.json')
     Get-Process -Name 'AARON', 'AARON_ScreenSaver' -ErrorAction SilentlyContinue |
         Stop-Process -Force -ErrorAction SilentlyContinue
     if (-not $process.HasExited) {
@@ -251,10 +264,18 @@ try {
 
     Write-RegistrySnapshot (Join-Path $LogRoot 'registry-after.txt')
     $finishedAt = [DateTimeOffset]::UtcNow
+    $exitCode = if ($process.HasExited) { $process.ExitCode } else { $null }
+    $exitCodeHex = if ($null -ne $exitCode) {
+        $unsignedExitCode = [BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$exitCode), 0)
+        '0x{0:X8}' -f $unsignedExitCode
+    } else {
+        $null
+    }
     $summary = [ordered]@{
         mode = $Mode
         kcatDebug = [bool]$KcatDebug
         aclStartupDebug = [bool]$AclStartupDebug
+        compatibilityLayer = $CompatibilityLayer
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')
@@ -264,7 +285,8 @@ try {
         msiInstallExitCode = $installExitCode
         process = [ordered]@{
             id = $process.Id
-            initialExitCode = if ($process.HasExited) { $process.ExitCode } else { $null }
+            exitCode = $exitCode
+            exitCodeHex = $exitCodeHex
             executable = if ($Mode -eq 'screensaver') { $screenSaver } else { $aaronExe }
             workingDirectory = $workingDirectory
         }
@@ -291,4 +313,3 @@ try {
     }
     if ($TranscriptStarted) { Stop-Transcript | Out-Null }
 }
-
