@@ -49,6 +49,7 @@ $RegistryPatchResult = $null
 $LicensePatchResult = $null
 $PremiumFlagPatchResult = $null
 $PremiumFlagMarkerPath = 'C:\temp\aaron-premium-flag-loaded.txt'
+$PremiumFlagIntrospectionPath = 'C:\temp\aaron-premium-introspection.txt'
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -354,6 +355,9 @@ try {
 
     if ($PatchPremiumFlag -and (Test-Path $PremiumFlagMarkerPath -PathType Leaf)) {
         Copy-Item -LiteralPath $PremiumFlagMarkerPath -Destination (Join-Path $LogRoot 'premium-flag-runtime.txt') -Force
+    }
+    if ($PatchPremiumFlag -and (Test-Path $PremiumFlagIntrospectionPath -PathType Leaf)) {
+        Copy-Item -LiteralPath $PremiumFlagIntrospectionPath -Destination (Join-Path $LogRoot 'premium-introspection.txt') -Force
     }
 
     $captured = @()
