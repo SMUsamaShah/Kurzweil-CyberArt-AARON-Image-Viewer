@@ -51,8 +51,15 @@ function mergeCommandCounts(channel) {
   return counts;
 }
 
+function countValues(list) {
+  const counts = {};
+  for (const value of list) counts[value] = (counts[value] ?? 0) + 1;
+  return Object.fromEntries(Object.entries(counts).sort(([left], [right]) => left.localeCompare(right)));
+}
+
 const canvasKeys = new Set(records.map(({ analysis }) =>
   `${analysis.canvas.width}x${analysis.canvas.height}`));
+const canvasSizes = records.map(({ analysis }) => `${analysis.canvas.width}x${analysis.canvas.height}`);
 const paletteSizes = values(({ analysis }) => analysis.palette.entries);
 const outlineOperations = values(({ analysis }) => analysis.outline.operations);
 const paintOperations = values(({ analysis }) => analysis.paint.operations);
@@ -64,6 +71,8 @@ console.log(JSON.stringify({
   root,
   files: records.length,
   canvasSizes: [...canvasKeys].sort(),
+  canvasSizeCounts: countValues(canvasSizes),
+  paletteEntryCounts: countValues(paletteSizes),
   paletteEntries: range(paletteSizes),
   outlineOperations: range(outlineOperations),
   paintOperations: range(paintOperations),
