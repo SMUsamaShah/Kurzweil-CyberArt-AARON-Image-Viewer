@@ -50,6 +50,7 @@ jobs:
             compatibility: ''
             native_trace: true
             patch_registry: false
+            target_paintings: 1
           - variant: dep-exception-paint
             os: windows-2022
             kcat_debug: false
@@ -57,6 +58,7 @@ jobs:
             compatibility: ''
             native_trace: false
             patch_registry: false
+            target_paintings: 1
           - variant: registry-running-patch-trace
             os: windows-2022
             kcat_debug: false
@@ -64,6 +66,7 @@ jobs:
             compatibility: ''
             native_trace: true
             patch_registry: true
+            target_paintings: 1
           - variant: registry-running-patch-paint
             os: windows-2022
             kcat_debug: false
@@ -71,6 +74,7 @@ jobs:
             compatibility: ''
             native_trace: false
             patch_registry: true
+            target_paintings: 16
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -100,7 +104,11 @@ jobs:
             OutputRoot = Join-Path $PWD 'research\artifacts\oracle'
             Mode = $env:ORACLE_MODE
             RunSeconds = [int]$env:ORACLE_RUN_SECONDS
-            TargetPaintings = [int]$env:ORACLE_TARGET_PAINTINGS
+            TargetPaintings = if ('${{ github.event_name }}' -eq 'workflow_dispatch') {
+              [int]$env:ORACLE_TARGET_PAINTINGS
+            } else {
+              [int]'${{ matrix.target_paintings }}'
+            }
             NativeTrace = '${{ matrix.native_trace }}' -eq 'true'
             DisableAaronDep = $true
             PatchRegistryRunning = '${{ matrix.patch_registry }}' -eq 'true'
