@@ -35,7 +35,7 @@ function analyzeOperations(operations) {
   for (const operation of operations) {
     increment(commands, operation.command);
 
-    if (operation.command in aaDirectionDeltas) {
+    if (Object.hasOwn(aaDirectionDeltas, operation.command)) {
       if (!hasPosition) {
         includePoint(bounds, x, y);
         hasPosition = true;
@@ -117,4 +117,3 @@ export function analyzeAaDocument(document) {
     paint: analyzeOperations(document.paint),
   };
 }
-

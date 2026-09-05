@@ -29,6 +29,7 @@ on:
       - '.github/workflows/aaron-oracle.yml'
       - 'research/oracle/**'
       - 'research/tools/extract-installer.mjs'
+      - 'research/tools/patch-registry-running.ps1'
 
 permissions:
   contents: read
@@ -48,12 +49,28 @@ jobs:
             acl_debug: false
             compatibility: ''
             native_trace: true
+            patch_registry: false
           - variant: dep-exception-paint
             os: windows-2022
             kcat_debug: false
             acl_debug: false
             compatibility: ''
             native_trace: false
+            patch_registry: false
+          - variant: registry-running-patch-trace
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: true
+            patch_registry: true
+          - variant: registry-running-patch-paint
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -86,6 +103,7 @@ jobs:
             TargetPaintings = [int]$env:ORACLE_TARGET_PAINTINGS
             NativeTrace = '${{ matrix.native_trace }}' -eq 'true'
             DisableAaronDep = $true
+            PatchRegistryRunning = '${{ matrix.patch_registry }}' -eq 'true'
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
             $parameters.KcatDebug = $true

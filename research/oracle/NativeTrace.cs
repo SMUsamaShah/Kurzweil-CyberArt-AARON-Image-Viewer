@@ -31,6 +31,39 @@ public static class AaronNativeTrace
     static extern uint GetMappedFileNameW(IntPtr process, IntPtr address, StringBuilder name, uint size);
     [DllImport("kernel32.dll", SetLastError = true)]
     static extern bool GetProcessDEPPolicy(IntPtr process, out uint flags, out bool permanent);
+    delegate bool EnumWindowProc(IntPtr window, IntPtr parameter);
+    [DllImport("user32.dll")] static extern bool EnumWindows(EnumWindowProc callback, IntPtr parameter);
+    [DllImport("user32.dll")] static extern bool EnumChildWindows(IntPtr parent, EnumWindowProc callback, IntPtr parameter);
+    [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr window, out uint pid);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    static extern int GetClassNameW(IntPtr window, StringBuilder text, int size);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    static extern IntPtr SendMessageTimeoutW(IntPtr window, uint message, IntPtr wparam,
+        StringBuilder text, uint flags, uint timeout, out IntPtr result);
+
+    public static void Snapshot(uint pid, string output)
+    {
+        using (var log = new StreamWriter(output)) {
+            EnumWindowProc write = (window, parameter) => {
+                var text = new StringBuilder(2048);
+                var kind = new StringBuilder(256);
+                IntPtr result;
+                GetClassNameW(window, kind, kind.Capacity);
+                SendMessageTimeoutW(window, 13, new IntPtr(text.Capacity), text, 2, 100, out result);
+                log.WriteLine("window=0x{0:X} class={1} text={2}", window.ToInt64(), kind, text);
+                return true;
+            };
+            EnumWindows((window, parameter) => {
+                uint owner;
+                GetWindowThreadProcessId(window, out owner);
+                if (owner == pid) {
+                    write(window, IntPtr.Zero);
+                    EnumChildWindows(window, write, IntPtr.Zero);
+                }
+                return true;
+            }, IntPtr.Zero);
+        }
+    }
 
     static uint U32(IntPtr p, int offset) { return unchecked((uint)Marshal.ReadInt32(p, offset)); }
     static ulong U64(IntPtr p, int offset) { return unchecked((ulong)Marshal.ReadInt64(p, offset)); }
@@ -85,6 +118,7 @@ public static class AaronNativeTrace
                     if (exited) break;
                 }
                 log.WriteLine("finished elapsed={0:F3} exceptions={1} exited={2}", timer.Elapsed.TotalSeconds, exceptions, exited);
+                if (!exited) Snapshot(process.pid, Path.ChangeExtension(output, ".windows.txt"));
             } finally {
                 if (!exited) TerminateProcess(process.process, 0xDEAD);
                 Marshal.FreeHGlobal(evt);

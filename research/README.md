@@ -45,8 +45,14 @@ screenshots.
 - [`host-protocol.md`](host-protocol.md) — screensaver launch behavior and
   exact scope of the two discovered diagnostic environment variables.
 - [`oracle.md`](oracle.md) — dynamic-analysis and corpus protocol.
+- [`startup-findings.md`](startup-findings.md) — verified DEP fault and seed-related leads.
 
 ## Tools
 
 `tools/extract-installer.mjs` safely extracts and verifies the archived
 installer. It never executes the Windows binaries.
+
+`tools/patch-registry-running.ps1` is a disposable-oracle diagnostic. It
+requires the exact extracted `registry.dll` hash before applying a temporary
+entry-point patch to the legacy process/version check; it is not part of the
+clean-room JavaScript engine.

@@ -19,6 +19,7 @@ param(
     [switch]$AclStartupDebug,
     [switch]$NativeTrace,
     [switch]$DisableAaronDep,
+    [switch]$PatchRegistryRunning,
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
 )
@@ -40,6 +41,7 @@ $TranscriptStarted = $false
 $FirewallRules = [Collections.Generic.List[string]]::new()
 $OriginalEnvironment = @{}
 $DepOverrideApplied = $false
+$RegistryPatchResult = $null
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -161,6 +163,22 @@ try {
         $installedScreenSaver
     } else {
         $portableScreenSaver
+    }
+
+    if ($PatchRegistryRunning) {
+        $registryPath = Join-Path $workingDirectory 'registry.dll'
+        $registryEntry = $manifest.files |
+            Where-Object { $_.installedName -eq 'registry.dll' } |
+            Select-Object -First 1
+        if ($null -eq $registryEntry) {
+            throw 'The extraction manifest has no registry.dll hash'
+        }
+        $patchScript = Join-Path $PSScriptRoot '..\tools\patch-registry-running.ps1'
+        $patchJson = & $patchScript -Path $registryPath -ExpectedSha256 $registryEntry.sha256
+        $RegistryPatchResult = $patchJson | ConvertFrom-Json
+        $RegistryPatchResult |
+            ConvertTo-Json -Depth 8 |
+            Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'registry-patch.json')
     }
 
     $credentialVariables = @(
@@ -313,6 +331,8 @@ try {
         aclStartupDebug = [bool]$AclStartupDebug
         compatibilityLayer = $CompatibilityLayer
         depException = [bool]$DisableAaronDep
+        patchRegistryRunning = [bool]$PatchRegistryRunning
+        registryPatch = $RegistryPatchResult
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')

@@ -46,7 +46,7 @@ function parseOperation(line, lineNumber, colorCount) {
   const parts = line.split(/\s+/);
   const command = parts[0];
 
-  if (command in DIRECTION_DELTAS) {
+  if (Object.hasOwn(DIRECTION_DELTAS, command)) {
     expectArity(parts, 0, lineNumber);
     return { command, lineNumber };
   }
@@ -197,7 +197,7 @@ function drawOperations(context, operations, palette, initialStyle) {
   };
 
   for (const operation of operations) {
-    if (operation.command in DIRECTION_DELTAS) {
+    if (Object.hasOwn(DIRECTION_DELTAS, operation.command)) {
       const [deltaX, deltaY] = DIRECTION_DELTAS[operation.command];
       lineTo(x + deltaX, y + deltaY);
       continue;

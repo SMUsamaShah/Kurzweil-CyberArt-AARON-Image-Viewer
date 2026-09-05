@@ -47,6 +47,13 @@ test('requires both phase markers', () => {
   );
 });
 
+test('rejects inherited object names as unknown stroke commands', () => {
+  for (const command of ['constructor', 'toString', '__proto__']) {
+    assert.throws(() => parseAaFile(`10 10 1\n0 0 0\ncolor\n${command}\nend\n`),
+      /unknown command/);
+  }
+});
+
 test('produces comparable corpus measurements', async () => {
   const analysis = analyzeAaDocument(parseAaFile(await sample('aa0')));
   assert.deepEqual(analysis.canvas, { width: 1920, height: 1080 });
