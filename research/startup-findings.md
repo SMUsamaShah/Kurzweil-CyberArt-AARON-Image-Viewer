@@ -112,9 +112,10 @@ offsets within that file, not function addresses or proof of reachable code.
 The same image contains the literal documentation string “Implement the
 Mersenne Twister (MT19937) Random Number Generator” and symbols for
 `RANDOM-STATE-MTI`, `INIT-RANDOM`, `SET-RANDOM`, and `NEW-RANDOM-FIXNUM`.
-The JavaScript engine now uses a standard MT19937 core behind a replaceable
-random-source API. This is a verified implementation lead, not yet proof that
-the initial seed or every Common Lisp numeric conversion matches the product.
+The targeted random probes now recover the older 69069 initialization,
+the final-word twist behavior, and the integer/float conversions. The clean-room
+implementation is in `engine/src/allegro-random.js` and is tested against 6,140
+values. This still does not identify AARON's startup seed or painting draw order.
 
 The bundled `license.dll` resource says Premium includes “enhanced artistic
 content,” in addition to saving/reviewing and printing. Its exported
@@ -166,8 +167,10 @@ different AA hashes therefore do not demonstrate later reseeding. Furthermore,
 `*INTERNAL-RANDOM-STATE*` is a BIGNUM, while `*RANDOM-STATE*` is a RANDOM-STATE
 object: assigning the same object to both would be invalid. The replacement
 `introspection/random-reference.cl` uses dynamic symbol lookup and explicit
-fresh states for isolated calls. It has not yet produced reference vectors.
-See [runtime-introspection.md](runtime-introspection.md) for the evidence.
+fresh states for isolated calls. Its short reference vectors and the longer
+validation set are preserved in [random-findings.md](random-findings.md); the
+state seed and painting draw order remain unresolved. See
+[runtime-introspection.md](runtime-introspection.md) for the evidence.
 
 Application mode remains a separate UI path. Its `Ctrl+O`/Paint One command
 produces a complete 320×480/148-color file in both trial and return-1 runs, but

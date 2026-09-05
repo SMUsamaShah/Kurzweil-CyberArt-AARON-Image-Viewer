@@ -51,8 +51,15 @@ of our own implementation.
 - [`startup-findings.md`](startup-findings.md) — verified DEP fault and seed-related leads.
 - [`runtime-introspection.md`](runtime-introspection.md) — live function inventory,
   retained signatures, and corrections to the failed seed experiment.
+- [`introspection/function-groups.md`](introspection/function-groups.md) — a
+  deterministic name-only grouping of the retained symbols for probe planning.
 - [`freehand-line.md`](freehand-line.md) — Paul Cohen's article supplied by Usama,
   its relevance to the 2001 build, and the next line-algorithm probe.
+- [`tools/parse-function-constants.mjs`](tools/parse-function-constants.mjs) — strict
+  parser for the bounded compiled-function constant report produced by the next
+  Windows probe.
+- [`random-findings.md`](random-findings.md) — Allegro 5.0.1 MT initialization,
+  numeric conversions, and 6,140 parity vectors.
 
 ## Tools
 

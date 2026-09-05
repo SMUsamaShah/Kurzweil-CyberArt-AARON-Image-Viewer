@@ -12,6 +12,15 @@ controlled whole-painting equivalence test has passed yet.
 | `runtime-census.txt` | [33966375745](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33966375745), artifact `9969556526` | Two completed startup invocations; 2,694 records, 1,347 unique application function bindings |
 | `routine-probe.txt` | [33966545590](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33966545590), artifact `9969605928` | Fifteen argument lists obtained; every disassembly attempt reports missing `disasm.fasl` |
 | `aaron-seed-loaded.txt` | [33962045540](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33962045540), seeded-trial-1234 artifact `9968241681` | Only the entry marker exists; the seed-installation experiment did not complete |
+| `line-metadata.txt` | [33970753206](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33970753206), artifact `9970845639` | All 23 line/brush candidates completed; retained types and argument lists recorded |
+| `random-reference.txt` | [33970753206](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33970753206), artifact `9970846142` | 48 short integer/float/RAN vectors completed |
+| `random-validation.txt` | [33971190965](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33971190965), artifact `9970968646` | 73 vectors and 6,140 values, including 1,300-call twist-boundary sequences |
+| `object-probe.txt` | [33971190965](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33971190965), artifact `9970968767` | Read-only headers for five compiled functions; no writes or disassembly |
+
+The local workflow also contains a not-yet-run `function-constants` probe. It
+uses the retained Allegro helper names `FUNCTION-CONSTANT-COUNT` and
+`FUNCTION-CONSTANT` to inspect at most 256 summarized constants per candidate;
+it does not call AARON drawing, planning, or mapping routines.
 
 Report SHA-256 values, respectively:
 
@@ -23,6 +32,9 @@ Report SHA-256 values, respectively:
 
 The artifact reports are temporary. The sorted function names and census
 provenance are preserved in [function-inventory.json](introspection/function-inventory.json).
+The name-only candidate groups used to prioritize the next probes are preserved
+in [function-groups.md](introspection/function-groups.md); they are deliberately
+not treated as evidence of call order or implementation.
 This inventory counts own symbols in `COMMON-GRAPHICS-USER` with `FBOUNDP`
 true. It includes generated accessors and host/UI routines. It is not a count
 of recovered algorithms, successfully invoked functions, or ported functions.
@@ -53,6 +65,13 @@ Names and argument lists establish callable interfaces, not parameter types,
 side effects, valid inputs, or behavior. `EXCL::RANDOM-INT` exists as a symbol
 but has no function binding in the census.
 
+The line metadata probe adds retained signatures for `FOLLOW`, `WIGGLE`,
+`LOCK-WIGGLE`, `PREP-LINE`, `HOP-OR-DRAW`, `PARSE-HOP`, `PARSE-P-HOP`,
+`DIRECTION`, `ANGLE-DIF`, `ANGLE-RANGE`, `RESET-RANGE`, `FROM-ANGLE`,
+`TO-ANGLE`, `RAN-HAND`, `RECORD-BRUSH`, `MAPLINE`, `LINE-MAPPING`,
+`DRAW-CFORM`, `BRUSH-FILL`, and `BRUSH-FILL-SUBPART`. The complete table and
+interpretation questions are in [freehand-line.md](freehand-line.md).
+
 ## Corrections that affect the next experiment
 
 1. **Seed installation was never demonstrated.** The old `seed-1234.cl`,
@@ -79,33 +98,43 @@ but has no function binding in the census.
    width, but ordinary compact corpora contain both 320 and 640 widths.
    Recover `SELECT-CANVAS` before presenting width halving as universal.
 
-## Prepared probes, not yet executed
+## Follow-up probe results
 
-The last GitHub write was rejected by automatic approval review because of
-an account usage limit. The following probes are prepared locally; this note
-does not claim they ran or yielded results:
+The earlier targeted Windows jobs succeeded and their artifact links above are
+stable. The current local workflow extension has not yet run: the local commits
+are still pending because the GitHub write review rejected the publish attempt.
+The remaining limitations are therefore both workflow access and behavior
+recovery; no new remote artifact is claimed below.
 
-- `object-probe.cl`: inspect bounded function-object headers and available
-  memory-access helper signatures as an alternative to the missing Lisp
-  disassembler. No memory writes. Header layout and helper availability are
-  still unknown; any raw-address interpretation requires validation.
-- `random-reference.cl`: call the dynamically resolved seed factory with fresh
-  explicit states, then collect integer, single-float, and double-float output.
-  Separately test whether a dynamic `*RANDOM-STATE*` binding controls `RAN`.
-  No assignments to the internal BIGNUM state are made.
-- `line-metadata.cl`: obtain retained signatures for 23 line/brush candidates
-  identified after reading [Paul Cohen's article](freehand-line.md). It calls
-  metadata helpers, not the application drawing routines. A completion marker
-  and a separate success marker distinguish completion from errors.
+- `object-probe.cl` obtained safe memory-helper signatures and 64-byte
+  read-only headers for `INIT-RANDOM`, `SET-RANDOM`, `GET-RANDOM`,
+  `SET-UP-SCREEN-SIZE`, and `SELECT-CANVAS`. The headers are retained evidence,
+  not decoded machine code; the missing disassembler still prevents a
+  source-level reconstruction.
+- `random-reference.cl` and `random-validation.cl` produced the numeric vectors
+  documented in [random-findings.md](random-findings.md). The JS parity tests
+  compare all 6,140 validation values.
+- `line-metadata.cl` completed all 23 candidates. It deliberately records
+  metadata only; no drawing routine was invoked.
 
-No original RNG vectors or FLA point sequences have been recovered by these
-pending probes. The current MT19937 tests check a standard reference generator,
-not Allegro 5.0.1 parity. Full generator equivalence also requires matching
-random draw order, numeric conversions, planning, geometry, color, and emission.
+No FLA point sequence or whole-painting equivalence has been recovered yet.
+Full generator equivalence still requires matching random draw order, planning,
+geometry, colour, and emission.
 
-The local workflow also makes the broad corpus matrix manual-only. Publishing
-routine research changes will run the three targeted introspection jobs rather
-than regenerate the large corpus. This workflow change is not yet on GitHub.
+The next report can be converted without evaluating Lisp:
+
+```sh
+node research/tools/parse-function-constants.mjs /path/to/function-constants.txt \
+  https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/RUN_ID \
+  > research/introspection/function-constants.json
+node --test research/tools/test/function-constants.test.mjs
+```
+
+The parser accepts only the probe's checkpointed summary records, preserves
+the original report hash, and rejects truncation or unsupported values.
+
+The broad corpus matrix is manual-only. Routine research changes run targeted
+introspection jobs rather than regenerating the large corpus.
 
 ## Reproduce the saved inventory
 

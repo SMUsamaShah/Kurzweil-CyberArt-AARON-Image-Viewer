@@ -10,7 +10,9 @@ The implementation is being built in independently testable layers:
 1. Parse and render AARON's `AA0`–`AA15` interchange files.
 2. Reconstruct drawing primitives and the freehand line system.
 3. Reconstruct the observed MT19937 random source and calibrate seed/state
-   semantics against the original oracle.
+   semantics against the original oracle. The Allegro 5.0.1 numeric path is
+   now available as an explicit `Allegro501Random` source; AARON's startup seed
+   and draw order are still unresolved.
 4. Reconstruct spatial planning, composition, and occlusion.
 5. Reconstruct figures, poses, garments, pots, plants, and trees.
 6. Reconstruct palette selection, filling, and brushwork.
@@ -39,6 +41,13 @@ Generate a deterministic clean-room scene in the same AA format with:
 ```sh
 cd engine
 npm run generate -- --seed 1234 --small --out /tmp/aaron-aa0
+```
+
+For experiments using the recovered Allegro numeric source (not an exact scene
+reproduction), add `--allegro-rng`:
+
+```sh
+npm run generate -- --seed 1234 --allegro-rng --small --out /tmp/aaron-aa0-allegro
 ```
 
 Normal-mode profile names `portrait`, `tall`, `square`, and `wide` expose the
@@ -76,5 +85,8 @@ Cohen's matrix notes.
 
 The freehand line algorithm is still missing. [Paul Cohen's article and the
 recovery plan](../research/freehand-line.md) are saved in the research folder.
-The RNG uses standard MT19937 reference seeding; compatibility with Allegro
-5.0.1 seeding and its integer/float conversions remains unverified.
+`engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
+source. Its vectors and limitations are documented in
+[`../research/random-findings.md`](../research/random-findings.md). The scene
+generator does not select it by default yet because AARON's startup seed and
+draw order remain unknown.

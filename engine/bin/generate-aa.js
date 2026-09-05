@@ -2,6 +2,7 @@
 
 import { writeFile } from 'node:fs/promises';
 
+import { Allegro501Random } from '../src/allegro-random.js';
 import { generateAaron } from '../src/generator.js';
 import { serializeAaFile } from '../src/aa-format.js';
 
@@ -17,6 +18,9 @@ const profile = valueAfter('--profile');
 const screenWidth = valueAfter('--screen-width');
 const screenHeight = valueAfter('--screen-height');
 const output = valueAfter('--out');
+const numericRandom = args.includes('--allegro-rng')
+  ? new Allegro501Random(seed === undefined ? 5489 : Number(seed))
+  : undefined;
 const result = generateAaron({
   seed: seed === undefined ? undefined : Number(seed),
   figureCount: figures === undefined ? undefined : Number(figures),
@@ -25,6 +29,7 @@ const result = generateAaron({
   profile,
   smallImageScreenWidth: screenWidth === undefined ? undefined : Number(screenWidth),
   smallImageScreenHeight: screenHeight === undefined ? undefined : Number(screenHeight),
+  random: numericRandom,
 });
 const text = serializeAaFile(result.document);
 

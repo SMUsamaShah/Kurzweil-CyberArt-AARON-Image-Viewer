@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [object-probe, random-validation]
+        probe: [object-probe, random-validation, line-behavior, function-constants]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,15 +48,20 @@ jobs:
             $report = 'C:\temp\aaron-${{ matrix.probe }}.txt'
             if (Test-Path $report) {
               Copy-Item $report (Join-Path $output '${{ matrix.probe }}.txt')
+              if ('${{ matrix.probe }}' -in @('line-behavior', 'function-constants', 'object-probe')) {
+                Get-Content -LiteralPath $report
+              }
             }
           }
           if (-not (Test-Path $report)) { throw 'Probe never started' }
           if (-not (Select-String -LiteralPath $report -SimpleMatch 'END ${{ matrix.probe }}')) {
             throw 'Probe started but did not complete; inspect last checkpoint'
           }
-          if ('${{ matrix.probe }}' -eq 'line-metadata' -and
-              -not (Select-String -LiteralPath $report -SimpleMatch 'SUCCESS line-metadata')) {
-            throw 'Line metadata probe completed with errors; inspect report'
+          if ('${{ matrix.probe }}' -eq 'function-constants') {
+            node research/tools/parse-function-constants.mjs $report `
+              'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' `
+              > (Join-Path $output 'function-constants.json')
+            if ($LASTEXITCODE -ne 0) { throw 'Constant report validation failed' }
           }
       - uses: actions/upload-artifact@v4
         if: always()

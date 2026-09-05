@@ -49,8 +49,10 @@ without copying proprietary implementation details.
    absolute (`am`/`ad`, `zm`/`zd`) and chain-code operations.
 4. `generator.js` owns composition order and object families while preserving
    the planner/grid boundary.
-5. `random.js` isolates MT19937 state so seed and draw semantics can be
-   calibrated independently.
+5. `random.js` isolates the standard reference MT19937 used by existing
+   clean-room tests. `allegro-random.js` separately models the numeric source
+   recovered from the 2001 image; startup seeding and draw order remain to be
+   calibrated.
 
 The current generator has the first three interfaces in place, but its figure
 and palette rules are explicitly provisional until controlled oracle runs

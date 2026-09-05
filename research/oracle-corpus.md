@@ -98,8 +98,9 @@ the clean-room JavaScript runtime.
 ## Current implication for the JS port
 
 The engine now exposes the observed large and small canvas families, two-phase
-AA emission, outline z-paths, palette and brush state, a seeded MT19937 source,
-and the Cohen-inspired planner/matrix boundary. The licensed corpus gives us a
+AA emission, outline z-paths, palette and brush state, and the recovered
+Allegro numeric random source. AARON's startup seed and draw order remain
+unknown. The licensed corpus gives us a
 separate oracle target for the next composition layer. It should be modelled
 as an explicit `premium`/compact profile only after the planner and content
 rules are calibrated; selecting a smaller canvas alone is not an exact port.
