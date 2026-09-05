@@ -486,12 +486,10 @@ public static class AaronWindowProbe {
     $summary | ConvertTo-Json -Depth 8 |
         Set-Content -Encoding UTF8 -Path (Join-Path $OutputRoot 'summary.json')
 
-    # Menu-only application probes intentionally do not create a painting.
-    # Keep the hard failure for every generator probe, while allowing the
-    # window/menu capture job to finish with its diagnostic artifacts.
-    $requiresPainting = -not ($Mode -eq 'application' -and
-                              -not $TriggerPaintOne -and
-                              $CaptureApplicationMenu)
+    # Application startup/menu probes intentionally do not create a painting.
+    # Keep the hard failure for generator probes, while allowing UI-only jobs
+    # to finish with their diagnostic artifacts.
+    $requiresPainting = -not ($Mode -eq 'application' -and -not $TriggerPaintOne)
     if ($requiresPainting -and @($captured | Where-Object { $_.complete }).Count -eq 0) {
         throw 'The original engine did not produce a complete AA painting during the probe.'
     }
