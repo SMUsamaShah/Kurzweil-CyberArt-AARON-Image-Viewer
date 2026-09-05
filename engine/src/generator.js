@@ -12,6 +12,10 @@ import {
 
 const LARGE_MODE = Object.freeze({ width: 1024, height: 768, paletteSize: 148 });
 const SMALL_MODE = Object.freeze({ width: 640, height: 480, paletteSize: 184 });
+// The licensed oracle uses the same compact geometry family but normally
+// keeps the 148-colour palette. It remains an approximate composition profile
+// until the original pose/colour tables are recovered.
+const PREMIUM_MODE = Object.freeze({ width: 640, height: 480, paletteSize: 148 });
 const LARGE_CANVAS_PROFILES = Object.freeze({
   portrait: 487 / 768,
   tall: 650 / 768,
@@ -228,8 +232,9 @@ export class AaronGenerator {
   constructor(options = {}) {
     this.seed = options.seed ?? 0xaa70;
     this.random = options.random ?? new AaronRandom(this.seed);
-    this.smallImage = Boolean(options.smallImage);
-    const mode = this.smallImage ? SMALL_MODE : LARGE_MODE;
+    this.premium = Boolean(options.premium);
+    this.smallImage = Boolean(options.smallImage || this.premium);
+    const mode = this.premium ? PREMIUM_MODE : (this.smallImage ? SMALL_MODE : LARGE_MODE);
     // The original compact branch keeps two retained screen-size variables.
     // Its saved AA header stores half the requested width, while preserving
     // the requested height.  Keep those knobs explicit so callers can use the
@@ -325,6 +330,7 @@ export class AaronGenerator {
         width: this.width,
         height: this.height,
         seed: this.seed,
+        premium: this.premium,
         smallImage: this.smallImage,
         requestedScreenWidth: this.requestedScreenWidth,
         requestedScreenHeight: this.requestedScreenHeight,
@@ -341,7 +347,7 @@ export function generateAaron(options) {
   return new AaronGenerator(options).generate();
 }
 
-export const aaronModes = Object.freeze({ large: LARGE_MODE, small: SMALL_MODE });
+export const aaronModes = Object.freeze({ large: LARGE_MODE, small: SMALL_MODE, premium: PREMIUM_MODE });
 export const aaronCanvasProfiles = Object.freeze({
   large: LARGE_CANVAS_PROFILES,
   small: SMALL_CANVAS_PROFILES,

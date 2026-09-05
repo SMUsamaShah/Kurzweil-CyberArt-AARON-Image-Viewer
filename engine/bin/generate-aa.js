@@ -20,6 +20,7 @@ const output = valueAfter('--out');
 const result = generateAaron({
   seed: seed === undefined ? undefined : Number(seed),
   figureCount: figures === undefined ? undefined : Number(figures),
+  premium: args.includes('--premium'),
   smallImage: args.includes('--small'),
   profile,
   smallImageScreenWidth: screenWidth === undefined ? undefined : Number(screenWidth),

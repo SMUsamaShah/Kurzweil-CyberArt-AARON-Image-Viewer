@@ -60,6 +60,11 @@ which emits a 1920×1080 document. This is a recovered dimension rule, not a
 claim that the current clean-room scene rules are byte-identical to the
 original composition.
 
+`--premium` selects the measured compact licensed profile (640×480 with the
+148-entry palette) while retaining the clean-room planner. It models the
+reachable Premium regime without claiming to bypass licensing in the original
+binary.
+
 The generator currently reproduces the recovered file protocol, stroke
 encoding, palette shape, and 640×480 small-image profile. Its scene planner is
 explicitly an oracle-calibratable first layer; the historical pose, planning,

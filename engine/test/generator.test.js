@@ -26,6 +26,14 @@ test('small-image mode uses the recovered 640x480 profile', () => {
   assert.equal(result.scene.smallImage, true);
 });
 
+test('premium mode selects the measured compact palette family', () => {
+  const result = generateAaron({ seed: 99, premium: true, figureCount: 1 });
+  const analysis = analyzeAaDocument(result.document);
+  assert.deepEqual(analysis.canvas, { width: 640, height: 480 });
+  assert.equal(analysis.palette.entries, 148);
+  assert.equal(result.scene.premium, true);
+});
+
 test('supports the measured normal-mode canvas profiles', () => {
   assert.equal(generateAaron({ seed: 1, profile: 'portrait' }).document.width, 487);
   assert.equal(generateAaron({ seed: 1, profile: 'tall' }).document.width, 650);
