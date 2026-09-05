@@ -417,7 +417,8 @@ public static class AaronWindowProbe {
         Copy-Item -LiteralPath $PremiumFlagMarkerPath -Destination (Join-Path $LogRoot 'premium-flag-runtime.txt') -Force
     }
     foreach ($probeMarker in @('C:\temp\aaron-premium-size-loaded.txt',
-                               'C:\temp\aaron-size-loaded.txt')) {
+                               'C:\temp\aaron-size-loaded.txt',
+                               'C:\temp\aaron-seed-loaded.txt')) {
         if (Test-Path $probeMarker -PathType Leaf) {
             Copy-Item -LiteralPath $probeMarker -Destination (Join-Path $LogRoot ([IO.Path]::GetFileName($probeMarker))) -Force
         }
