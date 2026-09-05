@@ -28,16 +28,15 @@
                          :if-does-not-exist :create)
     (format marker "packages: ~S~%" (nreverse matches)))
 
-  ;; Keep a small, source-free snapshot of the relevant runtime symbols.  A
-  ;; delivered Allegro image may retain compiled function names and values
-  ;; even though its original Lisp source is absent.  This gives the oracle
-  ;; a safe way to tell whether a lead is a variable, a function, or neither.
+  ;; Keep a small, source-free snapshot of the relevant runtime symbols.  The
+  ;; delivered image retains their names and values, but reflection APIs such
+  ;; as FUNCTION-LAMBDA-EXPRESSION are unsafe in this stripped runtime.  Use
+  ;; only FIND-SYMBOL/BOUNDP/FBOUNDP in the package where the flag was found.
   (with-open-file (report "C:\\temp\\aaron-premium-introspection.txt"
                          :direction :output
                          :if-exists :supersede
                          :if-does-not-exist :create)
-    (let ((*print-level* 3)
-          (*print-length* 8))
+    (let ((package (find-package "COMMON-GRAPHICS-USER")))
       (dolist (name '("*BUILD-PREMIUM*" "PREMIUM" "COMPOSE" "PAINT"
                       "DRAW-FIGURE-CFORMS" "FILL-POLYGON" "DRAW-LIST"
                       "DRAW-FN" "PLAN-REPLACE" "PLACE-ARM"
@@ -45,27 +44,21 @@
                       "KCAT-UPGRADE" "KCAT-CURRENT-DAY-TIME" "INIT-RANDOM"
                       "RANDOM-INT" "NEW-RANDOM-FLOAT" "?RSEED?"
                       "COPY-IMAGES" "SCREEN-AND-STORE"))
-        (dolist (package (list-all-packages))
-          (multiple-value-bind (symbol status) (find-symbol name package)
-            (when (and symbol (eq status :internal))
-              (format report "~&~A::~A bound=~S constant=~S"
-                      (package-name package) name (boundp symbol) (constantp symbol))
-              (when (boundp symbol)
+        (handler-case
+            (multiple-value-bind (symbol status) (find-symbol name package)
+              (format report "~&~A status=~S bound=~S fbound=~S"
+                      name status (and symbol (boundp symbol))
+                      (and symbol (fboundp symbol)))
+              (when (and symbol (boundp symbol))
                 (handler-case
                     (format report " value=~S" (symbol-value symbol))
                   (condition (condition)
                     (format report " value-error=~A" condition))))
-              (format report " fbound=~S~%" (fboundp symbol))
-              (when (fboundp symbol)
-                (handler-case
-                    (multiple-value-bind (lambda-expression closure function-name)
-                        (function-lambda-expression (symbol-function symbol))
-                      (declare (ignore closure))
-                      (format report "  lambda=~S function-name=~S~%"
-                              lambda-expression function-name))
-                  (condition (condition)
-                    (format report "  lambda-error=~A~%" condition))))))))
-  (finish-output))
+              (terpri report)
+              (finish-output report))
+          (condition (condition)
+            (format report "~&~A error=~A~%" name condition)
+            (finish-output report))))))
   (format t "~&AARON premium flag patch loaded; packages: ~S~%"
           (nreverse matches))
-  (finish-output)))
+  (finish-output))
