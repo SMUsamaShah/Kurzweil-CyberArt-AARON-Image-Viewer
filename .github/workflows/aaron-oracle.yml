@@ -103,7 +103,7 @@ jobs:
             native_trace: false
             patch_registry: true
             license_version: 1
-            target_paintings: 1
+            target_paintings: 16
             small_image: ''
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
