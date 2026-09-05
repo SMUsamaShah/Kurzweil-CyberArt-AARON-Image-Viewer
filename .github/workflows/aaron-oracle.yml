@@ -108,6 +108,7 @@ jobs:
             small_image: ''
           - variant: premium-build-flag
             os: windows-2022
+            mode: direct-screensaver
             kcat_debug: false
             acl_debug: false
             compatibility: ''
@@ -117,8 +118,20 @@ jobs:
             patch_premium_flag: true
             target_paintings: 16
             small_image: ''
+          - variant: premium-application
+            os: windows-2022
+            mode: application
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            patch_premium_flag: false
+            target_paintings: 1
+            small_image: ''
     env:
-      ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
+      ORACLE_MODE: ${{ matrix.mode || inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
       ORACLE_TARGET_PAINTINGS: ${{ inputs.target_paintings || '1' }}
 
