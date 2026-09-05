@@ -59,4 +59,5 @@ test('mirrors the retained compact screen-size variables', () => {
   assert.deepEqual(analysis.canvas, { width: 1920, height: 1080 });
   assert.deepEqual(result.scene.requestedScreenWidth, 3840);
   assert.deepEqual(result.scene.requestedScreenHeight, 1080);
+  assert.match(serializeAaFile(result.document), /^1920 1080 148\n/);
 });

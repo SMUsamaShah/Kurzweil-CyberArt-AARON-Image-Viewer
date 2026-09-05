@@ -14,6 +14,14 @@ The images it generates can not be saved/exported normally and you can only take
 
 This viewer can be used to view and save those files.
 
+The reverse-engineering work has now reached two additional original-engine
+paths: the licensed compact composition branch and a retained canvas-size hook
+that can make the original binary save a genuine 1920×1080 AA file. Those
+findings are documented in [`research/oracle-corpus.md`](research/oracle-corpus.md)
+and exposed as configurable profiles in the clean-room engine; they do not
+redistribute the proprietary runtime or claim that its hidden gallery code is
+the same as the separate gallery system Harold Cohen used.
+
 ## Engine reimplementation
 
 The active reverse-engineering work lives in [`engine/`](engine/) and
