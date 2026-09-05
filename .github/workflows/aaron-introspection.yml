@@ -1,0 +1,58 @@
+name: AARON targeted runtime introspection
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [reverse-engineer-aaron-js]
+    paths:
+      - '.github/workflows/aaron-introspection.yml'
+      - 'research/introspection/**'
+
+permissions:
+  contents: read
+
+jobs:
+  census:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download hash-verified reference build
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
+      - name: Run metadata-only startup probe
+        shell: pwsh
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'aaron-introspection'
+          try {
+            & research/oracle/run-oracle.ps1 `
+              -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
+              -OutputRoot $output -Mode direct-screensaver -RunSeconds 30 `
+              -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
+              -PatchPremiumFlag -PremiumFlagSource '..\introspection\runtime-census.cl'
+          } finally {
+            $report = 'C:\temp\aaron-runtime-census.txt'
+            if (Test-Path $report) {
+              Copy-Item $report (Join-Path $output 'runtime-census.txt')
+            }
+          }
+          if (-not (Test-Path $report)) { throw 'Probe never started' }
+          if (-not (Select-String -LiteralPath $report -SimpleMatch 'END runtime-census')) {
+            throw 'Probe started but did not complete; inspect last checkpoint'
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aaron-runtime-census
+          path: ${{ runner.temp }}/aaron-introspection
+          retention-days: 14
