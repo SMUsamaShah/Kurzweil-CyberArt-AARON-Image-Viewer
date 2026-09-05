@@ -17,10 +17,12 @@ controlled whole-painting equivalence test has passed yet.
 | `random-validation.txt` | [33971190965](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33971190965), artifact `9970968646` | 73 vectors and 6,140 values, including 1,300-call twist-boundary sequences |
 | `object-probe.txt` | [33971190965](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33971190965), artifact `9970968767` | Read-only headers for five compiled functions; no writes or disassembly |
 
-The local workflow also contains a not-yet-run `function-constants` probe. It
-uses the retained Allegro helper names `FUNCTION-CONSTANT-COUNT` and
-`FUNCTION-CONSTANT` to inspect at most 256 summarized constants per candidate;
-it does not call AARON drawing, planning, or mapping routines.
+Run [33986804721](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33986804721)
+completed the bounded `function-constants` probe: 37 candidates and 436
+summaries, with DIRECTION unavailable as a closure. The report parser then
+rejected a compound array type descriptor; that parser case is now fixed and
+tested against the complete report. The line probe completed 30 calls. See the
+saved [report excerpts and provenance](introspection/evidence/README.md).
 
 Report SHA-256 values, respectively:
 
@@ -100,11 +102,10 @@ interpretation questions are in [freehand-line.md](freehand-line.md).
 
 ## Follow-up probe results
 
-The earlier targeted Windows jobs succeeded and their artifact links above are
-stable. The current local workflow extension has not yet run: the local commits
-are still pending because the GitHub write review rejected the publish attempt.
-The remaining limitations are therefore both workflow access and behavior
-recovery; no new remote artifact is claimed below.
+Publishing resumed successfully at commit `4046acf`, whose repository tree
+matches local commit `cca7a5c`. The previously queued changes are on the
+`reverse-engineer-aaron-js` branch. The next targeted jobs validate the angle
+rules at boundaries and inspect generic-function methods without invoking them.
 
 - `object-probe.cl` obtained safe memory-helper signatures and 64-byte
   read-only headers for `INIT-RANDOM`, `SET-RANDOM`, `GET-RANDOM`,

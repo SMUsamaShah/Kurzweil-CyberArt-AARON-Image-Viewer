@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFileSync } from 'node:fs';
 
 import { parseFunctionConstants } from '../parse-function-constants.mjs';
 
@@ -80,4 +81,14 @@ test('accepts Allegro float exponents while preserving their original spelling',
   assert.deepEqual(result.candidates[0].constants[0].value, {
     kind: 'number', value: 0.00015, raw: '(:NUMBER 1.5d-4)',
   });
+});
+
+test('parses all constants from the first completed original-engine report', () => {
+  const path = new URL('../../introspection/evidence/function-constants-33986804721.txt', import.meta.url);
+  const parsed = parseFunctionConstants(readFileSync(path, 'utf8'));
+  assert.equal(parsed.candidates.length, 37);
+  assert.equal(parsed.candidates.reduce((sum, entry) => sum + entry.constants.length, 0), 436);
+  const wiggle = parsed.candidates.find(entry => entry.name === 'WIGGLE');
+  assert.equal(wiggle.functionType, 'STANDARD-GENERIC-FUNCTION');
+  assert.equal(wiggle.constants[1].value.type, '(SIMPLE-ARRAY T (7))');
 });

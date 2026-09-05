@@ -1,0 +1,43 @@
+;;; Independent angle boundary cases chosen after line-behavior run
+;;; 33986804721. Only these three numeric helpers are invoked.
+(in-package :cl-user)
+(unless (boundp 'aaron-line-validation-loaded)
+  (set 'aaron-line-validation-loaded t)
+  (with-open-file (report "C:\\temp\\aaron-line-validation.txt"
+                          :direction :output :if-exists :supersede
+                          :if-does-not-exist :create)
+    (let ((*print-length* nil) (*print-level* 8) (*print-circle* nil)
+          (*print-pretty* nil)
+          (owner (find-package "COMMON-GRAPHICS-USER")))
+      (labels ((call (name args)
+                 (format report "TRY ~S args=~S~%" name args)
+                 (finish-output report)
+                 (handler-case
+                     (let* ((symbol (find-symbol name owner))
+                            (values (multiple-value-list (apply symbol args))))
+                       (format report "RESULT ~S values=~S~%" name values))
+                   (error (problem)
+                     (format report "ERROR ~S ~S~%" name (type-of problem))))
+                 (finish-output report)))
+        (format report "BEGIN line-validation~%")
+        (let ((symbol (find-symbol "TWO-PI" owner)))
+          (when (and symbol (boundp symbol))
+            (format report "GLOBAL ~S value=~S type=~S~%"
+                    "TWO-PI" (symbol-value symbol) (type-of (symbol-value symbol)))))
+        (dolist (a (list 0 1 -1 3 -3 4 -4 7 -7 20 -20
+                         pi (- pi) (* 2 pi) (- (* 2 pi))
+                         (- pi 1.0d-12) (+ pi 1.0d-12)
+                         (- (- pi) 1.0d-12) (+ (- pi) 1.0d-12)))
+          (call "NORM-A" (list a))
+          (dolist (b (list 0 pi (- pi) 1.25d0))
+            (call "ANGLE-DIF" (list a b))))
+        (dolist (args '((3 4 -4) (-3 4 -4) (1 1 -1) (-1 1 -1)
+                        (0 1 -1) (0 0 0) (1 0 0) (-1 0 0)
+                        (3.0f0 4.0f0 -4.0f0)
+                        (3.0d0 4.0d0 -4.0d0)
+                        (0.0d0 -1.0d0 1.0d0)
+                        (-0.0d0 -0.0d0 0.0d0)
+                        (1000000 1 -1)))
+          (call "ANGLE-RANGE" args))
+        (format report "END line-validation~%")
+        (finish-output report)))))

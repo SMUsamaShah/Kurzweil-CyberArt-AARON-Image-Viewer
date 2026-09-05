@@ -8,7 +8,7 @@
   (with-open-file (report "C:\\temp\\aaron-function-constants.txt"
                           :direction :output :if-exists :supersede
                           :if-does-not-exist :create)
-    (let ((*print-length* 12) (*print-level* 4) (*print-circle* t)
+    (let ((*print-length* 12) (*print-level* 4) (*print-circle* nil)
           (*print-pretty* nil)
           (owner (find-package "COMMON-GRAPHICS-USER"))
           (candidate-names
@@ -21,7 +21,7 @@
              "MAKE-PLAN" "BUILD-FIGURE" "GENERATE-PERSON"
              "MAKE-PAINTING-COLORS" "PAINT-FILL" "MAKE-POTTED-PLANT"
              "TREE" "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM"
-             "SET-UP-SCREEN-SIZE" "SELECT-CANVAS")))
+             "SET-UP-SCREEN-SIZE" "SELECT-CANVAS" "NORM-A")))
       (labels
           ((helper (name)
              (let ((found nil))

@@ -70,6 +70,10 @@ export function parseFunctionConstants(text) {
     }
     match = /^\(:((?:LIST|TYPE|ERROR))\s+([^\s)]+)\)$/.exec(value);
     if (match) return { kind: match[1].toLowerCase(), type: match[2], raw: value };
+    // The original generic-function dispatch constants use array type
+    // specifiers. Preserve their text; never evaluate a Lisp reader form.
+    match = /^\(:TYPE (\(SIMPLE-ARRAY [A-Z][A-Z0-9:-]* \(\d+(?: \d+)*\)\))\)$/.exec(value);
+    if (match) return { kind: 'type', type: match[1], raw: value };
     fail(lineNumber, `unsupported summary ${value}`);
   };
 
