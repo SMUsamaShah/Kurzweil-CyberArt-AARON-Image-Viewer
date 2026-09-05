@@ -50,11 +50,12 @@ location and is independent of the image generator itself.
 The oracle now has an opt-in, hash-guarded compatibility probe
 (`tools/patch-registry-running.ps1`). On a disposable installed copy only, it
 resolves the PE export table, verifies the original `registry.dll` SHA-256 and
-`KCATisRunning` prologue, and replaces the entry point with `xor eax,eax; ret`
-(`31 C0 C3`). The patch makes the routine report “not already running” while
-leaving all other registry operations intact. The original extracted file is
-never changed or committed; the workflow records the patched hash and exact
-RVA/offset in `registry-patch.json`.
+the prologues of `KCATisRunning` and `KCATgetDaysSinceInstalled`, and replaces
+both entry points with `xor eax,eax; ret` (`31 C0 C3`). The first return value
+reports “not already running”; the second reports zero elapsed trial days.
+Other registry operations remain intact. The original extracted file is never
+changed or committed; the workflow records the patched hash and exact
+RVA/offsets in `registry-patch.json`.
 
 This is a diagnostic workaround, not a claim about the historical source. If
 the patched probe reaches the generator, subsequent traces can separate the

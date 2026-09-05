@@ -6,7 +6,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ExpectedSha256,
 
-    [string]$OutputPath = $Path
+    [string]$OutputPath = $Path,
+
+    [string[]]$Exports = @('KCATisRunning')
 )
 
 Set-StrictMode -Version Latest
@@ -88,40 +90,53 @@ $functionsFile = Convert-RvaToFileOffset $bytes $functionsRva $sectionTable $sec
 $namesFile = Convert-RvaToFileOffset $bytes $namesRva $sectionTable $sectionCount $sectionSize
 $ordinalsFile = Convert-RvaToFileOffset $bytes $ordinalsRva $sectionTable $sectionCount $sectionSize
 
-$targetOrdinal = $null
+$targetOrdinals = @{}
 for ($index = 0; $index -lt $nameCount; $index++) {
     $nameRva = Read-U32 $bytes ($namesFile + ($index * 4))
     $nameFile = Convert-RvaToFileOffset $bytes $nameRva $sectionTable $sectionCount $sectionSize
     $end = $nameFile
     while ($end -lt $bytes.Length -and $bytes[$end] -ne 0) { $end++ }
     $name = [Text.Encoding]::ASCII.GetString($bytes, $nameFile, $end - $nameFile)
-    if ($name -eq 'KCATisRunning') {
-        $targetOrdinal = [int](Read-U16 $bytes ($ordinalsFile + ($index * 2)))
-        break
+    if ($Exports -contains $name) {
+        $targetOrdinals[$name] = [int](Read-U16 $bytes ($ordinalsFile + ($index * 2)))
     }
 }
-if ($null -eq $targetOrdinal) {
-    throw 'The KCATisRunning export was not found'
+
+$missing = @($Exports | Where-Object { -not $targetOrdinals.ContainsKey($_) })
+if ($missing.Count -gt 0) {
+    throw ('Requested export(s) not found: {0}' -f ($missing -join ', '))
 }
 
-$functionRva = Read-U32 $bytes ($functionsFile + ($targetOrdinal * 4))
-# A forwarder RVA points back into the export directory and cannot be patched
-# as machine code. This old DLL should contain a normal .text address.
-if ($functionRva -ge $exportRva -and $functionRva -lt ($exportRva + $exportSize)) {
-    throw ('KCATisRunning is a forwarded export at RVA 0x{0:X8}' -f $functionRva)
-}
-$functionFile = Convert-RvaToFileOffset $bytes $functionRva $sectionTable $sectionCount $sectionSize
-$original = $bytes[$functionFile..($functionFile + 2)]
-if ($original[0] -ne 0x55 -or $original[1] -ne 0x8B -or $original[2] -ne 0xEC) {
-    throw ('Unexpected KCATisRunning prologue: {0}' -f (($original | ForEach-Object { '{0:X2}' -f $_ }) -join ' '))
-}
+$patches = foreach ($export in $Exports) {
+    $targetOrdinal = [int]$targetOrdinals[$export]
+    $functionRva = Read-U32 $bytes ($functionsFile + ($targetOrdinal * 4))
+    # A forwarder RVA points back into the export directory and cannot be
+    # patched as machine code. These old exports should be normal .text code.
+    if ($functionRva -ge $exportRva -and $functionRva -lt ($exportRva + $exportSize)) {
+        throw ("{0} is a forwarded export at RVA 0x{1:X8}" -f $export, $functionRva)
+    }
+    $functionFile = Convert-RvaToFileOffset $bytes $functionRva $sectionTable $sectionCount $sectionSize
+    $original = @($bytes[$functionFile..($functionFile + 2)])
+    if ($original[0] -ne 0x55 -or $original[1] -ne 0x8B -or $original[2] -ne 0xEC) {
+        throw ('Unexpected {0} prologue: {1}' -f $export,
+            (($original | ForEach-Object { '{0:X2}' -f $_ }) -join ' '))
+    }
 
-# Return BOOL FALSE without entering the obsolete OS-version/process scan.
-# The caller cleans its arguments, so this is valid for the exported cdecl
-# routine and leaves every other registry.dll operation intact.
-$bytes[$functionFile] = 0x31
-$bytes[$functionFile + 1] = 0xC0
-$bytes[$functionFile + 2] = 0xC3
+    # Return zero without entering the obsolete native check. The caller
+    # cleans its arguments, so this is valid for these exported cdecl routines
+    # and leaves every other registry.dll operation intact.
+    $bytes[$functionFile] = 0x31
+    $bytes[$functionFile + 1] = 0xC0
+    $bytes[$functionFile + 2] = 0xC3
+
+    [ordered]@{
+        export = $export
+        functionRva = ('0x{0:X8}' -f $functionRva)
+        functionFileOffset = ('0x{0:X8}' -f $functionFile)
+        originalPrologue = (($original | ForEach-Object { '{0:X2}' -f $_ }) -join ' ')
+        replacement = '31 C0 C3'
+    }
+}
 
 $destination = [IO.Path]::GetFullPath($OutputPath)
 $temporary = "$destination.$PID.tmp"
@@ -132,9 +147,5 @@ Move-Item -LiteralPath $temporary -Destination $destination -Force
     path = $destination
     inputSha256 = $actual
     outputSha256 = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
-    export = 'KCATisRunning'
-    functionRva = ('0x{0:X8}' -f $functionRva)
-    functionFileOffset = ('0x{0:X8}' -f $functionFile)
-    originalPrologue = (($original | ForEach-Object { '{0:X2}' -f $_ }) -join ' ')
-    replacement = '31 C0 C3'
+    patches = @($patches)
 } | ConvertTo-Json -Compress

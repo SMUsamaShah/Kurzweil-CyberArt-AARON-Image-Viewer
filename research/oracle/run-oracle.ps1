@@ -174,7 +174,8 @@ try {
             throw 'The extraction manifest has no registry.dll hash'
         }
         $patchScript = Join-Path $PSScriptRoot '..\tools\patch-registry-running.ps1'
-        $patchJson = & $patchScript -Path $registryPath -ExpectedSha256 $registryEntry.sha256
+        $patchJson = & $patchScript -Path $registryPath -ExpectedSha256 $registryEntry.sha256 `
+            -Exports @('KCATisRunning', 'KCATgetDaysSinceInstalled')
         $RegistryPatchResult = $patchJson | ConvertFrom-Json
         $RegistryPatchResult |
             ConvertTo-Json -Depth 8 |
