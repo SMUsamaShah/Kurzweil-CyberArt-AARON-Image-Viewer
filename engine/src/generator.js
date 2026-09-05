@@ -1,6 +1,7 @@
 import { createAaBuilder } from './aa-builder.js';
 import { AaronRandom } from './random.js';
 import { createAaronPalette } from './palette.js';
+import { createAaronPlanner } from './planner.js';
 import {
   ellipsePoints,
   pointInPolygon,
@@ -105,10 +106,12 @@ function makeBackground(random, width, height, palette) {
   return shapes;
 }
 
-function makeFigure(random, width, height, index, total, palette) {
+function makeFigure(random, width, height, index, total, palette, placement = null) {
   const scale = random.between(0.72, 1.08);
-  const centerX = ((index + 1) / (total + 1)) * width
-    + random.between(-width * 0.08, width * 0.08);
+  const plannedBounds = placement ? polygonBounds(placement.polygon) : null;
+  const centerX = plannedBounds
+    ? (plannedBounds.minX + plannedBounds.maxX) / 2
+    : ((index + 1) / (total + 1)) * width + random.between(-width * 0.08, width * 0.08);
   const floor = height * random.between(0.06, 0.14);
   const torsoWidth = width * 0.10 * scale;
   const torsoHeight = height * 0.26 * scale;
@@ -250,9 +253,29 @@ export class AaronGenerator {
 
     const figureCount = options.figureCount ?? this.figureCount
       ?? random.integer(this.smallImage ? 1 : 1, this.smallImage ? 2 : 3);
+    const planner = options.planning === false ? null : createAaronPlanner({
+      width: this.width,
+      height: this.height,
+      random: random.clone(),
+      cellSize: options.cellSize ?? 16,
+      roughness: options.roughness ?? 0,
+    });
+    const plannedFigures = planner?.planFigures({
+      count: figureCount,
+      width: this.width * 0.18,
+      height: this.height * 0.52,
+    }) ?? [];
     const figures = [];
     for (let index = 0; index < figureCount; index += 1) {
-      const figure = makeFigure(random, this.width, this.height, index, figureCount, this.palette);
+      const figure = makeFigure(
+        random,
+        this.width,
+        this.height,
+        index,
+        figureCount,
+        this.palette,
+        plannedFigures[index],
+      );
       figures.push(figure);
       scenes.push(figure);
     }
@@ -281,6 +304,7 @@ export class AaronGenerator {
         smallImage: this.smallImage,
         profile: this.profile,
         figures: figures.length,
+        planner: planner?.snapshot() ?? null,
         objects: scenes.map(({ kind, shapes }) => ({ kind, shapeCount: shapes.length })),
       },
     };

@@ -47,4 +47,6 @@ The generator currently reproduces the recovered file protocol, stroke
 encoding, palette shape, and 640×480 small-image profile. Its scene planner is
 explicitly an oracle-calibratable first layer; the historical pose, planning,
 and palette tables are still being recovered rather than silently presented as
-byte-identical.
+byte-identical. The planner now reserves candidate figure footprints on a
+coarse occupancy grid, including the no-corner-only diagonal rule described in
+Cohen's matrix notes.
