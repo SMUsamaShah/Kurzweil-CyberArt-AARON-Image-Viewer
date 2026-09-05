@@ -230,7 +230,24 @@ export class AaronGenerator {
     this.random = options.random ?? new AaronRandom(this.seed);
     this.smallImage = Boolean(options.smallImage);
     const mode = this.smallImage ? SMALL_MODE : LARGE_MODE;
-    this.height = options.height ?? mode.height;
+    // The original compact branch keeps two retained screen-size variables.
+    // Its saved AA header stores half the requested width, while preserving
+    // the requested height.  Keep those knobs explicit so callers can use the
+    // recovered full-HD path without confusing an output width with the
+    // internal screen-width setting.
+    const requestedScreenWidth = options.smallImageScreenWidth;
+    const requestedScreenHeight = options.smallImageScreenHeight;
+    if (requestedScreenWidth !== undefined &&
+        (!Number.isFinite(requestedScreenWidth) || requestedScreenWidth <= 0)) {
+      throw new RangeError('smallImageScreenWidth must be a positive number');
+    }
+    if (requestedScreenHeight !== undefined &&
+        (!Number.isFinite(requestedScreenHeight) || requestedScreenHeight <= 0)) {
+      throw new RangeError('smallImageScreenHeight must be a positive number');
+    }
+    this.requestedScreenWidth = requestedScreenWidth;
+    this.requestedScreenHeight = requestedScreenHeight;
+    this.height = options.height ?? requestedScreenHeight ?? mode.height;
     this.profile = options.profile ?? null;
     const profiles = this.smallImage ? SMALL_CANVAS_PROFILES : LARGE_CANVAS_PROFILES;
     const profileRatio = this.profile ? profiles[this.profile]
@@ -238,7 +255,10 @@ export class AaronGenerator {
     if (this.profile && profileRatio === undefined) {
       throw new RangeError(`unknown AARON canvas profile ${JSON.stringify(this.profile)}`);
     }
-    this.width = options.width ?? (profileRatio === undefined
+    const compactWidth = requestedScreenWidth === undefined
+      ? undefined
+      : Math.round(requestedScreenWidth / 2);
+    this.width = options.width ?? compactWidth ?? (profileRatio === undefined
       ? mode.width
       : Math.round(this.height * profileRatio));
     this.figureCount = options.figureCount;
@@ -306,6 +326,8 @@ export class AaronGenerator {
         height: this.height,
         seed: this.seed,
         smallImage: this.smallImage,
+        requestedScreenWidth: this.requestedScreenWidth,
+        requestedScreenHeight: this.requestedScreenHeight,
         profile: this.profile,
         figures: figures.length,
         planner: planner?.snapshot() ?? null,

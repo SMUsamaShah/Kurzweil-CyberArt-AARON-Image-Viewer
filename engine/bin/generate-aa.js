@@ -14,12 +14,16 @@ const valueAfter = (flag) => {
 const seed = valueAfter('--seed');
 const figures = valueAfter('--figures');
 const profile = valueAfter('--profile');
+const screenWidth = valueAfter('--screen-width');
+const screenHeight = valueAfter('--screen-height');
 const output = valueAfter('--out');
 const result = generateAaron({
   seed: seed === undefined ? undefined : Number(seed),
   figureCount: figures === undefined ? undefined : Number(figures),
   smallImage: args.includes('--small'),
   profile,
+  smallImageScreenWidth: screenWidth === undefined ? undefined : Number(screenWidth),
+  smallImageScreenHeight: screenHeight === undefined ? undefined : Number(screenHeight),
 });
 const text = serializeAaFile(result.document);
 

@@ -29,6 +29,25 @@ separate the large trial, small-image, and licensed output regimes.
 | Licensed branch | `license.dll!KCATversion` patched to return 1 | 16 | 320×480 (13), 640×480 (3) | 148 (14), 184 (2) | 2,282.44 | 37,393.94 | 32,900.94 |
 | Runtime build flag only | license return 1 plus `.clinit.cl` setting `*BUILD-PREMIUM*` | 16 | 320×480 (14), 640×480 (2) | 148 (16) | 2,922.75 | 34,221.25 | 30,007.25 |
 
+The retained image-size variables provide a more useful workaround than the
+ordinary small-image switch. A source-free `.clinit.cl` probe can set
+`SMALL-IMAGE-SCREEN-WIDTH` and `SMALL-IMAGE-SCREEN-HEIGHT` before composition.
+The compact branch stores exactly half the requested width while retaining the
+requested height:
+
+| Probe | AA header | Outline ops | Paint ops |
+|---|---:|---:|---:|
+| width 1024, height 768 | 512×768 | 1,123 | 47,513 |
+| width 1920, height 1080 | 960×1080 | 2,699 | 101,522 |
+| width 3840, height 1080 | **1920×1080** | 3,530 | 170,665 |
+
+The 3840×1080 probe completed in 10.9 seconds and wrote a valid 708,794-byte
+`AA0` with the normal 148-entry palette. This is the first direct evidence of
+a practical full-HD output path hidden behind the retained size variables. It
+is still an oracle workaround rather than a historical UI option: the
+shareware window remains clipped to the 1024×768 runner desktop and keeps its
+trial title, while the saved AA canvas is 1920×1080.
+
 The licensed branch is not merely a title change. It switches to the compact
 320/640×480 family, changes command distributions, and uses `zm`/`zd` outline
 paths (47/2,774 in the sixteen files). The clean trial large corpus used
@@ -64,6 +83,10 @@ route for testing the licensed composition branch.
 4. Optionally copy a source-free `.clinit.cl` probe into the installed working
    directory. This is useful for symbol experiments, but changing
    `*BUILD-PREMIUM*` at that late point does not reproduce the license branch.
+   The same hook can set the retained `SMALL-IMAGE-SCREEN-WIDTH` and
+   `SMALL-IMAGE-SCREEN-HEIGHT` variables. In the compact branch this produces
+   a saved canvas whose width is half the requested value, allowing the
+   1920×1080 result above without modifying AARON's image or executable.
 
 The patch scripts refuse unknown hashes and report every RVA, file offset,
 original prologue, and resulting hash. They are research harnesses, not part of

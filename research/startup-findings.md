@@ -144,6 +144,26 @@ symbol loads successfully in `COMMON-GRAPHICS-USER`, but produces a different
 cached earlier or represented by another value; setting this symbol after image
 restore is not a sufficient unlock.
 
+The same late hook exposes a productive high-resolution route. Setting the
+retained `SMALL-IMAGE-SCREEN-WIDTH`/`HEIGHT` variables to 1024×768, 1920×1080,
+and 3840×1080 produced valid saved headers 512×768, 960×1080, and **1920×1080**
+respectively. The largest probe wrote a 708,794-byte file with 3,530 outline
+and 170,665 paint operations. The width-halving rule is consistent across all
+three points; height is preserved. The desktop screenshot is necessarily
+clipped on the 1024×768 runner, but the AA file itself is full HD. This is the
+best current workaround for the gallery/high-resolution lead: it is a real
+engine path reached by the original binary, not a JavaScript upscale or a
+post-processing trick. It should be exposed in the JS port as an explicit
+`canvasWidth`/`canvasHeight` profile while keeping the historical compact
+branch's width conversion visible and configurable.
+
+The seed probe is a separate unresolved issue. `.clinit.cl` loaded successfully
+and set both Allegro random-state globals plus `?RSEED?`; however, two fresh
+Windows runners with seed 1234 still produced different AA hashes. The engine
+therefore resets or supplements that state during startup (or uses another
+time-dependent source). We can use the output corpus for structural inference,
+but should not call the current seed hook a reproducibility control.
+
 Application mode remains a separate UI path. Its `Ctrl+O`/Paint One command
 produces a complete 320×480/148-color file in both trial and return-1 runs, but
 the window title retains the trial suffix. Use direct engine/screen-saver mode

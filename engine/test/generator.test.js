@@ -37,3 +37,18 @@ test('supports both measured small-image aspect profiles', () => {
   assert.equal(generateAaron({ seed: 1, smallImage: true, profile: 'portrait' }).document.width, 320);
   assert.equal(generateAaron({ seed: 1, smallImage: true, profile: 'wide' }).document.width, 640);
 });
+
+test('mirrors the retained compact screen-size variables', () => {
+  const result = generateAaron({
+    seed: 7,
+    smallImage: true,
+    paletteSize: 148,
+    smallImageScreenWidth: 3840,
+    smallImageScreenHeight: 1080,
+    figureCount: 1,
+  });
+  const analysis = analyzeAaDocument(result.document);
+  assert.deepEqual(analysis.canvas, { width: 1920, height: 1080 });
+  assert.deepEqual(result.scene.requestedScreenWidth, 3840);
+  assert.deepEqual(result.scene.requestedScreenHeight, 1080);
+});

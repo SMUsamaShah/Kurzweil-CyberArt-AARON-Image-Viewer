@@ -44,6 +44,22 @@ Normal-mode profile names `portrait`, `tall`, `square`, and `wide` expose the
 oracle corpus. With `--small`, `portrait` and `wide` expose the measured
 320×480 and 640×480 small-image families.
 
+The recovered compact size controls are available as
+`--screen-width <value> --screen-height <value>`. They mirror AARON's retained
+`SMALL-IMAGE-SCREEN-WIDTH`/`HEIGHT` variables: the generated header stores half
+the requested width and the requested height. For example, the hidden
+full-HD-sized path is:
+
+```sh
+cd engine
+npm run generate -- --small --screen-width 3840 --screen-height 1080 \
+  --out /tmp/aaron-1920x1080-aa0
+```
+
+which emits a 1920×1080 document. This is a recovered dimension rule, not a
+claim that the current clean-room scene rules are byte-identical to the
+original composition.
+
 The generator currently reproduces the recovered file protocol, stroke
 encoding, palette shape, and 640×480 small-image profile. Its scene planner is
 explicitly an oracle-calibratable first layer; the historical pose, planning,

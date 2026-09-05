@@ -222,9 +222,16 @@ export function serializeAaFile(document, options = {}) {
     }
     lines.push(rgb.map((channel) => formatNumber(channel, digits)).join(' '));
   }
-  lines.push(...(document.outline ?? []).map((operation) => serializeOperation(operation, digits)));
+  // Do not spread large operation arrays into Array#push.  The recovered
+  // full-HD compact path can contain hundreds of thousands of paint commands,
+  // which would exceed V8's argument-count limit.
+  for (const operation of document.outline ?? []) {
+    lines.push(serializeOperation(operation, digits));
+  }
   lines.push('color');
-  lines.push(...(document.paint ?? []).map((operation) => serializeOperation(operation, digits)));
+  for (const operation of document.paint ?? []) {
+    lines.push(serializeOperation(operation, digits));
+  }
   lines.push('end');
   return `${lines.join('\n')}\n`;
 }
