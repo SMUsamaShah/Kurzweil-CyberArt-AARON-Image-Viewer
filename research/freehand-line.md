@@ -77,10 +77,11 @@ include coincident endpoints, horizontal/vertical lines, all quadrants, short
 distances, and direction changes near angle wrap boundaries. Only then port
 the measured rule and compare the full point sequence in JavaScript.
 
-Before invoking any line helper, the local `function-constants` probe attempts
-to read bounded, summarized constant pools from the line and planning
-functions. This may expose thresholds or lookup tables while keeping the
-application routines themselves untouched.
+The completed `function-constants` probes recovered 439 summaries across 38
+candidates, including references to MOD, NORM-A, TWO-PI and ATAN. Independent
+numeric probes now support a JavaScript implementation of ANGLE-RANGE with 20
+matching cases. See [angle-findings.md](angle-findings.md). The complete
+freehand point sequence remains unresolved.
 
 `engine/src/geometry.js` currently samples mathematical curves, and
 `AaBuilder.chainTo` emits a diagonal-then-axis unit path. Neither is a recovered

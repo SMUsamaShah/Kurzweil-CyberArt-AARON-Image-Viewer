@@ -61,9 +61,9 @@
                               (dotimes (i count)
                                 (format report "CONSTANT ~D ~S~%" i
                                         (summary (funcall constant-fn fn i)))))))
-                      (error (problem) (format report "METHOD-ERROR ~S~%" (type-of problem))))
+                      (error (problem) (format report "METHOD-ERROR ~S ~A~%" (type-of problem) problem)))
                     (finish-output report)))
-              (error (problem) (format report "ERROR ~S~%" (type-of problem))))
+              (error (problem) (format report "ERROR ~S ~A~%" (type-of problem) problem)))
             (finish-output report)))
         (format report "END generic-methods~%")
         (finish-output report)))))

@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [line-validation, function-constants, generic-methods]
+        probe: [line-validation, generic-methods]
     steps:
       - uses: actions/checkout@v4
         with:

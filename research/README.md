@@ -60,6 +60,8 @@ of our own implementation.
   Windows probe.
 - [`random-findings.md`](random-findings.md) — Allegro 5.0.1 MT initialization,
   numeric conversions, and 6,140 parity vectors.
+- [`angle-findings.md`](angle-findings.md) — ANGLE-RANGE reconstruction,
+  independent numeric validation, and remaining double-rounding differences.
 
 ## Tools
 

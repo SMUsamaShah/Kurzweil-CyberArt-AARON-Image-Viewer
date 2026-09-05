@@ -28,3 +28,19 @@ error case. RAN was not seeded in that probe; its numeric outputs are not
 deterministic reference vectors. DIRECTION returned NIL for all nine calls.
 ANGLE-DIF and ANGLE-RANGE produced numeric results, but the independent boundary
 validation must complete before claiming their reconstruction.
+
+## Independent validation run
+
+The `*-33987111580.txt` excerpts use the same timestamp-removal and LF
+normalization for run
+[33987111580](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33987111580),
+commit `c60f3db9661c9a8f43a7cb40e057eb5e1f1eb7db`:
+
+- `line-validation`: job 101362631581, 108 completed numeric calls.
+- `function-constants`: job 101362631648, 38 candidates and 439 summaries.
+- `generic-methods`: job 101362631452, errors for all nine candidates.
+
+All jobs completed; the method job's completion does not establish successful
+method inspection. The constant parser now succeeds in Windows as well as
+locally. ANGLE-RANGE is implemented and matches both saved line reports; see
+[`angle-findings.md`](../../angle-findings.md).

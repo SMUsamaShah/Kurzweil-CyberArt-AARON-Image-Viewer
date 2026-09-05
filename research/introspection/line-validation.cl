@@ -29,6 +29,7 @@
                          (- pi 1.0d-12) (+ pi 1.0d-12)
                          (- (- pi) 1.0d-12) (+ (- pi) 1.0d-12)))
           (call "NORM-A" (list a))
+          (call "MOD" (list a (* 2 pi)))
           (dolist (b (list 0 pi (- pi) 1.25d0))
             (call "ANGLE-DIF" (list a b))))
         (dolist (args '((3 4 -4) (-3 4 -4) (1 1 -1) (-1 1 -1)
