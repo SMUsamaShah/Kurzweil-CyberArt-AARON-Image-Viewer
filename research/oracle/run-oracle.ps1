@@ -48,6 +48,7 @@ $DepOverrideApplied = $false
 $RegistryPatchResult = $null
 $LicensePatchResult = $null
 $PremiumFlagPatchResult = $null
+$PremiumFlagMarkerPath = 'C:\temp\aaron-premium-flag-loaded.txt'
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -210,9 +211,15 @@ try {
         $premiumFlagSource = Join-Path $PSScriptRoot 'premium-flag.cl'
         $PremiumFlagPath = 'C:\temp\aaron-premium-flag.cl'
         Copy-Item -LiteralPath $premiumFlagSource -Destination $PremiumFlagPath -Force
+        Copy-Item -LiteralPath $premiumFlagSource -Destination (Join-Path $workingDirectory '.clinit.cl') -Force
+        Copy-Item -LiteralPath $premiumFlagSource -Destination (Join-Path $workingDirectory 'clinit.cl') -Force
         $PremiumFlagPatchResult = [ordered]@{
             source = $premiumFlagSource
             loadedPath = $PremiumFlagPath
+            initPaths = @(
+                (Join-Path $workingDirectory '.clinit.cl'),
+                (Join-Path $workingDirectory 'clinit.cl')
+            )
             switch = '-L'
         }
         $PremiumFlagPatchResult |
@@ -344,6 +351,10 @@ try {
         Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
     }
     Start-Sleep -Seconds 2
+
+    if ($PatchPremiumFlag -and (Test-Path $PremiumFlagMarkerPath -PathType Leaf)) {
+        Copy-Item -LiteralPath $PremiumFlagMarkerPath -Destination (Join-Path $LogRoot 'premium-flag-runtime.txt') -Force
+    }
 
     $captured = @()
     foreach ($file in @(Get-AaFiles $searchDirectories)) {
