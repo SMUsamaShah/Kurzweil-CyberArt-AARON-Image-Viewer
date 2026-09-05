@@ -38,6 +38,14 @@ window. Static analysis shows no change to the engine argument, random seed,
 painting resolution, scene rules, or quality setting. It is useful for tracing
 the screensaver lifecycle, but it is not evidence of a gallery-quality unlock.
 
+## `KCAT_AARON_SMALL_IMAGE`
+
+The pure Lisp library contains this environment-variable name, and a dynamic
+probe confirms that it reaches the generator. Defining it as `1` produced a
+complete 640×480 output with the 184-entry palette and a different, compact
+composition. This is a real alternate output mode, but the value semantics and
+whether it can be selected through the shipped UI are not yet recovered.
+
 ## `ACL_STARTUP_DEBUG`
 
 The small `AARON.exe` launcher calls `getenv("ACL_STARTUP_DEBUG")`, converts
@@ -59,4 +67,3 @@ This does not prove that every compiled rule is reachable from the public UI.
 The DXL contains the substantial `harold3` engine module set, so rare or
 unwired branches remain a legitimate research target. It does mean that
 registration should not be treated as the likely path to better artwork.
-

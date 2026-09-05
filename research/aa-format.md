@@ -72,6 +72,11 @@ The first patched-oracle corpus used the 1024×768 screen setting. Fourteen
 files used the 148-entry palette and two used 184 entries; `zm`/`zd` appeared
 only in the outline phases of two files (20/2,237 and 24/193 respectively).
 
+A separate patched run with the verified environment mode
+`KCAT_AARON_SMALL_IMAGE=1` emitted a 640×480 file with 184 palette entries,
+2,355 outline operations, and 62,906 paint operations. The switch changes the
+generator's output profile as well as its canvas size.
+
 ## Unknowns requiring more output
 
 - Whether other builds emit commands beyond `zm`/`zd` and the known chain code.

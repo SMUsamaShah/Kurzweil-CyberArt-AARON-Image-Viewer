@@ -25,6 +25,7 @@ Vary one factor at a time:
 - clock, locale, and timezone;
 - process start versus multiple paintings in one process;
 - `KCAT_AARON_DEBUG` and `ACL_STARTUP_DEBUG` presence/value;
+- `KCAT_AARON_SMALL_IMAGE` presence/value;
 - intercepted random and time APIs, where technically possible.
 
 ## Per-run capture

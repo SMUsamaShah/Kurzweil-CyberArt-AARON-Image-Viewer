@@ -77,6 +77,17 @@ Two files exposed an alternate outline path encoding: `zm`/`zd` (20/2,237
 commands in `aa3`, 24/193 in `aa9`). The generated files and artifact remain
 temporary; their hashes and summary are sufficient to reproduce the analysis.
 
+## Verified small-image mode
+
+The environment lead `KCAT_AARON_SMALL_IMAGE` is active in the generator, not
+just in the host. A patched one-paint run with `KCAT_AARON_SMALL_IMAGE=1`
+produced a complete `AA0` at 640×480 with a 184-entry palette, 2,355 outline
+operations, and 62,906 paint operations. The captured window shows a distinct
+single-figure composition. This proves an alternate small-canvas/composition
+mode; it does not, by itself, expose the richer gallery engine described in
+Harold Cohen's historical material. The behavior for other values (including
+whether the test is presence-based) remains unverified.
+
 ## Leads in the pure Lisp library
 
 These strings were found in the hash-identified `AARON.pll`. Offsets are byte
