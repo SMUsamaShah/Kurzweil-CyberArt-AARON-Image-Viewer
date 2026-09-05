@@ -95,6 +95,39 @@ jobs:
             license_version: -1
             target_paintings: 16
             small_image: '1'
+          - variant: small-image-value-0
+            os: windows-2022
+            run_seconds: 60
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            target_paintings: 1
+            small_image: '0'
+          - variant: small-image-value-2
+            os: windows-2022
+            run_seconds: 60
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            target_paintings: 1
+            small_image: '2'
+          - variant: small-image-value-false
+            os: windows-2022
+            run_seconds: 60
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            target_paintings: 1
+            small_image: 'false'
           - variant: premium-license-1
             os: windows-2022
             kcat_debug: false
@@ -118,6 +151,18 @@ jobs:
             patch_premium_flag: true
             target_paintings: 16
             small_image: ''
+          - variant: premium-small-image-1
+            os: windows-2022
+            run_seconds: 60
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            patch_premium_flag: false
+            target_paintings: 1
+            small_image: '1'
           - variant: premium-application
             os: windows-2022
             mode: application
