@@ -54,13 +54,15 @@ function analyzeOperations(operations) {
 
     switch (operation.command) {
       case 'am':
+      case 'zm':
         x = operation.x;
         y = operation.y;
         includePoint(bounds, x, y);
         hasPosition = true;
         moves += 1;
         break;
-      case 'ad': {
+      case 'ad':
+      case 'zd': {
         if (!hasPosition) {
           includePoint(bounds, x, y);
           hasPosition = true;

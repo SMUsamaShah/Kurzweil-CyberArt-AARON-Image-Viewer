@@ -54,6 +54,8 @@ function parseOperation(line, lineNumber, colorCount) {
   switch (command) {
     case 'am':
     case 'ad':
+    case 'zm':
+    case 'zd':
       expectArity(parts, 2, lineNumber);
       return {
         command,
@@ -205,12 +207,14 @@ function drawOperations(context, operations, palette, initialStyle) {
 
     switch (operation.command) {
       case 'am':
+      case 'zm':
         x = operation.x;
         y = operation.y;
         previousX = x;
         previousY = y;
         break;
       case 'ad':
+      case 'zd':
         lineTo(operation.x, operation.y);
         break;
       case 'nb':

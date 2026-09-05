@@ -61,6 +61,22 @@ This is a diagnostic workaround, not a claim about the historical source. If
 the patched probe reaches the generator, subsequent traces can separate the
 registry compatibility layer from AARON's composition and file-writing code.
 
+## First recovered generator corpus
+
+The patched paint probe in workflow run `33955266757` generated all sixteen
+`AA0`–`AA15` files in one process. It ran for 335.954 seconds on a 1024×768
+runner, with the registry and DEP probes applied only to that disposable copy.
+The title reached `Painting #15`; stdout shows a 15-second delay between
+paintings and a normal `start → write → end` sequence for every file.
+
+The files are not all screen-sized canvases: their widths were 487, 650, 768,
+or 1024 pixels while height stayed 768. Fourteen files used the 148-entry
+palette and two used 184 entries. Across the corpus, outline operation counts
+ranged from 342 to 19,636 and paint operations from 52,332 to 161,191.
+Two files exposed an alternate outline path encoding: `zm`/`zd` (20/2,237
+commands in `aa3`, 24/193 in `aa9`). The generated files and artifact remain
+temporary; their hashes and summary are sufficient to reproduce the analysis.
+
 ## Leads in the pure Lisp library
 
 These strings were found in the hash-identified `AARON.pll`. Offsets are byte

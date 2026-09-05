@@ -1,7 +1,8 @@
 # AARON AA interchange format
 
-Status: working specification based on the repository's `aa0` and `aa7`
-samples. Fields and commands below are observed, not guessed.
+Status: working specification based on the repository's `aa0`, `aa7`, and a
+16-file patched-oracle corpus. Fields and commands below are observed unless
+explicitly marked as inferred.
 
 ## Document structure
 
@@ -20,8 +21,10 @@ end
 - Palette channels are decimal values in the inclusive range 0–1.
 - Coordinates use an origin at the bottom-left.
 - `color` is a phase separator, despite looking like an operation name.
-- The outline phase in both known samples contains only `am` and `ad`.
-- The paint phase uses all currently known commands.
+- Most outline paths use `am` and `ad`; two corpus files also use `zm` and
+  `zd` for absolute outline paths.
+- The paint phase uses `nb`, `nc`, `am`, `ad`, and the eight chain-code letters
+  in the observed corpus.
 
 ## Commands
 
@@ -29,6 +32,8 @@ end
 |---|---:|---|
 | `am` | x y | Move to an absolute point without drawing. |
 | `ad` | x y | Draw from the current point to an absolute point. |
+| `zm` | x y | Move to an absolute point for a z-path (observed in outline phase; inferred same move semantics as `am`). |
+| `zd` | x y | Draw to an absolute point for a z-path (observed in outline phase; inferred same draw semantics as `ad`). |
 | `nb` | width | Select a brush width. Known widths are odd integers from 1–19. |
 | `nc` | index | Select a zero-based palette entry. |
 | `e` | — | Draw one unit right. |
@@ -41,8 +46,8 @@ end
 | `l` | — | Draw one unit right and down. |
 
 The one-letter commands form an eight-connected chain-code walk. They encode
-dense brush movement compactly while `am`/`ad` retain arbitrary-precision
-geometry for structural paths and jumps.
+dense brush movement compactly while `am`/`ad` and the observed `zm`/`zd`
+retain arbitrary-precision geometry for structural paths and jumps.
 
 ## Rendering order
 
@@ -63,11 +68,16 @@ should preserve this order.
 | `aa0` | 1920×1080 | 148 | 3,547 | 246,159 |
 | `aa7` | 1920×1080 | 184 | 6,220 | 260,178 |
 
+The first patched-oracle corpus used the 1024×768 screen setting. Fourteen
+files used the 148-entry palette and two used 184 entries; `zm`/`zd` appeared
+only in the outline phases of two files (20/2,237 and 24/193 respectively).
+
 ## Unknowns requiring more output
 
-- Whether other builds emit commands not present in these two samples.
+- Whether other builds emit commands beyond `zm`/`zd` and the known chain code.
 - Whether palette channels may exceed two decimal places or the 0–1 range.
 - Whether brush widths can be even, fractional, zero, or greater than 19.
-- Whether outline phases ever contain state-changing or chain-code commands.
+- Whether outline phases ever contain state-changing or chain-code commands
+  beyond the observed `zm`/`zd` branch.
 - Whether the background colour is implicit or stored elsewhere.
 - Whether identical random state and environment produce byte-identical files.

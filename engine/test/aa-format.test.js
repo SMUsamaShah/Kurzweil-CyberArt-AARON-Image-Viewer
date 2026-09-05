@@ -54,6 +54,21 @@ test('rejects inherited object names as unknown stroke commands', () => {
   }
 });
 
+test('parses absolute z-path outline commands', () => {
+  const document = parseAaFile([
+    '10 10 1',
+    '0 0 0',
+    'zm 1 2',
+    'zd 3.5 4.5',
+    'color',
+    'end',
+  ].join('\n'));
+  assert.deepEqual(document.outline, [
+    { command: 'zm', x: 1, y: 2, lineNumber: 3 },
+    { command: 'zd', x: 3.5, y: 4.5, lineNumber: 4 },
+  ]);
+});
+
 test('produces comparable corpus measurements', async () => {
   const analysis = analyzeAaDocument(parseAaFile(await sample('aa0')));
   assert.deepEqual(analysis.canvas, { width: 1920, height: 1080 });

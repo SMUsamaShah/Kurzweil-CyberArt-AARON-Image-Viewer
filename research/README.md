@@ -56,3 +56,7 @@ installer. It never executes the Windows binaries.
 requires the exact extracted `registry.dll` hash before applying temporary
 entry-point patches to the legacy process/version and trial-age checks; it is
 not part of the clean-room JavaScript engine.
+
+`tools/summarize-corpus.mjs` consumes a temporary AA0-AA15 directory and emits
+stable structural statistics plus file hashes. It keeps corpus inference
+reproducible without storing bulk generated output in the repository.

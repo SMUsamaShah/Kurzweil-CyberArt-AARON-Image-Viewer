@@ -20,6 +20,7 @@ param(
     [switch]$NativeTrace,
     [switch]$DisableAaronDep,
     [switch]$PatchRegistryRunning,
+    [string]$KcatSmallImage = '',
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
 )
@@ -195,12 +196,13 @@ try {
         [Environment]::SetEnvironmentVariable($name, $null, 'Process')
     }
 
-    foreach ($name in @('KCAT_AARON_DEBUG', 'ACL_STARTUP_DEBUG', '__COMPAT_LAYER')) {
+    foreach ($name in @('KCAT_AARON_DEBUG', 'ACL_STARTUP_DEBUG', 'KCAT_AARON_SMALL_IMAGE', '__COMPAT_LAYER')) {
         $OriginalEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
         [Environment]::SetEnvironmentVariable($name, $null, 'Process')
     }
     if ($KcatDebug) { $env:KCAT_AARON_DEBUG = '1' }
     if ($AclStartupDebug) { $env:ACL_STARTUP_DEBUG = '1' }
+    if ($KcatSmallImage) { $env:KCAT_AARON_SMALL_IMAGE = $KcatSmallImage }
     if ($CompatibilityLayer) { $env:__COMPAT_LAYER = $CompatibilityLayer }
 
     @($aaronExe, $screenSaver, $portableExe, $portableScreenSaver) |
@@ -330,6 +332,7 @@ try {
         mode = $Mode
         kcatDebug = [bool]$KcatDebug
         aclStartupDebug = [bool]$AclStartupDebug
+        kcatSmallImage = $KcatSmallImage
         compatibilityLayer = $CompatibilityLayer
         depException = [bool]$DisableAaronDep
         patchRegistryRunning = [bool]$PatchRegistryRunning
