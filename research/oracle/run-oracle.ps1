@@ -22,6 +22,7 @@ param(
     [switch]$PatchRegistryRunning,
     [ValidateRange(-1, 255)]
     [int]$LicenseVersion = -1,
+    [switch]$PatchPremiumFlag,
     [string]$KcatSmallImage = '',
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
@@ -46,6 +47,7 @@ $OriginalEnvironment = @{}
 $DepOverrideApplied = $false
 $RegistryPatchResult = $null
 $LicensePatchResult = $null
+$PremiumFlagPatchResult = $null
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -203,6 +205,21 @@ try {
             Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'license-patch.json')
     }
 
+    $PremiumFlagPath = $null
+    if ($PatchPremiumFlag) {
+        $premiumFlagSource = Join-Path $PSScriptRoot 'premium-flag.cl'
+        $PremiumFlagPath = 'C:\temp\aaron-premium-flag.cl'
+        Copy-Item -LiteralPath $premiumFlagSource -Destination $PremiumFlagPath -Force
+        $PremiumFlagPatchResult = [ordered]@{
+            source = $premiumFlagSource
+            loadedPath = $PremiumFlagPath
+            switch = '-L'
+        }
+        $PremiumFlagPatchResult |
+            ConvertTo-Json -Depth 8 |
+            Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'premium-flag-patch.json')
+    }
+
     $credentialVariables = @(
         'ACTIONS_ID_TOKEN_REQUEST_TOKEN',
         'ACTIONS_RUNTIME_TOKEN',
@@ -268,7 +285,12 @@ try {
             $process = Start-Process -FilePath $screenSaver -ArgumentList '/s' @startArguments
         }
         'direct-screensaver' {
-            $process = Start-Process -FilePath $aaronExe -ArgumentList @('--', 'screen-saver') @startArguments
+            $applicationArguments = if ($PatchPremiumFlag) {
+                @('-L', $PremiumFlagPath, '--', 'screen-saver')
+            } else {
+                @('--', 'screen-saver')
+            }
+            $process = Start-Process -FilePath $aaronExe -ArgumentList $applicationArguments @startArguments
         }
     }
 
@@ -359,6 +381,8 @@ try {
         registryPatch = $RegistryPatchResult
         licenseVersion = $LicenseVersion
         licensePatch = $LicensePatchResult
+        patchPremiumFlag = [bool]$PatchPremiumFlag
+        premiumFlagPatch = $PremiumFlagPatchResult
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')

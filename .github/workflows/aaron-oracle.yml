@@ -103,6 +103,18 @@ jobs:
             native_trace: false
             patch_registry: true
             license_version: 1
+            patch_premium_flag: false
+            target_paintings: 16
+            small_image: ''
+          - variant: premium-build-flag
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            patch_premium_flag: true
             target_paintings: 16
             small_image: ''
     env:
@@ -143,6 +155,7 @@ jobs:
             DisableAaronDep = $true
             PatchRegistryRunning = '${{ matrix.patch_registry }}' -eq 'true'
             LicenseVersion = [int]'${{ matrix.license_version }}'
+            PatchPremiumFlag = '${{ matrix.patch_premium_flag }}' -eq 'true'
             KcatSmallImage = '${{ matrix.small_image }}'
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
