@@ -13,11 +13,13 @@ const valueAfter = (flag) => {
 
 const seed = valueAfter('--seed');
 const figures = valueAfter('--figures');
+const profile = valueAfter('--profile');
 const output = valueAfter('--out');
 const result = generateAaron({
   seed: seed === undefined ? undefined : Number(seed),
   figureCount: figures === undefined ? undefined : Number(figures),
   smallImage: args.includes('--small'),
+  profile,
 });
 const text = serializeAaFile(result.document);
 

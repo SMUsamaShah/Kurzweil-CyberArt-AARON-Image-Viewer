@@ -45,6 +45,8 @@ screenshots.
 - [`host-protocol.md`](host-protocol.md) — screensaver launch behavior and
   exact scope of the two discovered diagnostic environment variables.
 - [`oracle.md`](oracle.md) — dynamic-analysis and corpus protocol.
+- [`oracle-corpus.md`](oracle-corpus.md) — measured trial, small-image, and
+  licensed composition regimes, plus the disposable compatibility workaround.
 - [`startup-findings.md`](startup-findings.md) — verified DEP fault and seed-related leads.
 
 ## Tools

@@ -124,6 +124,31 @@ that export return `1`, leaving all other licensing and registry operations
 unchanged, so the Premium-art-content claim can be compared directly against
 the trial control.
 
+## Licensed composition branch
+
+The direct-engine comparison is now complete. Returning `1` from
+`license.dll!KCATversion` suppresses the repeated `KCATversion license result:
+0` diagnostics and changes the generated corpus from the normal 487/650/768/
+1024×768 family to a compact 320/640×480 family. In a sixteen-file run the
+licensed files averaged 2,282 outline operations and 37,394 paint operations,
+versus 4,418 and 98,659 in the normal trial control. The direct licensed title
+also omits the “Free Trial Copy” suffix. This is a real reachable branch, not
+just a UI or registry patch.
+
+The branch is not identical to the explicit `KCAT_AARON_SMALL_IMAGE=1` trial
+mode: the latter averaged 3,691 outline and 43,367 paint operations, while the
+licensed corpus used `zm`/`zd` outline paths 47/2,774 times (small trial:
+25/963). A late `.clinit.cl` hook that sets every visible `*BUILD-PREMIUM*`
+symbol loads successfully in `COMMON-GRAPHICS-USER`, but produces a different
+148-entry-only corpus with no z-path commands. The license decision is therefore
+cached earlier or represented by another value; setting this symbol after image
+restore is not a sufficient unlock.
+
+Application mode remains a separate UI path. Its `Ctrl+O`/Paint One command
+produces a complete 320×480/148-color file in both trial and return-1 runs, but
+the window title retains the trial suffix. Use direct engine/screen-saver mode
+when comparing the licensed composition branch.
+
 Library strings include both application and runtime symbols. None of these
 leads should be presented as a verified user-facing switch until its callers,
 data references, or dynamic behavior are recovered.
