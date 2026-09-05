@@ -22,16 +22,9 @@ on:
         required: true
         default: '1'
         type: string
-  push:
-    branches:
-      - reverse-engineer-aaron-js
-    paths:
-      - '.github/workflows/aaron-oracle.yml'
-      - 'research/oracle/**'
-      - 'research/tools/extract-installer.mjs'
-      - 'research/tools/patch-registry-running.ps1'
-      - 'research/tools/patch-license-version.ps1'
-      - 'research/tools/summarize-corpus.mjs'
+
+# The broad corpus/compatibility matrix is now explicitly dispatched. Normal
+# research iteration uses aaron-introspection.yml's small, targeted probes.
 
 permissions:
   contents: read
@@ -208,48 +201,6 @@ jobs:
             premium_probe: size-1024x768.cl
             target_paintings: 1
             small_image: '1'
-          - variant: seeded-trial-1234
-            os: windows-2022
-            mode: direct-screensaver
-            run_seconds: 90
-            kcat_debug: false
-            acl_debug: false
-            compatibility: ''
-            native_trace: false
-            patch_registry: true
-            license_version: -1
-            patch_premium_flag: true
-            premium_probe: seed-1234.cl
-            target_paintings: 1
-            small_image: ''
-          - variant: seeded-trial-5678
-            os: windows-2022
-            mode: direct-screensaver
-            run_seconds: 90
-            kcat_debug: false
-            acl_debug: false
-            compatibility: ''
-            native_trace: false
-            patch_registry: true
-            license_version: -1
-            patch_premium_flag: true
-            premium_probe: seed-5678.cl
-            target_paintings: 1
-            small_image: ''
-          - variant: seeded-trial-1234-repeat
-            os: windows-2022
-            mode: direct-screensaver
-            run_seconds: 90
-            kcat_debug: false
-            acl_debug: false
-            compatibility: ''
-            native_trace: false
-            patch_registry: true
-            license_version: -1
-            patch_premium_flag: true
-            premium_probe: seed-1234-repeat.cl
-            target_paintings: 1
-            small_image: ''
           - variant: premium-small-image-1
             os: windows-2022
             run_seconds: 60

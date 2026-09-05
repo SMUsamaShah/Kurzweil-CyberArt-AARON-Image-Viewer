@@ -59,11 +59,14 @@ interactive diagnostic console.
 The bundled documentation describes the download as fully functional for 30
 days, after which licensing permanently enables continued execution. A stale
 rich-text resource inside `license.dll` describes “Premium” benefits as saving
-and reviewing up to sixteen paintings and printing paintings. Neither source
-mentions richer composition, more detailed figures, alternate brushes, or a
-gallery mode.
+and reviewing up to sixteen paintings, printing, and enhanced artistic content.
+The last item explicitly promises more elaborate and detailed paintings.
+The earlier statement here that neither source mentioned richer content was
+incorrect. The resource is a product claim, not a specification of the compiled
+content differences.
 
 This does not prove that every compiled rule is reachable from the public UI.
 The DXL contains the substantial `harold3` engine module set, so rare or
-unwired branches remain a legitimate research target. It does mean that
-registration should not be treated as the likely path to better artwork.
+unwired branches remain a legitimate research target. The licensing experiments
+in [oracle-corpus.md](oracle-corpus.md) provide output measurements, but do not
+yet isolate richer content rules or demonstrate a hidden gallery engine.

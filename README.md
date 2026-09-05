@@ -14,13 +14,10 @@ The images it generates can not be saved/exported normally and you can only take
 
 This viewer can be used to view and save those files.
 
-The reverse-engineering work has now reached two additional original-engine
-paths: the licensed compact composition branch and a retained canvas-size hook
-that can make the original binary save a genuine 1920×1080 AA file. Those
-findings are documented in [`research/oracle-corpus.md`](research/oracle-corpus.md)
-and exposed as configurable profiles in the clean-room engine; they do not
-redistribute the proprietary runtime or claim that its hidden gallery code is
-the same as the separate gallery system Harold Cohen used.
+Experiments have produced compact canvases and a genuine 1920×1080 AA file
+from the original engine. Measurements and their limits are documented in
+[`research/oracle-corpus.md`](research/oracle-corpus.md). These results do not
+establish that a hidden gallery engine has been unlocked.
 
 ## Engine reimplementation
 
@@ -30,8 +27,15 @@ the 2001 KCAT AARON generator, tested against observable output from the
 archived Windows program. Proprietary runtime binaries and bulk generated
 corpora are deliberately not committed.
 
+**The exact generator port is not finished.** The AA parser/emitter works with
+observed files; the JavaScript scene generator is a provisional implementation.
+The original planning, freehand drawing, color rules, and random-state semantics
+still need recovery and controlled comparison. Current progress is recorded in
+[`research/runtime-introspection.md`](research/runtime-introspection.md).
+
 ## Links about AARON
 
+- [Paul Cohen: The Hand of AARON — Harold Cohen's Freehand Line Algorithm](https://www.rightclicksave.com/article/the-hand-of-aaron-harold-cohens-freehand-line-algorithm-aaron-digital-art-human-randomness-feedback) — [research notes](research/freehand-line.md)
 - https://en.wikipedia.org/wiki/AARON
 - http://www.kurzweilcyberart.com/
 - http://www.kurzweilcyberart.com/aaron/static.html

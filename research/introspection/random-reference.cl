@@ -1,0 +1,41 @@
+;;; Reference vectors from the original runtime. Use only explicit fresh
+;;; random states; never assign an object to EXCL::*INTERNAL-RANDOM-STATE*.
+(in-package :cl-user)
+(unless (boundp 'aaron-random-reference-loaded)
+  (set 'aaron-random-reference-loaded t)
+  (with-open-file (report "C:\\temp\\aaron-random-reference.txt"
+                          :direction :output :if-exists :supersede
+                          :if-does-not-exist :create)
+    (let ((*print-length* nil) (*print-level* 5) (*print-circle* t)
+          (factory (find-symbol "MAKE-RANDOM-STATE-FROM-SEED" "EXCL"))
+          (ran (find-symbol "RAN" "COMMON-GRAPHICS-USER")))
+      (format report "BEGIN random-reference~%")
+      (finish-output report)
+      (dolist (seed '(1 1234 5678 5489))
+        (dolist (limit '(2 3 10 1000 536870911 4294967296 1.0f0 1.0d0))
+          (format report "TRY seed=~D limit=~S~%" seed limit)
+          (finish-output report)
+          (handler-case
+              (let ((state (funcall factory seed)))
+                (format report "VECTOR seed=~D limit=~S type=~S values=("
+                        seed limit (type-of limit))
+                (dotimes (i 20)
+                  (when (> i 0) (write-char #\Space report))
+                  (write (random limit state) :stream report))
+                (format report ")~%"))
+            (error (problem) (format report "ERROR ~A~%" problem)))
+          (finish-output report))
+        (dolist (bounds '((0 1) (0 10) (-10 10) (0.0f0 1.0f0) (10 0)))
+          (format report "TRY ran seed=~D bounds=~S~%" seed bounds)
+          (finish-output report)
+          (handler-case
+              (let ((*random-state* (funcall factory seed)))
+                (format report "RAN seed=~D bounds=~S values=(" seed bounds)
+                (dotimes (i 20)
+                  (when (> i 0) (write-char #\Space report))
+                  (write (funcall ran (first bounds) (second bounds)) :stream report))
+                (format report ")~%"))
+            (error (problem) (format report "ERROR ~A~%" problem)))
+          (finish-output report)))
+      (format report "END random-reference~%")
+      (finish-output report))))

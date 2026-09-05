@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [runtime-census, routine-probe]
+        probe: [object-probe, random-reference, line-metadata]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -53,6 +53,10 @@ jobs:
           if (-not (Test-Path $report)) { throw 'Probe never started' }
           if (-not (Select-String -LiteralPath $report -SimpleMatch 'END ${{ matrix.probe }}')) {
             throw 'Probe started but did not complete; inspect last checkpoint'
+          }
+          if ('${{ matrix.probe }}' -eq 'line-metadata' -and
+              -not (Select-String -LiteralPath $report -SimpleMatch 'SUCCESS line-metadata')) {
+            throw 'Line metadata probe completed with errors; inspect report'
           }
       - uses: actions/upload-artifact@v4
         if: always()

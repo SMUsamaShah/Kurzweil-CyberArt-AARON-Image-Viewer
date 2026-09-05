@@ -32,8 +32,9 @@ separate the large trial, small-image, and licensed output regimes.
 The retained image-size variables provide a more useful workaround than the
 ordinary small-image switch. A source-free `.clinit.cl` probe can set
 `SMALL-IMAGE-SCREEN-WIDTH` and `SMALL-IMAGE-SCREEN-HEIGHT` before composition.
-The compact branch stores exactly half the requested width while retaining the
-requested height:
+The three single-painting probes below stored half the requested width and
+the requested height. This does not yet establish a universal rule: compact
+corpora also contain full-width canvases.
 
 | Probe | AA header | Outline ops | Paint ops |
 |---|---:|---:|---:|
@@ -56,11 +57,12 @@ paths (47/2,774 in the sixteen files). The clean trial large corpus used
 25/963. The screenshot title for direct licensed runs no longer contains the
 “Free Trial Copy” suffix.
 
-Setting `*BUILD-PREMIUM*` after the Lisp image has loaded is not equivalent to
-the license path: the hook was confirmed to load in `COMMON-GRAPHICS-USER`,
-but its corpus had no z-path commands and all sixteen palettes had 148 entries.
-This is evidence that the real license decision is made earlier or through a
-different cached value; it is not evidence that the richer branch is absent.
+The `*BUILD-PREMIUM*` hook loaded in `COMMON-GRAPHICS-USER`, and its sampled
+corpus had no z-path commands and all sixteen palettes had 148 entries. That
+does not establish a timing or caching mechanism. The runtime census later
+found that the original value is integer `0`, while the old hook assigns `T`.
+Its type and callers must be recovered before interpreting the experiment.
+Uncontrolled random-scene differences alone also cannot prove distinct rules.
 
 Application mode is a separate UI path. `Ctrl+O` (`Paint One`) produced a
 complete 320×480/148-color file in both the clean-trial and return-1 runs, but
@@ -83,11 +85,11 @@ route for testing the licensed composition branch.
    route; it never changes the extracted source artifact.
 4. Optionally copy a source-free `.clinit.cl` probe into the installed working
    directory. This is useful for symbol experiments, but changing
-   `*BUILD-PREMIUM*` at that late point does not reproduce the license branch.
+   `*BUILD-PREMIUM*` has not established a content change.
    The same hook can set the retained `SMALL-IMAGE-SCREEN-WIDTH` and
-   `SMALL-IMAGE-SCREEN-HEIGHT` variables. In the compact branch this produces
-   a saved canvas whose width is half the requested value, allowing the
-   1920×1080 result above without modifying AARON's image or executable.
+   `SMALL-IMAGE-SCREEN-HEIGHT` variables. Three samples had half-width
+   saved canvases, including the 1920×1080 result above, without modifying
+   AARON's image or executable. The canvas selection rule is still unresolved.
 
 The patch scripts refuse unknown hashes and report every RVA, file offset,
 original prologue, and resulting hash. They are research harnesses, not part of

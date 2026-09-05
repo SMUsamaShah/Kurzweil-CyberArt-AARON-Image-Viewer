@@ -31,10 +31,11 @@ input at a time and retain generated AA files as temporary research artifacts.
 
 ### Behavioural reconstruction
 
-Treat original AARON as an oracle. Infer invariants and distributions from a
-large output corpus, then encode those independently in JavaScript. Golden
-tests should compare structural decisions and command streams, not merely
-screenshots.
+Treat original AARON as an oracle. Use a small corpus to identify candidate
+behaviors, then recover individual decision rules through controlled calls
+and binary analysis. Distributions alone cannot establish an exact port.
+Comparison tests must use original-engine reference results, not just tests
+of our own implementation.
 
 ## Current documents
 
@@ -48,6 +49,10 @@ screenshots.
 - [`oracle-corpus.md`](oracle-corpus.md) — measured trial, small-image, and
   licensed composition regimes, plus the disposable compatibility workaround.
 - [`startup-findings.md`](startup-findings.md) — verified DEP fault and seed-related leads.
+- [`runtime-introspection.md`](runtime-introspection.md) — live function inventory,
+  retained signatures, and corrections to the failed seed experiment.
+- [`freehand-line.md`](freehand-line.md) — Paul Cohen's article supplied by Usama,
+  its relevance to the 2001 build, and the next line-algorithm probe.
 
 ## Tools
 

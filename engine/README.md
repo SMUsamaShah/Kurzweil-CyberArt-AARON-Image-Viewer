@@ -1,7 +1,9 @@
 # AARON JavaScript engine
 
-This directory contains the clean-room JavaScript reimplementation of the
-2001 Kurzweil CyberArt AARON engine.
+This directory contains work toward a JavaScript reimplementation of the
+2001 Kurzweil CyberArt AARON engine. **It is not a complete or equivalent port.**
+The current scene generator is provisional; passing its tests does not prove
+equivalence to the Windows engine.
 
 The implementation is being built in independently testable layers:
 
@@ -44,11 +46,11 @@ Normal-mode profile names `portrait`, `tall`, `square`, and `wide` expose the
 oracle corpus. With `--small`, `portrait` and `wide` expose the measured
 320×480 and 640×480 small-image families.
 
-The recovered compact size controls are available as
-`--screen-width <value> --screen-height <value>`. They mirror AARON's retained
-`SMALL-IMAGE-SCREEN-WIDTH`/`HEIGHT` variables: the generated header stores half
-the requested width and the requested height. For example, the hidden
-full-HD-sized path is:
+The provisional compact size controls are available as
+`--screen-width <value> --screen-height <value>`. The JS implementation stores
+half the requested width and the requested height. Three original-engine
+samples had that relationship, but other observed compact canvases have full
+width: the original selection rule has not yet been recovered. For example:
 
 ```sh
 cd engine
@@ -56,14 +58,13 @@ npm run generate -- --small --screen-width 3840 --screen-height 1080 \
   --out /tmp/aaron-1920x1080-aa0
 ```
 
-which emits a 1920×1080 document. This is a recovered dimension rule, not a
-claim that the current clean-room scene rules are byte-identical to the
-original composition.
+which emits a 1920×1080 document. This reproduces the dimensions of one
+original-engine experiment, not the original composition or a proven universal
+dimension rule.
 
-`--premium` selects the measured compact licensed profile (640×480 with the
-148-entry palette) while retaining the clean-room planner. It models the
-reachable Premium regime without claiming to bypass licensing in the original
-binary.
+`--premium` selects a provisional compact preset (640×480 with the 148-entry
+palette). It does not implement recovered Premium content rules. Original
+licensed samples also include 320×480 canvases and 184-entry palettes.
 
 The generator currently reproduces the recovered file protocol, stroke
 encoding, palette shape, and 640×480 small-image profile. Its scene planner is
@@ -72,3 +73,8 @@ and palette tables are still being recovered rather than silently presented as
 byte-identical. The planner now reserves candidate figure footprints on a
 coarse occupancy grid, including the no-corner-only diagonal rule described in
 Cohen's matrix notes.
+
+The freehand line algorithm is still missing. [Paul Cohen's article and the
+recovery plan](../research/freehand-line.md) are saved in the research folder.
+The RNG uses standard MT19937 reference seeding; compatibility with Allegro
+5.0.1 seeding and its integer/float conversions remains unverified.

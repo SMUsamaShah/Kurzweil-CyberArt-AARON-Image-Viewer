@@ -1,0 +1,124 @@
+# Runtime introspection and exactness status
+
+The exact JavaScript engine is unfinished. We can run the archived program
+with the documented compatibility probes, read its AA output, and inspect
+retained Lisp metadata. The JavaScript scene rules are provisional, and no
+controlled whole-painting equivalence test has passed yet.
+
+## Verified evidence
+
+| Report | Original-engine run | Result |
+|---|---|---|
+| `runtime-census.txt` | [33966375745](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33966375745), artifact `9969556526` | Two completed startup invocations; 2,694 records, 1,347 unique application function bindings |
+| `routine-probe.txt` | [33966545590](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33966545590), artifact `9969605928` | Fifteen argument lists obtained; every disassembly attempt reports missing `disasm.fasl` |
+| `aaron-seed-loaded.txt` | [33962045540](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33962045540), seeded-trial-1234 artifact `9968241681` | Only the entry marker exists; the seed-installation experiment did not complete |
+
+Report SHA-256 values, respectively:
+
+```text
+92fde28d071bb314cbd9ba17369f13482317cbf0b967b7acaefe688bedeef334
+1fef4edb7d646f6486ead0f92b01fec7db9cd79ee524e8f60290d1d14ccd4fb2
+699c849e5b107df44406e76a43725bb11a4b85a563ceefb6d2478f2f339b4535
+```
+
+The artifact reports are temporary. The sorted function names and census
+provenance are preserved in [function-inventory.json](introspection/function-inventory.json).
+This inventory counts own symbols in `COMMON-GRAPHICS-USER` with `FBOUNDP`
+true. It includes generated accessors and host/UI routines. It is not a count
+of recovered algorithms, successfully invoked functions, or ported functions.
+The two loads produced identical name sets and must not be counted twice.
+
+## Argument lists retained in this build
+
+| Package | Function | Arguments |
+|---|---|---|
+| EXCL, internal | `MAKE-RANDOM-STATE-FROM-SEED` | `(SEED)` |
+| EXCL, internal | `NEW-RANDOM-FLOAT` | `(STATE)` |
+| EXCL, internal | `NEW-RANDOM-FIXNUM` | `(NUMBER STATE)` |
+| COMMON-LISP, external | `RANDOM` | `(NUMBER &OPTIONAL STATE)` |
+| COMMON-GRAPHICS-USER, internal | `INIT-RANDOM` | `()` |
+| COMMON-GRAPHICS-USER, internal | `SET-RANDOM` | `()` |
+| COMMON-GRAPHICS-USER, internal | `GET-RANDOM` | `()` |
+| COMMON-GRAPHICS-USER, internal | `RAN` | `(A B)` |
+| COMMON-GRAPHICS-USER, internal | `KCAT-CURRENT-DAY-TIME` | `()` |
+| COMMON-GRAPHICS-USER, internal | `SET-FILE-ADDRESSES` | `()` |
+| COMMON-GRAPHICS-USER, internal | `SET-UP-SCREEN-SIZE` | `()` |
+| COMMON-GRAPHICS-USER, internal | `SELECT-CANVAS` | `(SIZE)` |
+| COMMON-GRAPHICS-USER, internal | `SCRIPT` | `(PLAN)` |
+| COMMON-GRAPHICS-USER, internal | `SELECT-BRUSH` | `(COUNT)` |
+| COMMON-GRAPHICS-USER, internal | `BRUSH-STROKE` | `(PATH VALUE CDEX SDEX)` |
+
+The table omits package prefixes on parameter symbols for readability.
+Names and argument lists establish callable interfaces, not parameter types,
+side effects, valid inputs, or behavior. `EXCL::RANDOM-INT` exists as a symbol
+but has no function binding in the census.
+
+## Corrections that affect the next experiment
+
+1. **Seed installation was never demonstrated.** The old `seed-1234.cl`,
+   `seed-1234-repeat.cl`, and `seed-5678.cl` use the single-colon spelling
+   `excl:make-random-state-from-seed`. The symbol is internal, so the reader
+   fails before the surrounding handler can run. An entry marker written by
+   an earlier top-level form is insufficient evidence of installation. These
+   historical probes are invalid controls and must not be used to infer
+   reseeding from different painting hashes. Their jobs have been removed
+   from the local workflow; the old scripts remain as records of the failed
+   attempt. The replacement is `random-reference.cl`.
+2. **The random globals are different types.** At census time,
+   `COMMON-LISP:*RANDOM-STATE*` is a RANDOM-STATE object;
+   `EXCL::*INTERNAL-RANDOM-STATE*` is a BIGNUM. Never set both to the same
+   object. `?RSEED?` is present but unbound at this startup checkpoint.
+3. **The build flag is numeric at startup.** `*BUILD-PREMIUM*` is integer `0`.
+   The earlier hook's assignment of `T` does not establish its intended
+   semantics or prove when licensing decisions occur.
+4. **A bound function can still depend on an absent module.** `DISASSEMBLE`
+   attempts to autoload `disasm.fasl`, which is absent. Its failure was caught;
+   the workflow completing successfully does not mean disassembly succeeded.
+5. **The size rule remains unresolved.** Initial compact screen variables
+   are 640 and 480. Three modified-size samples used half the requested
+   width, but ordinary compact corpora contain both 320 and 640 widths.
+   Recover `SELECT-CANVAS` before presenting width halving as universal.
+
+## Prepared probes, not yet executed
+
+The last GitHub write was rejected by automatic approval review because of
+an account usage limit. The following probes are prepared locally; this note
+does not claim they ran or yielded results:
+
+- `object-probe.cl`: inspect bounded function-object headers and available
+  memory-access helper signatures as an alternative to the missing Lisp
+  disassembler. No memory writes. Header layout and helper availability are
+  still unknown; any raw-address interpretation requires validation.
+- `random-reference.cl`: call the dynamically resolved seed factory with fresh
+  explicit states, then collect integer, single-float, and double-float output.
+  Separately test whether a dynamic `*RANDOM-STATE*` binding controls `RAN`.
+  No assignments to the internal BIGNUM state are made.
+- `line-metadata.cl`: obtain retained signatures for 23 line/brush candidates
+  identified after reading [Paul Cohen's article](freehand-line.md). It calls
+  metadata helpers, not the application drawing routines. A completion marker
+  and a separate success marker distinguish completion from errors.
+
+No original RNG vectors or FLA point sequences have been recovered by these
+pending probes. The current MT19937 tests check a standard reference generator,
+not Allegro 5.0.1 parity. Full generator equivalence also requires matching
+random draw order, numeric conversions, planning, geometry, color, and emission.
+
+The local workflow also makes the broad corpus matrix manual-only. Publishing
+routine research changes will run the three targeted introspection jobs rather
+than regenerate the large corpus. This workflow change is not yet on GitHub.
+
+## Reproduce the saved inventory
+
+From the repository root, using the downloaded report:
+
+```sh
+node research/tools/summarize-runtime-census.mjs /path/to/runtime-census.txt \
+  https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33966375745 \
+  > research/introspection/function-inventory.json
+node --test research/tools/test/runtime-census.test.mjs
+```
+
+The parser rejects partial invocations, malformed records, duplicate names
+within one enumeration, reported errors, and differing inventories between
+loads. It records the original report's hash, including its original line
+endings. Its tests validate evidence handling; they do not test the generator.

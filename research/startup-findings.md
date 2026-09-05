@@ -126,7 +126,7 @@ the trial control.
 
 ## Licensed composition branch
 
-The direct-engine comparison is now complete. Returning `1` from
+The initial direct-engine corpus comparison is complete. Returning `1` from
 `license.dll!KCATversion` suppresses the repeated `KCATversion license result:
 0` diagnostics and changes the generated corpus from the normal 487/650/768/
 1024×768 family to a compact 320/640×480 family. In a sixteen-file run the
@@ -135,34 +135,39 @@ versus 4,418 and 98,659 in the normal trial control. The direct licensed title
 also omits the “Free Trial Copy” suffix. This is a real reachable branch, not
 just a UI or registry patch.
 
-The branch is not identical to the explicit `KCAT_AARON_SMALL_IMAGE=1` trial
+The sampled outputs differ from the explicit `KCAT_AARON_SMALL_IMAGE=1` trial
 mode: the latter averaged 3,691 outline and 43,367 paint operations, while the
 licensed corpus used `zm`/`zd` outline paths 47/2,774 times (small trial:
 25/963). A late `.clinit.cl` hook that sets every visible `*BUILD-PREMIUM*`
 symbol loads successfully in `COMMON-GRAPHICS-USER`, but produces a different
-148-entry-only corpus with no z-path commands. The license decision is therefore
-cached earlier or represented by another value; setting this symbol after image
-restore is not a sufficient unlock.
+148-entry-only corpus with no z-path commands. These are independent random
+scenes, so the differences do not establish distinct content logic. The later
+runtime census found that `*BUILD-PREMIUM*` starts as integer `0`, whereas the
+old hook assigns `T`. Its intended type and uses must be recovered before this
+probe can support a conclusion about timing, caching, or an unlock.
 
 The same late hook exposes a productive high-resolution route. Setting the
 retained `SMALL-IMAGE-SCREEN-WIDTH`/`HEIGHT` variables to 1024×768, 1920×1080,
 and 3840×1080 produced valid saved headers 512×768, 960×1080, and **1920×1080**
 respectively. The largest probe wrote a 708,794-byte file with 3,530 outline
-and 170,665 paint operations. The width-halving rule is consistent across all
-three points; height is preserved. The desktop screenshot is necessarily
-clipped on the 1024×768 runner, but the AA file itself is full HD. This is the
-best current workaround for the gallery/high-resolution lead: it is a real
-engine path reached by the original binary, not a JavaScript upscale or a
-post-processing trick. It should be exposed in the JS port as an explicit
-`canvasWidth`/`canvasHeight` profile while keeping the historical compact
-branch's width conversion visible and configurable.
+and 170,665 paint operations. Width halving was observed in these three
+samples; height was preserved. This is not yet a universal dimension rule:
+other small-mode samples have both half-width and full-width canvases. The desktop screenshot is necessarily
+clipped on the 1024×768 runner, but the AA file itself is full HD. This demonstrates a high-resolution engine path, but not gallery
+content. The JS canvas controls are provisional until `SELECT-CANVAS` and
+`SET-UP-SCREEN-SIZE` are recovered.
 
-The seed probe is a separate unresolved issue. `.clinit.cl` loaded successfully
-and set both Allegro random-state globals plus `?RSEED?`; however, two fresh
-Windows runners with seed 1234 still produced different AA hashes. The engine
-therefore resets or supplements that state during startup (or uses another
-time-dependent source). We can use the output corpus for structural inference,
-but should not call the current seed hook a reproducibility control.
+**Correction to the seed experiment:** the entry marker exists, but the
+completion marker does not. The old scripts use
+`excl:make-random-state-from-seed`; the routine probe confirms that this symbol
+is internal to EXCL. Reading that form fails before its handler can run.
+There is no evidence that these runs installed the requested seed. Their
+different AA hashes therefore do not demonstrate later reseeding. Furthermore,
+`*INTERNAL-RANDOM-STATE*` is a BIGNUM, while `*RANDOM-STATE*` is a RANDOM-STATE
+object: assigning the same object to both would be invalid. The replacement
+`introspection/random-reference.cl` uses dynamic symbol lookup and explicit
+fresh states for isolated calls. It has not yet produced reference vectors.
+See [runtime-introspection.md](runtime-introspection.md) for the evidence.
 
 Application mode remains a separate UI path. Its `Ctrl+O`/Paint One command
 produces a complete 320×480/148-color file in both trial and return-1 runs, but
