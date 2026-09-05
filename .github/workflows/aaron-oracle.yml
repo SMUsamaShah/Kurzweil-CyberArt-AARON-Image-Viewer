@@ -130,6 +130,20 @@ jobs:
             patch_premium_flag: false
             target_paintings: 1
             small_image: ''
+          - variant: application-menu
+            os: windows-2022
+            mode: application
+            run_seconds: 20
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            patch_premium_flag: false
+            capture_application_menu: true
+            target_paintings: 1
+            small_image: ''
     env:
       ORACLE_MODE: ${{ matrix.mode || inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -158,7 +172,11 @@ jobs:
             ExtractedRoot = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
             OutputRoot = Join-Path $PWD 'research\artifacts\oracle'
             Mode = $env:ORACLE_MODE
-            RunSeconds = [int]$env:ORACLE_RUN_SECONDS
+            RunSeconds = if ('${{ matrix.run_seconds }}' -ne '') {
+              [int]'${{ matrix.run_seconds }}'
+            } else {
+              [int]$env:ORACLE_RUN_SECONDS
+            }
             TargetPaintings = if ('${{ github.event_name }}' -eq 'workflow_dispatch') {
               [int]$env:ORACLE_TARGET_PAINTINGS
             } else {
@@ -169,6 +187,7 @@ jobs:
             PatchRegistryRunning = '${{ matrix.patch_registry }}' -eq 'true'
             LicenseVersion = [int]'${{ matrix.license_version }}'
             PatchPremiumFlag = '${{ matrix.patch_premium_flag }}' -eq 'true'
+            CaptureApplicationMenu = '${{ matrix.capture_application_menu }}' -eq 'true'
             KcatSmallImage = '${{ matrix.small_image }}'
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {

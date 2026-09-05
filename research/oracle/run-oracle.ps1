@@ -23,6 +23,7 @@ param(
     [ValidateRange(-1, 255)]
     [int]$LicenseVersion = -1,
     [switch]$PatchPremiumFlag,
+    [switch]$CaptureApplicationMenu,
     [string]$KcatSmallImage = '',
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
@@ -302,6 +303,47 @@ try {
         }
     }
 
+    if ($CaptureApplicationMenu -and $Mode -eq 'application') {
+        Add-Type @"
+using System;
+using System.Text;
+using System.Runtime.InteropServices;
+public static class AaronMenuProbe {
+    [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+    [DllImport("user32.dll")] public static extern IntPtr GetMenu(IntPtr hWnd);
+    [DllImport("user32.dll")] public static extern IntPtr GetSubMenu(IntPtr hMenu, int nPos);
+    [DllImport("user32.dll")] public static extern int GetMenuItemCount(IntPtr hMenu);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    public static extern int GetMenuString(IntPtr hMenu, uint uIDItem, StringBuilder lpString,
+        int nMaxCount, uint uFlag);
+    [DllImport("user32.dll")] public static extern uint GetMenuItemID(IntPtr hMenu, int nPos);
+}
+"@
+        Start-Sleep -Seconds 2
+        [AaronMenuProbe]::SetForegroundWindow($process.MainWindowHandle) | Out-Null
+        $menu = [AaronMenuProbe]::GetMenu($process.MainWindowHandle)
+        $menuLines = [Collections.Generic.List[string]]::new()
+        $menuLines.Add("window=0x$('{0:X}' -f $process.MainWindowHandle.ToInt64())")
+        $topCount = [AaronMenuProbe]::GetMenuItemCount($menu)
+        $menuLines.Add("topCount=$topCount")
+        for ($topIndex = 0; $topIndex -lt $topCount; $topIndex++) {
+            $label = [Text.StringBuilder]::new(512)
+            [void][AaronMenuProbe]::GetMenuString($menu, [uint32]$topIndex, $label, 512, 0x400)
+            $submenu = [AaronMenuProbe]::GetSubMenu($menu, $topIndex)
+            $menuLines.Add("top[$topIndex] label=<$label> submenu=0x$('{0:X}' -f $submenu.ToInt64())")
+            if ($submenu -eq [IntPtr]::Zero) { continue }
+            $subCount = [AaronMenuProbe]::GetMenuItemCount($submenu)
+            for ($subIndex = 0; $subIndex -lt $subCount; $subIndex++) {
+                $subLabel = [Text.StringBuilder]::new(512)
+                [void][AaronMenuProbe]::GetMenuString($submenu, [uint32]$subIndex, $subLabel, 512, 0x400)
+                $commandId = [AaronMenuProbe]::GetMenuItemID($submenu, $subIndex)
+                $menuLines.Add("  item[$subIndex] id=$commandId label=<$subLabel>")
+            }
+        }
+        $menuLines | Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'application-menu.txt')
+        [Windows.Forms.SendKeys]::SendWait('%p')
+    }
+
     $startedAt = [DateTimeOffset]::UtcNow
     $deadline = [DateTime]::UtcNow.AddSeconds($RunSeconds)
     $searchDirectories = @('C:\temp', $workingDirectory, $ApplicationRoot)
@@ -398,6 +440,7 @@ try {
         licensePatch = $LicensePatchResult
         patchPremiumFlag = [bool]$PatchPremiumFlag
         premiumFlagPatch = $PremiumFlagPatchResult
+        captureApplicationMenu = [bool]$CaptureApplicationMenu
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')
