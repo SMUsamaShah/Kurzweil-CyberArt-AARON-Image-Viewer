@@ -25,3 +25,10 @@ test('small-image mode uses the recovered 640x480 profile', () => {
   assert.equal(analysis.palette.entries, 184);
   assert.equal(result.scene.smallImage, true);
 });
+
+test('supports the measured normal-mode canvas profiles', () => {
+  assert.equal(generateAaron({ seed: 1, profile: 'portrait' }).document.width, 487);
+  assert.equal(generateAaron({ seed: 1, profile: 'tall' }).document.width, 650);
+  assert.equal(generateAaron({ seed: 1, profile: 'square' }).document.width, 768);
+  assert.equal(generateAaron({ seed: 1, profile: 'wide' }).document.width, 1024);
+});

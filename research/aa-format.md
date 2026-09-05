@@ -68,9 +68,11 @@ should preserve this order.
 | `aa0` | 1920×1080 | 148 | 3,547 | 246,159 |
 | `aa7` | 1920×1080 | 184 | 6,220 | 260,178 |
 
-The first patched-oracle corpus used the 1024×768 screen setting. Fourteen
-files used the 148-entry palette and two used 184 entries; `zm`/`zd` appeared
-only in the outline phases of two files (20/2,237 and 24/193 respectively).
+The first patched-oracle corpus used the 1024×768 screen setting. Its saved
+canvas widths were 487, 650, 768, or 1024 pixels, all at 768 pixels high.
+Fourteen files used the 148-entry palette and two used 184 entries; `zm`/`zd`
+appeared only in the outline phases of two files (20/2,237 and 24/193
+respectively).
 
 A separate patched run with the verified environment mode
 `KCAT_AARON_SMALL_IMAGE=1` emitted a 640×480 file with 184 palette entries,

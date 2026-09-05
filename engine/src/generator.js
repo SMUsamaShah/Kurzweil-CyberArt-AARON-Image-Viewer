@@ -11,6 +11,12 @@ import {
 
 const LARGE_MODE = Object.freeze({ width: 1024, height: 768, paletteSize: 148 });
 const SMALL_MODE = Object.freeze({ width: 640, height: 480, paletteSize: 184 });
+const LARGE_CANVAS_PROFILES = Object.freeze({
+  portrait: 487 / 768,
+  tall: 650 / 768,
+  square: 1,
+  wide: 1024 / 768,
+});
 
 function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
@@ -217,8 +223,17 @@ export class AaronGenerator {
     this.random = options.random ?? new AaronRandom(this.seed);
     this.smallImage = Boolean(options.smallImage);
     const mode = this.smallImage ? SMALL_MODE : LARGE_MODE;
-    this.width = options.width ?? mode.width;
     this.height = options.height ?? mode.height;
+    this.profile = options.profile ?? null;
+    const profileRatio = !this.smallImage && this.profile
+      ? LARGE_CANVAS_PROFILES[this.profile]
+      : undefined;
+    if (this.profile && profileRatio === undefined) {
+      throw new RangeError(`unknown AARON canvas profile ${JSON.stringify(this.profile)}`);
+    }
+    this.width = options.width ?? (profileRatio === undefined
+      ? mode.width
+      : Math.round(this.height * profileRatio));
     this.figureCount = options.figureCount;
     this.palette = options.palette ?? createAaronPalette({
       size: options.paletteSize ?? mode.paletteSize,
@@ -264,6 +279,7 @@ export class AaronGenerator {
         height: this.height,
         seed: this.seed,
         smallImage: this.smallImage,
+        profile: this.profile,
         figures: figures.length,
         objects: scenes.map(({ kind, shapes }) => ({ kind, shapeCount: shapes.length })),
       },
@@ -276,3 +292,4 @@ export function generateAaron(options) {
 }
 
 export const aaronModes = Object.freeze({ large: LARGE_MODE, small: SMALL_MODE });
+export const aaronCanvasProfiles = LARGE_CANVAS_PROFILES;
