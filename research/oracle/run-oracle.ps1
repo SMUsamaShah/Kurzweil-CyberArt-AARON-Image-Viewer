@@ -23,6 +23,7 @@ param(
     [ValidateRange(-1, 255)]
     [int]$LicenseVersion = -1,
     [switch]$PatchPremiumFlag,
+    [string]$PremiumFlagSource = 'premium-flag.cl',
     [switch]$CaptureApplicationMenu,
     [switch]$TriggerPaintOne,
     [string]$KcatSmallImage = '',
@@ -211,7 +212,10 @@ try {
 
     $PremiumFlagPath = $null
     if ($PatchPremiumFlag) {
-        $premiumFlagSource = Join-Path $PSScriptRoot 'premium-flag.cl'
+        $premiumFlagSource = Join-Path $PSScriptRoot $PremiumFlagSource
+        if (-not (Test-Path $premiumFlagSource -PathType Leaf)) {
+            throw "Premium probe source not found: $premiumFlagSource"
+        }
         $PremiumFlagPath = 'C:\temp\aaron-premium-flag.cl'
         Copy-Item -LiteralPath $premiumFlagSource -Destination $PremiumFlagPath -Force
         Copy-Item -LiteralPath $premiumFlagSource -Destination (Join-Path $workingDirectory '.clinit.cl') -Force
@@ -411,6 +415,12 @@ public static class AaronWindowProbe {
 
     if ($PatchPremiumFlag -and (Test-Path $PremiumFlagMarkerPath -PathType Leaf)) {
         Copy-Item -LiteralPath $PremiumFlagMarkerPath -Destination (Join-Path $LogRoot 'premium-flag-runtime.txt') -Force
+    }
+    foreach ($probeMarker in @('C:\temp\aaron-premium-size-loaded.txt',
+                               'C:\temp\aaron-size-loaded.txt')) {
+        if (Test-Path $probeMarker -PathType Leaf) {
+            Copy-Item -LiteralPath $probeMarker -Destination (Join-Path $LogRoot ([IO.Path]::GetFileName($probeMarker))) -Force
+        }
     }
     if ($PatchPremiumFlag -and (Test-Path $PremiumFlagIntrospectionPath -PathType Leaf)) {
         Copy-Item -LiteralPath $PremiumFlagIntrospectionPath -Destination (Join-Path $LogRoot 'premium-introspection.txt') -Force

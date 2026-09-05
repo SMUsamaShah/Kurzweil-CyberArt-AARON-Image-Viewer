@@ -152,6 +152,34 @@ jobs:
             patch_premium_flag: true
             target_paintings: 1
             small_image: ''
+          - variant: premium-size-1024x768
+            os: windows-2022
+            mode: direct-screensaver
+            run_seconds: 90
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            patch_premium_flag: true
+            premium_probe: premium-size-1024x768.cl
+            target_paintings: 1
+            small_image: ''
+          - variant: size-override-trial
+            os: windows-2022
+            mode: direct-screensaver
+            run_seconds: 90
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            patch_premium_flag: true
+            premium_probe: size-1024x768.cl
+            target_paintings: 1
+            small_image: '1'
           - variant: premium-small-image-1
             os: windows-2022
             run_seconds: 60
@@ -273,6 +301,9 @@ jobs:
           }
           if ('${{ matrix.acl_debug }}' -eq 'true') {
             $parameters.AclStartupDebug = $true
+          }
+          if ('${{ matrix.premium_probe }}' -ne '') {
+            $parameters.PremiumFlagSource = '${{ matrix.premium_probe }}'
           }
           $parameters.CompatibilityLayer = '${{ matrix.compatibility }}'
           & research/oracle/run-oracle.ps1 @parameters
