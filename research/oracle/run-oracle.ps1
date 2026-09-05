@@ -17,6 +17,7 @@ param(
 
     [switch]$KcatDebug,
     [switch]$AclStartupDebug,
+    [switch]$NativeTrace,
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
 )
@@ -80,6 +81,12 @@ function Test-AaComplete {
 
 function Get-InstalledAaronExecutable {
     param([string]$ExpectedSha256)
+
+    $installedPath = 'C:\Program Files (x86)\Kurzweil CyberArt\AARON\AARON.exe'
+    if ((Test-Path $installedPath) -and
+        (Get-FileHash $installedPath -Algorithm SHA256).Hash -eq $ExpectedSha256) {
+        return $installedPath
+    }
 
     $roots = @($env:ProgramFiles, ${env:ProgramFiles(x86)}) |
         Where-Object { $_ -and (Test-Path $_) } |
@@ -189,6 +196,13 @@ try {
     }
 
     $standardOutput = Join-Path $LogRoot 'process-stdout.txt'
+    if ($NativeTrace) {
+        Add-Type -Path (Join-Path $PSScriptRoot 'NativeTrace.cs')
+        [AaronNativeTrace]::Run($aaronExe, '-- screen-saver', $workingDirectory,
+            (Join-Path $LogRoot 'native-trace.txt'), 30)
+        Write-RegistrySnapshot (Join-Path $LogRoot 'registry-after.txt')
+        return
+    }
     $standardError = Join-Path $LogRoot 'process-stderr.txt'
     $startArguments = @{
         WorkingDirectory = $workingDirectory

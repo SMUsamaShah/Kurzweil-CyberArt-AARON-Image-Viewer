@@ -42,20 +42,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - variant: win2022-normal
+          - variant: win2022-native-trace
             os: windows-2022
             kcat_debug: false
             acl_debug: false
-            compatibility: ''
-          - variant: win2022-xp-compat
-            os: windows-2022
-            kcat_debug: false
-            acl_debug: false
-            compatibility: WINXPSP3
-          - variant: win2022-acl-debug
-            os: windows-2022
-            kcat_debug: false
-            acl_debug: true
             compatibility: ''
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
@@ -87,6 +77,7 @@ jobs:
             Mode = $env:ORACLE_MODE
             RunSeconds = [int]$env:ORACLE_RUN_SECONDS
             TargetPaintings = [int]$env:ORACLE_TARGET_PAINTINGS
+            NativeTrace = $true
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
             $parameters.KcatDebug = $true
