@@ -20,6 +20,8 @@ param(
     [switch]$NativeTrace,
     [switch]$DisableAaronDep,
     [switch]$PatchRegistryRunning,
+    [ValidateRange(-1, 255)]
+    [int]$LicenseVersion = -1,
     [string]$KcatSmallImage = '',
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
@@ -43,6 +45,7 @@ $FirewallRules = [Collections.Generic.List[string]]::new()
 $OriginalEnvironment = @{}
 $DepOverrideApplied = $false
 $RegistryPatchResult = $null
+$LicensePatchResult = $null
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -180,7 +183,24 @@ try {
         $RegistryPatchResult = $patchJson | ConvertFrom-Json
         $RegistryPatchResult |
             ConvertTo-Json -Depth 8 |
-            Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'registry-patch.json')
+        Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'registry-patch.json')
+    }
+
+    if ($LicenseVersion -ge 0) {
+        $licensePath = Join-Path $workingDirectory 'license.dll'
+        $licenseEntry = $manifest.files |
+            Where-Object { $_.installedName -eq 'license.dll' } |
+            Select-Object -First 1
+        if ($null -eq $licenseEntry) {
+            throw 'The extraction manifest has no license.dll hash'
+        }
+        $licensePatchScript = Join-Path $PSScriptRoot '..\tools\patch-license-version.ps1'
+        $licenseJson = & $licensePatchScript -Path $licensePath -ExpectedSha256 $licenseEntry.sha256 `
+            -ReturnValue $LicenseVersion
+        $LicensePatchResult = $licenseJson | ConvertFrom-Json
+        $LicensePatchResult |
+            ConvertTo-Json -Depth 8 |
+            Set-Content -Encoding UTF8 -Path (Join-Path $LogRoot 'license-patch.json')
     }
 
     $credentialVariables = @(
@@ -337,6 +357,8 @@ try {
         depException = [bool]$DisableAaronDep
         patchRegistryRunning = [bool]$PatchRegistryRunning
         registryPatch = $RegistryPatchResult
+        licenseVersion = $LicenseVersion
+        licensePatch = $LicensePatchResult
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')

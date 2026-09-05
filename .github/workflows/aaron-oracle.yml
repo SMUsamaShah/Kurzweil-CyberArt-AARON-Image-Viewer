@@ -30,6 +30,7 @@ on:
       - 'research/oracle/**'
       - 'research/tools/extract-installer.mjs'
       - 'research/tools/patch-registry-running.ps1'
+      - 'research/tools/patch-license-version.ps1'
       - 'research/tools/summarize-corpus.mjs'
 
 permissions:
@@ -51,6 +52,7 @@ jobs:
             compatibility: ''
             native_trace: true
             patch_registry: false
+            license_version: -1
             target_paintings: 1
             small_image: ''
           - variant: dep-exception-paint
@@ -60,6 +62,7 @@ jobs:
             compatibility: ''
             native_trace: false
             patch_registry: false
+            license_version: -1
             target_paintings: 1
             small_image: ''
           - variant: registry-running-patch-trace
@@ -69,6 +72,7 @@ jobs:
             compatibility: ''
             native_trace: true
             patch_registry: true
+            license_version: -1
             target_paintings: 1
             small_image: ''
           - variant: registry-running-patch-paint
@@ -78,6 +82,7 @@ jobs:
             compatibility: ''
             native_trace: false
             patch_registry: true
+            license_version: -1
             target_paintings: 16
             small_image: ''
           - variant: registry-running-small-image
@@ -87,8 +92,19 @@ jobs:
             compatibility: ''
             native_trace: false
             patch_registry: true
+            license_version: -1
             target_paintings: 16
             small_image: '1'
+          - variant: premium-license-1
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            target_paintings: 1
+            small_image: ''
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -126,6 +142,7 @@ jobs:
             NativeTrace = '${{ matrix.native_trace }}' -eq 'true'
             DisableAaronDep = $true
             PatchRegistryRunning = '${{ matrix.patch_registry }}' -eq 'true'
+            LicenseVersion = [int]'${{ matrix.license_version }}'
             KcatSmallImage = '${{ matrix.small_image }}'
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {

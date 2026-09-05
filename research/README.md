@@ -57,6 +57,11 @@ requires the exact extracted `registry.dll` hash before applying temporary
 entry-point patches to the legacy process/version and trial-age checks; it is
 not part of the clean-room JavaScript engine.
 
+`tools/patch-license-version.ps1` is a separate, hash-guarded diagnostic for
+the exported `license.dll!KCATversion` Boolean. It is used only on the
+disposable installed copy to test the Premium branch described by the bundled
+license resource; it never modifies the extracted original or the repository.
+
 `tools/summarize-corpus.mjs` consumes a temporary AA0-AA15 directory and emits
 stable structural statistics plus file hashes. It keeps corpus inference
 reproducible without storing bulk generated output in the repository.

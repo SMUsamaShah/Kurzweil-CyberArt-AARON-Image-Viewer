@@ -116,6 +116,14 @@ The JavaScript engine now uses a standard MT19937 core behind a replaceable
 random-source API. This is a verified implementation lead, not yet proof that
 the initial seed or every Common Lisp numeric conversion matches the product.
 
+The bundled `license.dll` resource says Premium includes “enhanced artistic
+content,” in addition to saving/reviewing and printing. Its exported
+`KCATversion` function returns a Boolean-style result; the clean trial path
+logs `KCATversion license result: 0`. A new disposable probe can make only
+that export return `1`, leaving all other licensing and registry operations
+unchanged, so the Premium-art-content claim can be compared directly against
+the trial control.
+
 Library strings include both application and runtime symbols. None of these
 leads should be presented as a verified user-facing switch until its callers,
 data references, or dynamic behavior are recovered.

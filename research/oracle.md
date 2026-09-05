@@ -26,6 +26,8 @@ Vary one factor at a time:
 - process start versus multiple paintings in one process;
 - `KCAT_AARON_DEBUG` and `ACL_STARTUP_DEBUG` presence/value;
 - `KCAT_AARON_SMALL_IMAGE` presence/value;
+- license result (`license.dll!KCATversion`) with the clean trial path kept as
+  the control;
 - intercepted random and time APIs, where technically possible.
 
 ## Per-run capture
