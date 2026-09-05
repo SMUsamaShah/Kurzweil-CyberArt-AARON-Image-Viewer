@@ -26,15 +26,17 @@
             (finish-output report))))
       (dolist (name '("RAN" "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM"
                       "SET-UP-SCREEN-SIZE" "SELECT-CANVAS"))
+        (format report "TRY object ~S~%" name)
+        (finish-output report)
         (let* ((symbol (find-symbol name "COMMON-GRAPHICS-USER"))
                (fn (symbol-function symbol)))
-          (format report "BEGIN object ~S printed=~S type=~S~%" name fn (type-of fn))
-          (finish-output report)
-          (handler-case (describe fn)
-            (error (problem) (format report "ERROR describe ~A~%" problem)))
+          ;; Printing a generic function or DESCRIBE can enter unavailable
+          ;; runtime facilities. Do not invoke either while locating headers.
+          (format report "BEGIN object ~S type=~S~%" name (type-of fn))
           (finish-output report)
           (let ((memref (find-symbol "MEMREF" "SYSTEM")))
-            (when (and memref (fboundp memref))
+            (when (and (eq (type-of fn) 'compiled-function)
+                       memref (fboundp memref))
               (format report "HEADER ")
               (finish-output report)
               (handler-case

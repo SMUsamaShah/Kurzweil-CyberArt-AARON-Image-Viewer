@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [object-probe, random-reference, line-metadata]
+        probe: [object-probe, random-validation]
     steps:
       - uses: actions/checkout@v4
         with:
