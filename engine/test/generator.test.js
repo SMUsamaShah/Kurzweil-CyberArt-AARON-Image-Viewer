@@ -32,3 +32,8 @@ test('supports the measured normal-mode canvas profiles', () => {
   assert.equal(generateAaron({ seed: 1, profile: 'square' }).document.width, 768);
   assert.equal(generateAaron({ seed: 1, profile: 'wide' }).document.width, 1024);
 });
+
+test('supports both measured small-image aspect profiles', () => {
+  assert.equal(generateAaron({ seed: 1, smallImage: true, profile: 'portrait' }).document.width, 320);
+  assert.equal(generateAaron({ seed: 1, smallImage: true, profile: 'wide' }).document.width, 640);
+});

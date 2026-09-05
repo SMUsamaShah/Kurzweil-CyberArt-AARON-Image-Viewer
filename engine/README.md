@@ -41,7 +41,8 @@ npm run generate -- --seed 1234 --small --out /tmp/aaron-aa0
 
 Normal-mode profile names `portrait`, `tall`, `square`, and `wide` expose the
 487×768, 650×768, 768×768, and 1024×768 canvas families observed in the first
-oracle corpus.
+oracle corpus. With `--small`, `portrait` and `wide` expose the measured
+320×480 and 640×480 small-image families.
 
 The generator currently reproduces the recovered file protocol, stroke
 encoding, palette shape, and 640×480 small-image profile. Its scene planner is

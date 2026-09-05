@@ -18,6 +18,10 @@ const LARGE_CANVAS_PROFILES = Object.freeze({
   square: 1,
   wide: 1024 / 768,
 });
+const SMALL_CANVAS_PROFILES = Object.freeze({
+  portrait: 320 / 480,
+  wide: 640 / 480,
+});
 
 function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
@@ -228,8 +232,8 @@ export class AaronGenerator {
     const mode = this.smallImage ? SMALL_MODE : LARGE_MODE;
     this.height = options.height ?? mode.height;
     this.profile = options.profile ?? null;
-    const profileRatio = !this.smallImage && this.profile
-      ? LARGE_CANVAS_PROFILES[this.profile]
+    const profiles = this.smallImage ? SMALL_CANVAS_PROFILES : LARGE_CANVAS_PROFILES;
+    const profileRatio = this.profile ? profiles[this.profile]
       : undefined;
     if (this.profile && profileRatio === undefined) {
       throw new RangeError(`unknown AARON canvas profile ${JSON.stringify(this.profile)}`);
@@ -316,4 +320,7 @@ export function generateAaron(options) {
 }
 
 export const aaronModes = Object.freeze({ large: LARGE_MODE, small: SMALL_MODE });
-export const aaronCanvasProfiles = LARGE_CANVAS_PROFILES;
+export const aaronCanvasProfiles = Object.freeze({
+  large: LARGE_CANVAS_PROFILES,
+  small: SMALL_CANVAS_PROFILES,
+});

@@ -88,6 +88,12 @@ mode; it does not, by itself, expose the richer gallery engine described in
 Harold Cohen's historical material. The behavior for other values (including
 whether the test is presence-based) remains unverified.
 
+A sixteen-painting follow-up with the same setting produced 320×480 or
+640×480 files. Fifteen files had 148 palette entries and one had 184. The
+small-image switch therefore selects a different aspect-profile family while
+leaving palette selection probabilistic; it is not evidence of a gallery-mode
+unlock.
+
 ## Leads in the pure Lisp library
 
 These strings were found in the hash-identified `AARON.pll`. Offsets are byte

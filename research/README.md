@@ -60,3 +60,7 @@ not part of the clean-room JavaScript engine.
 `tools/summarize-corpus.mjs` consumes a temporary AA0-AA15 directory and emits
 stable structural statistics plus file hashes. It keeps corpus inference
 reproducible without storing bulk generated output in the repository.
+
+`aaron-architecture.md` records the clean-room mapping from Cohen's published
+planner/matrix description and the recovered DXL module names to the JavaScript
+planner, occupancy grid, geometry, and emitter layers.

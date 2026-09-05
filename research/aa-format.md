@@ -79,6 +79,11 @@ A separate patched run with the verified environment mode
 2,355 outline operations, and 62,906 paint operations. The switch changes the
 generator's output profile as well as its canvas size.
 
+A sixteen-painting small-image corpus then produced only 320×480 or 640×480
+files. Fifteen files used the 148-entry palette and one used 184 entries;
+`zm`/`zd` remained outline-only. This makes small-image a canvas/composition
+regime, not a fixed palette or quality preset.
+
 ## Unknowns requiring more output
 
 - Whether other builds emit commands beyond `zm`/`zd` and the known chain code.
