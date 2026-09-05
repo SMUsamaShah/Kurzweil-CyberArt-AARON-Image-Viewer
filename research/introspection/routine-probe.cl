@@ -1,0 +1,55 @@
+;;; Inspect machine code and call signatures, not stored Lisp source.
+;;; Reports remain temporary oracle artifacts; only independently recovered
+;;; behavior and reference input/output vectors belong in the JS port.
+(in-package :cl-user)
+
+(unless (boundp 'aaron-routine-probe-loaded)
+  (set 'aaron-routine-probe-loaded t)
+  (with-open-file (report "C:\\temp\\aaron-routine-probe.txt"
+                          :direction :output :if-exists :supersede
+                          :if-does-not-exist :create)
+    (let ((*print-length* 50) (*print-level* 8) (*print-circle* t)
+          (*standard-output* report)
+          (*package* (find-package "COMMON-GRAPHICS-USER")))
+      (format report "BEGIN routine-probe~%")
+      (finish-output report)
+      (dolist (entry '(("EXCL" "MAKE-RANDOM-STATE-FROM-SEED")
+                      ("EXCL" "NEW-RANDOM-FLOAT")
+                      ("EXCL" "NEW-RANDOM-FIXNUM")
+                      ("COMMON-LISP" "RANDOM")
+                      ("COMMON-GRAPHICS-USER" "INIT-RANDOM")
+                      ("COMMON-GRAPHICS-USER" "SET-RANDOM")
+                      ("COMMON-GRAPHICS-USER" "GET-RANDOM")
+                      ("COMMON-GRAPHICS-USER" "RAN")
+                      ("COMMON-GRAPHICS-USER" "KCAT-CURRENT-DAY-TIME")
+                      ("COMMON-GRAPHICS-USER" "SET-FILE-ADDRESSES")
+                      ("COMMON-GRAPHICS-USER" "SET-UP-SCREEN-SIZE")
+                      ("COMMON-GRAPHICS-USER" "SELECT-CANVAS")
+                      ("COMMON-GRAPHICS-USER" "SCRIPT")
+                      ("COMMON-GRAPHICS-USER" "SELECT-BRUSH")
+                      ("COMMON-GRAPHICS-USER" "BRUSH-STROKE")))
+        (let* ((owner (find-package (first entry)))
+               (symbol (and owner (find-symbol (second entry) owner)))
+               (arglist (find-symbol "ARGLIST" "EXCL")))
+          (format report "BEGIN routine ~S status=~S callable=~S~%"
+                  entry (and owner (nth-value 1 (find-symbol (second entry) owner)))
+                  (and symbol (not (null (fboundp symbol)))))
+          (finish-output report)
+          (when (and symbol (fboundp symbol))
+            (handler-case
+                (format report "ARGLIST ~S~%"
+                        (multiple-value-list (funcall arglist symbol)))
+              (error (problem)
+                (format report "ERROR arglist ~A~%" problem)))
+            (finish-output report)
+            (format report "TRY disassemble~%")
+            (finish-output report)
+            (handler-case
+                (disassemble symbol)
+              (error (problem)
+                (format report "ERROR disassemble ~A~%" problem)))
+            (finish-output report))
+          (format report "END routine ~S~%" entry)
+          (finish-output report)))
+      (format report "END routine-probe~%")
+      (finish-output report))))

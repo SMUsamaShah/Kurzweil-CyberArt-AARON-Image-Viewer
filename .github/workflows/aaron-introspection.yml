@@ -12,9 +12,13 @@ permissions:
   contents: read
 
 jobs:
-  census:
+  inspect:
     runs-on: windows-2022
     timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        probe: [runtime-census, routine-probe]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +34,7 @@ jobs:
           node research/tools/extract-installer.mjs `
             $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
           if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
-      - name: Run metadata-only startup probe
+      - name: Run checkpointed startup probe
         shell: pwsh
         run: |
           $output = Join-Path $env:RUNNER_TEMP 'aaron-introspection'
@@ -39,20 +43,20 @@ jobs:
               -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
               -OutputRoot $output -Mode direct-screensaver -RunSeconds 30 `
               -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
-              -PatchPremiumFlag -PremiumFlagSource '..\introspection\runtime-census.cl'
+              -PatchPremiumFlag -PremiumFlagSource '..\introspection\${{ matrix.probe }}.cl'
           } finally {
-            $report = 'C:\temp\aaron-runtime-census.txt'
+            $report = 'C:\temp\aaron-${{ matrix.probe }}.txt'
             if (Test-Path $report) {
-              Copy-Item $report (Join-Path $output 'runtime-census.txt')
+              Copy-Item $report (Join-Path $output '${{ matrix.probe }}.txt')
             }
           }
           if (-not (Test-Path $report)) { throw 'Probe never started' }
-          if (-not (Select-String -LiteralPath $report -SimpleMatch 'END runtime-census')) {
+          if (-not (Select-String -LiteralPath $report -SimpleMatch 'END ${{ matrix.probe }}')) {
             throw 'Probe started but did not complete; inspect last checkpoint'
           }
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: aaron-runtime-census
+          name: aaron-${{ matrix.probe }}
           path: ${{ runner.temp }}/aaron-introspection
           retention-days: 14
