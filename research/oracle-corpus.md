@@ -46,7 +46,8 @@ The 3840×1080 probe completed in 10.9 seconds and wrote a valid 708,794-byte
 a practical full-HD output path hidden behind the retained size variables. It
 is still an oracle workaround rather than a historical UI option: the
 shareware window remains clipped to the 1024×768 runner desktop and keeps its
-trial title, while the saved AA canvas is 1920×1080.
+trial title, while the saved AA canvas is 1920×1080. The captured file's
+SHA-256 is `10c1f0e511efcae4d118b00c9bf607f5bc342f10ef72764dc05d6dceb71d34d3`.
 
 The licensed branch is not merely a title change. It switches to the compact
 320/640×480 family, changes command distributions, and uses `zm`/`zd` outline
