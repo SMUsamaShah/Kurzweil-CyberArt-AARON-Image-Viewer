@@ -222,6 +222,20 @@ jobs:
             premium_probe: seed-5678.cl
             target_paintings: 1
             small_image: ''
+          - variant: seeded-trial-1234-repeat
+            os: windows-2022
+            mode: direct-screensaver
+            run_seconds: 90
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: -1
+            patch_premium_flag: true
+            premium_probe: seed-1234-repeat.cl
+            target_paintings: 1
+            small_image: ''
           - variant: premium-small-image-1
             os: windows-2022
             run_seconds: 60

@@ -1,13 +1,12 @@
-;;; Disposable random-state probe.  It does not inspect or copy Lisp code;
-;;; it only asks Allegro for a seeded state and installs it in the visible
-;;; random-state variables before AARON starts its normal composition.
+;;; Repeat of seed-1234.cl; this is a separate workflow entry so byte-level
+;;; reproducibility can be tested across fresh Windows runners.
 (in-package :cl-user)
 
 (with-open-file (marker "C:\\temp\\aaron-seed-loaded.txt"
                        :direction :output
                        :if-exists :supersede
                        :if-does-not-exist :create)
-  (write-line "seed 1234 probe entered" marker)
+  (write-line "seed 1234 repeat probe entered" marker)
   (finish-output marker))
 
 (let ((state (handler-case
@@ -34,5 +33,5 @@
                        :direction :output
                        :if-exists :supersede
                        :if-does-not-exist :create)
-  (write-line "seed 1234 probe loaded" marker)
+  (write-line "seed 1234 repeat probe loaded" marker)
   (finish-output marker))
