@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "analyze": "node bin/analyze-aa.js",
+    "generate": "node bin/generate-aa.js",
     "test": "node --test"
   }
 }

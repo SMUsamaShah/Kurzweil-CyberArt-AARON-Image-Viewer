@@ -4,6 +4,7 @@ import test from 'node:test';
 
 import { analyzeAaDocument } from '../src/aa-analysis.js';
 import { AaFormatError, parseAaFile } from '../src/aa-format.js';
+import { Mt19937, mt19937Reference } from '../src/random.js';
 
 async function sample(name) {
   return readFile(new URL(`../../${name}`, import.meta.url), 'utf8');
@@ -83,4 +84,20 @@ test('produces comparable corpus measurements', async () => {
     minY: 5,
     maxY: 1_080,
   });
+});
+
+test('matches the MT19937 reference sequence', () => {
+  const random = new Mt19937(5489);
+  assert.deepEqual(
+    mt19937Reference.map(() => random.nextUint32()),
+    mt19937Reference,
+  );
+});
+
+test('keeps seeded choices reproducible and bounded', () => {
+  const left = new Mt19937(0xaa70);
+  const right = new Mt19937(0xaa70);
+  const values = Array.from({ length: 128 }, () => left.nextInt(7));
+  assert.deepEqual(values, Array.from({ length: 128 }, () => right.nextInt(7)));
+  assert(values.every((value) => value >= 0 && value < 7));
 });

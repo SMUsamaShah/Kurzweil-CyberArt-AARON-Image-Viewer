@@ -174,6 +174,61 @@ export function parseAaFile(text) {
   });
 }
 
+function formatNumber(value, digits = 6) {
+  if (!Number.isFinite(value)) throw new TypeError('AA coordinates must be finite');
+  if (Object.is(value, -0)) return '0';
+  if (Number.isInteger(value)) return String(value);
+  return Number(value.toFixed(digits)).toString();
+}
+
+function serializeOperation(operation, digits) {
+  switch (operation.command) {
+    case 'am':
+    case 'ad':
+    case 'zm':
+    case 'zd':
+      return `${operation.command} ${formatNumber(operation.x, digits)} ${formatNumber(operation.y, digits)}`;
+    case 'nb':
+      return `${operation.command} ${positiveInteger(operation.width, 'brush width')}`;
+    case 'nc':
+      return `${operation.command} ${positiveInteger(operation.index + 1, 'colour index') - 1}`;
+    case 'e':
+    case 'f':
+    case 'g':
+    case 'h':
+    case 'i':
+    case 'j':
+    case 'k':
+    case 'l':
+      return operation.command;
+    default:
+      throw new TypeError(`cannot serialize unknown AA command ${JSON.stringify(operation.command)}`);
+  }
+}
+
+/** Serialize a parsed or generated document back to the plain-text AA form. */
+export function serializeAaFile(document, options = {}) {
+  if (!document || !Number.isInteger(document.width) || !Number.isInteger(document.height)) {
+    throw new TypeError('AA document must contain integer width and height');
+  }
+  if (!Array.isArray(document.palette) || !document.palette.length) {
+    throw new TypeError('AA document must contain a non-empty palette');
+  }
+  const digits = options.coordinateDigits ?? 6;
+  const lines = [`${document.width} ${document.height} ${document.palette.length}`];
+  for (const rgb of document.palette) {
+    if (!Array.isArray(rgb) || rgb.length !== 3) {
+      throw new TypeError('AA palette entries must contain three channels');
+    }
+    lines.push(rgb.map((channel) => formatNumber(channel, digits)).join(' '));
+  }
+  lines.push(...(document.outline ?? []).map((operation) => serializeOperation(operation, digits)));
+  lines.push('color');
+  lines.push(...(document.paint ?? []).map((operation) => serializeOperation(operation, digits)));
+  lines.push('end');
+  return `${lines.join('\n')}\n`;
+}
+
 function cssColor(rgb) {
   const [red, green, blue] = rgb.map((channel) => channel * 100);
   return `rgb(${red}% ${green}% ${blue}%)`;

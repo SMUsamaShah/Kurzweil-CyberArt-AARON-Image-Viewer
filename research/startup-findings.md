@@ -103,6 +103,13 @@ offsets within that file, not function addresses or proof of reachable code.
 | `RANDOM-INT` | `0x344c24` | Which integer distribution and range semantics apply? |
 | `MAKE-RANDOM-STATE-FROM-SEED` | `0x3d6c84` | Runtime facility or application entry point? |
 
+The same image contains the literal documentation string “Implement the
+Mersenne Twister (MT19937) Random Number Generator” and symbols for
+`RANDOM-STATE-MTI`, `INIT-RANDOM`, `SET-RANDOM`, and `NEW-RANDOM-FIXNUM`.
+The JavaScript engine now uses a standard MT19937 core behind a replaceable
+random-source API. This is a verified implementation lead, not yet proof that
+the initial seed or every Common Lisp numeric conversion matches the product.
+
 Library strings include both application and runtime symbols. None of these
 leads should be presented as a verified user-facing switch until its callers,
 data references, or dynamic behavior are recovered.
