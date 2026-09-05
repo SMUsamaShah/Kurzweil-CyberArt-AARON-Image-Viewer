@@ -24,6 +24,7 @@ param(
     [int]$LicenseVersion = -1,
     [switch]$PatchPremiumFlag,
     [switch]$CaptureApplicationMenu,
+    [switch]$TriggerPaintOne,
     [string]$KcatSmallImage = '',
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
@@ -344,6 +345,19 @@ public static class AaronMenuProbe {
         [Windows.Forms.SendKeys]::SendWait('%p')
     }
 
+    if ($TriggerPaintOne -and $Mode -eq 'application') {
+        Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public static class AaronWindowProbe {
+    [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+}
+"@
+        Start-Sleep -Seconds 2
+        [AaronWindowProbe]::SetForegroundWindow($process.MainWindowHandle) | Out-Null
+        [Windows.Forms.SendKeys]::SendWait('^o')
+    }
+
     $startedAt = [DateTimeOffset]::UtcNow
     $deadline = [DateTime]::UtcNow.AddSeconds($RunSeconds)
     $searchDirectories = @('C:\temp', $workingDirectory, $ApplicationRoot)
@@ -441,6 +455,7 @@ public static class AaronMenuProbe {
         patchPremiumFlag = [bool]$PatchPremiumFlag
         premiumFlagPatch = $PremiumFlagPatchResult
         captureApplicationMenu = [bool]$CaptureApplicationMenu
+        triggerPaintOne = [bool]$TriggerPaintOne
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')

@@ -142,6 +142,22 @@ jobs:
             license_version: -1
             patch_premium_flag: false
             capture_application_menu: true
+            trigger_paint_one: false
+            target_paintings: 1
+            small_image: ''
+          - variant: premium-application-paint-one
+            os: windows-2022
+            mode: application
+            run_seconds: 60
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
+            patch_registry: true
+            license_version: 1
+            patch_premium_flag: false
+            capture_application_menu: false
+            trigger_paint_one: true
             target_paintings: 1
             small_image: ''
     env:
@@ -188,6 +204,7 @@ jobs:
             LicenseVersion = [int]'${{ matrix.license_version }}'
             PatchPremiumFlag = '${{ matrix.patch_premium_flag }}' -eq 'true'
             CaptureApplicationMenu = '${{ matrix.capture_application_menu }}' -eq 'true'
+            TriggerPaintOne = '${{ matrix.trigger_paint_one }}' -eq 'true'
             KcatSmallImage = '${{ matrix.small_image }}'
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
