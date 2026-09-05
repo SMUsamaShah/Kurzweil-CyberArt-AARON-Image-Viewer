@@ -18,6 +18,7 @@ param(
     [switch]$KcatDebug,
     [switch]$AclStartupDebug,
     [switch]$NativeTrace,
+    [switch]$DisableAaronDep,
     [string]$CompatibilityLayer = '',
     [switch]$SkipInstall
 )
@@ -38,6 +39,7 @@ $TranscriptPath = Join-Path $LogRoot 'transcript.txt'
 $TranscriptStarted = $false
 $FirewallRules = [Collections.Generic.List[string]]::new()
 $OriginalEnvironment = @{}
+$DepOverrideApplied = $false
 
 function Write-RegistrySnapshot {
     param([string]$Destination)
@@ -196,6 +198,13 @@ try {
     }
 
     $standardOutput = Join-Path $LogRoot 'process-stdout.txt'
+    New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+    if ($DisableAaronDep) {
+        Set-ProcessMitigation -Name $aaronExe -Disable DEP
+        $DepOverrideApplied = $true
+        Get-ProcessMitigation -Name $aaronExe | Out-String |
+            Set-Content -Encoding UTF8 (Join-Path $LogRoot 'mitigations.txt')
+    }
     if ($NativeTrace) {
         Add-Type -Path (Join-Path $PSScriptRoot 'NativeTrace.cs')
         [AaronNativeTrace]::Run($aaronExe, '-- screen-saver', $workingDirectory,
@@ -242,6 +251,19 @@ try {
     }
 
     Write-ProcessSnapshot (Join-Path $LogRoot 'processes-before-stop.json')
+    Get-Process -Name 'AARON', 'AARON_ScreenSaver' -ErrorAction SilentlyContinue |
+        Select-Object Id, MainWindowTitle, Responding, CPU |
+        ConvertTo-Json | Set-Content (Join-Path $LogRoot 'windows.json')
+    try {
+        Add-Type -AssemblyName System.Drawing
+        $bounds = [Windows.Forms.Screen]::PrimaryScreen.Bounds
+        $bitmap = [Drawing.Bitmap]::new($bounds.Width, $bounds.Height)
+        $graphics = [Drawing.Graphics]::FromImage($bitmap)
+        try {
+            $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.Size)
+            $bitmap.Save((Join-Path $LogRoot 'desktop.png'), [Drawing.Imaging.ImageFormat]::Png)
+        } finally { $graphics.Dispose(); $bitmap.Dispose() }
+    } catch { Write-Warning "Desktop capture failed: $_" }
     Get-WinEvent -FilterHashtable @{
         LogName = 'Application'
         StartTime = $startedAt.UtcDateTime.AddSeconds(-5)
@@ -290,6 +312,7 @@ try {
         kcatDebug = [bool]$KcatDebug
         aclStartupDebug = [bool]$AclStartupDebug
         compatibilityLayer = $CompatibilityLayer
+        depException = [bool]$DisableAaronDep
         requestedRunSeconds = $RunSeconds
         targetPaintings = $TargetPaintings
         startedAt = $startedAt.ToString('o')
@@ -321,6 +344,9 @@ try {
 
     foreach ($ruleName in $FirewallRules) {
         Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    }
+    if ($DepOverrideApplied) {
+        Set-ProcessMitigation -Name $aaronExe -Remove -Disable DEP
     }
     foreach ($name in $OriginalEnvironment.Keys) {
         [Environment]::SetEnvironmentVariable($name, $OriginalEnvironment[$name], 'Process')

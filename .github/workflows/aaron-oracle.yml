@@ -42,11 +42,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - variant: win2022-native-trace
+          - variant: dep-exception-trace
             os: windows-2022
             kcat_debug: false
             acl_debug: false
             compatibility: ''
+            native_trace: true
+          - variant: dep-exception-paint
+            os: windows-2022
+            kcat_debug: false
+            acl_debug: false
+            compatibility: ''
+            native_trace: false
     env:
       ORACLE_MODE: ${{ inputs.mode || 'direct-screensaver' }}
       ORACLE_RUN_SECONDS: ${{ inputs.run_seconds || '360' }}
@@ -77,7 +84,8 @@ jobs:
             Mode = $env:ORACLE_MODE
             RunSeconds = [int]$env:ORACLE_RUN_SECONDS
             TargetPaintings = [int]$env:ORACLE_TARGET_PAINTINGS
-            NativeTrace = $true
+            NativeTrace = '${{ matrix.native_trace }}' -eq 'true'
+            DisableAaronDep = $true
           }
           if ('${{ matrix.kcat_debug }}' -eq 'true') {
             $parameters.KcatDebug = $true
