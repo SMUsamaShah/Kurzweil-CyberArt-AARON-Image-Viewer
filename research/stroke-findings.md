@@ -40,6 +40,8 @@ intentionally not printed until a safe bounded shape policy is established.
 The existing `RAD` reader completes with `FIXNUM` value 0 for the same object.
 The existing `PERIM` reader completes with `NULL`; no perimeter geometry is
 present in this startup object at this checkpoint.
+The existing `CORE` reader also completes with `NULL`; the only unmeasured
+generated reader in the seven-slot class census is `CELLS`.
 
 The next oracle step is a bounded read-only call to the other existing
 `PAINT-BRUSH` readers, with one checkpoint per reader and only type/shape

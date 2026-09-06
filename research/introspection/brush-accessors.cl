@@ -134,5 +134,28 @@
 (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  (format report "NINTH-FORM-BEGIN~%")
+  (finish-output report)
+  (handler-case
+      (let* ((user (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" user))
+             (cells-symbol (find-symbol "CELLS" user))
+             (brush (car (symbol-value all-symbol))))
+        (format report "RESOLVED-CELLS~%")
+        (finish-output report)
+        (let ((value (funcall (symbol-function cells-symbol) brush)))
+          (format report "CELLS-RESULT-TYPE ~S~%" (type-of value))
+          (if (arrayp value)
+              (format report "CELLS-ARRAY rank=~D dimensions=~S element-type=~S~%"
+                      (array-rank value) (array-dimensions value)
+                      (array-element-type value))
+            (format report "CELLS-NOT-ARRAY~%"))))
+    (error (problem)
+      (format report "CELLS-ERROR ~S~%" (type-of problem))))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "END brush-accessors~%")
   (finish-output report))

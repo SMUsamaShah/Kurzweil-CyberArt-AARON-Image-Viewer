@@ -321,3 +321,10 @@ commit `16047cdf3a041be9a6cc0ab25663a60f0b279de4`, job 101579925193,
 artifact 9999543004. The existing `PERIM` reader completes and returns
 `NULL` for the first startup brush. This is a type boundary only; no perimeter
 contents or geometry are inferred.
+
+`brush-readers-34068037439.txt` adds the existing `CORE` reader in run
+[34068037439](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34068037439),
+commit `368a1c45e0be7fe2e20c8f8705a45daf9449685e`, job 101580174673,
+artifact 9999570347. `CORE` completes and returns `NULL` for the first startup
+brush. The only remaining generated reader in the seven-slot census is
+`CELLS`; it will be measured separately before any fill routine is considered.
