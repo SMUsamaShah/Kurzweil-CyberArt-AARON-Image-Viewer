@@ -144,3 +144,12 @@ job 101403609503, artifact 9979887826, with the same excerpt normalization.
 All 12 wrapped versus baseline comparisons report MATCH T, including returned
 coordinates and subsequent RANDOM values. The first RAN(3,5) per group is the
 probe's warmup, not an application call. See [`point-findings.md`](../../point-findings.md).
+
+`point-behavior-34015358031.txt` is from commit
+`50c27569cf2ffd19c8d581963a76b54fdb0d0e51`, run
+[34015358031](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34015358031),
+job 101438054549, artifact 9983721472. It adds eight endpoint pairs, giving
+320 successful paths and 80 distance/state observations. The initial JS model
+failed four repeated distance observations and 22 paths. These holdouts expose
+real arithmetic gaps; they are not accepted as approximate passes. The next
+trace records trigonometric results and products to localize the differences.

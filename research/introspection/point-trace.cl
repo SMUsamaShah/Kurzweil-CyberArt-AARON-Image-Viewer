@@ -27,7 +27,10 @@
         (measure '((0 0) (10 0)) 1)
         (dolist (seed '(1 1234 5678 5489))
           (dolist (bounds '(((0 0) (10 0)) ((2 3) (12 8))
-                            ((0.1d0 0.2d0) (0.3d0 0.4d0))))
+                            ((0.1d0 0.2d0) (0.3d0 0.4d0))
+                            ((123.456d0 -78.125d0) (-32.875d0 0.0625d0))
+                            ((-0.00013d0 0.00027d0) (0.00031d0 -0.00019d0))
+                            ((314.159d0 -271.828d0) (-161.803d0 141.421d0))))
             (format report "TRY seed=~D bounds=~S~%" seed bounds)
             (finish-output report)
             (let ((baseline (measure bounds seed)))
@@ -43,6 +46,9 @@
                             (let ((value (funcall original-pol point angle distance)))
                               (format report "POL-PT ~S ~S ~S => ~S~%"
                                       (coords point) angle distance (coords value))
+                              (format report "TRIG (~S ~S) PRODUCT (~S ~S)~%"
+                                      (cos angle) (sin angle)
+                                      (* distance (cos angle)) (* distance (sin angle)))
                               value)))
                     ;; Warm only wrapper dispatch; then measure resets the seed.
                     (let ((*random-state* (funcall factory 1)))

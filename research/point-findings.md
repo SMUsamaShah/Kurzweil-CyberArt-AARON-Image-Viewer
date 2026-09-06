@@ -6,7 +6,12 @@ XYDIST and LOCK-WIGGLE. The initial reference tests match 192 complete paths,
 [run 34002307774](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002307774).
 These are twelve endpoint pairs across four seeds, with four successive paths
 per pair. Endpoints cover all quadrants, coincidence, translation, and single
-versus double precision. Fresh holdouts are being collected separately.
+versus double precision. The fresh holdout report `point-behavior-34015358031`
+adds eight endpoint pairs (128 paths). It exposed distance and double path
+rounding gaps. XYDIST's square/sum intermediates must not be rounded to single;
+the corrected distance rule matches all 80 observations. Remaining double
+path differences are under investigation, so the initial 192 matches must
+not be generalized to all inputs.
 
 ## Recovered behavior
 

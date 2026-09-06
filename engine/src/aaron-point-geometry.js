@@ -12,7 +12,8 @@ function pointArithmetic(a, b, precision) {
   const first = a.map(cast), last = b.map(cast);
   const dx = cast(last[0] - first[0]), dy = cast(last[1] - first[1]);
   // XYDIST returns a single float even with double coordinate arguments.
-  const distance = single(Math.sqrt(cast(cast(dx * dx) + cast(dy * dy))));
+  // The held-out XYDIST cases rule out rounding the squares/sum to single.
+  const distance = single(Math.sqrt(dx * dx + dy * dy));
   if (!Number.isFinite(distance)) throw new RangeError('point distance exceeds the measured finite range');
   return { cast, first, dx, dy, distance };
 }
