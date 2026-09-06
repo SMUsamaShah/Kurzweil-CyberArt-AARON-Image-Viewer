@@ -52,7 +52,9 @@
                             (class-name-fn (find-in (find-package "CLOS")
                                                     "CLASS-NAME"))
                             (class-slots-fn (helper "CLASS-SLOTS"))
-                            (slot-name-fn (helper "SLOT-DEFINITION-NAME")))
+                            (slot-name-fn (helper "SLOT-DEFINITION-NAME"))
+                            (slot-value-fn (find-in (find-package "COMMON-LISP")
+                                                    "SLOT-VALUE")))
                        (format report "CLASS-OF ~S~%" (type-of class))
                        (when (and class-name-fn (fboundp class-name-fn))
                          (format report "CLASS-NAME ~S~%"
@@ -69,7 +71,20 @@
                                              (shape (funcall slot-name-fn slot)))
                                    (error (problem)
                                      (format report "SLOT-ERROR ~S~%"
-                                             (type-of problem)))))
+                                             (type-of problem))))
+                               (when (and slot-value-fn (fboundp slot-value-fn))
+                                 (dolist (slot slots)
+                                   (handler-case
+                                       (let ((slot-name (funcall slot-name-fn slot)))
+                                         (format report "BEFORE-SLOT-VALUE ~S~%"
+                                                 (shape slot-name))
+                                         (finish-output report)
+                                         (format report "SLOT-VALUE ~S~%"
+                                                 (shape (funcall slot-value-fn
+                                                                 object slot-name))))
+                                     (error (problem)
+                                       (format report "SLOT-VALUE-ERROR ~S~%"
+                                               (type-of problem))))))
                                (finish-output report))
                            (error (problem)
                              (format report "SLOTS-ERROR ~S~%"
@@ -99,4 +114,4 @@
                 (finish-output report)
                 (class-report (car brushes)))))
         (format report "END brush-accessors~%")
-        (finish-output report))))))
+        (finish-output report)))))))
