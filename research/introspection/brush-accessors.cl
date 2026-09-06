@@ -77,7 +77,7 @@
         (format report "ACCESSOR-SUMMARY-END~%"))
     (error (problem)
       (format report "ERROR ~S~%" (type-of problem))))
-  (finish-output report))
+  (finish-output report)))
 
 (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
                         :direction :output :if-exists :append
