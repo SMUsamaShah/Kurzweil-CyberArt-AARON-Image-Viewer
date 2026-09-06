@@ -1,0 +1,65 @@
+;;; Dependency-isolated emitter measurements, NOT unmodified GUI execution.
+;;; Replace only the PLOT function with a recording stub, restoring it even
+;;; on error. Test both NIL and T returns to detect dependence on its result.
+(in-package :cl-user)
+(unless (boundp 'aaron-store-isolated-loaded)
+  (set 'aaron-store-isolated-loaded t)
+  (with-open-file (report "C:\\temp\\aaron-store-isolated.txt"
+                          :direction :output :if-exists :supersede
+                          :if-does-not-exist :create)
+    (let* ((*print-length* nil) (*print-level* 10) (*print-pretty* nil)
+           (owner (find-package "COMMON-GRAPHICS-USER"))
+           (make (find-symbol "MAKE-TWOPT" owner))
+           (store (find-symbol "STORE-IN-FILE" owner))
+           (previous (find-symbol "PREV-STORED-PT" owner))
+           (plot (find-symbol "PLOT" owner))
+           (original-plot (symbol-function plot)))
+      (labels ((coords (point)
+                 (if (null point) nil
+                   (list (funcall (find-symbol "X" owner) point)
+                         (funcall (find-symbol "Y" owner) point))))
+               (argument (value)
+                 (cond ((or (numberp value) (symbolp value)) value)
+                       ((typep value (find-symbol "TWOPT" owner)) (coords value))
+                       (t (list :type (type-of value))))))
+        (format report "BEGIN store-isolated~%")
+        (format report "INTERVENTION PLOT-FUNCTION-STUB~%")
+        (unwind-protect
+            (dolist (stub-result '(nil t))
+              (setf (symbol-function plot)
+                    (lambda (&rest args)
+                      (format report "PLOT-CALL ~S~%" (mapcar #'argument args))
+                      stub-result))
+              (dolist (mode '("LARGE" "SMALL"))
+                (dolist (redraw '(nil t))
+                  (dolist (prior '((10 20) (10 99) (99 20) (99 99) nil))
+                    (dolist (b '((11 20) (11.125d0 -20.375d0) (-0.004d0 100.005d0)))
+                      (dolist (name '("VECTOR" "FILL"))
+                        (let ((output (make-string-output-stream)))
+                          (progv (list (find-symbol "*TEMP*" owner) previous
+                                       (find-symbol "?FILE-SIZE?" owner))
+                                 (list output (and prior (apply make prior))
+                                       (find-symbol mode owner))
+                            (format report "TRY method=~S mode=~S redraw=~S stub=~S previous=~S args=~S~%"
+                                    name mode redraw stub-result prior (list '(10 20) b))
+                            (finish-output report)
+                            (handler-case
+                                (funcall store (find-symbol name owner)
+                                         :pta (funcall make 10 20) :ptb (apply make b) :redraw redraw)
+                              (error (problem)
+                                (format report "ERROR ~S~%" (type-of problem))
+                                (when (typep problem 'cell-error)
+                                  (let ((cell (cell-error-name problem)))
+                                    (when (symbolp cell)
+                                      (format report "ERROR-CELL ~S ~S~%"
+                                              (and (symbol-package cell) (package-name (symbol-package cell)))
+                                              (symbol-name cell)))))))
+                            (format report "OUTPUT ~S~%"
+                                    (map 'list #'char-code (get-output-stream-string output)))
+                            (format report "PREVIOUS ~S~%" (coords (symbol-value previous)))
+                            (format report "ENDCASE~%")
+                            (finish-output report)))))))))
+          (setf (symbol-function plot) original-plot))
+        (format report "RESTORED ~S~%" (eq (symbol-function plot) original-plot))
+        (format report "END store-isolated~%")
+        (finish-output report)))))
