@@ -37,6 +37,7 @@ returns the `FIXNUM` value 0. These are startup-object observations, not runtime
 brush settings: no brush is selected, and no fill map has been initialized.
 The existing `ENVIR` reader also completes and returns a `CONS`; its value is
 intentionally not printed until a safe bounded shape policy is established.
+The existing `RAD` reader completes with `FIXNUM` value 0 for the same object.
 
 The next oracle step is a bounded read-only call to the other existing
 `PAINT-BRUSH` readers, with one checkpoint per reader and only type/shape

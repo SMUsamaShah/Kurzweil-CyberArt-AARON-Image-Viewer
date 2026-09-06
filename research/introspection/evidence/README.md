@@ -307,3 +307,10 @@ artifact 9999478570. It repeats the width and ID measurements and shows the exis
 `COMMON-GRAPHICS-USER::ENVIR` reader returns a `CONS` for the first startup
 brush. The value itself is not printed, so no environment structure is
 inferred from this type-only boundary.
+
+`brush-readers-34067834162.txt` extends the same isolated sequence in run
+[34067834162](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34067834162),
+commit `5d4518a93b5df7a878f561ebf09ee1527826eab5`, job 101579629325,
+artifact 9999511639. The existing `RAD` reader completes and returns a
+`FIXNUM` value of 0 for the first startup brush. `ENVIR` remains type-only;
+the probe still performs no writes or fill-map initialization.
