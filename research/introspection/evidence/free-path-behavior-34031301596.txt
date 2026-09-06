@@ -1,0 +1,81 @@
+BEGIN free-path-behavior
+INTERVENTION BOUNDED-RAN-POL-VPT-WRAPPERS
+MAKE-ARGLIST (COMMON-GRAPHICS-USER::X COMMON-GRAPHICS-USER::Y COMMON-GRAPHICS-USER::VIS)
+GLOBAL "FDEX" bound=NIL
+GLOBAL "TDEX" bound=NIL
+GLOBAL "FROM" bound=NIL
+GLOBAL "TO" bound=NIL
+TRY seed=1 vis=NIL bounds=((0 0) (10 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 893
+CALLS 0
+ENDCASE
+TRY seed=1 vis=NIL bounds=((0 0) (100 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 491
+CALLS 0
+ENDCASE
+TRY seed=1 vis=NIL bounds=((2 3) (12 18))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 491
+CALLS 0
+ENDCASE
+TRY seed=1 vis=T bounds=((0 0) (10 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 491
+CALLS 0
+ENDCASE
+TRY seed=1 vis=T bounds=((0 0) (100 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 491
+CALLS 0
+ENDCASE
+TRY seed=1 vis=T bounds=((2 3) (12 18))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 491
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=NIL bounds=((0 0) (10 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=NIL bounds=((0 0) (100 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=NIL bounds=((2 3) (12 18))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=T bounds=((0 0) (10 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=T bounds=((0 0) (100 0))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+TRY seed=1234 vis=T bounds=((2 3) (12 18))
+ERROR TYPE-ERROR
+CONTROL "~1@<~@<`~s' is not of the expected type `~s'~:@>~:@>"
+NEXT-RANDOM 413
+CALLS 0
+ENDCASE
+RESTORED T
+END free-path-behavior
