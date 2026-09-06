@@ -126,3 +126,13 @@ objects, not a single point. This localizes the previous error to our output
 extraction. The corrected numeric probe maps coordinates over the returned
 list and performs an unmeasured warmup before installing each measured seed.
 POL-PT has retained arguments `(PT A D)`.
+
+`point-behavior-34002307774.txt` is the corrected numeric capture, from commit
+`3ca84911acc157516cc876ec7a9b15afc9c9d3a6`, run
+[34002307774](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002307774),
+job 101403236262, artifact 9979846593. All calls succeed: 48 XYDIST results,
+192 LOCK-WIGGLE paths, and 48 subsequent random-state observations. The path
+is returned in reverse traversal order and includes the starting point. This
+is the first complete point-list capture; formula and bit parity remain to
+be established. `point-trace.cl` measures internal RAN/POL-PT arguments with
+temporary wrappers and compares outputs/state against an unwrapped baseline.

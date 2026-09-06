@@ -1,0 +1,57 @@
+;;; Trace dependency arguments and verify the wrapper leaves outputs/state equal.
+;;; Rebindings exist only during the probe and are restored by UNWIND-PROTECT.
+(in-package :cl-user)
+(unless (boundp 'aaron-point-trace-loaded)
+  (set 'aaron-point-trace-loaded t)
+  (with-open-file (report "C:\\temp\\aaron-point-trace.txt"
+                          :direction :output :if-exists :supersede
+                          :if-does-not-exist :create)
+    (let* ((*print-length* nil) (*print-level* 10) (*print-circle* nil)
+           (*print-pretty* nil)
+           (owner (find-package "COMMON-GRAPHICS-USER"))
+           (factory (find-symbol "MAKE-RANDOM-STATE-FROM-SEED" "EXCL"))
+           (ran (find-symbol "RAN" owner)) (pol (find-symbol "POL-PT" owner))
+           (original-ran (symbol-function ran)) (original-pol (symbol-function pol)))
+      (labels ((coords (point)
+                 (list (funcall (find-symbol "X" owner) point)
+                       (funcall (find-symbol "Y" owner) point)))
+               (measure (bounds seed)
+                 (let ((*random-state* (funcall factory seed))
+                       (make (find-symbol "MAKE-TWOPT" owner)))
+                   (let ((path (mapcar #'coords
+                                      (funcall (find-symbol "LOCK-WIGGLE" owner)
+                                               (apply make (car bounds))
+                                               (apply make (cadr bounds))))))
+                     (list path (random 1000))))))
+        (format report "BEGIN point-trace~%")
+        (measure '((0 0) (10 0)) 1)
+        (dolist (seed '(1 1234 5678 5489))
+          (dolist (bounds '(((0 0) (10 0)) ((2 3) (12 8))
+                            ((0.1d0 0.2d0) (0.3d0 0.4d0))))
+            (format report "TRY seed=~D bounds=~S~%" seed bounds)
+            (finish-output report)
+            (let ((baseline (measure bounds seed)))
+              (unwind-protect
+                  (progn
+                    (setf (symbol-function ran)
+                          (lambda (a b)
+                            (let ((value (funcall original-ran a b)))
+                              (format report "RAN (~S ~S) => ~S~%" a b value)
+                              value)))
+                    (setf (symbol-function pol)
+                          (lambda (point angle distance)
+                            (let ((value (funcall original-pol point angle distance)))
+                              (format report "POL-PT ~S ~S ~S => ~S~%"
+                                      (coords point) angle distance (coords value))
+                              value)))
+                    ;; Warm only wrapper dispatch; then measure resets the seed.
+                    (let ((*random-state* (funcall factory 1)))
+                      (funcall ran 3 5))
+                    (let ((actual (measure bounds seed)))
+                      (format report "BASELINE ~S~%ACTUAL ~S~%MATCH ~S~%"
+                              baseline actual (equalp baseline actual))))
+                (setf (symbol-function ran) original-ran)
+                (setf (symbol-function pol) original-pol)))
+            (finish-output report)))
+        (format report "END point-trace~%")
+        (finish-output report)))))
