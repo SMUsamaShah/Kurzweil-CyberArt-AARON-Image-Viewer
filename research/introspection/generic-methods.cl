@@ -43,11 +43,14 @@
             (finish-output report)
             (handler-case
                 (let ((items (funcall methods (symbol-function (find-symbol name owner)))))
-                  (loop for item in items for index from 0 below 32 do
+                  ;; Extended LOOP tries to autoload the absent loop.fasl.
+                  ;; DO and CAR/CDR keep this probe within the shipped runtime.
+                  (do ((remaining items (cdr remaining)) (index 0 (1+ index)))
+                      ((or (null remaining) (>= index 32)))
                     (format report "METHOD ~D~%" index)
                     (finish-output report)
                     (handler-case
-                        (let ((fn (funcall method-fn item)))
+                        (let* ((item (car remaining)) (fn (funcall method-fn item)))
                           (format report "SPECIALIZERS ~S~%"
                                   (mapcar (lambda (spec)
                                             (handler-case (summary (funcall class-name spec))
@@ -61,9 +64,9 @@
                               (dotimes (i count)
                                 (format report "CONSTANT ~D ~S~%" i
                                         (summary (funcall constant-fn fn i)))))))
-                      (error (problem) (format report "METHOD-ERROR ~S ~A~%" (type-of problem) problem)))
+                      (error (problem) (format report "METHOD-ERROR ~S~%" (type-of problem))))
                     (finish-output report)))
-              (error (problem) (format report "ERROR ~S ~A~%" (type-of problem) problem)))
+              (error (problem) (format report "ERROR ~S~%" (type-of problem))))
             (finish-output report)))
         (format report "END generic-methods~%")
         (finish-output report)))))

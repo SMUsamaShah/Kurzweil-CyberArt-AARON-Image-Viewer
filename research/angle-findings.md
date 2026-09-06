@@ -28,11 +28,21 @@ is `(-pi, pi]`; both positive and negative pi map to positive pi. ANGLE-DIF
 returns the magnitude of a wrapped difference. Constant pools refer to MOD,
 TWO-PI, NORM-A, and ABS, supporting that interpretation.
 
-The mathematical rules are identified but a bit-exact port is still pending.
-JavaScript `%` and a division/fraction implementation differ from original
-results by a few double ULPs in some cases. The next probe records Common Lisp
-MOD directly to distinguish remainder arithmetic from normalization order.
-No tolerance test is presented as byte-exact equivalence.
+Direct MOD measurements in run
+[33987402462](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33987402462)
+resolve the rounding differences. For positive divisor `d`, the measured path
+computes `q = x / d`, then `r = (q - trunc(q)) * d`, and adds `d` only when
+`r < 0`. Normalization reduces by TWO-PI and subtracts TWO-PI if the result
+exceeds pi. ANGLE-DIF normalizes each argument, subtracts B's positive remainder
+minus A's positive remainder, normalizes again, and takes ABS.
+
+`aaron-angles.js` now matches all 19 MOD, 19 NORM-A, and 84 ANGLE-DIF cases
+exactly, including tiny differences caused by operand order. These counts
+exclude repeated cases from previous runs. The next run adds 96 new holdout
+calls chosen after the arithmetic rule was identified. This is a measured
+double path, not a general implementation of Lisp's rational or complex
+arithmetic. Extremely large quotients and different JS math engines remain
+outside the validated range.
 
 ## DIRECTION and generic methods
 
@@ -43,5 +53,7 @@ helper. It has not been ported.
 The first generic-method probe completed its report, but every candidate
 reported an error; it recovered no method bodies or specializers. The initial
 error was FILE-ERROR followed by UNBOUND-VARIABLE and PROGRAM-ERROR cases.
-The follow-up records the condition messages to locate the missing facility.
-The workflow succeeding only establishes that the report completed.
+The verbose follow-up identifies `loop.fasl`: the extended LOOP macro in our
+probe attempted an unavailable autoload. The probe now uses DO. This failure
+does not establish that method access itself is unavailable. The verbose run
+did not complete its report; the original condition-type-only run did.

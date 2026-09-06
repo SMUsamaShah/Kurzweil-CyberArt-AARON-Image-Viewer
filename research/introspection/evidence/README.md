@@ -44,3 +44,10 @@ All jobs completed; the method job's completion does not establish successful
 method inspection. The constant parser now succeeds in Windows as well as
 locally. ANGLE-RANGE is implemented and matches both saved line reports; see
 [`angle-findings.md`](../../angle-findings.md).
+
+`line-validation-33987402462.txt` comes from job 101363409339 in run
+[33987402462](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33987402462),
+commit `69a8c986f0f357da76a3abee2702c77fadbcdd49`. It adds 19 direct MOD calls
+to the previous validation cases and uses the same excerpt normalization.
+The generic-method job in that run failed to complete; its log exposed an
+attempt to autoload the missing `loop.fasl` from the probe's LOOP macro.

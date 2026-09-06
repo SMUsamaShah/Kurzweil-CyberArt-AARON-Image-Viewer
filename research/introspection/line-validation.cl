@@ -40,5 +40,13 @@
                         (-0.0d0 -0.0d0 0.0d0)
                         (1000000 1 -1)))
           (call "ANGLE-RANGE" args))
+        ;; Holdout inputs selected after identifying the runtime's MOD
+        ;; operation order. No RNG is used to construct these cases.
+        (dotimes (i 32)
+          (let ((a (/ (- (* i 17) 211) 7.0d0))
+                (b (/ (- (* i 29) 317) 11.0d0)))
+            (call "MOD" (list a (* 2 pi)))
+            (call "NORM-A" (list a))
+            (call "ANGLE-DIF" (list a b))))
         (format report "END line-validation~%")
         (finish-output report)))))

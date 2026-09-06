@@ -6,7 +6,7 @@ on:
     branches: [reverse-engineer-aaron-js]
     paths:
       - '.github/workflows/aaron-introspection.yml'
-      - 'research/introspection/**'
+      - 'research/introspection/*.cl'
 
 permissions:
   contents: read

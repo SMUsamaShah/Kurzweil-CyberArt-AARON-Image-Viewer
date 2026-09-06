@@ -12,3 +12,31 @@ export function aaronAngleRange(z, lx, rx, { precision = 'single' } = {}) {
   const [depth, left, right] = coords;
   return [left, right].map(x => cast(Math.atan2(x, depth)));
 }
+
+const TWO_PI = 2 * Math.PI;
+
+/** Measured Allegro double MOD path for a positive divisor. */
+export function allegroDoubleModulo(value, divisor) {
+  if (!Number.isFinite(value) || !Number.isFinite(divisor) || divisor <= 0) {
+    throw new RangeError('MOD requires a finite value and positive finite divisor');
+  }
+  const quotient = value / divisor;
+  if (!Number.isFinite(quotient)) throw new RangeError('MOD quotient overflow');
+  // Preserve operation order. JS % or value - floor(value/divisor)*divisor
+  // rounds differently from the delivered Allegro runtime.
+  const remainder = (quotient - Math.trunc(quotient)) * divisor;
+  return remainder < 0 ? remainder + divisor : remainder;
+}
+
+/** Original NORM-A: normalize radians into (-pi, pi]. */
+export function aaronNormAngle(angle) {
+  const wrapped = allegroDoubleModulo(angle, TWO_PI);
+  return wrapped > Math.PI ? wrapped - TWO_PI : wrapped;
+}
+
+/** Original ANGLE-DIF: magnitude, preserving the observed B-minus-A order. */
+export function aaronAngleDifference(a, b) {
+  return Math.abs(aaronNormAngle(
+    allegroDoubleModulo(b, TWO_PI) - allegroDoubleModulo(a, TWO_PI),
+  ));
+}

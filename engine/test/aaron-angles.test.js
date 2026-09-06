@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
-import { aaronAngleRange } from '../src/aaron-angles.js';
+import { aaronAngleRange, aaronNormAngle, aaronAngleDifference, allegroDoubleModulo } from '../src/aaron-angles.js';
 import { parseLineReport } from '../../research/tools/parse-line-report.mjs';
 
 for (const [name, expectedCount] of [
@@ -17,3 +17,18 @@ for (const [name, expectedCount] of [
     }
   });
 }
+
+test('normalization, difference, and MOD match every recovered double exactly', () => {
+  const functions = { 'NORM-A': aaronNormAngle, 'ANGLE-DIF': aaronAngleDifference, MOD: allegroDoubleModulo };
+  const counts = { 'NORM-A': 0, 'ANGLE-DIF': 0, MOD: 0 };
+  for (const file of ['line-behavior-33986804721', 'line-validation-33987402462']) {
+    const path = new URL(`../../research/introspection/evidence/${file}.txt`, import.meta.url);
+    for (const entry of parseLineReport(readFileSync(path, 'utf8')).cases) {
+      const fn = functions[entry.name];
+      if (!fn) continue;
+      counts[entry.name]++;
+      assert.equal(fn(...entry.args), entry.values[0], `${entry.name} ${entry.argsText}`);
+    }
+  }
+  assert.deepEqual(counts, { 'NORM-A': 19, 'ANGLE-DIF': 84, MOD: 19 });
+});
