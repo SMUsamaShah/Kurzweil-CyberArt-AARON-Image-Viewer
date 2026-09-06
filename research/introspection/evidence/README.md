@@ -79,3 +79,27 @@ LF normalization. The probe completed without errors: 64 groups each contain
 eight RAN values and one following RANDOM value. The JS regression test matches
 all 512 RAN values and all 64 subsequent state observations exactly, including
 equal and reversed bounds. See [`random-findings.md`](../../random-findings.md).
+
+## Exact method selectors
+
+`generic-methods-34001927057.txt` is from commit
+`752f7bff3ad26040fdeffaa0dd59550bac4df7e9`, run
+[34001927057](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34001927057),
+job 101402207455, artifact 9979738365, with the same excerpt normalization.
+All eight generic candidates and three direct candidates complete without
+errors. The report resolves the EQL selectors:
+
+| Function | Selectors |
+|---|---|
+| PREP-LINE | NIL, plus the AARGB and INTEGER class specializations |
+| MAPLINE | YPRIME, XPRIME, DIAG, HOZ, VERT |
+| LINE-MAPPING | COMMON-GRAPHICS:DRAW, COMMON-GRAPHICS-USER::SKETCH |
+| BUILD-FIGURE | SIT-POSE, TL-POSE |
+| GENERATE-PERSON | DIETLIND, JOHNDOE, JANEDOE |
+
+SELECT-BRUSH is an ordinary compiled function with ALL-BRUSHES, ENVIR, and ID
+constants; its earlier generic-method inspection error was a probe mismatch.
+MAKE-TWOPT takes X and Y. SCORE-MAP is generic, so its direct constant report
+again describes dispatch machinery. These are callable-interface findings,
+not recovered figure or rasterization algorithms, and do not prove a hidden
+gallery mode.

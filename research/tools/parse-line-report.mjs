@@ -36,7 +36,7 @@ export function readNumericList(text) {
 
 export function parseLineReport(text) {
   const lines = text.trim().split(/\r?\n/);
-  const begin = /^BEGIN (line-behavior|line-validation|ran-float)$/.exec(lines[0]);
+  const begin = /^BEGIN (line-behavior|line-validation|ran-float|point-behavior)$/.exec(lines[0]);
   if (!begin || lines.at(-1) !== `END ${begin[1]}`) throw new Error('Missing line probe checkpoints');
   const cases = [];
   const globals = [];

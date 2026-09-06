@@ -104,7 +104,7 @@ interpretation questions are in [freehand-line.md](freehand-line.md).
 
 Publishing resumed successfully at commit `4046acf`, whose repository tree
 matches local commit `cca7a5c`. The previously queued changes are on the
-`reverse-engineer-aaron-js` branch. The next targeted jobs validate the angle
+`reverse-engineer-aaron-js` branch. Subsequent targeted jobs validate the angle
 rules at boundaries and inspect generic-function methods without invoking them.
 
 - `object-probe.cl` obtained safe memory-helper signatures and 64-byte
@@ -115,6 +115,16 @@ rules at boundaries and inspect generic-function methods without invoking them.
 - `random-reference.cl` and `random-validation.cl` produced the numeric vectors
   documented in [random-findings.md](random-findings.md). The JS parity tests
   compare all 6,140 validation values.
+- `line-validation.cl` supports the measured MOD, NORM-A, ANGLE-DIF, and
+  ANGLE-RANGE implementations. Tests match 218 double observations and 20
+  angle-range calls, including 96 new arithmetic holdouts.
+- `generic-methods.cl` recovered metadata for eight candidates after replacing
+  the unavailable LOOP macro. WIGGLE and SCRIPT appear to be slot accessors;
+  their names alone should no longer make them primary algorithm candidates.
+- `ran-float.cl` measured all four floating RAN signatures. JavaScript matches
+  512 values and 64 subsequent random-state observations, including the
+  no-consumption equal-endpoint case. The implementation is published at
+  [17dc646](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/commit/17dc646da7c84111fad03346a256a5ff08865ead).
 - `line-metadata.cl` completed all 23 candidates. It deliberately records
   metadata only; no drawing routine was invoked.
 

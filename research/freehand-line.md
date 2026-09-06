@@ -81,7 +81,17 @@ The completed `function-constants` probes recovered 439 summaries across 38
 candidates, including references to MOD, NORM-A, TWO-PI and ATAN. Independent
 numeric probes now support a JavaScript implementation of ANGLE-RANGE with 20
 matching cases. See [angle-findings.md](angle-findings.md). The complete
-freehand point sequence remains unresolved.
+freehand point sequence remains unresolved. Follow-up angle tests match 218
+double observations, including 96 fresh holdouts, and the recovered floating
+RAN methods match 512 values plus 64 checks of subsequent random state.
+
+Method inspection now identifies WIGGLE's XTPLAN method as a closure with
+retained argument OFFSET and no constants, suggesting a slot accessor rather
+than the freehand algorithm itself. LOCK-WIGGLE is a more concrete geometric
+lead: its constants reference XYDIST, ATAN, RAN, POL-PT, and single-float values
+`-0.05`, `0.05`, `0.8`, `1.2`. Those constants do not establish the arithmetic
+or random-call order. Recover point construction and the callable coordinate
+interface before measuring that function with controlled seeds.
 
 `engine/src/geometry.js` currently samples mathematical curves, and
 `AaBuilder.chainTo` emits a diagonal-then-axis unit path. Neither is a recovered
