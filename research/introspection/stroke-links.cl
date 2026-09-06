@@ -49,7 +49,8 @@
         (do-symbols (symbol owner)
           (when (and (eq owner (symbol-package symbol)) (fboundp symbol))
             (push (symbol-name symbol) names)))
-        (dolist (name (sort names #'string<))
+        (setf names (sort names #'string<))
+        (dolist (name names)
           (let ((fn (symbol-function (find-symbol name owner))))
             (if (eq (type-of fn) (find-symbol "STANDARD-GENERIC-FUNCTION" "COMMON-LISP"))
                 (handler-case

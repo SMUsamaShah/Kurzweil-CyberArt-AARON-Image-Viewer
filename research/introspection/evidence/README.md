@@ -163,3 +163,22 @@ All 24 baseline comparisons match. It records 60 trigonometric pairs, including
 The bounded high-precision helper matches all 40 double pairs. After the
 distance and trig corrections, tests match all 320 paths and all 80 distance
 and subsequent-state observations in the expanded numeric report exactly.
+
+## Stroke references and compact command selection
+
+The `*-34016252902.txt` excerpts come from commit
+`22f37285f8509be172e7dcf625cf708363a9d035`, run
+[34016252902](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34016252902),
+using the same timestamp-removal and LF normalization:
+
+| Report | Job | Artifact |
+|---|---:|---:|
+| stroke-links | 101440427759 | 9983982197 |
+| hop-behavior | 101440427694 | 9983982317 |
+
+The reference scan completes 2,098 object inspections with 28 matches and no
+errors; its final names count is invalid because of the SORT/list-head bug
+documented in [`stroke-findings.md`](../../stroke-findings.md). All 36 direct
+hop calls succeed. SMALL mode declines the tested down-left unit step;
+independent validation is pending. LOCK-WIGGLE's detected caller points toward
+specialised figure detail rather than proving a general FLA role.

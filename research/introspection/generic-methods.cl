@@ -41,9 +41,7 @@
           (format report "HELPERS ~S~%"
                   (list methods method-fn specializers eql-object class-name arglist count-fn constant-fn))
           (finish-output report)
-          (dolist (name '("WIGGLE" "PREP-LINE" "RAN"
-                          "MAPLINE" "LINE-MAPPING" "SCRIPT"
-                          "BUILD-FIGURE" "GENERATE-PERSON"))
+          (dolist (name '("STORE-IN-FILE" "SCORE-MAP"))
             (format report "TRY ~S~%" name)
             (finish-output report)
             (handler-case
@@ -80,7 +78,7 @@
             (finish-output report))
           ;; These candidates have ordinary retained signatures; do not
           ;; assume GENERIC-FUNCTION-METHODS applies to every compiled function.
-          (dolist (name '("SELECT-BRUSH" "MAKE-TWOPT" "SCORE-MAP"))
+          (dolist (name '("RASTRA-LOCKS" "SCREEN-AND-STORE"))
             (format report "DIRECT ~S~%" name)
             (finish-output report)
             (handler-case
