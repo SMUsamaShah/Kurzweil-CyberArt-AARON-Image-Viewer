@@ -116,5 +116,23 @@
 (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  (format report "EIGHTH-FORM-BEGIN~%")
+  (finish-output report)
+  (handler-case
+      (let* ((user (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" user))
+             (core-symbol (find-symbol "CORE" user))
+             (brush (car (symbol-value all-symbol))))
+        (format report "RESOLVED-CORE~%")
+        (finish-output report)
+        (let ((value (funcall (symbol-function core-symbol) brush)))
+          (format report "CORE-RESULT-TYPE ~S~%" (type-of value))))
+    (error (problem)
+      (format report "CORE-ERROR ~S~%" (type-of problem))))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "END brush-accessors~%")
   (finish-output report))

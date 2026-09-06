@@ -38,6 +38,8 @@ brush settings: no brush is selected, and no fill map has been initialized.
 The existing `ENVIR` reader also completes and returns a `CONS`; its value is
 intentionally not printed until a safe bounded shape policy is established.
 The existing `RAD` reader completes with `FIXNUM` value 0 for the same object.
+The existing `PERIM` reader completes with `NULL`; no perimeter geometry is
+present in this startup object at this checkpoint.
 
 The next oracle step is a bounded read-only call to the other existing
 `PAINT-BRUSH` readers, with one checkpoint per reader and only type/shape

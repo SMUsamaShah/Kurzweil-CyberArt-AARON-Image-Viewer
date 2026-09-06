@@ -314,3 +314,10 @@ commit `5d4518a93b5df7a878f561ebf09ee1527826eab5`, job 101579629325,
 artifact 9999511639. The existing `RAD` reader completes and returns a
 `FIXNUM` value of 0 for the first startup brush. `ENVIR` remains type-only;
 the probe still performs no writes or fill-map initialization.
+
+`brush-readers-34067944755.txt` continues the sequence in run
+[34067944755](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34067944755),
+commit `16047cdf3a041be9a6cc0ab25663a60f0b279de4`, job 101579925193,
+artifact 9999543004. The existing `PERIM` reader completes and returns
+`NULL` for the first startup brush. This is a type boundary only; no perimeter
+contents or geometry are inferred.
