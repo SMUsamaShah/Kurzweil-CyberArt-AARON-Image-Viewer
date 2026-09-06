@@ -103,12 +103,33 @@ export class Allegro501Random {
     return minimum + this.nextInt(maximum - minimum + 1);
   }
 
+  /**
+   * Floating RAN methods use one single-float fraction, even for double bounds.
+   * JS numbers do not retain Lisp types; declare each endpoint's precision.
+   * Reversed bounds are valid; equal bounds return without consuming state.
+   */
+  ranFloat(a, b, { aPrecision = 'double', bPrecision = 'double' } = {}) {
+    if (![aPrecision, bPrecision].every(value => value === 'single' || value === 'double')) {
+      throw new RangeError('RAN endpoint precision must be single or double');
+    }
+    const left = aPrecision === 'single' ? Math.fround(a) : a;
+    const right = bPrecision === 'single' ? Math.fround(b) : b;
+    if (!Number.isFinite(left) || !Number.isFinite(right)) {
+      throw new TypeError('RAN floating endpoints must be finite');
+    }
+    if (left === right) return left;
+    const cast = aPrecision === 'single' && bPrecision === 'single' ? Math.fround : value => value;
+    const span = cast(right - left);
+    if (!Number.isFinite(span)) throw new RangeError('RAN floating span must be finite');
+    return cast(left + cast(this.nextFloat() * span));
+  }
+
   between(minimum, maximum) {
     if (!Number.isFinite(minimum) || !Number.isFinite(maximum)) {
       throw new TypeError('random range bounds must be finite');
     }
     if (maximum < minimum) throw new RangeError('maximum must not be less than minimum');
-    return minimum + this.nextDouble(maximum - minimum);
+    return this.ranFloat(minimum, maximum);
   }
 
   pick(items) {

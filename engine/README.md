@@ -85,12 +85,14 @@ Cohen's matrix notes.
 
 The freehand line algorithm is still missing. [Paul Cohen's article and the
 recovery plan](../research/freehand-line.md) are saved in the research folder.
-`aaron-angles.js` now implements the measured ANGLE-RANGE coordinate helper;
-20 original-engine cases match exactly. This is one primitive toward the line
+`aaron-angles.js` implements ANGLE-RANGE, NORM-A, ANGLE-DIF, and the measured
+double MOD arithmetic. Tests match 20 ANGLE-RANGE calls and 218 double
+observations, including 96 fresh holdouts. These are primitives toward the line
 system, not the complete FLA. Details are in
 [`angle-findings.md`](../research/angle-findings.md).
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
-source. Its vectors and limitations are documented in
+source, including all four floating RAN signatures. The latter match 512
+original values and 64 subsequent random-state checks. Its vectors and limitations are documented in
 [`../research/random-findings.md`](../research/random-findings.md). The scene
 generator does not select it by default yet because AARON's startup seed and
 draw order remain unknown.

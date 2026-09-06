@@ -53,10 +53,46 @@ The numeric conversion behavior observed through `COMMON-LISP:RANDOM` is:
 | Positive single-float | Use `((word >>> 1) & 0xffffff) / 2^24`, then single-float multiply |
 | Positive double-float | Combine 27 bits from the first and 26 bits from the second `(word >>> 1)` value into a 53-bit fraction, then divide by `2^53` |
 | `RAN(A B)` with integer endpoints | Inclusive `B`, equivalent to `A + RANDOM(B-A+1)` for valid bounds |
+| `RAN(A B)` with single-float endpoints | `A + fraction * (B-A)`, rounding subtraction, multiplication, and addition separately to binary32 |
+| `RAN(A B)` with at least one double-float endpoint | Same single-float fraction; double arithmetic with each endpoint retaining its original precision |
 
 The bignum path is intentionally described as observed behavior, including
 its apparent high-limb cap. It is not a recommendation for an unbiased random
 distribution. This matters for reproducing historical output.
+
+## Floating RAN methods
+
+Method inspection found four floating signatures, all referencing
+`EXCL::NEW-RANDOM-FLOAT`. Run
+[34001498369](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34001498369)
+then measured 16 bound/type pairs across four fresh seeds, with eight RAN calls
+per pair followed by `RANDOM(1000)`. All **512 RAN values and 64 subsequent
+state observations match exactly** in JavaScript.
+
+Unlike `RANDOM` with a double limit, floating `RAN` consumes just one word per
+call. Equal endpoints return the endpoint without consuming any words. Reversed
+floating endpoints are accepted: the subtraction produces a negative span.
+These rules differ from integer `RAN`, whose reversed bounds fail and whose
+equal bounds still call `RANDOM(1)`.
+
+The single/single method rounds every arithmetic step, not just the final
+result. Final-only rounding fails 27 values in this report. Mixed signatures
+preserve the single endpoint's binary32 value before double arithmetic; this
+matters for bounds such as `0.1f0` and `0.2d0`.
+
+Use `ranFloat(a, b, { aPrecision: 'single', bPrecision: 'double' })` to retain
+the original argument types. Both precision options default to `double`.
+The planner adapter `between(a, b)` now uses this double/double RAN path, so
+provisional `--allegro-rng` scenes change as a consequence of corrected random
+consumption. `nextDouble()` continues to model the separate Common Lisp RANDOM
+double path. The adapter retains its ordered-bound contract; use `ranFloat`
+directly for reversed floating endpoints.
+
+Evidence: [`ran-float-34001498369.txt`](introspection/evidence/ran-float-34001498369.txt).
+The probe covers ordinary finite ranges, equal bounds, reversed bounds, and
+all four floating signatures. Overflow, subnormal arithmetic, and signed-zero
+endpoint selection have not been characterized; the JS API rejects non-finite
+endpoints or spans before consuming state.
 
 ## What this does not recover
 
@@ -67,7 +103,7 @@ therefore still unfinished. The standard `Mt19937` class remains available for
 existing clean-room tests; callers that need the recovered Allegro numeric
 behavior can use `Allegro501Random` explicitly.
 
-The reversed `RAN(10, 0)` cases produced the original runtime's invalid-random
-argument error. The JS class rejects reversed bounds before consuming state,
+The reversed integer `RAN(10, 0)` cases produced the original runtime's invalid-random
+argument error. The JS integer method rejects reversed bounds before consuming state,
 which preserves the important state invariant but does not claim identical
 condition text.

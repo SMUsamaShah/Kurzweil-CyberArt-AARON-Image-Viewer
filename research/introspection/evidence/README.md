@@ -68,3 +68,14 @@ All 96 fresh arithmetic holdout calls match the existing JS implementation
 exactly. Method inspection succeeds for eight candidates after replacing the
 unavailable LOOP macro. SELECT-BRUSH remains a reported PROGRAM-ERROR. No
 drawing method is invoked by that probe.
+
+## Seeded floating RAN
+
+`ran-float-34001498369.txt` is from commit
+`404f91d6da89af72d5ca3d95909a3c040a62d280`, run
+[34001498369](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34001498369),
+job 101401061007, artifact 9979617529. It uses the same timestamp-removal and
+LF normalization. The probe completed without errors: 64 groups each contain
+eight RAN values and one following RANDOM value. The JS regression test matches
+all 512 RAN values and all 64 subsequent state observations exactly, including
+equal and reversed bounds. See [`random-findings.md`](../../random-findings.md).
