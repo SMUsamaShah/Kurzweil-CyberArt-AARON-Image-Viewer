@@ -1,3 +1,8 @@
+const DIRECTION_CODES = new Map([
+  ['1,0', 'e'], ['1,1', 'f'], ['0,1', 'g'], ['-1,1', 'h'],
+  ['-1,0', 'i'], ['0,-1', 'k'], ['1,-1', 'l'],
+]);
+
 /** Measured HOP-OR-DRAW selector; NIL in Lisp is represented by null. */
 export function aaronHopOrDraw(a, b, { mode = 'small', precision = 'single' } = {}) {
   if (mode !== 'small' && mode !== 'large') throw new RangeError('mode must be small or large');
@@ -11,8 +16,5 @@ export function aaronHopOrDraw(a, b, { mode = 'small', precision = 'single' } = 
   const dy = cast(cast(b[1]) - cast(a[1]));
   // The original declines (-1,-1) in all measured cases despite retaining
   // a "j" literal. Preserve this encoding behavior; j remains valid to decode.
-  return new Map([
-    ['1,0', 'e'], ['1,1', 'f'], ['0,1', 'g'], ['-1,1', 'h'],
-    ['-1,0', 'i'], ['0,-1', 'k'], ['1,-1', 'l'],
-  ]).get(`${dx},${dy}`) ?? null;
+  return DIRECTION_CODES.get(`${dx},${dy}`) ?? null;
 }

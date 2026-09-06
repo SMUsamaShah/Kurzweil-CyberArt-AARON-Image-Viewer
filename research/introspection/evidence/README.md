@@ -196,3 +196,12 @@ with the same normalization:
 All 150 grid calls succeed, confirming the seven compact direction choices
 and the declined down-left unit step at all three new origins. The method
 probe resolves all ten STORE-IN-FILE selectors and two SCORE-MAP methods.
+
+`store-behavior-34016651940.txt` is from commit
+`9a9efc6f1cdb91d773a768679f89fe2456d5fffd`, run
+[34016651940](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34016651940),
+job 101441473260, artifact 9984104109. The same normalization is used for
+the report. Emitted string-stream characters are captured as numeric codes,
+so their LF bytes remain distinguishable from report formatting. All 96
+MOVE-TO/DRAW-TO calls succeed and match the JS output/state model; all 96
+VECTOR/FILL calls fail with UNBOUND-VARIABLE before output is written.

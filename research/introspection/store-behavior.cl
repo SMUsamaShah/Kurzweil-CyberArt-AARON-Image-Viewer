@@ -32,7 +32,14 @@
                         (handler-case
                             (funcall store (find-symbol name owner)
                                      :pta (funcall make 10 20) :ptb (apply make b) :redraw redraw)
-                          (error (problem) (format report "ERROR ~S~%" (type-of problem))))
+                          (error (problem)
+                            (format report "ERROR ~S~%" (type-of problem))
+                            (when (typep problem 'cell-error)
+                              (let ((cell (cell-error-name problem)))
+                                (when (symbolp cell)
+                                  (format report "ERROR-CELL ~S ~S~%"
+                                          (and (symbol-package cell) (package-name (symbol-package cell)))
+                                          (symbol-name cell)))))))
                         (format report "OUTPUT ~S~%"
                                 (map 'list #'char-code (get-output-stream-string output)))
                         (format report "PREVIOUS ~S~%" (coords (symbol-value previous)))

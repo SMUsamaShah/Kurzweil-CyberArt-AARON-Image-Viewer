@@ -46,5 +46,30 @@ small-mode decision returns seven unit-direction strings and otherwise NIL,
 including the down-left step. Unmeasured floating-point edge cases remain
 outside this claim.
 
-NIL means that this helper declined a compact command. It does not by itself
-establish whether a downstream caller skips, moves, or explicitly draws.
+NIL means that this helper declined a compact command. The subsequent stream
+probe confirms that DRAW-TO falls back to an explicit draw, preserving the
+segment even when its direction is not compacted.
+
+## Measured point emission
+
+Run 34016651940 measures private string-stream output and previous-point state
+for 192 calls. All 96 MOVE-TO/DRAW-TO calls succeed. The other 96 VECTOR/FILL
+calls report UNBOUND-VARIABLE and are preserved as failures, not parity data.
+The next diagnostic records the missing cell's name.
+
+`AaronStrokeWriter` models the successful integer-coordinate cases:
+
+- MOVE-TO writes PTA as `am` when REDRAW is true, otherwise `zm`, then updates
+  PREV-STORED-PT to PTA.
+- DRAW-TO uses PTB and the previous stored point, not the supplied PTA, to
+  select a hop. When no hop is available it emits `ad` with REDRAW true,
+  otherwise `zd`. It always updates the previous point to PTB.
+- File size controls hop eligibility. REDRAW selects the explicit command
+  family; it does not prevent a compact command when one is available.
+- The probed PLOT Boolean does not affect these two methods.
+
+The writer produces stream fragments, not complete painting documents. Its
+current API intentionally requires integer coordinates; float formatting,
+VECTOR/FILL, headers, colour/brush records, and end-of-stream behavior are
+separate recovery tasks. The existing AaBuilder remains a general format
+builder and is not relabelled as an exact implementation of these decisions.
