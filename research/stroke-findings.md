@@ -17,6 +17,22 @@ This suggests a specialised anatomical detail, possibly hair locks. It does
 not support identifying LOCK-WIGGLE as the main FLA. Unknown dynamic calls,
 closures, or deeper nested constants are outside this bounded scan.
 
+## Separate outline and fill routes
+
+The retained constants do not establish a direct `FREE-PATH` to
+`BRUSH-STROKE` call edge. `DRAW-CFORM` references `FREE-PATH`, clipping,
+`LINE-MAPPING`, `OCCL-PLOT`, and `MY-FILL`. Separately,
+`BRUSH-FILL-SUBPART` references `EDGE-PATH`, `PAINT-FILL`, and
+`BRUSH-STROKE`; `BRUSH-STROKE` references `SCREEN-AND-STORE` and brush/fill
+state. These are evidence-backed dependency leads, not proof that one route
+feeds the other in every painting.
+
+The next oracle step is therefore a read-only census of `BRUSH`,
+`ALL-BRUSHES`, `BOUNDARY-VALUE`, and `FILL-MAP`, followed by a bounded
+`BRUSH-STROKE` experiment with only `SCREEN-AND-STORE` replaced. Until the
+census identifies a safe private map and brush value, no fill routine is
+invoked and no shared startup map is written.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

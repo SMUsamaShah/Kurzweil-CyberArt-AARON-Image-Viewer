@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [free-path-validation]
+        probe: [free-path-validation, brush-metadata]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,7 +49,7 @@ jobs:
             $report = 'C:\temp\aaron-${{ matrix.probe }}.txt'
             if (Test-Path $report) {
               Copy-Item $report (Join-Path $output '${{ matrix.probe }}.txt')
-              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods', 'ran-float', 'point-behavior', 'point-shape', 'point-trace', 'stroke-links', 'hop-behavior', 'hop-validation', 'store-behavior', 'store-isolated', 'free-path-behavior', 'free-path-validation')) {
+              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods', 'ran-float', 'point-behavior', 'point-shape', 'point-trace', 'stroke-links', 'hop-behavior', 'hop-validation', 'store-behavior', 'store-isolated', 'free-path-behavior', 'free-path-validation', 'brush-metadata')) {
                 Get-Content -LiteralPath $report
               }
             }
