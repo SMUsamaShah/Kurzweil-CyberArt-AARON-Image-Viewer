@@ -61,5 +61,23 @@
 (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  (format report "FIFTH-FORM-BEGIN~%")
+  (finish-output report)
+  (handler-case
+      (let* ((user (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" user))
+             (envir-symbol (find-symbol "ENVIR" user))
+             (brush (car (symbol-value all-symbol))))
+        (format report "RESOLVED-ENVIR~%")
+        (finish-output report)
+        (let ((value (funcall (symbol-function envir-symbol) brush)))
+          (format report "ENVIR-RESULT-TYPE ~S~%" (type-of value))))
+    (error (problem)
+      (format report "ENVIR-ERROR ~S~%" (type-of problem))))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "END brush-accessors~%")
   (finish-output report))

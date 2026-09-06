@@ -291,3 +291,11 @@ successfully reaches separate top-level checkpoints, calls the existing
 the integer 0. The call used no `SLOT-VALUE`, MOP mutation, brush selection, or
 fill routine. Because this is one startup brush in a direct checkpoint, the
 zero is not generalized to all brushes or treated as the runtime brush width.
+
+`brush-readers-34067627399.txt` is the normalized follow-up from run
+[34067627399](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34067627399),
+commit `9c02d9f11bff45e7597d14caee861fbb57b87a67`, job 101579084711,
+artifact 9999448702. It repeats the width boundary and adds one direct
+existing reader: `COMMON-GRAPHICS::ID` returns a `FIXNUM` value of 0 for the
+first startup brush. The remaining readers are intentionally separate probes;
+this report still contains no brush selection, slot writes, or fill-map use.
