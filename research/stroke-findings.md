@@ -27,8 +27,10 @@ closures, or deeper nested constants are outside this bounded scan.
 - OCCL-PLOT also references STORE-IN-FILE, linking the visibility and output
   paths at the level of retained constants.
 
-The method selectors and controlled stream-writing behavior are the next
-measurements needed before implementing the emitter decisions.
+The method selectors are now confirmed: DIMS, BRUSH, AARGB, HUE, COLOR, END,
+MOVE-TO, DRAW-TO, VECTOR, and FILL. The output stream is `*TEMP*`.
+Controlled stream-writing behavior is the next measurement needed before
+implementing the emitter decisions.
 
 ## Initial HOP-OR-DRAW calls
 
@@ -37,7 +39,12 @@ SMALL mode returned the expected `e`, `f`, `g`, `h`, `i`, `k`, and `l` strings
 for seven unit directions, but the `(-1,-1)` offset returned NIL. The literal
 `j` exists in the function's constants. This discrepancy needs independent
 origin/offset validation; the viewer's direction table must not be changed
-based on a generator encoding decision.
+based on a generator encoding decision. Run 34016410110 then confirmed the
+same behavior for a 5-by-5 offset grid at three independent origins in both
+modes. JavaScript's `aaronHopOrDraw` now matches all 186 calls. Its tested
+small-mode decision returns seven unit-direction strings and otherwise NIL,
+including the down-left step. Unmeasured floating-point edge cases remain
+outside this claim.
 
 NIL means that this helper declined a compact command. It does not by itself
 establish whether a downstream caller skips, moves, or explicitly draws.

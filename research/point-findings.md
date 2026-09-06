@@ -72,7 +72,9 @@ startup draw order.
 LOCK-WIGGLE is a recovered path helper, not the complete freehand line
 algorithm. Its use in the larger drawing pipeline, final endpoint handling,
 brush emission, and relation to Paul Cohen's historical FLA still need to be
-traced. Mixed coordinate types, extreme/subnormal inputs, untested rounding
+traced. The later [stroke-reference scan](stroke-findings.md) finds its only
+detected caller in RASTRA-LOCKS, suggesting specialised figure detail rather
+than the main FLA. Mixed coordinate types, extreme/subnormal inputs, untested rounding
 boundaries, and other JavaScript implementations of ATAN2 remain outside the
 equivalence claim. The provisional scene generator does not substitute this helper for
 its existing curve sampler. Passing these tests establishes parity for the

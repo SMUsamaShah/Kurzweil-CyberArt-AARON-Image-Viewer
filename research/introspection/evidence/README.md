@@ -182,3 +182,17 @@ documented in [`stroke-findings.md`](../../stroke-findings.md). All 36 direct
 hop calls succeed. SMALL mode declines the tested down-left unit step;
 independent validation is pending. LOCK-WIGGLE's detected caller points toward
 specialised figure detail rather than proving a general FLA role.
+
+The `*-34016410110.txt` excerpts come from commit
+`9b322098d58550ee2fa5dda2b5409c87d81f75f3`, run
+[34016410110](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34016410110),
+with the same normalization:
+
+| Report | Job | Artifact |
+|---|---:|---:|
+| hop-validation | 101440841610 | 9984031801 |
+| generic-methods | 101440841797 | 9984032480 |
+
+All 150 grid calls succeed, confirming the seven compact direction choices
+and the declined down-left unit step at all three new origins. The method
+probe resolves all ten STORE-IN-FILE selectors and two SCORE-MAP methods.
