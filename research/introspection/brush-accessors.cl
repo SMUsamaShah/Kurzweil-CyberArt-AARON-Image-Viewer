@@ -1,102 +1,59 @@
-;;; Read-only PAINT-BRUSH class probe.  This follows the startup census:
-;;; ALL-BRUSHES is a six-element list, while BRUSH and FILL-MAP are not bound
-;;; at the direct-screensaver checkpoint.  No accessor, drawing, or fill
-;;; routine runs until the class shape is known.
+;;; Minimal reader probe after the PAINT-BRUSH class census.  The BEGIN form
+;;; is intentionally a separate top-level form so a later load/compile error
+;;; cannot hide the first checkpoint.  Only the existing WIDTH reader is
+;;; called; no brush selection, fill-map binding, drawing, or mutation occurs.
 (in-package :cl-user)
+
+(with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
+                        :direction :output :if-exists :supersede
+                        :if-does-not-exist :create)
+  (format report "BEGIN brush-accessors~%")
+  (format report "INTERVENTION MINIMAL-WIDTH-READER~%")
+  (finish-output report))
+
 (unless (boundp 'aaron-brush-accessors-loaded)
   (set 'aaron-brush-accessors-loaded t)
   (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
-                          :direction :output :if-exists :supersede
+                          :direction :output :if-exists :append
                           :if-does-not-exist :create)
-    (let ((*print-length* 16) (*print-level* 10) (*print-pretty* nil)
-          (user (find-package "COMMON-GRAPHICS-USER"))
-          (graphics (find-package "COMMON-GRAPHICS")))
-      (labels ((shape (value &optional (depth 0))
+    (let* ((user (find-package "COMMON-GRAPHICS-USER"))
+           (graphics (find-package "COMMON-GRAPHICS"))
+           (all-symbol (and user (find-symbol "ALL-BRUSHES" user)))
+           (width-symbol (and graphics (find-symbol "WIDTH" graphics))))
+      (labels ((summary (value &optional (depth 0))
                  (cond
-                   ((numberp value) (list :number value))
+                   ((numberp value) value)
                    ((symbolp value)
                     (list :symbol (and (symbol-package value)
                                        (package-name (symbol-package value)))
                           (symbol-name value)))
-                   ((stringp value)
-                    (list :string (length value)
-                          (subseq value 0 (min 120 (length value)))))
                    ((arrayp value)
-                    (let ((samples nil) (total (array-total-size value)))
-                      (dotimes (index (min total 8))
-                        (push (shape (row-major-aref value index) (1+ depth))
-                              samples))
-                      (list :array (type-of value)
-                            :rank (array-rank value)
-                            :dimensions (array-dimensions value)
-                            :element-type (array-element-type value)
-                            :samples (nreverse samples))))
-                   ((and (consp value) (< depth 5))
-                    (list :cons (shape (car value) (1+ depth))
-                          (shape (cdr value) (1+ depth))))
-                   (t (list :type (type-of value)))))
-               (find-in (package name)
-                 (and package (find-symbol name package)))
-               (helper (name)
-                 (let ((found nil))
-                   (do-all-symbols (symbol)
-                     (when (and (null found) (string= name (symbol-name symbol))
-                                (fboundp symbol))
-                       (setf found symbol)))
-                   found))
-               (class-report (object)
-                 (format report "BEFORE-CLASS-OF~%")
-                 (finish-output report)
-                 (handler-case
-                     (let* ((class (class-of object))
-                            (class-name-fn (find-in (find-package "CLOS")
-                                                    "CLASS-NAME"))
-                            (class-slots-fn (helper "CLASS-SLOTS"))
-                            (slot-name-fn (helper "SLOT-DEFINITION-NAME")))
-                       (format report "CLASS-OF ~S~%" (type-of class))
-                       (when (and class-name-fn (fboundp class-name-fn))
-                         (format report "CLASS-NAME ~S~%"
-                                 (funcall (symbol-function class-name-fn) class)))
-                       (format report "CLASS-SLOTS-HELPER ~S~%"
-                               (shape class-slots-fn))
-                       (when (and class-slots-fn slot-name-fn)
-                         (handler-case
-                             (let ((slots (funcall class-slots-fn class)))
-                               (format report "SLOT-COUNT ~D~%" (length slots))
-                               (dolist (slot slots)
-                                 (handler-case
-                                     (format report "SLOT ~S~%"
-                                             (shape (funcall slot-name-fn slot)))
-                                   (error (problem)
-                                     (format report "SLOT-ERROR ~S~%"
-                                             (type-of problem))))
-                               (finish-output report))
-                           (error (problem)
-                             (format report "SLOTS-ERROR ~S~%"
-                                     (type-of problem))))))
-                   (error (problem)
-                     (format report "CLASS-ERROR ~S~%" (type-of problem))))
-                 (finish-output report)))
-        (format report "BEGIN brush-accessors~%")
-        (format report "INTERVENTION READ-ONLY-PAINT-BRUSH-ACCESSORS~%")
-        (let ((all-symbol (find-in user "ALL-BRUSHES"))
-              (boundary-symbol (find-in user "BOUNDARY-VALUE")))
-          (format report "ALL-BRUSHES bound=~S~%"
-                  (and all-symbol (boundp all-symbol)))
-          (when (and all-symbol (boundp all-symbol))
-            (format report "ALL-BRUSHES-SHAPE ~S~%"
-                    (shape (symbol-value all-symbol))))
-          (format report "BOUNDARY-VALUE bound=~S~%"
-                  (and boundary-symbol (boundp boundary-symbol)))
-          (when (and boundary-symbol (boundp boundary-symbol))
-            (format report "BOUNDARY-VALUE-SHAPE ~S~%"
-                    (shape (symbol-value boundary-symbol))))
-          (finish-output report)
-          (when (and all-symbol (boundp all-symbol))
-            (let ((brushes (symbol-value all-symbol)))
-              (when (consp brushes)
-                (format report "BRUSH index=0 shape=~S~%" (shape (car brushes)))
-                (finish-output report)
-                (class-report (car brushes)))))
+                    (list :array (type-of value)
+                          :dimensions (array-dimensions value)
+                          :element-type (array-element-type value)))
+                   ((and (consp value) (< depth 3))
+                    (list (summary (car value) (1+ depth))
+                          (summary (cdr value) (1+ depth))))
+                   (t (list :type (type-of value))))))
+        (format report "ALL-BRUSHES bound=~S WIDTH fbound=~S~%"
+                (and all-symbol (boundp all-symbol))
+                (and width-symbol (fboundp width-symbol)))
+        (finish-output report)
+        (handler-case
+            (if (and all-symbol (boundp all-symbol)
+                     (consp (symbol-value all-symbol)))
+                (let ((brush (car (symbol-value all-symbol))))
+                  (format report "BRUSH shape=~S~%" (type-of brush))
+                  (format report "BEFORE-WIDTH~%")
+                  (finish-output report)
+                  (if (and width-symbol (fboundp width-symbol))
+                      (format report "WIDTH-RESULT ~S~%"
+                              (summary (funcall (symbol-function width-symbol)
+                                                brush)))
+                    (format report "WIDTH-SKIPPED~%")))
+              (format report "BRUSH-SKIPPED~%"))
+          (error (problem)
+            (format report "ERROR ~S~%" (type-of problem))))
+        (finish-output report)
         (format report "END brush-accessors~%")
-        (finish-output report)))))))
+        (finish-output report)))))
