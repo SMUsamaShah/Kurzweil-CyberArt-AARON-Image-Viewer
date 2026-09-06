@@ -228,3 +228,29 @@ with controls T, identifying `COMMON-GRAPHICS-USER::WOFFSET`. Neither
 binding of the PLOT variable changes this result. These failures are not
 emission parity data. The next metadata probe inspects the PLOT function
 and FREE-PATH, which DRAW-CFORM references beside FREEHAND-FLAG.
+
+## Screen isolation and FREE-PATH entry point
+
+These runs use the same timestamp removal and LF normalization:
+
+| Run | Commit | Report | Job | Artifact |
+|---|---|---|---:|---:|
+| [34031017111](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031017111) | eb4a9082bec96a56d91e7a9400bd16e7c710daa7 | generic-methods | 101480399684 | 9988601624 |
+| [34031149136](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031149136) | b850b741263d69f28db48dd7af7febb820965f78 | generic-methods | 101480763787 | 9988643132 |
+| 34031149136 | b850b741263d69f28db48dd7af7febb820965f78 | store-isolated | 101480764014 | 9988642045 |
+| [34031301596](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031301596) | e9cbcf8eff0d2c641777cb26e6ca7b59b708e0e6 | free-path-behavior | 101481185813 | 9988693186 |
+| [34031454178](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031454178) | 26675089a7f930621925f021583a2c63ab78920f | free-path-behavior | 101481607551 | 9988745693 |
+
+Metadata resolves FREE-PATH(EDGE), PLOT(PTA PTB), POL-VPT(PT A D V) and
+MAKE-VISPT(X Y VIS). Attempts to inspect ordinary functions as generics and
+globals as functions are recorded failures, not successful method recovery.
+
+The isolated writer report has 240 cases, with one recorded PLOT call each,
+216 successful outputs, and 24 VECTOR/NIL-previous PROGRAM-ERROR cases.
+The PLOT function is replaced, not forwarded, and `RESTORED T` is required.
+See [stroke-findings.md](../../stroke-findings.md) for the scoped parity claim.
+
+The first two FREE-PATH reports each contain 12 failures before any RAN or
+POL-VPT call. The second localizes TYPE-ERROR to the Boolean VIS field:
+the datum is NIL or T and the expected type is NUMBER. Both restore the
+temporary dependency wrappers. No freehand path was captured in those runs.

@@ -34,7 +34,7 @@ probe scripts, normalized reports, and clean-room implementations are kept.
 | 1. AA protocol | Mostly complete | Parser, serializer, renderer, corpus analysis, palettes, outline/paint phases, and compact direction commands are implemented for observed records. | Round-trip and corpus checks cover every observed command and edge case. |
 | 2. Numeric foundation | Measured for recovered primitives | Allegro RNG matches 6,140 validation values; floating `RAN` matches 512 values plus 64 state checks; angle helpers match 218 double observations and 20 range calls. | Remaining startup seed and generator random draw order are recovered. |
 | 3. Geometry and hand helpers | Partially measured | `XYDIST` and `LOCK-WIGGLE` match 320 paths, 80 distances, and 80 subsequent random states. Their role in the complete FLA is unresolved. | The complete line path and its caller chain match original point sequences. |
-| 4. Stream emission | Partially measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures; basic `DIMS`, `BRUSH`, `AARGB/HUE`, `COLOR`, and `END` formatter constants are recovered. | `VECTOR` and `FILL` are measured with `CONTROLS-VISIBLE` bound; float formatting, previous-point rules, and all selector branches have parity tests. |
+| 4. Stream emission | Partially measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures. Integer `VECTOR`/`FILL` match 72 successful captures with the screen PLOT function replaced; eight NIL-previous error cases are checked. Basic formatter constants are inferred. | Float formatting, all selectors, and stream lifetime are measured; screen-isolated evidence remains distinguished from unmodified calls. |
 | 5. Freehand line algorithm | Not complete | Paul Cohen’s article is saved as historical guidance; candidate names and numeric helpers are known, but no complete AARON FLA sequence is recovered. | A controlled point-to-point probe reproduces the full sequence, random consumption, correction/wedge behavior, and termination. |
 | 6. Brush and colour pipeline | Early research | `BRUSH-STROKE`, `PREP-LINE`, `RECORD-BRUSH`, `BRUSH-FILL`, `DRAW-CFORM`, and related candidates are inventoried; output semantics remain open. | Brush selection, colour transitions, fill paths, and brush state match captured original calls. |
 | 7. Composition and figures | Provisional only | The JS planner has occupancy checks and measured canvas/palette profiles, but scene rules, poses, body parts, plants, pots, garments, and occlusion are not byte-equivalent. | Seeded scenes reproduce object ordering, placements, geometry, and branch decisions across holdouts. |
@@ -47,16 +47,19 @@ complete equivalent port until phases 5–8 are recovered.
 
 ## Immediate work queue
 
-1. Publish the local reverse-engineering commits when the GitHub connector
-   permits writes; do not bypass connector restrictions.
-2. Run the expanded `store-behavior` probe. It binds
-   `CONTROLS-VISIBLE=NIL|T` and records 384 cases. Use
-   `tools/summarize-store-report.mjs` before interpreting failures.
-3. Implement and test `VECTOR`/`FILL` only from that fresh output. Keep old
-   192-case failures as historical evidence, not parity data.
-4. Isolate the FLA call chain: start with `PREP-LINE`, `BRUSH-STROKE`,
-   `FOLLOW`, `MAPLINE`, and `LINE-MAPPING`; use `LOCK-WIGGLE` as a measured
-   helper, not as proof that it is the whole FLA.
+1. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
+   to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
+   MAKE-VISPT takes X, Y, VIS, and VIS must be numeric. Preserve construction,
+   return/mutation, global-state and dependency-call checkpoints. Exclude
+   first-call dispatch warmup from future random-state parity claims.
+2. Establish the complete path formula and termination, then compare bounded
+   dependency wrappers against unwrapped baselines before porting the result.
+   Use LOCK-WIGGLE as a measured helper, not proof of the whole FLA.
+3. Extend the screen-isolated VECTOR/FILL measurements with independent
+   endpoint/continuity holdouts. Recover float formatting separately: the
+   captured half-cent and negative-zero cases do not all match JS toFixed.
+4. Directly measure remaining writer selectors and stream ownership. The
+   controls-visible matrix is complete; its failures are not parity data.
 5. Recover brush/fill/colour state and then connect those methods to the AA
    writer.
 6. Recover startup seed installation and random draw order before calibrating
@@ -64,6 +67,9 @@ complete equivalent port until phases 5–8 are recovered.
    a time with oracle-backed implementations.
 7. Add integrated holdout fixtures and a final parity report that separates
    exact, inferred, and provisional output.
+
+Publishing through the GitHub connector succeeded again on September 6, 2026.
+The earlier publishing blockage is historical, not a current prerequisite.
 
 ## Model handoff policy
 
@@ -107,4 +113,3 @@ The project is complete only when the JavaScript engine can:
 4. Match random-state consumption and startup seed behavior.
 5. Pass integrated holdouts without relying on the original binary at runtime.
 6. Clearly document any remaining version-specific or unobservable behavior.
-
