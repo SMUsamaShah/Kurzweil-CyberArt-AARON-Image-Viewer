@@ -56,12 +56,12 @@ of our own implementation.
 - [`freehand-line.md`](freehand-line.md) — Paul Cohen's article supplied by Usama,
   its relevance to the 2001 build, and the next line-algorithm probe.
 - [`tools/parse-function-constants.mjs`](tools/parse-function-constants.mjs) — strict
-  parser for the bounded compiled-function constant report produced by the next
-  Windows probe.
+  parser for the bounded compiled-function constant reports preserved from
+  completed Windows probes.
 - [`random-findings.md`](random-findings.md) — Allegro 5.0.1 MT initialization,
-  numeric conversions, and 6,140 parity vectors.
+  numeric conversions, 6,140 validation values, and floating RAN methods.
 - [`angle-findings.md`](angle-findings.md) — ANGLE-RANGE reconstruction,
-  independent numeric validation, and remaining double-rounding differences.
+  NORM-A, ANGLE-DIF, measured double rounding, and independent validation.
 
 ## Tools
 
