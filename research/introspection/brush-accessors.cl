@@ -1,6 +1,7 @@
-;;; Read-only PAINT-BRUSH accessor probe.  This follows the startup census:
+;;; Read-only PAINT-BRUSH class probe.  This follows the startup census:
 ;;; ALL-BRUSHES is a six-element list, while BRUSH and FILL-MAP are not bound
-;;; at the direct-screensaver checkpoint.  No drawing or fill routine runs.
+;;; at the direct-screensaver checkpoint.  No accessor, drawing, or fill
+;;; routine runs until the class shape is known.
 (in-package :cl-user)
 (unless (boundp 'aaron-brush-accessors-loaded)
   (set 'aaron-brush-accessors-loaded t)
@@ -36,19 +37,20 @@
                    (t (list :type (type-of value)))))
                (find-in (package name)
                  (and package (find-symbol name package)))
-               (accessor (name package object)
-                 (let ((symbol (find-in package name)))
-                   (format report "ACCESSOR ~S package=~S fbound=~S~%"
-                           name (and package (package-name package))
-                           (and symbol (fboundp symbol)))
-                   (finish-output report)
-                   (when (and symbol (fboundp symbol))
-                     (handler-case
-                         (format report "RESULT ~S~%"
-                                 (shape (funcall (symbol-function symbol) object)))
-                       (error (problem)
-                         (format report "ERROR ~S~%" (type-of problem))))
-                     (finish-output report)))))
+               (class-report (object)
+                 (format report "BEFORE-CLASS-OF~%")
+                 (finish-output report)
+                 (handler-case
+                     (let* ((class (class-of object))
+                            (class-name-fn (find-in (find-package "CLOS")
+                                                    "CLASS-NAME")))
+                       (format report "CLASS-OF ~S~%" (type-of class))
+                       (when (and class-name-fn (fboundp class-name-fn))
+                         (format report "CLASS-NAME ~S~%"
+                                 (funcall (symbol-function class-name-fn) class))))
+                   (error (problem)
+                     (format report "CLASS-ERROR ~S~%" (type-of problem))))
+                 (finish-output report)))
         (format report "BEGIN brush-accessors~%")
         (format report "INTERVENTION READ-ONLY-PAINT-BRUSH-ACCESSORS~%")
         (let ((all-symbol (find-in user "ALL-BRUSHES"))
@@ -69,6 +71,6 @@
               (when (consp brushes)
                 (format report "BRUSH index=0 shape=~S~%" (shape (car brushes)))
                 (finish-output report)
-                (accessor "WIDTH" graphics (car brushes)))))
+                (class-report (car brushes)))))
         (format report "END brush-accessors~%")
         (finish-output report))))))
