@@ -37,17 +37,43 @@
                    (t (list :type (type-of value)))))
                (find-in (package name)
                  (and package (find-symbol name package)))
+               (helper (name)
+                 (let ((found nil))
+                   (do-all-symbols (symbol)
+                     (when (and (null found) (string= name (symbol-name symbol))
+                                (fboundp symbol))
+                       (setf found symbol)))
+                   found))
                (class-report (object)
                  (format report "BEFORE-CLASS-OF~%")
                  (finish-output report)
                  (handler-case
                      (let* ((class (class-of object))
                             (class-name-fn (find-in (find-package "CLOS")
-                                                    "CLASS-NAME")))
+                                                    "CLASS-NAME"))
+                            (class-slots-fn (helper "CLASS-SLOTS"))
+                            (slot-name-fn (helper "SLOT-DEFINITION-NAME")))
                        (format report "CLASS-OF ~S~%" (type-of class))
                        (when (and class-name-fn (fboundp class-name-fn))
                          (format report "CLASS-NAME ~S~%"
-                                 (funcall (symbol-function class-name-fn) class))))
+                                 (funcall (symbol-function class-name-fn) class)))
+                       (format report "CLASS-SLOTS-HELPER ~S~%"
+                               (shape class-slots-fn))
+                       (when (and class-slots-fn slot-name-fn)
+                         (handler-case
+                             (let ((slots (funcall class-slots-fn class)))
+                               (format report "SLOT-COUNT ~D~%" (length slots))
+                               (dolist (slot slots)
+                                 (handler-case
+                                     (format report "SLOT ~S~%"
+                                             (shape (funcall slot-name-fn slot)))
+                                   (error (problem)
+                                     (format report "SLOT-ERROR ~S~%"
+                                             (type-of problem)))))
+                               (finish-output report))
+                           (error (problem)
+                             (format report "SLOTS-ERROR ~S~%"
+                                     (type-of problem))))))
                    (error (problem)
                      (format report "CLASS-ERROR ~S~%" (type-of problem))))
                  (finish-output report)))
