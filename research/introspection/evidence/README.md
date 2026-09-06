@@ -328,3 +328,11 @@ commit `368a1c45e0be7fe2e20c8f8705a45daf9449685e`, job 101580174673,
 artifact 9999570347. `CORE` completes and returns `NULL` for the first startup
 brush. The only remaining generated reader in the seven-slot census is
 `CELLS`; it will be measured separately before any fill routine is considered.
+
+`brush-readers-34068150338.txt` completes the first-object reader boundary in
+run [34068150338](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34068150338),
+commit `126e94183879439e7ac2adefd2f3638ca3c9b567`, job 101580477198,
+artifact 9999605921. `CELLS`
+returns a `FIXNUM`, not an array, in this startup object; its scalar value was
+not printed in that run. The next census reads all six brushes and prints only
+bounded scalar/list summaries.
