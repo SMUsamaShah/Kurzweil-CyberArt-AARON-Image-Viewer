@@ -62,6 +62,8 @@ of our own implementation.
   numeric conversions, 6,140 validation values, and floating RAN methods.
 - [`angle-findings.md`](angle-findings.md) — ANGLE-RANGE reconstruction,
   NORM-A, ANGLE-DIF, measured double rounding, and independent validation.
+- [`point-findings.md`](point-findings.md) — measured XYDIST and LOCK-WIGGLE
+  geometry, seeded path comparisons, and dependency-trace controls.
 
 ## Tools
 

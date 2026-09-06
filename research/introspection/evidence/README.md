@@ -136,3 +136,11 @@ is returned in reverse traversal order and includes the starting point. This
 is the first complete point-list capture; formula and bit parity remain to
 be established. `point-trace.cl` measures internal RAN/POL-PT arguments with
 temporary wrappers and compares outputs/state against an unwrapped baseline.
+
+`point-trace-34002445487.txt` is from commit
+`ef3f70f7dbda1324f9ecad9e6a152fa940f67246`, run
+[34002445487](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002445487),
+job 101403609503, artifact 9979887826, with the same excerpt normalization.
+All 12 wrapped versus baseline comparisons report MATCH T, including returned
+coordinates and subsequent RANDOM values. The first RAN(3,5) per group is the
+probe's warmup, not an application call. See [`point-findings.md`](../../point-findings.md).

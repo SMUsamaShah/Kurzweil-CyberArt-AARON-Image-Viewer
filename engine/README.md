@@ -90,6 +90,10 @@ double MOD arithmetic. Tests match 20 ANGLE-RANGE calls and 218 double
 observations, including 96 fresh holdouts. These are primitives toward the line
 system, not the complete FLA. Details are in
 [`angle-findings.md`](../research/angle-findings.md).
+`aaron-point-geometry.js` adds the measured XYDIST and LOCK-WIGGLE helpers;
+192 original point lists and their subsequent random states match exactly.
+The helper's use in the complete drawing pipeline remains unresolved. See
+[`point-findings.md`](../research/point-findings.md).
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in
