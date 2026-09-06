@@ -86,8 +86,13 @@ byte-identical. The planner now reserves candidate figure footprints on a
 coarse occupancy grid, including the no-corner-only diagonal rule described in
 Cohen's matrix notes.
 
-The freehand line algorithm is still missing. [Paul Cohen's article and the
-recovery plan](../research/freehand-line.md) are saved in the research folder.
+The freehand line algorithm is not complete, but a measured `FREE-PATH` subset
+is now available. `aaronFreePath` reproduces 16 traced-versus-unwrapped
+original sequences, including visibility gating, closed-edge traversal,
+single/double arithmetic, and subsequent random-state observations. It is not
+yet connected to DRAW-CFORM or the brush pipeline. [Paul Cohen's article and
+the recovery plan](../research/freehand-line.md) are saved in the research
+folder.
 `aaron-angles.js` implements ANGLE-RANGE, NORM-A, ANGLE-DIF, and the measured
 double MOD arithmetic. Tests match 20 ANGLE-RANGE calls and 218 double
 observations, including 96 fresh holdouts. These are primitives toward the line
@@ -95,7 +100,8 @@ system, not the complete FLA. Details are in
 [`angle-findings.md`](../research/angle-findings.md).
 `aaron-point-geometry.js` adds the measured XYDIST and LOCK-WIGGLE helpers;
 320 original point lists and their subsequent random states match exactly.
-The helper's use in the complete drawing pipeline remains unresolved. See
+It also contains the measured `FREE-PATH` subset and its parity fixtures. The
+helpers' use in the complete drawing pipeline remains unresolved. See
 [`point-findings.md`](../research/point-findings.md).
 `aaron-stroke-writer.js` also emits the recovered basic stream formatter
 records (`dims`, `nb`, `nc`, `color`, and `end`). VECTOR/FILL dispatch and

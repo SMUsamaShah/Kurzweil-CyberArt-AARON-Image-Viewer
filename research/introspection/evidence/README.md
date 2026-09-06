@@ -254,3 +254,13 @@ The first two FREE-PATH reports each contain 12 failures before any RAN or
 POL-VPT call. The second localizes TYPE-ERROR to the Boolean VIS field:
 the datum is NIL or T and the expected type is NUMBER. Both restore the
 temporary dependency wrappers. No freehand path was captured in those runs.
+
+`free-path-validation-34031848492.txt` is from commit
+`7e591a98327b8529e9ff613ac7388266276d2569`, run
+[34031848492](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031848492),
+job 101482699457, artifact 9988778393. It warms dispatch, compares a traced
+call with an unwrapped baseline, and restores RAN/POL-VPT/XYDIST. All 16
+comparisons report `MATCH T`. Inputs cover horizontal, vertical, diagonal,
+double-coordinate, three-point, and VIS values -1, 0, 1, and 2. This validates
+the captured point sequences and random state for those inputs, but does not
+yet prove every branch of FREE-PATH or the caller's edge-list setup.

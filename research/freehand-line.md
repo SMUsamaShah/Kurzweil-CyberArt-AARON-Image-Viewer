@@ -125,3 +125,32 @@ or POL-VPT call. They bound FROM/TO to NIL; the next probe supplies numeric
 indices and captures TYPE-ERROR datum/expected type and construction checkpoints.
 The initial seed-1 failure also consumes different random state from later
 seed-1 failures: dispatch warmup must be excluded from future parity captures.
+
+## Measured FREE-PATH subset
+
+The validation run warms the compiled-function dispatch, then compares a
+dependency-traced call with a fresh unwrapped baseline. All 16 cases report
+`MATCH T`, including horizontal, vertical, diagonal, double-coordinate,
+three-point, and VIS values `-1`, `0`, `1`, and `2`.
+
+For the closed point lists tested, the recovered behavior is:
+
+1. Traverse each point to the next, wrapping the last point to the first.
+   The returned list retains the source vertex at the start of each later
+   edge, so shared vertices appear twice.
+2. If the target point's numeric `VIS` is zero, copy the edge directly and do
+   not consume random state.
+3. Otherwise call `XYDIST`, choose an inclusive integer step count with
+   `RAN(8,14)`, and use the edge heading. For every step, consume
+   `RAN(.7,1.3)`, `RAN(.015,.03)`, advance a spine by
+   `distance/count * scale`, consume `RAN(0.0,6.28)`, and calculate a small
+   polar offset with `offset = step * wiggle`. The final offset is calculated
+   but omitted; the endpoint is appended instead.
+
+The JS implementation in `engine/src/aaron-point-geometry.js` matches the
+captured path and the following random-state observation exactly for all 16
+fixtures. Single-float products are rounded before coordinate addition;
+double-coordinate headings use the recovered bounded trig helper while their
+random offsets retain single-float deltas. This is a measured `FREE-PATH`
+subset, not yet the complete DRAW-CFORM/brush pipeline or proof that every
+edge-list shape uses the same traversal.
