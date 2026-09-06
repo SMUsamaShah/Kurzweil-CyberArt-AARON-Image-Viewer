@@ -48,7 +48,8 @@
         (finish-output report)
         (unwind-protect
             (dolist (seed '(1 1234))
-              (dolist (visible '(nil t))
+              ;; VIS is numeric: Boolean inputs produced TYPE-ERROR NUMBER.
+              (dolist (visible '(0 1))
                 (dolist (bounds '(((0 0) (10 0)) ((0 0) (100 0)) ((2 3) (12 18))))
                   (let ((*random-state* (funcall factory seed)) (calls 0))
                     (format report "TRY seed=~D vis=~S bounds=~S~%" seed visible bounds)

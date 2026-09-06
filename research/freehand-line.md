@@ -100,3 +100,28 @@ the recovered behavior, rounding corrections, and remaining scope limits.
 implementation of Cohen's FLA. The planner and figure generator also remain
 provisional. Adding a visually plausible random wobble would not establish
 the original algorithm or advance the exactness claim.
+
+## Stronger lead: FREE-PATH
+
+Run [34031017111](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031017111)
+identifies `FREE-PATH(EDGE)` as an ordinary compiled function. Its constants
+include FDEX, TDEX, NTHCDR, FROM, TO, VIS, XYDIST, X, Y, MOD, ATAN, RAN,
+POL-VPT and single-float values 0.7, 1.3, 0.015, 0.03, 0.0, 6.28 and 0.9.
+DRAW-CFORM references both FREEHAND-FLAG and FREE-PATH. This is the strongest
+current lead for freehand generation, but the constants do not reveal the
+formula, control flow, or whether the call returns or mutates its path.
+
+Earlier candidates have narrower supported roles: PREP-LINE sets graphics
+style; MAPLINE references raster/visibility operations; WIGGLE appears to be
+a slot accessor; RAN-HAND references finger-joint parameters. LOCK-WIGGLE
+remains a measured helper with a detected caller RASTRA-LOCKS.
+
+Run 34031149136 establishes `POL-VPT(PT A D V)` and identifies VISPT as a
+VIS accessor specialization. MAKE-EDGE is a higher-level scene routine, not
+a point-list constructor. FDEX/TDEX/FROM/TO have no callable bindings.
+Run 34031301596 confirms `MAKE-VISPT(X Y VIS)` and that all four globals
+are initially unbound. The first 12 exploratory calls fail before any RAN
+or POL-VPT call. They bound FROM/TO to NIL; the next probe supplies numeric
+indices and captures TYPE-ERROR datum/expected type and construction checkpoints.
+The initial seed-1 failure also consumes different random state from later
+seed-1 failures: dispatch warmup must be excluded from future parity captures.

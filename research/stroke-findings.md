@@ -56,9 +56,10 @@ Run 34016651940 measures private string-stream output and previous-point state
 for 192 calls. All 96 MOVE-TO/DRAW-TO calls succeed. The other 96 VECTOR/FILL
 calls report UNBOUND-VARIABLE and are preserved as failures, not parity data.
 Run 34016834286 identifies the missing cell as
-`COMMON-GRAPHICS-USER::CONTROLS-VISIBLE`; its replacement probe binds that
-Boolean and records both values, so the next successful capture will contain
-384 cases. The parser and summary tool preserve the distinction between an
+`COMMON-GRAPHICS-USER::CONTROLS-VISIBLE`. Run 34030806392 binds that Boolean
+and records both values in 384 cases. MOVE-TO/DRAW-TO succeed in all 192 calls;
+VECTOR/FILL still fail before output: controls NIL gives PROGRAM-ERROR and
+controls T gives UNBOUND-VARIABLE WOFFSET. The parser preserves an
 absent controls field in the historical report and an explicit `NIL` value.
 
 `AaronStrokeWriter` models the successful integer-coordinate cases:
@@ -74,13 +75,44 @@ absent controls field in the historical report and an explicit `NIL` value.
 
 The writer produces stream fragments, not complete painting documents. Its
 current API intentionally requires integer coordinates; float formatting,
-VECTOR/FILL, headers, colour/brush records, and end-of-stream behavior are
+headers, colour/brush records, and end-of-stream behavior are
 separate recovery tasks. The existing AaBuilder remains a general format
 builder and is not relabelled as an exact implementation of these decisions.
 
 The successful STORE-IN-FILE method constants also retain formatter trees for
-the basic records. `AaronStrokeWriter` now emits the measured strings
+the basic records. `AaronStrokeWriter` now emits the inferred strings
 `dims X Y` followed by `nb 1`, `nb WIDTH`, `nc INDEX`, `color`, and `am WIDTH
 HEIGHT` followed by `end`. These formatter strings come from the completed
 generic-method report; direct runtime calls for the formatter selectors remain
 useful for checking argument coercion and stream ownership.
+
+## VECTOR/FILL with screen drawing isolated
+
+Run 34031017111 confirms `PLOT(PTA PTB)` is an ordinary compiled function
+referencing controls, event processing, graphics stream F2, WOFFSET, picture
+height, coordinate rounding and GUI MOVE-TO/DRAW-TO. Binding the variable
+named PLOT does not intercept this function in Common Lisp.
+
+Run 34031149136 temporarily replaces PLOT with a recording stub and restores
+it with UNWIND-PROTECT (`RESTORED T`). These are dependency-isolated emitter
+measurements, not proof of unmodified GUI or full method equivalence.
+All 240 calls invoke PLOT once with PTA/PTB. Its NIL versus T return value
+does not change the tested emission/state behavior. Of these calls, 216
+succeed and 24 VECTOR calls with a NIL previous point raise PROGRAM-ERROR
+after PLOT, before emitting anything.
+
+- VECTOR compares both start coordinates with the previous point. If either
+  differs it emits a move, then always emits a draw to PTB. REDRAW selects
+  the `a` or `z` family. It updates the previous point to PTB.
+- FILL always emits `am PTA` then `ad PTB`, ignoring REDRAW, and preserves the
+  previous point, including NIL.
+- Both use two-decimal output and ignore SMALL/LARGE in this matrix; VECTOR
+  does not substitute a compact hop for the tested unit step.
+
+The integer `vector()` and `fill()` JS methods match all 72 successful integer
+captures and reject the eight integer VECTOR/NIL cases without changing state.
+The remaining 144 successful captures use doubles and are preserved as
+evidence, but floating formatting is not implemented. For example 11.125d0
+prints `11.12`, -20.375d0 prints `-20.37`, and -0.004d0 prints `-0.00`.
+JavaScript `toFixed(2)` does not reproduce all these observations. More format
+probes are needed before choosing a general rounding rule.

@@ -60,4 +60,26 @@ export class AaronStrokeWriter {
     this.previous = next;
     return this;
   }
+
+  /** Stream effect measured with PLOT replaced; no screen drawing is performed. */
+  vector(from, to, { redraw = false } = {}) {
+    const start = integerPoint(from);
+    const next = integerPoint(to);
+    if (this.previous === null) throw new Error('vector requires an initial previous point');
+    const family = redraw ? 'a' : 'z';
+    if (start[0] !== this.previous[0] || start[1] !== this.previous[1]) {
+      this.output += `${family}m ${start[0]}.00 ${start[1]}.00\n`;
+    }
+    this.output += `${family}d ${next[0]}.00 ${next[1]}.00\n`;
+    this.previous = next;
+    return this;
+  }
+
+  /** FILL emits absolute paint commands and preserves previous-point state. */
+  fill(from, to) {
+    const start = integerPoint(from);
+    const next = integerPoint(to);
+    this.output += `am ${start[0]}.00 ${start[1]}.00\nad ${next[0]}.00 ${next[1]}.00\n`;
+    return this;
+  }
 }
