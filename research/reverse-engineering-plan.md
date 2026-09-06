@@ -47,15 +47,17 @@ complete equivalent port until phases 5–8 are recovered.
 
 ## Immediate work queue
 
-1. Run the read-only brush-state census before invoking any fill routine. Record
-   the bound `BRUSH`, `ALL-BRUSHES`, `BOUNDARY-VALUE`, and `FILL-MAP` values,
-   array ranks/dimensions, retained signatures, and safe brush accessors. Do
-   not mutate the startup fill map or assume a `MAKE-BRUSH` constructor.
+1. Complete the read-only brush-state census before invoking any fill routine.
+   The direct checkpoint now records `ALL-BRUSHES` (six `PAINT-BRUSH` objects),
+   `BOUNDARY-VALUE=3`, unbound `BRUSH`/`FILL-MAP`, and a seven-slot brush class.
+   The existing `WIDTH` reader returns 0 for the first object in this startup
+   state. Read the remaining existing accessors with bounded type/shape
+   summaries; do not mutate the startup fill map or assume a constructor.
 2. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
-   `SCREEN-AND-STORE` after the census identifies a safe brush and private map
-   shape. Test fresh NIL/singleton/two-point/three-point paths and both observed
-   boundary values; restore the function with `UNWIND-PROTECT`. Treat this as
-   dependency-isolated branch behavior, not full pipeline parity.
+   `SCREEN-AND-STORE` after the accessor census identifies a safe brush and
+   private map shape. Test fresh NIL/singleton/two-point/three-point paths and
+   both observed boundary values; restore the function with `UNWIND-PROTECT`.
+   Treat this as dependency-isolated branch behavior, not full pipeline parity.
 3. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

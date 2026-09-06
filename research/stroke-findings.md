@@ -27,11 +27,20 @@ The retained constants do not establish a direct `FREE-PATH` to
 state. These are evidence-backed dependency leads, not proof that one route
 feeds the other in every painting.
 
-The next oracle step is therefore a read-only census of `BRUSH`,
-`ALL-BRUSHES`, `BOUNDARY-VALUE`, and `FILL-MAP`, followed by a bounded
-`BRUSH-STROKE` experiment with only `SCREEN-AND-STORE` replaced. Until the
-census identifies a safe private map and brush value, no fill routine is
-invoked and no shared startup map is written.
+The read-only census is now complete. In the direct startup checkpoint,
+`ALL-BRUSHES` is a six-element list of `PAINT-BRUSH` instances and
+`BOUNDARY-VALUE` is 3, but `BRUSH` and `FILL-MAP` remain unbound. A class census
+shows seven slots (`ID`, `ENVIR`, `PERIM`, `CORE`, `WIDTH`, `RAD`, and `CELLS`).
+The existing `WIDTH` reader can be called safely on the first brush and returns
+0 in this checkpoint. That value is not yet a runtime brush width: no brush is
+selected, and no fill map has been initialized.
+
+The next oracle step is a bounded read-only call to the other existing
+`PAINT-BRUSH` readers, with one checkpoint per reader and only type/shape
+summaries. Until those values identify a safe private map and brush value, no
+fill routine is invoked and no shared startup map is written. Only after that
+boundary is understood should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be isolated
+with `SCREEN-AND-STORE` replaced.
 
 ## Emission leads
 

@@ -264,3 +264,30 @@ comparisons report `MATCH T`. Inputs cover horizontal, vertical, diagonal,
 double-coordinate, three-point, and VIS values -1, 0, 1, and 2. This validates
 the captured point sequences and random state for those inputs, but does not
 yet prove every branch of FREE-PATH or the caller's edge-list setup.
+
+## Brush-state census and reader boundary
+
+`brush-metadata-34065878090.txt` is the normalized excerpt from run
+[34065878090](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34065878090),
+commit `07a25ec5414c61b99b687502a5923005922772f6`, job 101574411630,
+artifact 9998916677. It is read-only: the direct startup checkpoint leaves
+`BRUSH`, `FILL-MAP`, and the other working cells unbound, while `ALL-BRUSHES`
+is a six-element list of `PAINT-BRUSH` objects, `BOUNDARY-VALUE` is 3, and
+`PREVDEX` is -1. The shape report intentionally does not expose slot values.
+
+`brush-accessors-34066498538.txt` is the normalized class census from run
+[34066498538](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34066498538),
+commit `affe001f41bf123c28ce64a1fca5e05713e7dfe3`, job 101576064382,
+artifact 9999101114. The first object is a `STANDARD-CLASS` instance of
+`COMMON-GRAPHICS-USER::PAINT-BRUSH` with seven slots: `ID`, `ENVIR`, `PERIM`,
+`CORE`, `WIDTH`, `RAD`, and `CELLS`. This is a layout finding, not a claim
+about initialization or slot semantics.
+
+The later tiny reader probe is preserved in the workflow log for run
+[34066996343](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34066996343),
+commit `b6f20a352260a4362090ef5f9b07eae60dd38027`, job 101577399905. It
+successfully reaches separate top-level checkpoints, calls the existing
+`COMMON-GRAPHICS::WIDTH` reader on the first `ALL-BRUSHES` object, and returns
+the integer 0. The call used no `SLOT-VALUE`, MOP mutation, brush selection, or
+fill routine. Because this is one startup brush in a direct checkpoint, the
+zero is not generalized to all brushes or treated as the runtime brush width.
