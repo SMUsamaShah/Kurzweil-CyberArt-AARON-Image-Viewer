@@ -217,3 +217,14 @@ The updated probe records `controls=NIL|T` in each input record, doubling the
 matrix to 384 cases. `parse-store-report.mjs` accepts both the older 192-case
 capture and this expanded form without treating an omitted controls field as
 an observed `NIL` value; `summarize-store-report.mjs` reports the distinction.
+
+`store-behavior-34030806392.txt` is from commit
+`927313f6768debdbbf76ffd2988fb07b5def651a`, run
+[34030806392](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34030806392),
+job 101479826002, artifact 9988530699, with the same normalization.
+All 192 MOVE-TO/DRAW-TO calls succeed. All 192 VECTOR/FILL calls fail:
+96 PROGRAM-ERROR cases with controls NIL and 96 UNBOUND-VARIABLE cases
+with controls T, identifying `COMMON-GRAPHICS-USER::WOFFSET`. Neither
+binding of the PLOT variable changes this result. These failures are not
+emission parity data. The next metadata probe inspects the PLOT function
+and FREE-PATH, which DRAW-CFORM references beside FREEHAND-FLAG.
