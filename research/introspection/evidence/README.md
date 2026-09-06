@@ -116,3 +116,13 @@ call and coordinate extraction, so this result does not yet localize the
 failure. Random state advances before the error. Do not treat these as
 successful point-sequence measurements. `point-shape.cl` separates the return
 checkpoint from bounded shape inspection to resolve that ambiguity.
+
+`point-shape-34002204114.txt` is from commit
+`d73eb8de3e9748cdb69986a587655e4e27bbed1b`, run
+[34002204114](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002204114),
+job 101402958139, artifact 9979817113, with the same excerpt normalization.
+All three LOCK-WIGGLE calls return successfully. The result is a list of TWOPT
+objects, not a single point. This localizes the previous error to our output
+extraction. The corrected numeric probe maps coordinates over the returned
+list and performs an unmeasured warmup before installing each measured seed.
+POL-PT has retained arguments `(PT A D)`.

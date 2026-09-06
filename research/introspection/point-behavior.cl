@@ -17,6 +17,10 @@
                  (list (funcall (find-symbol "X" owner) point)
                        (funcall (find-symbol "Y" owner) point))))
         (format report "BEGIN point-behavior~%")
+        ;; Resolve first-use dispatch before installing each measured state.
+        ;; This warmup is excluded from the numeric observations below.
+        (let ((*random-state* (funcall factory 1)))
+          (mapcar #'coordinates (call-point "LOCK-WIGGLE" '((0 0) (10 0)))))
         (dolist (seed '(1 1234 5678 5489))
           (format report "GLOBAL ~S value=~D type=FIXNUM~%" "SEED" seed)
           (dolist (bounds '(((0 0) (10 0)) ((0 0) (0 10))
@@ -38,7 +42,7 @@
               (handler-case
                   (let ((values nil))
                     (dotimes (i 4)
-                      (push (coordinates (call-point "LOCK-WIGGLE" bounds)) values))
+                      (push (mapcar #'coordinates (call-point "LOCK-WIGGLE" bounds)) values))
                     (format report "RESULT ~S values=~S~%" "LOCK-WIGGLE" (nreverse values)))
                 (error (problem) (format report "ERROR ~S ~S~%" "LOCK-WIGGLE" (type-of problem))))
               (format report "TRY ~S args=(1000)~%" "RANDOM")
