@@ -28,7 +28,8 @@ jobs:
         run: |
           $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
           $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
-          curl.exe --fail --location --output $setup `
+          curl.exe --fail --location --retry 2 --retry-all-errors `
+            --connect-timeout 20 --max-time 120 --retry-max-time 180 --output $setup `
             'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
           if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
           node research/tools/extract-installer.mjs `
