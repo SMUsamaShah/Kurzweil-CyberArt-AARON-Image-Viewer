@@ -36,22 +36,25 @@ export function readNumericList(text) {
 
 export function parseLineReport(text) {
   const lines = text.trim().split(/\r?\n/);
-  const begin = /^BEGIN (line-behavior|line-validation)$/.exec(lines[0]);
+  const begin = /^BEGIN (line-behavior|line-validation|ran-float)$/.exec(lines[0]);
   if (!begin || lines.at(-1) !== `END ${begin[1]}`) throw new Error('Missing line probe checkpoints');
   const cases = [];
   const globals = [];
   let pending = null;
+  let seed;
   for (const line of lines.slice(1, -1)) {
     let match = /^GLOBAL "([A-Z0-9*-]+)" value=(\S+) type=(\S+)$/.exec(line);
     if (match) {
       if (pending) throw new Error('Global interrupts pending call');
       globals.push({ name: match[1], value: readNumericList(`(${match[2]})`)[0], type: match[3], raw: match[2] });
+      if (match[1] === 'SEED') seed = globals.at(-1).value;
       continue;
     }
     match = /^TRY "([A-Z-]+)" args=(\(.*\))$/.exec(line);
     if (match) {
       if (pending) throw new Error('Missing result before next call');
       pending = { name: match[1], args: readNumericList(match[2]), argsText: match[2] };
+      if (seed !== undefined) pending.seed = seed;
       continue;
     }
     match = /^(RESULT|ERROR) "([A-Z-]+)" (.*)$/.exec(line);

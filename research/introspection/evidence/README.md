@@ -51,3 +51,20 @@ commit `69a8c986f0f357da76a3abee2702c77fadbcdd49`. It adds 19 direct MOD calls
 to the previous validation cases and uses the same excerpt normalization.
 The generic-method job in that run failed to complete; its log exposed an
 attempt to autoload the missing `loop.fasl` from the probe's LOOP macro.
+
+## Holdout and successful method inspection
+
+The `*-34001269267.txt` excerpts are from commit
+`ae4df59c427c266f271efc54183a86e7c1b1e152`, run
+[34001269267](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34001269267).
+They use the same log-excerpt normalization:
+
+| Report | Job ID | Artifact ID |
+|---|---:|---:|
+| line-validation | 101400449701 | 9979555086 |
+| generic-methods | 101400449796 | 9979554973 |
+
+All 96 fresh arithmetic holdout calls match the existing JS implementation
+exactly. Method inspection succeeds for eight candidates after replacing the
+unavailable LOOP macro. SELECT-BRUSH remains a reported PROGRAM-ERROR. No
+drawing method is invoked by that probe.

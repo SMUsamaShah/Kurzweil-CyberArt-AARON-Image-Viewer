@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [line-validation, generic-methods]
+        probe: [ran-float]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,7 +48,7 @@ jobs:
             $report = 'C:\temp\aaron-${{ matrix.probe }}.txt'
             if (Test-Path $report) {
               Copy-Item $report (Join-Path $output '${{ matrix.probe }}.txt')
-              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods')) {
+              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods', 'ran-float')) {
                 Get-Content -LiteralPath $report
               }
             }

@@ -37,9 +37,11 @@ exceeds pi. ANGLE-DIF normalizes each argument, subtracts B's positive remainder
 minus A's positive remainder, normalizes again, and takes ABS.
 
 `aaron-angles.js` now matches all 19 MOD, 19 NORM-A, and 84 ANGLE-DIF cases
-exactly, including tiny differences caused by operand order. These counts
-exclude repeated cases from previous runs. The next run adds 96 new holdout
-calls chosen after the arithmetic rule was identified. This is a measured
+exactly, including tiny differences caused by operand order. Run
+[34001269267](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34001269267)
+then confirmed 96 fresh holdout calls without changing the implementation.
+The test now checks 51 MOD, 51 NORM-A, and 116 ANGLE-DIF observations, excluding
+repeated earlier reports. This is a measured
 double path, not a general implementation of Lisp's rational or complex
 arithmetic. Extremely large quotients and different JS math engines remain
 outside the validated range.
@@ -54,6 +56,12 @@ The first generic-method probe completed its report, but every candidate
 reported an error; it recovered no method bodies or specializers. The initial
 error was FILE-ERROR followed by UNBOUND-VARIABLE and PROGRAM-ERROR cases.
 The verbose follow-up identifies `loop.fasl`: the extended LOOP macro in our
-probe attempted an unavailable autoload. The probe now uses DO. This failure
-does not establish that method access itself is unavailable. The verbose run
-did not complete its report; the original condition-type-only run did.
+probe attempted an unavailable autoload. Replacing LOOP with DO allowed run
+34001269267 to obtain method metadata and constants for eight of nine
+candidates; SELECT-BRUSH still reports PROGRAM-ERROR. WIGGLE's XTPLAN method
+is a closure with OFFSET as its retained argument list, suggesting an accessor
+rather than a freehand construction routine. RAN has four float-type
+combinations and an INTEGER/INTEGER method. Each float method references
+NEW-RANDOM-FLOAT. BUILD-FIGURE exposes two methods referencing standing versus
+seated body construction. Constants remain leads until the corresponding
+calls or instructions are recovered.

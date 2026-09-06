@@ -21,7 +21,7 @@ for (const [name, expectedCount] of [
 test('normalization, difference, and MOD match every recovered double exactly', () => {
   const functions = { 'NORM-A': aaronNormAngle, 'ANGLE-DIF': aaronAngleDifference, MOD: allegroDoubleModulo };
   const counts = { 'NORM-A': 0, 'ANGLE-DIF': 0, MOD: 0 };
-  for (const file of ['line-behavior-33986804721', 'line-validation-33987402462']) {
+  for (const file of ['line-behavior-33986804721', 'line-validation-34001269267']) {
     const path = new URL(`../../research/introspection/evidence/${file}.txt`, import.meta.url);
     for (const entry of parseLineReport(readFileSync(path, 'utf8')).cases) {
       const fn = functions[entry.name];
@@ -30,5 +30,5 @@ test('normalization, difference, and MOD match every recovered double exactly', 
       assert.equal(fn(...entry.args), entry.values[0], `${entry.name} ${entry.argsText}`);
     }
   }
-  assert.deepEqual(counts, { 'NORM-A': 19, 'ANGLE-DIF': 84, MOD: 19 });
+  assert.deepEqual(counts, { 'NORM-A': 51, 'ANGLE-DIF': 116, MOD: 51 });
 });
