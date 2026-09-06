@@ -299,3 +299,11 @@ artifact 9999448702. It repeats the width boundary and adds one direct
 existing reader: `COMMON-GRAPHICS::ID` returns a `FIXNUM` value of 0 for the
 first startup brush. The remaining readers are intentionally separate probes;
 this report still contains no brush selection, slot writes, or fill-map use.
+
+`brush-readers-34067726198.txt` is the next normalized reader capture from run
+[34067726198](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34067726198),
+commit `bef7b071cec55cea4b05142978239501e8e7beb0`, job 101579348428,
+artifact 9999478570. It repeats the width and ID measurements and shows the existing
+`COMMON-GRAPHICS-USER::ENVIR` reader returns a `CONS` for the first startup
+brush. The value itself is not printed, so no environment structure is
+inferred from this type-only boundary.

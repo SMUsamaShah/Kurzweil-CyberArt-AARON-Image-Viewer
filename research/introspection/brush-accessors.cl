@@ -79,5 +79,24 @@
 (with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  (format report "SIXTH-FORM-BEGIN~%")
+  (finish-output report)
+  (handler-case
+      (let* ((user (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" user))
+             (rad-symbol (find-symbol "RAD" user))
+             (brush (car (symbol-value all-symbol))))
+        (format report "RESOLVED-RAD~%")
+        (finish-output report)
+        (let ((value (funcall (symbol-function rad-symbol) brush)))
+          (format report "RAD-RESULT-TYPE ~S~%" (type-of value))
+          (format report "RAD-RESULT ~S~%" value)))
+    (error (problem)
+      (format report "RAD-ERROR ~S~%" (type-of problem))))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-accessors.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "END brush-accessors~%")
   (finish-output report))
