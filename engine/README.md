@@ -91,7 +91,7 @@ observations, including 96 fresh holdouts. These are primitives toward the line
 system, not the complete FLA. Details are in
 [`angle-findings.md`](../research/angle-findings.md).
 `aaron-point-geometry.js` adds the measured XYDIST and LOCK-WIGGLE helpers;
-192 original point lists and their subsequent random states match exactly.
+320 original point lists and their subsequent random states match exactly.
 The helper's use in the complete drawing pipeline remains unresolved. See
 [`point-findings.md`](../research/point-findings.md).
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric

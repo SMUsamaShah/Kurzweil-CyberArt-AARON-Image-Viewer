@@ -153,3 +153,13 @@ job 101438054549, artifact 9983721472. It adds eight endpoint pairs, giving
 failed four repeated distance observations and 22 paths. These holdouts expose
 real arithmetic gaps; they are not accepted as approximate passes. The next
 trace records trigonometric results and products to localize the differences.
+
+`point-trace-34015537884.txt` is from commit
+`fe6ed1e79f88ae4632945ffd3191a18d9775e368`, run
+[34015537884](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34015537884),
+job 101438520127, artifact 9983769996, with the same excerpt normalization.
+All 24 baseline comparisons match. It records 60 trigonometric pairs, including
+40 doubles. Seven pairs expose differences in V8's built-in double trig.
+The bounded high-precision helper matches all 40 double pairs. After the
+distance and trig corrections, tests match all 320 paths and all 80 distance
+and subsequent-state observations in the expanded numeric report exactly.

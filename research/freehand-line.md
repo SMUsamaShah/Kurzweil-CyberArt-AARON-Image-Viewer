@@ -89,9 +89,11 @@ Method inspection now identifies WIGGLE's XTPLAN method as a closure with
 retained argument OFFSET and no constants, suggesting a slot accessor rather
 than the freehand algorithm itself. LOCK-WIGGLE is a more concrete geometric
 lead: its constants reference XYDIST, ATAN, RAN, POL-PT, and single-float values
-`-0.05`, `0.05`, `0.8`, `1.2`. Those constants do not establish the arithmetic
-or random-call order. Recover point construction and the callable coordinate
-interface before measuring that function with controlled seeds.
+`-0.05`, `0.05`, `0.8`, `1.2`. Those constants alone did not establish arithmetic
+or random-call order. Subsequent point and dependency probes now support a
+measured LOCK-WIGGLE implementation matching 320 complete paths and 80
+subsequent state observations. See [point-findings.md](point-findings.md) for
+the recovered behavior, rounding corrections, and remaining scope limits.
 
 `engine/src/geometry.js` currently samples mathematical curves, and
 `AaBuilder.chainTo` emits a diagonal-then-axis unit path. Neither is a recovered

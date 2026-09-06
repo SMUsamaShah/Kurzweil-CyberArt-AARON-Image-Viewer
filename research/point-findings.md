@@ -1,22 +1,22 @@
 # Point geometry and LOCK-WIGGLE
 
 [`aaron-point-geometry.js`](../engine/src/aaron-point-geometry.js) models
-XYDIST and LOCK-WIGGLE. The initial reference tests match 192 complete paths,
-48 distance observations, and 48 subsequent random-state observations from
-[run 34002307774](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002307774).
-These are twelve endpoint pairs across four seeds, with four successive paths
-per pair. Endpoints cover all quadrants, coincidence, translation, and single
-versus double precision. The fresh holdout report `point-behavior-34015358031`
-adds eight endpoint pairs (128 paths). It exposed distance and double path
-rounding gaps. XYDIST's square/sum intermediates must not be rounded to single;
-the corrected distance rule matches all 80 observations. Remaining double
-path differences are under investigation, so the initial 192 matches must
-not be generalized to all inputs.
+XYDIST and LOCK-WIGGLE. Tests match **320 complete paths, 80 distance
+observations, and 80 subsequent random-state observations** from
+[run 34015358031](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34015358031).
+These are twenty endpoint pairs across four seeds, with four successive paths
+per pair. Endpoints cover all quadrants, coincidence, translation, small
+distances, and single versus double precision. The first twelve pairs guided
+the initial model; eight new holdout pairs then exposed distance and double
+trigonometric rounding gaps. Both measured gaps are now resolved. The report
+contains repeated initial cases, so tests use the latest report alone.
 
 ## Recovered behavior
 
 - MAKE-TWOPT takes X and Y and preserves double coordinate values.
 - XYDIST returns a single-float distance, including for double coordinates.
+  Its squared differences and their sum retain more precision than single;
+  rounding each to binary32 fails the held-out distance case.
 - LOCK-WIGGLE draws an integer step count with `RAN(2, 4)`.
 - Each step uses the original endpoint heading plus a new single-float
   `RAN(-0.05, 0.05)` offset. The base heading stays fixed; steps accumulate
@@ -46,6 +46,20 @@ UNWIND-PROTECT. The leading `RAN(3, 5)` in each trace is an explicit **probe
 warmup**, not a call made by LOCK-WIGGLE. The actual routine then calls
 `RAN(2, 4)` followed by one angular RAN per step.
 
+The expanded trace in
+[run 34015537884](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34015537884)
+also records trigonometric results and products. All 24 wrapped/baseline
+comparisons match. V8's built-in double SIN/COS differ from the original in
+seven of the 60 traced pairs. A bounded Taylor calculation using 192 fractional
+bits and one final binary64 conversion matches all 40 double pairs exactly.
+The single path keeps its existing binary32 arithmetic. Combined with the
+distance correction, all 320 captured paths now match without tolerances.
+
+The double trig calculation is limited to headings in `[-3.25, 3.25]`, which
+covers this helper's ATAN2 heading plus its perturbation. It does not reconstruct
+Allegro's general trigonometric implementation. High-precision arithmetic is
+used to reproduce the observed values, not inferred to be the original code.
+
 The first point probe incorrectly expected one point and failed during output
 extraction. The return-shape diagnostic showed successful application returns
 containing lists of TWOPT objects. Those failed reports are preserved but are
@@ -58,6 +72,8 @@ startup draw order.
 LOCK-WIGGLE is a recovered path helper, not the complete freehand line
 algorithm. Its use in the larger drawing pipeline, final endpoint handling,
 brush emission, and relation to Paul Cohen's historical FLA still need to be
-traced. The provisional scene generator does not substitute this helper for
+traced. Mixed coordinate types, extreme/subnormal inputs, untested rounding
+boundaries, and other JavaScript implementations of ATAN2 remain outside the
+equivalence claim. The provisional scene generator does not substitute this helper for
 its existing curve sampler. Passing these tests establishes parity for the
 recorded cases, not whole-painting equivalence or all JavaScript math engines.

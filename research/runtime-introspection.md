@@ -127,8 +127,13 @@ rules at boundaries and inspect generic-function methods without invoking them.
   [17dc646](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/commit/17dc646da7c84111fad03346a256a5ff08865ead).
 - `line-metadata.cl` completed all 23 candidates. It deliberately records
   metadata only; no drawing routine was invoked.
+- Point probes now support XYDIST and LOCK-WIGGLE in JavaScript, matching
+  320 returned paths, 80 distances, and 80 following RNG values. The initial
+  holdouts exposed rounding gaps that were resolved through intermediate
+  numeric tracing. See [point-findings.md](point-findings.md).
 
-No FLA point sequence or whole-painting equivalence has been recovered yet.
+LOCK-WIGGLE point sequences are recovered for the measured cases. The full
+FLA pipeline and whole-painting equivalence have not been recovered yet.
 Full generator equivalence still requires matching random draw order, planning,
 geometry, colour, and emission.
 
