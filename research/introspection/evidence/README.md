@@ -103,3 +103,16 @@ MAKE-TWOPT takes X and Y. SCORE-MAP is generic, so its direct constant report
 again describes dispatch machinery. These are callable-interface findings,
 not recovered figure or rasterization algorithms, and do not prove a hidden
 gallery mode.
+
+## Initial point calls
+
+`point-behavior-34002072931.txt` is from commit
+`8a8b3b46b7b3d7646aa3eec84f36bf8db5a0db37`, run
+[34002072931](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34002072931),
+job 101402605665, artifact 9979780554, with the same excerpt normalization.
+XYDIST completes all 48 calls (12 input pairs repeated across four seeds).
+All 48 LOCK-WIGGLE groups report PROGRAM-ERROR. The handler covers both the
+call and coordinate extraction, so this result does not yet localize the
+failure. Random state advances before the error. Do not treat these as
+successful point-sequence measurements. `point-shape.cl` separates the return
+checkpoint from bounded shape inspection to resolve that ambiguity.
