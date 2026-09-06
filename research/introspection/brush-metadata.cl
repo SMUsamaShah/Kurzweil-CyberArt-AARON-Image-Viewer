@@ -9,10 +9,7 @@
                           :direction :output :if-exists :supersede
                           :if-does-not-exist :create)
     (let ((*print-length* 16) (*print-level* 10) (*print-pretty* nil)
-          (owner (find-package "COMMON-GRAPHICS-USER"))
-          (arglist (find-symbol "ARGLIST" "EXCL"))
-          (count-fn (find-symbol "FUNCTION-CONSTANT-COUNT" "EXCL"))
-          (constant-fn (find-symbol "FUNCTION-CONSTANT" "EXCL")))
+          (owner (find-package "COMMON-GRAPHICS-USER")))
       (labels ((symbol-info (value)
                  (list :symbol (and (symbol-package value)
                                     (package-name (symbol-package value)))
@@ -50,36 +47,11 @@
                          (format report " VALUE-ERROR ~S" (type-of problem)))))
                    (terpri report)
                    (finish-output report)))
-               (write-function (name)
-                 (let ((symbol (find-owner name)))
-                   (format report "FUNCTION ~S fbound=~S" name
-                           (and symbol (fboundp symbol)))
-                   (when (and symbol (fboundp symbol))
-                     (handler-case
-                         (format report " type=~S arglist=~S"
-                                 (type-of (symbol-function symbol))
-                                 (and arglist (funcall arglist (symbol-function symbol))))
-                       (error (problem)
-                         (format report " ARGLIST-ERROR ~S" (type-of problem))))
-                     (when count-fn
-                       (handler-case
-                           (let ((count (funcall count-fn (symbol-function symbol))))
-                             (format report " count=~S" count)
-                             (when (and constant-fn (integerp count)
-                                        (<= 0 count 64))
-                               (dotimes (index count)
-                                 (format report " CONSTANT ~D ~S" index
-                                         (shape (funcall constant-fn
-                                                         (symbol-function symbol)
-                                                         index))))))
-                         (error (problem)
-                           (format report " CONSTANT-ERROR ~S" (type-of problem))))))
-                   (terpri report)
-                   (finish-output report)))
                (read-accessor (name object)
                  (let ((symbol (find-owner name)))
                    (when (and symbol (fboundp symbol))
-                     (format report "ACCESSOR ~S" name)
+                     (format report "ACCESSOR ~S~%" name)
+                     (finish-output report)
                      (handler-case
                          (format report " RESULT ~S~%"
                                  (shape (funcall (symbol-function symbol) object)))
@@ -94,17 +66,8 @@
                         "COLORDEX" "PREVDEX" "CONTROLS-VISIBLE" "*PIC-WIDE*"
                         "*PIC-HIGH*"))
           (write-global name))
-        (dolist (name '("BRUSH-STROKE" "SCREEN-AND-STORE" "RECORD-BRUSH"
-                        "SELECT-BRUSH" "WIDTH" "PERIM" "CORE" "IN-SUB-FRAME"
-                        "BOUNDARY-VALUE" "FILL-MAP" "BRUSH" "X" "Y"))
-          (write-function name))
-        (let ((brush-symbol (find-owner "BRUSH")))
-          (when (and brush-symbol (boundp brush-symbol))
-            (let ((brush (symbol-value brush-symbol)))
-              (unless (null brush)
-                (format report "BRUSH-ACCESSORS-BEGIN~%")
-                (dolist (name '("WIDTH" "PERIM" "CORE" "IN-SUB-FRAME"))
-                  (read-accessor name brush))
-                (format report "BRUSH-ACCESSORS-END~%")))))
+        ;; The startup BRUSH cell is NIL/unbound in the direct screensaver
+        ;; checkpoint.  Do not call accessors until a PAINT-BRUSH object has
+        ;; been selected from ALL-BRUSHES in a separate guarded experiment.
         (format report "END brush-metadata~%")
         (finish-output report)))))
