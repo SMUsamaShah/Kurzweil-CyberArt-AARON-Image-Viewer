@@ -5,6 +5,9 @@ This directory contains work toward a JavaScript reimplementation of the
 The current scene generator is provisional; passing its tests does not prove
 equivalence to the Windows engine.
 
+See the [reverse-engineering plan](../research/reverse-engineering-plan.md) for
+phase status, exactness criteria, and Astra/Luna handoff guidance.
+
 The implementation is being built in independently testable layers:
 
 1. Parse and render AARON's `AA0`–`AA15` interchange files.
@@ -94,6 +97,9 @@ system, not the complete FLA. Details are in
 320 original point lists and their subsequent random states match exactly.
 The helper's use in the complete drawing pipeline remains unresolved. See
 [`point-findings.md`](../research/point-findings.md).
+`aaron-stroke-writer.js` also emits the recovered basic stream formatter
+records (`dims`, `nb`, `nc`, `color`, and `end`). VECTOR/FILL dispatch and
+complete brush semantics remain under investigation.
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

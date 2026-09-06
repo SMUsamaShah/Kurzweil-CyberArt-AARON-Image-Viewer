@@ -205,3 +205,15 @@ the report. Emitted string-stream characters are captured as numeric codes,
 so their LF bytes remain distinguishable from report formatting. All 96
 MOVE-TO/DRAW-TO calls succeed and match the JS output/state model; all 96
 VECTOR/FILL calls fail with UNBOUND-VARIABLE before output is written.
+`store-behavior-34016834286.txt` is from commit
+`a1cbfdf6106718daaee3e5e07ccea2187fc7691c`, run
+[34016834286](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34016834286),
+job 101441969020, artifact 9984157663. This follow-up preserves the same
+192 cases and identifies the missing runtime cell for VECTOR/FILL as
+`COMMON-GRAPHICS-USER::CONTROLS-VISIBLE`. The next probe binds that Boolean
+explicitly while retaining all other controls.
+
+The updated probe records `controls=NIL|T` in each input record, doubling the
+matrix to 384 cases. `parse-store-report.mjs` accepts both the older 192-case
+capture and this expanded form without treating an omitted controls field as
+an observed `NIL` value; `summarize-store-report.mjs` reports the distinction.

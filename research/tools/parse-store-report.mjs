@@ -8,11 +8,12 @@ export function parseStoreReport(text) {
   const cases = [];
   let pending;
   for (const line of lines.slice(1, -1)) {
-    const input = /^TRY method="(MOVE-TO|DRAW-TO|VECTOR|FILL)" mode="(LARGE|SMALL)" redraw=(NIL|T) plot=(NIL|T) previous=(\(.*?\)) args=(\(.*\))$/.exec(line);
+    const input = /^TRY method="(MOVE-TO|DRAW-TO|VECTOR|FILL)" mode="(LARGE|SMALL)" redraw=(NIL|T) plot=(NIL|T)(?: controls=(NIL|T))? previous=(\(.*?\)) args=(\(.*\))$/.exec(line);
     if (input) {
       if (pending) throw new Error('Unfinished store case');
       pending = { method: input[1], mode: input[2], redraw: input[3] === 'T', plot: input[4] === 'T',
-        previousBefore: readNumericList(input[5]), args: readNumericList(input[6]) };
+        previousBefore: readNumericList(input[6]), args: readNumericList(input[7]) };
+      if (input[5] !== undefined) pending.controls = input[5] === 'T';
       continue;
     }
     if (!pending) throw new Error('Store data without input');

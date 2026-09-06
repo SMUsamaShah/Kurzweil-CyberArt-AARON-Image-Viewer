@@ -18,16 +18,18 @@
         (format report "BEGIN store-behavior~%")
         (dolist (mode '("LARGE" "SMALL"))
           (dolist (redraw '(nil t))
-            (dolist (plot '(nil t))
-              (dolist (prior '((10 20) (50 60)))
+          (dolist (plot '(nil t))
+              (dolist (controls '(nil t))
+                (dolist (prior '((10 20) (50 60)))
                 (dolist (b '((11 20) (9 19) (14 22)))
                   (dolist (name '("MOVE-TO" "DRAW-TO" "VECTOR" "FILL"))
                     (let ((output (make-string-output-stream)))
                       (progv (list (find-symbol "*TEMP*" owner) previous
-                                   (find-symbol "?FILE-SIZE?" owner) (find-symbol "PLOT" owner))
-                             (list output (apply make prior) (find-symbol mode owner) plot)
-                        (format report "TRY method=~S mode=~S redraw=~S plot=~S previous=~S args=~S~%"
-                                name mode redraw plot prior (list '(10 20) b))
+                                   (find-symbol "?FILE-SIZE?" owner) (find-symbol "PLOT" owner)
+                                   (find-symbol "CONTROLS-VISIBLE" owner))
+                             (list output (apply make prior) (find-symbol mode owner) plot controls)
+                        (format report "TRY method=~S mode=~S redraw=~S plot=~S controls=~S previous=~S args=~S~%"
+                                name mode redraw plot controls prior (list '(10 20) b))
                         (finish-output report)
                         (handler-case
                             (funcall store (find-symbol name owner)
@@ -44,6 +46,6 @@
                                 (map 'list #'char-code (get-output-stream-string output)))
                         (format report "PREVIOUS ~S~%" (coords (symbol-value previous)))
                         (format report "ENDCASE~%")
-                        (finish-output report)))))))))
+                        (finish-output report))))))))))
         (format report "END store-behavior~%")
         (finish-output report)))))

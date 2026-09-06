@@ -55,7 +55,11 @@ segment even when its direction is not compacted.
 Run 34016651940 measures private string-stream output and previous-point state
 for 192 calls. All 96 MOVE-TO/DRAW-TO calls succeed. The other 96 VECTOR/FILL
 calls report UNBOUND-VARIABLE and are preserved as failures, not parity data.
-The next diagnostic records the missing cell's name.
+Run 34016834286 identifies the missing cell as
+`COMMON-GRAPHICS-USER::CONTROLS-VISIBLE`; its replacement probe binds that
+Boolean and records both values, so the next successful capture will contain
+384 cases. The parser and summary tool preserve the distinction between an
+absent controls field in the historical report and an explicit `NIL` value.
 
 `AaronStrokeWriter` models the successful integer-coordinate cases:
 
@@ -73,3 +77,10 @@ current API intentionally requires integer coordinates; float formatting,
 VECTOR/FILL, headers, colour/brush records, and end-of-stream behavior are
 separate recovery tasks. The existing AaBuilder remains a general format
 builder and is not relabelled as an exact implementation of these decisions.
+
+The successful STORE-IN-FILE method constants also retain formatter trees for
+the basic records. `AaronStrokeWriter` now emits the measured strings
+`dims X Y` followed by `nb 1`, `nb WIDTH`, `nc INDEX`, `color`, and `am WIDTH
+HEIGHT` followed by `end`. These formatter strings come from the completed
+generic-method report; direct runtime calls for the formatter selectors remain
+useful for checking argument coercion and stream ownership.

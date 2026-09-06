@@ -16,6 +16,35 @@ export class AaronStrokeWriter {
     this.output = '';
   }
 
+  dimensions(width, height) {
+    if (![width, height].every(Number.isSafeInteger)) throw new TypeError('dimensions must be safe integers');
+    this.output += `dims ${width} ${height}\nnb 1\n`;
+    return this;
+  }
+
+  brush(width) {
+    if (!Number.isSafeInteger(width) || width <= 0) throw new RangeError('brush width must be positive');
+    this.output += `nb ${width}\n`;
+    return this;
+  }
+
+  color(index) {
+    if (!Number.isSafeInteger(index) || index < 0) throw new RangeError('colour index must be non-negative');
+    this.output += `nc ${index}\n`;
+    return this;
+  }
+
+  colorMode() {
+    this.output += 'color\n';
+    return this;
+  }
+
+  end(width, height) {
+    if (![width, height].every(Number.isSafeInteger)) throw new TypeError('end dimensions must be safe integers');
+    this.output += `am ${width} ${height}\nend\n`;
+    return this;
+  }
+
   moveTo(point, { redraw = false } = {}) {
     const next = integerPoint(point);
     this.output += `${redraw ? 'am' : 'zm'} ${next[0]} ${next[1]}\n`;
