@@ -410,6 +410,15 @@ map writes, brush selection, or output parity. The earlier failed
 formatted-output checkpoint is retained in
 `brush-stroke-isolated-34070909268.txt` as a probe-debugging record.
 
+`brush-stroke-isolated-34071470348.txt` extends that probe through private
+environment setup in run
+[34071470348](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071470348),
+commit `93601fd1f4367a37b59c283dafd2fa974d431ac4`. A `PROGV` environment with
+16×16 typed maps, startup brush 1, boundary value 3, and zero `CDEX`/`SDEX`
+enters successfully; the bindings, map dimensions, brush ID, and post-exit
+binding restoration all pass. `BRUSH-STROKE` is still not called in this
+checkpoint.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

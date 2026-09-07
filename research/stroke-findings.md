@@ -65,6 +65,16 @@ not yet coordinate-index or fill-write parity.
 selected and no shared map has been written. The next safe step is to isolate
 `BRUSH-STROKE(PATH VALUE CDEX SDEX)` with `SCREEN-AND-STORE` replaced.
 
+The staged brush probe has now crossed that setup boundary without invoking
+the routine. In run
+[34071470348](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071470348),
+the original function cells were restored after the direct stub checks, and a
+private `PROGV` environment accepted 16×16 typed maps, brush 1, boundary 3,
+and zero `CDEX`/`SDEX`; all bindings were restored on exit. The next probe is
+one `BRUSH-STROKE` call under that environment with both downstream
+dependencies stubbed. Its result will be treated as dependency-isolated
+branch/map evidence, not integrated painting parity.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
