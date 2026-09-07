@@ -804,6 +804,95 @@
         (format matrix-report "STAGE-23-MATRIX-ERROR-B4 ~A~%"
                 (type-of problem))
         (finish-output matrix-report))))
+  ;; Repeated-vertex direct case: keep the top-level execution shape while
+  ;; checking duplicate path stamping and screen forwarding.
+  (let ((matrix-report report))
+    (handler-case
+        (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+               (all-symbol (find-symbol "ALL-BRUSHES" owner))
+               (brush-symbol (find-symbol "BRUSH" owner))
+               (fill-symbol (find-symbol "FILL-MAP" owner))
+               (patch-symbol (find-symbol "PATCH-MAP" owner))
+               (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+               (high-symbol (find-symbol "*PIC-HIGH*" owner))
+               (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+               (cdex-symbol (find-symbol "CDEX" owner))
+               (sdex-symbol (find-symbol "SDEX" owner))
+               (stroke (find-symbol "BRUSH-STROKE" owner))
+               (screen (find-symbol "SCREEN-AND-STORE" owner))
+               (inside (find-symbol "IN-SUB-FRAME" owner))
+               (make-point (find-symbol "MAKE-TWOPT" owner))
+               (all-brushes (symbol-value all-symbol))
+               (brush (elt all-brushes 1))
+               (fill-map (make-array '(16 16)
+                                     :element-type '(unsigned-byte 4)
+                                     :initial-element 0))
+               (patch-map (make-array '(16 16)
+                                      :element-type '(unsigned-byte 16)
+                                      :initial-element 0))
+               (path (list (funcall make-point 7 7)
+                           (funcall make-point 8 7)
+                           (funcall make-point 7 7)))
+               (screen-count 0)
+               (inside-count 0)
+               (error-type nil)
+               (original-screen (symbol-function screen))
+               (original-inside (symbol-function inside)))
+          (write-line "MATRIX-CASE b1-overlap-horizontal BRUSH 1 VALUE 1 CDEX 0 SDEX 0 INSIDE T"
+                      matrix-report)
+          (finish-output matrix-report)
+          (unwind-protect
+              (progv (list wide-symbol high-symbol patch-symbol fill-symbol
+                           brush-symbol boundary-symbol cdex-symbol sdex-symbol)
+                     (list 16 16 patch-map fill-map brush 3 0 0)
+                (setf (symbol-function screen)
+                      (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                        (declare (ignore forwarded-path forwarded-cdex forwarded-sdex))
+                        (incf screen-count)
+                        (format matrix-report "MATRIX-SCREEN b1-overlap-horizontal ~D 0 0~%"
+                                screen-count)
+                        nil))
+                (setf (symbol-function inside)
+                      (lambda (x y)
+                        (declare (ignore x y))
+                        (incf inside-count)
+                        t))
+                (handler-case
+                    (progn
+                      (write-line "MATRIX-BEFORE-STROKE b1-overlap-horizontal" matrix-report)
+                      (finish-output matrix-report)
+                      (funcall stroke path 1 0 0)
+                      (write-line "MATRIX-AFTER-STROKE b1-overlap-horizontal" matrix-report)
+                      (finish-output matrix-report))
+                  (error (problem)
+                    (setf error-type (type-of problem))
+                    (format matrix-report "MATRIX-ERROR b1-overlap-horizontal ~A~%"
+                            error-type)
+                    (finish-output matrix-report)))
+                (dotimes (index (array-total-size fill-map))
+                  (let ((value (row-major-aref fill-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-FILL b1-overlap-horizontal ~D ~D~%"
+                              index value))))
+                (dotimes (index (array-total-size patch-map))
+                  (let ((value (row-major-aref patch-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-PATCH b1-overlap-horizontal ~D ~D~%"
+                              index value))))
+                (format matrix-report "MATRIX-SCREEN-COUNT b1-overlap-horizontal ~D~%"
+                        screen-count)
+                (format matrix-report "MATRIX-INSIDE-COUNT b1-overlap-horizontal ~D~%"
+                        inside-count)
+                (write-line (if error-type "MATRIX-ERRORED" "MATRIX-RETURNED")
+                            matrix-report)
+                (finish-output matrix-report))
+            (setf (symbol-function screen) original-screen
+                  (symbol-function inside) original-inside)))
+      (error (problem)
+        (format matrix-report "STAGE-23-MATRIX-ERROR-B1-OVERLAP ~A~%"
+                (type-of problem))
+        (finish-output matrix-report))))
+
   (write-line "STAGE-23-BRUSH-MATRIX-END" report)
   (finish-output report))
 
