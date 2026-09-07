@@ -579,6 +579,17 @@ constrains the private map effect because screen/file output remains stubbed.
 The next probe should capture stubbed `SCREEN-AND-STORE` arguments for an
 interior path while retaining the controlled map setup.
 
+`brush-stroke-isolated-34075683103.txt` is the forwarding capture from run
+[34075683103](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075683103),
+commit `0a4fc7ddf24fb71f91f3db1eba9b53ca2a99864e`. With
+`IN-SUB-FRAME=NIL`, the stub sees one call, forwarded indices `0,0`, and the
+three numeric points `(7,7)`, `(8,7)`, `(7,7)` in order. Both private maps
+remain zero; `IN-SUB-FRAME` is called 27 times; the stroke returns and restores
+all function/dynamic bindings. The report deliberately stops at forwarding:
+the stub does not stand in for GUI/file output.
+
+The next probe should vary forwarded indices under `IN-SUB-FRAME=NIL`.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

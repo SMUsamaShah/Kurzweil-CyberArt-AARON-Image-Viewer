@@ -221,6 +221,18 @@ screen/file call would be repeated.
 The next probe should capture the stubbed `SCREEN-AND-STORE` arguments for an
 interior path while keeping map behavior controlled.
 
+Run [34075683103](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075683103)
+forces `IN-SUB-FRAME=NIL` and records the screen dependency for the repeated
+path `(7,7)→(8,7)→(7,7)`. `BRUSH-STROKE` calls `SCREEN-AND-STORE` exactly
+once, forwarding CDEX/SDEX `0,0` and all three path points in order, including
+the repeated final vertex. The private fill and patch maps remain zero, the
+predicate is called 27 times, and the stroke returns with all bindings and
+function cells restored. This measures forwarding under the stub; it does not
+yet recover screen/file emission or explain the predicate-call count.
+
+The next probe should vary the forwarded indices under `IN-SUB-FRAME=NIL` to
+compare CDEX/SDEX forwarding independently of map writes.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
