@@ -443,6 +443,15 @@ checkpoint and remains zero-filled while the isolated `IN-SUB-FRAME` stub
 returns `NIL`. That dependency gate is intentionally kept separate from the
 next run, which uses the same two points with the predicate stub returning `T`.
 
+`brush-stroke-isolated-34072198444.txt` is the first in-frame write result,
+from run
+[34072198444](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072198444),
+commit `a9acaf2f6e36d61d863011a06551a9f38f39dc3e`. With the same two points
+and `IN-SUB-FRAME` forced to `T`, the routine writes 12 nonzero cells to the
+private `FILL-MAP` and zero cells to `PATCH-MAP`; both function cells and all
+dynamic bindings restore. The current report records the counts only; a
+follow-up will capture the exact row-major indices and values.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

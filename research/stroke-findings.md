@@ -90,6 +90,15 @@ startup or constructor failure for a non-NIL path, but it still does not reach
 a segment between distinct points. The next isolated case uses exactly two
 horizontal points and otherwise keeps the environment unchanged.
 
+The in-frame variation in run
+[34072198444](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072198444)
+changed only the predicate stub to `T`. It wrote 12 nonzero cells to
+`FILL-MAP` and none to `PATCH-MAP`, then restored both function cells and all
+dynamic bindings. This is the first measured brush-map effect. The next
+increment records the 12 row-major index/value pairs; it deliberately avoids
+assigning X/Y meanings until the map dimensions or an asymmetric case provide
+that evidence.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

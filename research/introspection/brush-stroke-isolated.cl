@@ -313,12 +313,12 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 8 invokes BRUSH-STROKE exactly once with the same two-point
+  ;; Stage 9 invokes BRUSH-STROKE exactly once with the same two-point
   ;; horizontal path, but the isolated IN-SUB-FRAME predicate returns T.
-  ;; This changes only the dependency gate from Stage 7.
+  ;; This changes only map reporting from Stage 8.
   ;; downstream dependencies remain inert stubs, so any map writes or errors
   ;; belong to BRUSH-STROKE's own entry/branch logic, not file emission.
-  (write-line "STAGE-8-IN-FRAME-BEGIN" report)
+  (write-line "STAGE-9-MAP-CELLS-BEGIN" report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -370,28 +370,38 @@
           (setf (symbol-function inside) original-inside))
         (let ((fill-count 0)
               (patch-count 0))
+          (format report "FILL-DIMS ~D ~D~%"
+                  (array-dimension fill-map 0)
+                  (array-dimension fill-map 1))
+          (format report "PATCH-DIMS ~D ~D~%"
+                  (array-dimension patch-map 0)
+                  (array-dimension patch-map 1))
           (dotimes (index (array-total-size fill-map))
-            (unless (zerop (row-major-aref fill-map index))
-              (incf fill-count)))
+            (let ((value (row-major-aref fill-map index)))
+              (unless (zerop value)
+                (incf fill-count)
+                (format report "FILL-CELL ~D ~D~%" index value))))
           (dotimes (index (array-total-size patch-map))
-            (unless (zerop (row-major-aref patch-map index))
-              (incf patch-count)))
+            (let ((value (row-major-aref patch-map index)))
+              (unless (zerop value)
+                (incf patch-count)
+                (format report "PATCH-CELL ~D ~D~%" index value))))
           (format report "FILL-NONZERO-COUNT ~D~%" fill-count)
           (format report "PATCH-NONZERO-COUNT ~D~%" patch-count))
         (write-line (if (and (eq (symbol-function screen) original-screen)
                              (eq (symbol-function inside) original-inside))
-                        "STAGE-8-FUNCTIONS-RESTORED"
-                        "STAGE-8-FUNCTIONS-NOT-RESTORED")
+                        "STAGE-9-FUNCTIONS-RESTORED"
+                        "STAGE-9-FUNCTIONS-NOT-RESTORED")
                     report)
         (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
                              (eql (boundp fill-symbol) before-fill-bound)
                              (eql (boundp patch-symbol) before-patch-bound))
-                        "STAGE-8-BINDINGS-RESTORED"
-                        "STAGE-8-BINDINGS-LEAKED")
+                        "STAGE-9-BINDINGS-RESTORED"
+                        "STAGE-9-BINDINGS-LEAKED")
                     report))
     (error (problem)
       (declare (ignore problem))
-      (write-line "STAGE-8-IN-FRAME-ERROR" report)))
+      (write-line "STAGE-9-MAP-CELLS-ERROR" report)))
   (finish-output report))
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
@@ -501,6 +511,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-8-IN-FRAME~%")
+  (format report "STAGE-9-MAP-CELLS~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
