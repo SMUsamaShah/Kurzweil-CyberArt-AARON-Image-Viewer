@@ -243,6 +243,18 @@ claiming what the real screen/file consumer does with the index.
 
 The next holdout changes only aligned SDEX to `1`.
 
+Run [34076151916](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34076151916)
+changes aligned SDEX to `1` while CDEX remains `0` under the same rejecting
+predicate. The recorder sees exactly `SCREEN-ARGS 0 1`, one call, and the same
+three forwarded points; both maps remain zero and the 27 predicate calls,
+return, and restoration markers match the baseline. The isolated forwarding
+matrix now covers baseline `0,0`, CDEX `1,0`, and SDEX `0,1`; real screen/file
+consumers remain the next boundary.
+
+The next probe should replace `SCREEN-AND-STORE` with a recorder that also
+captures its downstream `PREP-LINE`/writer dependencies, without changing the
+private `BRUSH-STROKE` map setup.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

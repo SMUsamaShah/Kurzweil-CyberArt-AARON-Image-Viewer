@@ -600,6 +600,18 @@ real screen/file consumer remains replaced.
 
 The next holdout changes only aligned SDEX to `1`.
 
+`brush-stroke-isolated-34076151916.txt` is the forwarded-SDEX capture from run
+[34076151916](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34076151916),
+commit `aebdbcc9331f6d2c60f82aa0dac6180d4383b0e7`. With aligned CDEX=`0` and
+SDEX=`1`, the recorder sees `SCREEN-ARGS 0 1`, one call, and all three points
+in order. Both maps remain zero; the predicate count is 27; return and
+restoration markers match the baseline. Alongside the baseline and forwarded
+CDEX captures, this completes the isolated forwarding matrix while leaving the
+real screen/file consumer replaced.
+
+The next probe should instrument that consumer boundary rather than add more
+map-only cases.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
