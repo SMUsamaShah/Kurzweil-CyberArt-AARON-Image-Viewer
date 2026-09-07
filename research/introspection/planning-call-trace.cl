@@ -31,7 +31,10 @@
           (*print-circle* nil)
           (*print-pretty* nil)
           (owner nil)
-          (event-limit 512)
+          ;; SCRIPT is intentionally left unwrapped below: the original
+          ;; planner calls it once per script item and its generic edge can
+          ;; consume a bounded report before figure/drawing calls appear.
+          (event-limit 1024)
           (event-count 0)
           (overflow-written nil)
           (depth 0)
@@ -55,9 +58,10 @@
               "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM" "INIT-MAPS"
               "MAKE-PAINTING-COLORS" "MAKE-COLORSPEC" "MASTER-PLAN"
               "MAKE-PLAN" "MAKE-LEAF-LIST" "DEVELOP-PLAN" "PROTOCOL"
-              "RPARSE" "SCRIPT" "BUILD-FIGURE" "GENERATE-PERSON"
+              "RPARSE" "BUILD-FIGURE" "GENERATE-PERSON"
               "MAKE-POTTED-PLANT" "DRAW-CFORM" "PAINT-FILL"
-              "SCREEN-AND-STORE" "STORE-IN-FILE")
+              "PREP-LINE" "DISPLAY-COLOR-PATCHES" "SCREEN-AND-STORE"
+              "STORE-IN-FILE")
             state-names
             '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
               "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
