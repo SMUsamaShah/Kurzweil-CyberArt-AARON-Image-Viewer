@@ -94,14 +94,30 @@ all four floating signatures. Overflow, subnormal arithmetic, and signed-zero
 endpoint selection have not been characterized; the JS API rejects non-finite
 endpoints or spans before consuming state.
 
+## AARON startup-state holdout
+
+The corrected state-only planning probe in run
+[34109307251](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34109307251)
+uses the recovered dynamic `EXCL:MAKE-RANDOM-STATE-FROM-SEED` constructor and
+installs only `COMMON-LISP:*RANDOM-STATE*`. A copied preview shows distinct
+pre-startup streams for seeds 1234 and 5678, so the constructor is no longer a
+hypothesis. However, two fresh seed-1234 processes have the same pre-`INIT-RANDOM`
+preview and different post-`INIT-RANDOM` previews and AA output. At the init
+boundary `?RSEED?` is a 13-character string containing `C:\\temp\\rseed`; the
+runner found no persisted file at that path. The effective startup stream is
+therefore still not reproducible from the visible seeded state alone. Keep
+these results separate from the isolated Allegro RNG fixtures and do not call
+them whole-painting parity. See the normalized
+[holdout evidence](introspection/evidence/planning-random-seed-holdouts-34109307251.txt).
+
 ## What this does not recover
 
-The probes do not identify the time-based startup seed used by AARON, the
-sequence of random calls made by `SCRIPT`, or the mapping from those calls to
-planning, figures, colours, and brush strokes. The exact scene generator is
-therefore still unfinished. The standard `Mt19937` class remains available for
-existing clean-room tests; callers that need the recovered Allegro numeric
-behavior can use `Allegro501Random` explicitly.
+The probes do not yet identify the startup state transition inside
+`INIT-RANDOM`, the sequence of random calls made by `SCRIPT`, or the mapping
+from those calls to planning, figures, colours, and brush strokes. The exact
+scene generator is therefore still unfinished. The standard `Mt19937` class
+remains available for existing clean-room tests; callers that need the
+recovered Allegro numeric behavior can use `Allegro501Random` explicitly.
 
 The reversed integer `RAN(10, 0)` cases produced the original runtime's invalid-random
 argument error. The JS integer method rejects reversed bounds before consuming state,

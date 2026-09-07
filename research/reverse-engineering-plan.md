@@ -32,7 +32,7 @@ probe scripts, normalized reports, and clean-room implementations are kept.
 |---|---|---|---|
 | 0. Preserve and observe | Complete | Installer provenance, AA samples, safe extraction, isolated Windows oracle, registry/DEP compatibility workarounds, and debug/small-image switches are documented. | Another researcher can reproduce the oracle setup without modifying the source artifact. |
 | 1. AA protocol | Mostly complete | Parser, serializer, renderer, corpus analysis, palettes, outline/paint phases, and compact direction commands are implemented for observed records. | Round-trip and corpus checks cover every observed command and edge case. |
-| 2. Numeric foundation | Measured for recovered primitives | Allegro RNG matches 6,140 validation values; floating `RAN` matches 512 values plus 64 state checks; angle helpers match 218 double observations and 20 range calls. | Remaining startup seed and generator random draw order are recovered. |
+| 2. Numeric foundation | Measured for recovered primitives; startup state partially measured | Allegro RNG matches 6,140 validation values; floating `RAN` matches 512 values plus 64 state checks; angle helpers match 218 double observations and 20 range calls. The corrected seed constructor now installs `CL:*RANDOM-STATE*`, but `INIT-RANDOM` still changes the effective stream between fresh processes. | Remaining startup seed/state transition and generator random draw order are recovered. |
 | 3. Geometry and hand helpers | Partially measured | `XYDIST` and `LOCK-WIGGLE` match 320 paths, 80 distances, and 80 subsequent random states. Their role in the complete FLA is unresolved. | The complete line path and its caller chain match original point sequences. |
 | 4. Stream emission | Isolated writer selectors measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures. `VECTOR`/`FILL` match all 240 isolated cases (216 successful outputs and 24 expected NIL-previous errors), including two-decimal truncation and signed `-0.00`; the screen PLOT function is replaced. Basic formatter constants are inferred. | Real screen/file emission, stream ownership, and unmodified GUI/file integration remain to be measured; isolated evidence stays separate from those paths. |
 | 5. Freehand line algorithm | Partially measured | `FREE-PATH(EDGE)` now matches 16 traced-versus-unwrapped sequences and following random states, including visibility gating, closed-edge traversal, 8–14 step counts, and single/double arithmetic. The integrated startup trace reaches `FREE-PATH` from `DRAW-CFORM` with a real four-point `VISPT` edge, but its complete role remains unresolved. | Recover all edge-list branches and connect this subset to DRAW-CFORM/brush output; validate integrated caller state and termination beyond the tested shapes. |
@@ -112,14 +112,20 @@ complete equivalent port until phases 5–8 are recovered.
 9. Recover brush/fill/colour state and then connect those methods to the AA
    writer.
 10. Recover startup seed installation and random draw order before calibrating
-    composition. Keep seed-only, seed-plus-`?RSEED?`, and size interventions in
-    separate fresh-process runs. Then replace provisional planner/figure rules
-    one subsystem at a time with oracle-backed implementations.
+    composition. The corrected state-only holdouts now prove dynamic seeded
+    state construction and pre-`INIT-RANDOM` seed sensitivity, but repeated
+    seed 1234 runs diverge after `INIT-RANDOM`. Next inspect the `?RSEED?`
+    path/file boundary and run seed-plus-`?RSEED?` interventions separately
+    from size holdouts. Then replace provisional planner/figure rules one
+    subsystem at a time with oracle-backed implementations.
 11. Compare the complete oracle `aa0` record and its random-state checkpoints
     against the JS engine; first recover selector-level writer output and the
     generator's seed/draw order, then replace provisional composition rules.
     The canvas-state trace confirms `INIT-RANDOM` in the normal startup but no
-    `SET-RANDOM` or `GET-RANDOM`; do not infer a user seed from this run.
+    `SET-RANDOM` or `GET-RANDOM` entries in that traced call set. The seeded
+    holdout sees `?RSEED?` as the path `C:\\temp\\rseed` at `INIT-RANDOM`,
+    with no persisted file in the artifact; do not infer a user seed or final
+    reproducibility from the pre-INIT state alone.
 12. Add integrated holdout fixtures and a final parity report that separates
     exact, inferred, and provisional output.
 

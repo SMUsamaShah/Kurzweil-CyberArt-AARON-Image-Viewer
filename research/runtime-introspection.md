@@ -88,7 +88,9 @@ interpretation questions are in [freehand-line.md](freehand-line.md).
 2. **The random globals are different types.** At census time,
    `COMMON-LISP:*RANDOM-STATE*` is a RANDOM-STATE object;
    `EXCL::*INTERNAL-RANDOM-STATE*` is a BIGNUM. Never set both to the same
-   object. `?RSEED?` is present but unbound at this startup checkpoint.
+   object. `?RSEED?` is present but unbound at that census checkpoint; in a
+   normal seeded planning startup it later becomes a 13-character path string
+   (`C:\\temp\\rseed`).
 3. **The build flag is numeric at startup.** `*BUILD-PREMIUM*` is integer `0`.
    The earlier hook's assignment of `T` does not establish its intended
    semantics or prove when licensing decisions occur.
@@ -136,6 +138,22 @@ LOCK-WIGGLE point sequences are recovered for the measured cases. The full
 FLA pipeline and whole-painting equivalence have not been recovered yet.
 Full generator equivalence still requires matching random draw order, planning,
 geometry, colour, and emission.
+
+## Corrected seeded planning holdout
+
+Run [34109307251](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34109307251)
+replaced the invalid reader-qualified seed experiment with dynamic lookup of
+`EXCL:MAKE-RANDOM-STATE-FROM-SEED`. All three fresh-process jobs constructed
+and installed a visible `COMMON-LISP:*RANDOM-STATE*` and produced complete AA0
+files. A copied-state preview confirms that the requested seed changes the
+pre-`INIT-RANDOM` stream (`1234` and its repeat both preview `13,13,41`; `5678`
+previews `27,14,11`). It is not yet a complete startup seed solution: the two
+1234 processes have different post-`INIT-RANDOM` previews, first `RAN` values,
+canvas branches, and AA hashes. The `?RSEED?` value at the init boundary is
+the path `C:\\temp\\rseed`, and the workflow artifact contains no persisted
+file at that path. Preserve this as proof of constructor/state installation,
+not as evidence of deterministic whole-painting output. See the normalized
+[holdout evidence](introspection/evidence/planning-random-seed-holdouts-34109307251.txt).
 
 The next report can be converted without evaluating Lisp:
 

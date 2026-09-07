@@ -1,0 +1,57 @@
+RUN 34109307251
+COMMIT 54349ea7f8ada10a8e94df2ae53a6472e2b15e97
+WORKFLOW AARON random seed holdouts
+INTERVENTION corrected dynamic Allegro seeded-state constructor; state-only runs
+  install COMMON-LISP:*RANDOM-STATE* and leave ?RSEED? unmodified
+JOBS
+  seed-1234 artifact 10013714162 digest sha256:3b82294874218ed5ffa97ad26f06f1bd25c9869ef4edfdb6a164fdca4ad85afe
+  seed-1234-repeat artifact 10013686963 digest sha256:2cb78a546e94c0fc0e889803926eadaeb9e2f8871b7cac0f653c1084722ba506
+  seed-5678 artifact 10013684730 digest sha256:613d4e2a4c0cf42ff7737b9ddf3ba37349b5ed6347398ad57cb836607bd8b8c
+
+SETUP
+  All three markers reached STATE-CONSTRUCTOR-CALL-END STATE-FOUND T and
+  STATE-INSTALLED-IN COMMON-LISP:*RANDOM-STATE* T.  The pre-INIT preview is
+  made from a copy and does not consume the live engine state.  No rseed file
+  was present after any job; the normal path variable is the string
+  C:\\temp\\rseed.
+
+PRE-INIT STATE PREVIEWS (RANDOM 100, on a copied state)
+  seed-1234        (13 13 41)
+  seed-1234-repeat (13 13 41)
+  seed-5678        (27 14 11)
+
+INIT CHECKPOINTS
+  INIT-BEFORE sees COMMON-GRAPHICS-USER:?RSEED? bound as a 13-character
+  string with value C:\\temp\\rseed.  The visible CL random state remains a
+  RANDOM-STATE object.  After INIT-RANDOM the state is still typed
+  RANDOM-STATE, but its copied preview differs between fresh processes:
+    seed-1234        INIT-BEFORE (56 2 5), INIT-AFTER (67 13 53)
+    seed-1234-repeat INIT-BEFORE (56 2 5), INIT-AFTER (48 99 74)
+    seed-5678        INIT-BEFORE (14 50 23), INIT-AFTER (15 15 80)
+
+FIRST ENGINE RAN VALUES
+  seed-1234        (38.405567 34 4 82 1 32 0)
+  seed-1234-repeat (36.047337 86 70 9 1 21 1)
+  seed-5678        (35.57208 34 27 28 1 90 1)
+
+AA0 OUTPUTS
+  seed-1234        640x480, 148 palette entries, 3260 outline operations,
+                   50933 paint operations, 247738 bytes,
+                   sha256 2aec25f624ab8daf635d7e7f548dc9a75bcaeefdadf6defe2e33ac3294305fde
+  seed-1234-repeat 640x480, 148 palette entries, 4981 outline operations,
+                   73152 paint operations, 359332 bytes,
+                   sha256 452e6742b9e5182fdda705eee2386b116e5521e0d200896a7bf953b9db7c44d9
+  seed-5678        320x480, 148 palette entries, 6398 outline operations,
+                   34805 paint operations, 244331 bytes,
+                   sha256 1aad9f8f70f060699130008d724f877a75427b2f968900f5dc5d7be336c641f0
+
+INTERPRETATION
+  The corrected constructor is proven to resolve and install a seeded state;
+  different seeds affect the pre-INIT state and downstream scene branch.  A
+  state-only seed is not sufficient for reproducible painting output: the two
+  fresh 1234 processes have identical pre-INIT previews but different
+  INIT-AFTER previews, first RAN values, canvas dimensions, operation counts,
+  and AA hashes.  This localizes the remaining startup-seed problem to
+  INIT-RANDOM or another startup action after the pre-INIT checkpoint.  The
+  evidence does not yet establish the source of that replacement/advancement,
+  nor does it justify claiming whole-painting seed parity.

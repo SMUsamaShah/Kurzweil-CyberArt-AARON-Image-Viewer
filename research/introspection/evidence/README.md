@@ -799,3 +799,20 @@ artifact `10012239878`) selects 960x1080 and writes a complete 466,378-byte,
 and height minus one. These are controlled size interventions, not seeded
 random comparisons; they confirm a reachable high-resolution path while the
 universal dimension rule remains open.
+
+`planning-random-seed-holdouts-34109307251.txt` is the first completed seeded
+planning holdout from run
+[34109307251](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34109307251),
+commit `54349ea7f8ada10a8e94df2ae53a6472e2b15e97`, with artifacts
+`10013714162`, `10013686963`, and `10013684730`.  The dynamically resolved
+`EXCL:MAKE-RANDOM-STATE-FROM-SEED` path successfully constructs and installs a
+`COMMON-LISP:*RANDOM-STATE*` object for seeds 1234 and 5678.  A copied-state
+preview is repeatable before startup (`1234` gives `13,13,41` in both fresh
+processes), but `INIT-RANDOM` leaves different post-call previews, first `RAN`
+values, canvas branches, and AA hashes for the two 1234 processes.  At the
+`INIT-RANDOM` boundary `COMMON-GRAPHICS-USER:?RSEED?` is a 13-character string
+containing `C:\\temp\\rseed`; no such file remained in any artifact.  The
+holdout therefore proves state installation and seed sensitivity, but not
+startup reproducibility or whole-painting parity.  The normalized measurements
+and hashes are in the linked evidence file; no random values are drawn merely
+for the preview.
