@@ -16,6 +16,140 @@
   (format report "INTERVENTION SCREEN-AND-STORE-AND-IN-SUB-FRAME-STUBS~%")
   (finish-output report))
 
+(defun aaron-run-brush-matrix ()
+  (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                          :direction :output :if-exists :append
+                          :if-does-not-exist :create)
+    ;; Stage 23 is a bounded matrix for the next brush frontier. It keeps the
+  ;; original routine isolated from screen output and uses fresh 64x64 maps
+  ;; for every case. Interior cases test larger startup brush profiles,
+  ;; repeated/gapped vertices, values, and CDEX/SDEX forwarding. The final
+  ;; edge case deliberately records the original unchecked boundary behavior
+  ;; instead of turning it into a clipping assumption.
+  (write-line "STAGE-23-BRUSH-MATRIX-BEGIN" report)
+  (handler-case
+      (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" owner))
+             (brush-symbol (find-symbol "BRUSH" owner))
+             (fill-symbol (find-symbol "FILL-MAP" owner))
+             (patch-symbol (find-symbol "PATCH-MAP" owner))
+             (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+             (high-symbol (find-symbol "*PIC-HIGH*" owner))
+             (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+             (cdex-symbol (find-symbol "CDEX" owner))
+             (sdex-symbol (find-symbol "SDEX" owner))
+             (stroke (find-symbol "BRUSH-STROKE" owner))
+             (screen (find-symbol "SCREEN-AND-STORE" owner))
+             (inside (find-symbol "IN-SUB-FRAME" owner))
+             (make-point (find-symbol "MAKE-TWOPT" owner))
+             (x-fn (find-symbol "X" owner))
+             (y-fn (find-symbol "Y" owner))
+             (all-brushes (symbol-value all-symbol)))
+        (labels
+            ((make-path (points)
+               (mapcar (lambda (xy) (apply make-point xy)) points))
+             (write-cells (prefix name array)
+               (dotimes (index (array-total-size array))
+                 (let ((value (row-major-aref array index)))
+                   (unless (zerop value)
+                     (format report "~A ~A ~D ~D~%"
+                             prefix name index value)))))
+             (run-case (name brush-index points value cdex sdex inside-result)
+               (let* ((fill-map (make-array '(64 64)
+                                            :element-type '(unsigned-byte 4)
+                                            :initial-element 0))
+                      (patch-map (make-array '(64 64)
+                                             :element-type '(unsigned-byte 16)
+                                             :initial-element 0))
+                      (brush (elt all-brushes brush-index))
+                      (path (make-path points))
+                      (screen-count 0)
+                      (inside-count 0)
+                      (succeeded nil)
+                      (original-screen (symbol-function screen))
+                      (original-inside (symbol-function inside)))
+                 (format report "MATRIX-CASE ~A BRUSH ~D VALUE ~D CDEX ~D SDEX ~D INSIDE ~S~%"
+                         name brush-index value cdex sdex inside-result)
+                 (unwind-protect
+                     (progv (list wide-symbol high-symbol patch-symbol
+                                  fill-symbol brush-symbol boundary-symbol
+                                  cdex-symbol sdex-symbol)
+                            (list 64 64 patch-map fill-map brush 3 cdex sdex)
+                       (setf (symbol-function screen)
+                             (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                               (incf screen-count)
+                               (format report "MATRIX-SCREEN ~A ~D ~D ~D~%"
+                                       name screen-count forwarded-cdex
+                                       forwarded-sdex)
+                               (let ((tail forwarded-path)
+                                     (point-index 0))
+                                 (do ()
+                                     ((or (null tail) (= point-index 64)))
+                                   (if (consp tail)
+                                       (let ((point (car tail)))
+                                         (handler-case
+                                             (format report "MATRIX-POINT ~A ~D ~D ~D~%"
+                                                     name point-index
+                                                     (funcall x-fn point)
+                                                     (funcall y-fn point))
+                                           (error ()
+                                             (format report "MATRIX-POINT-ERROR ~A ~D~%"
+                                                     name point-index)))
+                                         (setf tail (cdr tail))
+                                         (incf point-index))
+                                       (progn
+                                         (write-line "MATRIX-IMPROPER-TAIL" report)
+                                         (setf tail nil)))))
+                               nil))
+                       (setf (symbol-function inside)
+                             (lambda (x y)
+                               (declare (ignore x y))
+                               (incf inside-count)
+                               (when (> inside-count 4096)
+                                 (error "IN-SUB-FRAME matrix bound exceeded"))
+                               inside-result))
+                       (handler-case
+                           (progn
+                             (funcall stroke path value cdex sdex)
+                             (setf succeeded t))
+                         (error (problem)
+                           (format report "MATRIX-ERROR ~A ~A~%"
+                                   name (type-of problem))))
+                       (write-cells "MATRIX-FILL" name fill-map)
+                       (write-cells "MATRIX-PATCH" name patch-map)
+                       (format report "MATRIX-SCREEN-COUNT ~A ~D~%"
+                               name screen-count)
+                       (format report "MATRIX-INSIDE-COUNT ~A ~D~%"
+                               name inside-count)
+                       (write-line (if succeeded
+                                       "MATRIX-RETURNED"
+                                       "MATRIX-ERRORED")
+                                   report))
+                   ;; The matrix intentionally changes the global function
+                   ;; cells only for the duration of this case.
+                   (setf (symbol-function screen)
+                         original-screen)
+                   (setf (symbol-function inside)
+                         original-inside))))
+          (dolist (case
+                    '(("b1-horizontal" 1 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b1-value-15" 1 ((32 32) (33 32)) 15 0 0 nil)
+                      ("b1-vertical" 1 ((32 32) (32 33)) 3 0 0 nil)
+                      ("b1-gapped" 1 ((32 32) (36 32)) 1 0 0 nil)
+                      ("b1-repeated" 1 ((32 32) (33 32) (32 32)) 1 0 0 nil)
+                      ("b2-horizontal" 2 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b3-horizontal" 3 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b4-horizontal" 4 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b5-horizontal" 5 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b6-horizontal" 6 ((32 32) (33 32)) 1 0 0 nil)
+                      ("b1-cdex-sdex" 1 ((32 32) (33 32)) 1 1 1 nil)
+                      ("b1-edge-inside" 1 ((0 0) (0 0)) 1 0 0 t)))
+            (apply #'run-case case))))
+    (error (problem)
+      (format report "STAGE-23-ERROR ~A~%" (type-of problem))))
+  (write-line "STAGE-23-BRUSH-MATRIX-END" report)
+    (finish-output report))))
+
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
@@ -599,6 +733,8 @@
       (write-line "STAGE-4-PRIVATE-SETUP-ERROR" report)))
   (finish-output report))
 
+(aaron-run-brush-matrix)
+
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
@@ -606,5 +742,6 @@
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
   (format report "STAGE-22-SCREEN-SDEX-1~%")
+  (format report "STAGE-23-BRUSH-MATRIX~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
