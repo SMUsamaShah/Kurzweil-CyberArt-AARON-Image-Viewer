@@ -18,6 +18,15 @@
 (with-open-file (report "C:\\temp\\aaron-screen-entry-frontier.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  ;; Keep a read/load checkpoint separate from the larger experiment.  If
+  ;; this marker is absent, the runtime rejected the following form before it
+  ;; could enter its own handler.
+  (write-line "STAGE-0-SECOND-FORM-REACHED" report)
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-screen-entry-frontier.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (let ((*print-length* 32)
         (*print-level* 8)
         (*print-circle* nil)
