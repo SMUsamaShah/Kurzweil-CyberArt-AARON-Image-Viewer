@@ -75,6 +75,14 @@ one `BRUSH-STROKE` call under that environment with both downstream
 dependencies stubbed. Its result will be treated as dependency-isolated
 branch/map evidence, not integrated painting parity.
 
+That first call is now measured in
+`introspection/evidence/brush-stroke-isolated-34071673602.txt`: the
+`PATH=NIL`, value-1 case reaches the post-call checkpoint and leaves both
+private maps zero-filled, with function cells and dynamic bindings restored.
+This establishes only the empty-path branch. The next holdout changes only
+the path to one point made by the measured `MAKE-TWOPT` constructor; no
+return-shape or brush-state traversal is added yet.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

@@ -419,6 +419,15 @@ enters successfully; the bindings, map dimensions, brush ID, and post-exit
 binding restoration all pass. `BRUSH-STROKE` is still not called in this
 checkpoint.
 
+`brush-stroke-isolated-34071673602.txt` is the first successful single-call
+`BRUSH-STROKE` checkpoint from run
+[34071673602](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071673602),
+commit `7e3d6796bf45168ef1fffc6cd926f3cf1c657727`. With a private 16×16
+environment, startup brush 1, value 1, zero `CDEX`/`SDEX`, and `PATH=NIL`,
+the call reaches `AFTER-STROKE`; both private maps remain all-zero, and the
+function cells and dynamic bindings restore. This is a no-path branch result,
+not evidence that a nonempty path stamps no cells.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
