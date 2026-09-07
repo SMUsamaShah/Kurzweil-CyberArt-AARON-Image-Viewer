@@ -83,6 +83,13 @@ This establishes only the empty-path branch. The next holdout changes only
 the path to one point made by the measured `MAKE-TWOPT` constructor; no
 return-shape or brush-state traversal is added yet.
 
+The singleton holdout completed in run
+[34071834659](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071834659)
+with the same zero-map result and restoration markers. That rules out a
+startup or constructor failure for a non-NIL path, but it still does not reach
+a segment between distinct points. The next isolated case uses exactly two
+horizontal points and otherwise keeps the environment unchanged.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

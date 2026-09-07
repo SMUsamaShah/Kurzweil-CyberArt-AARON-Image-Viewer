@@ -313,11 +313,11 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 6 invokes BRUSH-STROKE exactly once with a one-point path made by
-  ;; the measured MAKE-TWOPT constructor. Both
+  ;; Stage 7 invokes BRUSH-STROKE exactly once with a two-point horizontal
+  ;; path made by the measured MAKE-TWOPT constructor. Both
   ;; downstream dependencies remain inert stubs, so any map writes or errors
   ;; belong to BRUSH-STROKE's own entry/branch logic, not file emission.
-  (write-line "STAGE-6-SINGLE-POINT-BEGIN" report)
+  (write-line "STAGE-7-TWO-POINT-BEGIN" report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -335,7 +335,8 @@
              (all-brushes (symbol-value all-symbol))
              (brush (elt all-brushes 1))
              (make-point (find-symbol "MAKE-TWOPT" owner))
-             (path (list (funcall make-point 7 7)))
+             (path (list (funcall make-point 7 7)
+                         (funcall make-point 8 7)))
              (fill-map (make-array '(16 16)
                                    :element-type '(unsigned-byte 4)
                                    :initial-element 0))
@@ -378,18 +379,18 @@
           (format report "PATCH-NONZERO-COUNT ~D~%" patch-count))
         (write-line (if (and (eq (symbol-function screen) original-screen)
                              (eq (symbol-function inside) original-inside))
-                        "STAGE-6-FUNCTIONS-RESTORED"
-                        "STAGE-6-FUNCTIONS-NOT-RESTORED")
+                        "STAGE-7-FUNCTIONS-RESTORED"
+                        "STAGE-7-FUNCTIONS-NOT-RESTORED")
                     report)
         (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
                              (eql (boundp fill-symbol) before-fill-bound)
                              (eql (boundp patch-symbol) before-patch-bound))
-                        "STAGE-6-BINDINGS-RESTORED"
-                        "STAGE-6-BINDINGS-LEAKED")
+                        "STAGE-7-BINDINGS-RESTORED"
+                        "STAGE-7-BINDINGS-LEAKED")
                     report))
     (error (problem)
       (declare (ignore problem))
-      (write-line "STAGE-6-SINGLE-POINT-ERROR" report)))
+      (write-line "STAGE-7-TWO-POINT-ERROR" report)))
   (finish-output report))
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
@@ -499,6 +500,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-6-SINGLE-POINT~%")
+  (format report "STAGE-7-TWO-POINT~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))

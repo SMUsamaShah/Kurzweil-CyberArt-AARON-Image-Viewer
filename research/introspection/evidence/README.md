@@ -428,6 +428,14 @@ the call reaches `AFTER-STROKE`; both private maps remain all-zero, and the
 function cells and dynamic bindings restore. This is a no-path branch result,
 not evidence that a nonempty path stamps no cells.
 
+`brush-stroke-isolated-34071834659.txt` repeats the same isolated environment
+with a one-point path created by `MAKE-TWOPT(7,7)` in run
+[34071834659](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071834659),
+commit `949eb7d5add40ea12420d73086e27fbf1c4349c5`. The singleton path also
+reaches `AFTER-STROKE` and leaves both maps zero-filled, with cleanup intact.
+The next probe adds one horizontal segment; it is the first case expected to
+exercise path iteration rather than an empty/singleton path boundary.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
