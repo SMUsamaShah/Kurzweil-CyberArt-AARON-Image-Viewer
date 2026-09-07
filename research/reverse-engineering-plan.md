@@ -92,7 +92,9 @@ complete equivalent port until phases 5–8 are recovered.
    `NEW-START`/`END-START` before the bound; omitting them yields 200 integrated
    brush calls before the bound. Omit `BRUSH-STROKE` and `SCREEN-AND-STORE`
    next to sample post-stroke/finalization edges while retaining their
-   captured integrated evidence.
+   captured integrated evidence. That pass reaches three person/figure passes
+   and 55 `PAINT-FILL` calls before `GOOD-START` consumes the bound; omit
+   `GOOD-START` next.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

@@ -1,0 +1,33 @@
+BEGIN planning-call-trace-finalization-34102306571
+RUN 34102306571
+COMMIT 50f031dd0ba73e6962f516ebf32d4692ad52ca77
+JOB 101679281325
+ARTIFACT 10010974915
+SOURCE research/introspection/planning-call-trace.cl
+
+TRACE-CONFIG EVENT-LIMIT 1024
+TRACE-CONFIG STROKE-AND-SCREEN-WRAPPERS OMITTED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+TRACE-COUNTS ENTER 514
+TRACE-COUNTS EXIT 510
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 1024
+
+CALL-COUNTS GENERATE-PERSON 3
+CALL-COUNTS BUILD-FIGURE 3
+CALL-COUNTS DRAW-FIGURE-CFORMS 3
+CALL-COUNTS DRAW-CFORM 118
+CALL-COUNTS GOOD-START 316
+CALL-COUNTS PAINT-FILL 55
+
+PATH RPARSE -> GENERATE-PERSON -> BUILD-FIGURE -> DRAW-FIGURE-CFORMS
+PATH DRAW-CFORM -> PAINT-FILL / GOOD-START (repeated)
+
+INTERPRETATION Leaving BRUSH-STROKE and SCREEN-AND-STORE unwrapped allows the
+normal startup to progress through three person/figure passes and many fill
+operations. The 1,024-event bound lands in GOOD-START (316 entries), with no
+trace errors; later ordered/final painting calls are not yet sampled. The next
+pass omits GOOD-START to expose that continuation.
+END planning-call-trace-finalization-34102306571

@@ -744,3 +744,13 @@ artifact `10010841138`. With the start helpers omitted, it records 200
 and no trace errors; the 1,024-event bound lands in the two-hundredth brush
 call. The next pass leaves those two high-fanout boundaries unwrapped to
 sample post-stroke/finalization edges.
+
+`planning-call-trace-finalization-34102306571.txt` is the post-stroke trace
+from run
+[34102306571](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34102306571),
+commit `50f031dd0ba73e6962f516ebf32d4692ad52ca77`, job `101679281325`, and
+artifact `10010974915`. It omits the brush/screen wrappers and reaches three
+`GENERATE-PERSON` → `BUILD-FIGURE` → `DRAW-FIGURE-CFORMS` passes, 118
+`DRAW-CFORM`, and 55 `PAINT-FILL` entries. There are 514 entries, 510 exits,
+and no trace errors; 316 `GOOD-START` entries consume the 1,024-event bound.
+The next pass omits `GOOD-START` to expose later composition/finalization.
