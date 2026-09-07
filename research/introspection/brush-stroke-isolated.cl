@@ -840,14 +840,14 @@
              (y-fn (find-symbol "Y" owner))
              (all-brushes (symbol-value all-symbol))
              (brush (elt all-brushes 1))
-             (fill-map (make-array '(64 64)
+             (fill-map (make-array '(16 16)
                                    :element-type '(unsigned-byte 4)
                                    :initial-element 0))
-             (patch-map (make-array '(64 64)
+             (patch-map (make-array '(16 16)
                                     :element-type '(unsigned-byte 16)
                                     :initial-element 0))
-             (path (list (funcall make-point 32 32)
-                         (funcall make-point 33 32)))
+             (path (list (funcall make-point 7 7)
+                         (funcall make-point 8 7)))
              (screen-count 0)
              (inside-count 0)
              (original-screen (symbol-function screen))
@@ -860,7 +860,7 @@
         (unwind-protect
             (progv (list wide-symbol high-symbol patch-symbol fill-symbol
                          brush-symbol boundary-symbol cdex-symbol sdex-symbol)
-                   (list 64 64 patch-map fill-map brush 3 0 0)
+                   (list 16 16 patch-map fill-map brush 3 0 0)
               (setf (symbol-function screen)
                     (lambda (forwarded-path forwarded-cdex forwarded-sdex)
                       (incf screen-count)
@@ -882,7 +882,7 @@
                     (lambda (x y)
                       (declare (ignore x y))
                       (incf inside-count)
-                      nil))
+                      t))
               (handler-case
                   (progn
                     (write-line "MATRIX-BEFORE-STROKE b1-horizontal" report)
