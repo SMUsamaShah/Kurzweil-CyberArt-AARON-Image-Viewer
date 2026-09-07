@@ -69,11 +69,13 @@ complete equivalent port until phases 5–8 are recovered.
    distinct CLOS constructors; neither is invoked yet. The append-safe startup
    trace now confirms that the normal path calls `MASTER-PLAN`,
    `DEVELOP-PLAN`, `SELECT-CANVAS`, `INIT-MAPS`, `PROTOCOL`, and `RPARSE`.
-   Run a focused second trace without the high-fanout `SCRIPT` wrapper so the
-   downstream figure/drawing calls and the point at which `MPLAN` becomes
-   bound are observable. Then rerun the private `SCREEN-AND-STORE` path
-   without inventing a plan object. Treat any PREP-LINE, PLOT, or
-   STORE-IN-FILE observations as downstream only after the context is
+   The focused follow-up shows `MPLAN` is a `PLAN` by `RPARSE`, and the
+   initialized path reaches `DRAW-CFORM`, `SCREEN-AND-STORE`, `PREP-LINE`,
+   and `STORE-IN-FILE`; `BRUSH` and `RPLANE` are bound before `PREP-LINE`.
+   Remove only the high-fanout `STORE-IN-FILE` wrapper in the next trace so
+   downstream line/brush/plot calls can be observed. Then rerun the private
+   `SCREEN-AND-STORE` path without inventing a plan object. Treat any new
+   PLOT or writer observations as downstream only after the context is
    measured.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.

@@ -662,3 +662,16 @@ logger had captured a closed `WITH-OPEN-FILE` stream and swallowed its write
 errors; reopening the report for runtime appends makes the calls visible.
 The compact normalized evidence is in the linked file; the complete report
 remains in the GitHub artifact.
+
+`planning-call-trace-focused-34099250163.txt` is the follow-up trace from run
+[34099250163](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34099250163),
+commit `351cad8ab4d86fa54850410271973486bd3d617a`, and artifact
+`10009828004`. It omits the high-fanout `SCRIPT` wrapper and raises the event
+bound to 1,024. The normal path reaches `DRAW-CFORM`,
+`INITIALISE-PICTURE-PLANE`, `SCREEN-AND-STORE`, `PREP-LINE`, and
+`STORE-IN-FILE`; it records 515 entries, 509 exits, and no trace errors before
+the bound. `MPLAN` is a `PLAN` by the first `RPARSE` call, while `BRUSH` and
+`RPLANE` are bound before `PREP-LINE`; the private `FILL-MAP` is a
+`(320 480)` unsigned-byte-4 array. `STORE-IN-FILE` accounts for 445 entries,
+so the next pass will leave that writer unwrapped to expose its downstream
+line/brush/plot calls.
