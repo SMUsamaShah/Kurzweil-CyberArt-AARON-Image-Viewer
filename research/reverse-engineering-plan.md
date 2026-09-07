@@ -62,10 +62,12 @@ complete equivalent port until phases 5–8 are recovered.
    matrix that reproduces the 12-, 26-, 70-, and 108-cell adjacent footprints
    for brush IDs 1–4. The repeated interior brush-1 path also preserves the
    same unique map cells and forwards all three points, including the repeated
-   endpoint. Next vary bounded clipping, then capture the downstream
-   screen/writer context; restore every function and binding with
-   `UNWIND-PROTECT`. Treat this as dependency-isolated branch/map behavior,
-   not full pipeline parity.
+   endpoint. The `(0,0)→(1,0)` edge diagnostic now records a one-cell partial
+   write followed by `SIMPLE-ERROR` under the forced predicate; keep that as a
+   boundary diagnostic, not a clipping rule. Next capture the downstream
+   screen/writer context with a real scene setup; restore every function and
+   binding with `UNWIND-PROTECT`. Treat this as dependency-isolated
+   branch/map behavior, not full pipeline parity.
 4. Establish the scene context required by the original `SCREEN-AND-STORE`.
    The direct call now has a reliable condition boundary: it invokes
    `WATCH-FOR-MESSAGES` once and stops at unbound `MPLAN`, with all probe
