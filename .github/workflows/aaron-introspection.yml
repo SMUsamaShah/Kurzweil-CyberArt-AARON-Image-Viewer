@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        probe: [free-path-validation, brush-accessors, brush-census, fill-metadata, function-constants, init-maps, line-metadata, brush-stroke-isolated, screen-entry-frontier, planning-metadata, planning-call-trace]
+        probe: [free-path-validation, brush-accessors, brush-census, fill-metadata, function-constants, init-maps, line-metadata, brush-stroke-isolated, screen-entry-frontier, planning-metadata, planning-call-trace, entry-constants]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,7 +49,7 @@ jobs:
             $report = 'C:\temp\aaron-${{ matrix.probe }}.txt'
             if (Test-Path $report) {
               Copy-Item $report (Join-Path $output '${{ matrix.probe }}.txt')
-              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods', 'ran-float', 'point-behavior', 'point-shape', 'point-trace', 'stroke-links', 'hop-behavior', 'hop-validation', 'store-behavior', 'store-isolated', 'free-path-behavior', 'free-path-validation', 'line-metadata', 'brush-metadata', 'brush-accessors', 'brush-census', 'fill-metadata', 'init-maps', 'brush-stroke-isolated', 'screen-entry-frontier', 'planning-metadata', 'planning-call-trace')) {
+              if ('${{ matrix.probe }}' -in @('line-behavior', 'line-validation', 'function-constants', 'object-probe', 'generic-methods', 'ran-float', 'point-behavior', 'point-shape', 'point-trace', 'stroke-links', 'hop-behavior', 'hop-validation', 'store-behavior', 'store-isolated', 'free-path-behavior', 'free-path-validation', 'line-metadata', 'brush-metadata', 'brush-accessors', 'brush-census', 'fill-metadata', 'init-maps', 'brush-stroke-isolated', 'screen-entry-frontier', 'planning-metadata', 'planning-call-trace', 'entry-constants')) {
                 Get-Content -LiteralPath $report
               }
             }
