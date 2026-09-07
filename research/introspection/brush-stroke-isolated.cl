@@ -745,7 +745,43 @@
       (write-line "STAGE-4-PRIVATE-SETUP-ERROR" report)))
   (finish-output report))
 
-(aaron-run-brush-matrix)
+(defun aaron-run-brush-resolution ()
+  (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                          :direction :output :if-exists :append
+                          :if-does-not-exist :create)
+    (write-line "STAGE-23-RESOLUTION-BEGIN" report)
+    (finish-output report)
+    (handler-case
+        (let ((owner (find-package "COMMON-GRAPHICS-USER")))
+          (write-line (if owner "RESOLVE-OWNER-OK" "RESOLVE-OWNER-MISSING") report)
+          (finish-output report)
+          (let ((all-symbol (find-symbol "ALL-BRUSHES" owner)))
+            (write-line (if all-symbol "RESOLVE-ALL-SYMBOL-OK"
+                            "RESOLVE-ALL-SYMBOL-MISSING")
+                        report)
+            (finish-output report)
+            (write-line (if (and all-symbol (boundp all-symbol))
+                            "RESOLVE-ALL-BOUND"
+                            "RESOLVE-ALL-UNBOUND")
+                        report)
+            (finish-output report)
+            (when (and all-symbol (boundp all-symbol))
+              (let ((all-brushes (symbol-value all-symbol)))
+                (write-line (if (listp all-brushes)
+                                "RESOLVE-ALL-VALUE-LIST"
+                                "RESOLVE-ALL-VALUE-NONLIST")
+                            report)
+                (format report "RESOLVE-ALL-LENGTH ~D~%"
+                        (length all-brushes))
+                (finish-output report))))
+      (error (problem)
+        (format report "STAGE-23-RESOLUTION-ERROR ~A~%"
+                (type-of problem))
+        (finish-output report)))
+    (write-line "STAGE-23-RESOLUTION-END" report)
+    (finish-output report))))
+
+(aaron-run-brush-resolution)
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
