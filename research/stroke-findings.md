@@ -51,11 +51,19 @@ element/initial values, while `BRUSH-STROKE` reads `BOUNDARY-VALUE`, brush
 delegating to `SCREEN-AND-STORE`. These are dependency facts, not fill-output
 parity.
 
+The isolated `INIT-MAPS` behavior is now measured in
+`research/introspection/evidence/init-maps-34069679558.txt`. With private
+bindings, dimensions `(3 5)`, `(5 3)`, and `(1 1)` all allocate rank-2 arrays
+whose dimensions preserve the supplied `(width height)` order. `PATCH-MAP` is
+a fresh zero-filled `(UNSIGNED-BYTE 16)` array; `FILL-MAP` is a separate fresh
+zero-filled `(UNSIGNED-BYTE 4)` array, and the primary return value is the
+fill map. A second call replaces both arrays rather than reusing them. The
+outer bindings remain unbound after every case. This is map-allocation parity,
+not yet coordinate-index or fill-write parity.
+
 `BRUSH` and `FILL-MAP` remain unbound in the direct checkpoint; no brush is
-selected and no shared map has been written. The next safe step is to measure
-the map shape in a private/fresh state. Only after that boundary is isolated
-should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be invoked with
-`SCREEN-AND-STORE` replaced.
+selected and no shared map has been written. The next safe step is to isolate
+`BRUSH-STROKE(PATH VALUE CDEX SDEX)` with `SCREEN-AND-STORE` replaced.
 
 ## Emission leads
 

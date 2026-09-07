@@ -110,6 +110,11 @@ complete brush semantics remain under investigation.
 measured from the original build, including ordered perimeter/core masks and
 the separate `CELLS` scalars. Its ENVIR-band lookup is explicitly provisional:
 the original `SELECT-BRUSH` boundary comparison has not been invoked yet.
+`aaron-maps.js` models the measured `INIT-MAPS` allocation: fresh zeroed
+`Uint16Array` patch storage and `Uint8Array` fill storage for the requested
+width-by-height dimensions. The four-bit Common Lisp fill element type and
+coordinate indexing are documented constraints; fill-map writes are not yet
+implemented.
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

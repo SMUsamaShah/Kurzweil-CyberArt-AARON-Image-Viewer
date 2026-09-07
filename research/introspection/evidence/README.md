@@ -383,6 +383,18 @@ stroke emission, and the scan/fill helper chain. `INIT-MAPS` references
 constants establish the dependency surface but do not establish runtime map
 dimensions or boundary comparison semantics.
 
+`init-maps-34069679558.txt` is the isolated behavioral report from run
+[34069679558](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34069679558),
+commit `722ec4375618a8b612e193e2d52572460aced20e`, job 101584584107, artifact
+10000042831. It binds `*PIC-WIDE*`, `*PIC-HIGH*`, `PATCH-MAP`, and `FILL-MAP`
+only through `PROGV`, then invokes `INIT-MAPS` for `(3 5)`, `(5 3)`, and `(1 1)`.
+The measured result is a fresh zeroed rank-2 `PATCH-MAP` with
+`(UNSIGNED-BYTE 16)` elements and an independent fresh zeroed `FILL-MAP` with
+`(UNSIGNED-BYTE 4)` elements. The primary return is the fill map; a repeated
+call replaces both arrays. Every case reports `RESTORED T` and
+`BINDINGS-RESTORED T`. The report does not claim coordinate indexing or fill
+write semantics.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
