@@ -1,0 +1,39 @@
+BEGIN planning-call-trace-generator-34101507272
+RUN 34101507272
+COMMIT 80a328daecdc3b6f3c12b64f42a5a00a1f9452c0
+JOB 101676776120
+ARTIFACT 10010667597
+SOURCE research/introspection/planning-call-trace.cl
+
+TRACE-CONFIG EVENT-LIMIT 1024
+TRACE-CONFIG MESSAGE-PREP-HOP-MAPPING-WRAPPERS OMITTED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+TRACE-COUNTS ENTER 515
+TRACE-COUNTS EXIT 509
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 1024
+
+CALL-COUNTS MAKE-ARTWORK 1
+CALL-COUNTS MAKE-PAINTING-COLORS 1
+CALL-COUNTS FREE-PATH 18
+CALL-COUNTS DRAW-CFORM 52
+CALL-COUNTS GOOD-START 54
+CALL-COUNTS NEW-START 100
+CALL-COUNTS END-START 97
+CALL-COUNTS BRUSH-STROKE 87
+CALL-COUNTS SCREEN-AND-STORE 85
+CALL-COUNTS PAINT-FILL 2
+
+PATH RPARSE -> MAKE-ARTWORK -> MAKE-PAINTING-COLORS -> FREE-PATH
+PATH DRAW-CFORM -> NEW-START -> END-START -> BRUSH-STROKE
+PATH BRUSH-STROKE -> SCREEN-AND-STORE
+
+INTERPRETATION The startup trace now reaches the artwork/colour construction
+boundary and repeated new-start/end-start stroke preparation. The 1,024-event
+bound lands in the NEW-START/END-START repetition (the final event is an
+END-START entry), with no trace errors. The next pass omits those two helpers
+to sample later figure/painting continuation while keeping brush and screen
+boundaries.
+END planning-call-trace-generator-34101507272

@@ -87,7 +87,10 @@ complete equivalent port until phases 5–8 are recovered.
    next, then rerun the
    private `SCREEN-AND-STORE` path without inventing a plan object. Treat any
    new PLOT or writer observations as downstream only after the context is
-   measured.
+   measured. The generator trace now reaches `MAKE-ARTWORK`,
+   `MAKE-PAINTING-COLORS`, 18 `FREE-PATH` calls, and repeated
+   `NEW-START`/`END-START` before the bound; omit those two high-fanout
+   helpers next.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

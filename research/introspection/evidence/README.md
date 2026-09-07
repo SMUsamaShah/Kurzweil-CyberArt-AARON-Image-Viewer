@@ -723,3 +723,14 @@ artifact `10010542952`. It omits `WATCH-FOR-MESSAGES` but retains
 are 515 entries, 509 exits, and no trace errors. The source still contained
 `PREP-LINE` in this pass; the next probe removes it explicitly so later
 figure-finalization calls can be sampled.
+
+`planning-call-trace-generator-34101507272.txt` is the generator-continuation
+trace from run
+[34101507272](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34101507272),
+commit `80a328daecdc3b6f3c12b64f42a5a00a1f9452c0`, job `101676776120`, and
+artifact `10010667597`. With message, preparation, hop, and mapping wrappers
+omitted, the run reaches `MAKE-ARTWORK`, `MAKE-PAINTING-COLORS`, and 18
+`FREE-PATH` calls before repeated `NEW-START`/`END-START` → `BRUSH-STROKE` →
+`SCREEN-AND-STORE` sequences. It records 515 entries, 509 exits, and no trace
+errors; 100 `NEW-START` and 97 `END-START` entries consume the 1,024-event
+bound. The next pass omits those two helpers to sample later continuation.
