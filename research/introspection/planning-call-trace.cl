@@ -30,22 +30,27 @@
           (*print-level* 6)
           (*print-circle* nil)
           (*print-pretty* nil)
-          (owner (find-package "COMMON-GRAPHICS-USER"))
+          (owner nil)
           (event-limit 512)
           (event-count 0)
           (overflow-written nil)
           (depth 0)
-          (targets
-           '("MAIN" "SET-UP-SCREEN-SIZE" "SELECT-CANVAS"
-             "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM" "INIT-MAPS"
-             "MAKE-PAINTING-COLORS" "MAKE-COLORSPEC" "MASTER-PLAN"
-             "MAKE-PLAN" "MAKE-LEAF-LIST" "DEVELOP-PLAN" "PROTOCOL"
-             "RPARSE" "SCRIPT" "BUILD-FIGURE" "GENERATE-PERSON"
-             "MAKE-POTTED-PLANT" "SCREEN-AND-STORE"))
-          (state-names
-           '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
-             "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
-             "COMPLAN" "RPLANE" "PLACES"))
+          (targets nil)
+          (state-names nil))
+      ;; Keep the potentially implementation-specific initializers in the
+      ;; body, after the stream checkpoint, so a loader failure is observable.
+      (setf owner (find-package "COMMON-GRAPHICS-USER")
+            targets
+            '("MAIN" "SET-UP-SCREEN-SIZE" "SELECT-CANVAS"
+              "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM" "INIT-MAPS"
+              "MAKE-PAINTING-COLORS" "MAKE-COLORSPEC" "MASTER-PLAN"
+              "MAKE-PLAN" "MAKE-LEAF-LIST" "DEVELOP-PLAN" "PROTOCOL"
+              "RPARSE" "SCRIPT" "BUILD-FIGURE" "GENERATE-PERSON"
+              "MAKE-POTTED-PLANT" "SCREEN-AND-STORE")
+            state-names
+            '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
+              "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
+              "COMPLAN" "RPLANE" "PLACES"))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
       (labels
@@ -206,4 +211,4 @@
         ;; are appended after it by the normal screen-saver invocation.
         (emit-line "TRACE-READY")
         (emit-line "END planning-call-trace")
-        (finish-output report))))))
+        (finish-output report)))))
