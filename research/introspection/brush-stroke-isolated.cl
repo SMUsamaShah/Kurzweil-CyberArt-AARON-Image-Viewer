@@ -27,6 +27,7 @@
   ;; edge case deliberately records the original unchecked boundary behavior
   ;; instead of turning it into a clipping assumption.
   (write-line "STAGE-23-BRUSH-MATRIX-BEGIN" report)
+  (finish-output report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -70,6 +71,7 @@
                       (original-inside (symbol-function inside)))
                  (format report "MATRIX-CASE ~A BRUSH ~D VALUE ~D CDEX ~D SDEX ~D INSIDE ~S~%"
                          name brush-index value cdex sdex inside-result)
+                 (finish-output report)
                  (unwind-protect
                      (progv (list wide-symbol high-symbol patch-symbol
                                   fill-symbol brush-symbol boundary-symbol
@@ -110,8 +112,12 @@
                                inside-result))
                        (handler-case
                            (progn
+                             (format report "MATRIX-BEFORE-STROKE ~A~%" name)
+                             (finish-output report)
                              (funcall stroke path value cdex sdex)
-                             (setf succeeded t))
+                             (setf succeeded t)
+                             (format report "MATRIX-AFTER-STROKE ~A~%" name)
+                             (finish-output report))
                          (error (problem)
                            (format report "MATRIX-ERROR ~A ~A~%"
                                    name (type-of problem))))
