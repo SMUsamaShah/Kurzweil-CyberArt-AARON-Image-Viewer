@@ -822,6 +822,8 @@
                (screen (find-symbol "SCREEN-AND-STORE" owner))
                (inside (find-symbol "IN-SUB-FRAME" owner))
                (make-point (find-symbol "MAKE-TWOPT" owner))
+               (x-fn (find-symbol "X" owner))
+               (y-fn (find-symbol "Y" owner))
                (all-brushes (symbol-value all-symbol))
                (brush (elt all-brushes 1))
                (fill-map (make-array '(16 16)
@@ -847,10 +849,21 @@
                      (list 16 16 patch-map fill-map brush 3 0 0)
                 (setf (symbol-function screen)
                       (lambda (forwarded-path forwarded-cdex forwarded-sdex)
-                        (declare (ignore forwarded-path forwarded-cdex forwarded-sdex))
                         (incf screen-count)
-                        (format matrix-report "MATRIX-SCREEN b1-overlap-horizontal ~D 0 0~%"
-                                screen-count)
+                        (format matrix-report "MATRIX-SCREEN b1-overlap-horizontal ~D ~D ~D~%"
+                                screen-count forwarded-cdex forwarded-sdex)
+                        (let ((tail forwarded-path)
+                              (point-index 0))
+                          (do ()
+                              ((or (null tail) (= point-index 64)))
+                            (when (consp tail)
+                              (let ((point (car tail)))
+                                (format matrix-report
+                                        "MATRIX-POINT b1-overlap-horizontal ~D ~D ~D~%"
+                                        point-index (funcall x-fn point)
+                                        (funcall y-fn point)))
+                              (setf tail (cdr tail))
+                              (incf point-index))))
                         nil))
                 (setf (symbol-function inside)
                       (lambda (x y)
