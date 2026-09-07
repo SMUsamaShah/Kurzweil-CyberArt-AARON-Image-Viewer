@@ -123,6 +123,26 @@
 
 (load "C:\\temp\\planning-call-trace.cl")
 
+(defun aaron-random-state-preview ()
+  ;; Preview a copy only.  The engine's live state is never advanced by this
+  ;; diagnostic, so the following INIT-RANDOM/RAN calls remain untouched.
+  (handler-case
+      (let* ((common-lisp-package (find-package "COMMON-LISP"))
+             (random-state-symbol
+               (and common-lisp-package
+                    (find-symbol "*RANDOM-STATE*" common-lisp-package)))
+             (state (and random-state-symbol
+                         (boundp random-state-symbol)
+                         (symbol-value random-state-symbol)))
+             (copy (and state (make-random-state state))))
+        (if copy
+            (list :random-100-1 (random 100 copy)
+                  :random-100-2 (random 100 copy)
+                  :random-100-3 (random 100 copy))
+          (list :unavailable t)))
+    (condition (problem)
+      (list :error (type-of problem)))))
+
 (defun aaron-random-state-snapshot ()
   (let ((rows nil))
     (do-all-symbols (symbol)
@@ -130,17 +150,23 @@
                     '("*RANDOM-STATE*" "*INTERNAL-RANDOM-STATE*" "?RSEED?")
                     :test #'string-equal)
         (handler-case
-            (let ((is-bound (boundp symbol))
-                  (name (symbol-name symbol)))
+            (let* ((is-bound (boundp symbol))
+                   (name (symbol-name symbol))
+                   (raw-value (and is-bound (symbol-value symbol))))
               (push (list :package (and (symbol-package symbol)
                                         (package-name (symbol-package symbol)))
                           :name name
                           :bound is-bound
-                          :type (and is-bound (type-of (symbol-value symbol)))
-                          :value (when (and is-bound
-                                            (string-equal name "?RSEED?")
-                                            (numberp (symbol-value symbol)))
-                                   (symbol-value symbol)))
+                          :type (and is-bound (type-of raw-value))
+                          :value (cond
+                                   ((and (string-equal name "?RSEED?")
+                                         (stringp raw-value))
+                                    (subseq raw-value 0
+                                            (min 64 (length raw-value))))
+                                   ((and (string-equal name "?RSEED?")
+                                         (numberp raw-value))
+                                    raw-value)
+                                   (t nil)))
                     rows))
           (condition () nil))))
     (nreverse rows)))
@@ -173,11 +199,17 @@
               (aaron-random-emit
                (format nil "INIT-BEFORE STATE ~S"
                        (aaron-random-state-snapshot)))
+              (aaron-random-emit
+               (format nil "STATE-PREVIEW INIT-BEFORE ~S"
+                       (aaron-random-state-preview)))
               (multiple-value-prog1
                   (apply original-init args)
                 (aaron-random-emit
                  (format nil "INIT-AFTER STATE ~S"
-                         (aaron-random-state-snapshot))))))
+                         (aaron-random-state-snapshot)))
+                (aaron-random-emit
+                 (format nil "STATE-PREVIEW INIT-AFTER ~S"
+                         (aaron-random-state-preview))))))
       (setf (symbol-function ran-symbol)
             (lambda (&rest args)
               ;; The original RAN is called exactly once and all values are
@@ -193,3 +225,8 @@
 
 (aaron-random-emit
  (format nil "PRE-INIT STATE ~S" (aaron-random-state-snapshot)))
+(aaron-random-emit
+ (format nil "STATE-PREVIEW PRE-INIT ~S" (aaron-random-state-preview)))
+## reverse-engineer-aaron-js
+ M research/oracle/planning-random-seed-common.cl
+cccf6bed50acc36a9ec5299bbb80ccfb843c506f
