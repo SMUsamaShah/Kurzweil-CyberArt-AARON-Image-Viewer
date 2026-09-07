@@ -21,13 +21,13 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-07, the recovered checkout is clean at local commit
-`1612c9c` (`Index DXL descriptor and source chains`), and the connected branch
-is published at `967503a` with the same changed-file tree. The current direct
-matrix source remains in the earlier edge checkpoint. Its pre-index content ended at
+`4ca9bbd` (`Integrate measured outlines and planner frames`), and the connected
+branch is published at `0a3102a7e68dc98e1bf646e9058734bb10ca6fef` with the
+same changed-file tree. The current direct matrix source remains in the
+earlier edge checkpoint. Its pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication; the static-index publication was verified at
-`b33a90bb7462a0e853678a216eb80ce93948068b` (the connector branch may advance
-with later per-file commits).
+`b33a90bb7462a0e853678a216eb80ce93948068b`.
 The connected branch has different ancestry/SHA values from the local
 checkout, so compare the tree and files rather than assuming commit IDs are
 identical.
@@ -41,6 +41,12 @@ The latest published change adds:
 - normalized original-engine evidence at
   `research/introspection/evidence/ran-hand-post-init-34120567298.txt`;
 - updates to the plan, oracle notes, and freehand-line notes.
+
+The newest local-first checkpoint also adds accepted planner-frame metadata,
+an opt-in measured `FREE-PATH` outline adapter with a separate RNG stream,
+fixture-backed integration tests, and the 900-case invariant sweep documented
+in `research/clean-room-integration.md`. No Windows run was needed for that
+checkpoint.
 
 The current brush checkpoint also adds a strict Stage 23 report parser and
 the retained original-engine captures at
