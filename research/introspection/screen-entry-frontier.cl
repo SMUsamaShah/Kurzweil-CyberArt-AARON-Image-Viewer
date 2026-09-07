@@ -67,11 +67,15 @@
              (bounded-summary value depth)))
          (args-summary (args x-fn y-fn)
            (let ((rest args) (items nil) (count 0))
-             (loop while (and (consp rest) (< count 16)) do
+             ;; Do not use LOOP here: the shipped Allegro image may try to
+             ;; autoload the absent loop.fasl.  The other probes use DO for
+             ;; the same reason.
+             (do ()
+                 ((or (null rest) (>= count 16)) (nreverse items))
                (push (argument-summary (car rest) x-fn y-fn) items)
                (setf rest (cdr rest))
                (incf count))
-             (nreverse items)))
+             ))
          (write-metadata (name arglist count-fn constant-fn)
            (let ((symbol (find-symbol name owner)))
              (format report "META-SYMBOL ~A PRESENT=~S BOUND=~S FBOUND=~S~%"
@@ -111,6 +115,7 @@
                  (format report "ERROR-CELL ~S ~S~%"
                          (package-name-safe cell) (symbol-name cell)))))))
       (write-line "RESOLVER-BEGIN" report)
+      (finish-output report)
       (handler-case
           (let* ((graphics (find-package "COMMON-GRAPHICS"))
                  (arglist (find-symbol "ARGLIST" "EXCL"))
