@@ -24,6 +24,8 @@
   (with-open-file (report "C:\\temp\\aaron-planning-call-trace.txt"
                           :direction :output :if-exists :supersede
                           :if-does-not-exist :create)
+    (write-line "STAGE-1-SECOND-FORM-REACHED" report)
+    (finish-output report)
     (let ((*print-length* 16)
           (*print-level* 6)
           (*print-circle* nil)
@@ -44,6 +46,8 @@
            '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
              "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
              "COMPLAN" "RPLANE" "PLACES"))
+      (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
+      (finish-output report)
       (labels
           ((package-name-safe (symbol)
              (handler-case
