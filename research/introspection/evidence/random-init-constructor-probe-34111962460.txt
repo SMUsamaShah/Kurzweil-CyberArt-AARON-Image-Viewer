@@ -1,0 +1,20 @@
+BEGIN random-init-constructor-probe-34111962460
+RUN 34111962460
+COMMIT 571e7fac84de6a828ea585a387a0704bd0a9bffb
+WORKFLOW .github/workflows/aaron-random-init-probe.yml
+JOB 101710020147
+ARTIFACT 10014710722 digest sha256:4dc7bd84b91a13626f0b46e1b2c0c22c53b35670215a2b6ca7c5c938a8fc1079
+
+OBSERVATIONS
+  The probe attempted to wrap COMMON-LISP:MAKE-RANDOM-STATE and
+  EXCL:MAKE-RANDOM-STATE-FROM-SEED before the normal startup path.
+  Both function-cell writes were rejected with PACKAGE-LOCKED-ERROR.
+  INIT-RANDOM still completed and produced a complete AA0 file.
+
+INTERPRETATION
+  This run supplies no constructor call-count or argument evidence. It is
+  retained as a negative instrumentation result: protected runtime package
+  function cells cannot be advised by this method. The successful dynamic
+  seed constructor path and the post-init deterministic holdout remain the
+  authoritative state evidence.
+END random-init-constructor-probe-34111962460
