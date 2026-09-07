@@ -771,3 +771,19 @@ is `FIXNUM`, `FILL-MAP` is `(ARRAY (UNSIGNED-BYTE 4) (320 480))`, and
 `RGB-MAP` is a `CONS`. The same artifact contains one complete 142,806-byte
 `aa0` painting. This closes the broad startup call-graph phase; parity work
 now targets exact output records and random-state consumption.
+
+`planning-call-trace-canvas-values-34104396531.txt` is the numeric canvas-state
+follow-up from run
+[34104396531](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34104396531),
+commit `4a7e002e8dc3063915e82f419ad00b2389bcd14b`, job `101685960516`, and
+artifact `10011780947`. It records 92 entries, 90 exits, and no trace errors.
+For the default premium compact branch, `SET-UP-SCREEN-SIZE(NIL)` leaves the
+engine at `*SCREEN-WIDTH*=640`, `*SCREEN-HEIGHT*=480`, `*PIC-HIGH*=768`, and
+five 320-pixel width cells while `*PIC-WIDE*`, `RIGHTMAX`, and `TOPMAX` remain
+unbound. `SELECT-CANVAS(NARROW)` then sets `*PIC-WIDE*=320`, `*PIC-HIGH*=480`,
+`RIGHTMAX=319`, and `TOPMAX=479`; the private fill map is
+`(ARRAY (UNSIGNED-BYTE 4) (320 480))`. The harness metadata reports a separate
+1024x768 host screen. This is a measured default-branch transition, not a
+universal display-size rule. The same run captured a complete 141,792-byte
+`aa0` painting with SHA-256
+`bf957ce28279e9bfb40954bf495bf5d714f5311554a73c493bb381ee8c50cdd0`.
