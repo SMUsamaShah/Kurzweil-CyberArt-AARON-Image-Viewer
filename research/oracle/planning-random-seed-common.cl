@@ -38,62 +38,88 @@
              (integerp aaron-planning-seed))
   (error "AARON-PLANNING-SEED is not an integer"))
 
-(let* ((seed aaron-planning-seed)
-       (set-rseed (and (boundp 'aaron-planning-set-rseed)
-                       aaron-planning-set-rseed))
-       (excl-package (find-package "EXCL"))
-       (factory (and excl-package
-                     (find-symbol "MAKE-RANDOM-STATE-FROM-SEED"
-                                 excl-package)))
-       (common-lisp-package (find-package "COMMON-LISP"))
-       (random-state-symbol (and common-lisp-package
-                                 (find-symbol "*RANDOM-STATE*"
-                                             common-lisp-package))))
-  (aaron-random-probe-log
-   (format nil "FACTORY-FOUND ~S RANDOM-STATE-SYMBOL ~S"
-           (not (null factory))
-           (not (null random-state-symbol))))
-  (let ((state nil)
-        (constructor-error nil))
-    (when factory
-      (aaron-random-probe-log "STATE-CONSTRUCTOR-CALL-BEGIN")
-      (handler-case
-          ;; Call the dynamically found symbol directly. This is the form
-          ;; used by the validated random-reference probe.
-          (setf state (funcall factory seed))
-        (condition (problem)
-          (setf constructor-error (type-of problem))
-          (aaron-random-probe-log
-           (format nil "STATE-CONSTRUCTOR-ERROR-TYPE ~S" constructor-error))))
+(aaron-random-probe-log "SEED-CHECK-PASSED")
+
+;; Keep each runtime lookup in a separate flushed stage.  The original
+;; Allegro image can terminate the process when an unavailable internal
+;; symbol is touched, so a single large LET* obscures which lookup failed.
+(let ((seed aaron-planning-seed))
+  (aaron-random-probe-log "SEED-COPIED")
+  (let ((set-rseed (and (boundp 'aaron-planning-set-rseed)
+                        aaron-planning-set-rseed)))
+    (aaron-random-probe-log
+     (format nil "RSEED-OPTION-READ ~S" (not (null set-rseed))))
+    (let ((excl-package (find-package "EXCL")))
       (aaron-random-probe-log
-       (format nil "STATE-CONSTRUCTOR-CALL-END STATE-FOUND ~S"
-               (not (null state)))))
-    (unless (and state random-state-symbol)
-      (error "Could not resolve Allegro seeded random state constructor"))
-    (when (constantp random-state-symbol)
-      (error "COMMON-LISP:*RANDOM-STATE* is unexpectedly constant"))
-    ;; Do not assign this object to EXCL::*INTERNAL-RANDOM-STATE*: the census
-    ;; shows that variable is a BIGNUM, not a RANDOM-STATE object.
-    (set random-state-symbol state)
-    (let ((rseed-count 0))
-      (when set-rseed
-        (do-all-symbols (symbol)
-          (when (and (string-equal "?RSEED?" (symbol-name symbol))
-                     (not (constantp symbol)))
-            (handler-case
-                (progn (set symbol seed) (incf rseed-count))
-              (condition () nil)))))
-      (with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
-                             :direction :output
-                             :if-exists :append
-                             :if-does-not-exist :create)
-        (format marker "BEGIN planning-random-seed~%")
-        (format marker "SEED ~D~%" seed)
-        (format marker "STATE-CONSTRUCTOR-RESOLVED T~%")
-        (format marker "STATE-INSTALLED-IN COMMON-LISP:*RANDOM-STATE* T~%")
-        (format marker "RSEED-REQUESTED ~S~%" (not (null set-rseed)))
-        (format marker "RSEED-SYMBOLS-SET ~D~%" rseed-count)
-        (finish-output marker)))))
+       (format nil "EXCL-PACKAGE-FOUND ~S" (not (null excl-package))))
+      (let ((factory (and excl-package
+                          (find-symbol "MAKE-RANDOM-STATE-FROM-SEED"
+                                      excl-package))))
+        (aaron-random-probe-log
+         (format nil "FACTORY-SYMBOL-FOUND ~S" (not (null factory))))
+        (let ((common-lisp-package (find-package "COMMON-LISP")))
+          (aaron-random-probe-log
+           (format nil "COMMON-LISP-PACKAGE-FOUND ~S"
+                   (not (null common-lisp-package))))
+          (let ((random-state-symbol
+                  (and common-lisp-package
+                       (find-symbol "*RANDOM-STATE*"
+                                    common-lisp-package))))
+            (aaron-random-probe-log
+             (format nil "RANDOM-STATE-SYMBOL-FOUND ~S"
+                     (not (null random-state-symbol))))
+            (let ((callable nil)
+                  (state nil)
+                  (constructor-error nil))
+              (handler-case
+                  (setf callable (and factory (fboundp factory)))
+                (condition (problem)
+                  (setf constructor-error (type-of problem))
+                  (aaron-random-probe-log
+                   (format nil "FBOUNDP-ERROR-TYPE ~S" constructor-error))))
+              (aaron-random-probe-log
+               (format nil "FACTORY-CALLABLE ~S" (not (null callable))))
+              (when callable
+                (aaron-random-probe-log "STATE-CONSTRUCTOR-CALL-BEGIN")
+                (handler-case
+                    ;; Call the dynamically found symbol directly. This is
+                    ;; the form used by the validated random-reference probe.
+                    (setf state (funcall factory seed))
+                  (condition (problem)
+                    (setf constructor-error (type-of problem))
+                    (aaron-random-probe-log
+                     (format nil "STATE-CONSTRUCTOR-ERROR-TYPE ~S"
+                             constructor-error))))
+                (aaron-random-probe-log
+                 (format nil "STATE-CONSTRUCTOR-CALL-END STATE-FOUND ~S"
+                         (not (null state)))))
+              (unless (and state random-state-symbol)
+                (error "Could not resolve Allegro seeded random state constructor"))
+              (when (constantp random-state-symbol)
+                (error "COMMON-LISP:*RANDOM-STATE* is unexpectedly constant"))
+              ;; Do not assign this object to EXCL::*INTERNAL-RANDOM-STATE*:
+              ;; the census shows that variable is a BIGNUM, not a
+              ;; RANDOM-STATE object.
+              (set random-state-symbol state)
+              (let ((rseed-count 0))
+                (when set-rseed
+                  (do-all-symbols (symbol)
+                    (when (and (string-equal "?RSEED?" (symbol-name symbol))
+                               (not (constantp symbol)))
+                      (handler-case
+                          (progn (set symbol seed) (incf rseed-count))
+                        (condition () nil)))))
+                (with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
+                                       :direction :output
+                                       :if-exists :append
+                                       :if-does-not-exist :create)
+                  (format marker "BEGIN planning-random-seed~%")
+                  (format marker "SEED ~D~%" seed)
+                  (format marker "STATE-CONSTRUCTOR-RESOLVED T~%")
+                  (format marker "STATE-INSTALLED-IN COMMON-LISP:*RANDOM-STATE* T~%")
+                  (format marker "RSEED-REQUESTED ~S~%" (not (null set-rseed)))
+                  (format marker "RSEED-SYMBOLS-SET ~D~%" rseed-count)
+                  (finish-output marker))))))))))
 
 (load "C:\\temp\\planning-call-trace.cl")
 
@@ -167,5 +193,3 @@
 
 (aaron-random-emit
  (format nil "PRE-INIT STATE ~S" (aaron-random-state-snapshot)))
-## reverse-engineer-aaron-js
-1613feac4b035a7ace0ded2aa3f6b8e4a7a35d53
