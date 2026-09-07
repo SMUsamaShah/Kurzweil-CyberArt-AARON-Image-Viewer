@@ -194,11 +194,11 @@
               (format report "RGB-MAP-TYPE ~S~%"
                       (type-of (symbol-value rgb-map-symbol))))
             (finish-output report)
-            (write-line "METADATA-BEGIN" report)
-            (dolist (name '("SCRIPT" "CFLIST" "COLORDEX"
-                            "WATCH-FOR-MESSAGES"))
-              (write-metadata name arglist count-fn constant-fn))
-            (write-line "METADATA-END" report)
+            ;; Keep the first frontier run focused on the direct call.  The
+            ;; metadata helper is retained for a later read-only pass because
+            ;; generic-function constant walking can trigger runtime loader
+            ;; work in this image.
+            (write-line "METADATA-DEFERRED" report)
             (finish-output report)
             (unwind-protect
                 (progn
