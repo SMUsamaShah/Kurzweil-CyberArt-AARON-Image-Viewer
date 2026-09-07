@@ -117,7 +117,11 @@
              (let ((cell (cell-error-name problem)))
                (when (symbolp cell)
                  (format report "ERROR-CELL ~S ~S~%"
-                         (package-name-safe cell) (symbol-name cell)))))))
+                         (package-name-safe cell) (symbol-name cell))))))
+         (checkpoint (label value)
+           (format report "CHECKPOINT ~A~%" label)
+           (finish-output report)
+           value))
       (write-line "RESOLVER-BEGIN" report)
       (finish-output report)
       (handler-case
@@ -144,26 +148,35 @@
                  (prefs-symbol (required-symbol "PREFS"))
                  (rgb-map-symbol (required-symbol "RGB-MAP"))
                  (large-symbol (required-symbol "LARGE"))
-                 (original-watch (symbol-function watch))
-                 (original-prep (symbol-function prep))
-                 (original-plot (symbol-function plot))
-                 (original-store (symbol-function store))
-                 (function-symbols (list watch prep plot store))
-                 (binding-symbols (list temp-symbol prev-point-symbol
-                                         file-size-symbol prevdex-symbol
-                                         cdex-symbol sdex-symbol path-symbol
-                                         mplan-symbol prefs-symbol))
-                 (before-bindings (mapcar #'boundp binding-symbols))
+                 (original-watch (checkpoint "ORIGINAL-WATCH"
+                                             (symbol-function watch)))
+                 (original-prep (checkpoint "ORIGINAL-PREP"
+                                            (symbol-function prep)))
+                 (original-plot (checkpoint "ORIGINAL-PLOT"
+                                            (symbol-function plot)))
+                 (original-store (checkpoint "ORIGINAL-STORE"
+                                             (symbol-function store)))
+                 (binding-symbols
+                   (checkpoint "BINDING-SYMBOLS"
+                               (list temp-symbol prev-point-symbol
+                                     file-size-symbol prevdex-symbol
+                                     cdex-symbol sdex-symbol path-symbol
+                                     mplan-symbol prefs-symbol)))
+                 (before-bindings
+                   (checkpoint "BEFORE-BINDINGS"
+                               (mapcar #'boundp binding-symbols)))
                  (watch-count 0)
                  (prep-count 0)
                  (plot-count 0)
                  (store-count 0)
                  (store-stop nil)
                  (returned nil)
-                 (temp-stream (make-string-output-stream))
-                 (path (list (funcall make-point 7 7)
-                             (funcall make-point 8 7)
-                             (funcall make-point 7 7))))
+                 (temp-stream (checkpoint "TEMP-STREAM"
+                                          (make-string-output-stream)))
+                 (path (checkpoint "PATH"
+                                   (list (funcall make-point 7 7)
+                                         (funcall make-point 8 7)
+                                         (funcall make-point 7 7)))))
             (declare (ignore graphics))
             (write-line "RESOLVER-OWNER-PACKAGE-OK" report)
             (write-line "RESOLVER-SCREEN-FUNCTION-OK" report)
