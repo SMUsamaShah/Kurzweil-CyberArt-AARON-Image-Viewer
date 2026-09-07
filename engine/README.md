@@ -86,6 +86,15 @@ byte-identical. The planner now reserves candidate figure footprints on a
 coarse occupancy grid, including the no-corner-only diagonal rule described in
 Cohen's matrix notes.
 
+The planner's current provisional composition contract is now operational:
+accepted rectangular figure frames control which requested figures are
+generated, and each accepted figure is uniformly fitted inside its frame.
+Rejected indices and final bounds are exposed in `scene.composition` and
+`scene.figurePlacements`. This fixes the earlier integration gap where the
+planner could reject a candidate but the generator still drew the requested
+figure count. The frame geometry and rejection policy remain provisional until
+the original PLAN/MAPPING placement rules are measured.
+
 The freehand line algorithm is not complete, but a measured `FREE-PATH` subset
 is now available. `aaronFreePath` reproduces 16 traced-versus-unwrapped
 original sequences, including visibility gating, closed-edge traversal,
@@ -93,6 +102,22 @@ single/double arithmetic, and subsequent random-state observations. It is not
 yet connected to DRAW-CFORM or the brush pipeline. [Paul Cohen's article and
 the recovery plan](../research/freehand-line.md) are saved in the research
 folder.
+
+An explicitly experimental `outlineMode: 'free-path-subset'` can now connect
+that measured primitive to generated polygon outlines without changing the
+scene random stream or paint phase. It requires an explicit `outlineSeed` and
+uses the recovered Allegro numeric source in a separate stream:
+
+```sh
+cd engine
+npm run generate -- --seed 1234 --figures 2 --allegro-rng \
+  --free-path-subset --outline-seed 1234 --out /tmp/aaron-free-path-aa0
+```
+
+The mode is a clean-room integration fixture, not a claim that every original
+AARON polygon used this caller setup. The default polygon outline mode remains
+unchanged, and local integration hashes are kept separately in
+`test/fixtures/free-path-outline-integration.json`.
 `aaron-angles.js` implements ANGLE-RANGE, NORM-A, ANGLE-DIF, and the measured
 double MOD arithmetic. Tests match 20 ANGLE-RANGE calls and 218 double
 observations, including 96 fresh holdouts. These are primitives toward the line

@@ -52,6 +52,9 @@ of our own implementation.
 - [`scene-context-findings.md`](scene-context-findings.md) — package-qualified
   scene target checklist joined from static names, constants, and one bounded
   startup state trace.
+- [`clean-room-integration.md`](clean-room-integration.md) — current local
+  composition-frame and measured FREE-PATH integration checkpoint, with sweep
+  metrics and explicit provisional boundaries.
 - [`aa-format.md`](aa-format.md) — current specification of the interchange
   format.
 - [`host-protocol.md`](host-protocol.md) — screensaver launch behavior and

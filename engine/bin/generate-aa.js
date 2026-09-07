@@ -17,6 +17,7 @@ const figures = valueAfter('--figures');
 const profile = valueAfter('--profile');
 const screenWidth = valueAfter('--screen-width');
 const screenHeight = valueAfter('--screen-height');
+const outlineSeed = valueAfter('--outline-seed');
 const output = valueAfter('--out');
 const numericRandom = args.includes('--allegro-rng')
   ? new Allegro501Random(seed === undefined ? 5489 : Number(seed))
@@ -29,6 +30,8 @@ const result = generateAaron({
   profile,
   smallImageScreenWidth: screenWidth === undefined ? undefined : Number(screenWidth),
   smallImageScreenHeight: screenHeight === undefined ? undefined : Number(screenHeight),
+  outlineMode: args.includes('--free-path-subset') ? 'free-path-subset' : undefined,
+  outlineSeed: outlineSeed === undefined ? undefined : Number(outlineSeed),
   random: numericRandom,
 });
 const text = serializeAaFile(result.document);

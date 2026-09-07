@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local clean-room integration of the measured FREE-PATH subset; not an original-engine painting fixture",
+  "outlineMode": "free-path-subset",
+  "cases": [
+    {
+      "sceneSeed": 1234,
+      "outlineSeed": 1234,
+      "figureCount": 2,
+      "inputEdges": 252,
+      "emittedPoints": 3026,
+      "paintOperations": 68836,
+      "serializedBytes": 230439,
+      "sha256": "61a684184ae3a2f82dfaeb8d4b0fdb12b73e68cc7887c41928190b2502df0a05"
+    },
+    {
+      "sceneSeed": 5678,
+      "outlineSeed": 1234,
+      "figureCount": 2,
+      "inputEdges": 242,
+      "emittedPoints": 2909,
+      "paintOperations": 76550,
+      "serializedBytes": 242740,
+      "sha256": "5b4262e764668513dbcbfcb7d897f1409be74f52be80a3971d93f846c2151a33"
+    }
+  ]
+}

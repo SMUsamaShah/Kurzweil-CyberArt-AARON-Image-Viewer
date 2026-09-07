@@ -25,3 +25,25 @@ test('planner produces reproducible non-overlapping figure placements', () => {
   assert(leftFigures.length <= 3);
   assert(leftFigures.every(({ polygon }) => left.grid.canPlacePolygon(polygon) === false));
 });
+
+test('planner exposes accepted rectangular figure frames and preserves indices', () => {
+  const planner = new AaronPlanner({ width: 320, height: 240, random: new AaronRandom(7), roughness: 0 });
+  const frames = planner.planFigureFrames({ count: 10, width: 57.6, height: 124.8 });
+  assert.equal(frames.length, 3);
+  assert.deepEqual(frames.map(({ index }) => index), [0, 1, 2]);
+  for (const frame of frames) {
+    assert.equal(frame.frame.x, frame.polygon[0][0]);
+    assert.equal(frame.frame.y, frame.polygon[0][1]);
+    assert(Math.abs(frame.frame.width - 57.6) < 1e-9);
+    assert(Math.abs(frame.frame.height - 124.8) < 1e-9);
+    assert(frame.frame.x >= planner.grid.cellSize);
+    assert(frame.frame.y >= planner.grid.cellSize);
+    assert(frame.frame.x + frame.frame.width <= planner.grid.width - planner.grid.cellSize);
+    assert(frame.frame.y + frame.frame.height <= planner.grid.height - planner.grid.cellSize);
+  }
+});
+
+test('planner rejects an impossible frame without an inverted random range', () => {
+  const planner = new AaronPlanner({ width: 32, height: 240, random: new AaronRandom(7), roughness: 0 });
+  assert.deepEqual(planner.planFigureFrames({ count: 1, width: 16, height: 120 }), []);
+});

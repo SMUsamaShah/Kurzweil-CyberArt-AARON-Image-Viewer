@@ -1,7 +1,9 @@
 import { createAaBuilder } from './aa-builder.js';
+import { Allegro501Random } from './allegro-random.js';
 import { AaronRandom } from './random.js';
 import { createAaronPalette } from './palette.js';
 import { createAaronPlanner } from './planner.js';
+import { createFreePathOutline } from './aaron-outline.js';
 import {
   ellipsePoints,
   pointInPolygon,
@@ -50,13 +52,68 @@ function makeShape(kind, polygon, fill, options = {}) {
   };
 }
 
-function addClosedOutline(builder, polygon, zPath = false) {
-  if (polygon.length < 2) return;
-  builder.move(polygon[0][0], polygon[0][1], { z: zPath });
-  for (let index = 1; index < polygon.length; index += 1) {
-    builder.draw(polygon[index][0], polygon[index][1], { z: zPath });
+function addClosedOutline(builder, polygon, zPath = false, {
+  mode = 'polygon',
+  random = null,
+} = {}) {
+  if (polygon.length < 2) return { inputEdges: 0, emittedPoints: 0 };
+  const path = mode === 'free-path-subset'
+    ? createFreePathOutline(polygon, random)
+    : polygon;
+  builder.move(path[0][0], path[0][1], { z: zPath });
+  for (let index = 1; index < path.length; index += 1) {
+    builder.draw(path[index][0], path[index][1], { z: zPath });
   }
-  builder.draw(polygon[0][0], polygon[0][1], { z: zPath });
+  if (mode === 'polygon') builder.draw(polygon[0][0], polygon[0][1], { z: zPath });
+  return { inputEdges: polygon.length, emittedPoints: path.length + (mode === 'polygon' ? 1 : 0) };
+}
+
+function shapesBounds(shapes) {
+  let result = null;
+  for (const shape of shapes) {
+    const bounds = polygonBounds(shape.polygon);
+    if (!bounds) continue;
+    result = result
+      ? {
+        minX: Math.min(result.minX, bounds.minX),
+        minY: Math.min(result.minY, bounds.minY),
+        maxX: Math.max(result.maxX, bounds.maxX),
+        maxY: Math.max(result.maxY, bounds.maxY),
+      }
+      : { ...bounds };
+  }
+  return result;
+}
+
+function fitShapesToFrame(shapes, frame) {
+  const sourceBounds = shapesBounds(shapes);
+  if (!sourceBounds) return { shapes, sourceBounds: null, bounds: null, scale: 1 };
+  const inset = Math.min(frame.width, frame.height) * 0.02;
+  const inner = {
+    x: frame.x + inset,
+    y: frame.y + inset,
+    width: Math.max(0, frame.width - inset * 2),
+    height: Math.max(0, frame.height - inset * 2),
+  };
+  const sourceWidth = Math.max(sourceBounds.maxX - sourceBounds.minX, Number.EPSILON);
+  const sourceHeight = Math.max(sourceBounds.maxY - sourceBounds.minY, Number.EPSILON);
+  const scale = Math.min(inner.width / sourceWidth, inner.height / sourceHeight);
+  const offsetX = inner.x + (inner.width - sourceWidth * scale) / 2 - sourceBounds.minX * scale;
+  // Keep the provisional figure bottom-aligned inside its accepted frame.
+  const offsetY = inner.y - sourceBounds.minY * scale;
+  const transformed = shapes.map((shape) => ({
+    ...shape,
+    polygon: shape.polygon.map(([x, y]) => [
+      x * scale + offsetX,
+      y * scale + offsetY,
+    ]),
+  }));
+  return {
+    shapes: transformed,
+    sourceBounds,
+    bounds: shapesBounds(transformed),
+    scale,
+  };
 }
 
 function fillPolygon(builder, shape, random, palette) {
@@ -116,9 +173,8 @@ function makeBackground(random, width, height, palette) {
 
 function makeFigure(random, width, height, index, total, palette, placement = null) {
   const scale = random.between(0.72, 1.08);
-  const plannedBounds = placement ? polygonBounds(placement.polygon) : null;
-  const centerX = plannedBounds
-    ? (plannedBounds.minX + plannedBounds.maxX) / 2
+  const centerX = placement?.frame
+    ? placement.frame.x + placement.frame.width / 2
     : ((index + 1) / (total + 1)) * width + random.between(-width * 0.08, width * 0.08);
   const floor = height * random.between(0.06, 0.14);
   const torsoWidth = width * 0.10 * scale;
@@ -174,7 +230,24 @@ function makeFigure(random, width, height, index, total, palette, placement = nu
   shapes.push(makeShape('left-leg', leftLeg, cloth, { brush: 5 }));
   shapes.push(makeShape('right-leg', rightLeg, cloth, { brush: 5 }));
 
-  return { kind: 'figure', centerX, floor, headY, shapes };
+  if (!placement?.frame) {
+    return { kind: 'figure', index, centerX, floor, headY, placement: null, shapes };
+  }
+  const fitted = fitShapesToFrame(shapes, placement.frame);
+  return {
+    kind: 'figure',
+    index,
+    centerX,
+    floor,
+    headY,
+    placement: {
+      frame: { ...placement.frame },
+      sourceBounds: fitted.sourceBounds,
+      bounds: fitted.bounds,
+      scale: fitted.scale,
+    },
+    shapes: fitted.shapes,
+  };
 }
 
 function makePlant(random, width, height, palette) {
@@ -234,6 +307,22 @@ export class AaronGenerator {
     this.random = options.random ?? new AaronRandom(this.seed);
     this.premium = Boolean(options.premium);
     this.smallImage = Boolean(options.smallImage || this.premium);
+    this.outlineMode = options.outlineMode ?? 'polygon';
+    if (!['polygon', 'free-path-subset'].includes(this.outlineMode)) {
+      throw new RangeError(`unknown outline mode ${JSON.stringify(this.outlineMode)}`);
+    }
+    this.outlineSeed = options.outlineSeed;
+    if (this.outlineMode === 'free-path-subset') {
+      if (!Number.isInteger(this.outlineSeed)
+        || this.outlineSeed < -0x80000000 || this.outlineSeed >= 0x100000000) {
+        throw new RangeError('outlineSeed must be a signed or unsigned 32-bit integer in free-path-subset mode');
+      }
+      // Keep experimental outline sampling separate from scene randomness so
+      // enabling it does not silently change composition or palette draws.
+      this.outlineRandom = new Allegro501Random(this.outlineSeed);
+    } else {
+      this.outlineRandom = null;
+    }
     const mode = this.premium ? PREMIUM_MODE : (this.smallImage ? SMALL_MODE : LARGE_MODE);
     // The original compact branch keeps two retained screen-size variables.
     // Its saved AA header stores half the requested width, while preserving
@@ -289,21 +378,24 @@ export class AaronGenerator {
       cellSize: options.cellSize ?? 16,
       roughness: options.roughness ?? 0,
     });
-    const plannedFigures = planner?.planFigures({
+    const plannedFigures = planner?.planFigureFrames({
       count: figureCount,
       width: this.width * 0.18,
       height: this.height * 0.52,
     }) ?? [];
+    const figurePlans = planner
+      ? plannedFigures
+      : Array.from({ length: figureCount }, (_, index) => ({ index, frame: null }));
     const figures = [];
-    for (let index = 0; index < figureCount; index += 1) {
+    for (const plan of figurePlans) {
       const figure = makeFigure(
         random,
         this.width,
         this.height,
-        index,
+        plan.index,
         figureCount,
         this.palette,
-        plannedFigures[index],
+        plan.frame ? plan : null,
       );
       figures.push(figure);
       scenes.push(figure);
@@ -313,9 +405,17 @@ export class AaronGenerator {
     }
     if (options.includePlant ?? true) scenes.push(makePlant(random, this.width, this.height, this.palette));
 
+    let outlineInputEdges = 0;
+    let outlineEmittedPoints = 0;
     for (const scene of scenes) {
       for (const shape of scene.shapes) {
-        if (shape.outline) addClosedOutline(builder, shape.polygon, shape.zPath);
+        if (!shape.outline) continue;
+        const metrics = addClosedOutline(builder, shape.polygon, shape.zPath, {
+          mode: this.outlineMode,
+          random: this.outlineRandom,
+        });
+        outlineInputEdges += metrics.inputEdges;
+        outlineEmittedPoints += metrics.emittedPoints;
       }
     }
 
@@ -335,7 +435,29 @@ export class AaronGenerator {
         requestedScreenWidth: this.requestedScreenWidth,
         requestedScreenHeight: this.requestedScreenHeight,
         profile: this.profile,
+        outlineMode: this.outlineMode,
+        outlineSeed: this.outlineSeed ?? null,
+        outlineSampling: {
+          inputEdges: outlineInputEdges,
+          emittedPoints: outlineEmittedPoints,
+        },
         figures: figures.length,
+        composition: {
+          status: planner ? 'provisional-planned' : 'unplanned',
+          requestedFigures: figureCount,
+          acceptedFigures: figures.length,
+          rejectedFigureIndices: planner
+            ? Array.from({ length: figureCount }, (_, index) => index)
+              .filter((index) => !plannedFigures.some((figure) => figure.index === index))
+            : [],
+        },
+        figurePlacements: figures.map(({ index, placement }) => ({
+          index,
+          frame: placement?.frame ?? null,
+          sourceBounds: placement?.sourceBounds ?? null,
+          bounds: placement?.bounds ?? null,
+          scale: placement?.scale ?? null,
+        })),
         planner: planner?.snapshot() ?? null,
         objects: scenes.map(({ kind, shapes }) => ({ kind, shapeCount: shapes.length })),
       },

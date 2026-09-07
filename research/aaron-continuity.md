@@ -105,9 +105,23 @@ of truth for this pass. A follow-up comparison also confirms that the DXL and
 PLL retain the same 50 core module names in different orders (zero-item common
 prefix), so neither string order is being treated as execution order.
 
+The current local implementation checkpoint adds two explicitly provisional,
+measured-input integrations. `planFigureFrames` now turns accepted planner
+placements into rectangular frame contracts, and the generator fits each
+figure into its accepted frame while retaining placement metadata. An
+independent 900-case local sweep found 881 accepted placements with zero
+containment, overlap, exception, or count-mismatch failures. The opt-in
+`free-path-subset` outline mode connects the measured `FREE-PATH` primitive to
+closed figure outlines using a separate seeded RNG stream, so it does not
+change scene random consumption. Its local fixture records 3,026 and 2,909
+outline operations for the two seed cases. These are clean-room integration
+scaffolds, not claims about the archived caller policy; the exact boundaries
+and sweep are documented in
+[`clean-room-integration.md`](clean-room-integration.md).
+
 Local verification:
 
-- `cd engine && npm test` → 58 passing tests.
+- `cd engine && npm test` → 66 passing tests.
 - The brush report parser and its real original-engine captures are covered by
   the research-tool suite.
 - Research-tool tests are run directly with
@@ -117,11 +131,11 @@ Local verification:
 
 ## Honest progress estimate
 
-Overall completion is approximately **25–35%**. The archaeology, AA protocol,
-fixtures, static-analysis tools, numeric primitives, and several isolated
-stroke/map/writer boundaries are strong. The high-level artistic decision
-system is still mostly unresolved, so this is not yet a parity-equivalent
-generator.
+Overall completion is approximately **30–35%**. The archaeology, AA protocol,
+fixtures, static-analysis tools, numeric primitives, several isolated
+stroke/map/writer boundaries, and the first local composition/outline
+integration seams are now strong. The high-level artistic decision system is
+still mostly unresolved, so this is not yet a parity-equivalent generator.
 
 | Area | Current state |
 |---|---|
@@ -132,6 +146,8 @@ generator.
 | Stream/writer selectors | Isolated behavior measured; integrated screen/file path remains open |
 | Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints, repeated-vertex idempotency, and an edge error boundary; selection, integrated clipping, fill, colour, and state remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
+| Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
+| Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |
 
@@ -156,6 +172,12 @@ planning, figure generation, fills, brush work, and painting output.
 6. Productize the recovered engine without presenting provisional behavior as
    exact parity.
 
+The new frame and outline integrations make the local engine more measurable,
+but they do not reduce the main historical uncertainty: AARON's own scene
+planner, figure rules, clipping/brush policy, and downstream emission. They
+should therefore remain opt-in or clearly labelled provisional until an
+original-engine trace supports their caller semantics.
+
 ## Immediate next move
 
 Use the local-first workflow:
@@ -165,7 +187,8 @@ Use the local-first workflow:
    and the negative reference scan shows that raw heap arithmetic cannot safely
    replace runtime context. Use the object-span report and scene-context
    dossier to choose conservative read-only runtime targets, then inspect the
-   existing brush-stroke, map, and integrated-trace fixtures locally.
+   existing brush-stroke, map, integrated-trace, and new clean-room integration
+   fixtures locally.
 2. Extend only behavior already supported by evidence in the JS model and
    tests; do not guess at `SELECT-BRUSH`, clipping, or scene semantics.
 3. When a new original-engine observation is required, use the Windows Server
