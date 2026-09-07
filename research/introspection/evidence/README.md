@@ -495,6 +495,9 @@ commit `605d135fe2612328e68fa1ceb30e760c61e4ceb5`. It writes 26 value-1
 cells and no patch cells. The exact index set matches the union of the two
 translated brush-2 `CORE` masks in the new JS fixture.
 
+The next holdout keeps the same path and value but selects startup brush 3,
+extending this core-mask comparison one profile at a time.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
