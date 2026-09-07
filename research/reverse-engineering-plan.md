@@ -53,8 +53,12 @@ complete equivalent port until phases 5–8 are recovered.
    50 DXL `harold3` source markers with 50 PLL `.fasl` markers. Use the exact
    record/object offsets to select read-only targets such as `FILL-MAP`,
    `PAINT-BRUSH`, and `MPLAN`; do not infer their values, package ownership,
-   or code boundaries from names alone. The runtime PLL copy is truncated, so
-   static work must use the complete extracted PLL outside the repository.
+   or code boundaries from names alone. The first table now also has a
+   measured 7,723-object `0x6c` span tiling that ends exactly at the string
+   table, but no named function has been assigned to one of those objects.
+   Use `scene-context-findings.md` for the package-qualified runtime target
+   checklist. The runtime PLL copy is truncated, so static work must use the
+   complete extracted file outside the repository.
 
 1. Keep the completed read-only brush-state census as the boundary for fill
    work. The direct checkpoint records seven `PAINT-BRUSH` objects,
@@ -78,6 +82,9 @@ complete equivalent port until phases 5–8 are recovered.
    binding with `UNWIND-PROTECT`. Treat this as dependency-isolated
    branch/map behavior, not full pipeline parity.
 4. Establish the scene context required by the original `SCREEN-AND-STORE`.
+   First use `scene-context-findings.md` and its package-qualified dossier to
+   select metadata-only observations; do not manufacture a plan object from
+   the static names or first-table offsets.
    The direct call now has a reliable condition boundary: it invokes
    `WATCH-FOR-MESSAGES` once and stops at unbound `MPLAN`, with all probe
    overrides restored. The read-only constructor probe records

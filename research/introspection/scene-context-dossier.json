@@ -1,0 +1,1076 @@
+{
+  "schemaVersion": 1,
+  "scope": "Package-qualified target checklist from existing static and oracle reports; no heap evaluation or slot inference",
+  "evidenceSources": {
+    "staticIndex": "research/introspection/static-image-index.json",
+    "functionConstants": {
+      "path": "research/introspection/evidence/function-constants-33986804721.txt",
+      "sha256": "c9f1da905e3cd38f1b750d16629f97de882364467b58cbbd86236fbf76624b58"
+    },
+    "genericMethods": {
+      "path": "research/introspection/evidence/generic-methods-34016410110.txt",
+      "sha256": "6caba34dad6270cf2ae33210b726df4658621a3eacb5a8f4ef1ab5eed7f420e2"
+    },
+    "checkpoints": [
+      "research/introspection/evidence/planning-call-trace-focused-34099250163.txt"
+    ]
+  },
+  "limits": [
+    "A constant reference does not prove a call, read/write direction, or execution order.",
+    "An indexed name does not establish package ownership, class layout, slot layout, or function boundaries.",
+    "A missing checkpoint observation is not evidence that a binding is absent outside that checkpoint.",
+    "Checkpoint rows are retained from one normalized run and must not be merged with another run without a new boundary.",
+    "The dossier selects future metadata-only observations; it does not manufacture a PLAN or substitute live scene state."
+  ],
+  "checkpoints": [
+    {
+      "id": "master-plan-enter",
+      "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+      "run": "34099250163",
+      "checkpoint": "MASTER-PLAN entry",
+      "observations": {
+        "MPLAN": "NIL",
+        "PREFS": "NIL",
+        "SDEX": "NIL",
+        "FIGDEX": "NIL",
+        "FILL-MAP": "NIL",
+        "RGB-MAP": "T"
+      }
+    },
+    {
+      "id": "rparse-enter",
+      "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+      "run": "34099250163",
+      "checkpoint": "RPARSE entry",
+      "observations": {
+        "MPLAN": "bound",
+        "SDEX": "FIXNUM",
+        "FIGDEX": "FIXNUM",
+        "FILL-MAP": "bound",
+        "RGB-MAP": "bound",
+        "MPLAN:type": "PLAN",
+        "FILL-MAP:type": "(ARRAY (UNSIGNED-BYTE 4) (320 480))"
+      }
+    },
+    {
+      "id": "prep-line-enter",
+      "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+      "run": "34099250163",
+      "checkpoint": "PREP-LINE entry",
+      "observations": {
+        "MPLAN": "bound",
+        "SDEX": "bound",
+        "FIGDEX": "bound",
+        "BRUSH": "bound",
+        "FILL-MAP": "bound",
+        "RPLANE": "bound",
+        "RGB-MAP": "bound"
+      }
+    },
+    {
+      "id": "store-in-file-first",
+      "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+      "run": "34099250163",
+      "checkpoint": "first STORE-IN-FILE entry",
+      "observations": {
+        "MPLAN": "PLAN",
+        "SDEX": "FIXNUM",
+        "FIGDEX": "FIXNUM",
+        "FILL-MAP": "(ARRAY (UNSIGNED-BYTE 4) (320 480))",
+        "RGB-MAP": "NIL",
+        "BRUSH": "NIL"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "identity": "COMMON-GRAPHICS-USER::BRUSH",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "BRUSH",
+      "priority": 1,
+      "role": "selected brush binding; bound at PREP-LINE but NIL at first STORE-IN-FILE",
+      "question": "Where is brush selection finalized relative to SCREEN-AND-STORE and PREP-LINE?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3229864,
+        "objectOffset": 4473624,
+        "key": 60583,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 27,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "BRUSH"
+        },
+        {
+          "function": "BRUSH-STROKE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 3,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "BRUSH"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 20,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "BRUSH"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 7,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "BRUSH"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "BRUSH": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "BRUSH": "NIL"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::CFLIST",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "CFLIST",
+      "priority": 1,
+      "role": "figure/cform list referenced by scene and brush-fill routines",
+      "question": "What list shape does the current plan expose to RECORD-BRUSH and fill traversal?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2874832,
+        "objectOffset": 3383784,
+        "key": 6222,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 2874832,
+        "objectOffset": 3383784,
+        "key": 6222
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 5,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        },
+        {
+          "function": "BRUSH-FILL-SUBPART",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 17,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        },
+        {
+          "function": "DRAW-CFORM",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 12,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 13,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 4,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        },
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 6,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFLIST"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::FIGDEX",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "FIGDEX",
+      "priority": 1,
+      "role": "figure index; RPARSE reports a FIXNUM",
+      "question": "How does FIGDEX identify the active figure during drawing?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2966560,
+        "objectOffset": 3673704,
+        "key": 21876,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "MASTER-PLAN",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 4,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "FIGDEX"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FIGDEX": "NIL"
+          }
+        },
+        {
+          "id": "rparse-enter",
+          "checkpoint": "RPARSE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FIGDEX": "FIXNUM"
+          }
+        },
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FIGDEX": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FIGDEX": "FIXNUM"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::FILL-MAP",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "FILL-MAP",
+      "priority": 1,
+      "role": "private unsigned-byte-4 fill map, measured as 320 by 480 at RPARSE",
+      "question": "Which scene transition clears, reads, or replaces the private fill map?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3018152,
+        "objectOffset": 3822544,
+        "key": 29427,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-STROKE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 10,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "FILL-MAP"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FILL-MAP": "NIL"
+          }
+        },
+        {
+          "id": "rparse-enter",
+          "checkpoint": "RPARSE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FILL-MAP": "bound",
+            "FILL-MAP:type": "(ARRAY (UNSIGNED-BYTE 4) (320 480))"
+          }
+        },
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FILL-MAP": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "FILL-MAP": "(ARRAY (UNSIGNED-BYTE 4) (320 480))"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::MPLAN",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "MPLAN",
+      "priority": 1,
+      "role": "scene plan binding; RPARSE reports its value as a PLAN",
+      "question": "Which plan fields connect the parsed scene to screen, brush, and fill state?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3183272,
+        "objectOffset": 4343352,
+        "key": 55561,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 2,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "BRUSH-FILL-SUBPART",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 14,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "DRAW-CFORM",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 4,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "MASTER-PLAN",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 10,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 1,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "RESET-RANGE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 1,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        },
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 3,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "MPLAN"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "MPLAN": "NIL"
+          }
+        },
+        {
+          "id": "rparse-enter",
+          "checkpoint": "RPARSE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "MPLAN": "bound",
+            "MPLAN:type": "PLAN"
+          }
+        },
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "MPLAN": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "MPLAN": "PLAN"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::PLAN",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "PLAN",
+      "priority": 1,
+      "role": "reported class/type of MPLAN",
+      "question": "Which read-only accessors or class metadata describe the plan relationship?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3188048,
+        "objectOffset": 4355896,
+        "key": 56021,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [],
+      "checkpointObservations": [],
+      "evidenceStrength": "indexed-name-only"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::RGB-MAP",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "RGB-MAP",
+      "priority": 1,
+      "role": "colour map binding; true at RPARSE/PREP-LINE and NIL at first STORE-IN-FILE",
+      "question": "Which transition consumes or clears RGB-MAP before the first stored line?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3068760,
+        "objectOffset": 3981632,
+        "key": 37853,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 8,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "RGB-MAP"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "RGB-MAP": "T"
+          }
+        },
+        {
+          "id": "rparse-enter",
+          "checkpoint": "RPARSE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "RGB-MAP": "bound"
+          }
+        },
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "RGB-MAP": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "RGB-MAP": "NIL"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::RPLANE",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "RPLANE",
+      "priority": 1,
+      "role": "render-plane binding; bound at PREP-LINE",
+      "question": "What object or dimensions does RPLANE provide to the downstream screen path?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2901640,
+        "objectOffset": 3469432,
+        "key": 10734,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [],
+      "checkpointObservations": [
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "RPLANE": "bound"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::SCRIPT",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "SCRIPT",
+      "priority": 1,
+      "role": "scene/script context referenced by brush and fill routines",
+      "question": "Which script-level list or record supplies CFLIST/IDLIST and brush context?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2869600,
+        "objectOffset": 3367160,
+        "key": 5428,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 2869600,
+        "objectOffset": 3367160,
+        "key": 5428
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 3,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "BRUSH-FILL-SUBPART",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 15,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "DRAW-CFORM",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 5,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 11,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 2,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "RESET-RANGE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 2,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        },
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 4,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SCRIPT"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::SDEX",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "SDEX",
+      "priority": 1,
+      "role": "scene/subpart index; RPARSE reports a FIXNUM",
+      "question": "How does SDEX select the current scene record or subpart?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3193336,
+        "objectOffset": 4369608,
+        "key": 56540,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 3193336,
+        "objectOffset": 4369608,
+        "key": 56540
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "BRUSH-FILL-SUBPART",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "BRUSH-STROKE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "DRAW-CFORM",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "MASTER-PLAN",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 3,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "RESET-RANGE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "TREE",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        },
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "SDEX"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "SDEX": "NIL"
+          }
+        },
+        {
+          "id": "rparse-enter",
+          "checkpoint": "RPARSE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "SDEX": "FIXNUM"
+          }
+        },
+        {
+          "id": "prep-line-enter",
+          "checkpoint": "PREP-LINE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "SDEX": "bound"
+          }
+        },
+        {
+          "id": "store-in-file-first",
+          "checkpoint": "first STORE-IN-FILE entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "SDEX": "FIXNUM"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::ALL-BRUSHES",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "ALL-BRUSHES",
+      "priority": 2,
+      "role": "brush collection referenced by SELECT-BRUSH",
+      "question": "What collection ordering and selection boundary does SELECT-BRUSH use?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3094912,
+        "objectOffset": 4066112,
+        "key": 42157,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 19,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "ALL-BRUSHES"
+        },
+        {
+          "function": "SELECT-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 0,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "ALL-BRUSHES"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::CFRAME",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "CFRAME",
+      "priority": 2,
+      "role": "current frame context referenced by DRAW-CFORM and CLEAR-FILL-MAP",
+      "question": "Which frame bounds or status values govern fill-map clearing and drawing?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2886600,
+        "objectOffset": 3422400,
+        "key": 8149,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 2886600,
+        "objectOffset": 3422400,
+        "key": 8149
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 6,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFRAME"
+        },
+        {
+          "function": "DRAW-CFORM",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 28,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFRAME"
+        },
+        {
+          "function": "PAINT-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 14,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "CFRAME"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::COLORDEX",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "COLORDEX",
+      "priority": 2,
+      "role": "colour index referenced by SCREEN-AND-STORE",
+      "question": "Which palette entry and random branch feed a stored brush segment?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3028232,
+        "objectOffset": 3851608,
+        "key": 30846,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 3028232,
+        "objectOffset": 3851608,
+        "key": 30846
+      },
+      "constantReferences": [
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 7,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "COLORDEX"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::IDLIST",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "IDLIST",
+      "priority": 2,
+      "role": "identifier list referenced by RECORD-BRUSH and fill traversal",
+      "question": "Which identifiers are consumed while recording mapped brush output?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 2871536,
+        "objectOffset": 3373240,
+        "key": 5716,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 2871536,
+        "objectOffset": 3373240,
+        "key": 5716
+      },
+      "constantReferences": [
+        {
+          "function": "BRUSH-FILL",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 13,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "IDLIST"
+        },
+        {
+          "function": "BRUSH-FILL-SUBPART",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 18,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "IDLIST"
+        },
+        {
+          "function": "RECORD-BRUSH",
+          "functionType": "COMPILED-FUNCTION",
+          "constantIndex": 5,
+          "source": "research/introspection/evidence/function-constants-33986804721.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "IDLIST"
+        }
+      ],
+      "checkpointObservations": [],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::PREFS",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "PREFS",
+      "priority": 2,
+      "role": "screen/colour preference binding referenced by SCREEN-AND-STORE",
+      "question": "When is PREFS bound in the normal path, and which values affect emission?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3202496,
+        "objectOffset": 4395392,
+        "key": 57429,
+        "dynamicFunction": true
+      },
+      "knownFunction": {
+        "found": true,
+        "recordOffset": 3202496,
+        "objectOffset": 4395392,
+        "key": 57429
+      },
+      "constantReferences": [
+        {
+          "function": "SCREEN-AND-STORE",
+          "method": null,
+          "constantIndex": 13,
+          "source": "research/introspection/evidence/generic-methods-34016410110.txt",
+          "package": "COMMON-GRAPHICS-USER",
+          "name": "PREFS"
+        }
+      ],
+      "checkpointObservations": [
+        {
+          "id": "master-plan-enter",
+          "checkpoint": "MASTER-PLAN entry",
+          "run": "34099250163",
+          "source": "research/introspection/evidence/planning-call-trace-focused-34099250163.txt",
+          "observations": {
+            "PREFS": "NIL"
+          }
+        }
+      ],
+      "evidenceStrength": "observed-reference-or-state"
+    },
+    {
+      "identity": "COMMON-GRAPHICS-USER::PAINT-BRUSH",
+      "package": "COMMON-GRAPHICS-USER",
+      "name": "PAINT-BRUSH",
+      "priority": 3,
+      "role": "measured class of the seven retained brush objects",
+      "question": "Which already-measured brush object is selected for a given environment value?",
+      "staticIndex": {
+        "indexed": true,
+        "recordOffset": 3076680,
+        "objectOffset": 4009296,
+        "key": 39306,
+        "dynamicFunction": false
+      },
+      "knownFunction": {
+        "found": false,
+        "inventoryEntry": false
+      },
+      "constantReferences": [],
+      "checkpointObservations": [],
+      "evidenceStrength": "indexed-name-only"
+    }
+  ]
+}

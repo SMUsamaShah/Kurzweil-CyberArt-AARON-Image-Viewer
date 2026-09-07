@@ -21,9 +21,10 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-07, the recovered checkout is synchronized locally at
-`549dc71` (`Record bounded brush edge behavior`), with the current direct
-matrix source at `73ba1f6`. The connected branch contains the same tree under
-connector-created commits. Its pre-index content ended at
+`c81a09e` (`Record published static index checkpoint`), with the connected
+branch containing the same published tree under connector-created commits.
+The current direct matrix source remains in the earlier edge checkpoint. Its
+pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication; the static-index publication was verified at
 `b33a90bb7462a0e853678a216eb80ce93948068b` (the connector branch may advance
@@ -71,6 +72,15 @@ complete extracted file for static work. Exact references for `BRUSH-STROKE`,
 `research/static-image-findings.md`. These are offsets and name/binding
 cross-references, not recovered Lisp source or object semantics.
 
+The static parser now additionally validates all 7,723 first-table object
+spans: every object is tagged `0x6c`, every header length agrees with the
+record, sorted spans tile exactly to `0x2b4b90`, and all alignment padding is
+zero. This proves structural code-like object boundaries only; it does not
+map `MPLAN`, `BRUSH-STROKE`, or other names to objects. The package-qualified
+scene target checklist is retained at
+`research/introspection/scene-context-dossier.json`, with its interpretation
+in `research/scene-context-findings.md`.
+
 Local verification:
 
 - `cd engine && npm test` → 58 passing tests.
@@ -79,7 +89,7 @@ Local verification:
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`; the suite now has
-  22 passing tests.
+  28 passing tests.
 
 ## Honest progress estimate
 
@@ -127,9 +137,10 @@ planning, figure generation, fills, brush work, and painting output.
 Use the local-first workflow:
 
 1. Run the local static image index/tests first and inspect the exact
-   DXL/PLL references before scheduling another oracle job. Use them to choose
-   conservative read-only runtime targets, then inspect the existing
-   brush-stroke, map, and integrated-trace fixtures locally.
+   DXL/PLL references before scheduling another oracle job. Use the validated
+   object-span report and scene-context dossier to choose conservative
+   read-only runtime targets, then inspect the existing brush-stroke, map, and
+   integrated-trace fixtures locally.
 2. Extend only behavior already supported by evidence in the JS model and
    tests; do not guess at `SELECT-BRUSH`, clipping, or scene semantics.
 3. When a new original-engine observation is required, use the Windows Server

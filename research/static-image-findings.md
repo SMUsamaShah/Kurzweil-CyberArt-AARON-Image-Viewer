@@ -43,6 +43,40 @@ The table contains every one of the 1,347 names in the retained dynamic
 `.fasl` module paths. The DXL independently retains 50 matching `harold3`
 `.lisp` module names, so the module sets cross-reference exactly.
 
+### First-table object spans
+
+The first table has a stronger structural interpretation than its raw record
+list alone suggests. For each record `(A, B)`, the offset `0x40 + A` points to
+an eight-byte-aligned object whose four-byte header satisfies:
+
+```text
+header & 0xff = 0x6c
+header >>> 8 = B + 4
+```
+
+For the complete image, the predicted object span is
+`align_up(4 + 2 * (header >>> 8), 8)`. Sorting all 7,723 objects by offset,
+every predicted next boundary matches the next object, and the final boundary
+is exactly the string table at `0x2b4b90`. All alignment bytes are zero. The
+normalized report records this as `pll.firstTable.compiledObjects`:
+
+| Check | Measured result |
+|---|---:|
+| distinct objects | 7,723 / 7,723 |
+| eight-byte aligned | true |
+| header tag `0x6c` | 7,723 / 7,723 |
+| header length matches record | true |
+| predicted boundaries agree | true |
+| final boundary | `0x2b4b90` |
+| zero alignment padding | true |
+
+The most common four-byte payload prefixes are `55 8b ec 56` (7,373
+objects), `83 f9 01 74` (171), and `e3 03 ff 57` (52). These are useful
+code-like structural markers, not a disassembly or a function-name mapping.
+The exact indexed strings for `BRUSH-STROKE`, `FILL-MAP`, `PAINT-BRUSH`,
+`RAN-HAND`, and `MPLAN` remain string objects; no relationship from those
+names to a particular `0x6c` object has been established.
+
 The DXL header has a count of four at `0x60`, followed by four opaque
 three-word descriptors at `0x64`, `0x70`, `0x7C`, and `0x88`:
 
@@ -74,10 +108,11 @@ cross-reference, not a recovered value or class layout.
 
 ## Limits and next local use
 
-The indexed strings establish exact offsets and retained metadata, not source
-code. They do not yet establish package ownership, the semantics of the raw
-keys, function boundaries in the first table, or references from a function
-object to a source module. The next static step is to use these validated
-object references to build a conservative symbol/class/global target list for
-read-only runtime probes, while keeping all algorithm claims tied to existing
-original-engine evidence.
+The indexed strings and object spans establish exact offsets and retained
+metadata, not source code. They do not yet establish package ownership, the
+semantics of the raw keys, entry-point semantics inside a `0x6c` object, or a
+reference from a function object to a source module. The package-qualified
+scene target checklist is preserved in
+[`introspection/scene-context-dossier.json`](introspection/scene-context-dossier.json)
+and summarized in [`scene-context-findings.md`](scene-context-findings.md).
+Keep all algorithm claims tied to existing original-engine evidence.

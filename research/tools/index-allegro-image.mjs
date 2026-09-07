@@ -28,6 +28,11 @@ const PRINTABLE_MAX = 126;
 const SOURCE_SUFFIX = /\.(?:fasl|lisp|cl)$/i;
 const SYMBOL_PATTERN = /^[A-Z0-9*+\-/<=>!?_.$%&@^~:#]+$/;
 const APPLICATION_NAME_PATTERN = /(?:AARON|KCAT|PLAN|MPLAN|COMPOSE|FIGURE|BODY|POSE|ARM|HAND|HEAD|HAIR|TORSO|LEG|PLANT|TREE|POT|BLOX|PLINTH|BRUSH|PAINT|FILL|HUE|COLOR|COLOUR|CFORM|MAP|EDGE|PATH|LINE|RAN|RANDOM|RSEED|SCREEN|CANVAS|PREMIUM)/;
+const CONTEXT_TARGET_NAMES = Object.freeze([
+  'MPLAN', 'PLAN', 'SCRIPT', 'PREFS', 'SDEX', 'FIGDEX', 'CFLIST', 'IDLIST',
+  'CFRAME', 'BRUSH', 'PAINT-BRUSH', 'ALL-BRUSHES', 'FILL-MAP', 'RPLANE',
+  'RGB-MAP', 'COLORDEX',
+]);
 
 function assertBuffer(buffer, label) {
   if (!Buffer.isBuffer(buffer)) throw new TypeError(`${label} must be a Buffer`);
@@ -145,6 +150,125 @@ export function resolveIndexedStrings(buffer, table, objectBase, tag = 0x65) {
   return resolved;
 }
 
+function alignUp(value, alignment) {
+  return Math.ceil(value / alignment) * alignment;
+}
+
+function prefixHex(buffer, offset, length = 4) {
+  return buffer.subarray(offset, offset + length).toString('hex');
+}
+
+/**
+ * Validate the object spans addressed by the PLL's first table.
+ *
+ * The first table is not treated as a function-name map here.  It is only
+ * checked as a table of tagged code-like objects: each record's second word
+ * predicts the encoded object length, and sorted object offsets must tile the
+ * image up to the string table.  This deliberately stops short of assigning
+ * entry points or symbol names.
+ */
+export function parseCompiledObjectTable(buffer, table, {
+  objectBase = table?.offset,
+  expectedTag = 0x6c,
+  finalBoundary = null,
+} = {}) {
+  assertBuffer(buffer, 'image');
+  if (!table || !Array.isArray(table.records)) {
+    throw new TypeError('table must contain records');
+  }
+  if (!Number.isInteger(objectBase) || objectBase < 0) {
+    throw new RangeError('objectBase must be a non-negative integer');
+  }
+
+  const objects = table.records.map((record) => {
+    const objectOffset = objectBase + record.first;
+    if (objectOffset % 8 !== 0) {
+      throw new Error(`compiled object at 0x${objectOffset.toString(16)} is not eight-byte aligned`);
+    }
+    const header = u32(buffer, objectOffset, 'compiled object');
+    const tag = header & 0xff;
+    const encodedWords = header >>> 8;
+    const rawEnd = objectOffset + 4 + encodedWords * 2;
+    const nextBoundary = alignUp(rawEnd, 8);
+    if (nextBoundary > buffer.length) {
+      throw new RangeError(`compiled object at 0x${objectOffset.toString(16)} exceeds image`);
+    }
+    const padding = buffer.subarray(rawEnd, nextBoundary);
+    return {
+      recordOffset: record.offset,
+      objectOffset,
+      first: record.first,
+      second: record.second,
+      header,
+      tag,
+      encodedWords,
+      expectedEncodedWords: record.second + 4,
+      rawEnd,
+      nextBoundary,
+      paddingLength: padding.length,
+      paddingZero: [...padding].every((value) => value === 0),
+      prefix: prefixHex(buffer, objectOffset + 4),
+    };
+  });
+
+  const sorted = [...objects].sort((a, b) => a.objectOffset - b.objectOffset);
+  const objectOffsets = new Set(sorted.map(({ objectOffset }) => objectOffset));
+  const boundaryAgreement = sorted.every((object, index) => (
+    object.nextBoundary === (sorted[index + 1]?.objectOffset ?? finalBoundary)
+  ));
+  const tagCounts = new Map();
+  const prefixCounts = new Map();
+  const paddingLengthCounts = new Map();
+  for (const object of sorted) {
+    tagCounts.set(object.tag, (tagCounts.get(object.tag) ?? 0) + 1);
+    prefixCounts.set(object.prefix, (prefixCounts.get(object.prefix) ?? 0) + 1);
+    paddingLengthCounts.set(
+      object.paddingLength,
+      (paddingLengthCounts.get(object.paddingLength) ?? 0) + 1,
+    );
+  }
+  const summarizeCounts = (counts) => Object.fromEntries(
+    [...counts.entries()].sort(([a], [b]) => Number(a) - Number(b)),
+  );
+  const commonPrefixes = [...prefixCounts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 20)
+    .map(([prefix, count]) => ({ prefix, count }));
+
+  return {
+    objectBase,
+    objectCount: objects.length,
+    objectOffsetsDistinct: objectOffsets.size === objects.length,
+    objectOffsetsAligned: sorted.every(({ objectOffset }) => objectOffset % 8 === 0),
+    expectedTag,
+    allExpectedTag: sorted.every(({ tag }) => tag === expectedTag),
+    allLengthFieldsMatchSecondWord: sorted.every((object) => (
+      object.encodedWords === object.expectedEncodedWords
+    )),
+    boundaryAgreement,
+    finalBoundary: sorted.at(-1)?.nextBoundary ?? null,
+    finalBoundaryExpected: finalBoundary,
+    finalBoundaryMatchesExpected: finalBoundary === null
+      ? null
+      : (sorted.at(-1)?.nextBoundary ?? null) === finalBoundary,
+    allPaddingZero: sorted.every(({ paddingZero }) => paddingZero),
+    tagCounts: summarizeCounts(tagCounts),
+    paddingLengthCounts: summarizeCounts(paddingLengthCounts),
+    commonPrefixes,
+    firstObject: sorted[0] ?? null,
+    lastObject: sorted.at(-1) ?? null,
+    objects,
+  };
+}
+
+function compiledObjectSummary(result) {
+  const {
+    objects,
+    ...summary
+  } = result;
+  return summary;
+}
+
 function normalizePath(text) {
   return text.replaceAll('\\', '/');
 }
@@ -196,6 +320,23 @@ function selectedSymbols(strings, functionInventory) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function indexedTargetSymbols(strings) {
+  const firstByText = new Map();
+  for (const entry of strings) {
+    if (!firstByText.has(entry.text)) firstByText.set(entry.text, entry);
+  }
+  return CONTEXT_TARGET_NAMES.map((name) => {
+    const entry = firstByText.get(name);
+    return entry ? {
+      name,
+      found: true,
+      recordOffset: entry.recordOffset,
+      objectOffset: entry.objectOffset,
+      key: entry.key,
+    } : { name, found: false };
+  });
+}
+
 export function parsePll(buffer, layout = DEFAULT_PLL_LAYOUT) {
   assertBuffer(buffer, 'PLL image');
   const firstTable = parseIndexTable(buffer, layout.firstTableOffset, {
@@ -212,6 +353,11 @@ export function parsePll(buffer, layout = DEFAULT_PLL_LAYOUT) {
     layout.stringTableOffset,
     layout.stringObjectTag,
   );
+  const compiledObjects = parseCompiledObjectTable(buffer, firstTable, {
+    objectBase: firstTable.offset,
+    expectedTag: 0x6c,
+    finalBoundary: layout.stringTableOffset,
+  });
   return {
     layout,
     firstTable: {
@@ -221,6 +367,7 @@ export function parsePll(buffer, layout = DEFAULT_PLL_LAYOUT) {
       secondWordNondecreasing: firstTable.secondWordNondecreasing,
       firstRecord: firstTable.records[0],
       lastRecord: firstTable.records.at(-1),
+      compiledObjects: compiledObjectSummary(compiledObjects),
     },
     stringTable: {
       offset: stringTable.offset,
@@ -298,6 +445,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
       indexedCoreFaslModuleCount: coreFasl.length,
       indexedCoreFaslModules: coreFasl,
       sourceReferences,
+      indexedTargetSymbols: indexedTargetSymbols(parsed.strings),
       selectedSymbols: selectedSymbols(parsed.strings, functionInventory),
       knownFunctionReferences: (functionInventory?.functions ?? []).map((name) => {
         const found = parsed.strings.find(({ text }) => text === name);

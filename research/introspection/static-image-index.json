@@ -65,6 +65,141 @@
         "first": 2709896,
         "second": 25574,
         "previousSecond": 5869
+      },
+      "compiledObjects": {
+        "objectBase": 64,
+        "objectCount": 7723,
+        "objectOffsetsDistinct": true,
+        "objectOffsetsAligned": true,
+        "expectedTag": 108,
+        "allExpectedTag": true,
+        "allLengthFieldsMatchSecondWord": true,
+        "boundaryAgreement": true,
+        "finalBoundary": 2837392,
+        "finalBoundaryExpected": 2837392,
+        "finalBoundaryMatchesExpected": true,
+        "allPaddingZero": true,
+        "tagCounts": {
+          "108": 7723
+        },
+        "paddingLengthCounts": {
+          "0": 1893,
+          "2": 2009,
+          "4": 1996,
+          "6": 1825
+        },
+        "commonPrefixes": [
+          {
+            "prefix": "558bec56",
+            "count": 7373
+          },
+          {
+            "prefix": "83f90174",
+            "count": 171
+          },
+          {
+            "prefix": "e303ff57",
+            "count": 52
+          },
+          {
+            "prefix": "83f90274",
+            "count": 29
+          },
+          {
+            "prefix": "83f90374",
+            "count": 12
+          },
+          {
+            "prefix": "8bd880e3",
+            "count": 9
+          },
+          {
+            "prefix": "83f9017c",
+            "count": 7
+          },
+          {
+            "prefix": "ffa74703",
+            "count": 5
+          },
+          {
+            "prefix": "ffa75f02",
+            "count": 5
+          },
+          {
+            "prefix": "807fa300",
+            "count": 4
+          },
+          {
+            "prefix": "8b5dec8b",
+            "count": 3
+          },
+          {
+            "prefix": "8bc880e1",
+            "count": 3
+          },
+          {
+            "prefix": "83f9017d",
+            "count": 2
+          },
+          {
+            "prefix": "83f9027c",
+            "count": 2
+          },
+          {
+            "prefix": "83f9027d",
+            "count": 2
+          },
+          {
+            "prefix": "83f90474",
+            "count": 2
+          },
+          {
+            "prefix": "83f90574",
+            "count": 2
+          },
+          {
+            "prefix": "8bc83bcf",
+            "count": 2
+          },
+          {
+            "prefix": "33c0b068",
+            "count": 1
+          },
+          {
+            "prefix": "33c9b102",
+            "count": 1
+          }
+        ],
+        "firstObject": {
+          "recordOffset": 14744,
+          "objectOffset": 61856,
+          "first": 61792,
+          "second": 43,
+          "header": 12140,
+          "tag": 108,
+          "encodedWords": 47,
+          "expectedEncodedWords": 47,
+          "rawEnd": 61954,
+          "nextBoundary": 61960,
+          "paddingLength": 6,
+          "paddingZero": true,
+          "prefix": "558bec56"
+        },
+        "lastObject": {
+          "recordOffset": 28464,
+          "objectOffset": 2837224,
+          "first": 2837160,
+          "second": 77,
+          "header": 20844,
+          "tag": 108,
+          "encodedWords": 81,
+          "expectedEncodedWords": 81,
+          "rawEnd": 2837390,
+          "nextBoundary": 2837392,
+          "paddingLength": 2,
+          "paddingZero": true,
+          "prefix": "558bec56"
+        }
       }
     },
     "stringTable": {
@@ -30557,6 +30692,120 @@
         "recordOffset": 3108384,
         "objectOffset": 4109752,
         "key": 44353
+      }
+    ],
+    "indexedTargetSymbols": [
+      {
+        "name": "MPLAN",
+        "found": true,
+        "recordOffset": 3183272,
+        "objectOffset": 4343352,
+        "key": 55561
+      },
+      {
+        "name": "PLAN",
+        "found": true,
+        "recordOffset": 3188048,
+        "objectOffset": 4355896,
+        "key": 56021
+      },
+      {
+        "name": "SCRIPT",
+        "found": true,
+        "recordOffset": 2869600,
+        "objectOffset": 3367160,
+        "key": 5428
+      },
+      {
+        "name": "PREFS",
+        "found": true,
+        "recordOffset": 3202496,
+        "objectOffset": 4395392,
+        "key": 57429
+      },
+      {
+        "name": "SDEX",
+        "found": true,
+        "recordOffset": 3193336,
+        "objectOffset": 4369608,
+        "key": 56540
+      },
+      {
+        "name": "FIGDEX",
+        "found": true,
+        "recordOffset": 2966560,
+        "objectOffset": 3673704,
+        "key": 21876
+      },
+      {
+        "name": "CFLIST",
+        "found": true,
+        "recordOffset": 2874832,
+        "objectOffset": 3383784,
+        "key": 6222
+      },
+      {
+        "name": "IDLIST",
+        "found": true,
+        "recordOffset": 2871536,
+        "objectOffset": 3373240,
+        "key": 5716
+      },
+      {
+        "name": "CFRAME",
+        "found": true,
+        "recordOffset": 2886600,
+        "objectOffset": 3422400,
+        "key": 8149
+      },
+      {
+        "name": "BRUSH",
+        "found": true,
+        "recordOffset": 3229864,
+        "objectOffset": 4473624,
+        "key": 60583
+      },
+      {
+        "name": "PAINT-BRUSH",
+        "found": true,
+        "recordOffset": 3076680,
+        "objectOffset": 4009296,
+        "key": 39306
+      },
+      {
+        "name": "ALL-BRUSHES",
+        "found": true,
+        "recordOffset": 3094912,
+        "objectOffset": 4066112,
+        "key": 42157
+      },
+      {
+        "name": "FILL-MAP",
+        "found": true,
+        "recordOffset": 3018152,
+        "objectOffset": 3822544,
+        "key": 29427
+      },
+      {
+        "name": "RPLANE",
+        "found": true,
+        "recordOffset": 2901640,
+        "objectOffset": 3469432,
+        "key": 10734
+      },
+      {
+        "name": "RGB-MAP",
+        "found": true,
+        "recordOffset": 3068760,
+        "objectOffset": 3981632,
+        "key": 37853
+      },
+      {
+        "name": "COLORDEX",
+        "found": true,
+        "recordOffset": 3028232,
+        "objectOffset": 3851608,
+        "key": 30846
       }
     ]
   },

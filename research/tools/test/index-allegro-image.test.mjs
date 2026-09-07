@@ -3,11 +3,26 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
+  parseCompiledObjectTable,
   parseIndexTable,
   parsePll,
   readTaggedString,
   resolveIndexedStrings,
 } from '../index-allegro-image.mjs';
+
+function syntheticCompiledObjects() {
+  const image = Buffer.alloc(0x80, 0);
+  const table = {
+    offset: 0x08,
+    records: [
+      { offset: 0x08, first: 0x40, second: 2 },
+      { offset: 0x10, first: 0x50, second: 4 },
+    ],
+  };
+  image.writeUInt32LE((6 << 8) | 0x6c, 0x48);
+  image.writeUInt32LE((8 << 8) | 0x6c, 0x58);
+  return { image, table };
+}
 
 function syntheticPll() {
   const image = Buffer.alloc(0x100, 0);
@@ -46,14 +61,43 @@ test('parses terminated two-word tables and resolves tagged strings', () => {
   ]);
 });
 
+test('validates first-table compiled-object spans without assigning names', () => {
+  const { image, table } = syntheticCompiledObjects();
+  const result = parseCompiledObjectTable(image, table, { finalBoundary: 0x70 });
+  assert.equal(result.objectCount, 2);
+  assert.equal(result.objectOffsetsDistinct, true);
+  assert.equal(result.allExpectedTag, true);
+  assert.equal(result.allLengthFieldsMatchSecondWord, true);
+  assert.equal(result.boundaryAgreement, true);
+  assert.equal(result.finalBoundaryMatchesExpected, true);
+  assert.equal(result.allPaddingZero, true);
+  assert.deepEqual(result.paddingLengthCounts, { 0: 1, 4: 1 });
+  assert.deepEqual(result.objects.map(({ objectOffset, nextBoundary }) => ({
+    objectOffset,
+    nextBoundary,
+  })), [
+    { objectOffset: 0x48, nextBoundary: 0x58 },
+    { objectOffset: 0x58, nextBoundary: 0x70 },
+  ]);
+});
+
 test('accepts the complete retained PLL layout and cross-reference counts', () => {
   const path = new URL('../../introspection/static-image-index.json', import.meta.url);
   const index = JSON.parse(readFileSync(path, 'utf8'));
   assert.equal(index.artifacts.pll.size, 4573464);
   assert.equal(index.pll.firstTable.recordCount, 7723);
+  assert.equal(index.pll.firstTable.compiledObjects.objectCount, 7723);
+  assert.equal(index.pll.firstTable.compiledObjects.allExpectedTag, true);
+  assert.equal(index.pll.firstTable.compiledObjects.allLengthFieldsMatchSecondWord, true);
+  assert.equal(index.pll.firstTable.compiledObjects.boundaryAgreement, true);
+  assert.equal(index.pll.firstTable.compiledObjects.finalBoundary, 0x2b4b90);
+  assert.equal(index.pll.firstTable.compiledObjects.finalBoundaryMatchesExpected, true);
+  assert.equal(index.pll.firstTable.compiledObjects.allPaddingZero, true);
   assert.equal(index.pll.stringTable.recordCount, 53039);
   assert.equal(index.pll.stringTable.allStringObjects, true);
   assert.equal(index.pll.stringTable.allNulTerminated, true);
+  assert.equal(index.pll.indexedTargetSymbols.length, 16);
+  assert.equal(index.pll.indexedTargetSymbols.every(({ found }) => found), true);
   assert.equal(index.pll.indexedCoreFaslModuleCount, 50);
   assert.equal(index.crossReference.allKnownFunctionsIndexed, true);
   assert.equal(index.crossReference.pllCoreFaslModulesAlsoInDxl, true);

@@ -47,8 +47,11 @@ of our own implementation.
 - [`component-inventory.md`](component-inventory.md) — verified contents of
   the archived installer.
 - [`static-image-findings.md`](static-image-findings.md) — locally validated
-  DXL/PLL table structure, exact indexed string references, and artifact
-  completeness boundary.
+  DXL/PLL table structure, first-table object spans, exact indexed string
+  references, and artifact completeness boundary.
+- [`scene-context-findings.md`](scene-context-findings.md) — package-qualified
+  scene target checklist joined from static names, constants, and one bounded
+  startup state trace.
 - [`aa-format.md`](aa-format.md) — current specification of the interchange
   format.
 - [`host-protocol.md`](host-protocol.md) — screensaver launch behavior and
