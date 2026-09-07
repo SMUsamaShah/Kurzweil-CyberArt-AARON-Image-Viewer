@@ -489,6 +489,12 @@ other routine's coordinate handling.
 The next holdout keeps the horizontal path and value 1 but selects startup
 brush 2, extending the map-write measurement to the next measured core mask.
 
+`brush-stroke-isolated-34073138334.txt` is that brush-2 capture from run
+[34073138334](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073138334),
+commit `605d135fe2612328e68fa1ceb30e760c61e4ceb5`. It writes 26 value-1
+cells and no patch cells. The exact index set matches the union of the two
+translated brush-2 `CORE` masks in the new JS fixture.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

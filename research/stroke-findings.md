@@ -132,6 +132,12 @@ The next isolated case keeps the horizontal two-point path and value 1 but
 selects startup brush 2, testing the next measured core mask with the same
 predicate and private map environment.
 
+Run [34073138334](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073138334)
+returns 26 value-1 cells for brush 2, with no patch writes. The captured
+indices equal the union of the two translated measured brush-2 `CORE` masks,
+so the JS helper now has a second brush-backed footprint fixture rather than
+only the brush-1 case.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
