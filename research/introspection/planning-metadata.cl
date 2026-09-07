@@ -33,20 +33,20 @@
              (format report "~A-ERROR ~S~%" label (type-of problem))
              (write-cell-error problem)
              (finish-output report))
-           (safe-arglist (arglist symbol function)
+           (safe-arglist (arglist symbol fn)
              (handler-case
                  (multiple-value-list (funcall arglist symbol))
                (error ()
                  (handler-case
-                     (multiple-value-list (funcall arglist function))
+                     (multiple-value-list (funcall arglist fn))
                    (error (problem)
                      (write-cell-error problem)
                      (list :error (type-of problem)))))))
-           (safe-constant (constant-fn function index)
+           (safe-constant (constant-fn fn index)
              (handler-case
-                 (funcall constant-fn function index)
+                 (funcall constant-fn fn index)
                (error ()
-                 (funcall constant-fn function index))))
+                 (funcall constant-fn fn index))))
            (constant-type (value)
              (handler-case (type-of value)
                (error () :type-error))))
@@ -71,7 +71,7 @@
                  (list (and mplan (boundp mplan))
                        (and prefs (boundp prefs))
                        (and sdex (boundp sdex))
-                       (and figdex (boundp figdex))))
+                       (and figdex (boundp figdex)))))
           (format report "HELPERS ARGLIST=~S COUNT=~S CONSTANT=~S~%"
                   (and arglist (package-name-safe arglist))
                   (and count-fn (package-name-safe count-fn))
@@ -84,13 +84,13 @@
                                (list "MAKE-PLAN" make-symbol make-function)))
             (let ((name (first entry))
                   (symbol (second entry))
-                  (function (third entry)))
+                  (fn (third entry)))
               (format report "ARGLIST-BEGIN ~A~%" name)
               (finish-output report)
               (handler-case
-                  (if (and symbol function arglist)
+                  (if (and symbol fn arglist)
                       (format report "ARGLIST ~A ~S~%"
-                              name (safe-arglist arglist symbol function))
+                              name (safe-arglist arglist symbol fn))
                     (format report "ARGLIST ~A UNAVAILABLE~%" name))
                 (error (problem) (write-error (format nil "ARGLIST ~A" name)
                                               problem)))
@@ -124,4 +124,4 @@
             (format report "BINDING-STATES-UNCHANGED ~S~%"
                     (equal before-bindings after-bindings)))
           (write-line "END planning-metadata" report)
-          (finish-output report)))))))
+          (finish-output report))))))
