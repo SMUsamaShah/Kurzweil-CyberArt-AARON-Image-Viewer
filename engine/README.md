@@ -103,6 +103,10 @@ system, not the complete FLA. Details are in
 It also contains the measured `FREE-PATH` subset and its parity fixtures. The
 helpers' use in the complete drawing pipeline remains unresolved. See
 [`point-findings.md`](../research/point-findings.md).
+`aaron-hand.js` implements the measured zero-argument `RAN-HAND` helper: four
+post-`INIT-RANDOM` calls match its 20-joint order, single-float perturbations,
+and returned final delta. Its caller and role in the complete hand model are
+still unresolved.
 `aaron-stroke-writer.js` also emits the recovered basic stream formatter
 records (`dims`, `nb`, `nc`, `color`, and `end`). Its VECTOR/FILL selectors now
 match all 240 isolated PLOT-stub holdouts, including the original two-decimal

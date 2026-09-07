@@ -66,6 +66,36 @@ and uploads only logs plus generated AA files. Probe variants can compare OS
 compatibility layers and Allegro startup diagnostics. The screensaver-host
 debug switch is tested only when host lifecycle evidence is needed.
 
+## Local-first workflow
+
+All source-level work can run locally. From the repository root, the JavaScript
+engine and research parsers need only Node:
+
+```sh
+cd engine && npm test
+cd .. && node --test research/tools/test/*.test.mjs
+```
+
+Static installer analysis and normalization also run locally; the original
+installer and extracted runtime must stay outside the repository. On a
+disposable Windows 10/11 machine or VM, the same oracle harness can be run
+directly with PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File research\oracle\run-oracle.ps1 `
+  -ExtractedRoot C:\path\to\aaron-extracted `
+  -OutputRoot C:\temp\aaron-oracle `
+  -Mode direct-screensaver
+```
+
+GitHub Actions is currently the default for the original-engine step because
+this workspace is Linux and the archived Allegro GUI has been verified here
+only on an isolated Windows Server 2022 runner. Actions provide a disposable,
+repeatable environment and artifact retention; a local Windows VM provides
+faster iteration but requires the same isolation and manual evidence handling.
+Wine and newer Windows Server images are not considered equivalent oracle
+environments until they reproduce the known-good startup and AA output.
+
 ## First probe result
 
 Run 1 on Windows Server 2025 established that silent installation and trial

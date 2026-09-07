@@ -862,3 +862,16 @@ equal integer `RAN` endpoints return without consuming state. The normalized
 report is retained as [`random-integer-boundaries-34115285855.txt`](random-integer-boundaries-34115285855.txt),
 with parsed values asserted by the engine fixture
 [`random-integer-boundaries.json`](../../../engine/test/fixtures/random-integer-boundaries.json).
+
+## RAN-HAND helper trace
+
+`ran-hand-post-init-34120567298.txt` records the normalized output from run
+[34120567298](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34120567298),
+commit `ccf607317ea486575afab15febaa4185d4ac7a9b`. The two fresh seed-1234
+jobs both complete successfully, and their 50,297-byte `RAN-HAND` reports
+have the same SHA-256. The target is a compiled zero-argument helper. Four
+captured calls each consume 20 single-float `RAN(-0.1, 0.1)` samples, mutate
+the same 20 named joint bindings in order, and return the final delta. The
+raw report and the surrounding planning trace remain in the expiring workflow
+artifacts; only this normalized evidence and the clean-room fixture are kept
+in the repository.

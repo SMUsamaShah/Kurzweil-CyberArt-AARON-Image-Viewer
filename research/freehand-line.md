@@ -101,6 +101,27 @@ implementation of Cohen's FLA. The planner and figure generator also remain
 provisional. Adding a visually plausible random wobble would not establish
 the original algorithm or advance the exactness claim.
 
+## Measured RAN-HAND helper
+
+The dedicated post-`INIT-RANDOM` trace in run
+[34120567298](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34120567298)
+captured four calls to `COMMON-GRAPHICS-USER:RAN-HAND` in two fresh
+seed-1234 jobs. The complete report bytes are identical between the jobs. Each
+zero-argument call consumes exactly 20 engine-local samples, all with single
+float endpoints `RAN(-0.1, 0.1)`, in this order:
+
+`TJ3X TJ2X TJ1Z TJ1Y FJ3X FJ2X FJ1X FJ1Z IJ3X IJ2X IJ1X IJ1Z MJ3X MJ2X MJ1X MJ1Z PJ3X PJ2X PJ1X PJ1Z`
+
+Each sample is added to the corresponding single-float joint binding and the
+last sample is returned. The measured sample counters are `130..150`,
+`159..179`, `1568..1588`, and `1590..1610`. The normalized evidence and exact
+numeric fixture are [ran-hand-post-init-34120567298.txt](introspection/evidence/ran-hand-post-init-34120567298.txt)
+and [ran-hand-post-init.json](../engine/test/fixtures/ran-hand-post-init.json)
+respectively; the clean-room helper is `engine/src/aaron-hand.js`.
+
+This identifies the helper's mutation and rounding semantics, not its caller,
+draw position in the full generator, or the complete hand/figure model.
+
 ## Stronger lead: FREE-PATH
 
 Run [34031017111](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34031017111)
@@ -113,8 +134,8 @@ formula, control flow, or whether the call returns or mutates its path.
 
 Earlier candidates have narrower supported roles: PREP-LINE sets graphics
 style; MAPLINE references raster/visibility operations; WIGGLE appears to be
-a slot accessor; RAN-HAND references finger-joint parameters. LOCK-WIGGLE
-remains a measured helper with a detected caller RASTRA-LOCKS.
+a slot accessor. LOCK-WIGGLE remains a measured helper with a detected caller
+RASTRA-LOCKS.
 
 Run 34031149136 establishes `POL-VPT(PT A D V)` and identifies VISPT as a
 VIS accessor specialization. MAKE-EDGE is a higher-level scene routine, not
