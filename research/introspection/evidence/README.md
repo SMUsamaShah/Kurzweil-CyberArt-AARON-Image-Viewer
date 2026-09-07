@@ -568,6 +568,17 @@ because screen/file consumers were stubbed.
 
 The next probe should use a repeated interior vertex to test path idempotency.
 
+`brush-stroke-isolated-34075328544.txt` is the repeated-vertex capture from
+run [34075328544](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075328544),
+commit `18aca3d0cea395e05d61cc72af13c643fc39630b`. The path
+`(7,7)→(8,7)→(7,7)` writes exactly the same 12 value-1 cells as the adjacent
+two-point baseline, with no patch writes; all functions and bindings restore.
+The JS helper now has a matching idempotency regression. The capture only
+constrains the private map effect because screen/file output remains stubbed.
+
+The next probe should capture stubbed `SCREEN-AND-STORE` arguments for an
+interior path while retaining the controlled map setup.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

@@ -210,6 +210,17 @@ about mismatched positional/dynamic bindings.
 The next probe should use a repeated interior vertex to test whether path
 iteration is idempotent before moving into screen/file argument capture.
 
+Run [34075328544](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075328544)
+uses the path `(7,7)→(8,7)→(7,7)` with the baseline brush, value, indices,
+predicate, and private maps. It returns normally and writes the exact same 12
+value-1 cells as the two-point baseline, with no patch writes and complete
+restoration. The measured isolated map effect is therefore idempotent for this
+repeated interior vertex; this still does not expose whether an integrated
+screen/file call would be repeated.
+
+The next probe should capture the stubbed `SCREEN-AND-STORE` arguments for an
+interior path while keeping map behavior controlled.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

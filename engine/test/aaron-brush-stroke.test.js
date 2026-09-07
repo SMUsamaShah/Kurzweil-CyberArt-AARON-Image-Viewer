@@ -140,6 +140,22 @@ test('matches the captured horizontal footprint for brush 4', () => {
   assert.deepEqual([...maps.patchMap].filter(Boolean), []);
 });
 
+test('repeated interior vertices are idempotent in the measured brush-1 case', () => {
+  const maps = createAaronMaps(16, 16);
+  const touched = applyMeasuredBrushVertices(
+    maps,
+    getAaronBrushProfile(1),
+    [[7, 7], [8, 7], [7, 7]],
+    1,
+  );
+  assert.deepEqual(touched, horizontal);
+  assert.deepEqual(
+    nonzero(maps.fillMap),
+    horizontal.map((index) => [index, 1]),
+  );
+  assert.deepEqual([...maps.patchMap].filter(Boolean), []);
+});
+
 test('keeps the measured empty and singleton path boundary', () => {
   const profile = getAaronBrushProfile(1);
   const empty = createAaronMaps(16, 16);
