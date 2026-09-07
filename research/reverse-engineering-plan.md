@@ -48,13 +48,13 @@ complete equivalent port until phases 5–8 are recovered.
 ## Immediate work queue
 
 1. Complete the read-only brush-state census before invoking any fill routine.
-   The direct checkpoint now records `ALL-BRUSHES` (six `PAINT-BRUSH` objects),
+   The direct checkpoint now records seven `PAINT-BRUSH` objects,
    `BOUNDARY-VALUE=3`, unbound `BRUSH`/`FILL-MAP`, and a seven-slot brush class.
-   The existing `WIDTH` and `ID` readers both return 0 for the first object in
-   this startup state. The existing `ENVIR` reader returns a `CONS` and `RAD`
-   returns `FIXNUM` value 0, `PERIM` returns `NULL`, and `CORE` returns `NULL`
-   for that object. Measure the remaining `CELLS` reader with bounded shape
-   summaries; do not mutate the startup fill map or assume a constructor.
+   Brush 0 is a sentinel; brushes 1–5 have measured nonzero profiles and the
+   seventh profile remains to be logged. Capture complete perimeter/core lists
+   and metadata for `INIT-MAPS`, `CLEAR-FILL-MAP`, and
+   `WRITE-LIST-TO-FILL-MAP`. Do not mutate the startup fill map or assume a
+   constructor.
 2. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
    `SCREEN-AND-STORE` after the accessor census identifies a safe brush and
    private map shape. Test fresh NIL/singleton/two-point/three-point paths and

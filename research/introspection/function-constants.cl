@@ -21,7 +21,8 @@
              "MAKE-PLAN" "BUILD-FIGURE" "GENERATE-PERSON"
              "MAKE-PAINTING-COLORS" "PAINT-FILL" "MAKE-POTTED-PLANT"
              "TREE" "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM"
-             "SET-UP-SCREEN-SIZE" "SELECT-CANVAS" "NORM-A")))
+             "SET-UP-SCREEN-SIZE" "SELECT-CANVAS" "NORM-A"
+             "INIT-MAPS" "CLEAR-FILL-MAP" "WRITE-LIST-TO-FILL-MAP")))
       (labels
           ((helper (name)
              (let ((found nil))

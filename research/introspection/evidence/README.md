@@ -336,3 +336,23 @@ artifact 9999605921. `CELLS`
 returns a `FIXNUM`, not an array, in this startup object; its scalar value was
 not printed in that run. The next census reads all six brushes and prints only
 bounded scalar/list summaries.
+
+`brush-census-34068394324.txt` is the normalized all-object census from run
+[34068394324](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34068394324),
+commit `2d0e1f069b9663d2cadbc739844a002d56a2626c`, job 101581131660,
+artifact 9999680699. The list actually contains seven `PAINT-BRUSH` objects.
+Brush 0 is a sentinel with ID/width/radius/cells all zero, environment `(0
+100)`, and NIL perimeter/core. Brushes 1–5 have measured profiles:
+
+| ID | Width | Radius | Cells | Environment band |
+|---:|---:|---:|---:|---|
+| 1 | 3 | 1 | 5 | 100–3000 |
+| 2 | 5 | 2 | 12 | 3000–8000 |
+| 3 | 7 | 3 | 49 | 8000–16000 |
+| 4 | 13 | 6 | 121 | 16000–60000 |
+| 5 | 17 | 8 | 239 | 60000–120000 |
+
+The report prints only the first four list elements for `PERIM` and `CORE`.
+It establishes that brush 0 is not a meaningful behavioral target and that
+future fill probes must use one of the measured non-sentinel profiles. Complete
+coordinate lists and the seventh object's profile are separate evidence steps.

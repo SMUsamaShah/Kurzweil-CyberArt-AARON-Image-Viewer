@@ -1,6 +1,6 @@
 ;;; Read every startup PAINT-BRUSH through its existing generated readers.
 ;;; This probe is read-only: it never selects a brush, writes a slot, calls a
-;;; fill/map routine, or traverses more than four printed list elements.
+;;; fill/map routine, or traverses beyond the bounded printed list summaries.
 (in-package :cl-user)
 
 (with-open-file (report "C:\\temp\\aaron-brush-census.txt"
@@ -38,7 +38,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 0 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -59,7 +59,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 1 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -80,7 +80,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 2 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -101,7 +101,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 3 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -122,7 +122,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 4 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -143,7 +143,7 @@
               (let ((envir (funcall (symbol-function envir-symbol) brush))
                     (perim (funcall (symbol-function perim-symbol) brush))
                     (core (funcall (symbol-function core-symbol) brush)))
-                (let ((*print-length* 4) (*print-level* 4)
+                (let ((*print-length* 512) (*print-level* 4)
                       (*print-circle* t) (*print-pretty* nil))
                   (format report
                           "BRUSH-SHAPES 5 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
@@ -152,6 +152,27 @@
               (format report "BRUSH-END 5~%"))
           (error (problem)
             (format report "BRUSH-ERROR 5 ~S~%" (type-of problem))))
+        (finish-output report)
+        (handler-case
+            (let ((brush (nth 6 brushes)))
+              (format report "BRUSH-BEGIN 6 type=~S~%" (type-of brush))
+              (format report "BRUSH-SCALARS 6 ID=~S WIDTH=~S RAD=~S CELLS=~S~%"
+                      (funcall (symbol-function id-symbol) brush)
+                      (funcall (symbol-function width-symbol) brush)
+                      (funcall (symbol-function rad-symbol) brush)
+                      (funcall (symbol-function cells-symbol) brush))
+              (let ((envir (funcall (symbol-function envir-symbol) brush))
+                    (perim (funcall (symbol-function perim-symbol) brush))
+                    (core (funcall (symbol-function core-symbol) brush)))
+                (let ((*print-length* 512) (*print-level* 4)
+                      (*print-circle* t) (*print-pretty* nil))
+                  (format report
+                          "BRUSH-SHAPES 6 ENVIR-TYPE=~S ENVIR=~S PERIM-TYPE=~S PERIM=~S CORE-TYPE=~S CORE=~S~%"
+                          (type-of envir) envir (type-of perim) perim
+                          (type-of core) core)))
+              (format report "BRUSH-END 6~%"))
+          (error (problem)
+            (format report "BRUSH-ERROR 6 ~S~%" (type-of problem))))
         (finish-output report))
     (error (problem)
       (format report "SETUP-ERROR ~S~%" (type-of problem))))

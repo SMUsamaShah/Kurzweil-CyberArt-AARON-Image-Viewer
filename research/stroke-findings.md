@@ -27,28 +27,22 @@ The retained constants do not establish a direct `FREE-PATH` to
 state. These are evidence-backed dependency leads, not proof that one route
 feeds the other in every painting.
 
-The read-only census is now complete. In the direct startup checkpoint,
-`ALL-BRUSHES` is a six-element list of `PAINT-BRUSH` instances and
-`BOUNDARY-VALUE` is 3, but `BRUSH` and `FILL-MAP` remain unbound. A class census
-shows seven slots (`ID`, `ENVIR`, `PERIM`, `CORE`, `WIDTH`, `RAD`, and `CELLS`).
-The existing `WIDTH` reader can be called safely on the first brush and returns
-0 in this checkpoint. A separate direct call to the existing `ID` reader also
-returns the `FIXNUM` value 0. These are startup-object observations, not runtime
-brush settings: no brush is selected, and no fill map has been initialized.
-The existing `ENVIR` reader also completes and returns a `CONS`; its value is
-intentionally not printed until a safe bounded shape policy is established.
-The existing `RAD` reader completes with `FIXNUM` value 0 for the same object.
-The existing `PERIM` reader completes with `NULL`; no perimeter geometry is
-present in this startup object at this checkpoint.
-The existing `CORE` reader also completes with `NULL`; the only unmeasured
-generated reader in the seven-slot class census is `CELLS`.
+The first read-only census was followed by an all-object census. The direct
+startup checkpoint contains seven `PAINT-BRUSH` instances, not six. Brush 0 is
+a sentinel: ID, width, radius, and cells are all 0; its environment is `(0
+100)` and both perimeter/core readers return NIL. Brushes 1–5 have measured
+profiles `(3,1,5)`, `(5,2,12)`, `(7,3,49)`, `(13,6,121)`, and `(17,8,239)` for
+`(width,radius,cells)`, with environment bands `100–3000`, `3000–8000`,
+`8000–16000`, `16000–60000`, and `60000–120000`. The seventh profile and full
+perimeter/core lists remain to be captured. `BRUSH` and `FILL-MAP` are still
+unbound; no brush is selected and no shared map has been written.
 
-The next oracle step is a bounded read-only call to the other existing
-`PAINT-BRUSH` readers, with one checkpoint per reader and only type/shape
-summaries. Until those values identify a safe private map and brush value, no
-fill routine is invoked and no shared startup map is written. Only after that
-boundary is understood should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be isolated
-with `SCREEN-AND-STORE` replaced.
+This establishes that brush 0 is not a meaningful behavioral target. The next
+safe steps are complete perimeter/core list capture and metadata-only
+inspection of `INIT-MAPS`, `CLEAR-FILL-MAP`, and `WRITE-LIST-TO-FILL-MAP`.
+Only after those boundaries identify a private map and meaningful brush value
+should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be isolated with `SCREEN-AND-STORE`
+replaced.
 
 ## Emission leads
 
