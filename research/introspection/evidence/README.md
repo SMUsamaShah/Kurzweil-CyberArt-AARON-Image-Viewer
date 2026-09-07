@@ -460,9 +460,21 @@ the known 16×16 map; `PATCH-MAP` remains zero. The report intentionally keeps
 these as row-major indices, not X/Y coordinates, until an asymmetric map or
 origin/axis holdout distinguishes the two dimensions.
 
-The next holdout keeps that exact geometry and changes only `VALUE` from `1`
-to the measured `BOUNDARY-VALUE` of `3`; it will show whether the map stores
-the supplied value directly or applies boundary-specific logic.
+The boundary-value holdout kept that exact geometry and changed only `VALUE`
+from `1` to the measured `BOUNDARY-VALUE` of `3`; it tests whether the map
+stores the supplied value directly or applies boundary-specific logic.
+
+`brush-stroke-isolated-34072609079.txt` confirms direct propagation in run
+[34072609079](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072609079),
+commit `1cb415c9a0fd72f567e99e174d55175e7f737da1`: the same 12 row-major
+indices now contain value `3` instead of `1`, with zero `PATCH-MAP` cells and
+the same restoration markers. The value argument is therefore not merely a
+Boolean gate in this case.
+
+The next holdout changes only the second point to create a vertical segment;
+its transposed footprint will test the map's axis/origin interpretation while
+the report continues to use row-major indices rather than prematurely naming
+them X/Y.
 
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit

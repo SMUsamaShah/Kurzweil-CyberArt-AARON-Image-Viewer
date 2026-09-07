@@ -111,6 +111,16 @@ The next holdout preserves this geometry and changes only `VALUE` from `1` to
 the measured `BOUNDARY-VALUE` of `3`, testing whether the map stores the input
 value directly or applies boundary-specific logic.
 
+Run [34072609079](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072609079)
+shows the same 12 row-major cells with value `3` and no patch cells. For this
+case, `VALUE` is written directly into `FILL-MAP`; no boundary remapping is
+observed. This remains limited to brush 1, the tested two-point path, and the
+in-frame predicate stub.
+
+The next probe changes only the second point to `(7,8)`, creating a vertical
+segment while keeping brush 1, value 1, the 16×16 maps, and the `T` predicate.
+Its footprint will test orientation without changing any dependency wrapper.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
