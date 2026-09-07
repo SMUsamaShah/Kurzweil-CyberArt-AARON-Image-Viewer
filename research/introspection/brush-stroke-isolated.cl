@@ -31,19 +31,22 @@
                          "*PIC-HIGH*" "BOUNDARY-VALUE" "CDEX" "SDEX"
                          "RAD" "CELLS" "ENVIR" "PERIM" "CORE"))
           (multiple-value-bind (symbol status) (find-symbol entry owner)
-            (format report "RESOLVE USER ~S SYMBOL=~S STATUS=~S FBOUND=~S~%"
-                    entry (and symbol (symbol-name symbol)) status
+            (declare (ignore status))
+            (format report "RESOLVE USER name=~A present=~A fbound=~A~%"
+                    entry (not (null symbol))
                     (and symbol (fboundp symbol)))))
         (dolist (entry '("ID" "WIDTH"))
           (multiple-value-bind (symbol status) (find-symbol entry graphics)
-            (format report "RESOLVE GRAPHICS ~S SYMBOL=~S STATUS=~S FBOUND=~S~%"
-                    entry (and symbol (symbol-name symbol)) status
+            (declare (ignore status))
+            (format report "RESOLVE GRAPHICS name=~A present=~A fbound=~A~%"
+                    entry (not (null symbol))
                     (and symbol (fboundp symbol)))))
         (format report "RESOLVER-OK~%"))
     (error (problem)
       (format report "RESOLVER-ERROR ~S~%" (type-of problem))))
   (finish-output report))
 
+#|
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
@@ -234,3 +237,11 @@
           (format report "ERROR ~S~%" (type-of problem))))
       (format report "END brush-stroke-isolated~%")
       (finish-output report)))))
+|#
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
+  (format report "STAGE-1-RESOLUTION-ONLY~%")
+  (format report "END brush-stroke-isolated~%")
+  (finish-output report))
