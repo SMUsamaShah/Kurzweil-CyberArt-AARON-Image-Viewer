@@ -199,6 +199,17 @@ it does not prove that CDEX is unused by downstream screen/file emission.
 The next holdout changes only the aligned SDEX index to `1` with the same path,
 brush, value, and private-map setup.
 
+Run [34075045090](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075045090)
+changes only aligned SDEX to `1` (positional and dynamic), with CDEX back at
+`0`. The routine again returns normally and writes the exact 12 baseline
+value-1 cells, with zero patch cells and complete restoration. Together, the
+aligned CDEX/SDEX holdouts show no isolated fill-map effect for these index
+changes; they do not make a claim about the stubbed screen/file consumers or
+about mismatched positional/dynamic bindings.
+
+The next probe should use a repeated interior vertex to test whether path
+iteration is idempotent before moving into screen/file argument capture.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

@@ -557,6 +557,17 @@ consumers were stubbed.
 
 The next holdout changes only the aligned SDEX index to `1`.
 
+`brush-stroke-isolated-34075045090.txt` is the aligned SDEX holdout from run
+[34075045090](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075045090),
+commit `c94b9c881059dc0a474c19cfb7d4d96cc8e39e85`. It changes positional and
+dynamic SDEX from `0` to `1` while CDEX remains `0`; the adjacent brush-1 path
+again writes exactly the baseline 12 value-1 cells and no patch cells. The
+routine returns normally and restores both function cells and dynamic
+bindings. As with the CDEX capture, this constrains only isolated map effects
+because screen/file consumers were stubbed.
+
+The next probe should use a repeated interior vertex to test path idempotency.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
