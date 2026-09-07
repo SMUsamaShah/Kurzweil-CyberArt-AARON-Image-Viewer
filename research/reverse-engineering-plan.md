@@ -36,7 +36,7 @@ probe scripts, normalized reports, and clean-room implementations are kept.
 | 3. Geometry and hand helpers | Partially measured | `XYDIST` and `LOCK-WIGGLE` match 320 paths, 80 distances, and 80 subsequent random states. Their role in the complete FLA is unresolved. | The complete line path and its caller chain match original point sequences. |
 | 4. Stream emission | Partially measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures. Integer `VECTOR`/`FILL` match 72 successful captures with the screen PLOT function replaced; eight NIL-previous error cases are checked. Basic formatter constants are inferred. | Float formatting, all selectors, and stream lifetime are measured; screen-isolated evidence remains distinguished from unmodified calls. |
 | 5. Freehand line algorithm | Partially measured | `FREE-PATH(EDGE)` now matches 16 traced-versus-unwrapped sequences and following random states, including visibility gating, closed-edge traversal, 8–14 step counts, and single/double arithmetic. | Recover all edge-list branches and connect this subset to DRAW-CFORM/brush output; validate integrated caller state and termination beyond the tested shapes. |
-| 6. Brush and colour pipeline | Early research, maps measured | Seven startup brush profiles and complete ordered perimeter/core masks are captured; `INIT-MAPS` now matches private map dimensions, element widths, zero initialization, return value, replacement behavior, and binding restoration. Read-only signatures/constants for the remaining fill surface are retained; selection boundaries, fill writes, colour transitions, and brush state remain open. | Brush selection, colour transitions, fill paths, and brush state match captured original calls. |
+| 6. Brush and colour pipeline | Early research, first fill writes measured | Seven startup brush profiles and complete ordered perimeter/core masks are captured; `INIT-MAPS` matches private map dimensions, element widths, zero initialization, return value, replacement behavior, and binding restoration. Isolated `BRUSH-STROKE` probes now measure empty/singleton boundaries, direct value propagation, the brush-1 two-point 12-cell footprint, and first-coordinate-major map indexing. Selection boundaries, other brushes, overlaps, clipping, colour transitions, and brush state remain open. | Brush selection, colour transitions, fill paths, and brush state match captured original calls. |
 | 7. Composition and figures | Provisional only | The JS planner has occupancy checks and measured canvas/palette profiles, but scene rules, poses, body parts, plants, pots, garments, and occlusion are not byte-equivalent. | Seeded scenes reproduce object ordering, placements, geometry, and branch decisions across holdouts. |
 | 8. Integrated generator | Not started | The generator can create valid AA files and useful provisional scenes. No whole-painting equivalence test has passed. | Same controlled startup/input produces matching structural statistics, command/state traces, and—where deterministic—matching AA output. |
 | 9. Productization | Later | Keep the viewer, engine API, browser demo, corpus analyzer, and contributor documentation coherent. | Users can load, generate, inspect, and save AA files without research-only tooling. |
@@ -54,11 +54,13 @@ complete equivalent port until phases 5–8 are recovered.
    The measured profiles are implemented in `engine/src/aaron-brushes.js` and
    tested against the normalized report. Do not mutate the startup map or
    assume a constructor.
-2. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
-   `SCREEN-AND-STORE` after the accessor census identifies a safe brush and
-   measured private map shape. Test fresh NIL/singleton/two-point/three-point paths and
-   both observed boundary values; restore the function with `UNWIND-PROTECT`.
-   Treat this as dependency-isolated branch behavior, not full pipeline parity.
+2. Continue isolating `BRUSH-STROKE(PATH VALUE CDEX SDEX)` with the proven
+   `SCREEN-AND-STORE`/`IN-SUB-FRAME` stubs and private map shape. The current
+   evidence covers NIL, singleton, horizontal and vertical two-point paths,
+   values 1 and 3, and brush 1. Next vary brush IDs, path gaps/overlaps,
+   clipping, and `CDEX`/`SDEX`; restore every function and binding with
+   `UNWIND-PROTECT`. Treat this as dependency-isolated branch/map behavior,
+   not full pipeline parity.
 4. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

@@ -39,3 +39,35 @@ export function createAaronMaps(width, height) {
 export function initializeAaronMaps(width, height) {
   return createAaronMaps(width, height);
 }
+
+/**
+ * Convert the two measured map coordinates to Allegro's rank-2 row-major
+ * offset.  The original arrays are dimensioned `(width height)` and the
+ * brush probes establish `first * height + second` for the tested writes.
+ * Coordinate names stay neutral because broader callers are not measured.
+ */
+export function aaronMapIndex(width, height, first, second) {
+  const mapWidth = positiveDimension(width, 'width');
+  const mapHeight = positiveDimension(height, 'height');
+  if (!Number.isSafeInteger(first) || first < 0 || first >= mapWidth) {
+    throw new RangeError('first map coordinate is out of bounds');
+  }
+  if (!Number.isSafeInteger(second) || second < 0 || second >= mapHeight) {
+    throw new RangeError('second map coordinate is out of bounds');
+  }
+  return first * mapHeight + second;
+}
+
+/** Write one measured four-bit-compatible value to a fill map cell. */
+export function writeAaronFillCell(maps, first, second, value) {
+  if (!maps || !maps.fillMap || !Number.isSafeInteger(maps.width)
+      || !Number.isSafeInteger(maps.height)) {
+    throw new TypeError('maps must be an Aaron map bundle');
+  }
+  if (!Number.isSafeInteger(value) || value < 0 || value > 15) {
+    throw new RangeError('fill-map value must be an integer from 0 through 15');
+  }
+  const index = aaronMapIndex(maps.width, maps.height, first, second);
+  maps.fillMap[index] = value;
+  return index;
+}

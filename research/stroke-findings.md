@@ -121,6 +121,13 @@ The next probe changes only the second point to `(7,8)`, creating a vertical
 segment while keeping brush 1, value 1, the 16×16 maps, and the `T` predicate.
 Its footprint will test orientation without changing any dependency wrapper.
 
+Run [34072790047](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072790047)
+returns indices `102–105`, `118–121`, and `134–137`, all value `1`. The
+horizontal and vertical holdouts therefore support the map-write index rule
+`first-coordinate * height + second-coordinate` for this 16×16 case. The JS
+map layer can expose that convention while keeping broader coordinate claims
+scoped to the measured brush path.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

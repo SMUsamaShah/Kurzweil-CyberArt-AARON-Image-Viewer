@@ -476,6 +476,16 @@ its transposed footprint will test the map's axis/origin interpretation while
 the report continues to use row-major indices rather than prematurely naming
 them X/Y.
 
+`brush-stroke-isolated-34072790047.txt` is the vertical holdout from run
+[34072790047](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072790047),
+commit `f723c4bc7b58370c5f03e17e619284932844a7e6`. The cells are
+`102–105`, `118–121`, and `134–137`, all value `1`. Compared with the
+horizontal result, this transposes the 4×3 footprint to 3×4. On the known
+`(16 16)` maps, the clean-room model now treats the first coordinate as the
+outer row-major dimension (`index = first * height + second`) for these brush
+writes; this is still a measured map-write convention, not a claim about every
+other routine's coordinate handling.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

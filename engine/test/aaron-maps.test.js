@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createAaronMaps, initializeAaronMaps } from '../src/aaron-maps.js';
+import {
+  aaronMapIndex,
+  createAaronMaps,
+  initializeAaronMaps,
+  writeAaronFillCell,
+} from '../src/aaron-maps.js';
 
 test('allocates separate measured patch and fill maps in width-by-height order', () => {
   const maps = createAaronMaps(3, 5);
@@ -33,4 +38,15 @@ test('rejects dimensions outside the measured positive private cases', () => {
   assert.throws(() => createAaronMaps(-1, 1), RangeError);
   assert.throws(() => createAaronMaps(1.5, 1), RangeError);
   assert.throws(() => createAaronMaps(Number.MAX_SAFE_INTEGER, 2), RangeError);
+});
+
+test('uses the measured first-coordinate-major map index', () => {
+  assert.equal(aaronMapIndex(16, 16, 6, 6), 102);
+  assert.equal(aaronMapIndex(16, 16, 8, 9), 137);
+  const maps = createAaronMaps(3, 5);
+  assert.equal(writeAaronFillCell(maps, 2, 4, 3), 14);
+  assert.equal(maps.fillMap[14], 3);
+  assert.throws(() => aaronMapIndex(3, 5, 3, 0), RangeError);
+  assert.throws(() => aaronMapIndex(3, 5, 0, 5), RangeError);
+  assert.throws(() => writeAaronFillCell(maps, 0, 0, 16), RangeError);
 });
