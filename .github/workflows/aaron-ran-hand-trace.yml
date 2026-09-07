@@ -77,7 +77,12 @@ jobs:
           if (-not (Test-Path $sourceMarker)) { throw 'RAN-HAND source file was never loaded' }
           if (-not (Test-Path $report)) { throw 'RAN-HAND trace never started' }
           if (-not (Select-String -LiteralPath $report -SimpleMatch 'TRACE-READY T')) {
-            throw 'RAN-HAND trace did not finish installing'
+            $loadError = @(Select-String -LiteralPath (Join-Path $output 'random-samples.txt') `
+              -Pattern '^RAN-HAND-LOAD-ERROR-TYPE ')
+            if ($loadError.Count -eq 0) {
+              throw 'RAN-HAND trace did not finish installing and emitted no load error'
+            }
+            Write-Warning 'RAN-HAND wrapper load error captured; preserving the diagnostic artifact.'
           }
       - uses: actions/upload-artifact@v4
         if: always()

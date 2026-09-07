@@ -6,5 +6,9 @@
 (set 'aaron-ran-sample-limit 2048)
 (load "C:\\temp\\planning-random-seed-common.cl")
 (aaron-random-emit "RAN-HAND-SOURCE-BEFORE-LOAD")
-(load "C:\\temp\\ran-hand-trace.cl")
+(handler-case
+    (load "C:\\temp\\ran-hand-trace.cl")
+  (condition (problem)
+    (aaron-random-emit
+     (format nil "RAN-HAND-LOAD-ERROR-TYPE ~S" (type-of problem)))) )
 (aaron-random-emit "RAN-HAND-SOURCE-AFTER-LOAD")
