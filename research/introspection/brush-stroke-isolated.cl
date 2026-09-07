@@ -46,6 +46,8 @@
              (x-fn (find-symbol "X" owner))
              (y-fn (find-symbol "Y" owner))
              (all-brushes (symbol-value all-symbol)))
+        (write-line "MATRIX-RESOLVED" report)
+        (finish-output report)
         (labels
             ((make-path (points)
                (mapcar (lambda (xy)
