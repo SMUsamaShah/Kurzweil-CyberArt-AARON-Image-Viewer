@@ -147,6 +147,10 @@ returns 70 value-1 cells for brush 3, again with no patch writes. The index
 set equals the union of the two translated brush-3 `CORE` masks, extending
 the measured helper parity across three startup profiles.
 
+The next case returns to brush 1 and uses `(7,7)→(11,7)` with the same
+predicate and private maps, separating vertex stamping from interpolation
+across a non-adjacent path.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

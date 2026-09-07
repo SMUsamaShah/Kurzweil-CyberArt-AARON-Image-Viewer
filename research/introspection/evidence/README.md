@@ -504,6 +504,10 @@ commit `eda581602e5ca740ffc9d65e2f65a85d7ed68aeb`. It writes 70 value-1
 cells and no patch cells; the exact index set matches the union of the two
 translated brush-3 `CORE` masks, and the JS fixture now covers three profiles.
 
+The next probe returns to brush 1 and changes only the second point to `11,7`,
+testing whether a gapped path stamps the supplied vertices or interpolates
+between them.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
