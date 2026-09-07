@@ -43,7 +43,7 @@
               (condition (problem)
                 (format report "RANDOM-ERROR seed=~D limit=~D TYPE ~S~%"
                         seed limit (type-of problem))
-                (finish-output report))))
+                (finish-output report)))))
         ;; Engine-local integer RAN methods are measured separately because
         ;; their generic method is compiled against COMMON-LISP:RANDOM.
         (dolist (bounds '((0 0) (0 1) (0 2) (0 3) (0 5) (0 10)
@@ -69,4 +69,4 @@
                         seed bounds (type-of problem))
                 (finish-output report))))))
       (format report "END random-integer-boundaries~%")
-      (finish-output report)))))
+      (finish-output report))))
