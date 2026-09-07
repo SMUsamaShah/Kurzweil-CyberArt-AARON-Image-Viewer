@@ -1,0 +1,36 @@
+BEGIN planning-call-trace-late-34101175339
+RUN 34101175339
+COMMIT 59c7bd653864efd7a8d540fe20f8fd7dee5157fa
+JOB 101675739785
+ARTIFACT 10010542952
+SOURCE research/introspection/planning-call-trace.cl
+
+TRACE-CONFIG EVENT-LIMIT 1024
+TRACE-CONFIG WATCH-FOR-MESSAGES-WRAPPER OMITTED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+TRACE-COUNTS ENTER 515
+TRACE-COUNTS EXIT 509
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 1024
+
+CALL-COUNTS GENERATE-PERSON 1
+CALL-COUNTS DRAW-CFORM 70
+CALL-COUNTS GOOD-START 67
+CALL-COUNTS NEW-START 52
+CALL-COUNTS END-START 83
+CALL-COUNTS BRUSH-STROKE 76
+CALL-COUNTS SCREEN-AND-STORE 73
+CALL-COUNTS PREP-LINE 73
+CALL-COUNTS PAINT-FILL 2
+
+PATH DRAW-CFORM -> BRUSH-STROKE -> SCREEN-AND-STORE -> PREP-LINE
+PATH SCREEN-AND-STORE -> PREP-LINE (message wrapper omitted)
+
+INTERPRETATION Omitting WATCH-FOR-MESSAGES exposes repeated screen/brush
+calls but PREP-LINE remains a high-fanout target in this source revision and
+consumes the remaining event budget. The report has no errors and ends inside
+the seventy-third screen/brush sequence; absence of later figure-finalization
+calls is only a sampling bound. The next pass removes PREP-LINE explicitly.
+END planning-call-trace-late-34101175339

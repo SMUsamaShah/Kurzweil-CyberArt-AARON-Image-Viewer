@@ -713,3 +713,13 @@ artifact `10010369502`. It leaves `HOP-OR-DRAW` unwrapped and records 41
 1,024-event bound occurs inside the fortieth screen call; this is sampling
 evidence, not a termination claim. The next pass omits only the message-loop
 and preparation wrappers to expose later generator continuation.
+
+`planning-call-trace-late-34101175339.txt` is the follow-up from run
+[34101175339](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34101175339),
+commit `59c7bd653864efd7a8d540fe20f8fd7dee5157fa`, job `101675739785`, and
+artifact `10010542952`. It omits `WATCH-FOR-MESSAGES` but retains
+`PREP-LINE`, producing 76 `BRUSH-STROKE`, 73 `SCREEN-AND-STORE`, and 73
+`PREP-LINE` entries (plus 70 `DRAW-CFORM`) before the 1,024-event bound. There
+are 515 entries, 509 exits, and no trace errors. The source still contained
+`PREP-LINE` in this pass; the next probe removes it explicitly so later
+figure-finalization calls can be sampled.
