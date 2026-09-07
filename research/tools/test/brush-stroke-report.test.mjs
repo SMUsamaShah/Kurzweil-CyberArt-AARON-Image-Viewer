@@ -45,11 +45,11 @@ test('parses Stage 23 matrix cases and preserves returned/error boundaries', () 
 
 test('parses the completed original-engine brush capture', () => {
   const evidence = readFileSync(new URL(
-    '../../introspection/evidence/brush-stroke-isolated-34145707021.txt',
+    '../../introspection/evidence/brush-stroke-isolated-34146017804.txt',
     import.meta.url,
   ), 'utf8');
   const report = parseBrushStrokeReport(evidence);
-  assert.equal(report.cases.length, 5);
+  assert.equal(report.cases.length, 6);
   assert.equal(report.cases[0].name, 'b1-horizontal');
   assert.equal(report.cases[0].outcome, 'returned');
   assert.equal(report.cases[0].screens[0].points.length, 2);
@@ -81,6 +81,17 @@ test('parses the completed original-engine brush capture', () => {
   assert.equal(overlap.screenCount, 1);
   assert.equal(overlap.insideCount, 27);
   assert.equal(overlap.outcome, 'returned');
+  const edge = report.cases[5];
+  assert.equal(edge.name, 'b1-edge-horizontal');
+  assert.equal(edge.error, 'SIMPLE-ERROR');
+  assert.deepEqual(edge.fillCells, [{index: 0, value: 1}]);
+  assert.deepEqual(edge.patchCells, []);
+  assert.deepEqual(edge.screens[0].points, [
+    {index: 0, x: 0, y: 0}, {index: 1, x: 1, y: 0},
+  ]);
+  assert.equal(edge.screenCount, 1);
+  assert.equal(edge.insideCount, 2);
+  assert.equal(edge.outcome, 'errored');
 });
 
 test('rejects a partial Stage 23 case', () => {
