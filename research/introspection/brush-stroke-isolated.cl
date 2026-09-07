@@ -21,29 +21,69 @@
                         :if-does-not-exist :create)
   ;; Resolve only symbols and function cells before the larger experiment is
   ;; read/compiled. This checkpoint localizes startup/load failures.
-  (format report "RESOLVER-BEGIN~%")
+  (write-line "RESOLVER-BEGIN" report)
   (handler-case
       (let ((owner (find-package "COMMON-GRAPHICS-USER"))
             (graphics (find-package "COMMON-GRAPHICS")))
-        (dolist (entry '("MAKE-TWOPT" "X" "Y" "BRUSH-STROKE"
-                         "SCREEN-AND-STORE" "IN-SUB-FRAME" "ALL-BRUSHES"
-                         "BRUSH" "FILL-MAP" "PATCH-MAP" "*PIC-WIDE*"
-                         "*PIC-HIGH*" "BOUNDARY-VALUE" "CDEX" "SDEX"
-                         "RAD" "CELLS" "ENVIR" "PERIM" "CORE"))
-          (multiple-value-bind (symbol status) (find-symbol entry owner)
+        (write-line (if owner "OWNER-PACKAGE-OK" "OWNER-PACKAGE-MISSING")
+                    report)
+        (write-line (if graphics "GRAPHICS-PACKAGE-OK"
+                        "GRAPHICS-PACKAGE-MISSING")
+                    report)
+        (when owner
+          (multiple-value-bind (symbol status)
+              (find-symbol "MAKE-TWOPT" owner)
             (declare (ignore status))
-            (format report "RESOLVE USER name=~A present=~A fbound=~A~%"
-                    entry (not (null symbol))
-                    (and symbol (fboundp symbol)))))
-        (dolist (entry '("ID" "WIDTH"))
-          (multiple-value-bind (symbol status) (find-symbol entry graphics)
+            (write-line (if symbol "MAKE-TWOPT-PRESENT"
+                            "MAKE-TWOPT-MISSING")
+                        report)
+            (write-line (if (and symbol (fboundp symbol))
+                            "MAKE-TWOPT-FBOUND"
+                            "MAKE-TWOPT-NOT-FBOUND")
+                        report))
+          (multiple-value-bind (symbol status)
+              (find-symbol "BRUSH-STROKE" owner)
             (declare (ignore status))
-            (format report "RESOLVE GRAPHICS name=~A present=~A fbound=~A~%"
-                    entry (not (null symbol))
-                    (and symbol (fboundp symbol)))))
-        (format report "RESOLVER-OK~%"))
+            (write-line (if symbol "BRUSH-STROKE-PRESENT"
+                            "BRUSH-STROKE-MISSING")
+                        report)
+            (write-line (if (and symbol (fboundp symbol))
+                            "BRUSH-STROKE-FBOUND"
+                            "BRUSH-STROKE-NOT-FBOUND")
+                        report))
+          (multiple-value-bind (symbol status)
+              (find-symbol "SCREEN-AND-STORE" owner)
+            (declare (ignore status))
+            (write-line (if symbol "SCREEN-AND-STORE-PRESENT"
+                            "SCREEN-AND-STORE-MISSING")
+                        report)
+            (write-line (if (and symbol (fboundp symbol))
+                            "SCREEN-AND-STORE-FBOUND"
+                            "SCREEN-AND-STORE-NOT-FBOUND")
+                        report))
+          (multiple-value-bind (symbol status)
+              (find-symbol "IN-SUB-FRAME" owner)
+            (declare (ignore status))
+            (write-line (if symbol "IN-SUB-FRAME-PRESENT"
+                            "IN-SUB-FRAME-MISSING")
+                        report)
+            (write-line (if (and symbol (fboundp symbol))
+                            "IN-SUB-FRAME-FBOUND"
+                            "IN-SUB-FRAME-NOT-FBOUND")
+                        report)))
+        (when graphics
+          (multiple-value-bind (symbol status)
+              (find-symbol "ID" graphics)
+            (declare (ignore status))
+            (write-line (if symbol "ID-PRESENT" "ID-MISSING") report)
+            (write-line (if (and symbol (fboundp symbol))
+                            "ID-FBOUND"
+                            "ID-NOT-FBOUND")
+                        report)))
+        (write-line "RESOLVER-OK" report))
     (error (problem)
-      (format report "RESOLVER-ERROR ~S~%" (type-of problem))))
+      (declare (ignore problem))
+      (write-line "RESOLVER-ERROR" report)))
   (finish-output report))
 
 #|
