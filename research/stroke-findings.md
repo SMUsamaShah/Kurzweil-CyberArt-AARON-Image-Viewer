@@ -275,10 +275,22 @@ parity. Compiled helper variants failed before their first resolution
 checkpoint in this Allegro init-file harness, so the matrix remains direct
 top-level forms.
 
-The next probe should extend the direct top-level control one case at a time
-to larger startup brushes and explicit boundary/overlap cases, then replace
-`SCREEN-AND-STORE` with a recorder that also captures its downstream
-`PREP-LINE`/writer dependencies without changing the private map setup.
+The four-case direct matrix rerun in
+`introspection/evidence/brush-stroke-isolated-34145100465.txt` removes a
+probe-only form-boundary error and measures brushes 1–4 in one clean report.
+Brush 3 writes 70 value-1 cells and brush 4 writes 108; both sets match the
+union of the corresponding translated measured `CORE` masks. All four cases
+return normally, write no `PATCH-MAP` cells, and make exactly one
+`SCREEN-AND-STORE` forwarding call. The b3 and b4 predicate-call counts are
+122 and 194 respectively. This completes the adjacent horizontal footprint
+ladder for profiles 1–4 under the tested 16×16, `VALUE=1`, `CDEX=0`,
+`SDEX=0`, in-frame stub; it does not recover brush selection, clipping,
+overlap semantics, colour, or integrated emission.
+
+The next probe should use a repeated or overlapping interior vertex, then a
+carefully bounded edge case, before replacing `SCREEN-AND-STORE` with a
+recorder that captures its downstream `PREP-LINE`/writer dependencies without
+changing the private map setup.
 
 ## Emission leads
 
