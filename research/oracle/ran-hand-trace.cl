@@ -7,6 +7,19 @@
 ;;; helper so the broad planning trace remains an independent control.
 (in-package :cl-user)
 
+;; This marker is deliberately outside the one-time guard.  It distinguishes
+;; a source-load failure from a wrapper that loaded but could not resolve the
+;; target function.  Keep it in a separate file so the report's superseding
+;; stream cannot erase the checkpoint.
+(handler-case
+    (with-open-file (marker "C:\\temp\\aaron-ran-hand-source-entered.txt"
+                           :direction :output
+                           :if-exists :supersede
+                           :if-does-not-exist :create)
+      (write-line "SOURCE-ENTERED T" marker)
+      (finish-output marker))
+  (condition () nil))
+
 (unless (boundp 'aaron-ran-hand-trace-loaded)
   (set 'aaron-ran-hand-trace-loaded t)
   (let* ((owner (find-package "COMMON-GRAPHICS-USER"))

@@ -36,25 +36,39 @@ jobs:
         run: |
           $output = Join-Path $env:RUNNER_TEMP 'aaron-free-path-boundaries'
           New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+          $oracleError = $null
           try {
             & research/oracle/run-oracle.ps1 `
               -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
               -OutputRoot $output -Mode direct-screensaver -RunSeconds 90 `
               -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
               -PatchPremiumFlag -PremiumFlagSource '..\introspection\free-path-boundaries.cl'
+          } catch {
+            # The native reference process can terminate with a non-zero exit
+            # after the probe has emitted every case.  Keep the report and
+            # validate its own completion markers instead of discarding this
+            # useful clean-room evidence because AA painting capture failed.
+            $oracleError = $_
+            Write-Warning ("Oracle wrapper ended before AA capture completed: {0}" -f $_.Exception.Message)
           } finally {
             $report = 'C:\temp\aaron-free-path-boundaries.txt'
             if (Test-Path $report) {
               Copy-Item $report (Join-Path $output 'free-path-boundaries.txt') -Force
-              Get-Content -LiteralPath $report
+              Get-Content -LiteralPath $report -Tail 120
             }
           }
-          if (-not (Test-Path (Join-Path $output 'free-path-boundaries.txt'))) {
+          $reportPath = Join-Path $output 'free-path-boundaries.txt'
+          if (-not (Test-Path $reportPath)) {
             throw 'FREE-PATH boundary probe never started'
           }
-          if (-not (Select-String -LiteralPath (Join-Path $output 'free-path-boundaries.txt') `
-                    -SimpleMatch 'END free-path-boundaries')) {
-            throw 'FREE-PATH boundary probe started but did not complete'
+          $caseLines = @(Select-String -LiteralPath $reportPath -Pattern '^CASE [^ ]+ name=')
+          $endCaseLines = @(Select-String -LiteralPath $reportPath -Pattern '^ENDCASE$')
+          if ($caseLines.Count -ne 40 -or $endCaseLines.Count -ne 40) {
+            throw ("FREE-PATH boundary matrix incomplete: CASE={0} ENDCASE={1}" -f `
+              $caseLines.Count, $endCaseLines.Count)
+          }
+          if ($oracleError) {
+            Write-Warning 'The native wrapper did not leave a complete AA painting, but all 40 probe cases completed.'
           }
       - uses: actions/upload-artifact@v4
         if: always()

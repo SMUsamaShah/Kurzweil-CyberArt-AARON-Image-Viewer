@@ -61,6 +61,7 @@ jobs:
           } finally {
             foreach ($entry in @(
               @{ Source = 'C:\temp\aaron-ran-hand-trace.txt'; Name = 'ran-hand-trace.txt' },
+              @{ Source = 'C:\temp\aaron-ran-hand-source-entered.txt'; Name = 'ran-hand-source-entered.txt' },
               @{ Source = 'C:\temp\aaron-planning-call-trace.txt'; Name = 'planning-call-trace.txt' },
               @{ Source = 'C:\temp\aaron-random-seed-loaded.txt'; Name = 'random-seed-loaded.txt' },
               @{ Source = 'C:\temp\aaron-random-samples.txt'; Name = 'random-samples.txt' },
@@ -72,6 +73,8 @@ jobs:
             }
           }
           $report = Join-Path $output 'ran-hand-trace.txt'
+          $sourceMarker = Join-Path $output 'ran-hand-source-entered.txt'
+          if (-not (Test-Path $sourceMarker)) { throw 'RAN-HAND source file was never loaded' }
           if (-not (Test-Path $report)) { throw 'RAN-HAND trace never started' }
           if (-not (Select-String -LiteralPath $report -SimpleMatch 'TRACE-READY T')) {
             throw 'RAN-HAND trace did not finish installing'
