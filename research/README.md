@@ -5,6 +5,8 @@ reimplementation of Kurzweil CyberArt AARON.
 
 The consolidated roadmap, phase status, immediate queue, and model handoff
 policy are in [reverse-engineering-plan.md](reverse-engineering-plan.md).
+The short cross-conversation resumption record is
+[aaron-continuity.md](aaron-continuity.md).
 
 ## Principles
 
