@@ -542,8 +542,15 @@ patch writes, and clean return for every case. This is the retained four-
 profile fixture; the earlier single-profile artifacts remain useful for
 history and cross-checking.
 
-The next probe should reuse a measured profile with a repeated or overlapping
-vertex to isolate duplicate-path behavior from brush-size effects.
+The follow-up matrix in `brush-stroke-isolated-34145707021.txt` ([run
+34145707021](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34145707021))
+adds the repeated interior path `(7,7)→(8,7)→(7,7)`. Brush 1 still writes
+the same 12 unique cells, forwards one screen call containing all three points
+including the repeated endpoint, and restores cleanly; the predicate count is
+27 rather than the two-point baseline's 18.
+
+The next probe should use a carefully bounded edge/clip control, then expose
+the downstream screen/writer context without changing the private map setup.
 
 `brush-stroke-isolated-34074489559.txt` is the edge diagnostic from run
 [34074489559](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074489559),
