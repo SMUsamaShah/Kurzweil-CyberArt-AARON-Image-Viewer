@@ -754,3 +754,17 @@ artifact `10010974915`. It omits the brush/screen wrappers and reaches three
 `DRAW-CFORM`, and 55 `PAINT-FILL` entries. There are 514 entries, 510 exits,
 and no trace errors; 316 `GOOD-START` entries consume the 1,024-event bound.
 The next pass omits `GOOD-START` to expose later composition/finalization.
+
+`planning-call-trace-after-good-34102771315.txt` is the completed control-flow
+trace from run
+[34102771315](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34102771315),
+commit `ffbaf4348b735930c058aa317d3ce4a40a35ae28`, job `101680773883`, and
+artifact `10011150077`. With `GOOD-START` and all high-fanout stroke/screen
+helpers omitted, it finishes without the 1,024-event bound: 107 entries, 105
+exits, and no trace errors. `MAIN` returns after `DISPLAY-COLOR-PATCHES`, 43
+`PAINT-FILL` calls, and `PROTOCOL`; `DOIT` calls `WRITE-PAINTING-RECORD` once
+for image `0`. At that point `MPLAN` is `PLAN`, `BRUSH` is `NULL`, `RPLANE`
+is `FIXNUM`, `FILL-MAP` is `(ARRAY (UNSIGNED-BYTE 4) (320 480))`, and
+`RGB-MAP` is a `CONS`. The same artifact contains one complete 142,806-byte
+`aa0` painting. This closes the broad startup call-graph phase; parity work
+now targets exact output records and random-state consumption.
