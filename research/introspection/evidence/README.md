@@ -352,7 +352,39 @@ Brush 0 is a sentinel with ID/width/radius/cells all zero, environment `(0
 | 4 | 13 | 6 | 121 | 16000–60000 |
 | 5 | 17 | 8 | 239 | 60000–120000 |
 
-The report prints only the first four list elements for `PERIM` and `CORE`.
-It establishes that brush 0 is not a meaningful behavioral target and that
-future fill probes must use one of the measured non-sentinel profiles. Complete
-coordinate lists and the seventh object's profile are separate evidence steps.
+The report prints only the first four list elements for `PERIM` and `CORE` and
+was intentionally bounded to indices 0–5. It establishes that brush 0 is not a
+meaningful behavioral target; the complete masks and seventh profile are
+preserved by the later 34068649921 capture below.
+
+## Complete brush masks and fill metadata
+
+`brush-census-34068649921.txt` is the completed read-only census from run
+[34068649921](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34068649921),
+commit `89f5718de345ed2c21dfcbc44a4e9248b0bdbb00`, job 101581829016, artifact
+9999752272. It raises the print bound, reads all seven `ALL-BRUSHES` entries,
+and preserves every ordered `PERIM` and `CORE` point list. The profiles are
+IDs 0–6; brush 0 is a sentinel and brush 6 is `(width=19 radius=9 cells=329)`
+with ENVIR `(120000 200000)`. The earlier `34068394324` report is intentionally
+kept as a bounded predecessor; it omitted index 6 and truncated list values.
+
+`fill-metadata-34068649921.txt` is the matching read-only routine census from
+the same run, job 101581829103, artifact 9999751657. It records successful
+`ARGLIST`/type discovery for `INIT-MAPS`, `CLEAR-FILL-MAP`,
+`WRITE-LIST-TO-FILL-MAP`, `SELECT-BRUSH`, `BRUSH-STROKE`, `SCREEN-AND-STORE`,
+`PAINT-FILL`, `BRUSH-FILL`, `BRUSH-FILL-SUBPART`, and `RECORD-BRUSH`; `EDGE-PATH`
+has no function binding. No candidate is invoked.
+
+`fill-function-constants-34068649921.txt` is a focused excerpt from the
+complete constants report (job 101581829081, artifact 9999751800). It records
+the retained symbols for brush selection, map creation/clearing, list writes,
+stroke emission, and the scan/fill helper chain. `INIT-MAPS` references
+`*PIC-WIDE*`, `*PIC-HIGH*`, `MAKE-ARRAY`, `PATCH-MAP`, and `FILL-MAP`; the
+constants establish the dependency surface but do not establish runtime map
+dimensions or boundary comparison semantics.
+
+The measured profile module is
+[`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
+test parses the normalized census and compares every scalar, mask, point order,
+duplicate, and gap, so the clean-room data cannot silently drift from the
+captured report.

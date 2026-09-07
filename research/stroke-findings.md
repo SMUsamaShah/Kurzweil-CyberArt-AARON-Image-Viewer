@@ -27,22 +27,35 @@ The retained constants do not establish a direct `FREE-PATH` to
 state. These are evidence-backed dependency leads, not proof that one route
 feeds the other in every painting.
 
-The first read-only census was followed by an all-object census. The direct
-startup checkpoint contains seven `PAINT-BRUSH` instances, not six. Brush 0 is
-a sentinel: ID, width, radius, and cells are all 0; its environment is `(0
-100)` and both perimeter/core readers return NIL. Brushes 1–5 have measured
-profiles `(3,1,5)`, `(5,2,12)`, `(7,3,49)`, `(13,6,121)`, and `(17,8,239)` for
-`(width,radius,cells)`, with environment bands `100–3000`, `3000–8000`,
-`8000–16000`, `16000–60000`, and `60000–120000`. The seventh profile and full
-perimeter/core lists remain to be captured. `BRUSH` and `FILL-MAP` are still
-unbound; no brush is selected and no shared map has been written.
+The full read-only census is now preserved in
+`research/introspection/evidence/brush-census-34068649921.txt`. The direct
+startup checkpoint contains seven `PAINT-BRUSH` instances. Brush 0 is a
+sentinel: ID, width, radius, and cells are all 0; its environment is `(0 100)`
+and both perimeter/core readers return NIL. Brushes 1–6 have measured
+profiles `(3,1,5)`, `(5,2,12)`, `(7,3,49)`, `(13,6,121)`, `(17,8,239)`, and
+`(19,9,329)` for `(width,radius,cells)`, with environment bands `100–3000`,
+`3000–8000`, `8000–16000`, `16000–60000`, `60000–120000`, and `120000–200000`.
+The complete ordered perimeter/core lists are retained verbatim. Their point
+counts do not equal the reported `CELLS` scalar (for example brush 1 has nine
+core points but `CELLS=5`), so the two observations remain separate in the JS
+model. Brush 5 and brush 6 also contain repeated or missing-looking points;
+they are preserved rather than replaced by idealized disks.
 
-This establishes that brush 0 is not a meaningful behavioral target. The next
-safe steps are complete perimeter/core list capture and metadata-only
-inspection of `INIT-MAPS`, `CLEAR-FILL-MAP`, and `WRITE-LIST-TO-FILL-MAP`.
-Only after those boundaries identify a private map and meaningful brush value
-should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be isolated with `SCREEN-AND-STORE`
-replaced.
+The same run's metadata-only report identifies the callable surface without
+invoking it: `INIT-MAPS`, `CLEAR-FILL-MAP`, and `WRITE-LIST-TO-FILL-MAP` are
+internal compiled functions; `BRUSH-STROKE` takes PATH, VALUE, CDEX, and SDEX;
+`SELECT-BRUSH` takes COUNT. The focused constants excerpt shows that
+`INIT-MAPS` creates `PATCH-MAP` and `FILL-MAP` with `MAKE-ARRAY` and cons
+element/initial values, while `BRUSH-STROKE` reads `BOUNDARY-VALUE`, brush
+`WIDTH`, `PERIM`, `CORE`, coordinates, `IN-SUB-FRAME`, and `FILL-MAP` before
+delegating to `SCREEN-AND-STORE`. These are dependency facts, not fill-output
+parity.
+
+`BRUSH` and `FILL-MAP` remain unbound in the direct checkpoint; no brush is
+selected and no shared map has been written. The next safe step is to measure
+the map shape in a private/fresh state. Only after that boundary is isolated
+should `BRUSH-STROKE(PATH VALUE CDEX SDEX)` be invoked with
+`SCREEN-AND-STORE` replaced.
 
 ## Emission leads
 

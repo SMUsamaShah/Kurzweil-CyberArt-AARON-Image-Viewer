@@ -106,6 +106,10 @@ helpers' use in the complete drawing pipeline remains unresolved. See
 `aaron-stroke-writer.js` also emits the recovered basic stream formatter
 records (`dims`, `nb`, `nc`, `color`, and `end`). VECTOR/FILL dispatch and
 complete brush semantics remain under investigation.
+`aaron-brushes.js` now contains the seven startup `PAINT-BRUSH` profiles
+measured from the original build, including ordered perimeter/core masks and
+the separate `CELLS` scalars. Its ENVIR-band lookup is explicitly provisional:
+the original `SELECT-BRUSH` boundary comparison has not been invoked yet.
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

@@ -1,0 +1,44 @@
+BEGIN fill-metadata
+TRY "INIT-MAPS"
+ROUTINE "INIT-MAPS" status=:INTERNAL type=COMPILED-FUNCTION arglist=(NIL
+                                                                     T)
+TRY "CLEAR-FILL-MAP"
+ROUTINE "CLEAR-FILL-MAP" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::CDEX
+                                                                            COMMON-GRAPHICS-USER::SDEX)
+                                                                          T)
+TRY "WRITE-LIST-TO-FILL-MAP"
+ROUTINE "WRITE-LIST-TO-FILL-MAP" status=:INTERNAL type=COMPILED-FUNCTION arglist=((LIST COMMON-GRAPHICS-USER::VAL)
+                                                                                  T)
+TRY "SELECT-BRUSH"
+ROUTINE "SELECT-BRUSH" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COUNT)
+                                                                        T)
+TRY "BRUSH-STROKE"
+ROUTINE "BRUSH-STROKE" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS:PATH COMMON-GRAPHICS:VALUE
+                                                                                              COMMON-GRAPHICS-USER::CDEX
+                                                                                              COMMON-GRAPHICS-USER::SDEX)
+                                                                        T)
+TRY "SCREEN-AND-STORE"
+ROUTINE "SCREEN-AND-STORE" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::BRUSH-PATH
+                                                                             COMMON-GRAPHICS-USER::CDEX
+                                                                             COMMON-GRAPHICS-USER::SDEX)
+                                                                            T)
+TRY "PAINT-FILL"
+ROUTINE "PAINT-FILL" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::CDEX
+                                                                        COMMON-GRAPHICS-USER::SDEX
+                                                                        COMMON-GRAPHICS-USER::BAND-HI)
+                                                                      T)
+TRY "EDGE-PATH"
+ERROR "EDGE-PATH" No function binding for EDGE-PATH
+TRY "BRUSH-FILL"
+ROUTINE "BRUSH-FILL" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::CDEX
+                                                                        COMMON-GRAPHICS-USER::SDEX)
+                                                                      T)
+TRY "BRUSH-FILL-SUBPART"
+ROUTINE "BRUSH-FILL-SUBPART" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::CDEX
+                                                                                COMMON-GRAPHICS-USER::SDEX)
+                                                                              T)
+TRY "RECORD-BRUSH"
+ROUTINE "RECORD-BRUSH" status=:INTERNAL type=COMPILED-FUNCTION arglist=((COMMON-GRAPHICS-USER::CDEX
+                                                                          COMMON-GRAPHICS-USER::SDEX)
+                                                                        T)
+END fill-metadata

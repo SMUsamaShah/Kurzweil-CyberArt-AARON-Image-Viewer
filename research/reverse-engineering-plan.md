@@ -36,7 +36,7 @@ probe scripts, normalized reports, and clean-room implementations are kept.
 | 3. Geometry and hand helpers | Partially measured | `XYDIST` and `LOCK-WIGGLE` match 320 paths, 80 distances, and 80 subsequent random states. Their role in the complete FLA is unresolved. | The complete line path and its caller chain match original point sequences. |
 | 4. Stream emission | Partially measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures. Integer `VECTOR`/`FILL` match 72 successful captures with the screen PLOT function replaced; eight NIL-previous error cases are checked. Basic formatter constants are inferred. | Float formatting, all selectors, and stream lifetime are measured; screen-isolated evidence remains distinguished from unmodified calls. |
 | 5. Freehand line algorithm | Partially measured | `FREE-PATH(EDGE)` now matches 16 traced-versus-unwrapped sequences and following random states, including visibility gating, closed-edge traversal, 8–14 step counts, and single/double arithmetic. | Recover all edge-list branches and connect this subset to DRAW-CFORM/brush output; validate integrated caller state and termination beyond the tested shapes. |
-| 6. Brush and colour pipeline | Early research | `BRUSH-STROKE`, `PREP-LINE`, `RECORD-BRUSH`, `BRUSH-FILL`, `DRAW-CFORM`, and related candidates are inventoried; output semantics remain open. The retained constants separate the `DRAW-CFORM` outline route from the `BRUSH-FILL-SUBPART`/`BRUSH-STROKE` fill route. | Brush selection, colour transitions, fill paths, and brush state match captured original calls. |
+| 6. Brush and colour pipeline | Early research, brush state measured | Seven startup brush profiles and complete ordered perimeter/core masks are captured; read-only signatures and constants for `INIT-MAPS`, `CLEAR-FILL-MAP`, `WRITE-LIST-TO-FILL-MAP`, `SELECT-BRUSH`, `BRUSH-STROKE`, and fill helpers are retained. Fill output, selection boundaries, colour transitions, and brush state remain open. | Brush selection, colour transitions, fill paths, and brush state match captured original calls. |
 | 7. Composition and figures | Provisional only | The JS planner has occupancy checks and measured canvas/palette profiles, but scene rules, poses, body parts, plants, pots, garments, and occlusion are not byte-equivalent. | Seeded scenes reproduce object ordering, placements, geometry, and branch decisions across holdouts. |
 | 8. Integrated generator | Not started | The generator can create valid AA files and useful provisional scenes. No whole-painting equivalence test has passed. | Same controlled startup/input produces matching structural statistics, command/state traces, and—where deterministic—matching AA output. |
 | 9. Productization | Later | Keep the viewer, engine API, browser demo, corpus analyzer, and contributor documentation coherent. | Users can load, generate, inspect, and save AA files without research-only tooling. |
@@ -47,37 +47,41 @@ complete equivalent port until phases 5–8 are recovered.
 
 ## Immediate work queue
 
-1. Complete the read-only brush-state census before invoking any fill routine.
-   The direct checkpoint now records seven `PAINT-BRUSH` objects,
-   `BOUNDARY-VALUE=3`, unbound `BRUSH`/`FILL-MAP`, and a seven-slot brush class.
-   Brush 0 is a sentinel; brushes 1–5 have measured nonzero profiles and the
-   seventh profile remains to be logged. Capture complete perimeter/core lists
-   and metadata for `INIT-MAPS`, `CLEAR-FILL-MAP`, and
-   `WRITE-LIST-TO-FILL-MAP`. Do not mutate the startup fill map or assume a
-   constructor.
-2. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
+1. Keep the completed read-only brush-state census as the boundary for fill
+   work. The direct checkpoint records seven `PAINT-BRUSH` objects,
+   `BOUNDARY-VALUE=3`, unbound `BRUSH`/`FILL-MAP`, complete masks for brushes
+   0–6, and metadata-only signatures/constants for the map and fill routines.
+   The measured profiles are implemented in `engine/src/aaron-brushes.js` and
+   tested against the normalized report. Do not mutate the startup map or
+   assume a constructor.
+2. Measure `INIT-MAPS` shape in a fresh process with private dimensions and
+   private map bindings, restoring every binding with `UNWIND-PROTECT`. The
+   constants prove `MAKE-ARRAY` and two-dimensional cons dimensions, but not
+   the runtime dimensions, element type, or initial values. Record shape and
+   representative cells before attempting any fill routine.
+3. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
    `SCREEN-AND-STORE` after the accessor census identifies a safe brush and
    private map shape. Test fresh NIL/singleton/two-point/three-point paths and
    both observed boundary values; restore the function with `UNWIND-PROTECT`.
    Treat this as dependency-isolated branch behavior, not full pipeline parity.
-3. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
+4. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call
    checkpoints. Exclude first-call dispatch warmup from random-state claims.
-4. Establish the complete path formula and termination, then compare bounded
+5. Establish the complete path formula and termination, then compare bounded
    dependency wrappers against unwrapped baselines before porting the result.
    Use LOCK-WIGGLE as a measured helper, not proof of the whole FLA.
-5. Extend the screen-isolated VECTOR/FILL measurements with independent
+6. Extend the screen-isolated VECTOR/FILL measurements with independent
    endpoint/continuity holdouts. Recover float formatting separately: the
    captured half-cent and negative-zero cases do not all match JS toFixed.
-6. Directly measure remaining writer selectors and stream ownership. The
+7. Directly measure remaining writer selectors and stream ownership. The
    controls-visible matrix is complete; its failures are not parity data.
-7. Recover brush/fill/colour state and then connect those methods to the AA
+8. Recover brush/fill/colour state and then connect those methods to the AA
    writer.
-8. Recover startup seed installation and random draw order before calibrating
+9. Recover startup seed installation and random draw order before calibrating
    composition. Then replace provisional planner/figure rules one subsystem at
    a time with oracle-backed implementations.
-9. Add integrated holdout fixtures and a final parity report that separates
+10. Add integrated holdout fixtures and a final parity report that separates
    exact, inferred, and provisional output.
 
 Publishing through the GitHub connector succeeded again on September 6, 2026.
