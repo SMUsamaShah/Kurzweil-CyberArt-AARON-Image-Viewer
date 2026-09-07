@@ -21,10 +21,10 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-07, the recovered checkout is synchronized locally at
-`67d8d2d` (`Record repeated brush path behavior`), with the corrected probe
-source at `9dbfcbe`. The connected branch contains the same tree under
+`549dc71` (`Record bounded brush edge behavior`), with the current direct
+matrix source at `73ba1f6`. The connected branch contains the same tree under
 connector-created commits and currently ends at
-`4c07af6ca8eae3bf7aea9bbe71f9d4b1a62a66d1` after the overlap evidence
+`1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication.
 The connected branch has different ancestry/SHA values from the local
 checkout, so compare the tree and files rather than assuming commit IDs are
@@ -48,11 +48,13 @@ The corrected four-case capture reproduces the 12-, 26-, 70-, and 108-cell
 adjacent horizontal footprints for brush IDs 1–4, with one screen-forwarding
 call and clean return per case. The overlap capture adds the repeated
 `(7,7)→(8,7)→(7,7)` path: the same 12 unique cells, one screen call with all
-three points, and 27 predicate calls. The earlier run `34144809281` is
-deliberately non-evidence: a stray probe marker stopped it after b2. The probe
-must remain in direct top-level form for now; compiled helper variants failed
-before their first resolution marker in the Allegro init-file harness. The
-next matrix revision is a bounded clipping control.
+three points, and 27 predicate calls. The edge capture adds
+`(0,0)→(1,0)`: one screen call, one partial fill cell, then `SIMPLE-ERROR`
+under the forced predicate. The earlier run `34144809281` is deliberately
+non-evidence: a stray probe marker stopped it after b2. The probe must remain
+in direct top-level form for now; compiled helper variants failed before their
+first resolution marker in the Allegro init-file harness. The next frontier
+is real scene context and downstream emission.
 
 Local verification:
 
@@ -79,7 +81,7 @@ generator.
 | Allegro random source and numeric boundaries | Strongly measured; normal startup seed remains unresolved |
 | Angles, distance, `LOCK-WIGGLE`, measured `FREE-PATH` subset | Measured fixtures and implementations |
 | Stream/writer selectors | Isolated behavior measured; integrated screen/file path remains open |
-| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints and repeated-vertex idempotency; selection, clipping, fill, colour, and state remain open |
+| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints, repeated-vertex idempotency, and an edge error boundary; selection, integrated clipping, fill, colour, and state remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |
@@ -119,9 +121,8 @@ Use the local-first workflow:
 4. Record normalized evidence and update the roadmap before promoting a rule
    from provisional or inferred to measured.
 
-The current research roadmap's next oracle frontier is the controlled
-direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: bounded clipping,
-then the real scene context and downstream writer.
+The current research roadmap's next oracle frontier is the real scene context
+around `SCREEN-AND-STORE`, followed by downstream `PREP-LINE`/writer tracing.
 Existing high-fanout wrappers should be removed only deliberately so later
 brush, fill, and message-loop calls become visible without changing the
 original call graph.
