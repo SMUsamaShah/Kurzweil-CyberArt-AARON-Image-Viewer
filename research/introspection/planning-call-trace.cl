@@ -35,6 +35,11 @@
           (event-count 0)
           (overflow-written nil)
           (depth 0)
+          ;; The setup report is closed before the normal screensaver call
+          ;; begins.  Keep an explicit lifetime bit so runtime events can
+          ;; reopen the same report in append mode instead of writing to the
+          ;; closed lexical stream captured by the wrappers.
+          (stream-open t)
           (targets nil)
           (state-names nil))
       ;; Keep the potentially implementation-specific initializers in the
@@ -141,7 +146,15 @@
            (emit-line (line)
              ;; Diagnostics must never change the original program's result.
              (handler-case
-                 (progn (write-line line report) (finish-output report))
+                 (if stream-open
+                     (progn (write-line line report) (finish-output report))
+                   (with-open-file (runtime-report
+                                    "C:\\temp\\aaron-planning-call-trace.txt"
+                                    :direction :output
+                                    :if-exists :append
+                                    :if-does-not-exist :create)
+                     (write-line line runtime-report)
+                     (finish-output runtime-report)))
                (error () nil)))
            (emit-form (control &rest args)
              (handler-case
@@ -217,4 +230,8 @@
         ;; are appended after it by the normal screen-saver invocation.
         (emit-line "TRACE-READY")
         (emit-line "END planning-call-trace")
-        (finish-output report)))))
+        (finish-output report)
+        ;; From this point on wrappers must append through a short-lived
+        ;; stream.  The outer WITH-OPEN-FILE closes REPORT immediately after
+        ;; this form returns.
+        (setf stream-open nil)))))
