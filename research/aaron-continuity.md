@@ -20,11 +20,10 @@ conversation boundary.
 
 ## Last verified state
 
-As of 2026-09-07, the recovered checkout is synchronized locally at
-`69f9825` (`Keep static index publication order stable`), with the connected
-branch containing the same published tree under connector-created commits
-through `8896e9f`. The current direct matrix source remains in the earlier
-edge checkpoint. Its pre-index content ended at
+As of 2026-09-07, the recovered checkout is clean at local commit
+`1612c9c` (`Index DXL descriptor and source chains`), and the connected branch
+is published at `967503a` with the same changed-file tree. The current direct
+matrix source remains in the earlier edge checkpoint. Its pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication; the static-index publication was verified at
 `b33a90bb7462a0e853678a216eb80ce93948068b` (the connector branch may advance
