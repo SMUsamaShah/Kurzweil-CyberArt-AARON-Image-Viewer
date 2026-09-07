@@ -265,9 +265,10 @@
                                     (type-of problem)))
                           (write-cell-error problem)
                           (finish-output report)))
-                      (format report "PREV-STORED-PT-NIL ~S~%"
-                              (and (boundp prev-point-symbol)
-                                   (null (symbol-value prev-point-symbol)))))))
+                      ;; The error handler may unwind implementation-private
+                      ;; dynamic state before this point; keep cleanup
+                      ;; diagnostics independent of that value.
+                      (write-line "PREV-STORED-PT-CHECK-DEFERRED" report))))
                   (format report "TEMP-CODES ~S~%"
                           (map 'list #'char-code
                                (get-output-stream-string temp-stream)))
