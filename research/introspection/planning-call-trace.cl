@@ -38,6 +38,11 @@
           (event-count 0)
           (overflow-written nil)
           (depth 0)
+          ;; Publish only the names of currently active wrapped targets so a
+          ;; companion random probe can label each RAN draw without sharing
+          ;; this lexical trace state.  The stack is diagnostic state only;
+          ;; it never participates in the original call or return values.
+          (trace-stack nil)
           ;; The setup report is closed before the normal screensaver call
           ;; begins.  Keep an explicit lifetime bit so runtime events can
           ;; reopen the same report in append mode instead of writing to the
@@ -76,6 +81,7 @@
               "RIGHTMAX" "TOPMAX"))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
+      (set 'aaron-trace-current-stack nil)
       (labels
           ((package-name-safe (symbol)
              (handler-case
@@ -188,6 +194,8 @@
                 nil)
                (t nil)))
            (trace-enter (name args entry-depth)
+             (setf trace-stack (cons name trace-stack))
+             (set 'aaron-trace-current-stack (copy-list trace-stack))
              (when (next-event)
                (emit-form "TRACE-ENTER ~D DEPTH ~D NAME ~A ARGS ~S STATE ~S"
                           event-count entry-depth name (args-summary args)
@@ -223,9 +231,15 @@
                                       (multiple-value-prog1
                                           (apply original args)
                                         (trace-exit name entry-depth)
+                                        (setf trace-stack (cdr trace-stack))
+                                        (set 'aaron-trace-current-stack
+                                             (copy-list trace-stack))
                                         (decf depth))
                                     (error (problem)
                                       (trace-error name entry-depth problem)
+                                      (setf trace-stack (cdr trace-stack))
+                                      (set 'aaron-trace-current-stack
+                                           (copy-list trace-stack))
                                       (decf depth)
                                       (error problem))))))
                         (emit-form "TARGET ~A INSTALLED TYPE ~S"
