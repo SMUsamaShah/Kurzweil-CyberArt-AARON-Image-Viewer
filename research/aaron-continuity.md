@@ -23,9 +23,11 @@ conversation boundary.
 As of 2026-09-07, the recovered checkout is synchronized locally at
 `549dc71` (`Record bounded brush edge behavior`), with the current direct
 matrix source at `73ba1f6`. The connected branch contains the same tree under
-connector-created commits and currently ends at
+connector-created commits. Its pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
-publication.
+publication; the static-index publication was verified at
+`b33a90bb7462a0e853678a216eb80ce93948068b` (the connector branch may advance
+with later per-file commits).
 The connected branch has different ancestry/SHA values from the local
 checkout, so compare the tree and files rather than assuming commit IDs are
 identical.
