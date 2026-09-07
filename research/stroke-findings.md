@@ -298,9 +298,18 @@ map stamping for the tested repeated interior vertex while preserving the
 full path for the downstream consumer; it does not generalize to arbitrary
 overlaps or clipping.
 
-The next probe should use a carefully bounded edge/clip control, then replace
-`SCREEN-AND-STORE` with a recorder that captures its downstream
-`PREP-LINE`/writer dependencies without changing the private map setup.
+The bounded edge diagnostic in
+`introspection/evidence/brush-stroke-isolated-34146017804.txt` uses brush 1
+with `(0,0)→(1,0)` under the same forced in-frame predicate. It forwards the
+two points once, writes only row-major cell `0`, then raises `SIMPLE-ERROR`;
+there are no patch writes and only two predicate calls. This repeats the
+earlier edge result and confirms a partial-write/error boundary in this
+dependency-isolated setup. It is not evidence that the integrated engine
+clips all edge strokes this way, because the real frame predicate and screen
+context are still replaced.
+
+The next probe should restore a real scene context while recording downstream
+`PREP-LINE`/writer dependencies, without changing the private map setup.
 
 ## Emission leads
 
