@@ -20,16 +20,13 @@ conversation boundary.
 
 ## Last verified state
 
-As of 2026-09-07, the recovered checkout is being advanced locally from
-`ccb99fb` (`Implement measured RAN-HAND helper`); the latest local checkpoint
-is `b3a79f8` (`Capture second direct brush profile`). The connected branch
-currently contains the corresponding probe tree at
-`e8a96e7473981aaaf10f7f0c0f57af925f9de0dd`. The first handoff publication was
-based on connected-branch commit
-`0782c0dd9e819e6c9694809de05e1829c5997326`; the local continuity revisions
-are `fce7c5a` and `58ed34b`. The connected branch contains the same handoff
-content under connector-created commits with different ancestry/SHA values, so
-compare the tree and files rather than assuming local and remote commit IDs are
+As of 2026-09-07, the recovered checkout is synchronized locally at
+`d7ef146` (`Record four-profile brush matrix`), with the probe repair in
+`2e97202` and the direct b3/b4 extension in `e520d62`. The connected branch
+contains the same tree under connector-created commits and currently ends at
+`ebae9ab2c1800a420fe506ac0d87fe2d9a93cb45` after the evidence publication.
+The connected branch has different ancestry/SHA values from the local
+checkout, so compare the tree and files rather than assuming commit IDs are
 identical.
 
 The latest published change adds:
@@ -43,14 +40,16 @@ The latest published change adds:
 - updates to the plan, oracle notes, and freehand-line notes.
 
 The current brush checkpoint also adds a strict Stage 23 report parser and
-completed original-engine captures at
-`research/introspection/evidence/brush-stroke-isolated-34126488826.txt` and
-`research/introspection/evidence/brush-stroke-isolated-34127856773.txt`.
-The corrected two-case capture reproduces the twelve-cell brush-1 footprint,
-the 26-cell brush-2 footprint, and one screen-forwarding call per case. The
-probe must remain in direct top-level form for now: compiled helper variants
-failed before their first resolution marker in the Allegro init-file harness.
-The next matrix revision can add brushes 3–4 and boundary/overlap controls.
+the retained original-engine capture at
+`research/introspection/evidence/brush-stroke-isolated-34145100465.txt`.
+The corrected four-case capture reproduces the 12-, 26-, 70-, and 108-cell
+adjacent horizontal footprints for brush IDs 1–4, with one screen-forwarding
+call and clean return per case. The earlier run
+`34144809281` is deliberately non-evidence: a stray probe marker stopped it
+after b2. The probe must remain in direct top-level form for now; compiled
+helper variants failed before their first resolution marker in the Allegro
+init-file harness. The next matrix revision is repeated/overlapping vertices
+and a bounded clipping control.
 
 Local verification:
 
@@ -77,7 +76,7 @@ generator.
 | Allegro random source and numeric boundaries | Strongly measured; normal startup seed remains unresolved |
 | Angles, distance, `LOCK-WIGGLE`, measured `FREE-PATH` subset | Measured fixtures and implementations |
 | Stream/writer selectors | Isolated behavior measured; integrated screen/file path remains open |
-| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 control reproduces the baseline footprint; selection, clipping, fill, colour, and state remain open |
+| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints; selection, clipping, overlap, fill, colour, and state remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |
@@ -118,10 +117,11 @@ Use the local-first workflow:
    from provisional or inferred to measured.
 
 The current research roadmap's next oracle frontier is the controlled
-direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: brushes 3–4,
-boundary and overlap cases, then the real scene context and downstream writer. Existing high-fanout
-wrappers should be removed only deliberately so later brush, fill, and message
-loop calls become visible without changing the original call graph.
+direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: repeated/overlap
+cases and bounded clipping, then the real scene context and downstream writer.
+Existing high-fanout wrappers should be removed only deliberately so later
+brush, fill, and message-loop calls become visible without changing the
+original call graph.
 
 ## Execution split and model handoff
 
