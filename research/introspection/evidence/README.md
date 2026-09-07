@@ -486,6 +486,9 @@ outer row-major dimension (`index = first * height + second`) for these brush
 writes; this is still a measured map-write convention, not a claim about every
 other routine's coordinate handling.
 
+The next holdout keeps the horizontal path and value 1 but selects startup
+brush 2, extending the map-write measurement to the next measured core mask.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

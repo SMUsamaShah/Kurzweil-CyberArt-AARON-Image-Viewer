@@ -313,11 +313,11 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 11 invokes BRUSH-STROKE exactly once with a vertical two-point
-  ;; path. This changes only the second point and VALUE from Stage 10.
+  ;; Stage 12 invokes BRUSH-STROKE exactly once with brush 2 and the same
+  ;; horizontal two-point path used by the first brush footprint.
   ;; downstream dependencies remain inert stubs, so any map writes or errors
   ;; belong to BRUSH-STROKE's own entry/branch logic, not file emission.
-  (write-line "STAGE-11-VERTICAL-BEGIN" report)
+  (write-line "STAGE-12-BRUSH-2-BEGIN" report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -333,10 +333,10 @@
              (screen (find-symbol "SCREEN-AND-STORE" owner))
              (inside (find-symbol "IN-SUB-FRAME" owner))
              (all-brushes (symbol-value all-symbol))
-             (brush (elt all-brushes 1))
+             (brush (elt all-brushes 2))
              (make-point (find-symbol "MAKE-TWOPT" owner))
              (path (list (funcall make-point 7 7)
-                         (funcall make-point 7 8)))
+                         (funcall make-point 8 7)))
              (fill-map (make-array '(16 16)
                                    :element-type '(unsigned-byte 4)
                                    :initial-element 0))
@@ -389,18 +389,18 @@
           (format report "PATCH-NONZERO-COUNT ~D~%" patch-count))
         (write-line (if (and (eq (symbol-function screen) original-screen)
                              (eq (symbol-function inside) original-inside))
-                        "STAGE-11-FUNCTIONS-RESTORED"
-                        "STAGE-11-FUNCTIONS-NOT-RESTORED")
+                        "STAGE-12-FUNCTIONS-RESTORED"
+                        "STAGE-12-FUNCTIONS-NOT-RESTORED")
                     report)
         (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
                              (eql (boundp fill-symbol) before-fill-bound)
                              (eql (boundp patch-symbol) before-patch-bound))
-                        "STAGE-11-BINDINGS-RESTORED"
-                        "STAGE-11-BINDINGS-LEAKED")
+                        "STAGE-12-BINDINGS-RESTORED"
+                        "STAGE-12-BINDINGS-LEAKED")
                     report))
     (error (problem)
       (declare (ignore problem))
-      (write-line "STAGE-11-VERTICAL-ERROR" report)))
+      (write-line "STAGE-12-BRUSH-2-ERROR" report)))
   (finish-output report))
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
@@ -510,6 +510,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-11-VERTICAL~%")
+  (format report "STAGE-12-BRUSH-2~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))

@@ -128,6 +128,10 @@ horizontal and vertical holdouts therefore support the map-write index rule
 map layer can expose that convention while keeping broader coordinate claims
 scoped to the measured brush path.
 
+The next isolated case keeps the horizontal two-point path and value 1 but
+selects startup brush 2, testing the next measured core mask with the same
+predicate and private map environment.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
