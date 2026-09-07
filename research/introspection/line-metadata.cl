@@ -17,7 +17,7 @@
                       "HOP-OR-DRAW" "PARSE-HOP" "PARSE-P-HOP"
                       "DIRECTION" "ANGLE-DIF" "ANGLE-RANGE" "RESET-RANGE"
                       "FROM-ANGLE" "TO-ANGLE" "RAN" "RAN-HAND"
-                      "BRUSH-STROKE" "SELECT-BRUSH" "RECORD-BRUSH"
+                      "BRUSH-STROKE" "SELECT-BRUSH" "IN-SUB-FRAME" "RECORD-BRUSH"
                       "MAPLINE" "LINE-MAPPING" "DRAW-CFORM"
                       "BRUSH-FILL" "BRUSH-FILL-SUBPART"))
         (incf count)
