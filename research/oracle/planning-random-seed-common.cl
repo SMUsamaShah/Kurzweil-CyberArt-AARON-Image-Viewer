@@ -70,7 +70,7 @@
                  (not (constantp symbol)))
         (handler-case
             (progn (set symbol seed) (incf rseed-count))
-          (condition () nil)))
+          (condition () nil)))))
   (with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
                          :direction :output
                          :if-exists :append
@@ -104,7 +104,7 @@
                                             (numberp (symbol-value symbol)))
                                    (symbol-value symbol)))
                     rows))
-          (condition () nil)))))
+          (condition () nil)))
     (nreverse rows)))
 
 (defun aaron-random-emit (line)
