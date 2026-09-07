@@ -1,0 +1,69 @@
+BEGIN post-init-ran-context-34113996954
+RUN 34113996954
+COMMIT 4d15969c2771d40563647e4cfd58f14c1db1ee98
+WORKFLOW .github/workflows/aaron-post-init-ran-context.yml
+
+The two jobs installed the recovered seed-1234 state after the original
+`INIT-RANDOM`, then logged the active names from the bounded call-trace stack
+alongside 512 engine-local `RAN` calls. The stack bridge is diagnostic state;
+it does not alter arguments, return values, random state, or the AA output.
+
+HOLDOUT seed-1234
+JOB 101716447122
+ARTIFACT 10015502305 digest sha256:804a82f952476dcf9269d910acb7c88f4adfed7a58237c8f3896d8e3027f67b2
+RAN-SAMPLE-LINES 512
+RAN-CONTEXT-LINES 512
+RAN-SAMPLE-FILE-BYTES 71146
+RAN-SAMPLE-LF-SHA256 15d644e7643972a48aae4bfcab3608c8a1f31f082a1473a6552da63bb3952d51
+RAN-CONTEXT-LF-SHA256 14f3967a5328002c07a14d2cdfd1d1be17be49ba5d7d8dd6b76dc44e8a01c42d
+RAN-SAMPLE-CONTEXT-LF-SHA256 5a7a3a72de0a1d7d6388b8a72414054719ceb6d06eb623c18134ef0f91913b8f
+TRACE-FILE-BYTES 4564538
+TRACE-FILE-SHA256 74cb43b91319d1ab1794aeca060fd24fd8cb71a4a39c8a6435cef5a7cbb940d0
+AA0-BYTES 126956
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+
+HOLDOUT seed-1234-repeat
+JOB 101716446885
+ARTIFACT 10015502348 digest sha256:54177046936680bb5f40727cf2e9c87f47a7d93c9d783f7f0ea104d260e30a11
+RAN-SAMPLE-LINES 512
+RAN-CONTEXT-LINES 512
+RAN-SAMPLE-FILE-BYTES 71146
+RAN-SAMPLE-LF-SHA256 15d644e7643972a48aae4bfcab3608c8a1f31f082a1473a6552da63bb3952d51
+RAN-CONTEXT-LF-SHA256 14f3967a5328002c07a14d2cdfd1d1be17be49ba5d7d8dd6b76dc44e8a01c42d
+RAN-SAMPLE-CONTEXT-LF-SHA256 5a7a3a72de0a1d7d6388b8a72414054719ceb6d06eb623c18134ef0f91913b8f
+TRACE-FILE-BYTES 4564538
+TRACE-FILE-SHA256 74cb43b91319d1ab1794aeca060fd24fd8cb71a4a39c8a6435cef5a7cbb940d0
+AA0-BYTES 126956
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+
+CONTEXT-STACK-COUNTS
+367 RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+70 BUILD-FIGURE > RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+54 GENERATE-PERSON > RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+20 DEVELOP-PLAN > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+1 MAIN > DOIT > RUN-AARON
+
+CONTEXT-PARTITIONS
+1-1 MAIN > DOIT > RUN-AARON
+2-21 DEVELOP-PLAN > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+22-37 RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+38-91 GENERATE-PERSON > RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+92-112 RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+113-182 BUILD-FIGURE > RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+183-512 RPARSE > MASTER-PLAN > MAIN > DOIT > RUN-AARON
+
+COMPARISON
+  The two independent jobs match exactly after LF normalization for all 512
+  RAN samples, all 512 context stacks, the planner trace, and the complete
+  AA0 output. The same AA0 and trace hashes also match the earlier 512-call
+  holdout from run 34112709506, showing that the stack bridge is non-invasive.
+
+INTERPRETATION
+  The first 512 visible engine draws partition into a 20-call planning block,
+  a 54-call GENERATE-PERSON block, a 70-call BUILD-FIGURE block, and parser
+  draws before and after those blocks. This labels the draw-order fixture at
+  the current wrapper frontier; the many calls shown under RPARSE are not
+  claims that RPARSE itself owns every underlying figure rule. Additional
+  inner targets must be exposed before assigning those draws to individual
+  body, pose, colour, or brush routines.
+END post-init-ran-context-34113996954

@@ -183,6 +183,13 @@ exactly between two fresh seed-1234 jobs, and their AA0 files have the same
 SHA-256. This is a usable draw-order fixture for the clean-room engine while
 the default startup transition remains unresolved. See [long-trace evidence](introspection/evidence/post-init-ran-trace-34112709506.txt).
 
+Run [34113996954](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34113996954)
+adds a separate `RAN-CONTEXT` line for each of those calls. The two jobs match
+all 512 context lines; contiguous ranges are `MAIN` (1), `DEVELOP-PLAN`
+(2–21), `RPARSE` (22–37), `GENERATE-PERSON` (38–91), `RPARSE` (92–112),
+`BUILD-FIGURE` (113–182), and `RPARSE` (183–512). The bridge is diagnostic and
+does not draw from the random state. See [context evidence](introspection/evidence/post-init-ran-context-34113996954.txt).
+
 The companion constructor-advice run
 [34111962460](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111962460)
 was blocked by Allegro package locks when it attempted to replace the

@@ -846,3 +846,10 @@ negative instrumentation result.
 calibration seam to 512 engine-local `RAN` calls. The normalized call lines
 match exactly across fresh seed-1234 jobs, along with their AA0 SHA-256; this
 is a draw-order fixture, not default-startup parity.
+
+`post-init-ran-context-34113996954.txt` adds the matching 512 active-target
+stacks. The repeated seed-1234 jobs are identical and partition the stream
+into `MAIN`, `DEVELOP-PLAN`, `RPARSE`, `GENERATE-PERSON`, `BUILD-FIGURE`, and
+`RPARSE` phases. This makes the long stream actionable for scene probes. It
+does not imply that every integer bound has already been reproduced by the JS
+RNG; the current short-limit numeric fixture remains a separate boundary.

@@ -158,11 +158,25 @@ the normalized 512-line sequence SHA-256 is
 jobs. This is the first retained long draw-order fixture for replacing the
 provisional JS planner. See the [long-trace evidence](introspection/evidence/post-init-ran-trace-34112709506.txt).
 
+Run [34113996954](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34113996954)
+added a bounded call-stack bridge to the same two holdouts. All 512
+`RAN-CONTEXT` lines also match byte-for-byte (SHA-256
+`1c3bddc5bac8a8d1181d3793a2afb9ed7705b90521e50a35c739b716f1c99441`). The
+sequence is now phase-labelled: sample 1 is `MAIN`; 2–21 are
+`DEVELOP-PLAN`; 22–37 are `RPARSE`; 38–91 are `GENERATE-PERSON`; 92–112
+return to `RPARSE`; 113–182 are `BUILD-FIGURE`; and 183–512 are `RPARSE`.
+This separates planner call order from the numeric RNG model and provides the
+next targeting boundary for scene-rule probes. See the [context evidence](introspection/evidence/post-init-ran-context-34113996954.txt).
+
 ## What this does not recover
 
 The probes do not yet identify the process-varying input used by the normal
 `INIT-RANDOM` transition, the sequence of random calls made by `SCRIPT`, or the
-mapping from those calls to planning, figures, colours, and brush strokes.
+mapping from those calls to planning, figures, colours, and brush strokes. The
+long trace also shows that integer `RAN` bounds used by the planner can advance
+the state differently from the currently modelled short-limit vectors; this is
+why the 512-line fixture is retained as evidence and not yet asserted as a
+whole-stream JS RNG regression.
 The exact scene generator is therefore still unfinished. The standard
 `Mt19937` class remains available for existing clean-room tests; callers that
 need the recovered Allegro numeric behavior can use `Allegro501Random`
