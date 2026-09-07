@@ -452,6 +452,18 @@ private `FILL-MAP` and zero cells to `PATCH-MAP`; both function cells and all
 dynamic bindings restore. The current report records the counts only; a
 follow-up will capture the exact row-major indices and values.
 
+`brush-stroke-isolated-34072445077.txt` captures those exact cells in run
+[34072445077](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072445077),
+commit `59833eeda631bbfe15756faac29a49e1f1c45773`. The 12 values are all
+`1`, at row-major indices `102–104`, `118–120`, `134–136`, and `150–152` on
+the known 16×16 map; `PATCH-MAP` remains zero. The report intentionally keeps
+these as row-major indices, not X/Y coordinates, until an asymmetric map or
+origin/axis holdout distinguishes the two dimensions.
+
+The next holdout keeps that exact geometry and changes only `VALUE` from `1`
+to the measured `BOUNDARY-VALUE` of `3`; it will show whether the map stores
+the supplied value directly or applies boundary-specific logic.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

@@ -99,6 +99,18 @@ increment records the 12 row-major index/value pairs; it deliberately avoids
 assigning X/Y meanings until the map dimensions or an asymmetric case provide
 that evidence.
 
+The row-major capture in run
+[34072445077](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072445077)
+is `102–104`, `118–120`, `134–136`, and `150–152`, each with value `1`, on
+the 16×16 `FILL-MAP`; `PATCH-MAP` remains zero. This is a measured 12-cell
+brush-1 footprint for the tested two-point input and predicate gate. It is
+not yet generalized to other brushes, values, paths, map sizes, or axis
+orientation.
+
+The next holdout preserves this geometry and changes only `VALUE` from `1` to
+the measured `BOUNDARY-VALUE` of `3`, testing whether the map stores the input
+value directly or applies boundary-specific logic.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
