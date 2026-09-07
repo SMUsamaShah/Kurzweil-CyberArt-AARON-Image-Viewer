@@ -590,6 +590,16 @@ the stub does not stand in for GUI/file output.
 
 The next probe should vary forwarded indices under `IN-SUB-FRAME=NIL`.
 
+`brush-stroke-isolated-34075893528.txt` is the forwarded-CDEX capture from run
+[34075893528](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075893528),
+commit `bdec9e4c0380c9564a0b08eb8391dec149bc1e91`. With aligned CDEX=`1` and
+SDEX=`0`, the recorder sees `SCREEN-ARGS 1 0`, one call, and all three path
+points in order. Both maps remain zero; the predicate count is 27; return and
+restoration markers match the baseline. This is forwarding evidence only—the
+real screen/file consumer remains replaced.
+
+The next holdout changes only aligned SDEX to `1`.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

@@ -233,6 +233,16 @@ yet recover screen/file emission or explain the predicate-call count.
 The next probe should vary the forwarded indices under `IN-SUB-FRAME=NIL` to
 compare CDEX/SDEX forwarding independently of map writes.
 
+Run [34075893528](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34075893528)
+changes aligned CDEX to `1` while SDEX remains `0` under the same rejecting
+predicate. The recorder sees exactly `SCREEN-ARGS 1 0`, one call, and the same
+three forwarded points; both maps remain zero and the 27 predicate calls,
+return, and restoration markers match the baseline. This confirms positional
+and dynamic CDEX reach `SCREEN-AND-STORE` in the isolated call, without
+claiming what the real screen/file consumer does with the index.
+
+The next holdout changes only aligned SDEX to `1`.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.
