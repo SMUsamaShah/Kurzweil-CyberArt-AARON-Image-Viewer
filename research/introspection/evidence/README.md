@@ -675,3 +675,15 @@ the bound. `MPLAN` is a `PLAN` by the first `RPARSE` call, while `BRUSH` and
 `(320 480)` unsigned-byte-4 array. `STORE-IN-FILE` accounts for 445 entries,
 so the next pass will leave that writer unwrapped to expose its downstream
 line/brush/plot calls.
+
+`planning-call-trace-downstream-34099782995.txt` is the next bounded pass from
+run
+[34099782995](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34099782995),
+commit `fb51505d2d4e0c2e586b24d88e94f5da56994ded`, job `101671310643`, and
+artifact `10010008363`. It leaves `STORE-IN-FILE` unwrapped and instruments
+its downstream names. The first `DRAW-CFORM` repeatedly enters
+`LINE-MAPPING → MAPLINE → PLOT` (196, 196, and 102 entries respectively)
+before the 1,024-event bound; there are 516 entries, 508 exits, and no trace
+errors. No screen/brush edge appears before this sampling limit, so that
+absence is not a negative call-graph result. The next pass omits these three
+high-fanout mapping/plot wrappers to reach later startup stages.

@@ -72,8 +72,11 @@ complete equivalent port until phases 5–8 are recovered.
    The focused follow-up shows `MPLAN` is a `PLAN` by `RPARSE`, and the
    initialized path reaches `DRAW-CFORM`, `SCREEN-AND-STORE`, `PREP-LINE`,
    and `STORE-IN-FILE`; `BRUSH` and `RPLANE` are bound before `PREP-LINE`.
-   Remove only the high-fanout `STORE-IN-FILE` wrapper in the next trace so
-   downstream line/brush/plot calls can be observed. Then rerun the private
+   The next trace leaves `STORE-IN-FILE` unwrapped and confirms its first
+   figure dispatch is `LINE-MAPPING -> MAPLINE -> PLOT`; those three edges
+   consume the bounded report before screen/brush calls appear. Omit these
+   high-fanout mapping/plot wrappers in the following pass to reach later
+   `SCREEN-AND-STORE`, brush, and message-loop edges. Then rerun the private
    `SCREEN-AND-STORE` path without inventing a plan object. Treat any new
    PLOT or writer observations as downstream only after the context is
    measured.

@@ -1,0 +1,33 @@
+BEGIN planning-call-trace-downstream-34099782995
+RUN 34099782995
+COMMIT fb51505d2d4e0c2e586b24d88e94f5da56994ded
+JOB 101671310643
+ARTIFACT 10010008363
+SOURCE research/introspection/planning-call-trace.cl
+
+TRACE-CONFIG EVENT-LIMIT 1024
+TRACE-CONFIG STORE-IN-FILE-WRAPPER OMITTED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+TRACE-COUNTS ENTER 516
+TRACE-COUNTS EXIT 508
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 1024
+
+CALL-COUNTS DRAW-CFORM 5
+CALL-COUNTS LINE-MAPPING 196
+CALL-COUNTS MAPLINE 196
+CALL-COUNTS PLOT 102
+
+PATH RPARSE -> DRAW-CFORM -> INITIALISE-PICTURE-PLANE
+PATH DRAW-CFORM -> LINE-MAPPING -> MAPLINE -> PLOT (repeated)
+
+INTERPRETATION Leaving STORE-IN-FILE unwrapped exposes its actual writer
+dispatch: the first figure's mapped lines repeatedly enter LINE-MAPPING,
+MAPLINE, and PLOT. No SCREEN-AND-STORE, BRUSH-STROKE, FREE-PATH,
+HOP-OR-DRAW, or WATCH-FOR-MESSAGES entry appears before the 1,024-event bound;
+that is a sampling limit inside the first DRAW-CFORM, not evidence that those
+edges are absent from the full startup. The next probe leaves the three
+high-fanout mapping/plot wrappers out and keeps the screen/brush targets.
+END planning-call-trace-downstream-34099782995
