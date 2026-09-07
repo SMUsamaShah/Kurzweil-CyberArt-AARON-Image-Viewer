@@ -1,0 +1,79 @@
+name: AARON canvas state holdouts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [reverse-engineer-aaron-js]
+    paths:
+      - '.github/workflows/aaron-canvas-holdouts.yml'
+      - 'research/oracle/planning-canvas-size-*.cl'
+      - 'research/introspection/planning-call-trace.cl'
+
+permissions:
+  contents: read
+
+jobs:
+  canvas:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: size-1024x768
+            source: planning-canvas-size-1024x768.cl
+          - name: size-1920x1080
+            source: planning-canvas-size-1920x1080.cl
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download hash-verified reference build
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --retry 2 --retry-all-errors `
+            --connect-timeout 20 --max-time 120 --retry-max-time 180 --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
+      - name: Stage trace and run bounded canvas probe
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+          Copy-Item -LiteralPath 'research\introspection\planning-call-trace.cl' `
+            -Destination 'C:\temp\planning-call-trace.cl' -Force
+          $output = Join-Path $env:RUNNER_TEMP 'aaron-canvas-holdout'
+          try {
+            & research/oracle/run-oracle.ps1 `
+              -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
+              -OutputRoot $output -Mode direct-screensaver -RunSeconds 90 `
+              -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
+              -PatchPremiumFlag -PremiumFlagSource '${{ matrix.source }}'
+          } finally {
+            $report = 'C:\temp\aaron-planning-call-trace.txt'
+            if (Test-Path $report) {
+              Copy-Item $report (Join-Path $output 'planning-call-trace.txt') -Force
+            }
+            $marker = 'C:\temp\aaron-canvas-size-loaded.txt'
+            if (Test-Path $marker) {
+              Copy-Item $marker (Join-Path $output 'canvas-size-loaded.txt') -Force
+            }
+          }
+          if (-not (Test-Path (Join-Path $output 'planning-call-trace.txt'))) {
+            throw 'Canvas trace never started'
+          }
+          if (-not (Select-String -LiteralPath (Join-Path $output 'planning-call-trace.txt') `
+                    -SimpleMatch 'END planning-call-trace')) {
+            throw 'Canvas trace started but did not complete'
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aaron-canvas-${{ matrix.name }}
+          path: ${{ runner.temp }}/aaron-canvas-holdout
+          if-no-files-found: warn
+          retention-days: 14
