@@ -787,3 +787,15 @@ unbound. `SELECT-CANVAS(NARROW)` then sets `*PIC-WIDE*=320`, `*PIC-HIGH*=480`,
 universal display-size rule. The same run captured a complete 141,792-byte
 `aa0` painting with SHA-256
 `bf957ce28279e9bfb40954bf495bf5d714f5311554a73c493bb381ee8c50cdd0`.
+
+`planning-canvas-size-holdouts-34105595078.txt` records two fresh-process size
+holdouts from run
+[34105595078](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34105595078),
+commit `f1ab8055e154d2b10b66acfc3dd44723be42ddbd`. The 1024x768 job (job
+`101689749454`, artifact `10012226732`) selects a 512x768 canvas and writes a
+complete 207,144-byte, 148-colour `aa0`; the 1920x1080 job (job `101689749722`,
+artifact `10012239878`) selects 960x1080 and writes a complete 466,378-byte,
+148-colour `aa0`. Both traces show `RIGHTMAX`/`TOPMAX` as the selected width
+and height minus one. These are controlled size interventions, not seeded
+random comparisons; they confirm a reachable high-resolution path while the
+universal dimension rule remains open.

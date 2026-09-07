@@ -1,0 +1,84 @@
+name: AARON random seed holdouts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [reverse-engineer-aaron-js]
+    paths:
+      - '.github/workflows/aaron-random-holdouts.yml'
+      - 'research/oracle/planning-random-seed-*.cl'
+      - 'research/introspection/planning-call-trace.cl'
+
+permissions:
+  contents: read
+
+jobs:
+  random:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: seed-1234
+            source: planning-random-seed-1234.cl
+          - name: seed-1234-repeat
+            source: planning-random-seed-1234-repeat.cl
+          - name: seed-5678
+            source: planning-random-seed-5678.cl
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download hash-verified reference build
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --retry 2 --retry-all-errors `
+            --connect-timeout 20 --max-time 120 --retry-max-time 180 --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
+      - name: Stage trace and run bounded seed probe
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+          Copy-Item -LiteralPath 'research\introspection\planning-call-trace.cl' `
+            -Destination 'C:\temp\planning-call-trace.cl' -Force
+          Copy-Item -LiteralPath 'research\oracle\planning-random-seed-common.cl' `
+            -Destination 'C:\temp\planning-random-seed-common.cl' -Force
+          $output = Join-Path $env:RUNNER_TEMP 'aaron-random-holdout'
+          try {
+            & research/oracle/run-oracle.ps1 `
+              -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
+              -OutputRoot $output -Mode direct-screensaver -RunSeconds 90 `
+              -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
+              -PatchPremiumFlag -PremiumFlagSource '${{ matrix.source }}'
+          } finally {
+            foreach ($entry in @(
+              @{ Source = 'C:\temp\aaron-planning-call-trace.txt'; Name = 'planning-call-trace.txt' },
+              @{ Source = 'C:\temp\aaron-random-seed-loaded.txt'; Name = 'random-seed-loaded.txt' },
+              @{ Source = 'C:\temp\aaron-random-samples.txt'; Name = 'random-samples.txt' }
+            )) {
+              if (Test-Path $entry.Source) {
+                Copy-Item $entry.Source (Join-Path $output $entry.Name) -Force
+              }
+            }
+          }
+          if (-not (Test-Path (Join-Path $output 'planning-call-trace.txt'))) {
+            throw 'Random planning trace never started'
+          }
+          if (-not (Select-String -LiteralPath (Join-Path $output 'planning-call-trace.txt') `
+                    -SimpleMatch 'END planning-call-trace')) {
+            throw 'Random planning trace started but did not complete'
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aaron-random-${{ matrix.name }}
+          path: ${{ runner.temp }}/aaron-random-holdout
+          if-no-files-found: warn
+          retention-days: 14
