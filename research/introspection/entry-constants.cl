@@ -1,8 +1,7 @@
 ;;; Read-only entry-symbol and compiled-function checkpoint.
 ;;;
-;;; This intentionally starts with symbol resolution and function-cell type
-;;; only.  The previous broad constant probe stopped at its first candidate;
-;;; separate checkpoints make an Allegro loader/runtime boundary visible.
+;;; The symbol/function checkpoints remain separate from each constant read so
+;;; an implementation-specific object cannot hide later candidates.
 (in-package :cl-user)
 
 (unless (boundp 'aaron-entry-constants-loaded)
@@ -12,7 +11,37 @@
                           :if-does-not-exist :create)
     (write-line "BEGIN entry-constants" report)
     (finish-output report)
-    (dolist (name '("RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
+    (let ((count-fn (find-symbol "FUNCTION-CONSTANT-COUNT" "EXCL"))
+          (constant-fn (find-symbol "FUNCTION-CONSTANT" "EXCL")))
+      (labels
+          ((short-summary (value)
+             (handler-case
+                 (cond
+                   ((numberp value) (list :number value))
+                   ((symbolp value)
+                    (list :symbol (and (symbol-package value)
+                                       (package-name (symbol-package value)))
+                          (symbol-name value)))
+                   ((stringp value) (list :string-length (length value)))
+                   ((consp value) (list :type (type-of value)))
+                   (t (list :type (type-of value))))
+               (error () (list :type :summary-error))))
+           (try-count (fn symbol)
+             (handler-case
+                 (funcall count-fn fn)
+               (error ()
+                 (handler-case
+                     (funcall count-fn symbol)
+                   (error () nil)))))
+           (try-constant (fn index symbol)
+             (handler-case
+                 (short-summary (funcall constant-fn fn index))
+               (error ()
+                 (handler-case
+                     (short-summary (funcall constant-fn symbol index))
+                   (error (problem)
+                     (list :error (type-of problem))))))))
+        (dolist (name '("RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
                     "END-START" "GOOD-START" "OMAKE-FRESH-START"
                     "MAKE-FRESH-START" "REMAKE-IMAGE" "MAKE-ARTWORK" "MAIN"
                     "INITIALISE-PICTURE-PLANE" "DRAW-ONE-COMMAND"
@@ -42,6 +71,17 @@
                   (let ((fn (symbol-function symbol)))
                     (format report "FUNCTION-TYPE ~A ~S~%"
                             name (type-of fn))
+                    (if (and count-fn constant-fn
+                             (typep fn 'compiled-function))
+                        (let ((count (try-count fn symbol)))
+                          (format report "COUNT ~A ~S~%" name count)
+                          (when (and (integerp count)
+                                     (<= 0 count) (<= count 256))
+                            (dotimes (index count)
+                              (format report "CONSTANT ~A ~D ~S~%"
+                                      name index
+                                      (try-constant fn index symbol)))))
+                      (format report "CONSTANTS-UNAVAILABLE ~A~%" name))
                     (finish-output report))
                 (error (problem)
                   (format report "FUNCTION-ERROR ~A ~S~%"
@@ -50,6 +90,6 @@
         (error (problem)
           (format report "RESOLVE-ERROR ~A ~S~%"
                   name (type-of problem))))
-      (finish-output report))
-    (write-line "END entry-constants" report)
-    (finish-output report)))
+          (finish-output report))
+        (write-line "END entry-constants" report)
+        (finish-output report)))))
