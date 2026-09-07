@@ -61,10 +61,10 @@
               "RPARSE" "BUILD-FIGURE" "GENERATE-PERSON"
               "MAKE-POTTED-PLANT" "DRAW-CFORM" "PAINT-FILL"
               "PREP-LINE" "DISPLAY-COLOR-PATCHES" "SCREEN-AND-STORE"
-              ;; Leave the high-fanout writer itself unwrapped.  These
-              ;; downstream names expose its plot/line/brush edges while
-              ;; preserving the original writer dispatch.
-              "PLOT" "BRUSH-STROKE" "MAPLINE" "LINE-MAPPING"
+              ;; Leave the high-fanout writer and mapping edges unwrapped.
+              ;; The remaining names expose later screen/brush edges while
+              ;; preserving the original dispatch.
+              "BRUSH-STROKE"
               "FREE-PATH" "HOP-OR-DRAW" "WATCH-FOR-MESSAGES")
             state-names
             '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
