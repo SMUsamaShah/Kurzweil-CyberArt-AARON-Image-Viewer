@@ -373,10 +373,13 @@
                 ;; RAN-SAMPLE fixtures remain byte-for-byte parseable.
                 (when (and sample-number
                            (boundp 'aaron-trace-current-stack))
-                  (aaron-random-emit
-                   (format nil "RAN-CONTEXT ~D STACK ~S"
-                           sample-number
-                           aaron-trace-current-stack)))
+                  (let ((*print-pretty* nil)
+                        (*print-level* 8)
+                        (*print-length* 16))
+                    (aaron-random-emit
+                     (format nil "RAN-CONTEXT ~D STACK ~S"
+                             sample-number
+                             aaron-trace-current-stack))))
                 (values-list values))))
       (when original-day
         (setf (symbol-function day-symbol)
