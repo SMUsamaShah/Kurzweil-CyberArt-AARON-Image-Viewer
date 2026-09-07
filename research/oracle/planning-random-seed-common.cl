@@ -227,6 +227,3 @@
  (format nil "PRE-INIT STATE ~S" (aaron-random-state-snapshot)))
 (aaron-random-emit
  (format nil "STATE-PREVIEW PRE-INIT ~S" (aaron-random-state-preview)))
-## reverse-engineer-aaron-js
- M research/oracle/planning-random-seed-common.cl
-cccf6bed50acc36a9ec5299bbb80ccfb843c506f
