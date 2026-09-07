@@ -188,6 +188,17 @@ measured more broadly.
 The next probe should use a repeated or overlapping interior vertex, where no
 boundary error can obscure duplicate-path semantics.
 
+Before changing path topology, run [34074832466](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074832466)
+changed only the CDEX index from the zero baseline: positional CDEX and the
+dynamic CDEX binding were both `1`, while SDEX stayed `0`. The adjacent
+brush-1 path still returned successfully with the exact 12 baseline cells,
+all value `1`, no patch writes, and complete function/binding restoration.
+This establishes no changed isolated map effect for the aligned CDEX holdout;
+it does not prove that CDEX is unused by downstream screen/file emission.
+
+The next holdout changes only the aligned SDEX index to `1` with the same path,
+brush, value, and private-map setup.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

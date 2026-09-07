@@ -546,6 +546,17 @@ out-of-map skip policy pending broader in-frame and array-write probes.
 The next probe should use a repeated or overlapping interior vertex, where no
 boundary error can obscure duplicate-path semantics.
 
+`brush-stroke-isolated-34074832466.txt` is the aligned CDEX holdout from run
+[34074832466](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074832466),
+commit `55053468d397b075cfca4690612bc6c02cfbaf05`. It changes positional and
+dynamic CDEX from `0` to `1` while SDEX remains `0`; the adjacent brush-1 path
+still writes exactly the baseline 12 value-1 cells and no patch cells. The
+routine returns normally and restores both function cells and dynamic
+bindings. The capture only constrains isolated map effects; the screen/file
+consumers were stubbed.
+
+The next holdout changes only the aligned SDEX index to `1`.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
