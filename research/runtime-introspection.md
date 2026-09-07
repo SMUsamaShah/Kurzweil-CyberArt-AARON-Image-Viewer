@@ -190,6 +190,16 @@ all 512 context lines; contiguous ranges are `MAIN` (1), `DEVELOP-PLAN`
 `BUILD-FIGURE` (113–182), and `RPARSE` (183–512). The bridge is diagnostic and
 does not draw from the random state. See [context evidence](introspection/evidence/post-init-ran-context-34113996954.txt).
 
+The integer-boundary holdout in run
+[34115285855](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34115285855)
+measured larger `RANDOM` limits and integer `RAN` ranges directly. Non-equal
+integer calls consume one raw word and match the clean-room model; equal
+integer `RAN` endpoints return without advancing the state. This closes the
+remaining numeric boundary needed by the planner trace. The full report and
+parsed regression fixture are retained in
+[`introspection/evidence/random-integer-boundaries-34115285855.txt`](introspection/evidence/random-integer-boundaries-34115285855.txt)
+and [`engine/test/fixtures/random-integer-boundaries.json`](../engine/test/fixtures/random-integer-boundaries.json).
+
 The companion constructor-advice run
 [34111962460](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111962460)
 was blocked by Allegro package locks when it attempted to replace the

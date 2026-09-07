@@ -100,6 +100,9 @@ export class Allegro501Random {
       throw new RangeError('RAN integer endpoints must fit Allegro fixnums');
     }
     if (maximum < minimum) throw new RangeError('maximum must not be less than minimum');
+    // The engine-local integer RAN method returns equal endpoints directly;
+    // unlike RANDOM(1), this boundary does not advance the state.
+    if (maximum === minimum) return minimum;
     return minimum + this.nextInt(maximum - minimum + 1);
   }
 

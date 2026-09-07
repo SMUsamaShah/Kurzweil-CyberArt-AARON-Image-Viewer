@@ -853,3 +853,12 @@ into `MAIN`, `DEVELOP-PLAN`, `RPARSE`, `GENERATE-PERSON`, `BUILD-FIGURE`, and
 `RPARSE` phases. This makes the long stream actionable for scene probes. It
 does not imply that every integer bound has already been reproduced by the JS
 RNG; the current short-limit numeric fixture remains a separate boundary.
+
+The integer-boundary run
+[`34115285855`](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34115285855)
+measures the larger integer limits used by the planner. Its non-equal
+`RANDOM`/integer-`RAN` calls advance one raw word and match the JS model;
+equal integer `RAN` endpoints return without consuming state. The normalized
+report is retained as [`random-integer-boundaries-34115285855.txt`](random-integer-boundaries-34115285855.txt),
+with parsed values asserted by the engine fixture
+[`random-integer-boundaries.json`](../../../engine/test/fixtures/random-integer-boundaries.json).

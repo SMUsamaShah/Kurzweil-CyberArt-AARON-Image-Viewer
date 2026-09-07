@@ -72,8 +72,9 @@ state observations match exactly** in JavaScript.
 Unlike `RANDOM` with a double limit, floating `RAN` consumes just one word per
 call. Equal endpoints return the endpoint without consuming any words. Reversed
 floating endpoints are accepted: the subtraction produces a negative span.
-These rules differ from integer `RAN`, whose reversed bounds fail and whose
-equal bounds still call `RANDOM(1)`.
+Integer `RAN` also consumes one word for non-equal bounds (including the larger
+planner limits measured in the boundary probe), but its equal-endpoint case
+returns directly without consuming state; this differs from `RANDOM(1)`.
 
 The single/single method rounds every arithmetic step, not just the final
 result. Final-only rounding fails 27 values in this report. Mixed signatures
@@ -93,6 +94,16 @@ The probe covers ordinary finite ranges, equal bounds, reversed bounds, and
 all four floating signatures. Overflow, subnormal arithmetic, and signed-zero
 endpoint selection have not been characterized; the JS API rejects non-finite
 endpoints or spans before consuming state.
+
+The integer boundary holdout in run
+[34115285855](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34115285855)
+measured `RANDOM` limits 1 through 536,870,912 and engine-local integer `RAN`
+bounds through `(160 180)`. All non-equal calls consume one raw word and match
+the existing JS conversion. `RAN(0,0)` and `RAN(5,5)` leave the raw state at
+the seed's first word; the JS integer method now preserves that boundary. The
+report is retained as [`random-integer-boundaries-34115285855.txt`](introspection/evidence/random-integer-boundaries-34115285855.txt),
+and its parsed values are asserted by
+[`random-integer-boundaries.json`](../engine/test/fixtures/random-integer-boundaries.json).
 
 ## AARON startup-state holdout
 

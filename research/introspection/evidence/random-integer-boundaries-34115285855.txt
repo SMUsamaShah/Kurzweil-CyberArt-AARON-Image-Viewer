@@ -1,0 +1,36 @@
+BEGIN random-integer-boundaries-34115285855
+RUN 34115285855
+COMMIT 8f131a7dedb8a02e1cf66d45ea430f93c9eb9ed0
+JOB 101720538480
+ARTIFACT 10015991118
+ARTIFACT-DIGEST sha256:46e5df36f9daf3c6f05e7bbf61d5aee9ab1a7bf9570b79e0c0512510f92bbc9c
+SOURCE research/introspection/random-integer-boundaries.cl
+
+REPORT-BYTES 14879
+REPORT-LINES 122
+REPORT-SHA256 f0fb20a5c879c425c033e4ef7c98867424c753f8b10d3a680ba4d66166995b7e
+RECORD-COUNTS BEGIN 1 END 1 RANDOM 34 RANDOM-AFTER 34 RAN 26 RAN-AFTER 26 ERRORS 0
+SEEDS 1234 5678
+RANDOM-LIMITS 1 2 3 4 5 6 7 10 11 21 51 101 181 1001 10001 536870911 536870912
+RAN-BOUNDS (0 0) (0 1) (0 2) (0 3) (0 5) (0 10) (0 50) (0 100) (60 70) (120 135) (160 180) (-4 5) (5 5)
+
+RANDOM-AFTER-RAW seed=1234 all-limits 1348095007
+RANDOM-AFTER-RAW seed=5678 all-limits 2003265866
+RAN-AFTER-RAW seed=1234 non-equal 3905783326
+RAN-AFTER-RAW seed=5678 non-equal 2602982934
+RAN-AFTER-RAW seed=1234 equal 3249620827
+RAN-AFTER-RAW seed=5678 equal 939448254
+
+BOUNDARY-VALUES RAN(0 0) returns 0 for all 32 calls for both seeds
+BOUNDARY-VALUES RAN(5 5) returns 5 for all 32 calls for both seeds
+BOUNDARY-STATE Equal integer endpoints preserve the seed's first raw word;
+  non-equal integer endpoints consume 32 raw words across 32 calls.
+RANDOM-STATE All measured RANDOM limits, including 536870911 and 536870912,
+  consume one raw word per call in this 64-call holdout and match the existing
+  Allegro501Random conversion vectors.
+ERRORS None. Both probes reached END random-integer-boundaries.
+
+INTERPRETATION This closes the measured integer RAN boundary needed by the
+planner calibration. It is a numeric-method fixture, not whole-painting
+parity and not evidence about the unresolved normal INIT-RANDOM transition.
+END random-integer-boundaries-34115285855

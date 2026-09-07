@@ -6,6 +6,9 @@ import { parseLineReport } from '../../research/tools/parse-line-report.mjs';
 
 const reference = JSON.parse(readFileSync(new URL('./fixtures/random-reference.json', import.meta.url)));
 const validation = JSON.parse(readFileSync(new URL('./fixtures/random-validation.json', import.meta.url)));
+const integerBoundaries = JSON.parse(readFileSync(new URL(
+  './fixtures/random-integer-boundaries.json', import.meta.url,
+)));
 
 test('matches original Allegro integer, float, and RAN reference vectors', () => {
   assert.equal(reference.vectors.length, 48);
@@ -84,6 +87,37 @@ test('reversed integer RAN bounds fail before consuming state; clones keep posit
     assert.equal(random.nextDouble(), copy.nextDouble());
     assert.equal(random.nextInt(1000), copy.nextInt(1000));
     for (let i = 0; i < 1300; i += 1) assert.equal(random.nextFloat(), copy.nextFloat());
+  }
+});
+
+test('integer RAN equal bounds return directly without consuming state', () => {
+  for (const seed of [1, 1234, 5678, 5489]) {
+    const random = new Allegro501Random(seed);
+    const copy = random.clone();
+    assert.equal(random.integer(5, 5), 5);
+    assert.equal(random.nextUint32(), copy.nextUint32());
+    assert.equal(random.nextInt(1000), copy.nextInt(1000));
+  }
+});
+
+test('matches integer RANDOM/RAN boundary holdout and raw-state sentinels', () => {
+  assert.equal(integerBoundaries.random.length, 34);
+  assert.equal(integerBoundaries.ran.length, 26);
+  for (const row of integerBoundaries.random) {
+    const random = new Allegro501Random(row.seed);
+    for (const expected of row.values) assert.equal(random.nextInt(row.limit), expected,
+      `RANDOM seed=${row.seed} limit=${row.limit}`);
+    assert.equal(random.nextInt(2 ** 32), row.afterRaw,
+      `RANDOM sentinel seed=${row.seed} limit=${row.limit}`);
+  }
+  for (const row of integerBoundaries.ran) {
+    const random = new Allegro501Random(row.seed);
+    for (const expected of row.values) {
+      assert.equal(random.integer(...row.bounds), expected,
+        `RAN seed=${row.seed} bounds=${row.bounds.join(',')}`);
+    }
+    assert.equal(random.nextInt(2 ** 32), row.afterRaw,
+      `RAN sentinel seed=${row.seed} bounds=${row.bounds.join(',')}`);
   }
 });
 
