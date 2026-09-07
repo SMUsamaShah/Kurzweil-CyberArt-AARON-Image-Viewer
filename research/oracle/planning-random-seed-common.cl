@@ -181,6 +181,80 @@
         (finish-output report))
     (condition () nil)))
 
+(defun aaron-random-rseed-path ()
+  (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+         (symbol (and owner (find-symbol "?RSEED?" owner))))
+    (and symbol (boundp symbol) (symbol-value symbol))))
+
+(defun aaron-random-rseed-file-summary ()
+  (handler-case
+      (let ((path (aaron-random-rseed-path)))
+        (if (and (stringp path) (probe-file path))
+            (with-open-file (stream path :direction :input)
+              (list :exists t
+                    :bytes (file-length stream)
+                    :first-line (read-line stream nil nil)))
+          (list :exists nil :path path)))
+    (condition (problem)
+      (list :error (type-of problem)))))
+
+(defun aaron-random-print-length ()
+  (and (boundp '*print-length*) (symbol-value '*print-length*)))
+
+(defun aaron-random-file-roundtrip (original-set original-get original-ran)
+  ;; SET-RANDOM and GET-RANDOM are not part of ordinary startup.  Exercise
+  ;; them only after INIT-RANDOM has completed, in a disposable process, to
+  ;; determine whether the visible rseed file is a usable state checkpoint.
+  (unless (boundp 'aaron-random-file-roundtrip-done)
+    (set 'aaron-random-file-roundtrip-done t)
+    (aaron-random-emit "RSEED-ROUNDTRIP-BEGIN")
+    (aaron-random-emit
+     (format nil "RSEED-PRINT-LENGTH-BEFORE ~S"
+             (aaron-random-print-length)))
+    (aaron-random-emit
+     (format nil "RSEED-FILE-BEFORE ~S"
+             (aaron-random-rseed-file-summary)))
+    (handler-case
+        (progn
+          (funcall original-set)
+          (aaron-random-emit "RSEED-SET-DEFAULT SUCCEEDED")
+          (aaron-random-emit
+           (format nil "RSEED-FILE-AFTER-DEFAULT ~S"
+                   (aaron-random-rseed-file-summary)))
+          ;; A complete RANDOM-STATE requires all 624 vector elements.  If
+          ;; SET-RANDOM honors the dynamic print setting, this second file is
+          ;; a valid replay candidate; if it still truncates, that is itself
+          ;; evidence about the original save format.
+          (let ((*print-length* nil))
+            (funcall original-set))
+          (aaron-random-emit "RSEED-SET-UNLIMITED SUCCEEDED")
+          (aaron-random-emit
+           (format nil "RSEED-FILE-AFTER-UNLIMITED ~S"
+                   (aaron-random-rseed-file-summary)))
+          (let ((before (aaron-random-state-preview)))
+            (multiple-value-list (funcall original-ran 0 100))
+            (aaron-random-emit
+             (format nil "RSEED-ADVANCE PREVIEW-BEFORE ~S" before))
+            (aaron-random-emit
+             (format nil "RSEED-ADVANCE PREVIEW-AFTER ~S"
+                     (aaron-random-state-preview))))
+          (handler-case
+              (progn
+                (funcall original-get)
+                (aaron-random-emit "RSEED-GET SUCCEEDED")
+                (aaron-random-emit
+                 (format nil "RSEED-GET PREVIEW-AFTER ~S"
+                         (aaron-random-state-preview))))
+            (condition (problem)
+              (aaron-random-emit
+               (format nil "RSEED-GET ERROR-TYPE ~S"
+                       (type-of problem))))))
+      (condition (problem)
+        (aaron-random-emit
+         (format nil "RSEED-ROUNDTRIP ERROR-TYPE ~S"
+                 (type-of problem)))))
+    (aaron-random-emit "RSEED-ROUNDTRIP-END")))
+
 (unless (boundp 'aaron-ran-sample-count)
   (set 'aaron-ran-sample-count 0))
 (set 'aaron-ran-sample-count 0)
@@ -221,7 +295,12 @@
                          (aaron-random-state-snapshot)))
                 (aaron-random-emit
                  (format nil "STATE-PREVIEW INIT-AFTER ~S"
-                         (aaron-random-state-preview))))))
+                         (aaron-random-state-preview)))
+                (when (and (boundp 'aaron-planning-rseed-roundtrip)
+                           aaron-planning-rseed-roundtrip
+                           original-set original-get original-ran)
+                  (aaron-random-file-roundtrip
+                   original-set original-get original-ran)))))
       (setf (symbol-function ran-symbol)
             (lambda (&rest args)
               ;; The original RAN is called exactly once and all values are
