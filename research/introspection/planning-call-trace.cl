@@ -68,7 +68,12 @@
             state-names
             '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
               "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
-              "COMPLAN" "RPLANE" "PLACES"))
+              "COMPLAN" "RPLANE" "PLACES"
+              "*SCREEN-WIDTH*" "*SCREEN-HEIGHT*" "*PIC-WIDE*" "*PIC-HIGH*"
+              "A-WIDTH" "B-WIDTH" "C-WIDTH" "D-WIDTH" "E-WIDTH"
+              "SMALL-IMAGE-SCREEN-WIDTH" "SMALL-IMAGE-SCREEN-HEIGHT"
+              "NARROW" "VERTICAL" "HORIZONTAL" "WIDE" "OFFSET"
+              "RIGHTMAX" "TOPMAX"))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
       (labels
@@ -141,7 +146,12 @@
                         (list :symbol (symbol-summary symbol)
                               :bound t
                               :type (safe-type value)
-                              :shape (safe-length value))))))
+                              :shape (safe-length value)
+                              ;; Numeric dimensions and offsets are useful
+                              ;; state, while arbitrary scene objects remain
+                              ;; summarized only by type and shape.
+                              :value (when (or (numberp value) (symbolp value))
+                                       (bounded-summary value)))))))
                (error (problem)
                  (list :binding-error name (safe-type problem)))))
            (binding-state ()
