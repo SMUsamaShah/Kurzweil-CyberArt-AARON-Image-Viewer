@@ -62,7 +62,8 @@ jobs:
             foreach ($entry in @(
               @{ Source = 'C:\temp\aaron-planning-call-trace.txt'; Name = 'planning-call-trace.txt' },
               @{ Source = 'C:\temp\aaron-random-seed-loaded.txt'; Name = 'random-seed-loaded.txt' },
-              @{ Source = 'C:\temp\aaron-random-samples.txt'; Name = 'random-samples.txt' }
+              @{ Source = 'C:\temp\aaron-random-samples.txt'; Name = 'random-samples.txt' },
+              @{ Source = 'C:\temp\rseed'; Name = 'rseed' }
             )) {
               if (Test-Path $entry.Source) {
                 Copy-Item $entry.Source (Join-Path $output $entry.Name) -Force
