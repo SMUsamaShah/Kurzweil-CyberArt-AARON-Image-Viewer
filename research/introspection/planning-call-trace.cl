@@ -65,7 +65,7 @@
               ;; The remaining names expose later screen/brush edges while
               ;; preserving the original dispatch.
               "BRUSH-STROKE"
-              "FREE-PATH" "WATCH-FOR-MESSAGES")
+              "FREE-PATH")
             state-names
             '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
               "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
