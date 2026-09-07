@@ -816,3 +816,33 @@ holdout therefore proves state installation and seed sensitivity, but not
 startup reproducibility or whole-painting parity.  The normalized measurements
 and hashes are in the linked evidence file; no random values are drawn merely
 for the preview.
+
+`rseed-serializer-34111222810.txt` records the follow-up serializer holdout
+from run
+[34111222810](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111222810),
+commit `5306141beb592074db93c1c0f38969af8bdafeaa`, artifact `10014427965`.
+The original runtime writes a 3,030-byte `C:\\temp\\rseed` containing 201
+numbers and `...`, regardless of the caller's `*PRINT-LENGTH*`; `GET-RANDOM`
+raises `READER-ERROR` on the result. This is measured evidence that the visible
+file is not a complete replay state, not a whole-generator parity result.
+
+`planning-post-init-reseed-holdouts-34111960227.txt` records three fresh
+post-`INIT-RANDOM` reseed holdouts from run
+[34111960227](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111960227),
+head `093a70075bde1c6c4b1e85c6374c6f78f39b8228`. Reinstalling the dynamic
+seeded `COMMON-LISP:*RANDOM-STATE*` after the original init makes the two
+seed-1234 jobs match all 32 logged `RAN` calls and the complete AA0 SHA-256;
+seed 5678 is distinct. This is a controlled calibration boundary, not default
+startup parity.
+
+`random-init-constructor-probe-34111962460.txt` records the companion
+constructor-advice attempt from run
+[34111962460](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111962460).
+Both protected function-cell writes were rejected with `PACKAGE-LOCKED-ERROR`,
+so the run supplies no constructor call arguments and is retained only as a
+negative instrumentation result.
+
+`post-init-ran-trace-34112709506.txt` records the two-job extension of that
+calibration seam to 512 engine-local `RAN` calls. The normalized call lines
+match exactly across fresh seed-1234 jobs, along with their AA0 SHA-256; this
+is a draw-order fixture, not default-startup parity.

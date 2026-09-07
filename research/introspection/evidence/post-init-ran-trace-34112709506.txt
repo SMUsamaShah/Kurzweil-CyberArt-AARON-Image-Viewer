@@ -1,0 +1,40 @@
+BEGIN post-init-ran-trace-34112709506
+RUN 34112709506
+COMMIT b2286d9874141ebe3b6898ba13d3479d71302aac
+WORKFLOW .github/workflows/aaron-post-init-ran-trace.yml
+
+The two jobs installed the recovered seed-1234 state after the original
+`INIT-RANDOM`, then raised the diagnostic `RAN` sample cap from 32 to 512.
+Both jobs completed successfully.
+
+HOLDOUT seed-1234
+JOB 101712363042
+ARTIFACT 10015010419 digest sha256:8fd37a62a2e78998b87b5e9b6b953095abff39347c29619bca69fc58ebd1fd4a
+RAN-SAMPLE-LINES 512
+RAN-SAMPLE-FILE-BYTES 31248
+RAN-SAMPLE-FILE-SHA256 83121f63a67cf24ce5b3fb477dd12cbc6157eab4d9d6b79b049b5d70fa18ac84
+TRACE-FILE-BYTES 4564538
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+
+HOLDOUT seed-1234-repeat
+JOB 101712362806
+ARTIFACT 10015011591 digest sha256:65ca517f983b80ac9fe35ab1aad52ce21c70f17ddc03899e4380fb6920cbb054
+RAN-SAMPLE-LINES 512
+RAN-SAMPLE-FILE-BYTES 31246
+RAN-SAMPLE-FILE-SHA256 11a6b596626d52bd0da0a9879e38e11385605d16245fcf6645f7c405e0078681
+TRACE-FILE-BYTES 4564538
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+
+COMPARISON
+  Removing non-RAN diagnostics and comparing the 512 `RAN-SAMPLE` lines gives
+  an exact match. The normalized sequence SHA-256 is
+  `daa94e9d9bbae02f24819c67c4b2922bb1915a9dfb7744436b00ce1c6eaab497` in
+  both jobs. The differing complete-file hashes are only logging metadata;
+  the measured random-call sequence and AA0 output are identical.
+
+INTERPRETATION
+  After the explicit state reinstall, the original generator consumes the
+  same visible Allegro random stream across fresh processes for at least 512
+  observed calls. This is a controlled post-init draw-order fixture, not a
+  claim that the archived default `INIT-RANDOM` transition is deterministic.
+END post-init-ran-trace-34112709506

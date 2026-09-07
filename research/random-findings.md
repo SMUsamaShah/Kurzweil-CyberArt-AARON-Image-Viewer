@@ -110,14 +110,63 @@ these results separate from the isolated Allegro RNG fixtures and do not call
 them whole-painting parity. See the normalized
 [holdout evidence](introspection/evidence/planning-random-seed-holdouts-34109307251.txt).
 
+### Persisted `rseed` serializer holdout
+
+Run [34111222810](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111222810)
+tested the file boundary in a fresh seed-1234 process. `SET-FILE-ADDRESSES`
+sets `COMMON-GRAPHICS-USER:?RSEED?` to `C:\\temp\\rseed`; `INIT-RANDOM`
+creates that file before the first traced planning calls. The file is always
+about 3,030 bytes and contains only 201 printed state words followed by
+`...`. Setting `*PRINT-LENGTH*` to `NIL` before startup, and again around an
+explicit `SET-RANDOM`, does not change its size or contents. An explicit
+`GET-RANDOM` on the resulting file raises `READER-ERROR`.
+
+This closes a misleading replay avenue: the visible `rseed` is a diagnostic or
+legacy truncated dump, not a complete serialized `RANDOM-STATE`. Normal
+startup also made no traced `SET-RANDOM`/`GET-RANDOM` calls. The state-only
+constructor and the file serializer are therefore separate facts; neither yet
+explains the post-`INIT-RANDOM` stream replacement. See the normalized
+[serializer evidence](introspection/evidence/rseed-serializer-34111222810.txt).
+The follow-up attempt to replace `COMMON-LISP:PRINT` was rejected by the
+runtime's package lock, so the evidence does not claim a bypass of protected
+printer internals; it only establishes the observed file's truncation and
+unreadability.
+
+### Controlled post-`INIT-RANDOM` reseed holdout
+
+Run [34111960227](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111960227)
+reinstalled the recovered seeded `COMMON-LISP:*RANDOM-STATE*` immediately
+after the original `INIT-RANDOM` returned. The post-reseed copied previews were
+`13,13,41` for seed 1234 and `27,14,11` for seed 5678. The two fresh seed-1234
+jobs then produced the same first 32 engine-local `RAN` calls and the same
+complete AA0 file: 126,956 bytes with SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+Seed 5678 produced a distinct complete 158,833-byte AA0 with SHA-256
+`0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086`.
+
+This establishes a deterministic original-engine calibration seam after the
+normal startup transition. It does not make the archived default startup
+seed-reproducible and does not establish whole-generator parity. The
+normalized measurements are in
+[planning-post-init-reseed-holdouts-34111960227.txt](introspection/evidence/planning-post-init-reseed-holdouts-34111960227.txt).
+
+Run [34112709506](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34112709506)
+extended the same seam to 512 logged engine-local `RAN` calls. The two fresh
+seed-1234 jobs have an exact match after extracting only `RAN-SAMPLE` lines;
+the normalized 512-line sequence SHA-256 is
+`daa94e9d9bbae02f24819c67c4b2922bb1915a9dfb7744436b00ce1c6eaab497` in both
+jobs. This is the first retained long draw-order fixture for replacing the
+provisional JS planner. See the [long-trace evidence](introspection/evidence/post-init-ran-trace-34112709506.txt).
+
 ## What this does not recover
 
-The probes do not yet identify the startup state transition inside
-`INIT-RANDOM`, the sequence of random calls made by `SCRIPT`, or the mapping
-from those calls to planning, figures, colours, and brush strokes. The exact
-scene generator is therefore still unfinished. The standard `Mt19937` class
-remains available for existing clean-room tests; callers that need the
-recovered Allegro numeric behavior can use `Allegro501Random` explicitly.
+The probes do not yet identify the process-varying input used by the normal
+`INIT-RANDOM` transition, the sequence of random calls made by `SCRIPT`, or the
+mapping from those calls to planning, figures, colours, and brush strokes.
+The exact scene generator is therefore still unfinished. The standard
+`Mt19937` class remains available for existing clean-room tests; callers that
+need the recovered Allegro numeric behavior can use `Allegro501Random`
+explicitly.
 
 The reversed integer `RAN(10, 0)` cases produced the original runtime's invalid-random
 argument error. The JS integer method rejects reversed bounds before consuming state,

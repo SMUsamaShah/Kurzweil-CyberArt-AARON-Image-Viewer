@@ -155,6 +155,40 @@ file at that path. Preserve this as proof of constructor/state installation,
 not as evidence of deterministic whole-painting output. See the normalized
 [holdout evidence](introspection/evidence/planning-random-seed-holdouts-34109307251.txt).
 
+Run [34111222810](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111222810)
+then tested the apparent persisted-state path directly. `INIT-RANDOM` creates
+`C:\\temp\\rseed`, but the file remains a 3,030-byte form with 201 numbers and
+`...` even when `*PRINT-LENGTH*` is `NIL`. The original `GET-RANDOM` signals
+`READER-ERROR` on it, so this file cannot restore the full stream. The normal
+startup trace contains no `SET-RANDOM` or `GET-RANDOM` call; the calls in this
+run were explicitly gated to the disposable serializer probe. See
+[rseed serializer evidence](introspection/evidence/rseed-serializer-34111222810.txt).
+The later direct-`PRINT` override attempt was rejected with
+`PACKAGE-LOCKED-ERROR`; this is an instrumentation boundary, not evidence that
+the original serializer's internal writer has been fully decoded.
+
+Run [34111960227](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111960227)
+then reinstalled a dynamically constructed seed state after the original
+`INIT-RANDOM` returned. The two independent seed-1234 processes matched all
+32 logged `RAN` calls and the complete AA0 SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`; seed
+5678 produced a distinct stable stream and AA0. This is now the controlled
+original-engine seam for random draw-order and scene-rule calibration. It is
+an explicit intervention and must not be described as the default startup
+behavior. See [post-init reseed evidence](introspection/evidence/planning-post-init-reseed-holdouts-34111960227.txt).
+
+Run [34112709506](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34112709506)
+extends that calibration to 512 `RAN` calls. The normalized call lines match
+exactly between two fresh seed-1234 jobs, and their AA0 files have the same
+SHA-256. This is a usable draw-order fixture for the clean-room engine while
+the default startup transition remains unresolved. See [long-trace evidence](introspection/evidence/post-init-ran-trace-34112709506.txt).
+
+The companion constructor-advice run
+[34111962460](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34111962460)
+was blocked by Allegro package locks when it attempted to replace the
+`MAKE-RANDOM-STATE` function cells. It is retained as a negative
+instrumentation result, not as evidence of constructor arguments.
+
 The next report can be converted without evaluating Lisp:
 
 ```sh
