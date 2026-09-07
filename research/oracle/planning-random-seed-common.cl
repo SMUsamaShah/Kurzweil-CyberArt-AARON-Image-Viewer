@@ -360,20 +360,22 @@
             (lambda (&rest args)
               ;; The original RAN is called exactly once and all values are
               ;; returned. Logging is capped and never draws from the state.
-              (let ((values (multiple-value-list (apply original-ran args))))
+              (let ((values (multiple-value-list (apply original-ran args)))
+                    (sample-number nil))
                 (when (< aaron-ran-sample-count aaron-ran-sample-limit)
                   (incf aaron-ran-sample-count)
+                  (setf sample-number aaron-ran-sample-count)
                   (aaron-random-emit
                    (format nil "RAN-SAMPLE ~D ARGS ~S VALUES ~S"
-                           aaron-ran-sample-count args values)))
+                           sample-number args values)))
                 ;; planning-call-trace.cl publishes this bounded stack as a
                 ;; diagnostic bridge.  Keep it on a separate line so existing
                 ;; RAN-SAMPLE fixtures remain byte-for-byte parseable.
-                (when (and (<= aaron-ran-sample-count aaron-ran-sample-limit)
+                (when (and sample-number
                            (boundp 'aaron-trace-current-stack))
                   (aaron-random-emit
                    (format nil "RAN-CONTEXT ~D STACK ~S"
-                           aaron-ran-sample-count
+                           sample-number
                            aaron-trace-current-stack)))
                 (values-list values))))
       (when original-day
