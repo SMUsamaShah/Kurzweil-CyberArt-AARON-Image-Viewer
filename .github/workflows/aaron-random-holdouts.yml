@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/aaron-random-holdouts.yml'
       - 'research/oracle/planning-random-seed-*.cl'
+      - 'research/oracle/planning-random-seed-common.cl'
       - 'research/introspection/planning-call-trace.cl'
 
 permissions:
