@@ -24,6 +24,16 @@
         (finish-output marker))
     (condition () nil)))
 
+(let* ((user-package (find-package "CL-USER"))
+       (seed-symbol (and user-package
+                        (find-symbol "AARON-PLANNING-SEED" user-package))))
+  (aaron-random-probe-log
+   (format nil "SEED-SYMBOL-FOUND ~S BOUND ~S VALUE-TYPE ~S"
+           (not (null seed-symbol))
+           (and seed-symbol (boundp seed-symbol))
+           (and seed-symbol (boundp seed-symbol)
+                (type-of (symbol-value seed-symbol))))))
+
 (unless (and (boundp 'aaron-planning-seed)
              (integerp aaron-planning-seed))
   (error "AARON-PLANNING-SEED is not an integer"))
