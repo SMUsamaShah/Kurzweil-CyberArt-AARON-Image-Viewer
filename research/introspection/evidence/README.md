@@ -533,6 +533,15 @@ cells. The row-major index set matches the union of the two translated
 brush-4 `CORE` masks; the JS helper and regression fixture now cover the
 fourth measured profile.
 
+The combined direct Stage 23 matrix in
+`brush-stroke-isolated-34145100465.txt` ([run
+34145100465](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34145100465))
+repeats brushes 1–4 in one corrected report. It records 12, 26, 70, and 108
+value-1 fill cells respectively, one screen-forwarding call per case, no
+patch writes, and clean return for every case. This is the retained four-
+profile fixture; the earlier single-profile artifacts remain useful for
+history and cross-checking.
+
 The next probe should reuse a measured profile with a repeated or overlapping
 vertex to isolate duplicate-path behavior from brush-size effects.
 
