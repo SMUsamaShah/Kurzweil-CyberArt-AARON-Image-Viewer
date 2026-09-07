@@ -45,11 +45,11 @@ test('parses Stage 23 matrix cases and preserves returned/error boundaries', () 
 
 test('parses the completed original-engine brush capture', () => {
   const evidence = readFileSync(new URL(
-    '../../introspection/evidence/brush-stroke-isolated-34145100465.txt',
+    '../../introspection/evidence/brush-stroke-isolated-34145707021.txt',
     import.meta.url,
   ), 'utf8');
   const report = parseBrushStrokeReport(evidence);
-  assert.equal(report.cases.length, 4);
+  assert.equal(report.cases.length, 5);
   assert.equal(report.cases[0].name, 'b1-horizontal');
   assert.equal(report.cases[0].outcome, 'returned');
   assert.equal(report.cases[0].screens[0].points.length, 2);
@@ -71,6 +71,16 @@ test('parses the completed original-engine brush capture', () => {
     assert.equal(report.cases[index].insideCount, insideCount);
     assert.equal(report.cases[index].outcome, 'returned');
   }
+  const overlap = report.cases[4];
+  assert.equal(overlap.name, 'b1-overlap-horizontal');
+  assert.deepEqual(overlap.fillCells, report.cases[0].fillCells);
+  assert.deepEqual(overlap.screens[0].points, [
+    {index: 0, x: 7, y: 7}, {index: 1, x: 8, y: 7},
+    {index: 2, x: 7, y: 7},
+  ]);
+  assert.equal(overlap.screenCount, 1);
+  assert.equal(overlap.insideCount, 27);
+  assert.equal(overlap.outcome, 'returned');
 });
 
 test('rejects a partial Stage 23 case', () => {
