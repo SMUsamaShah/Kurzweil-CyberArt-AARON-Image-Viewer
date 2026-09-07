@@ -251,20 +251,27 @@
                               (boundp mplan-symbol)
                               (boundp prefs-symbol))
                       (finish-output report)
-                      (handler-case
-                          (progn
-                            (write-line "SCREEN-CALL-BEGIN" report)
-                            (finish-output report)
-                            (funcall screen path 0 0)
-                            (setf returned t)
-                            (write-line "SCREEN-RETURNED" report))
-                        (error (problem)
-                          (if store-stop
-                              (write-line "PROBE-STOP" report)
-                            (format report "ERROR-TYPE ~S~%"
-                                    (type-of problem)))
-                          (write-cell-error problem)
-                          (finish-output report)))
+                      ;; HANDLER-BIND records the condition before Allegro's
+                      ;; compiled caller can tear down its private dynamic
+                      ;; state.  THROW then exits the protected call through
+                      ;; a local CATCH, leaving the outer cleanup in control.
+                      (catch 'screen-entry-result
+                        (handler-bind
+                            ((error
+                               (lambda (problem)
+                                 (if store-stop
+                                     (write-line "PROBE-STOP" report)
+                                   (format report "ERROR-TYPE ~S~%"
+                                           (type-of problem)))
+                                 (write-cell-error problem)
+                                 (finish-output report)
+                                 (throw 'screen-entry-result :error)))
+                          (write-line "SCREEN-CALL-BEGIN" report)
+                          (finish-output report)
+                          (funcall screen path 0 0)
+                          (setf returned t)
+                          (write-line "SCREEN-RETURNED" report))
+                        (write-line "SCREEN-CATCH-COMPLETED" report))
                       ;; The error handler may unwind implementation-private
                       ;; dynamic state before this point; keep cleanup
                       ;; diagnostics independent of that value.
@@ -294,4 +301,4 @@
           (format report "PROBE-ERROR-TYPE ~S~%" (type-of problem))
           (write-cell-error problem)))
       (write-line "END screen-entry-frontier" report)
-      (finish-output report)))
+      (finish-output report))))
