@@ -5,4 +5,6 @@
 (set 'aaron-planning-reseed-after-init t)
 (set 'aaron-ran-sample-limit 2048)
 (load "C:\\temp\\planning-random-seed-common.cl")
+(aaron-random-emit "RAN-HAND-SOURCE-BEFORE-LOAD")
 (load "C:\\temp\\ran-hand-trace.cl")
+(aaron-random-emit "RAN-HAND-SOURCE-AFTER-LOAD")
