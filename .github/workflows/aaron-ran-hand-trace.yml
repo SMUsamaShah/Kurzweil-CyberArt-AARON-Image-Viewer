@@ -57,7 +57,7 @@ jobs:
               -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
               -OutputRoot $output -Mode direct-screensaver -RunSeconds 90 `
               -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
-              -PatchPremiumFlag -PremiumFlagSource 'research/oracle/${{ matrix.source }}'
+              -PatchPremiumFlag -PremiumFlagSource '${{ matrix.source }}'
           } finally {
             foreach ($entry in @(
               @{ Source = 'C:\temp\aaron-ran-hand-trace.txt'; Name = 'ran-hand-trace.txt' },
