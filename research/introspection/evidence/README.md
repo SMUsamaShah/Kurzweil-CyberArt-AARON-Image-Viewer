@@ -687,3 +687,18 @@ before the 1,024-event bound; there are 516 entries, 508 exits, and no trace
 errors. No screen/brush edge appears before this sampling limit, so that
 absence is not a negative call-graph result. The next pass omits these three
 high-fanout mapping/plot wrappers to reach later startup stages.
+
+`planning-call-trace-screen-34100143844.txt` is the screen/brush follow-up
+from run
+[34100143844](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34100143844),
+commit `5ccd36e1691ddab187f778317242fb6c275ce3b7`, job `101672469636`, and
+artifact `10010148779`. It omits the mapping/plot wrappers and reaches
+`GENERATE-PERSON`, `BUILD-FIGURE`, `DRAW-FIGURE-CFORMS`, `FREE-PATH`,
+`BRUSH-STROKE`, `SCREEN-AND-STORE`, `WATCH-FOR-MESSAGES`, and `PREP-LINE`.
+The first integrated brush call receives an eight-`TRIPT` path, value `3`,
+`CDEX=1`, `SDEX=0`, with `BRUSH` typed `PAINT-BRUSH`, `RPLANE` typed `FIXNUM`,
+`RGB-MAP` a `CONS`, and the private fill map a `(320 480)` unsigned-byte-4
+array. The report has 516 entries, 508 exits, and no trace errors; 254
+`HOP-OR-DRAW` entries consume the 1,024-event bound. The compact evidence
+preserves the distinction between observed integration and still-unseen later
+calls.
