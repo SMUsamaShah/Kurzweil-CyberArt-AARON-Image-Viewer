@@ -48,7 +48,9 @@
              (all-brushes (symbol-value all-symbol)))
         (labels
             ((make-path (points)
-               (mapcar (lambda (xy) (apply make-point xy)) points))
+               (mapcar (lambda (xy)
+                         (funcall make-point (car xy) (cadr xy)))
+                       points))
              (write-cells (prefix name array)
                (dotimes (index (array-total-size array))
                  (let ((value (row-major-aref array index)))
@@ -56,6 +58,8 @@
                      (format report "~A ~A ~D ~D~%"
                              prefix name index value)))))
              (run-case (name brush-index points value cdex sdex inside-result)
+               (format report "MATRIX-ENTER ~A~%" name)
+               (finish-output report)
                (let* ((fill-map (make-array '(64 64)
                                             :element-type '(unsigned-byte 4)
                                             :initial-element 0))
