@@ -1,0 +1,65 @@
+name: AARON integer random boundaries
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [reverse-engineer-aaron-js]
+    paths:
+      - '.github/workflows/aaron-random-integer-boundaries.yml'
+      - 'research/introspection/random-integer-boundaries.cl'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download hash-verified reference build
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --retry 2 --retry-all-errors `
+            --connect-timeout 20 --max-time 120 --retry-max-time 180 --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
+      - name: Run bounded integer random probe
+        shell: pwsh
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'aaron-random-integer-boundaries'
+          New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+          try {
+            & research/oracle/run-oracle.ps1 `
+              -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
+              -OutputRoot $output -Mode direct-screensaver -RunSeconds 30 `
+              -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
+              -PatchPremiumFlag -PremiumFlagSource '..\introspection\random-integer-boundaries.cl'
+          } finally {
+            $report = 'C:\temp\aaron-random-integer-boundaries.txt'
+            if (Test-Path $report) {
+              Copy-Item $report (Join-Path $output 'random-integer-boundaries.txt') -Force
+              Get-Content -LiteralPath $report
+            }
+          }
+          if (-not (Test-Path (Join-Path $output 'random-integer-boundaries.txt'))) {
+            throw 'Integer random probe never started'
+          }
+          if (-not (Select-String -LiteralPath (Join-Path $output 'random-integer-boundaries.txt') `
+                    -SimpleMatch 'END random-integer-boundaries')) {
+            throw 'Integer random probe started but did not complete'
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aaron-random-integer-boundaries
+          path: ${{ runner.temp }}/aaron-random-integer-boundaries
+          if-no-files-found: warn
+          retention-days: 14
