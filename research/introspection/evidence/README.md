@@ -436,6 +436,13 @@ reaches `AFTER-STROKE` and leaves both maps zero-filled, with cleanup intact.
 The next probe adds one horizontal segment; it is the first case expected to
 exercise path iteration rather than an empty/singleton path boundary.
 
+`brush-stroke-isolated-34072022757.txt` records that two-point case in run
+[34072022757](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34072022757),
+commit `4288cade31db7517a621086bc21aedd0dbc3e3f3`. It reaches the post-call
+checkpoint and remains zero-filled while the isolated `IN-SUB-FRAME` stub
+returns `NIL`. That dependency gate is intentionally kept separate from the
+next run, which uses the same two points with the predicate stub returning `T`.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

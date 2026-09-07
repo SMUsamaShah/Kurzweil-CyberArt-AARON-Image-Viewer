@@ -313,11 +313,12 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 7 invokes BRUSH-STROKE exactly once with a two-point horizontal
-  ;; path made by the measured MAKE-TWOPT constructor. Both
+  ;; Stage 8 invokes BRUSH-STROKE exactly once with the same two-point
+  ;; horizontal path, but the isolated IN-SUB-FRAME predicate returns T.
+  ;; This changes only the dependency gate from Stage 7.
   ;; downstream dependencies remain inert stubs, so any map writes or errors
   ;; belong to BRUSH-STROKE's own entry/branch logic, not file emission.
-  (write-line "STAGE-7-TWO-POINT-BEGIN" report)
+  (write-line "STAGE-8-IN-FRAME-BEGIN" report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -359,7 +360,7 @@
               (setf (symbol-function inside)
                     (lambda (x y)
                       (declare (ignore x y))
-                      nil))
+                      t))
               (write-line "BEFORE-STROKE" report)
               (finish-output report)
               (funcall stroke path 1 0 0)
@@ -379,18 +380,18 @@
           (format report "PATCH-NONZERO-COUNT ~D~%" patch-count))
         (write-line (if (and (eq (symbol-function screen) original-screen)
                              (eq (symbol-function inside) original-inside))
-                        "STAGE-7-FUNCTIONS-RESTORED"
-                        "STAGE-7-FUNCTIONS-NOT-RESTORED")
+                        "STAGE-8-FUNCTIONS-RESTORED"
+                        "STAGE-8-FUNCTIONS-NOT-RESTORED")
                     report)
         (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
                              (eql (boundp fill-symbol) before-fill-bound)
                              (eql (boundp patch-symbol) before-patch-bound))
-                        "STAGE-7-BINDINGS-RESTORED"
-                        "STAGE-7-BINDINGS-LEAKED")
+                        "STAGE-8-BINDINGS-RESTORED"
+                        "STAGE-8-BINDINGS-LEAKED")
                     report))
     (error (problem)
       (declare (ignore problem))
-      (write-line "STAGE-7-TWO-POINT-ERROR" report)))
+      (write-line "STAGE-8-IN-FRAME-ERROR" report)))
   (finish-output report))
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
@@ -500,6 +501,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-7-TWO-POINT~%")
+  (format report "STAGE-8-IN-FRAME~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
