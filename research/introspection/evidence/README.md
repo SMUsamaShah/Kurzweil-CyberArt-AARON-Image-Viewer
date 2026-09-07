@@ -734,3 +734,13 @@ omitted, the run reaches `MAKE-ARTWORK`, `MAKE-PAINTING-COLORS`, and 18
 `SCREEN-AND-STORE` sequences. It records 515 entries, 509 exits, and no trace
 errors; 100 `NEW-START` and 97 `END-START` entries consume the 1,024-event
 bound. The next pass omits those two helpers to sample later continuation.
+
+`planning-call-trace-after-start-34101957681.txt` is the follow-up from run
+[34101957681](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34101957681),
+commit `ad43b071c0ca39dfb883d7052ebf5f7fb10dabc4`, job `101678193826`, and
+artifact `10010841138`. With the start helpers omitted, it records 200
+`BRUSH-STROKE` and 196 `SCREEN-AND-STORE` entries, plus 44 `DRAW-CFORM`, two
+`FREE-PATH`, and three `PAINT-FILL` entries. There are 515 entries, 509 exits,
+and no trace errors; the 1,024-event bound lands in the two-hundredth brush
+call. The next pass leaves those two high-fanout boundaries unwrapped to
+sample post-stroke/finalization edges.

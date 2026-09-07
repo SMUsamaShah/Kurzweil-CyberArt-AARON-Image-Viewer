@@ -1,0 +1,33 @@
+BEGIN planning-call-trace-after-start-34101957681
+RUN 34101957681
+COMMIT ad43b071c0ca39dfb883d7052ebf5f7fb10dabc4
+JOB 101678193826
+ARTIFACT 10010841138
+SOURCE research/introspection/planning-call-trace.cl
+
+TRACE-CONFIG EVENT-LIMIT 1024
+TRACE-CONFIG START-HELPERS-MESSAGE-PREP-HOP-MAPPING-WRAPPERS OMITTED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+TRACE-COUNTS ENTER 515
+TRACE-COUNTS EXIT 509
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 1024
+
+CALL-COUNTS DRAW-CFORM 44
+CALL-COUNTS GOOD-START 52
+CALL-COUNTS FREE-PATH 2
+CALL-COUNTS BRUSH-STROKE 200
+CALL-COUNTS SCREEN-AND-STORE 196
+CALL-COUNTS PAINT-FILL 3
+
+PATH DRAW-CFORM -> BRUSH-STROKE -> SCREEN-AND-STORE
+
+INTERPRETATION Removing NEW-START and END-START exposes a long integrated
+stroke sequence. The 1,024-event bound lands in the two-hundredth
+BRUSH-STROKE entry, with no trace errors; later generator finalization cannot
+be inferred from this bounded run. The next pass omits BRUSH-STROKE and
+SCREEN-AND-STORE wrappers to reach post-stroke/finalization edges while
+retaining the already captured integrated evidence.
+END planning-call-trace-after-start-34101957681
