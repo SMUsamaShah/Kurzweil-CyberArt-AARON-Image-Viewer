@@ -21,13 +21,13 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-07, the recovered checkout is clean at local commit `ccb99fb`
-(`Implement measured RAN-HAND helper`). The preceding connected GitHub branch
-tip was `0782c0dd9e819e6c9694809de05e1829c5997326`; this handoff is now
-published there as remote commit
-`2a22bdf4168904bed27332284cabe657875d39d9` and exists locally as
-`fce7c5a`. The connector-created commits have different ancestry/SHA values,
-so compare the tree and files rather than assuming local and remote commit IDs
-are identical.
+(`Implement measured RAN-HAND helper`). The first handoff publication was
+based on connected-branch commit
+`0782c0dd9e819e6c9694809de05e1829c5997326`; the local continuity revisions
+are `fce7c5a` and `58ed34b`. The connected branch contains the same handoff
+content under connector-created commits with different ancestry/SHA values, so
+compare the tree and files rather than assuming local and remote commit IDs are
+identical.
 
 The latest published change adds:
 
