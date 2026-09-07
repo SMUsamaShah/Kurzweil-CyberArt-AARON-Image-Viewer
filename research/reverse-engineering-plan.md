@@ -56,7 +56,7 @@ complete equivalent port until phases 5–8 are recovered.
    assume a constructor.
 2. Isolate `BRUSH-STROKE(PATH VALUE CDEX SDEX)` by replacing only
    `SCREEN-AND-STORE` after the accessor census identifies a safe brush and
-   private map shape. Test fresh NIL/singleton/two-point/three-point paths and
+   measured private map shape. Test fresh NIL/singleton/two-point/three-point paths and
    both observed boundary values; restore the function with `UNWIND-PROTECT`.
    Treat this as dependency-isolated branch behavior, not full pipeline parity.
 4. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
