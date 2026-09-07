@@ -7,6 +7,23 @@
 ;;; engine-local RAN.  It never calls RANDOM/RAN merely to identify a state.
 (in-package :cl-user)
 
+(with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
+                       :direction :output
+                       :if-exists :supersede
+                       :if-does-not-exist :create)
+  (write-line "SOURCE-ENTERED T" marker)
+  (finish-output marker))
+
+(defun aaron-random-probe-log (line)
+  (handler-case
+      (with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
+                             :direction :output
+                             :if-exists :append
+                             :if-does-not-exist :create)
+        (write-line line marker)
+        (finish-output marker))
+    (condition () nil)))
+
 (unless (and (boundp 'aaron-planning-seed)
              (integerp aaron-planning-seed))
   (error "AARON-PLANNING-SEED is not an integer"))
@@ -21,13 +38,25 @@
        (state (and factory
                    (fboundp factory)
                    (handler-case
-                       (funcall (symbol-function factory) seed)
-                     (condition () nil))))
+                       ;; Call the dynamically found symbol directly. This is
+                       ;; the form used by the validated random-reference
+                       ;; probe and avoids depending on Allegro's function
+                       ;; cell representation for an internal symbol.
+                       (funcall factory seed)
+                     (condition (problem)
+                       (aaron-random-probe-log
+                        (format nil "STATE-CONSTRUCTOR-ERROR-TYPE ~S"
+                                (type-of problem)))
+                       nil))))
        (common-lisp-package (find-package "COMMON-LISP"))
        (random-state-symbol (and common-lisp-package
                                  (find-symbol "*RANDOM-STATE*"
                                              common-lisp-package)))
        (rseed-count 0))
+  (aaron-random-probe-log
+   (format nil "FACTORY-FOUND ~S FBOUNDP ~S STATE-FOUND ~S RANDOM-STATE-SYMBOL ~S"
+           (not (null factory)) (and factory (fboundp factory))
+           (not (null state)) (not (null random-state-symbol))))
   (unless (and factory (fboundp factory) state random-state-symbol)
     (error "Could not resolve Allegro seeded random state constructor"))
   (when (constantp random-state-symbol)
@@ -44,7 +73,7 @@
           (condition () nil)))
   (with-open-file (marker "C:\\temp\\aaron-random-seed-loaded.txt"
                          :direction :output
-                         :if-exists :supersede
+                         :if-exists :append
                          :if-does-not-exist :create)
     (format marker "BEGIN planning-random-seed~%")
     (format marker "SEED ~D~%" seed)
