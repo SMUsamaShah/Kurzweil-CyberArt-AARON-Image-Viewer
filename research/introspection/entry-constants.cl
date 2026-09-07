@@ -84,9 +84,10 @@
                   (t
                    (format report "FUNCTION-TYPE ~A ~S~%"
                            name (type-of fn))
-                   (when arglist
-                     (format report "ARGLIST ~A ~S~%"
-                             name (safe-arglist symbol fn)))
+                   ;; ARGLIST is deliberately deferred here.  Some entry
+                   ;; functions have loader-specific signature metadata that
+                   ;; can signal before the compiled constant walk; the
+                   ;; existing routine probe already records stable arglists.
                    (if (and count-fn constant-fn
                             (typep fn 'compiled-function))
                        (let ((count (safe-count fn symbol)))
