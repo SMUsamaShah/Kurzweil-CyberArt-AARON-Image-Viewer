@@ -265,11 +265,9 @@
                                     (type-of problem)))
                           (write-cell-error problem)
                           (finish-output report)))
-                      (format report "PREV-STORED-PT ~S~%"
-                              (if (boundp prev-point-symbol)
-                                  (argument-summary
-                                   (symbol-value prev-point-symbol) x-fn y-fn)
-                                :unbound)))))
+                      (format report "PREV-STORED-PT-NIL ~S~%"
+                              (and (boundp prev-point-symbol)
+                                   (null (symbol-value prev-point-symbol)))))))
                   (format report "TEMP-CODES ~S~%"
                           (map 'list #'char-code
                                (get-output-stream-string temp-stream)))
