@@ -549,8 +549,14 @@ the same 12 unique cells, forwards one screen call containing all three points
 including the repeated endpoint, and restores cleanly; the predicate count is
 27 rather than the two-point baseline's 18.
 
-The next probe should use a carefully bounded edge/clip control, then expose
-the downstream screen/writer context without changing the private map setup.
+The edge diagnostic in `brush-stroke-isolated-34146017804.txt` ([run
+34146017804](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34146017804))
+uses `(0,0)→(1,0)` with the forced in-frame predicate. It forwards the path
+once, writes only cell `0`, and raises `SIMPLE-ERROR`; this is retained as a
+partial-write/error boundary, not as a general clipping rule.
+
+The next probe should restore a real scene context while exposing the
+downstream screen/writer context without changing the private map setup.
 
 `brush-stroke-isolated-34074489559.txt` is the edge diagnostic from run
 [34074489559](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074489559),
