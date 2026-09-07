@@ -1,0 +1,41 @@
+BEGIN planning-call-trace-34098634519
+RUN 34098634519
+COMMIT 7b884656600fba7f27e58ee292542145e8041d17
+JOB 101667768442
+ARTIFACT 10009593887
+SOURCE research/introspection/planning-call-trace.cl
+
+SETUP STAGE-1-SECOND-FORM-REACHED
+SETUP STAGE-2-LET-INITIALIZERS-REACHED
+SETUP TRACE-READY
+SETUP END planning-call-trace
+
+LOGGER-FIX Runtime events append through a short-lived stream after the
+outer setup WITH-OPEN-FILE closes. The previous zero-event result was a
+closed-stream logging failure, not evidence that the calls were bypassing
+the installed wrappers.
+
+TRACE-COUNTS ENTER 259
+TRACE-COUNTS EXIT 253
+TRACE-COUNTS ERROR 0
+TRACE-LIMIT-REACHED 512
+
+TRACE-PATH SET-UP-SCREEN-SIZE -> RUN-AARON -> DOIT -> INIT-RANDOM -> MAIN
+TRACE-PATH MAIN -> MASTER-PLAN -> MAKE-LEAF-LIST -> DEVELOP-PLAN
+TRACE-PATH DEVELOP-PLAN -> SELECT-CANVAS -> INIT-MAPS -> PROTOCOL -> RPARSE
+TRACE-PATH RPARSE -> SCRIPT (repeated; the event cap is reached here)
+
+TRACE-NAMES DEVELOP-PLAN DOIT INIT-MAPS INIT-RANDOM MAIN MAKE-LEAF-LIST
+TRACE-NAMES MASTER-PLAN PROTOCOL RPARSE RUN-AARON SCRIPT SELECT-CANVAS
+TRACE-NAMES SET-UP-SCREEN-SIZE
+
+STATE-AT-SETUP MPLAN PREFS SDEX FIGDEX CFLIST COLORDEX BRUSH SCRIPT FILL-MAP
+STATE-AT-SETUP RGB-MAP IDLIST CFRAME COMPLAN RPLANE PLACES all UNBOUND
+
+INTERPRETATION The original screensaver calls the installed ordinary compiled
+function cells on its startup path. MASTER-PLAN and its planning descendants
+are now proven runtime edges, not only constant references. SCRIPT is a
+high-fanout generic call and consumes the bounded trace before downstream
+figure/drawing calls can be observed; the next probe removes that wrapper and
+keeps the logger fix.
+END planning-call-trace-34098634519

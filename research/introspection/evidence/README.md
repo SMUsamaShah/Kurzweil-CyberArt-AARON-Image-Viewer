@@ -645,4 +645,20 @@ has arglist `(NIL T)`; `MAKE-PLAN` has
 `((COMMON-GRAPHICS:ID COMMON-GRAPHICS-USER::SCRIPT) T)`. Both retain CLOS
 constructor constants, but the `MAKE-PLAN` constructor is not `MASTER-PLAN`
 constant 1 or 5 by `EQ`. `MPLAN`, `PREFS`, `SDEX`, and `FIGDEX` remain
-unbound. This is linkage evidence only; neither constructor was invoked.
+ unbound. This is linkage evidence only; neither constructor was invoked.
+
+`planning-call-trace-34098634519.txt` is the first append-safe runtime call
+trace, from run
+[34098634519](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34098634519),
+commit `7b884656600fba7f27e58ee292542145e8041d17`, job `101667768442`, and
+artifact `10009593887`. The original probe installed wrappers around the
+ordinary compiled and generic entry cells, then the normal screensaver startup
+called them: `SET-UP-SCREEN-SIZE`, `RUN-AARON`, `DOIT`, `INIT-RANDOM`, `MAIN`,
+`MASTER-PLAN`, `DEVELOP-PLAN`, `SELECT-CANVAS`, `INIT-MAPS`, `PROTOCOL`, and
+`RPARSE` all appear, followed by repeated `SCRIPT` calls. The report has 259
+entries, 253 exits, no trace errors, and reaches the 512-event bound during
+`SCRIPT`. This also resolves the previous empty-trace ambiguity: the wrapper
+logger had captured a closed `WITH-OPEN-FILE` stream and swallowed its write
+errors; reopening the report for runtime appends makes the calls visible.
+The compact normalized evidence is in the linked file; the complete report
+remains in the GitHub artifact.
