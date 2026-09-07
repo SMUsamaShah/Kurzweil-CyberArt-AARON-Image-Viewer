@@ -313,10 +313,10 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 17 changes CDEX from the measured zero baseline to one while
+  ;; Stage 18 changes SDEX from the measured zero baseline to one while
   ;; keeping the positional argument and dynamic binding aligned. The path is
   ;; interior so boundary errors cannot obscure this index-variable holdout.
-  (write-line "STAGE-17-CDEX-1-BEGIN" report)
+  (write-line "STAGE-18-SDEX-1-BEGIN" report)
   (let ((private-fill nil)
         (private-patch nil)
         (private-brush-symbol nil)
@@ -372,7 +372,7 @@
           (unwind-protect
                 (progv (list wide-symbol high-symbol patch-symbol fill-symbol
                            brush-symbol boundary-symbol cdex-symbol sdex-symbol)
-                     (list 16 16 patch-map fill-map brush 3 1 0)
+                     (list 16 16 patch-map fill-map brush 3 0 1)
                 (setf (symbol-function screen)
                       (lambda (brush-path cdex sdex)
                         (declare (ignore brush-path cdex sdex))
@@ -382,21 +382,21 @@
                         (declare (ignore x y))
                         t))
                 (write-line "BEFORE-STROKE" report)
-                (format report "ARGS POSITIONAL-CDEX 1 POSITIONAL-SDEX 0 DYNAMIC-CDEX ~D DYNAMIC-SDEX 0~%"
-                        (symbol-value cdex-symbol))
+                (format report "ARGS POSITIONAL-CDEX 0 POSITIONAL-SDEX 1 DYNAMIC-CDEX 0 DYNAMIC-SDEX ~D~%"
+                        (symbol-value sdex-symbol))
                 (finish-output report)
-                (funcall stroke path 1 1 0)
+                (funcall stroke path 1 0 1)
                 (setf success t)
                 (write-line "AFTER-STROKE" report)
                 (finish-output report))
             (setf (symbol-function screen) original-screen)
             (setf (symbol-function inside) original-inside)))
       (error (problem)
-        (format report "STAGE-17-ERROR-TYPE ~S~%" (type-of problem))
+        (format report "STAGE-18-ERROR-TYPE ~S~%" (type-of problem))
         (when (typep problem 'cell-error)
           (let ((name (cell-error-name problem)))
             (when (symbolp name)
-              (format report "STAGE-17-ERROR-CELL ~A~%"
+              (format report "STAGE-18-ERROR-CELL ~A~%"
                       (symbol-name name)))))
         (finish-output report)))
     (write-line (if (and private-screen-symbol
@@ -407,8 +407,8 @@
                              private-original-screen)
                          (eq (symbol-function private-inside-symbol)
                              private-original-inside))
-                    "STAGE-17-FUNCTIONS-RESTORED"
-                    "STAGE-17-FUNCTIONS-NOT-RESTORED")
+                    "STAGE-18-FUNCTIONS-RESTORED"
+                    "STAGE-18-FUNCTIONS-NOT-RESTORED")
                 report)
     (write-line (if (and private-brush-symbol
                          private-fill-symbol
@@ -419,8 +419,8 @@
                               before-fill-bound)
                          (eql (boundp private-patch-symbol)
                               before-patch-bound))
-                    "STAGE-17-BINDINGS-RESTORED"
-                    "STAGE-17-BINDINGS-LEAKED")
+                    "STAGE-18-BINDINGS-RESTORED"
+                    "STAGE-18-BINDINGS-LEAKED")
                 report)
     (when (and private-fill private-patch)
       (let ((fill-count 0)
@@ -444,8 +444,8 @@
         (format report "FILL-NONZERO-COUNT ~D~%" fill-count)
         (format report "PATCH-NONZERO-COUNT ~D~%" patch-count)))
     (write-line (if success
-                    "STAGE-17-SUCCESS"
-                    "STAGE-17-CDEX-ERROR")
+                    "STAGE-18-SUCCESS"
+                    "STAGE-18-SDEX-ERROR")
                 report))
   (finish-output report))
 
@@ -556,6 +556,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-17-CDEX-1~%")
+  (format report "STAGE-18-SDEX-1~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
