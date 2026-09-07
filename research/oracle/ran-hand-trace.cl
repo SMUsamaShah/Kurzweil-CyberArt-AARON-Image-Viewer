@@ -7,6 +7,8 @@
 ;;; helper so the broad planning trace remains an independent control.
 (in-package :cl-user)
 
+(aaron-random-emit "RAN-HAND-TRACE-ENTER")
+
 ;; This marker is deliberately outside the one-time guard.  It distinguishes
 ;; a source-load failure from a wrapper that loaded but could not resolve the
 ;; target function.  Keep it in a separate file so the report's superseding
@@ -20,7 +22,10 @@
       (finish-output marker))
   (condition () nil))
 
+(aaron-random-emit "RAN-HAND-SOURCE-MARKER-DONE")
+
 (unless (boundp 'aaron-ran-hand-trace-loaded)
+  (aaron-random-emit "RAN-HAND-GUARD-BODY")
   (set 'aaron-ran-hand-trace-loaded t)
   (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
          (symbol (and owner (find-symbol "RAN-HAND" owner)))
@@ -33,6 +38,7 @@
              "IJ3X" "IJ2X" "IJ1X" "IJ1Z"
              "MJ3X" "MJ2X" "MJ1X" "MJ1Z"
              "PJ3X" "PJ2X" "PJ1X" "PJ1Z")))
+    (aaron-random-emit "RAN-HAND-LET-ENTER")
     (labels
         ((safe-summary (value)
            (handler-case
@@ -84,6 +90,8 @@
                  (apply #'format stream control args)
                  (finish-output stream))
              (condition () nil))))
+      (aaron-random-emit "RAN-HAND-LABELS-READY")
+      (aaron-random-emit "RAN-HAND-REPORT-OPEN-BEGIN")
       (with-open-file (stream report-path
                               :direction :output
                               :if-exists :supersede
@@ -95,17 +103,19 @@
                 (and symbol (fboundp symbol)))
         (format stream "EVENT-LIMIT ~D~%" event-limit)
         (finish-output stream))
+      (aaron-random-emit "RAN-HAND-REPORT-HEADER-DONE")
       (unless (and symbol (fboundp symbol))
         (error "Could not resolve COMMON-GRAPHICS-USER:RAN-HAND"))
       (let ((original (symbol-function symbol)))
         (setf (symbol-function symbol)
               (lambda (&rest args)
-                (let ((before-count (sample-count))
-                      (before-bindings (bindings-summary))
+                  (let ((before-count (sample-count))
+                      (before-bindings nil)
                       (event-number nil))
                   (when (< event-count event-limit)
                     (incf event-count)
-                    (setf event-number event-count))
+                    (setf event-number event-count)
+                    (setf before-bindings (bindings-summary)))
                   (handler-case
                       (let ((values (multiple-value-list
                                       (apply original args))))
