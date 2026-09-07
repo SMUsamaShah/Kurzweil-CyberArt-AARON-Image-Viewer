@@ -45,11 +45,11 @@ test('parses Stage 23 matrix cases and preserves returned/error boundaries', () 
 
 test('parses the completed original-engine brush capture', () => {
   const evidence = readFileSync(new URL(
-    '../../introspection/evidence/brush-stroke-isolated-34127856773.txt',
+    '../../introspection/evidence/brush-stroke-isolated-34145100465.txt',
     import.meta.url,
   ), 'utf8');
   const report = parseBrushStrokeReport(evidence);
-  assert.equal(report.cases.length, 2);
+  assert.equal(report.cases.length, 4);
   assert.equal(report.cases[0].name, 'b1-horizontal');
   assert.equal(report.cases[0].outcome, 'returned');
   assert.equal(report.cases[0].screens[0].points.length, 2);
@@ -63,6 +63,14 @@ test('parses the completed original-engine brush capture', () => {
   assert.equal(report.cases[1].fillCells.length, 26);
   assert.equal(report.cases[1].screenCount, 1);
   assert.equal(report.cases[1].insideCount, 42);
+  for (const [index, fillCount, insideCount] of [[2, 70, 122], [3, 108, 194]]) {
+    assert.equal(report.cases[index].name, `b${index + 1}-horizontal`);
+    assert.equal(report.cases[index].fillCells.length, fillCount);
+    assert.deepEqual(report.cases[index].patchCells, []);
+    assert.equal(report.cases[index].screenCount, 1);
+    assert.equal(report.cases[index].insideCount, insideCount);
+    assert.equal(report.cases[index].outcome, 'returned');
+  }
 });
 
 test('rejects a partial Stage 23 case', () => {
