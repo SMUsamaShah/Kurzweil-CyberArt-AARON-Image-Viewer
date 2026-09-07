@@ -282,6 +282,69 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  ;; Stage 2 isolates mutation of SCREEN-AND-STORE's function cell and a
+  ;; direct call to the replacement. No AARON routine is invoked yet.
+  (write-line "STAGE-2-SCREEN-BEGIN" report)
+  (handler-case
+      (let ((owner (find-package "COMMON-GRAPHICS-USER")))
+        (multiple-value-bind (screen status)
+            (find-symbol "SCREEN-AND-STORE" owner)
+          (declare (ignore status))
+          (let ((original-screen (symbol-function screen)))
+            (unwind-protect
+                (progn
+                  (setf (symbol-function screen)
+                        (lambda (brush-path cdex sdex)
+                          (declare (ignore brush-path cdex sdex))
+                          nil))
+                  (write-line "STAGE-2-SCREEN-SET" report)
+                  (funcall (symbol-function screen) nil 0 0)
+                  (write-line "STAGE-2-SCREEN-CALL-OK" report))
+              (setf (symbol-function screen) original-screen))
+            (write-line (if (eq (symbol-function screen) original-screen)
+                            "STAGE-2-SCREEN-RESTORED"
+                            "STAGE-2-SCREEN-NOT-RESTORED")
+                        report))))
+    (error (problem)
+      (declare (ignore problem))
+      (write-line "STAGE-2-SCREEN-ERROR" report)))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
+  ;; Stage 3 performs the same replacement/restoration check for the
+  ;; predicate consulted by BRUSH-STROKE.
+  (write-line "STAGE-3-INSIDE-BEGIN" report)
+  (handler-case
+      (let ((owner (find-package "COMMON-GRAPHICS-USER")))
+        (multiple-value-bind (inside status)
+            (find-symbol "IN-SUB-FRAME" owner)
+          (declare (ignore status))
+          (let ((original-inside (symbol-function inside)))
+            (unwind-protect
+                (progn
+                  (setf (symbol-function inside)
+                        (lambda (x y)
+                          (declare (ignore x y))
+                          nil))
+                  (write-line "STAGE-3-INSIDE-SET" report)
+                  (funcall (symbol-function inside) 0 0)
+                  (write-line "STAGE-3-INSIDE-CALL-OK" report))
+              (setf (symbol-function inside) original-inside))
+            (write-line (if (eq (symbol-function inside) original-inside)
+                            "STAGE-3-INSIDE-RESTORED"
+                            "STAGE-3-INSIDE-NOT-RESTORED")
+                        report))))
+    (error (problem)
+      (declare (ignore problem))
+      (write-line "STAGE-3-INSIDE-ERROR" report)))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "STAGE-1-RESOLUTION-ONLY~%")
+  (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
