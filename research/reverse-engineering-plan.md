@@ -60,10 +60,12 @@ complete equivalent port until phases 5–8 are recovered.
    values 1 and 3, brush IDs 1–4, one non-interpolated brush-1 gap, repeated
    vertices, aligned `CDEX`/`SDEX`, and a corrected direct top-level Stage 23
    matrix that reproduces the 12-, 26-, 70-, and 108-cell adjacent footprints
-   for brush IDs 1–4. Next vary repeated/overlapping vertices and clipping,
-   then capture the downstream screen/writer context; restore every function
-   and binding with `UNWIND-PROTECT`. Treat this as dependency-isolated
-   branch/map behavior, not full pipeline parity.
+   for brush IDs 1–4. The repeated interior brush-1 path also preserves the
+   same unique map cells and forwards all three points, including the repeated
+   endpoint. Next vary bounded clipping, then capture the downstream
+   screen/writer context; restore every function and binding with
+   `UNWIND-PROTECT`. Treat this as dependency-isolated branch/map behavior,
+   not full pipeline parity.
 4. Establish the scene context required by the original `SCREEN-AND-STORE`.
    The direct call now has a reliable condition boundary: it invokes
    `WATCH-FOR-MESSAGES` once and stops at unbound `MPLAN`, with all probe
