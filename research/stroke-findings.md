@@ -251,9 +251,25 @@ return, and restoration markers match the baseline. The isolated forwarding
 matrix now covers baseline `0,0`, CDEX `1,0`, and SDEX `0,1`; real screen/file
 consumers remain the next boundary.
 
-The next probe should replace `SCREEN-AND-STORE` with a recorder that also
-captures its downstream `PREP-LINE`/writer dependencies, without changing the
-private `BRUSH-STROKE` map setup.
+The first bounded Stage 23 matrix control is preserved in
+`introspection/evidence/brush-stroke-isolated-34126488826.txt`. A direct
+top-level `BRUSH-STROKE` call using the validated 16×16 maps, brush 1,
+`VALUE=1`, `(7,7)→(8,7)`, and an in-frame predicate writes the same twelve
+row-major cells (`102–104`, `118–120`, `134–136`, `150–152`), forwards one
+screen call with the two points, and returns cleanly. A preceding 64×64 case
+with the rejecting predicate forwarded the path but wrote no fill cells; that
+is a predicate-gated control, not evidence that the larger map has no brush
+effect. The case label in that first artifact still says `INSIDE NIL` because
+it was emitted before the final predicate-label correction; the actual direct
+form used the in-frame `T` stub, as shown by the successful fill writes. The
+probe now keeps this experiment as direct top-level forms because compiled
+helper variants failed before reaching their first resolution checkpoint in
+this Allegro init-file harness.
+
+The next probe should extend the direct top-level control one case at a time
+to larger startup brushes and explicit boundary/overlap cases, then replace
+`SCREEN-AND-STORE` with a recorder that also captures its downstream
+`PREP-LINE`/writer dependencies without changing the private map setup.
 
 ## Emission leads
 

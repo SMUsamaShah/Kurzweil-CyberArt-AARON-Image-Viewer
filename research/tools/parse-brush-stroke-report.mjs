@@ -113,6 +113,8 @@ export function parseBrushStrokeReport(text) {
       currentScreen = undefined;
       continue;
     }
+    if (line === 'MATRIX-RESOLVED'
+        || /^MATRIX-(BEFORE|AFTER)-STROKE \S+$/.test(line)) continue;
     if (/^MATRIX-POINT-ERROR \S+ \d+$/.test(line)
         || line === 'MATRIX-IMPROPER-TAIL') continue;
     throw new Error(`Unsupported Stage 23 record: ${line}`);

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import test from 'node:test';
 
 import {parseBrushStrokeReport} from '../parse-brush-stroke-report.mjs';
@@ -40,6 +41,24 @@ test('parses Stage 23 matrix cases and preserves returned/error boundaries', () 
   assert.equal(report.cases[1].error, 'SIMPLE-ERROR');
   assert.equal(report.cases[1].outcome, 'errored');
   assert.deepEqual(report.cases[1].fillCells, [{index: 0, value: 1}]);
+});
+
+test('parses the completed original-engine brush capture', () => {
+  const evidence = readFileSync(new URL(
+    '../../introspection/evidence/brush-stroke-isolated-34126488826.txt',
+    import.meta.url,
+  ), 'utf8');
+  const report = parseBrushStrokeReport(evidence);
+  assert.equal(report.cases.length, 1);
+  assert.equal(report.cases[0].name, 'b1-horizontal');
+  assert.equal(report.cases[0].outcome, 'returned');
+  assert.equal(report.cases[0].screens[0].points.length, 2);
+  assert.deepEqual(report.cases[0].fillCells, [
+    {index: 102, value: 1}, {index: 103, value: 1}, {index: 104, value: 1},
+    {index: 118, value: 1}, {index: 119, value: 1}, {index: 120, value: 1},
+    {index: 134, value: 1}, {index: 135, value: 1}, {index: 136, value: 1},
+    {index: 150, value: 1}, {index: 151, value: 1}, {index: 152, value: 1},
+  ]);
 });
 
 test('rejects a partial Stage 23 case', () => {

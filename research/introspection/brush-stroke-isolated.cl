@@ -854,7 +854,7 @@
              (original-inside (symbol-function inside)))
         (write-line "MATRIX-RESOLVED" report)
         (finish-output report)
-        (write-line "MATRIX-CASE b1-horizontal BRUSH 1 VALUE 1 CDEX 0 SDEX 0 INSIDE NIL"
+        (write-line "MATRIX-CASE b1-horizontal BRUSH 1 VALUE 1 CDEX 0 SDEX 0 INSIDE T"
                     report)
         (finish-output report)
         (unwind-protect

@@ -20,8 +20,11 @@ conversation boundary.
 
 ## Last verified state
 
-As of 2026-09-07, the recovered checkout is clean at local commit `ccb99fb`
-(`Implement measured RAN-HAND helper`). The first handoff publication was
+As of 2026-09-07, the recovered checkout is being advanced locally from
+`ccb99fb` (`Implement measured RAN-HAND helper`); the latest local checkpoint
+is `a544471` (`Match brush matrix control to validated 16x16 case`). The
+connected branch currently contains the corresponding probe tree at
+`84871ba7fd13fee484967d35401679b88050967a`. The first handoff publication was
 based on connected-branch commit
 `0782c0dd9e819e6c9694809de05e1829c5997326`; the local continuity revisions
 are `fce7c5a` and `58ed34b`. The connected branch contains the same handoff
@@ -39,9 +42,21 @@ The latest published change adds:
   `research/introspection/evidence/ran-hand-post-init-34120567298.txt`;
 - updates to the plan, oracle notes, and freehand-line notes.
 
+The current brush checkpoint also adds a strict Stage 23 report parser and a
+completed original-engine capture at
+`research/introspection/evidence/brush-stroke-isolated-34126488826.txt`.
+That direct top-level control reproduces the previously measured twelve-cell
+brush-1 footprint and one screen-forwarding call. The probe must remain in
+direct top-level form for now: compiled helper variants failed before their
+first resolution marker in the Allegro init-file harness. The next matrix
+revision corrects the case label to reflect the actual in-frame `T` predicate
+and extends the control to additional startup brush profiles.
+
 Local verification:
 
 - `cd engine && npm test` → 58 passing tests.
+- The brush report parser and its real original-engine capture are covered by
+  the research-tool suite.
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`.
@@ -61,7 +76,7 @@ generator.
 | Allegro random source and numeric boundaries | Strongly measured; normal startup seed remains unresolved |
 | Angles, distance, `LOCK-WIGGLE`, measured `FREE-PATH` subset | Measured fixtures and implementations |
 | Stream/writer selectors | Isolated behavior measured; integrated screen/file path remains open |
-| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; selection, clipping, fill, colour, and state remain open |
+| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 control reproduces the baseline footprint; selection, clipping, fill, colour, and state remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |
@@ -102,8 +117,8 @@ Use the local-first workflow:
    from provisional or inferred to measured.
 
 The current research roadmap's next oracle frontier is the controlled
-`BRUSH-STROKE`/`SCREEN-AND-STORE` path: larger brush IDs and boundary cases,
-then the real scene context and downstream writer. Existing high-fanout
+direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: larger brush IDs
+and boundary cases, then the real scene context and downstream writer. Existing high-fanout
 wrappers should be removed only deliberately so later brush, fill, and message
 loop calls become visible without changing the original call graph.
 
