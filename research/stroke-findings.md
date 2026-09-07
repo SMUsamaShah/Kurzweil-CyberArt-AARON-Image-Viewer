@@ -162,6 +162,18 @@ The next probe should select a larger startup brush while retaining the
 adjacent horizontal path, extending the core-mask comparison without mixing
 in a new path topology.
 
+Run [34073990973](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073990973)
+selects startup brush 4 on the adjacent `(7,7)→(8,7)` path. It writes 108
+value-1 cells and no patch cells. The exact index set equals the union of the
+two translated brush-4 `CORE` masks, and the JS helper now has a fourth
+profile-backed footprint fixture. This remains dependency-isolated evidence;
+brush selection boundaries, clipping, overlaps, colour transitions, and
+`CDEX`/`SDEX` behavior are still not recovered.
+
+The next probe should exercise a repeated or overlapping vertex with an
+already measured profile, separating duplicate-path semantics from the
+profile ladder.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

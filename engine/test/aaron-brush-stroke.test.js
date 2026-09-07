@@ -34,6 +34,20 @@ const brushOneGapped = [
   182, 183, 184,
   198, 199, 200,
 ];
+const brushFourHorizontal = [
+  37, 38, 39, 40, 41,
+  52, 53, 54, 55, 56, 57, 58,
+  67, 68, 69, 70, 71, 72, 73, 74, 75,
+  82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92,
+  98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108,
+  114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124,
+  130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
+  146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156,
+  162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172,
+  179, 180, 181, 182, 183, 184, 185, 186, 187,
+  196, 197, 198, 199, 200, 201, 202,
+  213, 214, 215, 216, 217,
+];
 
 function nonzero(map) {
   return [...map].flatMap((value, index) => (value ? [[index, value]] : []));
@@ -106,6 +120,22 @@ test('does not interpolate a gapped path in the measured brush-1 case', () => {
   assert.deepEqual(
     nonzero(maps.fillMap),
     brushOneGapped.map((index) => [index, 1]),
+  );
+  assert.deepEqual([...maps.patchMap].filter(Boolean), []);
+});
+
+test('matches the captured horizontal footprint for brush 4', () => {
+  const maps = createAaronMaps(16, 16);
+  const touched = applyMeasuredBrushVertices(
+    maps,
+    getAaronBrushProfile(4),
+    [[7, 7], [8, 7]],
+    1,
+  );
+  assert.deepEqual(touched, brushFourHorizontal);
+  assert.deepEqual(
+    nonzero(maps.fillMap),
+    brushFourHorizontal.map((index) => [index, 1]),
   );
   assert.deepEqual([...maps.patchMap].filter(Boolean), []);
 });

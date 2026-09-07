@@ -522,6 +522,17 @@ The next probe selects a larger startup brush with the adjacent horizontal
 path, keeping path topology fixed while extending the measured core-mask
 comparison.
 
+`brush-stroke-isolated-34073990973.txt` is the brush-4 capture from run
+[34073990973](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073990973),
+commit `b2917007340ace2cb848c8751a0e100ba0244543`. With the same adjacent
+points `(7,7)` and `(8,7)`, it writes exactly 108 value-1 cells and no patch
+cells. The row-major index set matches the union of the two translated
+brush-4 `CORE` masks; the JS helper and regression fixture now cover the
+fourth measured profile.
+
+The next probe should reuse a measured profile with a repeated or overlapping
+vertex to isolate duplicate-path behavior from brush-size effects.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
