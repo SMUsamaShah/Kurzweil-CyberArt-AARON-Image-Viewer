@@ -151,6 +151,17 @@ The next case returns to brush 1 and uses `(7,7)→(11,7)` with the same
 predicate and private maps, separating vertex stamping from interpolation
 across a non-adjacent path.
 
+Run [34073609021](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073609021)
+returns 18 value-1 cells and no patch writes: two disjoint 3×3 brush-1
+core footprints at the supplied vertices, with no fill cells between them.
+The clean-room helper and regression fixture now preserve this measured
+non-interpolation result for this case. This does not establish behavior for
+arbitrary gaps, overlaps, clipping, or the `CDEX`/`SDEX` arguments.
+
+The next probe should select a larger startup brush while retaining the
+adjacent horizontal path, extending the core-mask comparison without mixing
+in a new path topology.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

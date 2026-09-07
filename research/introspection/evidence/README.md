@@ -508,6 +508,20 @@ The next probe returns to brush 1 and changes only the second point to `11,7`,
 testing whether a gapped path stamps the supplied vertices or interpolates
 between them.
 
+`brush-stroke-isolated-34073609021.txt` is the gapped brush-1 capture from run
+[34073609021](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073609021).
+With points `(7,7)` and `(11,7)`, it writes exactly 18 value-1 cells:
+`102–104`, `118–120`, `134–136`, `166–168`, `182–184`, and `198–200`.
+These are two disjoint translated brush-1 `CORE` footprints; there are no
+intermediate cells in the gap and `PATCH-MAP` remains zero. The JS helper and
+fixture now cover this measured non-interpolation case. The result is scoped
+to this path and dependency setup; arbitrary gaps, overlaps, clipping, and
+`CDEX`/`SDEX` behavior remain open.
+
+The next probe selects a larger startup brush with the adjacent horizontal
+path, keeping path topology fixed while extending the measured core-mask
+comparison.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

@@ -116,7 +116,9 @@ width-by-height dimensions. Its first-coordinate-major index and checked
 fill-cell writer are measured from the horizontal/vertical brush probes.
 `aaron-brush-stroke.js` adds a deliberately scoped clean-room helper that
 applies the measured brush-core union for nonempty vertices; it matches the
-brush-1 two-point fixtures but is not yet the complete `BRUSH-STROKE` routine.
+brush-1, brush-2, and brush-3 two-point fixtures and the measured brush-1
+gapped path without interpolating across the gap. It is not yet the complete
+`BRUSH-STROKE` routine.
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

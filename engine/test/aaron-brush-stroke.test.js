@@ -26,6 +26,14 @@ const brushThreeHorizontal = [
   180, 181, 182, 183, 184, 185, 186,
   198, 199, 200,
 ];
+const brushOneGapped = [
+  102, 103, 104,
+  118, 119, 120,
+  134, 135, 136,
+  166, 167, 168,
+  182, 183, 184,
+  198, 199, 200,
+];
 
 function nonzero(map) {
   return [...map].flatMap((value, index) => (value ? [[index, value]] : []));
@@ -84,6 +92,22 @@ test('matches the captured horizontal footprint for brush 3', () => {
     nonzero(maps.fillMap),
     brushThreeHorizontal.map((index) => [index, 1]),
   );
+});
+
+test('does not interpolate a gapped path in the measured brush-1 case', () => {
+  const maps = createAaronMaps(16, 16);
+  const touched = applyMeasuredBrushVertices(
+    maps,
+    getAaronBrushProfile(1),
+    [[7, 7], [11, 7]],
+    1,
+  );
+  assert.deepEqual(touched, brushOneGapped);
+  assert.deepEqual(
+    nonzero(maps.fillMap),
+    brushOneGapped.map((index) => [index, 1]),
+  );
+  assert.deepEqual([...maps.patchMap].filter(Boolean), []);
 });
 
 test('keeps the measured empty and singleton path boundary', () => {
