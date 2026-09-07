@@ -9,6 +9,16 @@
 ;;; remain installed until the oracle terminates it.
 (in-package :cl-user)
 
+;; Keep a separate reader/load checkpoint.  If the guarded body is rejected
+;; before evaluation, this marker distinguishes that failure from a runtime
+;; trace with no calls.
+(with-open-file (checkpoint "C:\\temp\\aaron-planning-call-trace.txt"
+                            :direction :output :if-exists :supersede
+                            :if-does-not-exist :create)
+  (write-line "BEGIN planning-call-trace" checkpoint)
+  (write-line "STAGE-0-LOAD-FORM-REACHED" checkpoint)
+  (finish-output checkpoint))
+
 (unless (boundp 'aaron-planning-call-trace-loaded)
   (set 'aaron-planning-call-trace-loaded t)
   (with-open-file (report "C:\\temp\\aaron-planning-call-trace.txt"
