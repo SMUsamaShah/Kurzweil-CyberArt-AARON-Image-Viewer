@@ -300,6 +300,8 @@
 (unless (boundp 'aaron-ran-sample-count)
   (set 'aaron-ran-sample-count 0))
 (set 'aaron-ran-sample-count 0)
+(unless (boundp 'aaron-ran-sample-limit)
+  (set 'aaron-ran-sample-limit 32))
 
 (unless (boundp 'aaron-random-observers-installed)
   (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
@@ -359,7 +361,7 @@
               ;; The original RAN is called exactly once and all values are
               ;; returned. Logging is capped and never draws from the state.
               (let ((values (multiple-value-list (apply original-ran args))))
-                (when (< aaron-ran-sample-count 32)
+                (when (< aaron-ran-sample-count aaron-ran-sample-limit)
                   (incf aaron-ran-sample-count)
                   (aaron-random-emit
                    (format nil "RAN-SAMPLE ~D ARGS ~S VALUES ~S"
