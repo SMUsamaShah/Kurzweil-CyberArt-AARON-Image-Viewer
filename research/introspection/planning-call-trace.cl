@@ -41,12 +41,18 @@
       ;; body, after the stream checkpoint, so a loader failure is observable.
       (setf owner (find-package "COMMON-GRAPHICS-USER")
             targets
-            '("MAIN" "SET-UP-SCREEN-SIZE" "SELECT-CANVAS"
+            '("RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
+              "END-START" "GOOD-START" "OMAKE-FRESH-START"
+              "MAKE-FRESH-START" "REMAKE-IMAGE" "MAKE-ARTWORK"
+              "INITIALISE-PICTURE-PLANE" "DRAW-ONE-COMMAND"
+              "DRAW-FIGURE-CFORMS" "DRAW-ORDERED-CFORMS" "WRITE-PAINTING-RECORD"
+              "MAIN" "SET-UP-SCREEN-SIZE" "SELECT-CANVAS"
               "INIT-RANDOM" "SET-RANDOM" "GET-RANDOM" "INIT-MAPS"
               "MAKE-PAINTING-COLORS" "MAKE-COLORSPEC" "MASTER-PLAN"
               "MAKE-PLAN" "MAKE-LEAF-LIST" "DEVELOP-PLAN" "PROTOCOL"
               "RPARSE" "SCRIPT" "BUILD-FIGURE" "GENERATE-PERSON"
-              "MAKE-POTTED-PLANT" "SCREEN-AND-STORE")
+              "MAKE-POTTED-PLANT" "DRAW-CFORM" "PAINT-FILL"
+              "SCREEN-AND-STORE" "STORE-IN-FILE")
             state-names
             '("MPLAN" "PREFS" "SDEX" "FIGDEX" "CFLIST" "COLORDEX"
               "BRUSH" "SCRIPT" "FILL-MAP" "RGB-MAP" "IDLIST" "CFRAME"
