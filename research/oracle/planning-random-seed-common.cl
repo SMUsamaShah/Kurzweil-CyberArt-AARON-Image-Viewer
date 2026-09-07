@@ -188,12 +188,24 @@
 (unless (boundp 'aaron-random-observers-installed)
   (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
          (init-symbol (and owner (find-symbol "INIT-RANDOM" owner)))
-         (ran-symbol (and owner (find-symbol "RAN" owner))))
+         (ran-symbol (and owner (find-symbol "RAN" owner)))
+         (day-symbol (and owner (find-symbol "KCAT-CURRENT-DAY-TIME" owner)))
+         (file-symbol (and owner (find-symbol "SET-FILE-ADDRESSES" owner)))
+         (set-symbol (and owner (find-symbol "SET-RANDOM" owner)))
+         (get-symbol (and owner (find-symbol "GET-RANDOM" owner))))
     (unless (and init-symbol (fboundp init-symbol)
                  ran-symbol (fboundp ran-symbol))
       (error "Could not resolve INIT-RANDOM and engine-local RAN"))
     (let ((original-init (symbol-function init-symbol))
-          (original-ran (symbol-function ran-symbol)))
+          (original-ran (symbol-function ran-symbol))
+          (original-day (and day-symbol (fboundp day-symbol)
+                             (symbol-function day-symbol)))
+          (original-file (and file-symbol (fboundp file-symbol)
+                              (symbol-function file-symbol)))
+          (original-set (and set-symbol (fboundp set-symbol)
+                             (symbol-function set-symbol)))
+          (original-get (and get-symbol (fboundp get-symbol)
+                             (symbol-function get-symbol))))
       (setf (symbol-function init-symbol)
             (lambda (&rest args)
               (aaron-random-emit
@@ -221,6 +233,42 @@
                    (format nil "RAN-SAMPLE ~D ARGS ~S VALUES ~S"
                            aaron-ran-sample-count args values)))
                 (values-list values))))
+      (when original-day
+        (setf (symbol-function day-symbol)
+              (lambda (&rest args)
+                (aaron-random-emit
+                 (format nil "CURRENT-DAY-TIME-BEFORE ARGS ~S" args))
+                (let ((values (multiple-value-list (apply original-day args))))
+                  (aaron-random-emit
+                   (format nil "CURRENT-DAY-TIME-AFTER VALUES ~S" values))
+                  (values-list values)))))
+      (when original-file
+        (setf (symbol-function file-symbol)
+              (lambda (&rest args)
+                (aaron-random-emit
+                 (format nil "SET-FILE-ADDRESSES-BEFORE STATE ~S"
+                         (aaron-random-state-snapshot)))
+                (multiple-value-prog1
+                    (apply original-file args)
+                  (aaron-random-emit
+                   (format nil "SET-FILE-ADDRESSES-AFTER STATE ~S"
+                           (aaron-random-state-snapshot)))))))
+      (when original-set
+        (setf (symbol-function set-symbol)
+              (lambda (&rest args)
+                (aaron-random-emit
+                 (format nil "SET-RANDOM-BEFORE ARGS ~S" args))
+                (multiple-value-prog1
+                    (apply original-set args)
+                  (aaron-random-emit "SET-RANDOM-AFTER")))))
+      (when original-get
+        (setf (symbol-function get-symbol)
+              (lambda (&rest args)
+                (aaron-random-emit
+                 (format nil "GET-RANDOM-BEFORE ARGS ~S" args))
+                (multiple-value-prog1
+                    (apply original-get args)
+                  (aaron-random-emit "GET-RANDOM-AFTER")))))
     (set 'aaron-random-observers-installed t))))
 
 (aaron-random-emit
