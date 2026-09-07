@@ -313,10 +313,10 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 20 rejects the in-frame predicate and records the exact
-  ;; SCREEN-AND-STORE forwarding arguments. Private map state is still dumped
-  ;; after unwind, so this remains a dependency-isolated forwarding probe.
-  (write-line "STAGE-20-SCREEN-FORWARD-BEGIN" report)
+  ;; Stage 21 repeats the rejecting-predicate forwarding probe with CDEX=1.
+  ;; Private map state is still dumped after unwind, so this remains a
+  ;; dependency-isolated forwarding probe.
+  (write-line "STAGE-21-SCREEN-CDEX-1-BEGIN" report)
   (let ((private-fill nil)
         (private-patch nil)
         (private-brush-symbol nil)
@@ -377,7 +377,7 @@
           (unwind-protect
                 (progv (list wide-symbol high-symbol patch-symbol fill-symbol
                            brush-symbol boundary-symbol cdex-symbol sdex-symbol)
-                     (list 16 16 patch-map fill-map brush 3 0 0)
+                     (list 16 16 patch-map fill-map brush 3 1 0)
                 (setf (symbol-function screen)
                       (lambda (forwarded-path forwarded-cdex forwarded-sdex)
                         (let ((call (incf screen-count)))
@@ -428,22 +428,22 @@
                           (error "IN-SUB-FRAME call bound exceeded"))
                         nil))
                 (write-line "BEFORE-STROKE" report)
-                (format report "ARGS POSITIONAL-CDEX 0 POSITIONAL-SDEX 0 DYNAMIC-CDEX ~D DYNAMIC-SDEX ~D~%"
+                (format report "ARGS POSITIONAL-CDEX 1 POSITIONAL-SDEX 0 DYNAMIC-CDEX ~D DYNAMIC-SDEX ~D~%"
                         (symbol-value cdex-symbol)
                         (symbol-value sdex-symbol))
                 (finish-output report)
-                (funcall stroke path 1 0 0)
+                (funcall stroke path 1 1 0)
                 (setf success t)
                 (write-line "AFTER-STROKE" report)
                 (finish-output report))
             (setf (symbol-function screen) original-screen)
             (setf (symbol-function inside) original-inside)))
       (error (problem)
-        (format report "STAGE-20-ERROR-TYPE ~S~%" (type-of problem))
+        (format report "STAGE-21-ERROR-TYPE ~S~%" (type-of problem))
         (when (typep problem 'cell-error)
           (let ((name (cell-error-name problem)))
             (when (symbolp name)
-              (format report "STAGE-20-ERROR-CELL ~A~%"
+              (format report "STAGE-21-ERROR-CELL ~A~%"
                       (symbol-name name)))))
         (finish-output report)))
     (write-line (if (and private-screen-symbol
@@ -454,8 +454,8 @@
                              private-original-screen)
                          (eq (symbol-function private-inside-symbol)
                              private-original-inside))
-                    "STAGE-20-FUNCTIONS-RESTORED"
-                    "STAGE-20-FUNCTIONS-NOT-RESTORED")
+                    "STAGE-21-FUNCTIONS-RESTORED"
+                    "STAGE-21-FUNCTIONS-NOT-RESTORED")
                 report)
     (write-line (if (and private-brush-symbol
                          private-fill-symbol
@@ -466,8 +466,8 @@
                               before-fill-bound)
                          (eql (boundp private-patch-symbol)
                               before-patch-bound))
-                    "STAGE-20-BINDINGS-RESTORED"
-                    "STAGE-20-BINDINGS-LEAKED")
+                    "STAGE-21-BINDINGS-RESTORED"
+                    "STAGE-21-BINDINGS-LEAKED")
                 report)
     (when (and private-fill private-patch)
       (let ((fill-count 0)
@@ -493,8 +493,8 @@
     (format report "SCREEN-COUNT ~D~%" screen-count)
     (format report "INSIDE-COUNT ~D~%" inside-count)
     (write-line (if success
-                    "STAGE-20-STROKE-RETURNED"
-                    "STAGE-20-STROKE-ERROR")
+                    "STAGE-21-STROKE-RETURNED"
+                    "STAGE-21-STROKE-ERROR")
                 report))
   (finish-output report))
 
@@ -605,6 +605,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-20-SCREEN-FORWARD~%")
+  (format report "STAGE-21-SCREEN-CDEX-1~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
