@@ -7,7 +7,8 @@
 (load "C:\\temp\\planning-random-seed-common.cl")
 (aaron-random-emit "RAN-HAND-SOURCE-BEFORE-LOAD")
 (handler-case
-    (load "C:\\temp\\ran-hand-trace.cl")
+    (let ((*load-print* nil))
+      (load "C:\\temp\\ran-hand-trace.cl"))
   (condition (problem)
     (aaron-random-emit
      (format nil "RAN-HAND-LOAD-ERROR-TYPE ~S" (type-of problem)))) )
