@@ -344,7 +344,78 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
+  ;; Stage 4 creates the smallest private BRUSH-STROKE environment. It
+  ;; validates PROGV setup, map shape, brush selection, and binding cleanup;
+  ;; it deliberately does not call BRUSH-STROKE yet.
+  (write-line "STAGE-4-PRIVATE-SETUP-BEGIN" report)
+  (handler-case
+      (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+             (graphics (find-package "COMMON-GRAPHICS"))
+             (all-symbol (find-symbol "ALL-BRUSHES" owner))
+             (brush-symbol (find-symbol "BRUSH" owner))
+             (fill-symbol (find-symbol "FILL-MAP" owner))
+             (patch-symbol (find-symbol "PATCH-MAP" owner))
+             (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+             (high-symbol (find-symbol "*PIC-HIGH*" owner))
+             (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+             (cdex-symbol (find-symbol "CDEX" owner))
+             (sdex-symbol (find-symbol "SDEX" owner))
+             (id-symbol (find-symbol "ID" graphics))
+             (all-brushes (symbol-value all-symbol)))
+        (when (and (listp all-brushes)
+                   (>= (length all-brushes) 2)
+                   (fboundp id-symbol))
+          (let* ((brush (elt all-brushes 1))
+                 (fill-map (make-array '(16 16)
+                                       :element-type '(unsigned-byte 4)
+                                       :initial-element 0))
+                 (patch-map (make-array '(16 16)
+                                        :element-type '(unsigned-byte 16)
+                                        :initial-element 0))
+                 (before-brush-bound (boundp brush-symbol))
+                 (before-fill-bound (boundp fill-symbol))
+                 (before-patch-bound (boundp patch-symbol)))
+            (progv (list wide-symbol high-symbol patch-symbol fill-symbol
+                         brush-symbol boundary-symbol cdex-symbol sdex-symbol)
+                   (list 16 16 patch-map fill-map brush 3 0 0)
+              (write-line "STAGE-4-PROGV-ENTERED" report)
+              (write-line (if (and (= (symbol-value wide-symbol) 16)
+                                     (= (symbol-value high-symbol) 16)
+                                     (eq (symbol-value brush-symbol) brush)
+                                     (eq (symbol-value fill-symbol) fill-map)
+                                     (eq (symbol-value patch-symbol) patch-map)
+                                     (= (symbol-value boundary-symbol) 3)
+                                     (= (symbol-value cdex-symbol) 0)
+                                     (= (symbol-value sdex-symbol) 0))
+                                "STAGE-4-BINDINGS-OK"
+                                "STAGE-4-BINDINGS-MISMATCH")
+                          report)
+              (write-line (if (and (equal (array-dimensions
+                                           (symbol-value fill-symbol))
+                                          '(16 16))
+                                     (equal (array-dimensions
+                                             (symbol-value patch-symbol))
+                                            '(16 16))
+                                     (= (funcall id-symbol brush) 1))
+                                "STAGE-4-MAPS-AND-BRUSH-OK"
+                                "STAGE-4-MAPS-OR-BRUSH-MISMATCH")
+                          report))
+            (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
+                                   (eql (boundp fill-symbol) before-fill-bound)
+                                   (eql (boundp patch-symbol) before-patch-bound))
+                              "STAGE-4-BINDINGS-RESTORED"
+                              "STAGE-4-BINDINGS-LEAKED")
+                        report))))
+    (error (problem)
+      (declare (ignore problem))
+      (write-line "STAGE-4-PRIVATE-SETUP-ERROR" report)))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
+  (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))

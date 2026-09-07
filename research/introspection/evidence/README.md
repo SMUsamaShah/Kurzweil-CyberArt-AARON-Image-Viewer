@@ -395,6 +395,21 @@ call replaces both arrays. Every case reports `RESTORED T` and
 `BINDINGS-RESTORED T`. The report does not claim coordinate indexing or fill
 write semantics.
 
+`brush-stroke-isolated-34071136475.txt` is the successful load and symbol
+resolution checkpoint from run
+[34071136475](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34071136475),
+commit `72ab3a8b36c6edddc73f21a0e3698fb8db660d16`. Static-marker output
+confirms that `BRUSH-STROKE`, `SCREEN-AND-STORE`, `IN-SUB-FRAME`,
+`MAKE-TWOPT`, and the `ID` reader are present and callable in the direct
+startup image. The follow-up replacement checks install a temporary
+`SCREEN-AND-STORE` stub and a temporary `IN-SUB-FRAME` stub, call each stub
+directly, and restore both original function cells
+(`STAGE-2-SCREEN-RESTORED` and `STAGE-3-INSIDE-RESTORED`). This is a
+hook-safety result only; it does not yet invoke `BRUSH-STROKE` or establish
+map writes, brush selection, or output parity. The earlier failed
+formatted-output checkpoint is retained in
+`brush-stroke-isolated-34070909268.txt` as a probe-debugging record.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
