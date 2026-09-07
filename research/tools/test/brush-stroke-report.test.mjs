@@ -45,11 +45,11 @@ test('parses Stage 23 matrix cases and preserves returned/error boundaries', () 
 
 test('parses the completed original-engine brush capture', () => {
   const evidence = readFileSync(new URL(
-    '../../introspection/evidence/brush-stroke-isolated-34126488826.txt',
+    '../../introspection/evidence/brush-stroke-isolated-34127856773.txt',
     import.meta.url,
   ), 'utf8');
   const report = parseBrushStrokeReport(evidence);
-  assert.equal(report.cases.length, 1);
+  assert.equal(report.cases.length, 2);
   assert.equal(report.cases[0].name, 'b1-horizontal');
   assert.equal(report.cases[0].outcome, 'returned');
   assert.equal(report.cases[0].screens[0].points.length, 2);
@@ -59,6 +59,10 @@ test('parses the completed original-engine brush capture', () => {
     {index: 134, value: 1}, {index: 135, value: 1}, {index: 136, value: 1},
     {index: 150, value: 1}, {index: 151, value: 1}, {index: 152, value: 1},
   ]);
+  assert.equal(report.cases[1].name, 'b2-horizontal');
+  assert.equal(report.cases[1].fillCells.length, 26);
+  assert.equal(report.cases[1].screenCount, 1);
+  assert.equal(report.cases[1].insideCount, 42);
 });
 
 test('rejects a partial Stage 23 case', () => {

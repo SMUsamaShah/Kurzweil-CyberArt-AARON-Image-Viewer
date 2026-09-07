@@ -261,10 +261,19 @@ with the rejecting predicate forwarded the path but wrote no fill cells; that
 is a predicate-gated control, not evidence that the larger map has no brush
 effect. The case label in that first artifact still says `INSIDE NIL` because
 it was emitted before the final predicate-label correction; the actual direct
-form used the in-frame `T` stub, as shown by the successful fill writes. The
-probe now keeps this experiment as direct top-level forms because compiled
-helper variants failed before reaching their first resolution checkpoint in
-this Allegro init-file harness.
+form used the in-frame `T` stub, as shown by the successful fill writes.
+
+The corrected two-case rerun in
+`introspection/evidence/brush-stroke-isolated-34127856773.txt` keeps the same
+direct top-level setup and adds brush 2. It reproduces the 12 brush-1 cells
+and records 26 brush-2 cells at
+`86–88`, `101–105`, `117–121`, `133–137`, `149–153`, and `166–168`, with one
+screen call and clean return for each case. The brush-2 set is the union of
+the two translated measured `CORE` masks, extending the clean-room fixture
+without claiming brush-selection, clipping, colour, or integrated-emission
+parity. Compiled helper variants failed before their first resolution
+checkpoint in this Allegro init-file harness, so the matrix remains direct
+top-level forms.
 
 The next probe should extend the direct top-level control one case at a time
 to larger startup brushes and explicit boundary/overlap cases, then replace

@@ -59,10 +59,10 @@ complete equivalent port until phases 5–8 are recovered.
    evidence covers NIL, singleton, horizontal and vertical two-point paths,
    values 1 and 3, brush IDs 1–4, one non-interpolated brush-1 gap, repeated
    vertices, aligned `CDEX`/`SDEX`, and a direct top-level Stage 23 control that
-   reproduces the 12-cell brush-1 footprint. Next vary larger brush IDs,
-   overlaps, clipping, and the remaining matrix cases; restore every function
-   and binding with `UNWIND-PROTECT`. Treat this as dependency-isolated
-   branch/map behavior, not full pipeline parity.
+   reproduces the 12-cell brush-1 and 26-cell brush-2 footprints. Next vary
+   larger brush IDs, overlaps, clipping, and the remaining matrix cases;
+   restore every function and binding with `UNWIND-PROTECT`. Treat this as
+   dependency-isolated branch/map behavior, not full pipeline parity.
 4. Establish the scene context required by the original `SCREEN-AND-STORE`.
    The direct call now has a reliable condition boundary: it invokes
    `WATCH-FOR-MESSAGES` once and stops at unbound `MPLAN`, with all probe
