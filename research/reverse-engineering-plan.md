@@ -64,11 +64,13 @@ complete equivalent port until phases 5–8 are recovered.
 4. Establish the scene context required by the original `SCREEN-AND-STORE`.
    The direct call now has a reliable condition boundary: it invokes
    `WATCH-FOR-MESSAGES` once and stops at unbound `MPLAN`, with all probe
-   overrides restored. Trace the original initialization path to learn how
-   `MPLAN` (and its colour/scene companions) is bound, then rerun the same
-   private path without inventing a plan object. Treat any resulting PREP-LINE,
-   PLOT, or STORE-IN-FILE observations as downstream only after the context is
-   measured.
+   overrides restored. The read-only constructor probe records
+   `MASTER-PLAN(NIL T)` and `MAKE-PLAN((COMMON-GRAPHICS:ID SCRIPT) T)` as
+   distinct CLOS constructors; neither is invoked yet. Trace the original
+   initialization path to learn how `MPLAN` (and its colour/scene companions)
+   is bound, then rerun the same private path without inventing a plan object.
+   Treat any resulting PREP-LINE, PLOT, or STORE-IN-FILE observations as
+   downstream only after the context is measured.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

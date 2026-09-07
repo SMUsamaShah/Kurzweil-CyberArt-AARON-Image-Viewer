@@ -635,3 +635,14 @@ dynamic bindings. This is a dependency frontier, not evidence that an
 uninitialized screen call can emit a file. The next screen probe must establish
 the original scene/colour context that binds `MPLAN` (and then record the next
 frontier) rather than guessing a substitute plan object.
+
+`planning-metadata-34094924609.txt` is the read-only constructor-linkage
+follow-up from the same matrix, run
+[34094924609](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34094924609),
+commit `b0f6364ffca721fb2c4f3dfc5c295a68cf02d200`, job `101656287967`,
+artifact `10008213232`. `MASTER-PLAN`
+has arglist `(NIL T)`; `MAKE-PLAN` has
+`((COMMON-GRAPHICS:ID COMMON-GRAPHICS-USER::SCRIPT) T)`. Both retain CLOS
+constructor constants, but the `MAKE-PLAN` constructor is not `MASTER-PLAN`
+constant 1 or 5 by `EQ`. `MPLAN`, `PREFS`, `SDEX`, and `FIGDEX` remain
+unbound. This is linkage evidence only; neither constructor was invoked.
