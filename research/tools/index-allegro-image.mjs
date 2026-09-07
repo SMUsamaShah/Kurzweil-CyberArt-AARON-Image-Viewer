@@ -445,7 +445,6 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
       indexedCoreFaslModuleCount: coreFasl.length,
       indexedCoreFaslModules: coreFasl,
       sourceReferences,
-      indexedTargetSymbols: indexedTargetSymbols(parsed.strings),
       selectedSymbols: selectedSymbols(parsed.strings, functionInventory),
       knownFunctionReferences: (functionInventory?.functions ?? []).map((name) => {
         const found = parsed.strings.find(({ text }) => text === name);
@@ -457,6 +456,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
           key: found?.key ?? null,
         };
       }),
+      indexedTargetSymbols: indexedTargetSymbols(parsed.strings),
     },
     dxl: {
       coreLispModuleCount: dxlCoreLisp.length,
