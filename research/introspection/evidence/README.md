@@ -617,3 +617,21 @@ The measured profile module is
 test parses the normalized census and compares every scalar, mask, point order,
 duplicate, and gap, so the clean-room data cannot silently drift from the
 captured report.
+
+## Direct SCREEN-AND-STORE frontier
+
+`screen-entry-frontier-34093884222.txt` is the corrected direct-call capture
+from run [34093884222](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34093884222),
+commit `557e9776f879e2dbfd1203bc8eb9eb5b3f62dc8f`, job `101653042992`,
+artifact `10007843734`. The probe calls the original `SCREEN-AND-STORE` once
+with a private three-point path and bounded WATCH/PREP/PLOT/STORE recorders;
+the report is a normalized copy of the artifact's `screen-entry-frontier.txt`.
+
+The call reaches `WATCH-FOR-MESSAGES` exactly once, then signals
+`UNBOUND-VARIABLE` for `COMMON-GRAPHICS-USER::MPLAN`. No PREP-LINE, PLOT, or
+STORE-IN-FILE call occurs. The `HANDLER-BIND`/`CATCH` boundary now records the
+condition before unwind and the probe restores all replaced function cells and
+dynamic bindings. This is a dependency frontier, not evidence that an
+uninitialized screen call can emit a file. The next screen probe must establish
+the original scene/colour context that binds `MPLAN` (and then record the next
+frontier) rather than guessing a substitute plan object.

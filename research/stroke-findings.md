@@ -354,3 +354,17 @@ evidence, but floating formatting is not implemented. For example 11.125d0
 prints `11.12`, -20.375d0 prints `-20.37`, and -0.004d0 prints `-0.00`.
 JavaScript `toFixed(2)` does not reproduce all these observations. More format
 probes are needed before choosing a general rounding rule.
+
+## Direct SCREEN-AND-STORE frontier
+
+The corrected direct-screen capture in run
+[34093884222](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34093884222)
+calls the original `SCREEN-AND-STORE` with a private path while recording its
+downstream dependencies. It invokes `WATCH-FOR-MESSAGES` once, then signals
+`UNBOUND-VARIABLE` for `COMMON-GRAPHICS-USER::MPLAN`; `PREP-LINE`, `PLOT`, and
+`STORE-IN-FILE` are not reached. The report also proves that the condition can
+be captured before unwind and that all temporary function cells and dynamic
+bindings restore. `MPLAN` is therefore the first missing scene-context
+dependency, not a brush-map or writer failure. The next probe must trace how
+the original startup path binds that plan and its colour/scene companions
+before making downstream emission claims.
