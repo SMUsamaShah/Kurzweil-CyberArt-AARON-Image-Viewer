@@ -26,9 +26,12 @@ function requireProfile(profile) {
  * BRUSH-STROKE routine has been recovered.  The original NIL and singleton
  * probes wrote no cells; the two-point horizontal and vertical probes wrote
  * the union of the translated CORE masks.  This helper preserves that
- * observed boundary and uses the measured map index convention.  Out-of-map
- * offsets are skipped as the clean-room equivalent of the in-frame gate; that
- * policy needs separate oracle coverage before it is treated as exact.
+ * observed boundary and uses the measured map index convention. Out-of-map
+ * offsets are currently skipped as a provisional clean-room policy. The
+ * private edge experiment (run 34074489559) forced IN-SUB-FRAME true and
+ * instead observed a SIMPLE-ERROR after one partial fill write; that is an
+ * unchecked boundary-write result, not enough evidence to claim a general
+ * clipping rule for integrated callers.
  */
 export function applyMeasuredBrushVertices(maps, profile, path, value) {
   requireProfile(profile);

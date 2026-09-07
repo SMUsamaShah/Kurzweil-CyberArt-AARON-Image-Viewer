@@ -174,6 +174,20 @@ The next probe should exercise a repeated or overlapping vertex with an
 already measured profile, separating duplicate-path semantics from the
 profile ladder.
 
+The edge experiment in run
+[34074489559](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074489559)
+kept brush 1 and the `T` predicate but moved the path to `(0,0)→(1,0)` on
+the private 16×16 maps. It raised `SIMPLE-ERROR` before `AFTER-STROKE`, after
+one partial fill write at row-major index `0`; `PATCH-MAP` stayed zero and all
+function/dynamic bindings restored. This is an unchecked boundary-write
+experiment under the forced predicate, not proof that every integrated path
+fails to clip. The JS helper therefore keeps its explicit provisional
+out-of-map skip policy until the original in-frame/array-write contract is
+measured more broadly.
+
+The next probe should use a repeated or overlapping interior vertex, where no
+boundary error can obscure duplicate-path semantics.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

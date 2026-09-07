@@ -533,6 +533,19 @@ fourth measured profile.
 The next probe should reuse a measured profile with a repeated or overlapping
 vertex to isolate duplicate-path behavior from brush-size effects.
 
+`brush-stroke-isolated-34074489559.txt` is the edge diagnostic from run
+[34074489559](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34074489559),
+commit `2e91711e2b5d9260ca9580517447be0177a9756b`. With brush 1 and points
+`(0,0)` and `(1,0)`, the forced `IN-SUB-FRAME=T` call raises `SIMPLE-ERROR`
+before `AFTER-STROKE`; one partial fill write survives at row-major index `0`,
+`PATCH-MAP` stays zero, and the function/dynamic bindings restore. This is an
+unchecked boundary-write result under the dependency stub, not a general
+clipping rule. The JS helper therefore retains its explicit provisional
+out-of-map skip policy pending broader in-frame and array-write probes.
+
+The next probe should use a repeated or overlapping interior vertex, where no
+boundary error can obscure duplicate-path semantics.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,
