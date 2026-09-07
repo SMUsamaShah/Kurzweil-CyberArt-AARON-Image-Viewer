@@ -498,6 +498,12 @@ translated brush-2 `CORE` masks in the new JS fixture.
 The next holdout keeps the same path and value but selects startup brush 3,
 extending this core-mask comparison one profile at a time.
 
+`brush-stroke-isolated-34073376591.txt` is the brush-3 capture from run
+[34073376591](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073376591),
+commit `eda581602e5ca740ffc9d65e2f65a85d7ed68aeb`. It writes 70 value-1
+cells and no patch cells; the exact index set matches the union of the two
+translated brush-3 `CORE` masks, and the JS fixture now covers three profiles.
+
 The measured profile module is
 [`engine/src/aaron-brushes.js`](../../../engine/src/aaron-brushes.js). Its unit
 test parses the normalized census and compares every scalar, mask, point order,

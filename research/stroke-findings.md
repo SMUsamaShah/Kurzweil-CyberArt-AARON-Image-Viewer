@@ -142,6 +142,11 @@ The next case selects brush 3 without changing the path or dependency stubs,
 continuing the measured profile ladder before any color or selection logic is
 introduced.
 
+Run [34073376591](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34073376591)
+returns 70 value-1 cells for brush 3, again with no patch writes. The index
+set equals the union of the two translated brush-3 `CORE` masks, extending
+the measured helper parity across three startup profiles.
+
 ## Emission leads
 
 - BRUSH-STROKE references SCREEN-AND-STORE.

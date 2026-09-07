@@ -14,6 +14,18 @@ const brushTwoHorizontal = [
   149, 150, 151, 152, 153,
   166, 167, 168,
 ];
+const brushThreeHorizontal = [
+  54, 55, 56,
+  68, 69, 70, 71, 72, 73, 74,
+  84, 85, 86, 87, 88, 89, 90,
+  99, 100, 101, 102, 103, 104, 105, 106, 107,
+  115, 116, 117, 118, 119, 120, 121, 122, 123,
+  131, 132, 133, 134, 135, 136, 137, 138, 139,
+  147, 148, 149, 150, 151, 152, 153, 154, 155,
+  164, 165, 166, 167, 168, 169, 170,
+  180, 181, 182, 183, 184, 185, 186,
+  198, 199, 200,
+];
 
 function nonzero(map) {
   return [...map].flatMap((value, index) => (value ? [[index, value]] : []));
@@ -56,6 +68,21 @@ test('matches the captured horizontal footprint for brush 2', () => {
   assert.deepEqual(
     nonzero(maps.fillMap),
     brushTwoHorizontal.map((index) => [index, 1]),
+  );
+});
+
+test('matches the captured horizontal footprint for brush 3', () => {
+  const maps = createAaronMaps(16, 16);
+  const touched = applyMeasuredBrushVertices(
+    maps,
+    getAaronBrushProfile(3),
+    [[7, 7], [8, 7]],
+    1,
+  );
+  assert.deepEqual(touched, brushThreeHorizontal);
+  assert.deepEqual(
+    nonzero(maps.fillMap),
+    brushThreeHorizontal.map((index) => [index, 1]),
   );
 });
 
