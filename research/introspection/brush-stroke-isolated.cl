@@ -1117,9 +1117,7 @@
       (finish-output report)))
   ;; Second direct case: keep the top-level execution shape while checking
   ;; that a larger startup brush reaches the same isolated map path.
-  (with-open-file (matrix-report "C:\\temp\\aaron-brush-stroke-isolated.txt"
-                                  :direction :output :if-exists :append
-                                  :if-does-not-exist :create)
+  (let ((matrix-report report))
     (handler-case
         (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
                (all-symbol (find-symbol "ALL-BRUSHES" owner))
