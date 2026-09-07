@@ -1,0 +1,55 @@
+BEGIN planning-post-init-reseed-holdouts-34111960227
+RUN 34111960227
+COMMIT 093a70075bde1c6c4b1e85c6374c6f78f39b8228
+WORKFLOW .github/workflows/aaron-post-init-reseed.yml
+INTERVENTION after the original INIT-RANDOM returns, dynamically construct
+  EXCL:MAKE-RANDOM-STATE-FROM-SEED and install only COMMON-LISP:*RANDOM-STATE*
+TRACE-RESULT all three seed jobs completed successfully; each produced a
+  complete AA0 painting
+
+HOLDOUT seed-1234
+JOB 101710013274
+ARTIFACT 10014709671 digest sha256:4cb3ff13333234ecc5a6dd223c9db3749f9e7c35477979f4e9e06b543b35de12
+INIT-AFTER-PREVIEW (40 90 81)
+POST-INIT-RESEED INSTALLED T
+POST-INIT-RESEED-PREVIEW (13 13 41)
+FIRST-RAN (39.00818 37 3 56 1 37 2 2)
+AA0-BYTES 126956
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+TRACE-ENTERS 118
+TRACE-EXITS 116
+
+HOLDOUT seed-1234-repeat
+JOB 101710013340
+ARTIFACT 10014710655 digest sha256:e460ebf9a3b80a7eb64d4608f5b7e0bf31db6d783dab50185aa25b6ece4c8964
+INIT-AFTER-PREVIEW (74 16 49)
+POST-INIT-RESEED INSTALLED T
+POST-INIT-RESEED-PREVIEW (13 13 41)
+FIRST-RAN (39.00818 37 3 56 1 37 2 2)
+AA0-BYTES 126956
+AA0-SHA256 0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1
+TRACE-ENTERS 118
+TRACE-EXITS 116
+
+HOLDOUT seed-5678
+JOB 101710013141
+ARTIFACT 10014710057 digest sha256:aecdde70f7a6823eea025b2704d7afe83a1f4b4837c0ea2c90009019b2e78efb
+INIT-AFTER-PREVIEW (74 16 49)
+POST-INIT-RESEED INSTALLED T
+POST-INIT-RESEED-PREVIEW (27 14 11)
+FIRST-RAN (36.232433 56 32 24 1 40 1 2)
+AA0-BYTES 158833
+AA0-SHA256 0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086
+TRACE-ENTERS 152
+TRACE-EXITS 150
+
+INTERPRETATION
+  The normal INIT-RANDOM transition is process-varying, but the explicit
+  post-init state installation is accepted and restores the recovered
+  Allegro stream. The two independent seed-1234 processes have identical
+  post-reseed previews, first 32 RAN calls, canvas result, AA0 byte count, and
+  AA0 SHA-256. Seed 5678 produces a distinct deterministic stream and
+  painting. This is a controlled calibration harness, not evidence that the
+  archived application's default startup is seed-reproducible; the probe
+  changes the runtime after the original initialization has completed.
+END planning-post-init-reseed-holdouts-34111960227
