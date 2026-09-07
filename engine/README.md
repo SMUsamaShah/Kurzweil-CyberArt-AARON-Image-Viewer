@@ -104,7 +104,9 @@ It also contains the measured `FREE-PATH` subset and its parity fixtures. The
 helpers' use in the complete drawing pipeline remains unresolved. See
 [`point-findings.md`](../research/point-findings.md).
 `aaron-stroke-writer.js` also emits the recovered basic stream formatter
-records (`dims`, `nb`, `nc`, `color`, and `end`). VECTOR/FILL dispatch and
+records (`dims`, `nb`, `nc`, `color`, and `end`). Its VECTOR/FILL selectors now
+match all 240 isolated PLOT-stub holdouts, including the original two-decimal
+truncation and signed `-0.00` behavior; the real screen/file consumer and
 complete brush semantics remain under investigation.
 `aaron-brushes.js` now contains the seven startup `PAINT-BRUSH` profiles
 measured from the original build, including ordered perimeter/core masks and

@@ -248,7 +248,10 @@ globals as functions are recorded failures, not successful method recovery.
 The isolated writer report has 240 cases, with one recorded PLOT call each,
 216 successful outputs, and 24 VECTOR/NIL-previous PROGRAM-ERROR cases.
 The PLOT function is replaced, not forwarded, and `RESTORED T` is required.
-See [stroke-findings.md](../../stroke-findings.md) for the scoped parity claim.
+The clean-room writer now matches those output bytes and previous-point states,
+including the observed two-decimal truncation (`1.125` -> `1.12`,
+`-20.375` -> `-20.37`) and signed `-0.00`. See
+[stroke-findings.md](../../stroke-findings.md) for the scoped parity claim.
 
 The first two FREE-PATH reports each contain 12 failures before any RAN or
 POL-VPT call. The second localizes TYPE-ERROR to the Boolean VIS field:

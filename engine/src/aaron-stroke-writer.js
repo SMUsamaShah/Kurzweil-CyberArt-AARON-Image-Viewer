@@ -7,12 +7,40 @@ function integerPoint(point) {
   return [...point];
 }
 
+function numericPoint(point) {
+  if (!Array.isArray(point) || point.length !== 2 || !point.every(Number.isFinite)) {
+    throw new TypeError('writer points must contain two finite coordinates');
+  }
+  return [...point];
+}
+
+/**
+ * Format the two-decimal `~$` values used by VECTOR and FILL.
+ *
+ * The observed Allegro/ACL formatter truncates toward zero at the half-cent
+ * (1.125 -> 1.12, -20.375 -> -20.37) and preserves a negative sign when a
+ * negative value truncates to zero (-0.004 -> -0.00).
+ * This deliberately stays small and deterministic rather than using
+ * JavaScript's `toFixed`, whose binary tie handling differs for 1.125.
+ */
+function formatFixed(value, digits = 2) {
+  if (!Number.isFinite(value)) throw new TypeError('writer coordinates must be finite');
+  const scale = 10 ** digits;
+  const scaled = Math.abs(value) * scale;
+  const rounded = Math.floor(scaled);
+
+  const sign = value < 0 || Object.is(value, -0) ? '-' : '';
+  const whole = Math.floor(rounded / scale);
+  const fractionText = String(rounded % scale).padStart(digits, '0');
+  return `${sign}${whole}.${fractionText}`;
+}
+
 /** Recovered STORE-IN-FILE point decisions, producing AA stream fragments. */
 export class AaronStrokeWriter {
   constructor({ mode = 'small', previous = null } = {}) {
     if (mode !== 'small' && mode !== 'large') throw new RangeError('mode must be small or large');
     this.mode = mode;
-    this.previous = previous === null ? null : integerPoint(previous);
+    this.previous = previous === null ? null : numericPoint(previous);
     this.output = '';
   }
 
@@ -63,23 +91,23 @@ export class AaronStrokeWriter {
 
   /** Stream effect measured with PLOT replaced; no screen drawing is performed. */
   vector(from, to, { redraw = false } = {}) {
-    const start = integerPoint(from);
-    const next = integerPoint(to);
+    const start = numericPoint(from);
+    const next = numericPoint(to);
     if (this.previous === null) throw new Error('vector requires an initial previous point');
     const family = redraw ? 'a' : 'z';
     if (start[0] !== this.previous[0] || start[1] !== this.previous[1]) {
-      this.output += `${family}m ${start[0]}.00 ${start[1]}.00\n`;
+      this.output += `${family}m ${formatFixed(start[0])} ${formatFixed(start[1])}\n`;
     }
-    this.output += `${family}d ${next[0]}.00 ${next[1]}.00\n`;
+    this.output += `${family}d ${formatFixed(next[0])} ${formatFixed(next[1])}\n`;
     this.previous = next;
     return this;
   }
 
   /** FILL emits absolute paint commands and preserves previous-point state. */
   fill(from, to) {
-    const start = integerPoint(from);
-    const next = integerPoint(to);
-    this.output += `am ${start[0]}.00 ${start[1]}.00\nad ${next[0]}.00 ${next[1]}.00\n`;
+    const start = numericPoint(from);
+    const next = numericPoint(to);
+    this.output += `am ${formatFixed(start[0])} ${formatFixed(start[1])}\nad ${formatFixed(next[0])} ${formatFixed(next[1])}\n`;
     return this;
   }
 }
