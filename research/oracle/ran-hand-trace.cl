@@ -97,10 +97,12 @@
                               :if-exists :supersede
                               :if-does-not-exist :create)
         (write-line "BEGIN ran-hand-trace" stream)
-        (format stream "TARGET-PRESENT ~S~%"
-                (not (null symbol)))
-        (format stream "TARGET-FBOUNDP ~S~%"
-                (and symbol (fboundp symbol)))
+        (write-line (if symbol "TARGET-PRESENT T" "TARGET-PRESENT NIL")
+                    stream)
+        (write-line (if (and symbol (fboundp symbol))
+                        "TARGET-FBOUNDP T"
+                        "TARGET-FBOUNDP NIL")
+                    stream)
         (format stream "EVENT-LIMIT ~D~%" event-limit)
         (finish-output stream))
       (aaron-random-emit "RAN-HAND-REPORT-HEADER-DONE")
