@@ -101,7 +101,9 @@ An independent bounded cross-image search also rejected a tempting
 name-to-object arithmetic match under shifted-offset controls. No defensible
 function-name map, source dependency order, or relocation decoder has been
 promoted. The exact normalized report and parser/test coverage are the source
-of truth for this pass.
+of truth for this pass. A follow-up comparison also confirms that the DXL and
+PLL retain the same 50 core module names in different orders (zero-item common
+prefix), so neither string order is being treated as execution order.
 
 Local verification:
 

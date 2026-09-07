@@ -131,6 +131,13 @@ The 50 core module basenames still agree exactly with the 50 indexed PLL
 the zero-filled alignment rule established for PLL `0x6c` code-like objects
 must not be reused for these DXL strings.
 
+The two retained module lists also have different orders. The DXL chain begins
+`globvars`, `bodyvars`, `colobs`, `hues`, while the PLL indexed `.fasl` strings
+begin `paint`, `ut1`, `colobs`, `place`; their common prefix length is zero.
+The normalized index records the complete two orders and confirms that the
+sets are equal but the orders are not. Therefore neither order is promoted to
+execution or dependency order from the images alone.
+
 ### Negative name-to-object search
 
 An independent read-only cross-image scan tested the 16 scene-context names,

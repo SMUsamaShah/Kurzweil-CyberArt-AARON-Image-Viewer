@@ -593,10 +593,25 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
   const dxlCoreLisp = [...new Set(dxlSourceMarkers(dxl)
     .filter(({ normalized }) => /\/core\/harold3\//i.test(normalized))
     .map(({ normalized }) => basename(normalized).replace(/\.lisp$/i, '').toLowerCase()))].sort();
+  const dxlCoreLispOrder = dxlSourceObjectChain.objects
+    .filter(({ kind }) => kind === 'core-harold3')
+    .map(({ raw }) => basename(normalizePath(raw)).replace(/\.lisp$/i, '').toLowerCase());
+  const pllCoreFaslOrder = sourceReferences
+    .filter(({ coreHarold3, normalized }) => coreHarold3 && normalized.toLowerCase().endsWith('.fasl'))
+    .map(({ module }) => module);
   const truncated = truncatedPllPath ? readFileSync(truncatedPllPath) : null;
   const prefixMatch = truncated
     ? truncated.length <= pll.length && pll.subarray(0, truncated.length).equals(truncated)
     : null;
+  const sameModuleSet = dxlCoreLispOrder.length === pllCoreFaslOrder.length
+    && new Set(dxlCoreLispOrder).size === new Set(pllCoreFaslOrder).size
+    && dxlCoreLispOrder.every((module) => pllCoreFaslOrder.includes(module));
+  let commonModuleOrderPrefixLength = 0;
+  while (
+    commonModuleOrderPrefixLength < Math.min(dxlCoreLispOrder.length, pllCoreFaslOrder.length)
+    && dxlCoreLispOrder[commonModuleOrderPrefixLength]
+      === pllCoreFaslOrder[commonModuleOrderPrefixLength]
+  ) commonModuleOrderPrefixLength += 1;
   return {
     schemaVersion: 1,
     scope: 'Read-only structural metadata; no DXL/PLL evaluation or source reconstruction',
@@ -643,6 +658,14 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
         .every((name) => parsed.strings.some(({ text }) => text === name)),
       pllCoreFaslModulesAlsoInDxl: coreFasl.every((module) => dxlCoreLisp.includes(module)),
       dxlModulesWithoutIndexedPllFaslMarker: dxlCoreLisp.filter((module) => !coreFasl.includes(module)),
+      coreModuleOrderComparison: {
+        dxlCoreLispOrder,
+        pllCoreFaslOrder,
+        sameModuleSet,
+        sameOrder: sameModuleSet
+          && dxlCoreLispOrder.every((module, index) => module === pllCoreFaslOrder[index]),
+        commonModuleOrderPrefixLength,
+      },
     },
   };
 }

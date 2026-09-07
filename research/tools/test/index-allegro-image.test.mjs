@@ -102,6 +102,9 @@ test('accepts the complete retained PLL layout and cross-reference counts', () =
   assert.equal(index.pll.indexedCoreFaslModuleCount, 50);
   assert.equal(index.crossReference.allKnownFunctionsIndexed, true);
   assert.equal(index.crossReference.pllCoreFaslModulesAlsoInDxl, true);
+  assert.equal(index.crossReference.coreModuleOrderComparison.sameModuleSet, true);
+  assert.equal(index.crossReference.coreModuleOrderComparison.sameOrder, false);
+  assert.equal(index.crossReference.coreModuleOrderComparison.commonModuleOrderPrefixLength, 0);
   const brush = index.pll.selectedSymbols.find(({ name }) => name === 'BRUSH-STROKE');
   assert.deepEqual(
     { recordOffset: brush.recordOffset, objectOffset: brush.objectOffset, key: brush.key },
