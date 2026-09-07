@@ -313,12 +313,12 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 15 invokes BRUSH-STROKE with startup brush 4 and the same adjacent
-  ;; horizontal path used by the earlier profile fixtures. This changes only
-  ;; the brush profile; downstream dependencies remain inert stubs, so any map
-  ;; writes or errors belong to BRUSH-STROKE's own entry/branch logic, not file
-  ;; emission.
-  (write-line "STAGE-15-BRUSH-4-BEGIN" report)
+  ;; Stage 16 invokes BRUSH-STROKE with brush 1 at the lower-left map edge.
+  ;; This keeps the measured profile and predicate fixed while exposing the
+  ;; routine's out-of-map clipping/error policy. Downstream dependencies remain
+  ;; inert stubs, so any map writes or errors belong to BRUSH-STROKE's own
+  ;; entry/branch logic, not file emission.
+  (write-line "STAGE-16-EDGE-CLIP-BEGIN" report)
   (handler-case
       (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
              (all-symbol (find-symbol "ALL-BRUSHES" owner))
@@ -334,10 +334,10 @@
              (screen (find-symbol "SCREEN-AND-STORE" owner))
              (inside (find-symbol "IN-SUB-FRAME" owner))
              (all-brushes (symbol-value all-symbol))
-             (brush (elt all-brushes 4))
+             (brush (elt all-brushes 1))
              (make-point (find-symbol "MAKE-TWOPT" owner))
-             (path (list (funcall make-point 7 7)
-                         (funcall make-point 8 7)))
+             (path (list (funcall make-point 0 0)
+                         (funcall make-point 1 0)))
              (fill-map (make-array '(16 16)
                                    :element-type '(unsigned-byte 4)
                                    :initial-element 0))
@@ -390,18 +390,18 @@
           (format report "PATCH-NONZERO-COUNT ~D~%" patch-count))
         (write-line (if (and (eq (symbol-function screen) original-screen)
                              (eq (symbol-function inside) original-inside))
-                        "STAGE-15-FUNCTIONS-RESTORED"
-                        "STAGE-15-FUNCTIONS-NOT-RESTORED")
+                        "STAGE-16-FUNCTIONS-RESTORED"
+                        "STAGE-16-FUNCTIONS-NOT-RESTORED")
                     report)
         (write-line (if (and (eql (boundp brush-symbol) before-brush-bound)
                              (eql (boundp fill-symbol) before-fill-bound)
                              (eql (boundp patch-symbol) before-patch-bound))
-                        "STAGE-15-BINDINGS-RESTORED"
-                        "STAGE-15-BINDINGS-LEAKED")
+                        "STAGE-16-BINDINGS-RESTORED"
+                        "STAGE-16-BINDINGS-LEAKED")
                     report))
     (error (problem)
       (declare (ignore problem))
-      (write-line "STAGE-15-BRUSH-4-ERROR" report)))
+      (write-line "STAGE-16-EDGE-CLIP-ERROR" report)))
   (finish-output report))
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
@@ -511,6 +511,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-15-BRUSH-4~%")
+  (format report "STAGE-16-EDGE-CLIP~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
