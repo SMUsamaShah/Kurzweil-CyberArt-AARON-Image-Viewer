@@ -79,10 +79,12 @@ complete equivalent port until phases 5–8 are recovered.
    `SCREEN-AND-STORE`, brush, and message-loop edges. The resulting trace
    reaches `FREE-PATH`, `BRUSH-STROKE`, `SCREEN-AND-STORE`,
    `WATCH-FOR-MESSAGES`, and `PREP-LINE`; `HOP-OR-DRAW` then consumes the
-   bound. Remove only that high-fanout edge next to expose later brush/plot
-   continuation. Then rerun the private `SCREEN-AND-STORE` path without
-   inventing a plan object. Treat any new PLOT or writer observations as
-   downstream only after the context is measured.
+   bound. Removing `HOP-OR-DRAW` yields 40 integrated screen calls; omit only
+   the message-loop and preparation wrappers next to expose later generator
+   continuation while retaining the screen/brush boundaries. Then rerun the
+   private `SCREEN-AND-STORE` path without inventing a plan object. Treat any
+   new PLOT or writer observations as downstream only after the context is
+   measured.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

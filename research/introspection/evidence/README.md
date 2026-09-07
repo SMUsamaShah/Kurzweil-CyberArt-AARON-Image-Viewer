@@ -702,3 +702,14 @@ array. The report has 516 entries, 508 exits, and no trace errors; 254
 `HOP-OR-DRAW` entries consume the 1,024-event bound. The compact evidence
 preserves the distinction between observed integration and still-unseen later
 calls.
+
+`planning-call-trace-continuation-34100708130.txt` is the bounded continuation
+from run
+[34100708130](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/34100708130),
+commit `6a0a2ab37a3a551e6a26b62d7a78c1121a2c34ac`, job `101674263968`, and
+artifact `10010369502`. It leaves `HOP-OR-DRAW` unwrapped and records 41
+`BRUSH-STROKE`, 40 `SCREEN-AND-STORE`, 40 `WATCH-FOR-MESSAGES`, and 76
+`PREP-LINE` entries, with 516 entries, 508 exits, and no trace errors. The
+1,024-event bound occurs inside the fortieth screen call; this is sampling
+evidence, not a termination claim. The next pass omits only the message-loop
+and preparation wrappers to expose later generator continuation.
