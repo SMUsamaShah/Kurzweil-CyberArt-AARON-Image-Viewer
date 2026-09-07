@@ -34,9 +34,13 @@
         (owner (find-package "COMMON-GRAPHICS-USER")))
     (labels
         ((required-symbol (name)
+           (format report "RESOLVE-TRY ~A~%" name)
+           (finish-output report)
            (multiple-value-bind (symbol status) (find-symbol name owner)
              (unless symbol
                (error "Missing symbol ~A status ~S" name status))
+             (format report "RESOLVE-DONE ~A~%" name)
+             (finish-output report)
              symbol))
          (package-name-safe (symbol)
            (and (symbolp symbol)
