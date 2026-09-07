@@ -47,6 +47,15 @@ complete equivalent port until phases 5–8 are recovered.
 
 ## Immediate work queue
 
+0. Keep the local static image index as the first step before another Windows
+   run. The complete PLL's two indexed tables resolve 53,039 tagged string
+   objects, include all 1,347 retained function names, and cross-reference all
+   50 DXL `harold3` source markers with 50 PLL `.fasl` markers. Use the exact
+   record/object offsets to select read-only targets such as `FILL-MAP`,
+   `PAINT-BRUSH`, and `MPLAN`; do not infer their values, package ownership,
+   or code boundaries from names alone. The runtime PLL copy is truncated, so
+   static work must use the complete extracted PLL outside the repository.
+
 1. Keep the completed read-only brush-state census as the boundary for fill
    work. The direct checkpoint records seven `PAINT-BRUSH` objects,
    `BOUNDARY-VALUE=3`, unbound `BRUSH`/`FILL-MAP`, complete masks for brushes
