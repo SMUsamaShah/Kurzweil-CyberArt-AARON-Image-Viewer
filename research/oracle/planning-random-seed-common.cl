@@ -201,6 +201,28 @@
 (defun aaron-random-print-length ()
   (and (boundp '*print-length*) (symbol-value '*print-length*)))
 
+(defun aaron-random-set-with-unlimited-print (original-set)
+  ;; SET-RANDOM binds *PRINT-LENGTH* itself, so a caller's dynamic binding is
+  ;; not enough.  Temporarily wrap the standard PRINT function and bind the
+  ;; printer inside that wrapper.  Restore the function cell even when the
+  ;; original save routine signals.
+  (let* ((common-lisp-package (find-package "COMMON-LISP"))
+         (print-symbol (and common-lisp-package
+                           (find-symbol "PRINT" common-lisp-package)))
+         (original-print (and print-symbol
+                              (fboundp print-symbol)
+                              (symbol-function print-symbol))))
+    (unless original-print
+      (error "Could not resolve COMMON-LISP:PRINT"))
+    (unwind-protect
+        (progn
+          (setf (symbol-function print-symbol)
+                (lambda (&rest args)
+                  (let ((*print-length* nil))
+                    (apply original-print args))))
+          (funcall original-set))
+      (setf (symbol-function print-symbol) original-print))))
+
 (defun aaron-random-file-roundtrip (original-set original-get original-ran)
   ;; SET-RANDOM and GET-RANDOM are not part of ordinary startup.  Exercise
   ;; them only after INIT-RANDOM has completed, in a disposable process, to
@@ -225,8 +247,7 @@
           ;; SET-RANDOM honors the dynamic print setting, this second file is
           ;; a valid replay candidate; if it still truncates, that is itself
           ;; evidence about the original save format.
-          (let ((*print-length* nil))
-            (funcall original-set))
+          (aaron-random-set-with-unlimited-print original-set)
           (aaron-random-emit "RSEED-SET-UNLIMITED SUCCEEDED")
           (aaron-random-emit
            (format nil "RSEED-FILE-AFTER-UNLIMITED ~S"
