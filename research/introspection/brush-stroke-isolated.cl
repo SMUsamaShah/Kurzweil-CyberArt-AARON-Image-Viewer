@@ -630,7 +630,7 @@
         (format matrix-report "STAGE-23-MATRIX-ERROR-B2 ~A~%"
                 (type-of problem))
         (finish-output matrix-report))))
-+  ;; Additional direct case: keep the top-level execution shape while checking
+  ;; Additional direct case: keep the top-level execution shape while checking
   ;; that a larger startup brush reaches the same isolated map path.
   (let ((matrix-report report))
     (handler-case
