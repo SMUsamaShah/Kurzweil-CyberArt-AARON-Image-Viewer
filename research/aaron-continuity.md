@@ -22,9 +22,9 @@ conversation boundary.
 
 As of 2026-09-07, the recovered checkout is being advanced locally from
 `ccb99fb` (`Implement measured RAN-HAND helper`); the latest local checkpoint
-is `a544471` (`Match brush matrix control to validated 16x16 case`). The
-connected branch currently contains the corresponding probe tree at
-`84871ba7fd13fee484967d35401679b88050967a`. The first handoff publication was
+is `b3a79f8` (`Capture second direct brush profile`). The connected branch
+currently contains the corresponding probe tree at
+`e8a96e7473981aaaf10f7f0c0f57af925f9de0dd`. The first handoff publication was
 based on connected-branch commit
 `0782c0dd9e819e6c9694809de05e1829c5997326`; the local continuity revisions
 are `fce7c5a` and `58ed34b`. The connected branch contains the same handoff
@@ -42,24 +42,25 @@ The latest published change adds:
   `research/introspection/evidence/ran-hand-post-init-34120567298.txt`;
 - updates to the plan, oracle notes, and freehand-line notes.
 
-The current brush checkpoint also adds a strict Stage 23 report parser and a
-completed original-engine capture at
-`research/introspection/evidence/brush-stroke-isolated-34126488826.txt`.
-That direct top-level control reproduces the previously measured twelve-cell
-brush-1 footprint and one screen-forwarding call. The probe must remain in
-direct top-level form for now: compiled helper variants failed before their
-first resolution marker in the Allegro init-file harness. The next matrix
-revision corrects the case label to reflect the actual in-frame `T` predicate
-and extends the control to additional startup brush profiles.
+The current brush checkpoint also adds a strict Stage 23 report parser and
+completed original-engine captures at
+`research/introspection/evidence/brush-stroke-isolated-34126488826.txt` and
+`research/introspection/evidence/brush-stroke-isolated-34127856773.txt`.
+The corrected two-case capture reproduces the twelve-cell brush-1 footprint,
+the 26-cell brush-2 footprint, and one screen-forwarding call per case. The
+probe must remain in direct top-level form for now: compiled helper variants
+failed before their first resolution marker in the Allegro init-file harness.
+The next matrix revision can add brushes 3–4 and boundary/overlap controls.
 
 Local verification:
 
 - `cd engine && npm test` → 58 passing tests.
-- The brush report parser and its real original-engine capture are covered by
+- The brush report parser and its real original-engine captures are covered by
   the research-tool suite.
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
-  `research/tools` directory has no separate `package.json`.
+  `research/tools` directory has no separate `package.json`; the suite now has
+  22 passing tests.
 
 ## Honest progress estimate
 
@@ -117,8 +118,8 @@ Use the local-first workflow:
    from provisional or inferred to measured.
 
 The current research roadmap's next oracle frontier is the controlled
-direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: larger brush IDs
-and boundary cases, then the real scene context and downstream writer. Existing high-fanout
+direct-top-level `BRUSH-STROKE`/`SCREEN-AND-STORE` matrix: brushes 3–4,
+boundary and overlap cases, then the real scene context and downstream writer. Existing high-fanout
 wrappers should be removed only deliberately so later brush, fill, and message
 loop calls become visible without changing the original call graph.
 
