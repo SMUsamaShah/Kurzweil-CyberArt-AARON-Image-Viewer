@@ -21,10 +21,10 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-07, the recovered checkout is synchronized locally at
-`c81a09e` (`Record published static index checkpoint`), with the connected
-branch containing the same published tree under connector-created commits.
-The current direct matrix source remains in the earlier edge checkpoint. Its
-pre-index content ended at
+`69f9825` (`Keep static index publication order stable`), with the connected
+branch containing the same published tree under connector-created commits
+through `8896e9f`. The current direct matrix source remains in the earlier
+edge checkpoint. Its pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication; the static-index publication was verified at
 `b33a90bb7462a0e853678a216eb80ce93948068b` (the connector branch may advance
@@ -80,6 +80,13 @@ map `MPLAN`, `BRUSH-STROKE`, or other names to objects. The package-qualified
 scene target checklist is retained at
 `research/introspection/scene-context-dossier.json`, with its interpretation
 in `research/scene-context-findings.md`.
+
+This continuation also added the reproducible scene-context dossier and its
+builder, joining 16 package-qualified targets to the static index, retained
+constant references, and four state checkpoints from run `34099250163`.
+It deliberately stops at target selection: no opaque heap pointer or named
+function boundary has been inferred. The local and connected trees were
+checked byte-for-byte for all changed paths after publication.
 
 Local verification:
 
