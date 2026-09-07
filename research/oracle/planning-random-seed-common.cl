@@ -50,12 +50,12 @@
                                  (find-symbol "*RANDOM-STATE*"
                                              common-lisp-package))))
   (aaron-random-probe-log
-   (format nil "FACTORY-FOUND ~S FBOUNDP ~S RANDOM-STATE-SYMBOL ~S"
-           (not (null factory)) (and factory (fboundp factory))
+   (format nil "FACTORY-FOUND ~S RANDOM-STATE-SYMBOL ~S"
+           (not (null factory))
            (not (null random-state-symbol))))
   (let ((state nil)
         (constructor-error nil))
-    (when (and factory (fboundp factory))
+    (when factory
       (aaron-random-probe-log "STATE-CONSTRUCTOR-CALL-BEGIN")
       (handler-case
           ;; Call the dynamically found symbol directly. This is the form
@@ -168,4 +168,4 @@
 (aaron-random-emit
  (format nil "PRE-INIT STATE ~S" (aaron-random-state-snapshot)))
 ## reverse-engineer-aaron-js
-886881b4b689f9d16e500650f0660993e37e7a3c
+1613feac4b035a7ace0ded2aa3f6b8e4a7a35d53
