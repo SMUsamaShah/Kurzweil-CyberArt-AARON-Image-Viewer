@@ -88,6 +88,22 @@ It deliberately stops at target selection: no opaque heap pointer or named
 function boundary has been inferred. The local and connected trees were
 checked byte-for-byte for all changed paths after publication.
 
+The latest local-only static pass extends the image index without executing
+the archived runtime. It records the arithmetic layout of all four DXL header
+descriptors: their first-word ranges tile `0x010000–0x500000`, header words
+`0x18`, `0x1C`, and `0x54` agree with the corresponding endpoints, and the
+unassigned image prefix/suffix are `0x10000`/`0x20000` bytes. It also validates
+the 53-object tagged-string chain at `0x1B65E8–0x1B6FA8`, containing 50
+`harold3` paths, one interface path, and the auxiliary basenames
+`review-s.lisp` and `local-f.lisp`; 101 of its 172 alignment bytes are
+nonzero. These are structural facts only, not loader or relocation semantics.
+
+An independent bounded cross-image search also rejected a tempting
+name-to-object arithmetic match under shifted-offset controls. No defensible
+function-name map, source dependency order, or relocation decoder has been
+promoted. The exact normalized report and parser/test coverage are the source
+of truth for this pass.
+
 Local verification:
 
 - `cd engine && npm test` → 58 passing tests.
@@ -96,7 +112,7 @@ Local verification:
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`; the suite now has
-  28 passing tests.
+  30 passing tests, including DXL descriptor and source-object validation.
 
 ## Honest progress estimate
 
@@ -143,11 +159,12 @@ planning, figure generation, fills, brush work, and painting output.
 
 Use the local-first workflow:
 
-1. Run the local static image index/tests first and inspect the exact
-   DXL/PLL references before scheduling another oracle job. Use the validated
-   object-span report and scene-context dossier to choose conservative
-   read-only runtime targets, then inspect the existing brush-stroke, map, and
-   integrated-trace fixtures locally.
+1. Continue with local implementation and fixture inspection first. The
+   static image index now includes the validated DXL descriptor/source chains,
+   and the negative reference scan shows that raw heap arithmetic cannot safely
+   replace runtime context. Use the object-span report and scene-context
+   dossier to choose conservative read-only runtime targets, then inspect the
+   existing brush-stroke, map, and integrated-trace fixtures locally.
 2. Extend only behavior already supported by evidence in the JS model and
    tests; do not guess at `SELECT-BRUSH`, clipping, or scene semantics.
 3. When a new original-engine observation is required, use the Windows Server

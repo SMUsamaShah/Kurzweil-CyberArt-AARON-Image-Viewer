@@ -90,6 +90,65 @@ three-word descriptors at `0x64`, `0x70`, `0x7C`, and `0x88`:
 These are preserved as raw header metadata. Their segment-mapping semantics
 are not yet established.
 
+The local parser now records the arithmetic relationships without assigning
+loader semantics. The first words and lengths form contiguous image ranges:
+
+| Descriptor | First-word range | Candidate second-word range |
+|---|---:|---:|
+| `0x64` | `0x010000–0x280000` | `0x20000000–0x20270000` |
+| `0x70` | `0x280000–0x4D0000` | `0x202A0000–0x204F0000` |
+| `0x7C` | `0x4D0000–0x4F0000` | `0x20570000–0x20590000` |
+| `0x88` | `0x4F0000–0x500000` | `0x205E0000–0x205F0000` |
+
+All three descriptor fields are `0x10000`-aligned. The first-word ranges tile
+exactly from `0x010000` through `0x500000`, matching header word `0x54` at
+the final boundary. The candidate second-word range begins at header word
+`0x18` (`0x20000000`) and ends at header word `0x1C` (`0x205F0000`), with
+gaps of `0x30000`, `0x80000`, and `0x50000`. The image still has a `0x10000`
+prefix and a `0x20000` suffix outside those first-word ranges. None of these
+relationships proves file offsets, virtual addresses, relocation, loading, or
+protection behavior; the normalized report labels them as structural only.
+
+### DXL source-object chain
+
+The source-marker region is stronger than a printable-string list. Starting at
+object offset `0x1B65E8`, the parser follows 53 consecutive eight-byte-aligned
+tagged string objects through exclusive end `0x1B6FA8`:
+
+| Check | Measured result |
+|---|---:|
+| objects | 53 |
+| `0x65` string tags | 53 / 53 |
+| NUL terminators | 53 / 53 |
+| `core/harold3` paths | 50 |
+| `interface` paths | 1 |
+| basename-only auxiliaries | `review-s.lisp`, `local-f.lisp` |
+| chain tiles region | true |
+| alignment bytes | 172 total; 101 nonzero |
+
+The 50 core module basenames still agree exactly with the 50 indexed PLL
+`.fasl` markers. The nonzero source-object padding is an important boundary:
+the zero-filled alignment rule established for PLL `0x6c` code-like objects
+must not be reused for these DXL strings.
+
+### Negative name-to-object search
+
+An independent read-only cross-image scan tested the 16 scene-context names,
+all indexed PLL strings, the DXL source markers, and all 7,723 first-table
+object starts while excluding the known PLL index tables. It found no
+defensible name-to-code or name-to-source mapping. In particular, absolute
+string offsets with small tag variants and string-table-relative candidates
+gave no scene-target coverage; raw keys and simple `×4`/`×8` encodings were
+sparse and inconsistent. A seemingly strong DXL base-adjusted match covered
+42,798 strings, but shifted-offset controls from 8 through 256 bytes covered
+42,787–42,806 strings as well, including the same 15 scene targets. That
+control result rejects the apparent match as numerical overlap rather than a
+validated reference encoding.
+
+This negative result is useful: the image structure can guide conservative
+probe selection, but it does not justify inventing a function-name map,
+relocation decoder, or dependency order from these bytes.
+
 Selected exact references from the complete PLL:
 
 | Name | Record offset | String-object offset | Raw key |

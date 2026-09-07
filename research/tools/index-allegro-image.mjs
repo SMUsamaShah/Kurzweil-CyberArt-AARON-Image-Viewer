@@ -400,16 +400,187 @@ function dxlHeader(buffer) {
   return { descriptorCount, descriptors };
 }
 
+/**
+ * Derive only arithmetic relationships from the DXL header descriptors.
+ *
+ * The descriptor fields are intentionally kept opaque.  The first field
+ * forms contiguous ranges in the image and the second field forms separated
+ * candidate address ranges, but this report does not claim that either field
+ * is a loader offset, virtual address, relocation, or protection boundary.
+ */
+export function parseDxlDescriptorLayout(buffer, header = dxlHeader(buffer)) {
+  assertBuffer(buffer, 'DXL image');
+  if (!header || !Array.isArray(header.descriptors)) {
+    throw new TypeError('header must contain descriptors');
+  }
+  const descriptors = header.descriptors.map((descriptor, index) => {
+    const word1SpanStart = descriptor.word1;
+    const word1SpanEnd = word1SpanStart + descriptor.word3;
+    const word2RangeStart = descriptor.word2;
+    const word2RangeEnd = word2RangeStart + descriptor.word3;
+    const next = header.descriptors[index + 1] ?? null;
+    return {
+      index,
+      offset: descriptor.offset,
+      word1: descriptor.word1,
+      word2: descriptor.word2,
+      word3: descriptor.word3,
+      word1SpanStart,
+      word1SpanEnd,
+      word2RangeStart,
+      word2RangeEnd,
+      nextWord1SpanStart: next?.word1 ?? null,
+      word1SpanContiguousToNext: next ? next.word1 === word1SpanEnd : null,
+      allFields64KAligned: [descriptor.word1, descriptor.word2, descriptor.word3]
+        .every((value) => value % 0x10000 === 0),
+    };
+  });
+  const first = descriptors[0] ?? null;
+  const last = descriptors.at(-1) ?? null;
+  const headerWordAt18 = u32(buffer, 0x18, 'DXL header');
+  const headerWordAt1c = u32(buffer, 0x1c, 'DXL header');
+  const headerWordAt54 = u32(buffer, 0x54, 'DXL header');
+  const candidateGaps = descriptors.slice(1).map((descriptor, index) => ({
+    afterIndex: index,
+    start: descriptors[index].word2RangeEnd,
+    end: descriptor.word2RangeStart,
+    bytes: descriptor.word2RangeStart - descriptors[index].word2RangeEnd,
+  }));
+  return {
+    descriptorCount: descriptors.length,
+    descriptors,
+    allFields64KAligned: descriptors.every(({ allFields64KAligned }) => allFields64KAligned),
+    word1SpansWithinImage: descriptors.every(({ word1SpanStart, word1SpanEnd }) => (
+      word1SpanStart >= 0 && word1SpanEnd <= buffer.length
+    )),
+    word1SpansContiguous: descriptors.slice(1).every((descriptor, index) => (
+      descriptor.word1 === descriptors[index].word1SpanEnd
+    )),
+    word1SpanStart: first?.word1SpanStart ?? null,
+    word1SpanEnd: last?.word1SpanEnd ?? null,
+    filePrefixBytes: first?.word1SpanStart ?? null,
+    fileSuffixBytes: last ? buffer.length - last.word1SpanEnd : null,
+    candidateAddressStart: first?.word2RangeStart ?? null,
+    candidateAddressEnd: last?.word2RangeEnd ?? null,
+    candidateAddressGaps: candidateGaps,
+    headerComparisons: {
+      wordAt18: headerWordAt18,
+      wordAt1c: headerWordAt1c,
+      wordAt54: headerWordAt54,
+      firstWord2MatchesWordAt18: (first?.word2RangeStart ?? null) === headerWordAt18,
+      lastWord2EndMatchesWordAt1c: (last?.word2RangeEnd ?? null) === headerWordAt1c,
+      lastWord1EndMatchesWordAt54: (last?.word1SpanEnd ?? null) === headerWordAt54,
+    },
+  };
+}
+
 function dxlSourceMarkers(buffer) {
   return extractAsciiRuns(buffer)
     .filter(({ text }) => SOURCE_SUFFIX.test(text) && /(?:\\|\/)(?:core|interface)(?:\\|\/)/i.test(text))
     .map(({ offset, text }) => ({ offset, raw: text, normalized: normalizePath(text) }));
 }
 
+/**
+ * Validate the contiguous tagged-string chain surrounding the DXL source
+ * markers.  It includes two basename-only auxiliary strings interspersed
+ * among the 50 core module paths; those are retained as data, not treated as
+ * module dependencies or execution order.
+ */
+export function parseDxlSourceObjectChain(buffer) {
+  assertBuffer(buffer, 'DXL image');
+  const markers = dxlSourceMarkers(buffer);
+  if (markers.length === 0) {
+    return {
+      found: false,
+      objectCount: 0,
+      objects: [],
+    };
+  }
+  const firstObjectOffset = Math.min(...markers.map(({ offset }) => offset - 4));
+  const lastMarker = markers.at(-1);
+  const lastObjectOffset = lastMarker.offset - 4;
+  const lastRawEnd = lastObjectOffset + 4 + lastMarker.raw.length + 1;
+  const regionStart = firstObjectOffset;
+  const regionEnd = alignUp(lastRawEnd, 8);
+  const objects = [];
+  let cursor = regionStart;
+  while (cursor < regionEnd) {
+    const object = readTaggedString(buffer, cursor, 0x65);
+    const rawEnd = object.nulOffset + 1;
+    const nextBoundary = alignUp(rawEnd, 8);
+    if (nextBoundary > regionEnd) {
+      throw new Error(`DXL source object at 0x${cursor.toString(16)} exceeds source region`);
+    }
+    const padding = buffer.subarray(rawEnd, nextBoundary);
+    const normalized = normalizePath(object.text);
+    const isCoreHarold3 = /\/core\/harold3\//i.test(normalized);
+    const isInterface = /\/interface\//i.test(normalized);
+    objects.push({
+      objectOffset: cursor,
+      textOffset: cursor + 4,
+      header: object.header,
+      tag: object.tag,
+      length: object.length,
+      raw: object.text,
+      normalized,
+      kind: isCoreHarold3 ? 'core-harold3'
+        : (isInterface ? 'interface' : 'auxiliary-basename'),
+      nulOffset: object.nulOffset,
+      nextBoundary,
+      paddingLength: padding.length,
+      paddingZero: [...padding].every((value) => value === 0),
+    });
+    cursor = nextBoundary;
+  }
+  if (cursor !== regionEnd) {
+    throw new Error(`DXL source object chain ended at 0x${cursor.toString(16)}, expected 0x${regionEnd.toString(16)}`);
+  }
+  const paddingLengthCounts = new Map();
+  let paddingByteCount = 0;
+  let paddingNonzeroByteCount = 0;
+  for (const object of objects) {
+    paddingLengthCounts.set(
+      object.paddingLength,
+      (paddingLengthCounts.get(object.paddingLength) ?? 0) + 1,
+    );
+    paddingByteCount += object.paddingLength;
+    paddingNonzeroByteCount += object.paddingZero
+      ? 0
+      : [...buffer.subarray(object.nulOffset + 1, object.nextBoundary)]
+        .filter((value) => value !== 0).length;
+  }
+  return {
+    found: true,
+    regionStart,
+    regionEnd,
+    regionLength: regionEnd - regionStart,
+    objectCount: objects.length,
+    allObjectsEightByteAligned: objects.every(({ objectOffset }) => objectOffset % 8 === 0),
+    allExpectedTag: objects.every(({ tag }) => tag === 0x65),
+    allNulTerminated: objects.every(({ nulOffset }) => buffer[nulOffset] === 0),
+    chainTilesRegion: objects.at(-1)?.nextBoundary === regionEnd,
+    coreHarold3Count: objects.filter(({ kind }) => kind === 'core-harold3').length,
+    interfaceCount: objects.filter(({ kind }) => kind === 'interface').length,
+    auxiliaryBasenames: objects
+      .filter(({ kind }) => kind === 'auxiliary-basename')
+      .map(({ raw }) => raw),
+    paddingByteCount,
+    paddingNonzeroByteCount,
+    paddingZeroByteCount: paddingByteCount - paddingNonzeroByteCount,
+    paddingLengthCounts: Object.fromEntries(
+      [...paddingLengthCounts.entries()].sort(([a], [b]) => Number(a) - Number(b)),
+    ),
+    objects,
+  };
+}
+
 export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, functionInventory = null }) {
   const dxl = readFileSync(dxlPath);
   const pll = readFileSync(pllPath);
   const parsed = parsePll(pll);
+  const dxlHeaderInfo = dxlHeader(dxl);
+  const dxlDescriptorLayout = parseDxlDescriptorLayout(dxl, dxlHeaderInfo);
+  const dxlSourceObjectChain = parseDxlSourceObjectChain(dxl);
   const sourceReferences = parsed.strings
     .map(({ text, recordOffset, objectOffset, key }) => {
       const info = sourceInfo(text);
@@ -430,7 +601,10 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
     schemaVersion: 1,
     scope: 'Read-only structural metadata; no DXL/PLL evaluation or source reconstruction',
     artifacts: {
-      dxl: artifactMetadata(dxlPath, dxl, { header: dxlHeader(dxl) }),
+      dxl: artifactMetadata(dxlPath, dxl, {
+        header: dxlHeaderInfo,
+        descriptorLayout: dxlDescriptorLayout,
+      }),
       pll: artifactMetadata(pllPath, pll),
       truncatedPll: truncatedPllPath && truncated
         ? artifactMetadata(truncatedPllPath, truncated, {
@@ -462,6 +636,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
       coreLispModuleCount: dxlCoreLisp.length,
       coreLispModules: dxlCoreLisp,
       sourceMarkers: dxlSourceMarkers(dxl),
+      sourceObjectChain: dxlSourceObjectChain,
     },
     crossReference: {
       allKnownFunctionsIndexed: (functionInventory?.functions ?? [])
