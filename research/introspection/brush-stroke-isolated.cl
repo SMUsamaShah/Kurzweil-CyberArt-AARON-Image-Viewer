@@ -159,8 +159,208 @@
             (apply #'run-case case))))
     (error (problem)
       (format report "STAGE-23-ERROR ~A~%" (type-of problem))))
+  ;; Keep the next case as another direct top-level form. The earlier
+  ;; compiled helper is retained as an uncalled record of the intended full
+  ;; matrix, but direct forms are the reliable Allegro init-file seam.
+  (with-open-file (matrix-report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                                  :direction :output :if-exists :append
+                                  :if-does-not-exist :create)
+    (handler-case
+        (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+               (all-symbol (find-symbol "ALL-BRUSHES" owner))
+               (brush-symbol (find-symbol "BRUSH" owner))
+               (fill-symbol (find-symbol "FILL-MAP" owner))
+               (patch-symbol (find-symbol "PATCH-MAP" owner))
+               (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+               (high-symbol (find-symbol "*PIC-HIGH*" owner))
+               (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+               (cdex-symbol (find-symbol "CDEX" owner))
+               (sdex-symbol (find-symbol "SDEX" owner))
+               (stroke (find-symbol "BRUSH-STROKE" owner))
+               (screen (find-symbol "SCREEN-AND-STORE" owner))
+               (inside (find-symbol "IN-SUB-FRAME" owner))
+               (make-point (find-symbol "MAKE-TWOPT" owner))
+               (x-fn (find-symbol "X" owner))
+               (y-fn (find-symbol "Y" owner))
+               (all-brushes (symbol-value all-symbol))
+               (brush (elt all-brushes 2))
+               (fill-map (make-array '(16 16)
+                                     :element-type '(unsigned-byte 4)
+                                     :initial-element 0))
+               (patch-map (make-array '(16 16)
+                                      :element-type '(unsigned-byte 16)
+                                      :initial-element 0))
+               (path (list (funcall make-point 7 7)
+                           (funcall make-point 8 7)))
+               (screen-count 0)
+               (inside-count 0)
+               (error-type nil)
+               (original-screen (symbol-function screen))
+               (original-inside (symbol-function inside)))
+          (write-line "MATRIX-CASE b2-horizontal BRUSH 2 VALUE 1 CDEX 0 SDEX 0 INSIDE T"
+                      matrix-report)
+          (finish-output matrix-report)
+          (unwind-protect
+              (progv (list wide-symbol high-symbol patch-symbol fill-symbol
+                           brush-symbol boundary-symbol cdex-symbol sdex-symbol)
+                     (list 16 16 patch-map fill-map brush 3 0 0)
+                (setf (symbol-function screen)
+                      (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                        (incf screen-count)
+                        (format matrix-report
+                                "MATRIX-SCREEN b2-horizontal ~D ~D ~D~%"
+                                screen-count forwarded-cdex forwarded-sdex)
+                        (let ((tail forwarded-path)
+                              (point-index 0))
+                          (do ()
+                              ((or (null tail) (= point-index 64)))
+                            (let ((point (car tail)))
+                              (format matrix-report
+                                      "MATRIX-POINT b2-horizontal ~D ~D ~D~%"
+                                      point-index (funcall x-fn point)
+                                      (funcall y-fn point)))
+                            (setf tail (cdr tail))
+                            (incf point-index)))
+                        nil))
+                (setf (symbol-function inside)
+                      (lambda (x y)
+                        (declare (ignore x y))
+                        (incf inside-count)
+                        t))
+                (handler-case
+                    (progn
+                      (write-line "MATRIX-BEFORE-STROKE b2-horizontal"
+                                  matrix-report)
+                      (finish-output matrix-report)
+                      (funcall stroke path 1 0 0)
+                      (write-line "MATRIX-AFTER-STROKE b2-horizontal"
+                                  matrix-report)
+                      (finish-output matrix-report))
+                  (error (problem)
+                    (setf error-type (type-of problem))
+                    (format matrix-report "MATRIX-ERROR b2-horizontal ~A~%"
+                            error-type)
+                    (finish-output matrix-report)))
+                (dotimes (index (array-total-size fill-map))
+                  (let ((value (row-major-aref fill-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-FILL b2-horizontal ~D ~D~%"
+                              index value))))
+                (dotimes (index (array-total-size patch-map))
+                  (let ((value (row-major-aref patch-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-PATCH b2-horizontal ~D ~D~%"
+                              index value))))
+                (format matrix-report "MATRIX-SCREEN-COUNT b2-horizontal ~D~%"
+                        screen-count)
+                (format matrix-report "MATRIX-INSIDE-COUNT b2-horizontal ~D~%"
+                        inside-count)
+                (write-line (if error-type
+                                "MATRIX-ERRORED"
+                                "MATRIX-RETURNED")
+                            matrix-report)
+                (finish-output matrix-report))
+            (setf (symbol-function screen) original-screen
+                  (symbol-function inside) original-inside)))
+      (error (problem)
+        (format matrix-report "STAGE-23-MATRIX-ERROR-B2 ~A~%"
+                (type-of problem))
+        (finish-output matrix-report))))
   (write-line "STAGE-23-BRUSH-MATRIX-END" report)
-    (finish-output report))))
+  (finish-output report))))
+
+#| Misplaced draft; the executable copy belongs after the Stage 23 begin form.
+(with-open-file (matrix-report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                                :direction :output :if-exists :append
+                                :if-does-not-exist :create)
+  ;; A second direct form confirms that the reliable top-level seam is not
+  ;; specific to brush 1. Keep it deliberately small before expanding the
+  ;; full matrix again.
+  (handler-case
+      (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+             (all-symbol (find-symbol "ALL-BRUSHES" owner))
+             (brush-symbol (find-symbol "BRUSH" owner))
+             (fill-symbol (find-symbol "FILL-MAP" owner))
+             (patch-symbol (find-symbol "PATCH-MAP" owner))
+             (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+             (high-symbol (find-symbol "*PIC-HIGH*" owner))
+             (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+             (cdex-symbol (find-symbol "CDEX" owner))
+             (sdex-symbol (find-symbol "SDEX" owner))
+             (stroke (find-symbol "BRUSH-STROKE" owner))
+             (screen (find-symbol "SCREEN-AND-STORE" owner))
+             (inside (find-symbol "IN-SUB-FRAME" owner))
+             (make-point (find-symbol "MAKE-TWOPT" owner))
+             (all-brushes (symbol-value all-symbol))
+             (brush (elt all-brushes 2))
+             (fill-map (make-array '(16 16)
+                                   :element-type '(unsigned-byte 4)
+                                   :initial-element 0))
+             (patch-map (make-array '(16 16)
+                                    :element-type '(unsigned-byte 16)
+                                    :initial-element 0))
+             (path (list (funcall make-point 7 7)
+                         (funcall make-point 8 7)))
+             (screen-count 0)
+             (inside-count 0)
+             (error-type nil)
+             (original-screen (symbol-function screen))
+             (original-inside (symbol-function inside)))
+        (write-line "MATRIX-CASE b2-horizontal BRUSH 2 VALUE 1 CDEX 0 SDEX 0 INSIDE T"
+                    matrix-report)
+        (finish-output matrix-report)
+        (unwind-protect
+            (progv (list wide-symbol high-symbol patch-symbol fill-symbol
+                         brush-symbol boundary-symbol cdex-symbol sdex-symbol)
+                   (list 16 16 patch-map fill-map brush 3 0 0)
+              (setf (symbol-function screen)
+                    (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                      (declare (ignore forwarded-path forwarded-cdex forwarded-sdex))
+                      (incf screen-count)
+                      (format matrix-report "MATRIX-SCREEN b2-horizontal ~D 0 0~%"
+                              screen-count)
+                      nil))
+              (setf (symbol-function inside)
+                    (lambda (x y)
+                      (declare (ignore x y))
+                      (incf inside-count)
+                      t))
+              (handler-case
+                  (progn
+                    (write-line "MATRIX-BEFORE-STROKE b2-horizontal" matrix-report)
+                    (finish-output matrix-report)
+                    (funcall stroke path 1 0 0)
+                    (write-line "MATRIX-AFTER-STROKE b2-horizontal" matrix-report)
+                    (finish-output matrix-report))
+                (error (problem)
+                  (setf error-type (type-of problem))
+                  (format matrix-report "MATRIX-ERROR b2-horizontal ~A~%"
+                          error-type)
+                  (finish-output matrix-report)))
+              (dotimes (index (array-total-size fill-map))
+                (let ((value (row-major-aref fill-map index)))
+                  (unless (zerop value)
+                    (format matrix-report "MATRIX-FILL b2-horizontal ~D ~D~%"
+                            index value))))
+              (dotimes (index (array-total-size patch-map))
+                (let ((value (row-major-aref patch-map index)))
+                  (unless (zerop value)
+                    (format matrix-report "MATRIX-PATCH b2-horizontal ~D ~D~%"
+                            index value))))
+              (format matrix-report "MATRIX-SCREEN-COUNT b2-horizontal ~D~%"
+                      screen-count)
+              (format matrix-report "MATRIX-INSIDE-COUNT b2-horizontal ~D~%"
+                      inside-count)
+              (write-line (if error-type "MATRIX-ERRORED" "MATRIX-RETURNED")
+                          matrix-report)
+              (finish-output matrix-report))
+          (setf (symbol-function screen) original-screen
+                (symbol-function inside) original-inside)))
+    (error (problem)
+      (format matrix-report "STAGE-23-MATRIX-ERROR-B2 ~A~%"
+              (type-of problem))
+      (finish-output matrix-report)))
+|#
 
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
@@ -915,6 +1115,95 @@
     (error (problem)
       (format report "STAGE-23-MATRIX-ERROR ~A~%" (type-of problem))
       (finish-output report)))
+  ;; Second direct case: keep the top-level execution shape while checking
+  ;; that a larger startup brush reaches the same isolated map path.
+  (with-open-file (matrix-report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                                  :direction :output :if-exists :append
+                                  :if-does-not-exist :create)
+    (handler-case
+        (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+               (all-symbol (find-symbol "ALL-BRUSHES" owner))
+               (brush-symbol (find-symbol "BRUSH" owner))
+               (fill-symbol (find-symbol "FILL-MAP" owner))
+               (patch-symbol (find-symbol "PATCH-MAP" owner))
+               (wide-symbol (find-symbol "*PIC-WIDE*" owner))
+               (high-symbol (find-symbol "*PIC-HIGH*" owner))
+               (boundary-symbol (find-symbol "BOUNDARY-VALUE" owner))
+               (cdex-symbol (find-symbol "CDEX" owner))
+               (sdex-symbol (find-symbol "SDEX" owner))
+               (stroke (find-symbol "BRUSH-STROKE" owner))
+               (screen (find-symbol "SCREEN-AND-STORE" owner))
+               (inside (find-symbol "IN-SUB-FRAME" owner))
+               (make-point (find-symbol "MAKE-TWOPT" owner))
+               (all-brushes (symbol-value all-symbol))
+               (brush (elt all-brushes 2))
+               (fill-map (make-array '(16 16)
+                                     :element-type '(unsigned-byte 4)
+                                     :initial-element 0))
+               (patch-map (make-array '(16 16)
+                                      :element-type '(unsigned-byte 16)
+                                      :initial-element 0))
+               (path (list (funcall make-point 7 7)
+                           (funcall make-point 8 7)))
+               (screen-count 0)
+               (inside-count 0)
+               (error-type nil)
+               (original-screen (symbol-function screen))
+               (original-inside (symbol-function inside)))
+          (write-line "MATRIX-CASE b2-horizontal BRUSH 2 VALUE 1 CDEX 0 SDEX 0 INSIDE T"
+                      matrix-report)
+          (finish-output matrix-report)
+          (unwind-protect
+              (progv (list wide-symbol high-symbol patch-symbol fill-symbol
+                           brush-symbol boundary-symbol cdex-symbol sdex-symbol)
+                     (list 16 16 patch-map fill-map brush 3 0 0)
+                (setf (symbol-function screen)
+                      (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                        (declare (ignore forwarded-path forwarded-cdex forwarded-sdex))
+                        (incf screen-count)
+                        (format matrix-report "MATRIX-SCREEN b2-horizontal ~D 0 0~%"
+                                screen-count)
+                        nil))
+                (setf (symbol-function inside)
+                      (lambda (x y)
+                        (declare (ignore x y))
+                        (incf inside-count)
+                        t))
+                (handler-case
+                    (progn
+                      (write-line "MATRIX-BEFORE-STROKE b2-horizontal" matrix-report)
+                      (finish-output matrix-report)
+                      (funcall stroke path 1 0 0)
+                      (write-line "MATRIX-AFTER-STROKE b2-horizontal" matrix-report)
+                      (finish-output matrix-report))
+                  (error (problem)
+                    (setf error-type (type-of problem))
+                    (format matrix-report "MATRIX-ERROR b2-horizontal ~A~%"
+                            error-type)
+                    (finish-output matrix-report)))
+                (dotimes (index (array-total-size fill-map))
+                  (let ((value (row-major-aref fill-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-FILL b2-horizontal ~D ~D~%"
+                              index value))))
+                (dotimes (index (array-total-size patch-map))
+                  (let ((value (row-major-aref patch-map index)))
+                    (unless (zerop value)
+                      (format matrix-report "MATRIX-PATCH b2-horizontal ~D ~D~%"
+                              index value))))
+                (format matrix-report "MATRIX-SCREEN-COUNT b2-horizontal ~D~%"
+                        screen-count)
+                (format matrix-report "MATRIX-INSIDE-COUNT b2-horizontal ~D~%"
+                        inside-count)
+                (write-line (if error-type "MATRIX-ERRORED" "MATRIX-RETURNED")
+                            matrix-report)
+                (finish-output matrix-report))
+            (setf (symbol-function screen) original-screen
+                  (symbol-function inside) original-inside)))
+      (error (problem)
+        (format matrix-report "STAGE-23-MATRIX-ERROR-B2 ~A~%"
+                (type-of problem))
+        (finish-output matrix-report))))
   (write-line "STAGE-23-BRUSH-MATRIX-END" report)
   (finish-output report))
 
