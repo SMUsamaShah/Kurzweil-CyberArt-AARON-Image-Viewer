@@ -10,6 +10,43 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :supersede
                         :if-does-not-exist :create)
+  ;; Keep this in its own top-level form: if a later form fails during
+  ;; compilation, the artifact still proves that the probe file was read.
+  (format report "BEGIN brush-stroke-isolated~%")
+  (format report "INTERVENTION SCREEN-AND-STORE-AND-IN-SUB-FRAME-STUBS~%")
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
+  ;; Resolve only symbols and function cells before the larger experiment is
+  ;; read/compiled. This checkpoint localizes startup/load failures.
+  (format report "RESOLVER-BEGIN~%")
+  (handler-case
+      (let ((owner (find-package "COMMON-GRAPHICS-USER"))
+            (graphics (find-package "COMMON-GRAPHICS")))
+        (dolist (entry '("MAKE-TWOPT" "X" "Y" "BRUSH-STROKE"
+                         "SCREEN-AND-STORE" "IN-SUB-FRAME" "ALL-BRUSHES"
+                         "BRUSH" "FILL-MAP" "PATCH-MAP" "*PIC-WIDE*"
+                         "*PIC-HIGH*" "BOUNDARY-VALUE" "CDEX" "SDEX"
+                         "RAD" "CELLS" "ENVIR" "PERIM" "CORE"))
+          (multiple-value-bind (symbol status) (find-symbol entry owner)
+            (format report "RESOLVE USER ~S SYMBOL=~S STATUS=~S FBOUND=~S~%"
+                    entry (and symbol (symbol-name symbol)) status
+                    (and symbol (fboundp symbol)))))
+        (dolist (entry '("ID" "WIDTH"))
+          (multiple-value-bind (symbol status) (find-symbol entry graphics)
+            (format report "RESOLVE GRAPHICS ~S SYMBOL=~S STATUS=~S FBOUND=~S~%"
+                    entry (and symbol (symbol-name symbol)) status
+                    (and symbol (fboundp symbol)))))
+        (format report "RESOLVER-OK~%"))
+    (error (problem)
+      (format report "RESOLVER-ERROR ~S~%" (type-of problem))))
+  (finish-output report))
+
+(with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
+                        :direction :output :if-exists :append
+                        :if-does-not-exist :create)
   (let ((*print-length* 64) (*print-level* 12) (*print-circle* nil)
         (*print-pretty* nil)
         (owner (find-package "COMMON-GRAPHICS-USER"))
@@ -64,8 +101,7 @@
                  (copy-tree (funcall envir brush))
                  (copy-tree (funcall perim brush))
                  (copy-tree (funcall core brush))))
-      (format report "BEGIN brush-stroke-isolated~%")
-      (format report "INTERVENTION SCREEN-AND-STORE-AND-IN-SUB-FRAME-STUBS~%")
+      (format report "EXPERIMENT-BEGIN~%")
       (finish-output report)
       (handler-case
           (let* ((make-point (required-symbol "MAKE-TWOPT" owner))
