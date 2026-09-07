@@ -50,7 +50,7 @@
       (setf owner (find-package "COMMON-GRAPHICS-USER")
             targets
             '("DOIT" "STOP-WORKING" "RUN-AARON" "START-WORKING" "FULL-START"
-              "GOOD-START" "OMAKE-FRESH-START"
+              "OMAKE-FRESH-START"
               "MAKE-FRESH-START" "REMAKE-IMAGE" "MAKE-ARTWORK"
               "INITIALISE-PICTURE-PLANE" "DRAW-ONE-COMMAND"
               "DRAW-FIGURE-CFORMS" "DRAW-ORDERED-CFORMS" "WRITE-PAINTING-RECORD"
