@@ -287,10 +287,20 @@ ladder for profiles 1–4 under the tested 16×16, `VALUE=1`, `CDEX=0`,
 `SDEX=0`, in-frame stub; it does not recover brush selection, clipping,
 overlap semantics, colour, or integrated emission.
 
-The next probe should use a repeated or overlapping interior vertex, then a
-carefully bounded edge case, before replacing `SCREEN-AND-STORE` with a
-recorder that captures its downstream `PREP-LINE`/writer dependencies without
-changing the private map setup.
+The repeated-vertex direct matrix case in
+`introspection/evidence/brush-stroke-isolated-34145707021.txt` uses
+`(7,7)→(8,7)→(7,7)` with brush 1 and the same private 16×16 environment. It
+writes the same 12 unique fill cells as the two-point baseline, makes one
+screen-forwarding call, and forwards all three points in order, including the
+repeated endpoint. The predicate count rises from 18 to 27, while
+`PATCH-MAP` remains zero and all bindings restore. This establishes idempotent
+map stamping for the tested repeated interior vertex while preserving the
+full path for the downstream consumer; it does not generalize to arbitrary
+overlaps or clipping.
+
+The next probe should use a carefully bounded edge/clip control, then replace
+`SCREEN-AND-STORE` with a recorder that captures its downstream
+`PREP-LINE`/writer dependencies without changing the private map setup.
 
 ## Emission leads
 
