@@ -177,7 +177,11 @@
                                    (list (funcall make-point 7 7)
                                          (funcall make-point 8 7)
                                          (funcall make-point 7 7)))))
-            (declare (ignore graphics))
+            ;; Keep this body checkpoint explicit.  The graphics package is
+            ;; resolved only as a metadata sanity check and is intentionally
+            ;; not used by the guarded call.
+            (write-line "BODY-ENTERED" report)
+            (finish-output report)
             (write-line "RESOLVER-OWNER-PACKAGE-OK" report)
             (write-line "RESOLVER-SCREEN-FUNCTION-OK" report)
             (write-line "RESOLVER-DEPENDENCY-FUNCTIONS-OK" report)
