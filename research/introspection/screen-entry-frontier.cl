@@ -265,17 +265,17 @@
                                            (type-of problem)))
                                  (write-cell-error problem)
                                  (finish-output report)
-                                 (throw 'screen-entry-result :error)))
+                                 (throw 'screen-entry-result :error))))
                           (write-line "SCREEN-CALL-BEGIN" report)
                           (finish-output report)
                           (funcall screen path 0 0)
                           (setf returned t)
-                          (write-line "SCREEN-RETURNED" report))
-                        (write-line "SCREEN-CATCH-COMPLETED" report))
+                          (write-line "SCREEN-RETURNED" report)))
+                        (write-line "SCREEN-CATCH-COMPLETED" report)
                       ;; The error handler may unwind implementation-private
                       ;; dynamic state before this point; keep cleanup
                       ;; diagnostics independent of that value.
-                      (write-line "PREV-STORED-PT-CHECK-DEFERRED" report))))
+                      (write-line "PREV-STORED-PT-CHECK-DEFERRED" report)))
                   (format report "TEMP-CODES ~S~%"
                           (map 'list #'char-code
                                (get-output-stream-string temp-stream)))
