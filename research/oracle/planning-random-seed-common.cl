@@ -201,6 +201,27 @@
 (defun aaron-random-print-length ()
   (and (boundp '*print-length*) (symbol-value '*print-length*)))
 
+(defun aaron-random-install-seed (seed)
+  ;; Controlled intervention used only after the original INIT-RANDOM has
+  ;; returned.  It changes the visible Common Lisp state and leaves Allegro's
+  ;; internal bignum state untouched, matching the validated seed-only setup.
+  (handler-case
+      (let* ((excl-package (find-package "EXCL"))
+             (factory (and excl-package
+                           (find-symbol "MAKE-RANDOM-STATE-FROM-SEED"
+                                       excl-package)))
+             (common-lisp-package (find-package "COMMON-LISP"))
+             (random-state-symbol
+               (and common-lisp-package
+                    (find-symbol "*RANDOM-STATE*"
+                                 common-lisp-package)))
+             (state (and factory (funcall factory seed))))
+        (when (and state random-state-symbol
+                   (not (constantp random-state-symbol)))
+          (set random-state-symbol state)
+          t))
+    (condition () nil)))
+
 (defun aaron-random-set-with-unlimited-print (original-set)
   ;; SET-RANDOM binds *PRINT-LENGTH* itself, so a caller's dynamic binding is
   ;; not enough.  Temporarily wrap the standard PRINT function and bind the
@@ -317,6 +338,17 @@
                 (aaron-random-emit
                  (format nil "STATE-PREVIEW INIT-AFTER ~S"
                          (aaron-random-state-preview)))
+                (when (and (boundp 'aaron-planning-reseed-after-init)
+                           aaron-planning-reseed-after-init
+                           (boundp 'aaron-planning-seed)
+                           (integerp aaron-planning-seed))
+                  (let ((installed
+                          (aaron-random-install-seed aaron-planning-seed)))
+                    (aaron-random-emit
+                     (format nil "POST-INIT-RESEED INSTALLED ~S" installed))
+                    (aaron-random-emit
+                     (format nil "STATE-PREVIEW POST-INIT-RESEED ~S"
+                             (aaron-random-state-preview)))))
                 (when (and (boundp 'aaron-planning-rseed-roundtrip)
                            aaron-planning-rseed-roundtrip
                            original-set original-get original-ran)
