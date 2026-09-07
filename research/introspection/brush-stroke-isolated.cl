@@ -313,10 +313,10 @@
 (with-open-file (report "C:\\temp\\aaron-brush-stroke-isolated.txt"
                         :direction :output :if-exists :append
                         :if-does-not-exist :create)
-  ;; Stage 19 repeats the first interior vertex after an adjacent step. This
-  ;; keeps brush, value, indices, and map geometry at the baseline while
-  ;; exposing duplicate-path/idempotency behavior.
-  (write-line "STAGE-19-REPEATED-VERTEX-BEGIN" report)
+  ;; Stage 20 rejects the in-frame predicate and records the exact
+  ;; SCREEN-AND-STORE forwarding arguments. Private map state is still dumped
+  ;; after unwind, so this remains a dependency-isolated forwarding probe.
+  (write-line "STAGE-20-SCREEN-FORWARD-BEGIN" report)
   (let ((private-fill nil)
         (private-patch nil)
         (private-brush-symbol nil)
@@ -329,6 +329,8 @@
         (before-brush-bound nil)
         (before-fill-bound nil)
         (before-patch-bound nil)
+        (screen-count 0)
+        (inside-count 0)
         (success nil))
     (handler-case
         (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
@@ -344,6 +346,8 @@
                (stroke (find-symbol "BRUSH-STROKE" owner))
                (screen (find-symbol "SCREEN-AND-STORE" owner))
                (inside (find-symbol "IN-SUB-FRAME" owner))
+               (x-fn (find-symbol "X" owner))
+               (y-fn (find-symbol "Y" owner))
                (all-brushes (symbol-value all-symbol))
                (brush (elt all-brushes 1))
                (make-point (find-symbol "MAKE-TWOPT" owner))
@@ -375,13 +379,54 @@
                            brush-symbol boundary-symbol cdex-symbol sdex-symbol)
                      (list 16 16 patch-map fill-map brush 3 0 0)
                 (setf (symbol-function screen)
-                      (lambda (brush-path cdex sdex)
-                        (declare (ignore brush-path cdex sdex))
+                      (lambda (forwarded-path forwarded-cdex forwarded-sdex)
+                        (let ((call (incf screen-count)))
+                          (when (> call 8)
+                            (write-line "SCREEN-CALL-LIMIT" report)
+                            (error "SCREEN-AND-STORE call bound exceeded"))
+                          (format report "SCREEN-BEGIN ~D~%" call)
+                          (if (and (integerp forwarded-cdex)
+                                   (integerp forwarded-sdex))
+                              (format report "SCREEN-ARGS ~D ~D~%"
+                                      forwarded-cdex forwarded-sdex)
+                              (write-line "SCREEN-ARGS NONINTEGER" report))
+                          (let ((tail forwarded-path)
+                                (point-index 0))
+                            (do ()
+                                ((or (null tail) (= point-index 32)))
+                              (if (consp tail)
+                                  (let ((point (car tail)))
+                                    (handler-case
+                                        (let ((x (funcall x-fn point))
+                                              (y (funcall y-fn point)))
+                                          (if (and (integerp x) (integerp y))
+                                              (format report
+                                                      "SCREEN-POINT ~D ~D ~D ~D~%"
+                                                      call point-index x y)
+                                              (format report
+                                                      "SCREEN-POINT-NONINTEGER ~D ~D~%"
+                                                      call point-index)))
+                                      (error (problem)
+                                        (declare (ignore problem))
+                                        (format report
+                                                "SCREEN-POINT-CAPTURE-ERROR ~D ~D~%"
+                                                call point-index)))
+                                    (setf tail (cdr tail))
+                                    (incf point-index))
+                                  (progn
+                                    (write-line "SCREEN-IMPROPER-TAIL" report)
+                                    (setf tail nil))))
+                            (when (and (= point-index 32) (consp tail))
+                              (format report "SCREEN-TRUNCATED ~D~%" call))
+                            (format report "SCREEN-END ~D~%" call)))
                         nil))
                 (setf (symbol-function inside)
                       (lambda (x y)
                         (declare (ignore x y))
-                        t))
+                        (when (> (incf inside-count) 32)
+                          (write-line "INSIDE-CALL-LIMIT" report)
+                          (error "IN-SUB-FRAME call bound exceeded"))
+                        nil))
                 (write-line "BEFORE-STROKE" report)
                 (format report "ARGS POSITIONAL-CDEX 0 POSITIONAL-SDEX 0 DYNAMIC-CDEX ~D DYNAMIC-SDEX ~D~%"
                         (symbol-value cdex-symbol)
@@ -394,11 +439,11 @@
             (setf (symbol-function screen) original-screen)
             (setf (symbol-function inside) original-inside)))
       (error (problem)
-        (format report "STAGE-19-ERROR-TYPE ~S~%" (type-of problem))
+        (format report "STAGE-20-ERROR-TYPE ~S~%" (type-of problem))
         (when (typep problem 'cell-error)
           (let ((name (cell-error-name problem)))
             (when (symbolp name)
-              (format report "STAGE-19-ERROR-CELL ~A~%"
+              (format report "STAGE-20-ERROR-CELL ~A~%"
                       (symbol-name name)))))
         (finish-output report)))
     (write-line (if (and private-screen-symbol
@@ -409,8 +454,8 @@
                              private-original-screen)
                          (eq (symbol-function private-inside-symbol)
                              private-original-inside))
-                    "STAGE-19-FUNCTIONS-RESTORED"
-                    "STAGE-19-FUNCTIONS-NOT-RESTORED")
+                    "STAGE-20-FUNCTIONS-RESTORED"
+                    "STAGE-20-FUNCTIONS-NOT-RESTORED")
                 report)
     (write-line (if (and private-brush-symbol
                          private-fill-symbol
@@ -421,8 +466,8 @@
                               before-fill-bound)
                          (eql (boundp private-patch-symbol)
                               before-patch-bound))
-                    "STAGE-19-BINDINGS-RESTORED"
-                    "STAGE-19-BINDINGS-LEAKED")
+                    "STAGE-20-BINDINGS-RESTORED"
+                    "STAGE-20-BINDINGS-LEAKED")
                 report)
     (when (and private-fill private-patch)
       (let ((fill-count 0)
@@ -445,9 +490,11 @@
               (format report "PATCH-CELL ~D ~D~%" index value))))
         (format report "FILL-NONZERO-COUNT ~D~%" fill-count)
         (format report "PATCH-NONZERO-COUNT ~D~%" patch-count)))
+    (format report "SCREEN-COUNT ~D~%" screen-count)
+    (format report "INSIDE-COUNT ~D~%" inside-count)
     (write-line (if success
-                    "STAGE-19-SUCCESS"
-                    "STAGE-19-REPEATED-VERTEX-ERROR")
+                    "STAGE-20-STROKE-RETURNED"
+                    "STAGE-20-STROKE-ERROR")
                 report))
   (finish-output report))
 
@@ -558,6 +605,6 @@
   (format report "STAGE-1-RESOLUTION-ONLY~%")
   (format report "STAGE-2-3-REPLACEMENT-ONLY~%")
   (format report "STAGE-4-PRIVATE-SETUP-ONLY~%")
-  (format report "STAGE-19-REPEATED-VERTEX~%")
+  (format report "STAGE-20-SCREEN-FORWARD~%")
   (format report "END brush-stroke-isolated~%")
   (finish-output report))
