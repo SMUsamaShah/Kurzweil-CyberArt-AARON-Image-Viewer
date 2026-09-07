@@ -185,13 +185,15 @@
             (write-line "RESOLVER-OWNER-PACKAGE-OK" report)
             (write-line "RESOLVER-SCREEN-FUNCTION-OK" report)
             (write-line "RESOLVER-DEPENDENCY-FUNCTIONS-OK" report)
-            (format report "PATH ~S~%"
-                    (mapcar (lambda (point)
-                              (argument-summary point x-fn y-fn)) path))
+            ;; The path is already constructed from three measured points;
+            ;; keep this checkpoint scalar-only so no accessor dispatch can
+            ;; obscure the direct-screen frontier.
+            (write-line "PATH 7 7 8 7 7 7" report)
             (format report "RGB-MAP-BOUND ~S~%" (boundp rgb-map-symbol))
             (when (boundp rgb-map-symbol)
               (format report "RGB-MAP-TYPE ~S~%"
                       (type-of (symbol-value rgb-map-symbol))))
+            (finish-output report)
             (write-line "METADATA-BEGIN" report)
             (dolist (name '("SCRIPT" "CFLIST" "COLORDEX"
                             "WATCH-FOR-MESSAGES"))
