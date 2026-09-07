@@ -366,6 +366,15 @@
                   (aaron-random-emit
                    (format nil "RAN-SAMPLE ~D ARGS ~S VALUES ~S"
                            aaron-ran-sample-count args values)))
+                ;; planning-call-trace.cl publishes this bounded stack as a
+                ;; diagnostic bridge.  Keep it on a separate line so existing
+                ;; RAN-SAMPLE fixtures remain byte-for-byte parseable.
+                (when (and (<= aaron-ran-sample-count aaron-ran-sample-limit)
+                           (boundp 'aaron-trace-current-stack))
+                  (aaron-random-emit
+                   (format nil "RAN-CONTEXT ~D STACK ~S"
+                           aaron-ran-sample-count
+                           aaron-trace-current-stack)))
                 (values-list values))))
       (when original-day
         (setf (symbol-function day-symbol)
