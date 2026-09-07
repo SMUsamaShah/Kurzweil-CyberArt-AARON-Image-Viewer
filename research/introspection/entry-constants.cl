@@ -41,7 +41,7 @@
                      (short-summary (funcall constant-fn symbol index))
                    (error (problem)
                      (list :error (type-of problem))))))))
-        (dolist (name '("RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
+        (dolist (name '("DOIT" "STOP-WORKING" "RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
                     "END-START" "GOOD-START" "OMAKE-FRESH-START"
                     "MAKE-FRESH-START" "REMAKE-IMAGE" "MAKE-ARTWORK" "MAIN"
                     "INITIALISE-PICTURE-PLANE" "DRAW-ONE-COMMAND"

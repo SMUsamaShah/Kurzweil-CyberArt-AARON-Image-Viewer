@@ -41,7 +41,7 @@
       ;; body, after the stream checkpoint, so a loader failure is observable.
       (setf owner (find-package "COMMON-GRAPHICS-USER")
             targets
-            '("RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
+            '("DOIT" "STOP-WORKING" "RUN-AARON" "START-WORKING" "FULL-START" "NEW-START"
               "END-START" "GOOD-START" "OMAKE-FRESH-START"
               "MAKE-FRESH-START" "REMAKE-IMAGE" "MAKE-ARTWORK"
               "INITIALISE-PICTURE-PLANE" "DRAW-ONE-COMMAND"
