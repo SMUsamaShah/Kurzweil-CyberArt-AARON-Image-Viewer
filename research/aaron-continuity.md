@@ -143,6 +143,14 @@ document. The three-case local fixture now retains full serialized-AA hashes
 as well as stage hashes. This remains provisional clean-room instrumentation,
 not recovered AARON scene semantics.
 
+The same static pass now inventories a distinct DXL candidate set without
+executing Windows: 6,671 byte-offset `0x6c` headers reduce to 1,511 bounded
+headers and 190 eight-byte-aligned objects with the common `55 8b ec 56`
+prologue. The prologue appears at none of the other seven alignment residues.
+The offsets and length/padding metadata are retained under
+`dxl.compiledObjectCandidates` in the static index. This strengthens the
+structural report but still provides no defensible symbol-to-code mapping.
+
 Finally, the measured dependency-isolated brush boundary is now represented by
 `applyMeasuredBrushStroke`: an explicit `IN-SUB-FRAME` predicate gates the
 measured core-mask writes, while a nontrivial path is forwarded once to an
@@ -160,8 +168,8 @@ Local verification:
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`; the suite now has
-  33 passing tests, including module adjacency and compiled-payload identity
-  validation.
+  34 passing tests, including module adjacency, compiled-payload identity, and
+  DXL candidate-residue validation.
 
 ## Honest progress estimate
 
@@ -184,7 +192,7 @@ the historical scene rules have been recovered.
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
 | Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
-| Static module/payload cross-image analysis | 50-module adjacency negative control plus three exact anonymous compiled-payload anchors; no names or execution semantics assigned |
+| Static module/payload cross-image analysis | 50-module adjacency negative control, three exact anonymous compiled-payload anchors, and 190 DXL prologue candidates with residue controls; no names or execution semantics assigned |
 | Scene geometry/emission attribution | Frozen, document-bound manifest with per-shape ranges/hashes and isolated replay slices; semantics remain provisional |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |

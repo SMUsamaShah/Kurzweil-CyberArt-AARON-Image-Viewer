@@ -261,6 +261,94 @@ export function parseCompiledObjectTable(buffer, table, {
   };
 }
 
+function validateScanOption(value, label) {
+  if (!Number.isInteger(value) || value < 1) {
+    throw new RangeError(`${label} must be a positive integer`);
+  }
+  return value;
+}
+
+/**
+ * Inventory only the DXL byte patterns that look like aligned compiled
+ * objects under the validated PLL object convention.
+ *
+ * This is intentionally a candidate scan, not a DXL object parser. DXL
+ * object boundaries, entry points, and symbol/function-cell relationships
+ * are not established by a matching tag and x86 prologue. The residue counts
+ * are retained as a false-positive control: on the preserved image the
+ * selected prologue occurs only at eight-byte-aligned offsets.
+ */
+export function scanDxlCompiledObjectCandidates(buffer, {
+  alignment = 8,
+  expectedTag = 0x6c,
+  prologue = Buffer.from('558bec56', 'hex'),
+} = {}) {
+  assertBuffer(buffer, 'DXL image');
+  validateScanOption(alignment, 'alignment');
+  if (!Number.isInteger(expectedTag) || expectedTag < 0 || expectedTag > 0xff) {
+    throw new RangeError('expectedTag must be an unsigned byte');
+  }
+  assertBuffer(prologue, 'prologue');
+  if (prologue.length === 0) throw new RangeError('prologue must not be empty');
+
+  const residues = Array.from({ length: alignment }, () => ({
+    tagCount: 0,
+    boundedTagCount: 0,
+    prologueCount: 0,
+  }));
+  const candidates = [];
+  let tagCount = 0;
+  let boundedTagCount = 0;
+  let prologueCount = 0;
+  for (let offset = 0; offset + 4 <= buffer.length; offset += 1) {
+    const header = u32(buffer, offset, 'DXL candidate compiled object');
+    if ((header & 0xff) !== expectedTag) continue;
+    tagCount += 1;
+    const residue = residues[offset % alignment];
+    residue.tagCount += 1;
+    const encodedWords = header >>> 8;
+    const rawEnd = offset + 4 + encodedWords * 2;
+    if (rawEnd > buffer.length) continue;
+    boundedTagCount += 1;
+    residue.boundedTagCount += 1;
+    if (!buffer.subarray(offset + 4, offset + 4 + prologue.length).equals(prologue)) {
+      continue;
+    }
+    prologueCount += 1;
+    residue.prologueCount += 1;
+    if (offset % alignment !== 0) continue;
+    const nextBoundary = alignUp(rawEnd, alignment);
+    if (nextBoundary > buffer.length) continue;
+    const padding = buffer.subarray(rawEnd, nextBoundary);
+    candidates.push({
+      offset,
+      header,
+      tag: expectedTag,
+      encodedWords,
+      payloadLength: encodedWords * 2,
+      rawEnd,
+      nextBoundary,
+      paddingLength: padding.length,
+      paddingZero: [...padding].every((value) => value === 0),
+      prologue: prologue.toString('hex'),
+    });
+  }
+
+  return {
+    scope: 'Structural DXL compiled-object candidates only; no object boundary, entry point, relocation, or symbol mapping is assigned',
+    alignment,
+    expectedTag,
+    prologue: prologue.toString('hex'),
+    byteScan: { tagCount, boundedTagCount, prologueCount },
+    residueCounts: residues.map((counts, residue) => ({ residue, ...counts })),
+    alignedTagCount: residues[0]?.tagCount ?? 0,
+    alignedBoundedTagCount: residues[0]?.boundedTagCount ?? 0,
+    alignedPrologueCount: residues[0]?.prologueCount ?? 0,
+    candidateCount: candidates.length,
+    candidates,
+  };
+}
+
 function compiledPayload(buffer, object) {
   if (!object || !Number.isInteger(object.objectOffset)
       || !Number.isInteger(object.rawEnd)
@@ -815,6 +903,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
   const dxlHeaderInfo = dxlHeader(dxl);
   const dxlDescriptorLayout = parseDxlDescriptorLayout(dxl, dxlHeaderInfo);
   const dxlSourceObjectChain = parseDxlSourceObjectChain(dxl);
+  const dxlCompiledObjectCandidates = scanDxlCompiledObjectCandidates(dxl);
   const sourceReferences = parsed.strings
     .map(({ text, recordOffset, objectOffset, key }) => {
       const info = sourceInfo(text);
@@ -894,6 +983,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
       coreLispModules: dxlCoreLisp,
       sourceMarkers: dxlSourceMarkers(dxl),
       sourceObjectChain: dxlSourceObjectChain,
+      compiledObjectCandidates: dxlCompiledObjectCandidates,
     },
     crossReference: {
       allKnownFunctionsIndexed: (functionInventory?.functions ?? [])

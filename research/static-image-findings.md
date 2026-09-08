@@ -184,6 +184,32 @@ index stores only offsets, lengths, hashes, header comparisons, and span
 hashes—not executable payload bytes. Synthetic tests cover repeated matches,
 unaligned candidates, mismatched headers, and padded-span comparison.
 
+### DXL compiled-object candidates
+
+The static index also keeps a separately labelled candidate scan of the DXL.
+It searches every byte offset for a low-byte `0x6c` header whose encoded
+length remains inside the image, then records only eight-byte-aligned matches
+whose first four payload bytes are `55 8b ec 56`. This is a fingerprint
+inventory, not a DXL object parser or function map.
+
+| Measurement | Result |
+|---|---:|
+| all byte-offset `0x6c` headers | 6,671 |
+| bounded byte-offset headers | 1,511 |
+| bounded `55 8b ec 56` prologues | 190 |
+| eight-byte-aligned headers | 427 |
+| eight-byte-aligned bounded headers | 322 |
+| eight-byte-aligned prologue candidates | 190 |
+| prologue candidates at residues 1–7 modulo 8 | 0 |
+
+The 190 candidate offsets, encoded lengths, raw ends, and padding checks are
+retained under `dxl.compiledObjectCandidates` in
+[`introspection/static-image-index.json`](introspection/static-image-index.json).
+The residue control makes the alignment observation reproducible, but neither
+the `0x6c` tag nor the x86-looking prologue proves an object boundary, entry
+point, relocation, or relationship to a retained symbol. A conservative
+symbol-to-code mapping remains unsupported.
+
 ### Negative name-to-object search
 
 An independent read-only cross-image scan tested the 16 scene-context names,

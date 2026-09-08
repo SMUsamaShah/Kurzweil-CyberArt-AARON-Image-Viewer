@@ -11,6 +11,7 @@ import {
   parsePll,
   readTaggedString,
   resolveIndexedStrings,
+  scanDxlCompiledObjectCandidates,
 } from '../index-allegro-image.mjs';
 
 test('compares module adjacency while preserving entry provenance', () => {
@@ -182,6 +183,30 @@ test('validates first-table compiled-object spans without assigning names', () =
   ]);
 });
 
+test('keeps DXL compiled-object candidates separate from named objects', () => {
+  const image = Buffer.alloc(0x80, 0);
+  image.writeUInt32LE((4 << 8) | 0x6c, 0x10);
+  image.write('U\x8b\xecV', 0x14, 'binary');
+  image.writeUInt32LE((4 << 8) | 0x6c, 0x21);
+  image.write('U\x8b\xecV', 0x25, 'binary');
+  image.writeUInt32LE((4 << 8) | 0x6c, 0x30);
+  image.write('xxxx', 0x34, 'ascii');
+
+  const result = scanDxlCompiledObjectCandidates(image);
+  assert.equal(result.byteScan.tagCount, 3);
+  assert.equal(result.byteScan.boundedTagCount, 3);
+  assert.equal(result.byteScan.prologueCount, 2);
+  assert.equal(result.alignedTagCount, 2);
+  assert.equal(result.alignedBoundedTagCount, 2);
+  assert.equal(result.alignedPrologueCount, 1);
+  assert.equal(result.candidateCount, 1);
+  assert.deepEqual(result.candidates.map(({ offset, payloadLength, nextBoundary }) => ({
+    offset, payloadLength, nextBoundary,
+  })), [{ offset: 0x10, payloadLength: 8, nextBoundary: 0x20 }]);
+  assert.equal(result.residueCounts[1].prologueCount, 1);
+  assert.equal(result.residueCounts[2].prologueCount, 0);
+});
+
 test('accepts the complete retained PLL layout and cross-reference counts', () => {
   const path = new URL('../../introspection/static-image-index.json', import.meta.url);
   const index = JSON.parse(readFileSync(path, 'utf8'));
@@ -262,6 +287,28 @@ test('accepts the complete retained PLL layout and cross-reference counts', () =
       dxlCandidateAligned: true,
       paddedSpanMatches: false,
     },
+  ]);
+  const dxlCandidates = index.dxl.compiledObjectCandidates;
+  assert.equal(dxlCandidates.alignment, 8);
+  assert.equal(dxlCandidates.expectedTag, 0x6c);
+  assert.equal(dxlCandidates.prologue, '558bec56');
+  assert.deepEqual(dxlCandidates.byteScan, {
+    tagCount: 6671,
+    boundedTagCount: 1511,
+    prologueCount: 190,
+  });
+  assert.equal(dxlCandidates.alignedTagCount, 427);
+  assert.equal(dxlCandidates.alignedBoundedTagCount, 322);
+  assert.equal(dxlCandidates.alignedPrologueCount, 190);
+  assert.equal(dxlCandidates.candidateCount, 190);
+  assert.equal(dxlCandidates.residueCounts[0].prologueCount, 190);
+  assert.equal(dxlCandidates.residueCounts.slice(1).every(({ prologueCount }) => prologueCount === 0), true);
+  assert.deepEqual(dxlCandidates.candidates.slice(0, 3).map(({ offset, encodedWords, payloadLength }) => ({
+    offset, encodedWords, payloadLength,
+  })), [
+    { offset: 0x60ed8, encodedWords: 246, payloadLength: 492 },
+    { offset: 0x610c8, encodedWords: 59, payloadLength: 118 },
+    { offset: 0x611e8, encodedWords: 178, payloadLength: 356 },
   ]);
   const brush = index.pll.selectedSymbols.find(({ name }) => name === 'BRUSH-STROKE');
   assert.deepEqual(

@@ -59,7 +59,11 @@ complete equivalent port until phases 5–8 are recovered.
    The cross-image payload pass finds three exact anonymous 66-byte matches in
    the DXL, each with a matching `0x216c` header and aligned start; all padded
    spans differ. Keep this as a structural anchor report, not a function or
-   relocation map. Use `scene-context-findings.md` for the package-qualified
+   relocation map. A separate DXL scan now retains 190 eight-byte-aligned,
+   bounded `0x6c` candidates with the common `55 8b ec 56` prologue and zero
+   matches at the other seven alignment residues; keep this as a candidate
+   fingerprint inventory, not a DXL object or function inventory. Use
+   `scene-context-findings.md` for the package-qualified
    runtime target checklist. The runtime PLL copy is truncated, so static work
    must use the complete extracted file outside the repository.
 
