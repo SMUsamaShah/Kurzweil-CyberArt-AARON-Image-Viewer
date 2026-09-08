@@ -69,7 +69,7 @@
               "MAKE-PAINTING-COLORS" "MAKE-COLORSPEC" "MASTER-PLAN"
               "MAKE-PLAN" "MAKE-LEAF-LIST" "DEVELOP-PLAN" "PROTOCOL"
               "RPARSE" "BUILD-FIGURE" "GENERATE-PERSON"
-              "MAKE-POTTED-PLANT" "DRAW-CFORM" "PAINT-FILL"
+              "MAKE-POTTED-PLANT" "DRAW-CFORM" "SCREEN-AND-STORE" "PAINT-FILL"
               "DISPLAY-COLOR-PATCHES"
               ;; Leave the high-fanout writer and mapping edges unwrapped.
               ;; The remaining names expose later screen/brush edges while
