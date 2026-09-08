@@ -20,11 +20,12 @@ conversation boundary.
 
 ## Last verified state
 
-As of 2026-09-07, the recovered checkout is clean at local commit
-`4ca9bbd` (`Integrate measured outlines and planner frames`), and the connected
-branch is published at `0a3102a7e68dc98e1bf646e9058734bb10ca6fef` with the
-same changed-file tree. The current direct matrix source remains in the
-earlier edge checkpoint. Its pre-index content ended at
+As of 2026-09-08, the recovered checkout is clean at local commit
+`d0038e10bcbebc1dcebfb100c2206bfc934b27c2` (`Add static anchors and verified
+scene attribution`), and the connected branch is published at
+`64093163a18b65a8a1c373077c54426bae8b976d` with the same changed-file tree.
+The current direct matrix source remains in the earlier edge checkpoint. Its
+pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
 publication; the static-index publication was verified at
 `b33a90bb7462a0e853678a216eb80ce93948068b`.
