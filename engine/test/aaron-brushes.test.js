@@ -5,6 +5,7 @@ import {
   AARON_BRUSH_PROFILES,
   findAaronBrushBand,
   getAaronBrushProfile,
+  selectAaronBrushProfile,
 } from '../src/aaron-brushes.js';
 
 const evidencePath = new URL(
@@ -88,4 +89,24 @@ test('measured profile and provisional ENVIR-band helpers are exposed', () => {
   assert.equal(findAaronBrushBand(199999).id, 6);
   assert.equal(findAaronBrushBand(200000), undefined);
   assert.throws(() => findAaronBrushBand(Number.NaN), TypeError);
+});
+
+test('provisional brush selection preserves observed half-open bands', () => {
+  const cases = [
+    [0, 0], [99.999, 0], [100, 1], [2999.999, 1], [3000, 2],
+    [7999.999, 2], [8000, 3], [15999.999, 3], [16000, 4],
+    [59999.999, 4], [60000, 5], [119999.999, 5], [120000, 6],
+    [199999.999, 6],
+  ];
+  for (const [value, id] of cases) {
+    assert.equal(selectAaronBrushProfile(value).id, id, `ENVIR=${value}`);
+  }
+  assert.equal(selectAaronBrushProfile(200000), undefined);
+  assert.equal(selectAaronBrushProfile(-1), undefined);
+  assert.equal(selectAaronBrushProfile(-1, {outOfRange: 'clamp'}).id, 0);
+  assert.equal(selectAaronBrushProfile(200000, {outOfRange: 'clamp'}).id, 6);
+  assert.throws(
+    () => selectAaronBrushProfile(1, {outOfRange: 'error'}),
+    /outOfRange/,
+  );
 });

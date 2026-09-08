@@ -443,3 +443,15 @@ clean-room adapter: it accepts an explicit predicate and screen callback,
 preserves the full forwarded path, and leaves the unresolved screen/file,
 colour, clipping, and brush-state logic outside its scope. The generator does
 not use this adapter yet.
+
+## Provisional ENVIR selection adapter
+
+The startup census provides six non-sentinel `PAINT-BRUSH` environment bands
+and one zero-width sentinel. `engine/src/aaron-brushes.js` now exposes
+`selectAaronBrushProfile(value)` over those measured bands with an explicit
+half-open `[low, high)` interpretation. This is useful for local experiments
+and tests the exact observed boundary values, but it is not yet the historical
+`SELECT-BRUSH` implementation: the live selector body has not been invoked,
+and the function's reported `COUNT` argument remains unresolved. The default
+out-of-range result is `undefined`; clamping to the first or last profile is
+available only when a caller opts into that provisional policy.

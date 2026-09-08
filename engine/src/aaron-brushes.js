@@ -59,3 +59,22 @@ export function findAaronBrushBand(value) {
     return value >= low && value < high;
   });
 }
+
+/**
+ * Select a measured brush profile using the provisional ENVIR-band adapter.
+ *
+ * `SELECT-BRUSH` has not yet been exercised with a live call, so the default
+ * policy deliberately returns `undefined` outside the observed bands.  The
+ * optional `clamp` policy is useful for exploratory scenes but is a local
+ * caller choice, not a recovered AARON rule.
+ */
+export function selectAaronBrushProfile(value, {outOfRange = 'none'} = {}) {
+  if (outOfRange !== 'none' && outOfRange !== 'clamp') {
+    throw new RangeError("outOfRange must be 'none' or 'clamp'");
+  }
+  const profile = findAaronBrushBand(value);
+  if (profile || outOfRange === 'none') return profile;
+  return value < AARON_BRUSH_PROFILES[0].envir[0]
+    ? AARON_BRUSH_PROFILES[0]
+    : AARON_BRUSH_PROFILES.at(-1);
+}

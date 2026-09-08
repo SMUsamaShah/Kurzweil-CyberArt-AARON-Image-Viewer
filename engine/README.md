@@ -149,6 +149,9 @@ complete brush semantics remain under investigation.
 measured from the original build, including ordered perimeter/core masks and
 the separate `CELLS` scalars. Its ENVIR-band lookup is explicitly provisional:
 the original `SELECT-BRUSH` boundary comparison has not been invoked yet.
+`selectAaronBrushProfile(value)` exposes that lookup as an explicit
+exploration adapter, returning no profile outside the measured range by
+default; `{outOfRange: 'clamp'}` is available only as a local caller policy.
 `aaron-maps.js` models the measured `INIT-MAPS` allocation: fresh zeroed
 `Uint16Array` patch storage and `Uint8Array` fill storage for the requested
 width-by-height dimensions. Its first-coordinate-major index and checked
