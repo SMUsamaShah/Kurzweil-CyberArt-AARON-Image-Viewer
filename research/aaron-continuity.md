@@ -21,9 +21,9 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-08, the recovered checkout is clean at local commit
-`4b19379fb2f1ba6ab9aa55bf6cd521b81ca92bab` (`Profile anonymous DXL call
-continuation`), and the connected branch is published at
-`8e9913b4bb21b8932cd006446b68a90cb727be17` with the same changed-file tree.
+`442f963091bf2d5c51e04d92fcff3688d459099b` (`Compact anonymous control-flow
+report`), and the connected branch is published at
+`b0d76c97799da7629d8af1802363e37ce8187876` with the same changed-file tree.
 The current direct matrix source remains in the earlier edge checkpoint. Its
 pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
@@ -46,7 +46,10 @@ The separate assumed-indirect-call-return view reaches 22,694 rows and 64,470
 bytes after continuing through 2,555 indirect call sites, while indirect jumps
 remain unresolved. It also retains 28 shifted-start controls, three exact
 66-byte PLL/DXL anchor profiles with matching normalized transfer structure,
-and 24 bounded PLL decoder-reference windows. This is anonymous
+and 24 bounded PLL decoder-reference windows. The report is 517,247 bytes;
+per-candidate scalar summaries and detailed control-window transfer lists are
+both retained, while redundant per-candidate transfer arrays are omitted. This
+is anonymous
 byte-interpretation evidence; it does not assign names, entry points,
 relocations, calling conventions, source modules, or Lisp semantics. The new
 parser and fixture are covered by the research suite.
