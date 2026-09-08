@@ -21,9 +21,9 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-08, the recovered checkout is clean at local commit
-`b740f46f7b862e09d2aa2754ca75871672d8471d` (`Record DXL compiled-object
-candidates`), and the connected branch is published at
-`78bd0996e2e2f097fc6b1ac60f25d74a5d210b0a` with the same changed-file tree.
+`c5f7e13fac3d8e67f1a251b26894eb748c20d4c8` (`Add DXL pointer encoding
+controls`), and the connected branch is published at
+`b75aa72459d3ab57e3e5ab20d0b4b016fbb4459e` with the same changed-file tree.
 The current direct matrix source remains in the earlier edge checkpoint. Its
 pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
