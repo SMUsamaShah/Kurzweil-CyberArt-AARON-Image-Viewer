@@ -220,6 +220,10 @@ with GNU `objdump` 2.42. It profiles the candidate payloads as anonymous
 branch-following view. It records relative-transfer target classes, indirect
 transfer counts, operand-register signatures, and shifted-start controls; it
 does not retain executable bytes or assign a function name.
+The 190-candidate inventory stores scalar per-candidate summaries, while the
+detailed transfer lists are retained only for the bounded shifted, anchor, and
+PLL control windows; this keeps the normalized UTF-8 report below the
+repository text-transport limit without discarding aggregate evidence.
 
 | Measurement across 190 candidates | Result |
 |---|---:|

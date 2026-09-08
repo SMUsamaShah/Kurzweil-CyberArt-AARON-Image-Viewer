@@ -446,7 +446,13 @@ function aggregateProfiles(profiles) {
   };
 }
 
-function candidateSummary(candidate, profile) {
+function reportRecursiveSummary(summary, includeTransfers) {
+  if (includeTransfers) return summary;
+  const { transfers, ...compact } = summary;
+  return compact;
+}
+
+function candidateSummary(candidate, profile, { includeTransfers = false } = {}) {
   return {
     offset: candidate.offset,
     rawEnd: candidate.rawEnd,
@@ -467,8 +473,12 @@ function candidateSummary(candidate, profile) {
       targetClassCounts: profile.linear.targetClassCounts,
       operandSignatureCounts: profile.linear.operandSignatureCounts,
     },
-    recursive: profile.recursive,
-    assumedReturn: profile.assumedReturn,
+    // Per-candidate transfer lists are redundant with the aggregate and
+    // bounded control profiles.  Keep those detailed lists in controls while
+    // making the checked-in 190-candidate inventory compact enough for the
+    // repository text transport.
+    recursive: reportRecursiveSummary(profile.recursive, includeTransfers),
+    assumedReturn: reportRecursiveSummary(profile.assumedReturn, includeTransfers),
   };
 }
 
@@ -485,7 +495,7 @@ function profileWindows(imagePath, windows, candidateRanges, objdump) {
     return {
       ...window,
       payloadLength: window.end - (candidate.offset + 4),
-      profile: candidateSummary(candidate, profile),
+      profile: candidateSummary(candidate, profile, { includeTransfers: true }),
     };
   });
 }

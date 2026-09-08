@@ -90,6 +90,8 @@ test('retains the checked-in DXL profile as an anonymous structural fixture', ()
   assert.equal(profile.aggregate.assumedReturnReachableBytes, 64470);
   assert.equal(profile.aggregate.assumedReturnCallCount, 2555);
   assert.equal(profile.aggregate.targetClassCounts['origin-instruction-interior'], 33);
+  assert.equal('transfers' in profile.candidates[0].recursive, false);
+  assert.equal(profile.controls.exactPayloadAnchors.profiles[0].profile.recursive.transfers.length, 3);
   assert.equal(profile.controls.exactPayloadAnchors.profiles.length, 3);
   assert.equal(profile.controls.shiftedStarts.profiles.length, 28);
   assert.equal(profile.controls.pllPrefixReferences.sampledWindowCount, 24);
