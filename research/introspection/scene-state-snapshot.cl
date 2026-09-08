@@ -1,10 +1,11 @@
 ;;; Read-only scene-state snapshots around the normal planning/drawing path.
 ;;;
-;;; This companion loads the existing bounded call trace first, then wraps
-;;; only RPARSE, DRAW-CFORM, SCREEN-AND-STORE, and MAIN.  The wrappers retain
-;;; the original argument/return path and only inspect package-qualified
-;;; bindings.  No PLAN is manufactured, no slot writer is called, and no
-;;; object printer or unbounded list traversal is used.
+;;; This companion attaches an observer to the existing bounded call trace.
+;;; It deliberately does not redefine any function cell a second time: the
+;;; trace's already-validated wrappers report the scene boundaries here while
+;;; this file only inspects package-qualified bindings.  No PLAN is
+;;; manufactured, no slot writer is called, and no object printer or
+;;; unbounded list traversal is used.
 (in-package :cl-user)
 
 (unless (boundp 'aaron-scene-state-snapshot-loaded)
@@ -21,10 +22,6 @@
     (write-line "SOURCE-ENTERED" report)
     (finish-output report))
 
-  ;; The focused call trace supplies the already-validated transparent
-  ;; wrappers.  The dedicated workflow stages this file at C:\\temp.
-  (load "C:\\temp\\planning-call-trace.cl")
-
   (let* ((report-path "C:\\temp\\aaron-scene-state-snapshot.txt")
          (owner (find-package "COMMON-GRAPHICS-USER"))
          (state-names
@@ -38,7 +35,6 @@
          (pre-draw-written nil)
          (pre-screen-written nil)
          (finalized nil)
-         (installed-count 0)
          (required-installed-count 0)
          (main-installed nil))
     (labels
@@ -213,136 +209,81 @@
                    (emit-form "SNAPSHOT-END label=~A rows=~D" label rows)))
              (condition ()
                (emit-form "SNAPSHOT-ERROR label=~A" label))))
-         (install (name kind)
-           (handler-case
-               (let ((symbol (and owner (find-symbol name owner))))
-                 (cond
-                   ((null symbol)
-                    (emit-form "TARGET-MISSING name=~A" name)
-                    nil)
-                   ((not (fboundp symbol))
-                    (emit-form "TARGET-UNBOUND name=~A" name)
-                    nil)
-                   (t
-                    (let ((original (symbol-function symbol)))
-                      (setf (symbol-function symbol)
-                            (cond
-                              ((eq kind :rparse)
-                               (lambda (&rest args)
-                                 (incf rparse-depth)
-                                 ;; UNWIND-PROTECT keeps the depth balanced
-                                 ;; across THROW/RETURN-FROM.  Do not catch or
-                                 ;; re-signal conditions from the original;
-                                 ;; the observer must not alter restart/error
-                                 ;; behavior.
-                                 (unwind-protect
-                                     (multiple-value-prog1
-                                         (apply original args)
-                                       (when (and (= rparse-depth 1)
-                                                  (not after-rparse))
-                                         (setf after-rparse t)
-                                         (emit-line "BOUNDARY label=AFTER-RPARSE")
-                                         (snapshot "AFTER-RPARSE")))
-                                   (decf rparse-depth))))
-                              ((eq kind :draw-cform)
-                               (lambda (&rest args)
-                                 (if after-rparse
-                                     (unless first-draw-cform
-                                       (setf first-draw-cform t)
-                                       (emit-line "BOUNDARY label=FIRST-DRAW-CFORM")
-                                       (snapshot "FIRST-DRAW-CFORM"))
-                                   (unless pre-draw-written
-                                     (setf pre-draw-written t)
-                                     (emit-line "BOUNDARY-NOT-OBSERVED label=FIRST-DRAW-CFORM reason=PRE-RPARSE-BOUNDARY")))
-                                 (apply original args)))
-                              ((eq kind :screen-and-store)
-                               (lambda (&rest args)
-                                 (if after-rparse
-                                     (unless first-screen-and-store
-                                       (setf first-screen-and-store t)
-                                       (emit-line "BOUNDARY label=FIRST-SCREEN-AND-STORE")
-                                       (snapshot "FIRST-SCREEN-AND-STORE"))
-                                   (unless pre-screen-written
-                                     (setf pre-screen-written t)
-                                     (emit-line "BOUNDARY-NOT-OBSERVED label=FIRST-SCREEN-AND-STORE reason=PRE-RPARSE-BOUNDARY")))
-                                 (apply original args)))
-                              ((eq kind :main)
-                               (lambda (&rest args)
-                                 (let ((returned nil))
-                                   ;; Cleanup runs for nonlocal exits as well;
-                                   ;; it only emits missing observations and
-                                   ;; never catches/re-signals the original
-                                   ;; condition or throw.
-                                   (unwind-protect
-                                       (multiple-value-prog1
-                                           (apply original args)
-                                         (setf returned t))
-                                     (unless finalized
-                                       (setf finalized t)
-                                       (let ((reason (if returned "MAIN-RETURNED" "MAIN-EXIT")))
-                                         (unless after-rparse
-                                           (emit-form "BOUNDARY-NOT-OBSERVED label=AFTER-RPARSE reason=~A" reason))
-                                         (unless first-draw-cform
-                                           (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-DRAW-CFORM reason=~A" reason))
-                                         (unless first-screen-and-store
-                                           (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-SCREEN-AND-STORE reason=~A" reason))
-                                         (emit-line "END scene-state-snapshot"))))))
-                              (t original)))
-                      (incf installed-count)
-                      (when (or (string= name "RPARSE")
-                                (string= name "DRAW-CFORM")
-                                (string= name "SCREEN-AND-STORE"))
-                        (incf required-installed-count))
-                      (when (string= name "MAIN")
-                        (setf main-installed t))
-                      (emit-form "TARGET-INSTALLED name=~A actual-package=~A actual-name=~A kind=~A"
-                                 name (safe-package-name (symbol-package symbol))
-                                 (symbol-name symbol) kind)
-                      original))))
-             (condition (problem)
-               (emit-form "TARGET-INSTALL-ERROR name=~A type=~A"
-                          name (safe-type-token problem))
-               nil)))))
+         (finish-probe (reason)
+           (unless finalized
+             (setf finalized t)
+             (unless after-rparse
+               (emit-form "BOUNDARY-NOT-OBSERVED label=AFTER-RPARSE reason=~A" reason))
+             (unless first-draw-cform
+               (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-DRAW-CFORM reason=~A" reason))
+             (unless first-screen-and-store
+               (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-SCREEN-AND-STORE reason=~A" reason))
+             (emit-line "END scene-state-snapshot")))
+         (scene-observer (event name args entry-depth)
+           ;; The trace invokes this callback inside its own condition guard.
+           ;; Keep this function defensive because it must never alter the
+           ;; original engine's call, return, or condition path.
+           (declare (ignore args entry-depth))
+           (cond
+             ((eq event :install)
+              (cond
+                ((or (string= name "RPARSE")
+                     (string= name "DRAW-CFORM")
+                     (string= name "SCREEN-AND-STORE"))
+                 (incf required-installed-count)
+                 (emit-form "TARGET-INSTALLED name=~A actual-package=~A actual-name=~A kind=~A"
+                            name (safe-package-name owner) name name))
+                ((string= name "MAIN")
+                 (setf main-installed t)
+                 (emit-form "TARGET-INSTALLED name=~A actual-package=~A actual-name=~A kind=~A"
+                            name (safe-package-name owner) name name))))
+             ((and (eq event :enter) (string= name "RPARSE"))
+              (incf rparse-depth))
+             ((and (or (eq event :exit) (eq event :error))
+                   (string= name "RPARSE"))
+              (unwind-protect
+                  (when (and (eq event :exit)
+                             (= rparse-depth 1)
+                             (not after-rparse))
+                    (setf after-rparse t)
+                    (emit-line "BOUNDARY label=AFTER-RPARSE")
+                    (snapshot "AFTER-RPARSE"))
+                (when (> rparse-depth 0)
+                  (decf rparse-depth))))
+             ((and (eq event :enter) (string= name "DRAW-CFORM"))
+              (if after-rparse
+                  (unless first-draw-cform
+                    (setf first-draw-cform t)
+                    (emit-line "BOUNDARY label=FIRST-DRAW-CFORM")
+                    (snapshot "FIRST-DRAW-CFORM"))
+                (unless pre-draw-written
+                  (setf pre-draw-written t)
+                  (emit-line "BOUNDARY-NOT-OBSERVED label=FIRST-DRAW-CFORM reason=PRE-RPARSE-BOUNDARY"))))
+             ((and (eq event :enter) (string= name "SCREEN-AND-STORE"))
+              (if after-rparse
+                  (unless first-screen-and-store
+                    (setf first-screen-and-store t)
+                    (emit-line "BOUNDARY label=FIRST-SCREEN-AND-STORE")
+                    (snapshot "FIRST-SCREEN-AND-STORE"))
+                (unless pre-screen-written
+                  (setf pre-screen-written t)
+                  (emit-line "BOUNDARY-NOT-OBSERVED label=FIRST-SCREEN-AND-STORE reason=PRE-RPARSE-BOUNDARY"))))
+             ((and (or (eq event :exit) (eq event :error))
+                   (string= name "MAIN"))
+              (finish-probe (if (eq event :exit) "MAIN-RETURNED" "MAIN-EXIT"))))))
+      ;; Install the observer before loading the validated trace.  The trace
+      ;; captures this function once, then invokes it for its own successful
+      ;; target installations and runtime events.
+      (set 'aaron-scene-state-hook #'scene-observer)
+      (load "C:\\temp\\planning-call-trace.cl")
       (with-open-file (report report-path
                               :direction :output
                               :if-exists :append
                               :if-does-not-exist :create)
         (write-line "TRACE-LOADED" report)
         (finish-output report))
-      ;; Keep an explicit checkpoint on each installation boundary.  The
-      ;; first Windows holdout reached TRACE-LOADED and then stopped without
-      ;; an error record, so the next disposable run must distinguish a
-      ;; setter/closure failure from an append/report failure.
-      (format t "~&SCENE-INSTALL-BEGIN RPARSE~%")
-      (finish-output)
-      (emit-line "INSTALL-BEGIN name=RPARSE")
-      (install "RPARSE" :rparse)
-      (format t "~&SCENE-INSTALL-DONE RPARSE~%")
-      (finish-output)
-      (emit-line "INSTALL-DONE name=RPARSE")
-      (format t "~&SCENE-INSTALL-BEGIN DRAW-CFORM~%")
-      (finish-output)
-      (emit-line "INSTALL-BEGIN name=DRAW-CFORM")
-      (install "DRAW-CFORM" :draw-cform)
-      (format t "~&SCENE-INSTALL-DONE DRAW-CFORM~%")
-      (finish-output)
-      (emit-line "INSTALL-DONE name=DRAW-CFORM")
-      (format t "~&SCENE-INSTALL-BEGIN SCREEN-AND-STORE~%")
-      (finish-output)
-      (emit-line "INSTALL-BEGIN name=SCREEN-AND-STORE")
-      (install "SCREEN-AND-STORE" :screen-and-store)
-      (format t "~&SCENE-INSTALL-DONE SCREEN-AND-STORE~%")
-      (finish-output)
-      (emit-line "INSTALL-DONE name=SCREEN-AND-STORE")
-      ;; MAIN is only a finalization checkpoint; it does not inspect or alter
-      ;; the scene.  The three required target markers remain distinct.
-      (format t "~&SCENE-INSTALL-BEGIN MAIN~%")
-      (finish-output)
-      (emit-line "INSTALL-BEGIN name=MAIN")
-      (install "MAIN" :main)
-      (format t "~&SCENE-INSTALL-DONE MAIN~%")
-      (finish-output)
-      (emit-line "INSTALL-DONE name=MAIN")
+      ;; The trace has already installed and reported its wrapped targets via
+      ;; SCENE-OBSERVER.  Do not replace those function cells again here.
       (if (and (= required-installed-count 3) main-installed)
           (progn
             (emit-form "READY required-targets=3 installed-targets=~D" required-installed-count)

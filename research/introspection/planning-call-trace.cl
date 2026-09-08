@@ -49,7 +49,12 @@
           ;; closed lexical stream captured by the wrappers.
           (stream-open t)
           (targets nil)
-          (state-names nil))
+          (state-names nil)
+          ;; Optional observer installed by a companion probe.  The normal
+          ;; trace remains unchanged when this is NIL.  A companion can use
+          ;; the already-validated wrappers without redefining their function
+          ;; cells a second time.
+          (scene-hook nil))
       ;; Keep the potentially implementation-specific initializers in the
       ;; body, after the stream checkpoint, so a loader failure is observable.
       (setf owner (find-package "COMMON-GRAPHICS-USER")
@@ -79,6 +84,9 @@
               "SMALL-IMAGE-SCREEN-WIDTH" "SMALL-IMAGE-SCREEN-HEIGHT"
               "NARROW" "VERTICAL" "HORIZONTAL" "WIDE" "OFFSET"
               "RIGHTMAX" "TOPMAX"))
+      (setf scene-hook
+            (and (boundp 'aaron-scene-state-hook)
+                 (symbol-value 'aaron-scene-state-hook)))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
       (set 'aaron-trace-current-stack nil)
@@ -193,18 +201,29 @@
                 (emit-form "TRACE-LIMIT-REACHED ~D" event-limit)
                 nil)
                (t nil)))
+           (scene-event (event name args entry-depth)
+             ;; An observer is diagnostic only.  Conditions from it are
+             ;; swallowed so the validated call trace cannot change the
+             ;; original program's condition or return path.
+             (when (functionp scene-hook)
+               (handler-case
+                   (funcall scene-hook event name args entry-depth)
+                 (condition () nil))))
            (trace-enter (name args entry-depth)
              (setf trace-stack (cons name trace-stack))
              (set 'aaron-trace-current-stack (copy-list trace-stack))
+             (scene-event :enter name args entry-depth)
              (when (next-event)
                (emit-form "TRACE-ENTER ~D DEPTH ~D NAME ~A ARGS ~S STATE ~S"
                           event-count entry-depth name (args-summary args)
                           (binding-state))))
            (trace-exit (name entry-depth)
+             (scene-event :exit name nil entry-depth)
              (when (next-event)
                (emit-form "TRACE-EXIT ~D DEPTH ~D NAME ~A STATE ~S"
                           event-count entry-depth name (binding-state))))
            (trace-error (name entry-depth problem)
+             (scene-event :error name problem entry-depth)
              (when (next-event)
                (emit-form "TRACE-ERROR ~D DEPTH ~D NAME ~A TYPE ~S STATE ~S"
                           event-count entry-depth name (safe-type problem)
@@ -243,7 +262,8 @@
                                       (decf depth)
                                       (error problem))))))
                         (emit-form "TARGET ~A INSTALLED TYPE ~S"
-                                   name (safe-type original))))))
+                                   name (safe-type original))
+                        (scene-event :install name nil nil)))))
                (error (problem)
                  (emit-form "TARGET ~A INSTALL-ERROR TYPE ~S"
                             name (safe-type problem))))))
