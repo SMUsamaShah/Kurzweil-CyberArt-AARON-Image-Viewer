@@ -48,7 +48,8 @@ of our own implementation.
   the archived installer.
 - [`static-image-findings.md`](static-image-findings.md) — locally validated
   DXL/PLL table structure, first-table object spans, DXL descriptor/source
-  chains, exact indexed string references, and artifact completeness boundary.
+  chains, exact indexed string references, artifact completeness boundary, and
+  the anonymous bounded x86-like candidate profile.
 - [`scene-context-findings.md`](scene-context-findings.md) — package-qualified
   scene target checklist joined from static names, constants, and one bounded
   startup state trace.
@@ -83,6 +84,12 @@ of our own implementation.
 
 `tools/extract-installer.mjs` safely extracts and verifies the archived
 installer. It never executes the Windows binaries.
+
+`tools/profile-x86-candidates.mjs` uses a bounded local GNU `objdump` pass to
+summarize the anonymous DXL prologue candidates. It records conservative and
+assumed-indirect-call-return decoder views, boundary controls, and uncertainty
+categories; it does not map machine code to Lisp symbols or retain executable
+payload bytes.
 
 `tools/patch-registry-running.ps1` is a disposable-oracle diagnostic. It
 requires the exact extracted `registry.dll` hash before applying temporary

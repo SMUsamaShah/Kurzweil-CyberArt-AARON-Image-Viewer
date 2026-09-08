@@ -65,7 +65,16 @@ complete equivalent port until phases 5–8 are recovered.
    fingerprint inventory, not a DXL object or function inventory. Use
    `scene-context-findings.md` for the package-qualified
    runtime target checklist. The runtime PLL copy is truncated, so static work
-   must use the complete extracted file outside the repository.
+   must use the complete extracted file outside the repository. The anonymous
+   bounded control-flow profile in `introspection/static-code-profile.json`
+   now records 28,594 linear instruction rows, 4,271 direct relative
+   transfers, 2,986 indirect calls, 33 linear-boundary conflicts, and
+   5,638 conservatively reached rows across those candidates. Its separate
+   assumed-return control reaches 22,694 rows after continuing past 2,555
+   indirect call sites, while indirect jumps remain unresolved. It also
+   retains shifted-start, exact-payload-anchor, and 24-window PLL decoder
+   controls. Treat all of these as byte-interpretation evidence only; no
+   function name, calling convention, or runtime reachability is assigned.
 
 1. Keep the completed read-only brush-state census as the boundary for fill
    work. The direct checkpoint records seven `PAINT-BRUSH` objects,
