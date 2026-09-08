@@ -1,0 +1,99 @@
+name: AARON scene-state snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [reverse-engineer-aaron-js]
+    paths:
+      - '.github/workflows/aaron-scene-state.yml'
+      - 'research/introspection/scene-state-snapshot.cl'
+      - 'research/introspection/scene-state-snapshot-seeded-1234.cl'
+      - 'research/introspection/planning-call-trace.cl'
+      - 'research/oracle/planning-random-seed-common.cl'
+      - 'research/tools/parse-scene-state-report.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: windows-2022
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: baseline
+            source: scene-state-snapshot.cl
+          - id: seed-1234-a
+            source: scene-state-snapshot-seeded-1234.cl
+          - id: seed-1234-b
+            source: scene-state-snapshot-seeded-1234.cl
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download hash-verified reference build
+        shell: pwsh
+        run: |
+          $setup = Join-Path $env:RUNNER_TEMP 'AARONsetup.exe'
+          $extract = Join-Path $env:RUNNER_TEMP 'aaron-extracted'
+          curl.exe --fail --location --retry 2 --retry-all-errors `
+            --connect-timeout 20 --max-time 120 --retry-max-time 180 --output $setup `
+            'https://archive.org/download/kurzweilcyberart_aaron/AARONsetup.exe'
+          if ($LASTEXITCODE -ne 0) { throw 'Reference download failed' }
+          node research/tools/extract-installer.mjs `
+            $setup $extract "$env:ProgramFiles\7-Zip\7z.exe"
+          if ($LASTEXITCODE -ne 0) { throw 'Reference verification failed' }
+      - name: Stage companion sources
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path 'C:\temp' | Out-Null
+          Copy-Item -LiteralPath research/introspection/planning-call-trace.cl `
+            -Destination 'C:\temp\planning-call-trace.cl' -Force
+          Copy-Item -LiteralPath research/introspection/scene-state-snapshot.cl `
+            -Destination 'C:\temp\scene-state-snapshot.cl' -Force
+          Copy-Item -LiteralPath research/oracle/planning-random-seed-common.cl `
+            -Destination 'C:\temp\planning-random-seed-common.cl' -Force
+      - name: Run focused scene-state probe
+        shell: pwsh
+        run: |
+          $output = Join-Path $env:RUNNER_TEMP 'aaron-scene-state'
+          try {
+            & research/oracle/run-oracle.ps1 `
+              -ExtractedRoot (Join-Path $env:RUNNER_TEMP 'aaron-extracted') `
+              -OutputRoot $output -Mode direct-screensaver -RunSeconds 40 `
+              -TargetPaintings 1 -DisableAaronDep -PatchRegistryRunning `
+              -PatchPremiumFlag -PremiumFlagSource '..\introspection\${{ matrix.source }}'
+          } finally {
+            $report = 'C:\temp\aaron-scene-state-snapshot.txt'
+            if (Test-Path $report) {
+              Copy-Item -LiteralPath $report `
+                -Destination (Join-Path $output 'scene-state-snapshot.txt') -Force
+            }
+            $trace = 'C:\temp\aaron-planning-call-trace.txt'
+            if (Test-Path $trace) {
+              Copy-Item -LiteralPath $trace `
+                -Destination (Join-Path $output 'planning-call-trace.txt') -Force
+            }
+            $random = 'C:\temp\aaron-random-samples.txt'
+            if (Test-Path $random) {
+              Copy-Item -LiteralPath $random `
+                -Destination (Join-Path $output 'random-samples.txt') -Force
+            }
+          }
+          $report = Join-Path $output 'scene-state-snapshot.txt'
+          if (-not (Test-Path $report)) { throw 'Scene-state probe never started' }
+          if (-not (Select-String -LiteralPath $report -SimpleMatch 'END scene-state-snapshot')) {
+            throw 'Scene-state probe started but did not complete; inspect checkpoints'
+          }
+          node research/tools/parse-scene-state-report.mjs $report `
+            'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}' `
+            > (Join-Path $output 'scene-state-snapshot.json')
+          if ($LASTEXITCODE -ne 0) { throw 'Scene-state report validation failed' }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aaron-scene-state-${{ matrix.id }}
+          path: ${{ runner.temp }}/aaron-scene-state
+          retention-days: 14

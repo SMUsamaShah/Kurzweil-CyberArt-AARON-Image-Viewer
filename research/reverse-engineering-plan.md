@@ -141,6 +141,15 @@ complete equivalent port until phases 5–8 are recovered.
    shape-level geometry/stage attribution. Use it to compare provisional
    output slices while the oracle caller remains unresolved; it does not
    replace the next original-engine context trace.
+   A local-only companion is now prepared at
+   `introspection/scene-state-snapshot.cl`: it snapshots the 15
+   package-qualified scene bindings after the first successful outermost
+   `RPARSE`, at the first post-parse `DRAW-CFORM`, and at the first post-parse
+   `SCREEN-AND-STORE`. It never manufactures a `PLAN` or calls guessed
+   accessors; the current evidence therefore records an explicit
+   `NO-VERIFIED-READERS` decision. Its parser/tests run locally, while the
+   isolated three-case Windows workflow supplies a baseline and two seeded
+   repeat controls only when execution is required.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call

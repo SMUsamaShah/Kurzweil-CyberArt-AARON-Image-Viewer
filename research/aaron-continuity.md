@@ -210,6 +210,33 @@ Local verification:
    candidate-residue validation, tagged-pointer controls, and the anonymous
    control-flow profile.
 
+## Current in-flight scene-context checkpoint
+
+The next local-first target is now prepared but is not yet original-engine
+evidence. `research/introspection/scene-state-snapshot.cl` loads the existing
+validated call trace and adds observation wrappers around `RPARSE`,
+`DRAW-CFORM`, `SCREEN-AND-STORE`, and `MAIN`. It snapshots exactly 15
+package-qualified bindings at three boundaries: after the first successful
+outermost `RPARSE`, at the first post-parse `DRAW-CFORM`, and at the first
+post-parse `SCREEN-AND-STORE`. It records bounded scalar/type/list/array shape
+summaries only; it does not print live objects, manufacture a `PLAN`, or call
+unverified readers. The current evidence therefore records
+`PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS` in every completed
+snapshot.
+
+`research/introspection/scene-state-snapshot-seeded-1234.cl` supplies the
+already validated post-`INIT-RANDOM` seed-1234 calibration seam, and
+`.github/workflows/aaron-scene-state.yml` runs one baseline plus two fresh
+seeded repeat controls on Windows Server 2022. The local parser
+`research/tools/parse-scene-state-report.mjs` and its four tests validate
+marker order, target installation, exactly 15 unique binding rows per
+snapshot, explicit PLAN-reader omission, and explicit non-observations. The
+probe source uses `UNWIND-PROTECT` for depth/finalization cleanup so original
+conditions and nonlocal exits are not caught or re-signaled. No Windows result
+should be treated as evidence until the report is complete, the AA0 bytes and
+random controls match across the two seeded jobs, and all three reports
+normalize successfully.
+
 ## Honest progress estimate
 
 Overall completion is approximately **35–40%**. The archaeology, AA protocol,

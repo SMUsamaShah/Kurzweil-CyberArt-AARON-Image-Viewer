@@ -91,6 +91,11 @@ assumed-indirect-call-return decoder views, an independently decoded branch
 worklist, boundary controls, and uncertainty categories; it does not map
 machine code to Lisp symbols or retain executable payload bytes.
 
+`tools/parse-scene-state-report.mjs` validates the sanitized report from the
+focused scene-context companion. The companion and its isolated Windows
+workflow are staged only when a live `RPARSE`/drawing boundary is needed; the
+parser, tests, and report-shape checks remain local.
+
 `tools/patch-registry-running.ps1` is a disposable-oracle diagnostic. It
 requires the exact extracted `registry.dll` hash before applying temporary
 entry-point patches to the legacy process/version and trial-age checks; it is
