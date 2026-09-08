@@ -21,9 +21,9 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-08, the recovered checkout is clean at local commit
-`c5f7e13fac3d8e67f1a251b26894eb748c20d4c8` (`Add DXL pointer encoding
-controls`), and the connected branch is published at
-`b75aa72459d3ab57e3e5ab20d0b4b016fbb4459e` with the same changed-file tree.
+`4b19379fb2f1ba6ab9aa55bf6cd521b81ca92bab` (`Profile anonymous DXL call
+continuation`), and the connected branch is published at
+`8e9913b4bb21b8932cd006446b68a90cb727be17` with the same changed-file tree.
 The current direct matrix source remains in the earlier edge checkpoint. Its
 pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
@@ -197,10 +197,11 @@ Local verification:
 - The brush report parser and its real original-engine captures are covered by
   the research-tool suite.
 - Research-tool tests are run directly with
-  `node --test research/tools/test/*.test.mjs` from the repository root; the
-  `research/tools` directory has no separate `package.json`; the suite now has
-  35 passing tests, including module adjacency, compiled-payload identity, DXL
-  candidate-residue validation, and tagged-pointer controls.
+   `node --test research/tools/test/*.test.mjs` from the repository root; the
+   `research/tools` directory has no separate `package.json`; the suite now has
+   39 passing tests, including module adjacency, compiled-payload identity, DXL
+   candidate-residue validation, tagged-pointer controls, and the anonymous
+   control-flow profile.
 
 ## Honest progress estimate
 
