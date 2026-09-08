@@ -46,7 +46,11 @@ The separate assumed-indirect-call-return view reaches 22,694 rows and 64,470
 bytes after continuing through 2,555 indirect call sites, while indirect jumps
 remain unresolved. It also retains 28 shifted-start controls, three exact
 66-byte PLL/DXL anchor profiles with matching normalized transfer structure,
-and 24 bounded PLL decoder-reference windows. The report is 517,247 bytes;
+and 24 bounded PLL decoder-reference windows. A fresh independent worklist at
+each branch target reaches 5,670 conservative instructions / 15,278 bytes and
+22,795 assumed-return instructions / 64,808 bytes, with no target/interior
+boundary conflicts in this image; it continues through 2,561 indirect calls
+and leaves indirect jumps unresolved. The report is 873,511 bytes;
 per-candidate scalar summaries and detailed control-window transfer lists are
 both retained, while redundant per-candidate transfer arrays are omitted. This
 is anonymous

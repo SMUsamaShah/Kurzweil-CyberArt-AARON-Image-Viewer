@@ -73,8 +73,11 @@ complete equivalent port until phases 5–8 are recovered.
    assumed-return control reaches 22,694 rows after continuing past 2,555
    indirect call sites, while indirect jumps remain unresolved. It also
    retains shifted-start, exact-payload-anchor, and 24-window PLL decoder
-   controls. Treat all of these as byte-interpretation evidence only; no
-   function name, calling convention, or runtime reachability is assigned.
+   controls. A fresh decoder worklist at each branch target reaches 5,670
+   conservative instructions and 22,795 assumed-return instructions with no
+   target/interior boundary conflicts in this image; it still assigns no
+   function name, calling convention, or runtime reachability. Treat all of
+   these as byte-interpretation evidence only.
 
 1. Keep the completed read-only brush-state census as the boundary for fill
    work. The direct checkpoint records seven `PAINT-BRUSH` objects,

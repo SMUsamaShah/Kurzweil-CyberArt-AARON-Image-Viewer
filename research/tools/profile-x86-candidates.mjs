@@ -374,19 +374,198 @@ export function profileInstructionStream(instructions, candidate, candidateRange
   };
 }
 
-function runObjdump(imagePath, start, end, objdump = DEFAULT_OBJDUMP) {
+function runObjdump(
+  imagePath,
+  start,
+  end,
+  objdump = DEFAULT_OBJDUMP,
+  { disassembleZeroes = false } = {},
+) {
   assertInteger(start, 'disassembly start');
   assertInteger(end, 'disassembly end', start + 1);
-  const output = execFileSync(objdump, [
+  const args = [
     '-b', 'binary',
     '-m', 'i386',
     '-D',
     '--insn-width=16',
+    ...(disassembleZeroes ? ['--disassemble-zeroes'] : []),
     `--start-address=${start}`,
     `--stop-address=${end}`,
     imagePath,
-  ], { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+  ];
+  const output = execFileSync(objdump, args, { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
   return parseObjdumpInstructions(output);
+}
+
+/**
+ * Independently decode reachable blocks from arbitrary transfer targets.
+ *
+ * Each queued start is passed to a fresh bounded objdump invocation, so a
+ * target that lands inside a linear-sweep instruction gets its own decode.
+ * The default mode stops at indirect transfers; the optional assumed-return
+ * mode only continues after indirect calls.  No indirect target is guessed.
+ */
+function independentRecursiveSummary(
+  imagePath,
+  range,
+  candidateRanges,
+  objdump,
+  { assumeIndirectCallsReturn = false, decodeCache = new Map() } = {},
+) {
+  const queue = [range.payloadStart];
+  const queued = new Set(queue);
+  const visited = new Set();
+  const decoded = new Map();
+  const instructionRanges = [];
+  const blockStarts = new Set();
+  const invalidStarts = new Set();
+  const unclassifiedStarts = new Set();
+  const boundaryConflicts = new Set();
+  const stopReasons = new Map();
+  const transfers = [];
+  let assumedReturnCallCount = 0;
+
+  const enqueue = (target) => {
+    if (target < range.payloadStart || target >= range.end) return;
+    if (!queued.has(target)) {
+      queued.add(target);
+      queue.push(target);
+    }
+  };
+
+  while (queue.length) {
+    const blockStart = queue.pop();
+    if (blockStarts.has(blockStart)) continue;
+    blockStarts.add(blockStart);
+    const rows = decodeCache.has(blockStart)
+      ? decodeCache.get(blockStart)
+      : runObjdump(
+        imagePath,
+        blockStart,
+        range.end,
+        objdump,
+        { disassembleZeroes: true },
+      ).filter(({ offset }) => offset >= blockStart && offset < range.end);
+    decodeCache.set(blockStart, rows);
+    if (rows.length === 0 || rows[0].offset !== blockStart) {
+      unclassifiedStarts.add(blockStart);
+      increment(stopReasons, 'no-independent-decode');
+      continue;
+    }
+
+    for (const instruction of rows) {
+      if (instruction.offset < range.payloadStart || instruction.offset >= range.end) break;
+      if (visited.has(instruction.offset)) break;
+      const overlapping = instructionRanges.find(({ start, end }) => (
+        instruction.offset > start && instruction.offset < end
+      ));
+      if (overlapping) boundaryConflicts.add(instruction.offset);
+      visited.add(instruction.offset);
+      decoded.set(instruction.offset, instruction);
+      instructionRanges.push({
+        start: instruction.offset,
+        end: instruction.offset + instruction.length,
+      });
+
+      if (isInvalidInstruction(instruction)) {
+        invalidStarts.add(instruction.offset);
+        increment(stopReasons, 'invalid-or-byte-fallback');
+        break;
+      }
+
+      const relative = relativeTransfer(instruction);
+      if (relative) {
+        transfers.push({
+          offset: instruction.offset,
+          kind: relative.kind,
+          target: relative.target,
+        });
+        if (relative.kind === 'conditional-jump') {
+          enqueue(relative.target);
+          enqueue(instruction.offset + instruction.length);
+        } else if (relative.kind === 'jump') {
+          enqueue(relative.target);
+        } else {
+          enqueue(instruction.offset + instruction.length);
+        }
+        break;
+      }
+
+      const transferKind = indirectTransfer(instruction);
+      if (transferKind) {
+        if (transferKind === 'call' && assumeIndirectCallsReturn) {
+          assumedReturnCallCount += 1;
+          increment(stopReasons, 'indirect-call-assumed-return');
+          enqueue(instruction.offset + instruction.length);
+        } else {
+          increment(stopReasons, 'indirect-transfer');
+        }
+        break;
+      }
+      if (isTerminal(instruction)) {
+        increment(stopReasons, 'terminal-instruction');
+        break;
+      }
+    }
+  }
+
+  const reachableBytes = [...visited].reduce((total, offset) => (
+    total + (decoded.get(offset)?.length ?? 0)
+  ), 0);
+  const starts = new Set(decoded.keys());
+  const targetClasses = new Map();
+  const classifiedTransfers = transfers.map((transfer) => {
+    const targetClass = classifyTarget(
+      transfer.target,
+      range,
+      candidateRanges,
+      starts,
+      instructionRanges,
+    );
+    increment(targetClasses, targetClass);
+    if (instructionRanges.some(({ start, end }) => (
+      transfer.target > start && transfer.target < end
+    ))) {
+      boundaryConflicts.add(transfer.target);
+    }
+    return { ...transfer, targetClass };
+  });
+  return {
+    blockCount: blockStarts.size,
+    instructionCount: visited.size,
+    reachableBytes,
+    coverageRatio: (range.end - range.payloadStart) === 0
+      ? 0
+      : reachableBytes / (range.end - range.payloadStart),
+    invalidStartCount: invalidStarts.size,
+    unclassifiedStartCount: unclassifiedStarts.size,
+    boundaryConflictCount: boundaryConflicts.size,
+    assumedReturnCallCount,
+    targetClassCounts: summarizeCounts(targetClasses),
+    stopReasonCounts: summarizeCounts(stopReasons),
+    transfers: classifiedTransfers,
+  };
+}
+
+function independentProfile(imagePath, candidate, candidateRanges, objdump) {
+  const range = candidateRange(candidate);
+  const decodeCache = new Map();
+  return {
+    conservative: independentRecursiveSummary(
+      imagePath,
+      range,
+      candidateRanges,
+      objdump,
+      { decodeCache },
+    ),
+    assumedReturn: independentRecursiveSummary(
+      imagePath,
+      range,
+      candidateRanges,
+      objdump,
+      { assumeIndirectCallsReturn: true, decodeCache },
+    ),
+  };
 }
 
 function aggregateProfiles(profiles) {
@@ -443,6 +622,45 @@ function aggregateProfiles(profiles) {
     targetClassCounts: summarizeCounts(totals.targetClassCounts),
     stopReasonCounts: summarizeCounts(totals.stopReasonCounts),
     operandSignatureCounts: summarizeCounts(totals.operandSignatureCounts),
+    independent: aggregateIndependentProfiles(profiles),
+  };
+}
+
+function aggregateIndependentView(profiles, view) {
+  const totals = {
+    blockCount: 0,
+    instructionCount: 0,
+    reachableBytes: 0,
+    invalidStartCount: 0,
+    unclassifiedStartCount: 0,
+    boundaryConflictCount: 0,
+    assumedReturnCallCount: 0,
+    targetClassCounts: new Map(),
+    stopReasonCounts: new Map(),
+  };
+  for (const profile of profiles) {
+    const summary = profile.independent[view];
+    totals.blockCount += summary.blockCount;
+    totals.instructionCount += summary.instructionCount;
+    totals.reachableBytes += summary.reachableBytes;
+    totals.invalidStartCount += summary.invalidStartCount;
+    totals.unclassifiedStartCount += summary.unclassifiedStartCount;
+    totals.boundaryConflictCount += summary.boundaryConflictCount;
+    totals.assumedReturnCallCount += summary.assumedReturnCallCount;
+    for (const [key, value] of Object.entries(summary.targetClassCounts)) increment(totals.targetClassCounts, key, value);
+    for (const [key, value] of Object.entries(summary.stopReasonCounts)) increment(totals.stopReasonCounts, key, value);
+  }
+  return {
+    ...totals,
+    targetClassCounts: summarizeCounts(totals.targetClassCounts),
+    stopReasonCounts: summarizeCounts(totals.stopReasonCounts),
+  };
+}
+
+function aggregateIndependentProfiles(profiles) {
+  return {
+    conservative: aggregateIndependentView(profiles, 'conservative'),
+    assumedReturn: aggregateIndependentView(profiles, 'assumedReturn'),
   };
 }
 
@@ -479,10 +697,22 @@ function candidateSummary(candidate, profile, { includeTransfers = false } = {})
     // repository text transport.
     recursive: reportRecursiveSummary(profile.recursive, includeTransfers),
     assumedReturn: reportRecursiveSummary(profile.assumedReturn, includeTransfers),
+    ...(profile.independent ? {
+      independent: {
+        conservative: reportRecursiveSummary(profile.independent.conservative, includeTransfers),
+        assumedReturn: reportRecursiveSummary(profile.independent.assumedReturn, includeTransfers),
+      },
+    } : {}),
   };
 }
 
-function profileWindows(imagePath, windows, candidateRanges, objdump) {
+function profileWindows(
+  imagePath,
+  windows,
+  candidateRanges,
+  objdump,
+  { includeIndependent = false } = {},
+) {
   return windows.map((window) => {
     const instructions = runObjdump(imagePath, window.start, window.end, objdump);
     const candidate = {
@@ -492,6 +722,9 @@ function profileWindows(imagePath, windows, candidateRanges, objdump) {
       rawEnd: window.end,
     };
     const profile = profileInstructionStream(instructions, candidate, candidateRanges);
+    if (includeIndependent) {
+      profile.independent = independentProfile(imagePath, candidate, candidateRanges, objdump);
+    }
     return {
       ...window,
       payloadLength: window.end - (candidate.offset + 4),
@@ -563,7 +796,9 @@ export function buildDxlControlFlowProfile({
   }));
   const profiles = candidates.map((candidate) => {
     const instructions = runObjdump(dxlPath, candidate.offset + 4, candidate.rawEnd, objdump);
-    return { candidate, profile: profileInstructionStream(instructions, candidate, candidateRanges) };
+    const profile = profileInstructionStream(instructions, candidate, candidateRanges);
+    profile.independent = independentProfile(dxlPath, candidate, candidateRanges, objdump);
+    return { candidate, profile };
   });
 
   const selectedOffsets = shiftedCandidateOffsets ?? candidates
@@ -586,7 +821,13 @@ export function buildDxlControlFlowProfile({
       });
     }
   }
-  const shiftedProfiles = profileWindows(dxlPath, shiftedWindows, candidateRanges, objdump);
+  const shiftedProfiles = profileWindows(
+    dxlPath,
+    shiftedWindows,
+    candidateRanges,
+    objdump,
+    { includeIndependent: true },
+  );
 
   const anchorWindows = (staticIndex.crossReference?.compiledPayloadIdentity?.matches ?? [])
     .filter((match) => match.precedingHeaderMatches && match.dxlCandidateAligned)
@@ -600,7 +841,13 @@ export function buildDxlControlFlowProfile({
       payloadLength: match.payloadLength,
       payloadSha256: match.payloadSha256,
     }));
-  const anchorProfiles = profileWindows(dxlPath, anchorWindows, candidateRanges, objdump);
+  const anchorProfiles = profileWindows(
+    dxlPath,
+    anchorWindows,
+    candidateRanges,
+    objdump,
+    { includeIndependent: true },
+  );
   const pllWindows = pllReferenceWindows(pllPath);
   const pllProfiles = pllWindows.length
     ? profileWindows(pllPath, pllWindows, [], objdump)
@@ -615,6 +862,7 @@ export function buildDxlControlFlowProfile({
       command: objdump,
       version: toolVersion(objdump),
       mode: 'objdump -b binary -m i386 -D --insn-width=16',
+      independentMode: 'same bounded command plus --disassemble-zeroes from each queued block start',
       caveat: 'Linear and recursive decoding are exploratory byte interpretations; embedded data, tail calls, and Allegro VM conventions can make apparent instructions or transfers non-semantic.',
     },
     image: { name: dxlPath.split(/[\\/]/).at(-1), size: dxl.length, sha256: sha256(dxl) },

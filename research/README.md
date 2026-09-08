@@ -87,9 +87,9 @@ installer. It never executes the Windows binaries.
 
 `tools/profile-x86-candidates.mjs` uses a bounded local GNU `objdump` pass to
 summarize the anonymous DXL prologue candidates. It records conservative and
-assumed-indirect-call-return decoder views, boundary controls, and uncertainty
-categories; it does not map machine code to Lisp symbols or retain executable
-payload bytes.
+assumed-indirect-call-return decoder views, an independently decoded branch
+worklist, boundary controls, and uncertainty categories; it does not map
+machine code to Lisp symbols or retain executable payload bytes.
 
 `tools/patch-registry-running.ps1` is a disposable-oracle diagnostic. It
 requires the exact extracted `registry.dll` hash before applying temporary

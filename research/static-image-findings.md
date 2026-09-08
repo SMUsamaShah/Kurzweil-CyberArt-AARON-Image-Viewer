@@ -260,6 +260,25 @@ included as a structural decoder reference. These controls test decoder
 sensitivity and cross-image byte identity; they do not turn the profile into a
 relocation or symbol map.
 
+The independent worklist repeats the comparison by starting a fresh bounded
+decoder at every queued branch target, including targets that were not starts
+in the initial linear sweep. With `--disassemble-zeroes`, it reaches the
+following aggregate counts:
+
+| Independent worklist view across 190 candidates | Blocks | Instructions | Bytes | Boundary conflicts |
+|---|---:|---:|---:|---:|
+| stop at indirect transfers | 1,559 | 5,670 | 15,278 | 0 |
+| assume indirect calls return | 6,816 | 22,795 | 64,808 | 0 |
+
+The second independent view continues through 2,561 indirect call sites, finds
+two invalid starting decodes, and still leaves indirect jumps unresolved. The
+absence of a boundary conflict is specific to this bounded decoder and image;
+it is not proof that every target is a machine-code edge or that every
+assumed-return path executes. Three exact PLL/DXL anchors retain the same
+independent five-block, 20-instruction, 57-byte normalized profile in both
+modes. The report keeps detailed transfer lists for the anchor and shifted
+controls, while the 190-candidate inventory stores compact scalar summaries.
+
 ### Negative name-to-object search
 
 An independent read-only cross-image scan tested the 16 scene-context names,

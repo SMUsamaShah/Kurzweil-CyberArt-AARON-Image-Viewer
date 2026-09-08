@@ -89,9 +89,23 @@ test('retains the checked-in DXL profile as an anonymous structural fixture', ()
   assert.equal(profile.aggregate.assumedReturnInstructionCount, 22694);
   assert.equal(profile.aggregate.assumedReturnReachableBytes, 64470);
   assert.equal(profile.aggregate.assumedReturnCallCount, 2555);
+  assert.equal(profile.aggregate.independent.conservative.blockCount, 1559);
+  assert.equal(profile.aggregate.independent.conservative.instructionCount, 5670);
+  assert.equal(profile.aggregate.independent.conservative.reachableBytes, 15278);
+  assert.equal(profile.aggregate.independent.conservative.boundaryConflictCount, 0);
+  assert.equal(profile.aggregate.independent.assumedReturn.blockCount, 6816);
+  assert.equal(profile.aggregate.independent.assumedReturn.instructionCount, 22795);
+  assert.equal(profile.aggregate.independent.assumedReturn.reachableBytes, 64808);
+  assert.equal(profile.aggregate.independent.assumedReturn.assumedReturnCallCount, 2561);
+  assert.equal(profile.aggregate.independent.assumedReturn.boundaryConflictCount, 0);
   assert.equal(profile.aggregate.targetClassCounts['origin-instruction-interior'], 33);
   assert.equal('transfers' in profile.candidates[0].recursive, false);
+  assert.equal('transfers' in profile.candidates[0].independent.conservative, false);
   assert.equal(profile.controls.exactPayloadAnchors.profiles[0].profile.recursive.transfers.length, 3);
+  assert.equal(
+    profile.controls.exactPayloadAnchors.profiles[0].profile.independent.conservative.transfers.length,
+    3,
+  );
   assert.equal(profile.controls.exactPayloadAnchors.profiles.length, 3);
   assert.equal(profile.controls.shiftedStarts.profiles.length, 28);
   assert.equal(profile.controls.pllPrefixReferences.sampledWindowCount, 24);
