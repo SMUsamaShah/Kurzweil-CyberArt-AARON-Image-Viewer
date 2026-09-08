@@ -309,12 +309,40 @@
                               :if-does-not-exist :create)
         (write-line "TRACE-LOADED" report)
         (finish-output report))
+      ;; Keep an explicit checkpoint on each installation boundary.  The
+      ;; first Windows holdout reached TRACE-LOADED and then stopped without
+      ;; an error record, so the next disposable run must distinguish a
+      ;; setter/closure failure from an append/report failure.
+      (format t "~&SCENE-INSTALL-BEGIN RPARSE~%")
+      (finish-output)
+      (emit-line "INSTALL-BEGIN name=RPARSE")
       (install "RPARSE" :rparse)
+      (format t "~&SCENE-INSTALL-DONE RPARSE~%")
+      (finish-output)
+      (emit-line "INSTALL-DONE name=RPARSE")
+      (format t "~&SCENE-INSTALL-BEGIN DRAW-CFORM~%")
+      (finish-output)
+      (emit-line "INSTALL-BEGIN name=DRAW-CFORM")
       (install "DRAW-CFORM" :draw-cform)
+      (format t "~&SCENE-INSTALL-DONE DRAW-CFORM~%")
+      (finish-output)
+      (emit-line "INSTALL-DONE name=DRAW-CFORM")
+      (format t "~&SCENE-INSTALL-BEGIN SCREEN-AND-STORE~%")
+      (finish-output)
+      (emit-line "INSTALL-BEGIN name=SCREEN-AND-STORE")
       (install "SCREEN-AND-STORE" :screen-and-store)
+      (format t "~&SCENE-INSTALL-DONE SCREEN-AND-STORE~%")
+      (finish-output)
+      (emit-line "INSTALL-DONE name=SCREEN-AND-STORE")
       ;; MAIN is only a finalization checkpoint; it does not inspect or alter
       ;; the scene.  The three required target markers remain distinct.
+      (format t "~&SCENE-INSTALL-BEGIN MAIN~%")
+      (finish-output)
+      (emit-line "INSTALL-BEGIN name=MAIN")
       (install "MAIN" :main)
+      (format t "~&SCENE-INSTALL-DONE MAIN~%")
+      (finish-output)
+      (emit-line "INSTALL-DONE name=MAIN")
       (if (and (= required-installed-count 3) main-installed)
           (progn
             (emit-form "READY required-targets=3 installed-targets=~D" required-installed-count)
