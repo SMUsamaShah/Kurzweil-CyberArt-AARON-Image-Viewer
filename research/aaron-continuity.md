@@ -21,9 +21,9 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-08, the recovered checkout is clean at local commit
-`442f963091bf2d5c51e04d92fcff3688d459099b` (`Compact anonymous control-flow
-report`), and the connected branch is published at
-`b0d76c97799da7629d8af1802363e37ce8187876` with the same changed-file tree.
+`311792d321b52e0980faf8f6a49e46f69598a4a0` (`Add independent DXL
+control-flow profile`), and the connected branch is published at
+`decd0f150202039b915ed1815533c3527335d128` with the same changed-file tree.
 The current direct matrix source remains in the earlier edge checkpoint. Its
 pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
