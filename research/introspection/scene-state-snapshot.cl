@@ -214,9 +214,9 @@
              (setf finalized t)
              (unless after-rparse
                (emit-form "BOUNDARY-NOT-OBSERVED label=AFTER-RPARSE reason=~A" reason))
-             (unless first-draw-cform
+             (unless (or first-draw-cform pre-draw-written)
                (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-DRAW-CFORM reason=~A" reason))
-             (unless first-screen-and-store
+             (unless (or first-screen-and-store pre-screen-written)
                (emit-form "BOUNDARY-NOT-OBSERVED label=FIRST-SCREEN-AND-STORE reason=~A" reason))
              (emit-line "END scene-state-snapshot")))
          (scene-observer (event name args entry-depth)
