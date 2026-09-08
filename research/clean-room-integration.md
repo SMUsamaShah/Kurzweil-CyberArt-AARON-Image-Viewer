@@ -47,6 +47,38 @@ counts, frame containment, and pairwise frame overlap:
 The acceptance rates are behavior of this provisional scaffold, not estimates
 of the historical engine's composition frequencies.
 
+## Scene geometry and emission manifest
+
+The generator now returns a frozen `scene.manifest` alongside the AA document.
+It gives every generated object and shape a stable ID, preserves the actual
+polygon and bounds, labels figure placement as `accepted` or `unplanned`, and
+records half-open operation ranges for the outline and paint phases. The
+manifest also stores a hash of each complete emitted phase. This makes a
+document-level mismatch attributable to a shape or stage without changing the
+generator's random draw order or AA bytes.
+
+`replaySceneManifest(document, manifest)` provides an immutable operation-slice
+index for inspection and replay of the captured result. Finalization binds the
+manifest to the document dimensions and palette hash, stores per-shape stage
+hashes, and rejects gaps, overlaps, duplicate IDs, or repeated stage
+assignments. Replay verifies those bindings and hashes before it slices, then
+deep-copies operation objects so the result cannot freeze or alias the source
+document. It does not regenerate artwork or claim to restore a Lisp random
+state; it deliberately reuses the already emitted operations. The local stage
+fixture covers one polygon case and two FREE-PATH cases in
+[`engine/test/fixtures/scene-stage-integration.json`](../engine/test/fixtures/scene-stage-integration.json):
+
+| Case | Objects / shapes | Outline ops | Paint ops | Serialized bytes | Serialized SHA-256 |
+|---|---:|---:|---:|---:|---|
+| seed 1234, polygon | 5 / 31 | 283 | 68,836 | 163,018 | `3016bc28…1474ac3` |
+| seed 1234, FREE-PATH | 5 / 31 | 3,026 | 68,836 | 230,439 | `61a68418…2df0a05` |
+| seed 5678, FREE-PATH | 5 / 30 | 2,909 | 76,550 | 242,740 | `5b4262e7…2151a33` |
+
+The manifest is a structural clean-room aid. Its `provisional-clean-room`
+label covers the current figure, plant, table, outline-caller, and scanline
+paint policies; only the underlying isolated primitives have original-engine
+evidence.
+
 ## FREE-PATH outline integration
 
 `outlineMode: 'free-path-subset'` routes generated polygon outlines through the
@@ -87,4 +119,3 @@ all-visible outline caller, independent outline seed, and direct AA emission.
 The next high-value task is to recover real scene context around
 `SCREEN-AND-STORE`, `MPLAN`, and `RPARSE`, then replace these scaffolds one rule
 at a time. No Windows execution was required for this checkpoint.
-

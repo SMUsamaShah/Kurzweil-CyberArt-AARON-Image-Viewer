@@ -33,7 +33,9 @@ function requireProfile(profile) {
  * unchecked boundary-write result, not enough evidence to claim a general
  * clipping rule for integrated callers.
  */
-export function applyMeasuredBrushVertices(maps, profile, path, value) {
+export function applyMeasuredBrushVertices(maps, profile, path, value, {
+  insideFrame = null,
+} = {}) {
   requireProfile(profile);
   requirePath(path);
   if (!maps || !maps.fillMap) throw new TypeError('maps must include fillMap');
@@ -47,6 +49,7 @@ export function applyMeasuredBrushVertices(maps, profile, path, value) {
     for (const [deltaFirst, deltaSecond] of profile.core) {
       const targetFirst = first + deltaFirst;
       const targetSecond = second + deltaSecond;
+      if (insideFrame && !insideFrame(targetFirst, targetSecond)) continue;
       if (targetFirst < 0 || targetFirst >= maps.width
           || targetSecond < 0 || targetSecond >= maps.height) {
         continue;
@@ -59,4 +62,48 @@ export function applyMeasuredBrushVertices(maps, profile, path, value) {
     }
   }
   return Object.freeze([...touched].sort((left, right) => left - right));
+}
+
+/**
+ * Apply the measured dependency-isolated BRUSH-STROKE boundary.
+ *
+ * For the captured nonempty paths, the original calls SCREEN-AND-STORE once
+ * with the complete path and CDEX/SDEX, regardless of whether the
+ * IN-SUB-FRAME predicate accepts the core-mask cells. Accepted cells are
+ * written to FILL-MAP using the measured helper above. Empty and singleton
+ * paths produce neither a screen call nor map writes in the retained cases.
+ * This adapter deliberately does not model the unresolved downstream screen,
+ * fill, colour, or brush-state routines.
+ */
+export function applyMeasuredBrushStroke(
+  maps,
+  profile,
+  path,
+  value,
+  {
+    insideFrame = null,
+    screenAndStore = null,
+    cdex = 0,
+    sdex = 0,
+  } = {},
+) {
+  requireProfile(profile);
+  requirePath(path);
+  if (!Number.isSafeInteger(cdex) || !Number.isSafeInteger(sdex)) {
+    throw new TypeError('CDEX and SDEX must be safe integers');
+  }
+  if (screenAndStore !== null && typeof screenAndStore !== 'function') {
+    throw new TypeError('screenAndStore must be a function or null');
+  }
+  const touched = applyMeasuredBrushVertices(maps, profile, path, value, {
+    insideFrame,
+  });
+  if (path.length < 2) {
+    return Object.freeze({ touched, screenCalls: 0 });
+  }
+  if (screenAndStore) screenAndStore(path, cdex, sdex);
+  return Object.freeze({
+    touched,
+    screenCalls: screenAndStore ? 1 : 0,
+  });
 }

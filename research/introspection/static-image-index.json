@@ -32104,7 +32104,2347 @@
       ],
       "sameModuleSet": true,
       "sameOrder": false,
-      "commonModuleOrderPrefixLength": 0
+      "commonModuleOrderPrefixLength": 0,
+      "adjacencyAudit": {
+        "sameModuleSet": true,
+        "sameOrder": false,
+        "commonOrderPrefixLength": 0,
+        "left": {
+          "moduleCount": 50,
+          "uniqueModuleCount": 50,
+          "duplicateModules": [],
+          "adjacentPairCount": 49,
+          "adjacentPairs": [
+            {
+              "index": 0,
+              "key": "globvars\u0000bodyvars",
+              "undirectedKey": "bodyvars\u0000globvars",
+              "left": {
+                "module": "globvars",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\globvars.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/globvars.lisp",
+                "objectOffset": 1795608,
+                "textOffset": 1795612,
+                "nextBoundary": 1795656,
+                "position": 0
+              },
+              "right": {
+                "module": "bodyvars",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\bodyvars.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/bodyvars.lisp",
+                "objectOffset": 1795656,
+                "textOffset": 1795660,
+                "nextBoundary": 1795704,
+                "position": 1
+              }
+            },
+            {
+              "index": 1,
+              "key": "bodyvars\u0000colobs",
+              "undirectedKey": "bodyvars\u0000colobs",
+              "left": {
+                "module": "bodyvars",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\bodyvars.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/bodyvars.lisp",
+                "objectOffset": 1795656,
+                "textOffset": 1795660,
+                "nextBoundary": 1795704,
+                "position": 1
+              },
+              "right": {
+                "module": "colobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\colobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/colobs.lisp",
+                "objectOffset": 1795704,
+                "textOffset": 1795708,
+                "nextBoundary": 1795752,
+                "position": 2
+              }
+            },
+            {
+              "index": 2,
+              "key": "colobs\u0000hues",
+              "undirectedKey": "colobs\u0000hues",
+              "left": {
+                "module": "colobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\colobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/colobs.lisp",
+                "objectOffset": 1795704,
+                "textOffset": 1795708,
+                "nextBoundary": 1795752,
+                "position": 2
+              },
+              "right": {
+                "module": "hues",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hues.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hues.lisp",
+                "objectOffset": 1795752,
+                "textOffset": 1795756,
+                "nextBoundary": 1795800,
+                "position": 3
+              }
+            },
+            {
+              "index": 3,
+              "key": "hues\u0000primobs",
+              "undirectedKey": "hues\u0000primobs",
+              "left": {
+                "module": "hues",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hues.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hues.lisp",
+                "objectOffset": 1795752,
+                "textOffset": 1795756,
+                "nextBoundary": 1795800,
+                "position": 3
+              },
+              "right": {
+                "module": "primobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\primobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/primobs.lisp",
+                "objectOffset": 1795800,
+                "textOffset": 1795804,
+                "nextBoundary": 1795848,
+                "position": 4
+              }
+            },
+            {
+              "index": 4,
+              "key": "primobs\u0000ut1",
+              "undirectedKey": "primobs\u0000ut1",
+              "left": {
+                "module": "primobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\primobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/primobs.lisp",
+                "objectOffset": 1795800,
+                "textOffset": 1795804,
+                "nextBoundary": 1795848,
+                "position": 4
+              },
+              "right": {
+                "module": "ut1",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut1.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut1.lisp",
+                "objectOffset": 1795848,
+                "textOffset": 1795852,
+                "nextBoundary": 1795896,
+                "position": 5
+              }
+            },
+            {
+              "index": 5,
+              "key": "ut1\u0000ut2",
+              "undirectedKey": "ut1\u0000ut2",
+              "left": {
+                "module": "ut1",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut1.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut1.lisp",
+                "objectOffset": 1795848,
+                "textOffset": 1795852,
+                "nextBoundary": 1795896,
+                "position": 5
+              },
+              "right": {
+                "module": "ut2",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut2.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut2.lisp",
+                "objectOffset": 1795896,
+                "textOffset": 1795900,
+                "nextBoundary": 1795944,
+                "position": 6
+              }
+            },
+            {
+              "index": 6,
+              "key": "ut2\u0000planobs",
+              "undirectedKey": "planobs\u0000ut2",
+              "left": {
+                "module": "ut2",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut2.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut2.lisp",
+                "objectOffset": 1795896,
+                "textOffset": 1795900,
+                "nextBoundary": 1795944,
+                "position": 6
+              },
+              "right": {
+                "module": "planobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\planobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/planobs.lisp",
+                "objectOffset": 1795944,
+                "textOffset": 1795948,
+                "nextBoundary": 1795992,
+                "position": 7
+              }
+            },
+            {
+              "index": 7,
+              "key": "planobs\u0000ut3",
+              "undirectedKey": "planobs\u0000ut3",
+              "left": {
+                "module": "planobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\planobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/planobs.lisp",
+                "objectOffset": 1795944,
+                "textOffset": 1795948,
+                "nextBoundary": 1795992,
+                "position": 7
+              },
+              "right": {
+                "module": "ut3",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut3.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut3.lisp",
+                "objectOffset": 1795992,
+                "textOffset": 1795996,
+                "nextBoundary": 1796040,
+                "position": 8
+              }
+            },
+            {
+              "index": 8,
+              "key": "ut3\u0000ut4",
+              "undirectedKey": "ut3\u0000ut4",
+              "left": {
+                "module": "ut3",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut3.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut3.lisp",
+                "objectOffset": 1795992,
+                "textOffset": 1795996,
+                "nextBoundary": 1796040,
+                "position": 8
+              },
+              "right": {
+                "module": "ut4",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut4.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut4.lisp",
+                "objectOffset": 1796040,
+                "textOffset": 1796044,
+                "nextBoundary": 1796088,
+                "position": 9
+              }
+            },
+            {
+              "index": 9,
+              "key": "ut4\u0000ut5",
+              "undirectedKey": "ut4\u0000ut5",
+              "left": {
+                "module": "ut4",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut4.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut4.lisp",
+                "objectOffset": 1796040,
+                "textOffset": 1796044,
+                "nextBoundary": 1796088,
+                "position": 9
+              },
+              "right": {
+                "module": "ut5",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut5.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut5.lisp",
+                "objectOffset": 1796088,
+                "textOffset": 1796092,
+                "nextBoundary": 1796136,
+                "position": 10
+              }
+            },
+            {
+              "index": 10,
+              "key": "ut5\u0000propobs",
+              "undirectedKey": "propobs\u0000ut5",
+              "left": {
+                "module": "ut5",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut5.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut5.lisp",
+                "objectOffset": 1796088,
+                "textOffset": 1796092,
+                "nextBoundary": 1796136,
+                "position": 10
+              },
+              "right": {
+                "module": "propobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\propobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/propobs.lisp",
+                "objectOffset": 1796136,
+                "textOffset": 1796140,
+                "nextBoundary": 1796184,
+                "position": 11
+              }
+            },
+            {
+              "index": 11,
+              "key": "propobs\u0000defbody",
+              "undirectedKey": "defbody\u0000propobs",
+              "left": {
+                "module": "propobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\propobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/propobs.lisp",
+                "objectOffset": 1796136,
+                "textOffset": 1796140,
+                "nextBoundary": 1796184,
+                "position": 11
+              },
+              "right": {
+                "module": "defbody",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\defbody.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/defbody.lisp",
+                "objectOffset": 1796184,
+                "textOffset": 1796188,
+                "nextBoundary": 1796232,
+                "position": 12
+              }
+            },
+            {
+              "index": 12,
+              "key": "defbody\u0000figobs",
+              "undirectedKey": "defbody\u0000figobs",
+              "left": {
+                "module": "defbody",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\defbody.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/defbody.lisp",
+                "objectOffset": 1796184,
+                "textOffset": 1796188,
+                "nextBoundary": 1796232,
+                "position": 12
+              },
+              "right": {
+                "module": "figobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\figobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/figobs.lisp",
+                "objectOffset": 1796232,
+                "textOffset": 1796236,
+                "nextBoundary": 1796280,
+                "position": 13
+              }
+            },
+            {
+              "index": 13,
+              "key": "figobs\u0000thingobs",
+              "undirectedKey": "figobs\u0000thingobs",
+              "left": {
+                "module": "figobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\figobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/figobs.lisp",
+                "objectOffset": 1796232,
+                "textOffset": 1796236,
+                "nextBoundary": 1796280,
+                "position": 13
+              },
+              "right": {
+                "module": "thingobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\thingobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/thingobs.lisp",
+                "objectOffset": 1796280,
+                "textOffset": 1796284,
+                "nextBoundary": 1796328,
+                "position": 14
+              }
+            },
+            {
+              "index": 14,
+              "key": "thingobs\u0000brushobs",
+              "undirectedKey": "brushobs\u0000thingobs",
+              "left": {
+                "module": "thingobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\thingobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/thingobs.lisp",
+                "objectOffset": 1796280,
+                "textOffset": 1796284,
+                "nextBoundary": 1796328,
+                "position": 14
+              },
+              "right": {
+                "module": "brushobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\brushobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/brushobs.lisp",
+                "objectOffset": 1796328,
+                "textOffset": 1796332,
+                "nextBoundary": 1796376,
+                "position": 15
+              }
+            },
+            {
+              "index": 15,
+              "key": "brushobs\u0000ut6",
+              "undirectedKey": "brushobs\u0000ut6",
+              "left": {
+                "module": "brushobs",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\brushobs.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/brushobs.lisp",
+                "objectOffset": 1796328,
+                "textOffset": 1796332,
+                "nextBoundary": 1796376,
+                "position": 15
+              },
+              "right": {
+                "module": "ut6",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut6.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut6.lisp",
+                "objectOffset": 1796376,
+                "textOffset": 1796380,
+                "nextBoundary": 1796424,
+                "position": 16
+              }
+            },
+            {
+              "index": 16,
+              "key": "ut6\u0000ut7",
+              "undirectedKey": "ut6\u0000ut7",
+              "left": {
+                "module": "ut6",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut6.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut6.lisp",
+                "objectOffset": 1796376,
+                "textOffset": 1796380,
+                "nextBoundary": 1796424,
+                "position": 16
+              },
+              "right": {
+                "module": "ut7",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut7.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut7.lisp",
+                "objectOffset": 1796424,
+                "textOffset": 1796428,
+                "nextBoundary": 1796472,
+                "position": 17
+              }
+            },
+            {
+              "index": 17,
+              "key": "ut7\u0000ut8",
+              "undirectedKey": "ut7\u0000ut8",
+              "left": {
+                "module": "ut7",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut7.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut7.lisp",
+                "objectOffset": 1796424,
+                "textOffset": 1796428,
+                "nextBoundary": 1796472,
+                "position": 17
+              },
+              "right": {
+                "module": "ut8",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut8.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut8.lisp",
+                "objectOffset": 1796472,
+                "textOffset": 1796476,
+                "nextBoundary": 1796520,
+                "position": 18
+              }
+            },
+            {
+              "index": 18,
+              "key": "ut8\u0000ut9",
+              "undirectedKey": "ut8\u0000ut9",
+              "left": {
+                "module": "ut8",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut8.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut8.lisp",
+                "objectOffset": 1796472,
+                "textOffset": 1796476,
+                "nextBoundary": 1796520,
+                "position": 18
+              },
+              "right": {
+                "module": "ut9",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut9.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut9.lisp",
+                "objectOffset": 1796544,
+                "textOffset": 1796548,
+                "nextBoundary": 1796592,
+                "position": 19
+              }
+            },
+            {
+              "index": 19,
+              "key": "ut9\u0000tellit",
+              "undirectedKey": "tellit\u0000ut9",
+              "left": {
+                "module": "ut9",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\ut9.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/ut9.lisp",
+                "objectOffset": 1796544,
+                "textOffset": 1796548,
+                "nextBoundary": 1796592,
+                "position": 19
+              },
+              "right": {
+                "module": "tellit",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\tellit.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/tellit.lisp",
+                "objectOffset": 1796616,
+                "textOffset": 1796620,
+                "nextBoundary": 1796664,
+                "position": 20
+              }
+            },
+            {
+              "index": 20,
+              "key": "tellit\u0000rorl",
+              "undirectedKey": "rorl\u0000tellit",
+              "left": {
+                "module": "tellit",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\tellit.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/tellit.lisp",
+                "objectOffset": 1796616,
+                "textOffset": 1796620,
+                "nextBoundary": 1796664,
+                "position": 20
+              },
+              "right": {
+                "module": "rorl",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\rorl.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/rorl.lisp",
+                "objectOffset": 1796664,
+                "textOffset": 1796668,
+                "nextBoundary": 1796712,
+                "position": 21
+              }
+            },
+            {
+              "index": 21,
+              "key": "rorl\u0000hair",
+              "undirectedKey": "hair\u0000rorl",
+              "left": {
+                "module": "rorl",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\rorl.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/rorl.lisp",
+                "objectOffset": 1796664,
+                "textOffset": 1796668,
+                "nextBoundary": 1796712,
+                "position": 21
+              },
+              "right": {
+                "module": "hair",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hair.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hair.lisp",
+                "objectOffset": 1796712,
+                "textOffset": 1796716,
+                "nextBoundary": 1796760,
+                "position": 22
+              }
+            },
+            {
+              "index": 22,
+              "key": "hair\u0000box",
+              "undirectedKey": "box\u0000hair",
+              "left": {
+                "module": "hair",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hair.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hair.lisp",
+                "objectOffset": 1796712,
+                "textOffset": 1796716,
+                "nextBoundary": 1796760,
+                "position": 22
+              },
+              "right": {
+                "module": "box",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\box.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/box.lisp",
+                "objectOffset": 1796760,
+                "textOffset": 1796764,
+                "nextBoundary": 1796808,
+                "position": 23
+              }
+            },
+            {
+              "index": 23,
+              "key": "box\u0000hand",
+              "undirectedKey": "box\u0000hand",
+              "left": {
+                "module": "box",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\box.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/box.lisp",
+                "objectOffset": 1796760,
+                "textOffset": 1796764,
+                "nextBoundary": 1796808,
+                "position": 23
+              },
+              "right": {
+                "module": "hand",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hand.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hand.lisp",
+                "objectOffset": 1796808,
+                "textOffset": 1796812,
+                "nextBoundary": 1796856,
+                "position": 24
+              }
+            },
+            {
+              "index": 24,
+              "key": "hand\u0000arm",
+              "undirectedKey": "arm\u0000hand",
+              "left": {
+                "module": "hand",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\hand.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/hand.lisp",
+                "objectOffset": 1796808,
+                "textOffset": 1796812,
+                "nextBoundary": 1796856,
+                "position": 24
+              },
+              "right": {
+                "module": "arm",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\arm.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/arm.lisp",
+                "objectOffset": 1796856,
+                "textOffset": 1796860,
+                "nextBoundary": 1796904,
+                "position": 25
+              }
+            },
+            {
+              "index": 25,
+              "key": "arm\u0000torso",
+              "undirectedKey": "arm\u0000torso",
+              "left": {
+                "module": "arm",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\arm.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/arm.lisp",
+                "objectOffset": 1796856,
+                "textOffset": 1796860,
+                "nextBoundary": 1796904,
+                "position": 25
+              },
+              "right": {
+                "module": "torso",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\torso.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/torso.lisp",
+                "objectOffset": 1796904,
+                "textOffset": 1796908,
+                "nextBoundary": 1796952,
+                "position": 26
+              }
+            },
+            {
+              "index": 26,
+              "key": "torso\u0000two-leg",
+              "undirectedKey": "torso\u0000two-leg",
+              "left": {
+                "module": "torso",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\torso.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/torso.lisp",
+                "objectOffset": 1796904,
+                "textOffset": 1796908,
+                "nextBoundary": 1796952,
+                "position": 26
+              },
+              "right": {
+                "module": "two-leg",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\two-leg.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/two-leg.lisp",
+                "objectOffset": 1796952,
+                "textOffset": 1796956,
+                "nextBoundary": 1797000,
+                "position": 27
+              }
+            },
+            {
+              "index": 27,
+              "key": "two-leg\u0000defpose",
+              "undirectedKey": "defpose\u0000two-leg",
+              "left": {
+                "module": "two-leg",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\two-leg.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/two-leg.lisp",
+                "objectOffset": 1796952,
+                "textOffset": 1796956,
+                "nextBoundary": 1797000,
+                "position": 27
+              },
+              "right": {
+                "module": "defpose",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\defpose.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/defpose.lisp",
+                "objectOffset": 1797000,
+                "textOffset": 1797004,
+                "nextBoundary": 1797048,
+                "position": 28
+              }
+            },
+            {
+              "index": 28,
+              "key": "defpose\u0000window",
+              "undirectedKey": "defpose\u0000window",
+              "left": {
+                "module": "defpose",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\defpose.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/defpose.lisp",
+                "objectOffset": 1797000,
+                "textOffset": 1797004,
+                "nextBoundary": 1797048,
+                "position": 28
+              },
+              "right": {
+                "module": "window",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\window.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/window.lisp",
+                "objectOffset": 1797048,
+                "textOffset": 1797052,
+                "nextBoundary": 1797096,
+                "position": 29
+              }
+            },
+            {
+              "index": 29,
+              "key": "window\u0000pskel",
+              "undirectedKey": "pskel\u0000window",
+              "left": {
+                "module": "window",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\window.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/window.lisp",
+                "objectOffset": 1797048,
+                "textOffset": 1797052,
+                "nextBoundary": 1797096,
+                "position": 29
+              },
+              "right": {
+                "module": "pskel",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\pskel.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/pskel.lisp",
+                "objectOffset": 1797096,
+                "textOffset": 1797100,
+                "nextBoundary": 1797144,
+                "position": 30
+              }
+            },
+            {
+              "index": 30,
+              "key": "pskel\u0000fill",
+              "undirectedKey": "fill\u0000pskel",
+              "left": {
+                "module": "pskel",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\pskel.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/pskel.lisp",
+                "objectOffset": 1797096,
+                "textOffset": 1797100,
+                "nextBoundary": 1797144,
+                "position": 30
+              },
+              "right": {
+                "module": "fill",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\fill.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/fill.lisp",
+                "objectOffset": 1797144,
+                "textOffset": 1797148,
+                "nextBoundary": 1797192,
+                "position": 31
+              }
+            },
+            {
+              "index": 31,
+              "key": "fill\u0000map",
+              "undirectedKey": "fill\u0000map",
+              "left": {
+                "module": "fill",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\fill.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/fill.lisp",
+                "objectOffset": 1797144,
+                "textOffset": 1797148,
+                "nextBoundary": 1797192,
+                "position": 31
+              },
+              "right": {
+                "module": "map",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\map.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/map.lisp",
+                "objectOffset": 1797192,
+                "textOffset": 1797196,
+                "nextBoundary": 1797240,
+                "position": 32
+              }
+            },
+            {
+              "index": 32,
+              "key": "map\u0000edges",
+              "undirectedKey": "edges\u0000map",
+              "left": {
+                "module": "map",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\map.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/map.lisp",
+                "objectOffset": 1797192,
+                "textOffset": 1797196,
+                "nextBoundary": 1797240,
+                "position": 32
+              },
+              "right": {
+                "module": "edges",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\edges.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/edges.lisp",
+                "objectOffset": 1797240,
+                "textOffset": 1797244,
+                "nextBoundary": 1797288,
+                "position": 33
+              }
+            },
+            {
+              "index": 33,
+              "key": "edges\u0000dandf",
+              "undirectedKey": "dandf\u0000edges",
+              "left": {
+                "module": "edges",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\edges.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/edges.lisp",
+                "objectOffset": 1797240,
+                "textOffset": 1797244,
+                "nextBoundary": 1797288,
+                "position": 33
+              },
+              "right": {
+                "module": "dandf",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\dandf.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/dandf.lisp",
+                "objectOffset": 1797288,
+                "textOffset": 1797292,
+                "nextBoundary": 1797336,
+                "position": 34
+              }
+            },
+            {
+              "index": 34,
+              "key": "dandf\u0000cntrl",
+              "undirectedKey": "cntrl\u0000dandf",
+              "left": {
+                "module": "dandf",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\dandf.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/dandf.lisp",
+                "objectOffset": 1797288,
+                "textOffset": 1797292,
+                "nextBoundary": 1797336,
+                "position": 34
+              },
+              "right": {
+                "module": "cntrl",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\cntrl.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/cntrl.lisp",
+                "objectOffset": 1797336,
+                "textOffset": 1797340,
+                "nextBoundary": 1797384,
+                "position": 35
+              }
+            },
+            {
+              "index": 35,
+              "key": "cntrl\u0000paint",
+              "undirectedKey": "cntrl\u0000paint",
+              "left": {
+                "module": "cntrl",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\cntrl.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/cntrl.lisp",
+                "objectOffset": 1797336,
+                "textOffset": 1797340,
+                "nextBoundary": 1797384,
+                "position": 35
+              },
+              "right": {
+                "module": "paint",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\paint.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/paint.lisp",
+                "objectOffset": 1797384,
+                "textOffset": 1797388,
+                "nextBoundary": 1797432,
+                "position": 36
+              }
+            },
+            {
+              "index": 36,
+              "key": "paint\u0000concat",
+              "undirectedKey": "concat\u0000paint",
+              "left": {
+                "module": "paint",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\paint.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/paint.lisp",
+                "objectOffset": 1797384,
+                "textOffset": 1797388,
+                "nextBoundary": 1797432,
+                "position": 36
+              },
+              "right": {
+                "module": "concat",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\concat.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/concat.lisp",
+                "objectOffset": 1797432,
+                "textOffset": 1797436,
+                "nextBoundary": 1797480,
+                "position": 37
+              }
+            },
+            {
+              "index": 37,
+              "key": "concat\u0000subpart",
+              "undirectedKey": "concat\u0000subpart",
+              "left": {
+                "module": "concat",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\concat.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/concat.lisp",
+                "objectOffset": 1797432,
+                "textOffset": 1797436,
+                "nextBoundary": 1797480,
+                "position": 37
+              },
+              "right": {
+                "module": "subpart",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\subpart.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/subpart.lisp",
+                "objectOffset": 1797480,
+                "textOffset": 1797484,
+                "nextBoundary": 1797528,
+                "position": 38
+              }
+            },
+            {
+              "index": 38,
+              "key": "subpart\u0000deco",
+              "undirectedKey": "deco\u0000subpart",
+              "left": {
+                "module": "subpart",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\subpart.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/subpart.lisp",
+                "objectOffset": 1797480,
+                "textOffset": 1797484,
+                "nextBoundary": 1797528,
+                "position": 38
+              },
+              "right": {
+                "module": "deco",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\deco.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/deco.lisp",
+                "objectOffset": 1797528,
+                "textOffset": 1797532,
+                "nextBoundary": 1797576,
+                "position": 39
+              }
+            },
+            {
+              "index": 39,
+              "key": "deco\u0000patch",
+              "undirectedKey": "deco\u0000patch",
+              "left": {
+                "module": "deco",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\deco.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/deco.lisp",
+                "objectOffset": 1797528,
+                "textOffset": 1797532,
+                "nextBoundary": 1797576,
+                "position": 39
+              },
+              "right": {
+                "module": "patch",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\patch.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/patch.lisp",
+                "objectOffset": 1797576,
+                "textOffset": 1797580,
+                "nextBoundary": 1797624,
+                "position": 40
+              }
+            },
+            {
+              "index": 40,
+              "key": "patch\u0000zsense",
+              "undirectedKey": "patch\u0000zsense",
+              "left": {
+                "module": "patch",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\patch.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/patch.lisp",
+                "objectOffset": 1797576,
+                "textOffset": 1797580,
+                "nextBoundary": 1797624,
+                "position": 40
+              },
+              "right": {
+                "module": "zsense",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\zsense.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/zsense.lisp",
+                "objectOffset": 1797624,
+                "textOffset": 1797628,
+                "nextBoundary": 1797672,
+                "position": 41
+              }
+            },
+            {
+              "index": 41,
+              "key": "zsense\u0000eg",
+              "undirectedKey": "eg\u0000zsense",
+              "left": {
+                "module": "zsense",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\zsense.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/zsense.lisp",
+                "objectOffset": 1797624,
+                "textOffset": 1797628,
+                "nextBoundary": 1797672,
+                "position": 41
+              },
+              "right": {
+                "module": "eg",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\eg.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/eg.lisp",
+                "objectOffset": 1797672,
+                "textOffset": 1797676,
+                "nextBoundary": 1797720,
+                "position": 42
+              }
+            },
+            {
+              "index": 42,
+              "key": "eg\u0000pots",
+              "undirectedKey": "eg\u0000pots",
+              "left": {
+                "module": "eg",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\eg.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/eg.lisp",
+                "objectOffset": 1797672,
+                "textOffset": 1797676,
+                "nextBoundary": 1797720,
+                "position": 42
+              },
+              "right": {
+                "module": "pots",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\pots.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/pots.lisp",
+                "objectOffset": 1797720,
+                "textOffset": 1797724,
+                "nextBoundary": 1797768,
+                "position": 43
+              }
+            },
+            {
+              "index": 43,
+              "key": "pots\u0000place",
+              "undirectedKey": "place\u0000pots",
+              "left": {
+                "module": "pots",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\pots.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/pots.lisp",
+                "objectOffset": 1797720,
+                "textOffset": 1797724,
+                "nextBoundary": 1797768,
+                "position": 43
+              },
+              "right": {
+                "module": "place",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\place.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/place.lisp",
+                "objectOffset": 1797768,
+                "textOffset": 1797772,
+                "nextBoundary": 1797816,
+                "position": 44
+              }
+            },
+            {
+              "index": 44,
+              "key": "place\u0000plant",
+              "undirectedKey": "place\u0000plant",
+              "left": {
+                "module": "place",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\place.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/place.lisp",
+                "objectOffset": 1797768,
+                "textOffset": 1797772,
+                "nextBoundary": 1797816,
+                "position": 44
+              },
+              "right": {
+                "module": "plant",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\plant.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/plant.lisp",
+                "objectOffset": 1797816,
+                "textOffset": 1797820,
+                "nextBoundary": 1797864,
+                "position": 45
+              }
+            },
+            {
+              "index": 45,
+              "key": "plant\u0000tree",
+              "undirectedKey": "plant\u0000tree",
+              "left": {
+                "module": "plant",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\plant.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/plant.lisp",
+                "objectOffset": 1797816,
+                "textOffset": 1797820,
+                "nextBoundary": 1797864,
+                "position": 45
+              },
+              "right": {
+                "module": "tree",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\tree.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/tree.lisp",
+                "objectOffset": 1797864,
+                "textOffset": 1797868,
+                "nextBoundary": 1797912,
+                "position": 46
+              }
+            },
+            {
+              "index": 46,
+              "key": "tree\u0000mplan",
+              "undirectedKey": "mplan\u0000tree",
+              "left": {
+                "module": "tree",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\tree.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/tree.lisp",
+                "objectOffset": 1797864,
+                "textOffset": 1797868,
+                "nextBoundary": 1797912,
+                "position": 46
+              },
+              "right": {
+                "module": "mplan",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\mplan.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/mplan.lisp",
+                "objectOffset": 1797912,
+                "textOffset": 1797916,
+                "nextBoundary": 1797960,
+                "position": 47
+              }
+            },
+            {
+              "index": 47,
+              "key": "mplan\u0000garb",
+              "undirectedKey": "garb\u0000mplan",
+              "left": {
+                "module": "mplan",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\mplan.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/mplan.lisp",
+                "objectOffset": 1797912,
+                "textOffset": 1797916,
+                "nextBoundary": 1797960,
+                "position": 47
+              },
+              "right": {
+                "module": "garb",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\garb.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/garb.lisp",
+                "objectOffset": 1797960,
+                "textOffset": 1797964,
+                "nextBoundary": 1798008,
+                "position": 48
+              }
+            },
+            {
+              "index": 48,
+              "key": "garb\u0000compose",
+              "undirectedKey": "compose\u0000garb",
+              "left": {
+                "module": "garb",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\garb.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/garb.lisp",
+                "objectOffset": 1797960,
+                "textOffset": 1797964,
+                "nextBoundary": 1798008,
+                "position": 48
+              },
+              "right": {
+                "module": "compose",
+                "raw": "\\kcat\\aaron\\_src\\core\\harold3\\compose.lisp",
+                "normalized": "/kcat/aaron/_src/core/harold3/compose.lisp",
+                "objectOffset": 1798008,
+                "textOffset": 1798012,
+                "nextBoundary": 1798056,
+                "position": 49
+              }
+            }
+          ]
+        },
+        "right": {
+          "moduleCount": 50,
+          "uniqueModuleCount": 50,
+          "duplicateModules": [],
+          "adjacentPairCount": 49,
+          "adjacentPairs": [
+            {
+              "index": 0,
+              "key": "paint\u0000ut1",
+              "undirectedKey": "paint\u0000ut1",
+              "left": {
+                "module": "paint",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\paint.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/paint.fasl",
+                "recordOffset": 2842496,
+                "objectOffset": 3275880,
+                "key": 723,
+                "position": 0
+              },
+              "right": {
+                "module": "ut1",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut1.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut1.fasl",
+                "recordOffset": 2842704,
+                "objectOffset": 3276496,
+                "key": 750,
+                "position": 1
+              }
+            },
+            {
+              "index": 1,
+              "key": "ut1\u0000colobs",
+              "undirectedKey": "colobs\u0000ut1",
+              "left": {
+                "module": "ut1",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut1.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut1.fasl",
+                "recordOffset": 2842704,
+                "objectOffset": 3276496,
+                "key": 750,
+                "position": 1
+              },
+              "right": {
+                "module": "colobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\colobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/colobs.fasl",
+                "recordOffset": 2846104,
+                "objectOffset": 3287664,
+                "key": 1373,
+                "position": 2
+              }
+            },
+            {
+              "index": 2,
+              "key": "colobs\u0000place",
+              "undirectedKey": "colobs\u0000place",
+              "left": {
+                "module": "colobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\colobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/colobs.fasl",
+                "recordOffset": 2846104,
+                "objectOffset": 3287664,
+                "key": 1373,
+                "position": 2
+              },
+              "right": {
+                "module": "place",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\place.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/place.fasl",
+                "recordOffset": 2855920,
+                "objectOffset": 3321760,
+                "key": 3066,
+                "position": 3
+              }
+            },
+            {
+              "index": 3,
+              "key": "place\u0000edges",
+              "undirectedKey": "edges\u0000place",
+              "left": {
+                "module": "place",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\place.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/place.fasl",
+                "recordOffset": 2855920,
+                "objectOffset": 3321760,
+                "key": 3066,
+                "position": 3
+              },
+              "right": {
+                "module": "edges",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\edges.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/edges.fasl",
+                "recordOffset": 2859768,
+                "objectOffset": 3334856,
+                "key": 3814,
+                "position": 4
+              }
+            },
+            {
+              "index": 4,
+              "key": "edges\u0000zsense",
+              "undirectedKey": "edges\u0000zsense",
+              "left": {
+                "module": "edges",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\edges.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/edges.fasl",
+                "recordOffset": 2859768,
+                "objectOffset": 3334856,
+                "key": 3814,
+                "position": 4
+              },
+              "right": {
+                "module": "zsense",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\zsense.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/zsense.fasl",
+                "recordOffset": 2869800,
+                "objectOffset": 3367680,
+                "key": 5476,
+                "position": 5
+              }
+            },
+            {
+              "index": 5,
+              "key": "zsense\u0000ut8",
+              "undirectedKey": "ut8\u0000zsense",
+              "left": {
+                "module": "zsense",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\zsense.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/zsense.fasl",
+                "recordOffset": 2869800,
+                "objectOffset": 3367680,
+                "key": 5476,
+                "position": 5
+              },
+              "right": {
+                "module": "ut8",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut8.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut8.fasl",
+                "recordOffset": 2874928,
+                "objectOffset": 3384008,
+                "key": 6235,
+                "position": 6
+              }
+            },
+            {
+              "index": 6,
+              "key": "ut8\u0000concat",
+              "undirectedKey": "concat\u0000ut8",
+              "left": {
+                "module": "ut8",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut8.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut8.fasl",
+                "recordOffset": 2874928,
+                "objectOffset": 3384008,
+                "key": 6235,
+                "position": 6
+              },
+              "right": {
+                "module": "concat",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\concat.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/concat.fasl",
+                "recordOffset": 2876584,
+                "objectOffset": 3389256,
+                "key": 6513,
+                "position": 7
+              }
+            },
+            {
+              "index": 7,
+              "key": "concat\u0000bodyvars",
+              "undirectedKey": "bodyvars\u0000concat",
+              "left": {
+                "module": "concat",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\concat.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/concat.fasl",
+                "recordOffset": 2876584,
+                "objectOffset": 3389256,
+                "key": 6513,
+                "position": 7
+              },
+              "right": {
+                "module": "bodyvars",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\bodyvars.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/bodyvars.fasl",
+                "recordOffset": 2879360,
+                "objectOffset": 3398144,
+                "key": 6981,
+                "position": 8
+              }
+            },
+            {
+              "index": 8,
+              "key": "bodyvars\u0000deco",
+              "undirectedKey": "bodyvars\u0000deco",
+              "left": {
+                "module": "bodyvars",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\bodyvars.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/bodyvars.fasl",
+                "recordOffset": 2879360,
+                "objectOffset": 3398144,
+                "key": 6981,
+                "position": 8
+              },
+              "right": {
+                "module": "deco",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\deco.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/deco.fasl",
+                "recordOffset": 2886512,
+                "objectOffset": 3422104,
+                "key": 8138,
+                "position": 9
+              }
+            },
+            {
+              "index": 9,
+              "key": "deco\u0000primobs",
+              "undirectedKey": "deco\u0000primobs",
+              "left": {
+                "module": "deco",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\deco.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/deco.fasl",
+                "recordOffset": 2886512,
+                "objectOffset": 3422104,
+                "key": 8138,
+                "position": 9
+              },
+              "right": {
+                "module": "primobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\primobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/primobs.fasl",
+                "recordOffset": 2907840,
+                "objectOffset": 3488328,
+                "key": 11662,
+                "position": 10
+              }
+            },
+            {
+              "index": 10,
+              "key": "primobs\u0000ut2",
+              "undirectedKey": "primobs\u0000ut2",
+              "left": {
+                "module": "primobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\primobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/primobs.fasl",
+                "recordOffset": 2907840,
+                "objectOffset": 3488328,
+                "key": 11662,
+                "position": 10
+              },
+              "right": {
+                "module": "ut2",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut2.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut2.fasl",
+                "recordOffset": 2910872,
+                "objectOffset": 3497640,
+                "key": 12132,
+                "position": 11
+              }
+            },
+            {
+              "index": 11,
+              "key": "ut2\u0000pots",
+              "undirectedKey": "pots\u0000ut2",
+              "left": {
+                "module": "ut2",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut2.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut2.fasl",
+                "recordOffset": 2910872,
+                "objectOffset": 3497640,
+                "key": 12132,
+                "position": 11
+              },
+              "right": {
+                "module": "pots",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\pots.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/pots.fasl",
+                "recordOffset": 2920072,
+                "objectOffset": 3525112,
+                "key": 13489,
+                "position": 12
+              }
+            },
+            {
+              "index": 12,
+              "key": "pots\u0000cntrl",
+              "undirectedKey": "cntrl\u0000pots",
+              "left": {
+                "module": "pots",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\pots.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/pots.fasl",
+                "recordOffset": 2920072,
+                "objectOffset": 3525112,
+                "key": 13489,
+                "position": 12
+              },
+              "right": {
+                "module": "cntrl",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\cntrl.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/cntrl.fasl",
+                "recordOffset": 2929712,
+                "objectOffset": 3556280,
+                "key": 15128,
+                "position": 13
+              }
+            },
+            {
+              "index": 13,
+              "key": "cntrl\u0000hand",
+              "undirectedKey": "cntrl\u0000hand",
+              "left": {
+                "module": "cntrl",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\cntrl.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/cntrl.fasl",
+                "recordOffset": 2929712,
+                "objectOffset": 3556280,
+                "key": 15128,
+                "position": 13
+              },
+              "right": {
+                "module": "hand",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hand.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hand.fasl",
+                "recordOffset": 2951768,
+                "objectOffset": 3625880,
+                "key": 19073,
+                "position": 14
+              }
+            },
+            {
+              "index": 14,
+              "key": "hand\u0000pskel",
+              "undirectedKey": "hand\u0000pskel",
+              "left": {
+                "module": "hand",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hand.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hand.fasl",
+                "recordOffset": 2951768,
+                "objectOffset": 3625880,
+                "key": 19073,
+                "position": 14
+              },
+              "right": {
+                "module": "pskel",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\pskel.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/pskel.fasl",
+                "recordOffset": 2958056,
+                "objectOffset": 3645672,
+                "key": 20213,
+                "position": 15
+              }
+            },
+            {
+              "index": 15,
+              "key": "pskel\u0000tree",
+              "undirectedKey": "pskel\u0000tree",
+              "left": {
+                "module": "pskel",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\pskel.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/pskel.fasl",
+                "recordOffset": 2958056,
+                "objectOffset": 3645672,
+                "key": 20213,
+                "position": 15
+              },
+              "right": {
+                "module": "tree",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\tree.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/tree.fasl",
+                "recordOffset": 2965680,
+                "objectOffset": 3670616,
+                "key": 21704,
+                "position": 16
+              }
+            },
+            {
+              "index": 16,
+              "key": "tree\u0000brushobs",
+              "undirectedKey": "brushobs\u0000tree",
+              "left": {
+                "module": "tree",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\tree.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/tree.fasl",
+                "recordOffset": 2965680,
+                "objectOffset": 3670616,
+                "key": 21704,
+                "position": 16
+              },
+              "right": {
+                "module": "brushobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\brushobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/brushobs.fasl",
+                "recordOffset": 2965928,
+                "objectOffset": 3671392,
+                "key": 21749,
+                "position": 17
+              }
+            },
+            {
+              "index": 17,
+              "key": "brushobs\u0000window",
+              "undirectedKey": "brushobs\u0000window",
+              "left": {
+                "module": "brushobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\brushobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/brushobs.fasl",
+                "recordOffset": 2965928,
+                "objectOffset": 3671392,
+                "key": 21749,
+                "position": 17
+              },
+              "right": {
+                "module": "window",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\window.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/window.fasl",
+                "recordOffset": 2967120,
+                "objectOffset": 3675392,
+                "key": 21971,
+                "position": 18
+              }
+            },
+            {
+              "index": 18,
+              "key": "window\u0000plant",
+              "undirectedKey": "plant\u0000window",
+              "left": {
+                "module": "window",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\window.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/window.fasl",
+                "recordOffset": 2967120,
+                "objectOffset": 3675392,
+                "key": 21971,
+                "position": 18
+              },
+              "right": {
+                "module": "plant",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\plant.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/plant.fasl",
+                "recordOffset": 2971384,
+                "objectOffset": 3688920,
+                "key": 22808,
+                "position": 19
+              }
+            },
+            {
+              "index": 19,
+              "key": "plant\u0000ut9",
+              "undirectedKey": "plant\u0000ut9",
+              "left": {
+                "module": "plant",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\plant.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/plant.fasl",
+                "recordOffset": 2971384,
+                "objectOffset": 3688920,
+                "key": 22808,
+                "position": 19
+              },
+              "right": {
+                "module": "ut9",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut9.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut9.fasl",
+                "recordOffset": 2973928,
+                "objectOffset": 3697112,
+                "key": 23316,
+                "position": 20
+              }
+            },
+            {
+              "index": 20,
+              "key": "ut9\u0000map",
+              "undirectedKey": "map\u0000ut9",
+              "left": {
+                "module": "ut9",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut9.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut9.fasl",
+                "recordOffset": 2973928,
+                "objectOffset": 3697112,
+                "key": 23316,
+                "position": 20
+              },
+              "right": {
+                "module": "map",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\map.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/map.fasl",
+                "recordOffset": 2982936,
+                "objectOffset": 3727904,
+                "key": 24945,
+                "position": 21
+              }
+            },
+            {
+              "index": 21,
+              "key": "map\u0000rorl",
+              "undirectedKey": "map\u0000rorl",
+              "left": {
+                "module": "map",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\map.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/map.fasl",
+                "recordOffset": 2982936,
+                "objectOffset": 3727904,
+                "key": 24945,
+                "position": 21
+              },
+              "right": {
+                "module": "rorl",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\rorl.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/rorl.fasl",
+                "recordOffset": 2993768,
+                "objectOffset": 3756312,
+                "key": 26305,
+                "position": 22
+              }
+            },
+            {
+              "index": 22,
+              "key": "rorl\u0000globvars",
+              "undirectedKey": "globvars\u0000rorl",
+              "left": {
+                "module": "rorl",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\rorl.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/rorl.fasl",
+                "recordOffset": 2993768,
+                "objectOffset": 3756312,
+                "key": 26305,
+                "position": 22
+              },
+              "right": {
+                "module": "globvars",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\globvars.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/globvars.fasl",
+                "recordOffset": 2994960,
+                "objectOffset": 3759360,
+                "key": 26477,
+                "position": 23
+              }
+            },
+            {
+              "index": 23,
+              "key": "globvars\u0000subpart",
+              "undirectedKey": "globvars\u0000subpart",
+              "left": {
+                "module": "globvars",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\globvars.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/globvars.fasl",
+                "recordOffset": 2994960,
+                "objectOffset": 3759360,
+                "key": 26477,
+                "position": 23
+              },
+              "right": {
+                "module": "subpart",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\subpart.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/subpart.fasl",
+                "recordOffset": 3017184,
+                "objectOffset": 3820296,
+                "key": 29346,
+                "position": 24
+              }
+            },
+            {
+              "index": 24,
+              "key": "subpart\u0000ut3",
+              "undirectedKey": "subpart\u0000ut3",
+              "left": {
+                "module": "subpart",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\subpart.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/subpart.fasl",
+                "recordOffset": 3017184,
+                "objectOffset": 3820296,
+                "key": 29346,
+                "position": 24
+              },
+              "right": {
+                "module": "ut3",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut3.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut3.fasl",
+                "recordOffset": 3032176,
+                "objectOffset": 3862752,
+                "key": 31390,
+                "position": 25
+              }
+            },
+            {
+              "index": 25,
+              "key": "ut3\u0000dandf",
+              "undirectedKey": "dandf\u0000ut3",
+              "left": {
+                "module": "ut3",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut3.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut3.fasl",
+                "recordOffset": 3032176,
+                "objectOffset": 3862752,
+                "key": 31390,
+                "position": 25
+              },
+              "right": {
+                "module": "dandf",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\dandf.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/dandf.fasl",
+                "recordOffset": 3048824,
+                "objectOffset": 3914784,
+                "key": 34228,
+                "position": 26
+              }
+            },
+            {
+              "index": 26,
+              "key": "dandf\u0000two-leg",
+              "undirectedKey": "dandf\u0000two-leg",
+              "left": {
+                "module": "dandf",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\dandf.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/dandf.fasl",
+                "recordOffset": 3048824,
+                "objectOffset": 3914784,
+                "key": 34228,
+                "position": 26
+              },
+              "right": {
+                "module": "two-leg",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\two-leg.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/two-leg.fasl",
+                "recordOffset": 3061832,
+                "objectOffset": 3957376,
+                "key": 36551,
+                "position": 27
+              }
+            },
+            {
+              "index": 27,
+              "key": "two-leg\u0000eg",
+              "undirectedKey": "eg\u0000two-leg",
+              "left": {
+                "module": "two-leg",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\two-leg.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/two-leg.fasl",
+                "recordOffset": 3061832,
+                "objectOffset": 3957376,
+                "key": 36551,
+                "position": 27
+              },
+              "right": {
+                "module": "eg",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\eg.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/eg.fasl",
+                "recordOffset": 3073352,
+                "objectOffset": 3998144,
+                "key": 38625,
+                "position": 28
+              }
+            },
+            {
+              "index": 28,
+              "key": "eg\u0000box",
+              "undirectedKey": "box\u0000eg",
+              "left": {
+                "module": "eg",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\eg.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/eg.fasl",
+                "recordOffset": 3073352,
+                "objectOffset": 3998144,
+                "key": 38625,
+                "position": 28
+              },
+              "right": {
+                "module": "box",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\box.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/box.fasl",
+                "recordOffset": 3081704,
+                "objectOffset": 4024864,
+                "key": 40064,
+                "position": 29
+              }
+            },
+            {
+              "index": 29,
+              "key": "box\u0000defbody",
+              "undirectedKey": "box\u0000defbody",
+              "left": {
+                "module": "box",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\box.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/box.fasl",
+                "recordOffset": 3081704,
+                "objectOffset": 4024864,
+                "key": 40064,
+                "position": 29
+              },
+              "right": {
+                "module": "defbody",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\defbody.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/defbody.fasl",
+                "recordOffset": 3086216,
+                "objectOffset": 4038792,
+                "key": 40742,
+                "position": 30
+              }
+            },
+            {
+              "index": 30,
+              "key": "defbody\u0000ut6",
+              "undirectedKey": "defbody\u0000ut6",
+              "left": {
+                "module": "defbody",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\defbody.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/defbody.fasl",
+                "recordOffset": 3086216,
+                "objectOffset": 4038792,
+                "key": 40742,
+                "position": 30
+              },
+              "right": {
+                "module": "ut6",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut6.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut6.fasl",
+                "recordOffset": 3088544,
+                "objectOffset": 4046592,
+                "key": 41132,
+                "position": 31
+              }
+            },
+            {
+              "index": 31,
+              "key": "ut6\u0000ut4",
+              "undirectedKey": "ut4\u0000ut6",
+              "left": {
+                "module": "ut6",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut6.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut6.fasl",
+                "recordOffset": 3088544,
+                "objectOffset": 4046592,
+                "key": 41132,
+                "position": 31
+              },
+              "right": {
+                "module": "ut4",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut4.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut4.fasl",
+                "recordOffset": 3108176,
+                "objectOffset": 4109056,
+                "key": 44324,
+                "position": 32
+              }
+            },
+            {
+              "index": 32,
+              "key": "ut4\u0000mplan",
+              "undirectedKey": "mplan\u0000ut4",
+              "left": {
+                "module": "ut4",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut4.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut4.fasl",
+                "recordOffset": 3108176,
+                "objectOffset": 4109056,
+                "key": 44324,
+                "position": 32
+              },
+              "right": {
+                "module": "mplan",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\mplan.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/mplan.fasl",
+                "recordOffset": 3120640,
+                "objectOffset": 4149544,
+                "key": 46524,
+                "position": 33
+              }
+            },
+            {
+              "index": 33,
+              "key": "mplan\u0000propobs",
+              "undirectedKey": "mplan\u0000propobs",
+              "left": {
+                "module": "mplan",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\mplan.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/mplan.fasl",
+                "recordOffset": 3120640,
+                "objectOffset": 4149544,
+                "key": 46524,
+                "position": 33
+              },
+              "right": {
+                "module": "propobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\propobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/propobs.fasl",
+                "recordOffset": 3128400,
+                "objectOffset": 4174136,
+                "key": 47859,
+                "position": 34
+              }
+            },
+            {
+              "index": 34,
+              "key": "propobs\u0000torso",
+              "undirectedKey": "propobs\u0000torso",
+              "left": {
+                "module": "propobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\propobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/propobs.fasl",
+                "recordOffset": 3128400,
+                "objectOffset": 4174136,
+                "key": 47859,
+                "position": 34
+              },
+              "right": {
+                "module": "torso",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\torso.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/torso.fasl",
+                "recordOffset": 3131048,
+                "objectOffset": 4182064,
+                "key": 48378,
+                "position": 35
+              }
+            },
+            {
+              "index": 35,
+              "key": "torso\u0000compose",
+              "undirectedKey": "compose\u0000torso",
+              "left": {
+                "module": "torso",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\torso.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/torso.fasl",
+                "recordOffset": 3131048,
+                "objectOffset": 4182064,
+                "key": 48378,
+                "position": 35
+              },
+              "right": {
+                "module": "compose",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\compose.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/compose.fasl",
+                "recordOffset": 3155968,
+                "objectOffset": 4263368,
+                "key": 52361,
+                "position": 36
+              }
+            },
+            {
+              "index": 36,
+              "key": "compose\u0000fill",
+              "undirectedKey": "compose\u0000fill",
+              "left": {
+                "module": "compose",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\compose.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/compose.fasl",
+                "recordOffset": 3155968,
+                "objectOffset": 4263368,
+                "key": 52361,
+                "position": 36
+              },
+              "right": {
+                "module": "fill",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\fill.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/fill.fasl",
+                "recordOffset": 3159616,
+                "objectOffset": 4273424,
+                "key": 52829,
+                "position": 37
+              }
+            },
+            {
+              "index": 37,
+              "key": "fill\u0000planobs",
+              "undirectedKey": "fill\u0000planobs",
+              "left": {
+                "module": "fill",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\fill.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/fill.fasl",
+                "recordOffset": 3159616,
+                "objectOffset": 4273424,
+                "key": 52829,
+                "position": 37
+              },
+              "right": {
+                "module": "planobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\planobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/planobs.fasl",
+                "recordOffset": 3162992,
+                "objectOffset": 4283920,
+                "key": 53274,
+                "position": 38
+              }
+            },
+            {
+              "index": 38,
+              "key": "planobs\u0000tellit",
+              "undirectedKey": "planobs\u0000tellit",
+              "left": {
+                "module": "planobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\planobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/planobs.fasl",
+                "recordOffset": 3162992,
+                "objectOffset": 4283920,
+                "key": 53274,
+                "position": 38
+              },
+              "right": {
+                "module": "tellit",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\tellit.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/tellit.fasl",
+                "recordOffset": 3163904,
+                "objectOffset": 4286784,
+                "key": 53383,
+                "position": 39
+              }
+            },
+            {
+              "index": 39,
+              "key": "tellit\u0000hair",
+              "undirectedKey": "hair\u0000tellit",
+              "left": {
+                "module": "tellit",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\tellit.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/tellit.fasl",
+                "recordOffset": 3163904,
+                "objectOffset": 4286784,
+                "key": 53383,
+                "position": 39
+              },
+              "right": {
+                "module": "hair",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hair.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hair.fasl",
+                "recordOffset": 3188512,
+                "objectOffset": 4356952,
+                "key": 56061,
+                "position": 40
+              }
+            },
+            {
+              "index": 40,
+              "key": "hair\u0000thingobs",
+              "undirectedKey": "hair\u0000thingobs",
+              "left": {
+                "module": "hair",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hair.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hair.fasl",
+                "recordOffset": 3188512,
+                "objectOffset": 4356952,
+                "key": 56061,
+                "position": 40
+              },
+              "right": {
+                "module": "thingobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\thingobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/thingobs.fasl",
+                "recordOffset": 3189000,
+                "objectOffset": 4358384,
+                "key": 56146,
+                "position": 41
+              }
+            },
+            {
+              "index": 41,
+              "key": "thingobs\u0000arm",
+              "undirectedKey": "arm\u0000thingobs",
+              "left": {
+                "module": "thingobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\thingobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/thingobs.fasl",
+                "recordOffset": 3189000,
+                "objectOffset": 4358384,
+                "key": 56146,
+                "position": 41
+              },
+              "right": {
+                "module": "arm",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\arm.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/arm.fasl",
+                "recordOffset": 3192112,
+                "objectOffset": 4366720,
+                "key": 56437,
+                "position": 42
+              }
+            },
+            {
+              "index": 42,
+              "key": "arm\u0000garb",
+              "undirectedKey": "arm\u0000garb",
+              "left": {
+                "module": "arm",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\arm.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/arm.fasl",
+                "recordOffset": 3192112,
+                "objectOffset": 4366720,
+                "key": 56437,
+                "position": 42
+              },
+              "right": {
+                "module": "garb",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\garb.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/garb.fasl",
+                "recordOffset": 3199912,
+                "objectOffset": 4388800,
+                "key": 57186,
+                "position": 43
+              }
+            },
+            {
+              "index": 43,
+              "key": "garb\u0000defpose",
+              "undirectedKey": "defpose\u0000garb",
+              "left": {
+                "module": "garb",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\garb.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/garb.fasl",
+                "recordOffset": 3199912,
+                "objectOffset": 4388800,
+                "key": 57186,
+                "position": 43
+              },
+              "right": {
+                "module": "defpose",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\defpose.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/defpose.fasl",
+                "recordOffset": 3222800,
+                "objectOffset": 4453728,
+                "key": 59666,
+                "position": 44
+              }
+            },
+            {
+              "index": 44,
+              "key": "defpose\u0000ut7",
+              "undirectedKey": "defpose\u0000ut7",
+              "left": {
+                "module": "defpose",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\defpose.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/defpose.fasl",
+                "recordOffset": 3222800,
+                "objectOffset": 4453728,
+                "key": 59666,
+                "position": 44
+              },
+              "right": {
+                "module": "ut7",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut7.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut7.fasl",
+                "recordOffset": 3228424,
+                "objectOffset": 4469552,
+                "key": 60389,
+                "position": 45
+              }
+            },
+            {
+              "index": 45,
+              "key": "ut7\u0000figobs",
+              "undirectedKey": "figobs\u0000ut7",
+              "left": {
+                "module": "ut7",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut7.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut7.fasl",
+                "recordOffset": 3228424,
+                "objectOffset": 4469552,
+                "key": 60389,
+                "position": 45
+              },
+              "right": {
+                "module": "figobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\figobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/figobs.fasl",
+                "recordOffset": 3234768,
+                "objectOffset": 4489864,
+                "key": 61256,
+                "position": 46
+              }
+            },
+            {
+              "index": 46,
+              "key": "figobs\u0000ut5",
+              "undirectedKey": "figobs\u0000ut5",
+              "left": {
+                "module": "figobs",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\figobs.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/figobs.fasl",
+                "recordOffset": 3234768,
+                "objectOffset": 4489864,
+                "key": 61256,
+                "position": 46
+              },
+              "right": {
+                "module": "ut5",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut5.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut5.fasl",
+                "recordOffset": 3235768,
+                "objectOffset": 4492744,
+                "key": 61405,
+                "position": 47
+              }
+            },
+            {
+              "index": 47,
+              "key": "ut5\u0000hues",
+              "undirectedKey": "hues\u0000ut5",
+              "left": {
+                "module": "ut5",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\ut5.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/ut5.fasl",
+                "recordOffset": 3235768,
+                "objectOffset": 4492744,
+                "key": 61405,
+                "position": 47
+              },
+              "right": {
+                "module": "hues",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hues.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hues.fasl",
+                "recordOffset": 3242288,
+                "objectOffset": 4512968,
+                "key": 62412,
+                "position": 48
+              }
+            },
+            {
+              "index": 48,
+              "key": "hues\u0000patch",
+              "undirectedKey": "hues\u0000patch",
+              "left": {
+                "module": "hues",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\hues.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/hues.fasl",
+                "recordOffset": 3242288,
+                "objectOffset": 4512968,
+                "key": 62412,
+                "position": 48
+              },
+              "right": {
+                "module": "patch",
+                "text": "E:\\kcat\\aaron\\_src\\core\\harold3\\patch.fasl",
+                "normalized": "E:/kcat/aaron/_src/core/harold3/patch.fasl",
+                "recordOffset": 3248312,
+                "objectOffset": 4531608,
+                "key": 63324,
+                "position": 49
+              }
+            }
+          ]
+        },
+        "sharedAdjacentPairs": {
+          "sameDirection": [],
+          "reversedDirection": [],
+          "undirected": []
+        }
+      }
+    },
+    "compiledPayloadIdentity": {
+      "pllObjectCount": 7723,
+      "uniquePayloadHashCount": 7723,
+      "allPayloadHashesDistinct": true,
+      "dxlExactPayloadOccurrenceCount": 3,
+      "pllObjectsWithDxlPayloadMatches": 3,
+      "headerAndPayloadMatchCount": 3,
+      "alignedHeaderAndPayloadMatchCount": 3,
+      "paddedSpanMatchCount": 0,
+      "matches": [
+        {
+          "pllRecordOffset": 7728,
+          "pllObjectOffset": 686432,
+          "pllHeader": 8556,
+          "payloadLength": 66,
+          "payloadSha256": "c268193bfe86b1fa6121a544b2944ff21f6867160edba6e7c46b30fb77f9002e",
+          "dxlPayloadOffset": 222540,
+          "dxlCandidateObjectOffset": 222536,
+          "dxlCandidateAligned": true,
+          "dxlPrecedingHeader": 8556,
+          "precedingHeaderMatches": true,
+          "candidateSpanWithinImage": true,
+          "pllSpanSha256": "3485d7a927b8464cd8c19aea54d40f9f261397ca6479a682460f3248dee4f59f",
+          "dxlSpanSha256": "cd0585ba45ad2b88183f0486d98aa8668a9ba45e3513eae87ce832db97fb3938",
+          "paddedSpanMatches": false
+        },
+        {
+          "pllRecordOffset": 7752,
+          "pllObjectOffset": 671872,
+          "pllHeader": 8556,
+          "payloadLength": 66,
+          "payloadSha256": "b43f6fbf0bd7e9916d817ba6a64a180d2df1666823762875c2d27413050cf968",
+          "dxlPayloadOffset": 215324,
+          "dxlCandidateObjectOffset": 215320,
+          "dxlCandidateAligned": true,
+          "dxlPrecedingHeader": 8556,
+          "precedingHeaderMatches": true,
+          "candidateSpanWithinImage": true,
+          "pllSpanSha256": "b25c5f650006c44b1e8070fd354f7c862bb315ac1410e3874f6dccdc4c87cf27",
+          "dxlSpanSha256": "68163bc77e465eeaca087decc8a549b62256ebc7501daac580df2aab3b954359",
+          "paddedSpanMatches": false
+        },
+        {
+          "pllRecordOffset": 7760,
+          "pllObjectOffset": 667248,
+          "pllHeader": 8556,
+          "payloadLength": 66,
+          "payloadSha256": "a8dfe3bd633a1ffa0f164c1a73578cf8ccb1686955529c09d8bffdfe26451c37",
+          "dxlPayloadOffset": 214052,
+          "dxlCandidateObjectOffset": 214048,
+          "dxlCandidateAligned": true,
+          "dxlPrecedingHeader": 8556,
+          "precedingHeaderMatches": true,
+          "candidateSpanWithinImage": true,
+          "pllSpanSha256": "0f5d54d0224a697f6527a352ee2868b87527d0237e3bbdf092dece65b99cda6f",
+          "dxlSpanSha256": "6439c25db7d776a11b0a0d1edb3746e1bc87251b15f5f55e38dbac692a1793a7",
+          "paddedSpanMatches": false
+        }
+      ]
     }
   }
 }

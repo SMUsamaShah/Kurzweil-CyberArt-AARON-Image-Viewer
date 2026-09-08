@@ -424,3 +424,22 @@ bindings restore. `MPLAN` is therefore the first missing scene-context
 dependency, not a brush-map or writer failure. The next probe must trace how
 the original startup path binds that plan and its colour/scene companions
 before making downstream emission claims.
+
+## Measured dependency-isolated stroke adapter
+
+The retained brush matrix provides one safe local boundary beyond raw map
+stamping. For a nonempty path, the original `BRUSH-STROKE` forwards the full
+path to `SCREEN-AND-STORE` once with the supplied CDEX/SDEX. The
+`IN-SUB-FRAME` predicate is consulted once per translated core-mask point: the
+repeated brush-1 path makes 27 predicate calls, and returning NIL leaves the
+fill map empty while the single screen call still occurs. Returning T for the
+adjacent two-point brush-1 case makes 18 predicate calls and writes the
+measured 12-cell core union with the input value unchanged. Empty and singleton
+paths produce no screen call or map writes in the retained cases.
+
+`engine/src/aaron-brush-stroke.js` now exposes
+`applyMeasuredBrushStroke` for this boundary. It is a dependency-isolated
+clean-room adapter: it accepts an explicit predicate and screen callback,
+preserves the full forwarded path, and leaves the unresolved screen/file,
+colour, clipping, and brush-state logic outside its scope. The generator does
+not use this adapter yet.

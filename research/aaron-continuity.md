@@ -125,23 +125,52 @@ scaffolds, not claims about the archived caller policy; the exact boundaries
 and sweep are documented in
 [`clean-room-integration.md`](clean-room-integration.md).
 
+The newest local-only checkpoint adds two further boundaries without executing
+Windows. The static image index now compares every validated PLL compiled
+payload against the DXL and records three exact anonymous 66-byte anchors.
+All 7,723 PLL payload hashes are distinct; each anchor has the same `0x216c`
+header and an aligned candidate object start, while no padded object span is
+identical. These are structural cross-image anchors only—no function name,
+entry point, relocation, or module is assigned. The implementation and exact
+hashes are documented in [`static-image-findings.md`](static-image-findings.md).
+
+The scene manifest was also hardened into a verified attribution boundary. It
+now binds finalized captures to dimensions and palette, stores per-shape stage
+hashes, rejects duplicate IDs/repeated stage assignments and gaps/overlaps,
+and deep-copies replay slices so replay cannot freeze or alias the source
+document. The three-case local fixture now retains full serialized-AA hashes
+as well as stage hashes. This remains provisional clean-room instrumentation,
+not recovered AARON scene semantics.
+
+Finally, the measured dependency-isolated brush boundary is now represented by
+`applyMeasuredBrushStroke`: an explicit `IN-SUB-FRAME` predicate gates the
+measured core-mask writes, while a nontrivial path is forwarded once to an
+explicit `SCREEN-AND-STORE` callback with CDEX/SDEX. Tests preserve the 27-call
+repeated-path and 18-call adjacent-path predicate counts, direct values, and
+single screen-forwarding call. The generator still does not use this adapter;
+its downstream screen/file, colour, clipping, and brush-state behavior remain
+open.
+
 Local verification:
 
-- `cd engine && npm test` → 66 passing tests.
+- `cd engine && npm test` → 76 passing tests.
 - The brush report parser and its real original-engine captures are covered by
   the research-tool suite.
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`; the suite now has
-  30 passing tests, including DXL descriptor and source-object validation.
+  33 passing tests, including module adjacency and compiled-payload identity
+  validation.
 
 ## Honest progress estimate
 
-Overall completion is approximately **30–35%**. The archaeology, AA protocol,
+Overall completion is approximately **35–40%**. The archaeology, AA protocol,
 fixtures, static-analysis tools, numeric primitives, several isolated
-stroke/map/writer boundaries, and the first local composition/outline
-integration seams are now strong. The high-level artistic decision system is
-still mostly unresolved, so this is not yet a parity-equivalent generator.
+stroke/map/writer boundaries, and the local composition/outline attribution
+seams are now strong. The high-level artistic decision system is still mostly
+unresolved, so this is not yet a parity-equivalent generator. The increase is
+measurable infrastructure and structural evidence, not a claim that half of
+the historical scene rules have been recovered.
 
 | Area | Current state |
 |---|---|
@@ -154,6 +183,8 @@ still mostly unresolved, so this is not yet a parity-equivalent generator.
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
 | Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
+| Static module/payload cross-image analysis | 50-module adjacency negative control plus three exact anonymous compiled-payload anchors; no names or execution semantics assigned |
+| Scene geometry/emission attribution | Frozen, document-bound manifest with per-shape ranges/hashes and isolated replay slices; semantics remain provisional |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |
 

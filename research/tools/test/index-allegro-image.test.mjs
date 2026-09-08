@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import {
+  compareCompiledPayloads,
+  compareModuleOrders,
   parseCompiledObjectTable,
   parseDxlDescriptorLayout,
   parseIndexTable,
@@ -10,6 +12,50 @@ import {
   readTaggedString,
   resolveIndexedStrings,
 } from '../index-allegro-image.mjs';
+
+test('compares module adjacency while preserving entry provenance', () => {
+  const result = compareModuleOrders(
+    [
+      { module: 'alpha', source: 'dxl', offset: 10 },
+      { module: 'beta', source: 'dxl', offset: 20 },
+      { module: 'gamma', source: 'dxl', offset: 30 },
+    ],
+    [
+      { module: 'gamma', source: 'pll', offset: 300 },
+      { module: 'beta', source: 'pll', offset: 200 },
+      { module: 'alpha', source: 'pll', offset: 100 },
+    ],
+  );
+  assert.equal(result.sameModuleSet, true);
+  assert.equal(result.sameOrder, false);
+  assert.equal(result.commonOrderPrefixLength, 0);
+  assert.deepEqual(result.left.duplicateModules, []);
+  assert.equal(result.left.adjacentPairCount, 2);
+  assert.equal(result.right.adjacentPairCount, 2);
+  assert.equal(result.sharedAdjacentPairs.sameDirection.length, 0);
+  assert.equal(result.sharedAdjacentPairs.reversedDirection.length, 2);
+  assert.equal(result.sharedAdjacentPairs.undirected.length, 2);
+  assert.deepEqual(result.sharedAdjacentPairs.reversedDirection[0].left.left, {
+    module: 'alpha', source: 'dxl', offset: 10, position: 0,
+  });
+  assert.deepEqual(result.sharedAdjacentPairs.reversedDirection[0].right.right, {
+    module: 'alpha', source: 'pll', offset: 100, position: 2,
+  });
+});
+
+test('reports duplicate module names and handles short orders', () => {
+  const result = compareModuleOrders(
+    ['one', 'one', 'two'],
+    ['two'],
+  );
+  assert.deepEqual(result.left.duplicateModules, [{
+    module: 'one', count: 2, positions: [0, 1],
+  }]);
+  assert.equal(result.left.adjacentPairCount, 2);
+  assert.equal(result.right.adjacentPairCount, 0);
+  assert.equal(result.sharedAdjacentPairs.sameDirection.length, 0);
+  assert.throws(() => compareModuleOrders(['ok'], [{ name: 'missing' }]), /module name/);
+});
 
 function syntheticCompiledObjects() {
   const image = Buffer.alloc(0x80, 0);
@@ -21,9 +67,63 @@ function syntheticCompiledObjects() {
     ],
   };
   image.writeUInt32LE((6 << 8) | 0x6c, 0x48);
+  image.write('abcdefghijkl', 0x4c, 'ascii');
   image.writeUInt32LE((8 << 8) | 0x6c, 0x58);
+  image.write('ABCDEFGHIJKLMNOP', 0x5c, 'ascii');
   return { image, table };
 }
+
+test('finds anonymous compiled payload anchors without assigning names', () => {
+  const { image, table } = syntheticCompiledObjects();
+  const compiled = parseCompiledObjectTable(image, table, { finalBoundary: 0x70 });
+  const dxl = Buffer.alloc(0x100, 0);
+  const firstPayload = image.subarray(0x4c, 0x58);
+  const secondPayload = image.subarray(0x5c, 0x6c);
+
+  // An unaligned occurrence must remain visible but must not become an
+  // aligned object anchor.
+  firstPayload.copy(dxl, 0x21);
+  image.subarray(0x48, 0x4c).copy(dxl, 0x40);
+  firstPayload.copy(dxl, 0x44);
+  // This exact payload has a deliberately mismatched preceding header.
+  secondPayload.copy(dxl, 0x84);
+  dxl.writeUInt32LE(0x6c, 0x80);
+
+  const result = compareCompiledPayloads(image, compiled.objects, dxl);
+  assert.equal(result.pllObjectCount, 2);
+  assert.equal(result.uniquePayloadHashCount, 2);
+  assert.equal(result.allPayloadHashesDistinct, true);
+  assert.equal(result.dxlExactPayloadOccurrenceCount, 3);
+  assert.equal(result.pllObjectsWithDxlPayloadMatches, 2);
+  assert.equal(result.headerAndPayloadMatchCount, 1);
+  assert.equal(result.alignedHeaderAndPayloadMatchCount, 1);
+  assert.equal(result.paddedSpanMatchCount, 1);
+  assert.deepEqual(result.matches.map((match) => ({
+    pllObjectOffset: match.pllObjectOffset,
+    dxlPayloadOffset: match.dxlPayloadOffset,
+    dxlCandidateAligned: match.dxlCandidateAligned,
+    precedingHeaderMatches: match.precedingHeaderMatches,
+  })), [
+    {
+      pllObjectOffset: 0x48,
+      dxlPayloadOffset: 0x21,
+      dxlCandidateAligned: false,
+      precedingHeaderMatches: false,
+    },
+    {
+      pllObjectOffset: 0x48,
+      dxlPayloadOffset: 0x44,
+      dxlCandidateAligned: true,
+      precedingHeaderMatches: true,
+    },
+    {
+      pllObjectOffset: 0x58,
+      dxlPayloadOffset: 0x84,
+      dxlCandidateAligned: true,
+      precedingHeaderMatches: false,
+    },
+  ]);
+});
 
 function syntheticPll() {
   const image = Buffer.alloc(0x100, 0);
@@ -105,6 +205,64 @@ test('accepts the complete retained PLL layout and cross-reference counts', () =
   assert.equal(index.crossReference.coreModuleOrderComparison.sameModuleSet, true);
   assert.equal(index.crossReference.coreModuleOrderComparison.sameOrder, false);
   assert.equal(index.crossReference.coreModuleOrderComparison.commonModuleOrderPrefixLength, 0);
+  const adjacency = index.crossReference.coreModuleOrderComparison.adjacencyAudit;
+  assert.equal(adjacency.left.moduleCount, 50);
+  assert.equal(adjacency.right.moduleCount, 50);
+  assert.equal(adjacency.left.uniqueModuleCount, 50);
+  assert.equal(adjacency.right.uniqueModuleCount, 50);
+  assert.deepEqual(adjacency.left.duplicateModules, []);
+  assert.deepEqual(adjacency.right.duplicateModules, []);
+  assert.equal(adjacency.left.adjacentPairCount, 49);
+  assert.equal(adjacency.right.adjacentPairCount, 49);
+  assert.equal(adjacency.sharedAdjacentPairs.sameDirection.length, 0);
+  assert.equal(adjacency.sharedAdjacentPairs.reversedDirection.length, 0);
+  assert.equal(adjacency.sharedAdjacentPairs.undirected.length, 0);
+  const payloadIdentity = index.crossReference.compiledPayloadIdentity;
+  assert.equal(payloadIdentity.pllObjectCount, 7723);
+  assert.equal(payloadIdentity.uniquePayloadHashCount, 7723);
+  assert.equal(payloadIdentity.allPayloadHashesDistinct, true);
+  assert.equal(payloadIdentity.dxlExactPayloadOccurrenceCount, 3);
+  assert.equal(payloadIdentity.pllObjectsWithDxlPayloadMatches, 3);
+  assert.equal(payloadIdentity.headerAndPayloadMatchCount, 3);
+  assert.equal(payloadIdentity.alignedHeaderAndPayloadMatchCount, 3);
+  assert.equal(payloadIdentity.paddedSpanMatchCount, 0);
+  assert.deepEqual(payloadIdentity.matches.map((match) => ({
+    pllObjectOffset: match.pllObjectOffset,
+    dxlCandidateObjectOffset: match.dxlCandidateObjectOffset,
+    payloadLength: match.payloadLength,
+    payloadSha256: match.payloadSha256,
+    precedingHeaderMatches: match.precedingHeaderMatches,
+    dxlCandidateAligned: match.dxlCandidateAligned,
+    paddedSpanMatches: match.paddedSpanMatches,
+  })), [
+    {
+      pllObjectOffset: 0xa7960,
+      dxlCandidateObjectOffset: 0x36548,
+      payloadLength: 66,
+      payloadSha256: 'c268193bfe86b1fa6121a544b2944ff21f6867160edba6e7c46b30fb77f9002e',
+      precedingHeaderMatches: true,
+      dxlCandidateAligned: true,
+      paddedSpanMatches: false,
+    },
+    {
+      pllObjectOffset: 0xa4080,
+      dxlCandidateObjectOffset: 0x34918,
+      payloadLength: 66,
+      payloadSha256: 'b43f6fbf0bd7e9916d817ba6a64a180d2df1666823762875c2d27413050cf968',
+      precedingHeaderMatches: true,
+      dxlCandidateAligned: true,
+      paddedSpanMatches: false,
+    },
+    {
+      pllObjectOffset: 0xa2e70,
+      dxlCandidateObjectOffset: 0x34420,
+      payloadLength: 66,
+      payloadSha256: 'a8dfe3bd633a1ffa0f164c1a73578cf8ccb1686955529c09d8bffdfe26451c37',
+      precedingHeaderMatches: true,
+      dxlCandidateAligned: true,
+      paddedSpanMatches: false,
+    },
+  ]);
   const brush = index.pll.selectedSymbols.find(({ name }) => name === 'BRUSH-STROKE');
   assert.deepEqual(
     { recordOffset: brush.recordOffset, objectOffset: brush.objectOffset, key: brush.key },

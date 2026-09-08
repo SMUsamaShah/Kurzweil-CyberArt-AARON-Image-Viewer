@@ -5,6 +5,11 @@ import { createAaronPalette } from './palette.js';
 import { createAaronPlanner } from './planner.js';
 import { createFreePathOutline } from './aaron-outline.js';
 import {
+  createSceneManifest,
+  finalizeSceneManifest,
+  recordSceneStage,
+} from './scene-manifest.js';
+import {
   ellipsePoints,
   pointInPolygon,
   polygonBounds,
@@ -87,7 +92,11 @@ function shapesBounds(shapes) {
 
 function fitShapesToFrame(shapes, frame) {
   const sourceBounds = shapesBounds(shapes);
-  if (!sourceBounds) return { shapes, sourceBounds: null, bounds: null, scale: 1 };
+  if (!sourceBounds) {
+    return {
+      shapes, sourceBounds: null, bounds: null, scale: 1, offsetX: 0, offsetY: 0,
+    };
+  }
   const inset = Math.min(frame.width, frame.height) * 0.02;
   const inner = {
     x: frame.x + inset,
@@ -113,6 +122,8 @@ function fitShapesToFrame(shapes, frame) {
     sourceBounds,
     bounds: shapesBounds(transformed),
     scale,
+    offsetX,
+    offsetY,
   };
 }
 
@@ -245,6 +256,8 @@ function makeFigure(random, width, height, index, total, palette, placement = nu
       sourceBounds: fitted.sourceBounds,
       bounds: fitted.bounds,
       scale: fitted.scale,
+      offsetX: fitted.offsetX,
+      offsetY: fitted.offsetY,
     },
     shapes: fitted.shapes,
   };
@@ -405,27 +418,43 @@ export class AaronGenerator {
     }
     if (options.includePlant ?? true) scenes.push(makePlant(random, this.width, this.height, this.palette));
 
+    const manifest = createSceneManifest(scenes);
     let outlineInputEdges = 0;
     let outlineEmittedPoints = 0;
-    for (const scene of scenes) {
-      for (const shape of scene.shapes) {
-        if (!shape.outline) continue;
+    scenes.forEach((scene, objectIndex) => {
+      scene.shapes.forEach((shape, shapeIndex) => {
+        if (!shape.outline) return;
+        const start = builder.outline.length;
         const metrics = addClosedOutline(builder, shape.polygon, shape.zPath, {
           mode: this.outlineMode,
           random: this.outlineRandom,
         });
+        recordSceneStage(manifest, objectIndex, shapeIndex, 'outline', {
+          start,
+          end: builder.outline.length,
+        }, metrics);
         outlineInputEdges += metrics.inputEdges;
         outlineEmittedPoints += metrics.emittedPoints;
-      }
-    }
+      });
+    });
 
     builder.usePaint();
-    for (const scene of scenes) {
-      for (const shape of scene.shapes) fillPolygon(builder, shape, random, this.palette);
-    }
+    scenes.forEach((scene, objectIndex) => {
+      scene.shapes.forEach((shape, shapeIndex) => {
+        const start = builder.paint.length;
+        fillPolygon(builder, shape, random, this.palette);
+        recordSceneStage(manifest, objectIndex, shapeIndex, 'paint', {
+          start,
+          end: builder.paint.length,
+        }, { operations: builder.paint.length - start });
+      });
+    });
+
+    const document = builder.document();
+    const sceneManifest = finalizeSceneManifest(manifest, document);
 
     return {
-      document: builder.document(),
+      document,
       scene: {
         width: this.width,
         height: this.height,
@@ -457,7 +486,10 @@ export class AaronGenerator {
           sourceBounds: placement?.sourceBounds ?? null,
           bounds: placement?.bounds ?? null,
           scale: placement?.scale ?? null,
+          offsetX: placement?.offsetX ?? null,
+          offsetY: placement?.offsetY ?? null,
         })),
+        manifest: sceneManifest,
         planner: planner?.snapshot() ?? null,
         objects: scenes.map(({ kind, shapes }) => ({ kind, shapeCount: shapes.length })),
       },

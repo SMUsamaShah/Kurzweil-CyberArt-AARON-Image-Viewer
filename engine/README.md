@@ -118,6 +118,14 @@ The mode is a clean-room integration fixture, not a claim that every original
 AARON polygon used this caller setup. The default polygon outline mode remains
 unchanged, and local integration hashes are kept separately in
 `test/fixtures/free-path-outline-integration.json`.
+
+Every generated scene also contains a frozen `scene.manifest` with stable
+object/shape IDs, actual geometry bounds, placement status, and half-open
+outline/paint operation ranges. Finalization records document dimensions,
+palette and per-shape stage hashes, while `replaySceneManifest` verifies those
+bindings and returns copied exact slices without consuming random state. It is
+an attribution/replay index, not a second historical generator. Its local
+fixture is `test/fixtures/scene-stage-integration.json`.
 `aaron-angles.js` implements ANGLE-RANGE, NORM-A, ANGLE-DIF, and the measured
 double MOD arithmetic. Tests match 20 ANGLE-RANGE calls and 218 double
 observations, including 96 fresh holdouts. These are primitives toward the line

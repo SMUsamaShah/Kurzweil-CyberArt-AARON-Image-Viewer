@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local clean-room scene geometry and emission manifest; not original-engine parity evidence",
+  "cases": [
+    {
+      "sceneSeed": 1234,
+      "outlineMode": "polygon",
+      "figureCount": 2,
+      "objects": 5,
+      "shapes": 31,
+      "acceptedFigures": 2,
+      "outlineOperations": 283,
+      "paintOperations": 68836,
+      "outlineSha256": "6df33ea1acd1f69fc9a1af7bc6e961753b891398f5d57f1fb8c8653647fd730e",
+      "paintSha256": "140f01c08c2678439df2611c2c304581475851f67ca688a5896a78df04ac9f0b",
+      "serializedSha256": "3016bc280caa2be95b9b5da9584771c9cbbca091a86ef0bdd183cb3ac1474ac3",
+      "serializedBytes": 163018
+    },
+    {
+      "sceneSeed": 1234,
+      "outlineMode": "free-path-subset",
+      "outlineSeed": 1234,
+      "figureCount": 2,
+      "objects": 5,
+      "shapes": 31,
+      "acceptedFigures": 2,
+      "outlineOperations": 3026,
+      "paintOperations": 68836,
+      "outlineSha256": "7c99c6afaf4d7af89ed86af1f18339b8ff5cc33d15f8c9f4d6a86a0b47734294",
+      "paintSha256": "140f01c08c2678439df2611c2c304581475851f67ca688a5896a78df04ac9f0b",
+      "serializedSha256": "61a684184ae3a2f82dfaeb8d4b0fdb12b73e68cc7887c41928190b2502df0a05",
+      "serializedBytes": 230439
+    },
+    {
+      "sceneSeed": 5678,
+      "outlineMode": "free-path-subset",
+      "outlineSeed": 1234,
+      "figureCount": 2,
+      "objects": 5,
+      "shapes": 30,
+      "acceptedFigures": 2,
+      "outlineOperations": 2909,
+      "paintOperations": 76550,
+      "outlineSha256": "afa0e935a2f9c4fa4152a7cda3da0c544aa91e73b6e575d382ebe0cbc83ef4b9",
+      "paintSha256": "22ea1fcba51d3915549efda318993b3b8c7233a71433101cca2522b4aba77455",
+      "serializedSha256": "5b4262e764668513dbcbfcb7d897f1409be74f52be80a3971d93f846c2151a33",
+      "serializedBytes": 242740
+    }
+  ]
+}

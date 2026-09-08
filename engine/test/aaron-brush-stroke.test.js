@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getAaronBrushProfile } from '../src/aaron-brushes.js';
-import { applyMeasuredBrushVertices } from '../src/aaron-brush-stroke.js';
+import {
+  applyMeasuredBrushStroke,
+  applyMeasuredBrushVertices,
+} from '../src/aaron-brush-stroke.js';
 import { createAaronMaps } from '../src/aaron-maps.js';
 
 const horizontal = [102, 103, 104, 118, 119, 120, 134, 135, 136, 150, 151, 152];
@@ -167,4 +170,49 @@ test('keeps the measured empty and singleton path boundary', () => {
   );
   assert.deepEqual(nonzero(empty.fillMap), []);
   assert.deepEqual(nonzero(singleton.fillMap), []);
+});
+
+test('gates measured fill writes while forwarding a nontrivial path once', () => {
+  const maps = createAaronMaps(16, 16);
+  const profile = getAaronBrushProfile(1);
+  const path = [[7, 7], [8, 7], [7, 7]];
+  let insideCalls = 0;
+  const forwarded = [];
+  const result = applyMeasuredBrushStroke(maps, profile, path, 1, {
+    insideFrame: () => {
+      insideCalls += 1;
+      return false;
+    },
+    screenAndStore: (forwardedPath, cdex, sdex) => {
+      forwarded.push({ path: forwardedPath, cdex, sdex });
+    },
+    cdex: 1,
+    sdex: 0,
+  });
+
+  assert.deepEqual(result.touched, []);
+  assert.equal(result.screenCalls, 1);
+  assert.equal(insideCalls, 27);
+  assert.deepEqual(forwarded, [{ path, cdex: 1, sdex: 0 }]);
+  assert.deepEqual(nonzero(maps.fillMap), []);
+});
+
+test('combines accepted core-mask writes with one screen-forwarding call', () => {
+  const maps = createAaronMaps(16, 16);
+  const calls = [];
+  const result = applyMeasuredBrushStroke(
+    maps,
+    getAaronBrushProfile(1),
+    [[7, 7], [8, 7]],
+    3,
+    {
+      insideFrame: () => true,
+      screenAndStore: (...args) => calls.push(args),
+    },
+  );
+  assert.deepEqual(result.touched, horizontal);
+  assert.equal(result.screenCalls, 1);
+  assert.equal(calls.length, 1);
+  assert.deepEqual(calls[0], [[[7, 7], [8, 7]], 0, 0]);
+  assert.deepEqual(nonzero(maps.fillMap), horizontal.map((index) => [index, 3]));
 });

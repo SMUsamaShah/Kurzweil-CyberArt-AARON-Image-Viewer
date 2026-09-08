@@ -261,6 +261,104 @@ export function parseCompiledObjectTable(buffer, table, {
   };
 }
 
+function compiledPayload(buffer, object) {
+  if (!object || !Number.isInteger(object.objectOffset)
+      || !Number.isInteger(object.rawEnd)
+      || object.objectOffset < 0
+      || object.rawEnd < object.objectOffset + 4
+      || object.rawEnd > buffer.length) {
+    throw new RangeError('compiled object payload is outside the image');
+  }
+  const payload = buffer.subarray(object.objectOffset + 4, object.rawEnd);
+  if (payload.length === 0) throw new Error('compiled object payload must not be empty');
+  return payload;
+}
+
+function exactOccurrences(buffer, needle) {
+  const offsets = [];
+  let offset = buffer.indexOf(needle);
+  while (offset >= 0) {
+    offsets.push(offset);
+    offset = buffer.indexOf(needle, offset + 1);
+  }
+  return offsets;
+}
+
+/**
+ * Compare validated PLL compiled-object payloads against a DXL byte image.
+ *
+ * This is an anonymous structural anchor search. It retains exact payload
+ * occurrences and reports whether the bytes immediately before an occurrence
+ * form the same tagged compiled-object header at an aligned candidate start.
+ * It does not assign a name, entry point, relocation, or runtime meaning to a
+ * match, and it never stores executable payload bytes in the report.
+ */
+export function compareCompiledPayloads(pllBuffer, compiledObjects, dxlBuffer) {
+  assertBuffer(pllBuffer, 'PLL image');
+  assertBuffer(dxlBuffer, 'DXL image');
+  if (!Array.isArray(compiledObjects)) {
+    throw new TypeError('compiledObjects must be an array');
+  }
+
+  const payloadHashes = new Map();
+  const matches = [];
+  for (const object of compiledObjects) {
+    const payload = compiledPayload(pllBuffer, object);
+    const payloadSha256 = sha256(payload);
+    payloadHashes.set(payloadSha256, (payloadHashes.get(payloadSha256) ?? 0) + 1);
+    const pllSpan = pllBuffer.subarray(object.objectOffset, object.nextBoundary);
+    for (const dxlPayloadOffset of exactOccurrences(dxlBuffer, payload)) {
+      const candidateObjectOffset = dxlPayloadOffset - 4;
+      const candidateAligned = candidateObjectOffset >= 0 && candidateObjectOffset % 8 === 0;
+      const candidateHeader = candidateObjectOffset >= 0 && candidateObjectOffset + 4 <= dxlBuffer.length
+        ? u32(dxlBuffer, candidateObjectOffset, 'DXL candidate compiled object')
+        : null;
+      const headerMatches = candidateHeader === object.header;
+      const candidateRawEnd = headerMatches
+        ? candidateObjectOffset + 4 + (candidateHeader >>> 8) * 2
+        : null;
+      const candidateNextBoundary = candidateRawEnd === null
+        ? null
+        : alignUp(candidateRawEnd, 8);
+      const candidateSpanWithinImage = candidateNextBoundary !== null
+        && candidateNextBoundary <= dxlBuffer.length;
+      const dxlSpan = candidateSpanWithinImage
+        ? dxlBuffer.subarray(candidateObjectOffset, candidateNextBoundary)
+        : null;
+      matches.push({
+        pllRecordOffset: object.recordOffset,
+        pllObjectOffset: object.objectOffset,
+        pllHeader: object.header,
+        payloadLength: payload.length,
+        payloadSha256,
+        dxlPayloadOffset,
+        dxlCandidateObjectOffset: candidateObjectOffset >= 0 ? candidateObjectOffset : null,
+        dxlCandidateAligned: candidateAligned,
+        dxlPrecedingHeader: candidateHeader,
+        precedingHeaderMatches: headerMatches,
+        candidateSpanWithinImage,
+        pllSpanSha256: sha256(pllSpan),
+        dxlSpanSha256: dxlSpan ? sha256(dxlSpan) : null,
+        paddedSpanMatches: Boolean(dxlSpan && dxlSpan.equals(pllSpan)),
+      });
+    }
+  }
+
+  const matchesWithHeader = matches.filter(({ precedingHeaderMatches }) => precedingHeaderMatches);
+  const matchesWithAlignedHeader = matchesWithHeader.filter(({ dxlCandidateAligned }) => dxlCandidateAligned);
+  return {
+    pllObjectCount: compiledObjects.length,
+    uniquePayloadHashCount: payloadHashes.size,
+    allPayloadHashesDistinct: payloadHashes.size === compiledObjects.length,
+    dxlExactPayloadOccurrenceCount: matches.length,
+    pllObjectsWithDxlPayloadMatches: new Set(matches.map(({ pllObjectOffset }) => pllObjectOffset)).size,
+    headerAndPayloadMatchCount: matchesWithHeader.length,
+    alignedHeaderAndPayloadMatchCount: matchesWithAlignedHeader.length,
+    paddedSpanMatchCount: matches.filter(({ paddedSpanMatches }) => paddedSpanMatches).length,
+    matches,
+  };
+}
+
 function compiledObjectSummary(result) {
   const {
     objects,
@@ -283,6 +381,125 @@ function sourceInfo(text) {
     basename: name,
     module: name.replace(SOURCE_SUFFIX, '').toLowerCase(),
     coreHarold3: /\/core\/harold3\//i.test(normalized),
+  };
+}
+
+function normalizeModuleEntries(entries, label) {
+  if (!Array.isArray(entries)) throw new TypeError(`${label} must be an array`);
+  return entries.map((entry, position) => {
+    const normalized = typeof entry === 'string' ? { module: entry } : entry;
+    if (!normalized || typeof normalized.module !== 'string' || !normalized.module) {
+      throw new TypeError(`${label} entries must contain a module name`);
+    }
+    return { ...normalized, position };
+  });
+}
+
+function duplicateModuleSummary(entries) {
+  const positions = new Map();
+  for (const entry of entries) {
+    const values = positions.get(entry.module) ?? [];
+    values.push(entry.position);
+    positions.set(entry.module, values);
+  }
+  return [...positions.entries()]
+    .filter(([, values]) => values.length > 1)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([module, values]) => ({ module, count: values.length, positions: values }));
+}
+
+function directedPairKey(left, right) {
+  return `${left}\u0000${right}`;
+}
+
+function adjacentModulePairs(entries) {
+  return entries.slice(0, -1).map((left, index) => {
+    const right = entries[index + 1];
+    return {
+      index,
+      key: directedPairKey(left.module, right.module),
+      undirectedKey: [left.module, right.module].sort().join('\u0000'),
+      left,
+      right,
+    };
+  });
+}
+
+function intersectPairSets(leftPairs, rightPairs, leftKey, rightKey = leftKey) {
+  const rightByKey = new Map();
+  for (const pair of rightPairs) {
+    const key = rightKey(pair);
+    const values = rightByKey.get(key) ?? [];
+    values.push(pair);
+    rightByKey.set(key, values);
+  }
+  const matches = [];
+  for (const left of leftPairs) {
+    for (const right of rightByKey.get(leftKey(left)) ?? []) {
+      matches.push({ left, right });
+    }
+  }
+  return matches;
+}
+
+/**
+ * Compare two retained module-name orders without assigning dependency or
+ * execution semantics. Entries may be bare module strings or objects with a
+ * `module` field and arbitrary provenance fields. The adjacent-pair report
+ * deliberately preserves that provenance so a future interpretation can be
+ * checked against the exact source/table records.
+ */
+export function compareModuleOrders(leftEntries, rightEntries) {
+  const left = normalizeModuleEntries(leftEntries, 'left module order');
+  const right = normalizeModuleEntries(rightEntries, 'right module order');
+  const leftPairs = adjacentModulePairs(left);
+  const rightPairs = adjacentModulePairs(right);
+  const leftModules = new Set(left.map(({ module }) => module));
+  const rightModules = new Set(right.map(({ module }) => module));
+  const sameModuleSet = left.length === right.length
+    && leftModules.size === rightModules.size
+    && [...leftModules].every((module) => rightModules.has(module));
+  const sameOrder = left.length === right.length
+    && left.every(({ module }, index) => module === right[index]?.module);
+  let commonOrderPrefixLength = 0;
+  while (
+    commonOrderPrefixLength < Math.min(left.length, right.length)
+    && left[commonOrderPrefixLength].module === right[commonOrderPrefixLength].module
+  ) commonOrderPrefixLength += 1;
+
+  return {
+    sameModuleSet,
+    sameOrder,
+    commonOrderPrefixLength,
+    left: {
+      moduleCount: left.length,
+      uniqueModuleCount: leftModules.size,
+      duplicateModules: duplicateModuleSummary(left),
+      adjacentPairCount: leftPairs.length,
+      adjacentPairs: leftPairs,
+    },
+    right: {
+      moduleCount: right.length,
+      uniqueModuleCount: rightModules.size,
+      duplicateModules: duplicateModuleSummary(right),
+      adjacentPairCount: rightPairs.length,
+      adjacentPairs: rightPairs,
+    },
+    sharedAdjacentPairs: {
+      sameDirection: intersectPairSets(leftPairs, rightPairs, (pair) => pair.key),
+      reversedDirection: intersectPairSets(
+        leftPairs,
+        rightPairs,
+        (pair) => pair.key,
+        (pair) => directedPairKey(pair.right.module, pair.left.module),
+      ),
+      undirected: intersectPairSets(
+        leftPairs,
+        rightPairs,
+        (pair) => pair.undirectedKey,
+        (pair) => pair.undirectedKey,
+      ),
+    },
   };
 }
 
@@ -578,6 +795,23 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
   const dxl = readFileSync(dxlPath);
   const pll = readFileSync(pllPath);
   const parsed = parsePll(pll);
+  // `parsePll` keeps the public report compact by omitting the 7,723 object
+  // entries. Reuse the same validated layout here for the anonymous
+  // cross-image payload search; only hashes and offsets enter the JSON report.
+  const pllFirstTable = parseIndexTable(pll, DEFAULT_PLL_LAYOUT.firstTableOffset, {
+    expectedCount: DEFAULT_PLL_LAYOUT.firstTableCount,
+    label: 'PLL first table for payload comparison',
+  });
+  const pllCompiledObjects = parseCompiledObjectTable(pll, pllFirstTable, {
+    objectBase: pllFirstTable.offset,
+    expectedTag: 0x6c,
+    finalBoundary: DEFAULT_PLL_LAYOUT.stringTableOffset,
+  });
+  const compiledPayloadIdentity = compareCompiledPayloads(
+    pll,
+    pllCompiledObjects.objects,
+    dxl,
+  );
   const dxlHeaderInfo = dxlHeader(dxl);
   const dxlDescriptorLayout = parseDxlDescriptorLayout(dxl, dxlHeaderInfo);
   const dxlSourceObjectChain = parseDxlSourceObjectChain(dxl);
@@ -593,25 +827,33 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
   const dxlCoreLisp = [...new Set(dxlSourceMarkers(dxl)
     .filter(({ normalized }) => /\/core\/harold3\//i.test(normalized))
     .map(({ normalized }) => basename(normalized).replace(/\.lisp$/i, '').toLowerCase()))].sort();
-  const dxlCoreLispOrder = dxlSourceObjectChain.objects
+  const dxlCoreLispEntries = dxlSourceObjectChain.objects
     .filter(({ kind }) => kind === 'core-harold3')
-    .map(({ raw }) => basename(normalizePath(raw)).replace(/\.lisp$/i, '').toLowerCase());
-  const pllCoreFaslOrder = sourceReferences
+    .map(({ raw, normalized, objectOffset, textOffset, nextBoundary }) => ({
+      module: basename(normalizePath(raw)).replace(/\.lisp$/i, '').toLowerCase(),
+      raw,
+      normalized,
+      objectOffset,
+      textOffset,
+      nextBoundary,
+    }));
+  const pllCoreFaslEntries = sourceReferences
     .filter(({ coreHarold3, normalized }) => coreHarold3 && normalized.toLowerCase().endsWith('.fasl'))
-    .map(({ module }) => module);
+    .map(({ module, text, normalized, recordOffset, objectOffset, key }) => ({
+      module,
+      text,
+      normalized,
+      recordOffset,
+      objectOffset,
+      key,
+    }));
+  const dxlCoreLispOrder = dxlCoreLispEntries.map(({ module }) => module);
+  const pllCoreFaslOrder = pllCoreFaslEntries.map(({ module }) => module);
+  const moduleOrderComparison = compareModuleOrders(dxlCoreLispEntries, pllCoreFaslEntries);
   const truncated = truncatedPllPath ? readFileSync(truncatedPllPath) : null;
   const prefixMatch = truncated
     ? truncated.length <= pll.length && pll.subarray(0, truncated.length).equals(truncated)
     : null;
-  const sameModuleSet = dxlCoreLispOrder.length === pllCoreFaslOrder.length
-    && new Set(dxlCoreLispOrder).size === new Set(pllCoreFaslOrder).size
-    && dxlCoreLispOrder.every((module) => pllCoreFaslOrder.includes(module));
-  let commonModuleOrderPrefixLength = 0;
-  while (
-    commonModuleOrderPrefixLength < Math.min(dxlCoreLispOrder.length, pllCoreFaslOrder.length)
-    && dxlCoreLispOrder[commonModuleOrderPrefixLength]
-      === pllCoreFaslOrder[commonModuleOrderPrefixLength]
-  ) commonModuleOrderPrefixLength += 1;
   return {
     schemaVersion: 1,
     scope: 'Read-only structural metadata; no DXL/PLL evaluation or source reconstruction',
@@ -661,11 +903,12 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
       coreModuleOrderComparison: {
         dxlCoreLispOrder,
         pllCoreFaslOrder,
-        sameModuleSet,
-        sameOrder: sameModuleSet
-          && dxlCoreLispOrder.every((module, index) => module === pllCoreFaslOrder[index]),
-        commonModuleOrderPrefixLength,
+        sameModuleSet: moduleOrderComparison.sameModuleSet,
+        sameOrder: moduleOrderComparison.sameOrder,
+        commonModuleOrderPrefixLength: moduleOrderComparison.commonOrderPrefixLength,
+        adjacencyAudit: moduleOrderComparison,
       },
+      compiledPayloadIdentity,
     },
   };
 }

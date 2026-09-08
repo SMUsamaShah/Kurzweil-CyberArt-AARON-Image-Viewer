@@ -138,6 +138,52 @@ The normalized index records the complete two orders and confirms that the
 sets are equal but the orders are not. Therefore neither order is promoted to
 execution or dependency order from the images alone.
 
+### Module-adjacency audit
+
+The index now performs a second exact comparison over the filtered 50-item
+core-module orders. Each side has 49 adjacent pairs and no duplicate module
+names. There are zero shared pairs in the same direction, zero shared pairs
+with the opposite direction, and zero shared pairs when direction is ignored:
+
+| Measurement | DXL `.lisp` chain | PLL `.fasl` strings |
+|---|---:|---:|
+| core modules | 50 | 50 |
+| unique modules | 50 | 50 |
+| adjacent pairs | 49 | 49 |
+| shared same-direction pairs | 0 | 0 |
+| shared reversed-direction pairs | 0 | 0 |
+| shared undirected pairs | 0 | 0 |
+
+The normalized `adjacencyAudit` retains both entries of every pair, including
+their source path or PLL table/object offsets, so the result is reproducible
+from the exact retained strings. These are neighbors in the filtered lists;
+they are not proof of physical adjacency, source dependencies, load order, or
+random order. The result only strengthens the negative conclusion that neither
+retained list provides cross-image-supported module neighborhoods.
+
+### Anonymous compiled-payload anchors
+
+The same validated PLL object spans were compared against the complete DXL as
+raw payloads, excluding each object's four-byte header and alignment padding.
+All 7,723 PLL payload hashes are distinct. Exactly three payloads occur in the
+DXL, each once; in every case the four bytes immediately before the payload
+are the same `0x216c` compiled-object header and the candidate object start is
+eight-byte aligned:
+
+| PLL object | DXL candidate object | Payload bytes | Payload SHA-256 |
+|---:|---:|---:|---|
+| `0xA7960` | `0x36548` | 66 | `c268193bfe86b1fa6121a544b2944ff21f6867160edba6e7c46b30fb77f9002e` |
+| `0xA4080` | `0x34918` | 66 | `b43f6fbf0bd7e9916d817ba6a64a180d2df1666823762875c2d27413050cf968` |
+| `0xA2E70` | `0x34420` | 66 | `a8dfe3bd633a1ffa0f164c1a73578cf8ccb1686955529c09d8bffdfe26451c37` |
+
+The complete padded object spans do not match because their alignment bytes
+or surrounding object bytes differ. These are anonymous cross-image anchors,
+not named AARON functions: they may be shared runtime/compiler helpers, and no
+entry point, relocation, source module, or function binding is assigned. The
+index stores only offsets, lengths, hashes, header comparisons, and span
+hashes—not executable payload bytes. Synthetic tests cover repeated matches,
+unaligned candidates, mismatched headers, and padded-span comparison.
+
 ### Negative name-to-object search
 
 An independent read-only cross-image scan tested the 16 scene-context names,
