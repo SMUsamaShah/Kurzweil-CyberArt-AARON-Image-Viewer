@@ -21,9 +21,9 @@ conversation boundary.
 ## Last verified state
 
 As of 2026-09-08, the recovered checkout is clean at local commit
-`d0038e10bcbebc1dcebfb100c2206bfc934b27c2` (`Add static anchors and verified
-scene attribution`), and the connected branch is published at
-`64093163a18b65a8a1c373077c54426bae8b976d` with the same changed-file tree.
+`b740f46f7b862e09d2aa2754ca75871672d8471d` (`Record DXL compiled-object
+candidates`), and the connected branch is published at
+`78bd0996e2e2f097fc6b1ac60f25d74a5d210b0a` with the same changed-file tree.
 The current direct matrix source remains in the earlier edge checkpoint. Its
 pre-index content ended at
 `1c78085fbc3e5430db84002ecd05105c2cf9d86f` after the edge evidence
