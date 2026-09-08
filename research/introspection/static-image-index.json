@@ -36792,6 +36792,237 @@
           "paddedSpanMatches": false
         }
       ]
+    },
+    "encodedStringPointerControls": {
+      "scope": "Negative tagged-pointer encoding control; occurrence at a DXL byte offset is not treated as a reference",
+      "encoding": {
+        "base": 536870912,
+        "tag": 1,
+        "expression": "base + PLL string-object offset + tag + shift"
+      },
+      "dxlByteLength": 5373952,
+      "uniqueDxlUint32Count": 1649851,
+      "nonemptyPllRecordCount": 53038,
+      "measurements": [
+        {
+          "shift": 0,
+          "matchedRecordCount": 42798,
+          "matchedUniqueTextCount": 42747,
+          "matchedDynamicFunctionNameCount": 1129
+        },
+        {
+          "shift": 8,
+          "matchedRecordCount": 42799,
+          "matchedUniqueTextCount": 42748,
+          "matchedDynamicFunctionNameCount": 1129
+        },
+        {
+          "shift": 16,
+          "matchedRecordCount": 42800,
+          "matchedUniqueTextCount": 42749,
+          "matchedDynamicFunctionNameCount": 1129
+        },
+        {
+          "shift": 24,
+          "matchedRecordCount": 42809,
+          "matchedUniqueTextCount": 42758,
+          "matchedDynamicFunctionNameCount": 1129
+        },
+        {
+          "shift": 32,
+          "matchedRecordCount": 42808,
+          "matchedUniqueTextCount": 42757,
+          "matchedDynamicFunctionNameCount": 1131
+        },
+        {
+          "shift": 40,
+          "matchedRecordCount": 42801,
+          "matchedUniqueTextCount": 42750,
+          "matchedDynamicFunctionNameCount": 1128
+        },
+        {
+          "shift": 48,
+          "matchedRecordCount": 42799,
+          "matchedUniqueTextCount": 42748,
+          "matchedDynamicFunctionNameCount": 1127
+        },
+        {
+          "shift": 56,
+          "matchedRecordCount": 42798,
+          "matchedUniqueTextCount": 42747,
+          "matchedDynamicFunctionNameCount": 1125
+        },
+        {
+          "shift": 64,
+          "matchedRecordCount": 42789,
+          "matchedUniqueTextCount": 42738,
+          "matchedDynamicFunctionNameCount": 1124
+        },
+        {
+          "shift": 72,
+          "matchedRecordCount": 42791,
+          "matchedUniqueTextCount": 42740,
+          "matchedDynamicFunctionNameCount": 1123
+        },
+        {
+          "shift": 80,
+          "matchedRecordCount": 42792,
+          "matchedUniqueTextCount": 42741,
+          "matchedDynamicFunctionNameCount": 1124
+        },
+        {
+          "shift": 88,
+          "matchedRecordCount": 42786,
+          "matchedUniqueTextCount": 42735,
+          "matchedDynamicFunctionNameCount": 1123
+        },
+        {
+          "shift": 96,
+          "matchedRecordCount": 42781,
+          "matchedUniqueTextCount": 42730,
+          "matchedDynamicFunctionNameCount": 1125
+        },
+        {
+          "shift": 104,
+          "matchedRecordCount": 42787,
+          "matchedUniqueTextCount": 42736,
+          "matchedDynamicFunctionNameCount": 1126
+        },
+        {
+          "shift": 112,
+          "matchedRecordCount": 42793,
+          "matchedUniqueTextCount": 42742,
+          "matchedDynamicFunctionNameCount": 1126
+        },
+        {
+          "shift": 120,
+          "matchedRecordCount": 42784,
+          "matchedUniqueTextCount": 42734,
+          "matchedDynamicFunctionNameCount": 1124
+        },
+        {
+          "shift": 128,
+          "matchedRecordCount": 42794,
+          "matchedUniqueTextCount": 42744,
+          "matchedDynamicFunctionNameCount": 1124
+        },
+        {
+          "shift": 136,
+          "matchedRecordCount": 42795,
+          "matchedUniqueTextCount": 42745,
+          "matchedDynamicFunctionNameCount": 1125
+        },
+        {
+          "shift": 144,
+          "matchedRecordCount": 42797,
+          "matchedUniqueTextCount": 42747,
+          "matchedDynamicFunctionNameCount": 1123
+        },
+        {
+          "shift": 152,
+          "matchedRecordCount": 42794,
+          "matchedUniqueTextCount": 42744,
+          "matchedDynamicFunctionNameCount": 1124
+        },
+        {
+          "shift": 160,
+          "matchedRecordCount": 42793,
+          "matchedUniqueTextCount": 42742,
+          "matchedDynamicFunctionNameCount": 1123
+        },
+        {
+          "shift": 168,
+          "matchedRecordCount": 42797,
+          "matchedUniqueTextCount": 42746,
+          "matchedDynamicFunctionNameCount": 1125
+        },
+        {
+          "shift": 176,
+          "matchedRecordCount": 42797,
+          "matchedUniqueTextCount": 42746,
+          "matchedDynamicFunctionNameCount": 1126
+        },
+        {
+          "shift": 184,
+          "matchedRecordCount": 42797,
+          "matchedUniqueTextCount": 42746,
+          "matchedDynamicFunctionNameCount": 1128
+        },
+        {
+          "shift": 192,
+          "matchedRecordCount": 42793,
+          "matchedUniqueTextCount": 42742,
+          "matchedDynamicFunctionNameCount": 1128
+        },
+        {
+          "shift": 200,
+          "matchedRecordCount": 42790,
+          "matchedUniqueTextCount": 42739,
+          "matchedDynamicFunctionNameCount": 1131
+        },
+        {
+          "shift": 208,
+          "matchedRecordCount": 42794,
+          "matchedUniqueTextCount": 42743,
+          "matchedDynamicFunctionNameCount": 1131
+        },
+        {
+          "shift": 216,
+          "matchedRecordCount": 42786,
+          "matchedUniqueTextCount": 42736,
+          "matchedDynamicFunctionNameCount": 1130
+        },
+        {
+          "shift": 224,
+          "matchedRecordCount": 42791,
+          "matchedUniqueTextCount": 42741,
+          "matchedDynamicFunctionNameCount": 1129
+        },
+        {
+          "shift": 232,
+          "matchedRecordCount": 42782,
+          "matchedUniqueTextCount": 42732,
+          "matchedDynamicFunctionNameCount": 1128
+        },
+        {
+          "shift": 240,
+          "matchedRecordCount": 42786,
+          "matchedUniqueTextCount": 42736,
+          "matchedDynamicFunctionNameCount": 1126
+        },
+        {
+          "shift": 248,
+          "matchedRecordCount": 42787,
+          "matchedUniqueTextCount": 42737,
+          "matchedDynamicFunctionNameCount": 1125
+        },
+        {
+          "shift": 256,
+          "matchedRecordCount": 42795,
+          "matchedUniqueTextCount": 42744,
+          "matchedDynamicFunctionNameCount": 1124
+        }
+      ],
+      "baseline": {
+        "shift": 0,
+        "matchedRecordCount": 42798,
+        "matchedUniqueTextCount": 42747,
+        "matchedDynamicFunctionNameCount": 1129
+      },
+      "controlRanges": {
+        "matchedRecordCount": {
+          "min": 42781,
+          "max": 42809
+        },
+        "matchedUniqueTextCount": {
+          "min": 42730,
+          "max": 42758
+        },
+        "matchedDynamicFunctionNameCount": {
+          "min": 1123,
+          "max": 1131
+        }
+      }
     }
   }
 }

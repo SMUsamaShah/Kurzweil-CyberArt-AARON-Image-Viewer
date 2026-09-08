@@ -150,6 +150,10 @@ prologue. The prologue appears at none of the other seven alignment residues.
 The offsets and length/padding metadata are retained under
 `dxl.compiledObjectCandidates` in the static index. This strengthens the
 structural report but still provides no defensible symbol-to-code mapping.
+The index also retains a tagged-pointer control: the proposed
+`0x20000000 + string-object-offset + 1` encoding matches 42,798 nonempty PLL
+records, while nearby shifts match 42,781–42,809, so the apparent coverage is
+not promoted to a reference decoder.
 
 Finally, the measured dependency-isolated brush boundary is now represented by
 `applyMeasuredBrushStroke`: an explicit `IN-SUB-FRAME` predicate gates the
@@ -168,8 +172,8 @@ Local verification:
 - Research-tool tests are run directly with
   `node --test research/tools/test/*.test.mjs` from the repository root; the
   `research/tools` directory has no separate `package.json`; the suite now has
-  34 passing tests, including module adjacency, compiled-payload identity, and
-  DXL candidate-residue validation.
+  35 passing tests, including module adjacency, compiled-payload identity, DXL
+  candidate-residue validation, and tagged-pointer controls.
 
 ## Honest progress estimate
 
@@ -192,7 +196,7 @@ the historical scene rules have been recovered.
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
 | Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
-| Static module/payload cross-image analysis | 50-module adjacency negative control, three exact anonymous compiled-payload anchors, and 190 DXL prologue candidates with residue controls; no names or execution semantics assigned |
+| Static module/payload cross-image analysis | 50-module adjacency negative control, three exact anonymous payload anchors, 190 DXL prologue candidates with residue controls, and tagged-pointer shift controls; no names or execution semantics assigned |
 | Scene geometry/emission attribution | Frozen, document-bound manifest with per-shape ranges/hashes and isolated replay slices; semantics remain provisional |
 | Composition, figures, poses, plants, garments, occlusion | Mostly provisional/unresolved |
 | Integrated JS generator | Runnable and deterministic, but not original-equivalent |

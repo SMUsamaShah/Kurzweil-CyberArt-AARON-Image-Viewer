@@ -218,11 +218,17 @@ object starts while excluding the known PLL index tables. It found no
 defensible name-to-code or name-to-source mapping. In particular, absolute
 string offsets with small tag variants and string-table-relative candidates
 gave no scene-target coverage; raw keys and simple `×4`/`×8` encodings were
-sparse and inconsistent. A seemingly strong DXL base-adjusted match covered
-42,798 strings, but shifted-offset controls from 8 through 256 bytes covered
-42,787–42,806 strings as well, including the same 15 scene targets. That
-control result rejects the apparent match as numerical overlap rather than a
-validated reference encoding.
+sparse and inconsistent.
+
+The current reproducible tagged-pointer control is retained under
+`crossReference.encodedStringPointerControls` in the static index. It tests
+the expression `0x20000000 + string-object-offset + 1 + shift` against every
+four-byte value at every DXL byte offset, counting nonempty PLL string-table
+records. With `shift=0`, 42,798 records match (42,747 unique text values and
+1,129 unique dynamic-function names). Controls from `shift=8` through `256`
+match 42,781–42,809 records, 42,730–42,758 unique text values, and
+1,123–1,131 dynamic names. The near-flat shifted controls reject the apparent
+match as numerical overlap rather than a validated reference encoding.
 
 This negative result is useful: the image structure can guide conservative
 probe selection, but it does not justify inventing a function-name map,

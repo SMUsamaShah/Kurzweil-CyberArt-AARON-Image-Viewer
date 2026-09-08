@@ -349,6 +349,87 @@ export function scanDxlCompiledObjectCandidates(buffer, {
   };
 }
 
+function validateUint32(value, label) {
+  if (!Number.isInteger(value) || value < 0 || value > 0xffffffff) {
+    throw new RangeError(`${label} must be an unsigned 32-bit integer`);
+  }
+  return value;
+}
+
+/**
+ * Test a proposed tagged pointer encoding against all four-byte values in the
+ * DXL, with nearby-shift controls. A hit counts a nonempty PLL string-table
+ * record whose encoded value occurs at any DXL byte offset; duplicate records
+ * and duplicate text values are reported separately. This is a negative
+ * control for name/reference hypotheses, not a pointer decoder.
+ */
+export function scanEncodedStringPointerControls(pllStrings, dxlBuffer, {
+  base = 0x20000000,
+  tag = 1,
+  shifts = Array.from({ length: 33 }, (_, index) => index * 8),
+  dynamicFunctionNames = [],
+} = {}) {
+  if (!Array.isArray(pllStrings)) throw new TypeError('PLL strings must be an array');
+  assertBuffer(dxlBuffer, 'DXL image');
+  validateUint32(base, 'base');
+  validateUint32(tag, 'tag');
+  if (!Array.isArray(shifts) || shifts.length === 0) {
+    throw new TypeError('shifts must be a non-empty array');
+  }
+  for (const shift of shifts) validateUint32(shift, 'shift');
+  if (!Array.isArray(dynamicFunctionNames)) {
+    throw new TypeError('dynamicFunctionNames must be an array');
+  }
+  const dynamicNames = new Set(dynamicFunctionNames);
+  const values = new Set();
+  for (let offset = 0; offset + 4 <= dxlBuffer.length; offset += 1) {
+    values.add(dxlBuffer.readUInt32LE(offset));
+  }
+  const records = pllStrings.filter((entry) => {
+    if (!entry || !Number.isInteger(entry.objectOffset) || typeof entry.text !== 'string') {
+      throw new TypeError('PLL string entries must contain objectOffset and text');
+    }
+    return entry.text.length > 0;
+  });
+  const measurements = shifts.map((shift) => {
+    const matchedTexts = new Set();
+    const matchedDynamicNames = new Set();
+    let matchedRecordCount = 0;
+    for (const entry of records) {
+      const encoded = (base + entry.objectOffset + tag + shift) >>> 0;
+      if (!values.has(encoded)) continue;
+      matchedRecordCount += 1;
+      matchedTexts.add(entry.text);
+      if (dynamicNames.has(entry.text)) matchedDynamicNames.add(entry.text);
+    }
+    return {
+      shift,
+      matchedRecordCount,
+      matchedUniqueTextCount: matchedTexts.size,
+      matchedDynamicFunctionNameCount: matchedDynamicNames.size,
+    };
+  });
+  const controls = measurements.slice(1);
+  const range = (field) => ({
+    min: Math.min(...controls.map((measurement) => measurement[field])),
+    max: Math.max(...controls.map((measurement) => measurement[field])),
+  });
+  return {
+    scope: 'Negative tagged-pointer encoding control; occurrence at a DXL byte offset is not treated as a reference',
+    encoding: { base, tag, expression: 'base + PLL string-object offset + tag + shift' },
+    dxlByteLength: dxlBuffer.length,
+    uniqueDxlUint32Count: values.size,
+    nonemptyPllRecordCount: records.length,
+    measurements,
+    baseline: measurements[0],
+    controlRanges: {
+      matchedRecordCount: range('matchedRecordCount'),
+      matchedUniqueTextCount: range('matchedUniqueTextCount'),
+      matchedDynamicFunctionNameCount: range('matchedDynamicFunctionNameCount'),
+    },
+  };
+}
+
 function compiledPayload(buffer, object) {
   if (!object || !Number.isInteger(object.objectOffset)
       || !Number.isInteger(object.rawEnd)
@@ -904,6 +985,11 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
   const dxlDescriptorLayout = parseDxlDescriptorLayout(dxl, dxlHeaderInfo);
   const dxlSourceObjectChain = parseDxlSourceObjectChain(dxl);
   const dxlCompiledObjectCandidates = scanDxlCompiledObjectCandidates(dxl);
+  const encodedStringPointerControls = scanEncodedStringPointerControls(
+    parsed.strings,
+    dxl,
+    { dynamicFunctionNames: functionInventory?.functions ?? [] },
+  );
   const sourceReferences = parsed.strings
     .map(({ text, recordOffset, objectOffset, key }) => {
       const info = sourceInfo(text);
@@ -999,6 +1085,7 @@ export function buildImageIndex({ dxlPath, pllPath, truncatedPllPath = null, fun
         adjacencyAudit: moduleOrderComparison,
       },
       compiledPayloadIdentity,
+      encodedStringPointerControls,
     },
   };
 }

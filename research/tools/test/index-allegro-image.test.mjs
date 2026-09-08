@@ -12,6 +12,7 @@ import {
   readTaggedString,
   resolveIndexedStrings,
   scanDxlCompiledObjectCandidates,
+  scanEncodedStringPointerControls,
 } from '../index-allegro-image.mjs';
 
 test('compares module adjacency while preserving entry provenance', () => {
@@ -207,6 +208,39 @@ test('keeps DXL compiled-object candidates separate from named objects', () => {
   assert.equal(result.residueCounts[2].prologueCount, 0);
 });
 
+test('keeps tagged-pointer hits separate from reference claims', () => {
+  const strings = [
+    { objectOffset: 0x20, text: 'ONE' },
+    { objectOffset: 0x28, text: 'ONE' },
+    { objectOffset: 0x40, text: 'TWO' },
+  ];
+  const image = Buffer.alloc(0x40, 0);
+  image.writeUInt32LE(0x20000021, 0x00);
+  image.writeUInt32LE(0x20000029, 0x04);
+  image.writeUInt32LE(0x20000041, 0x08);
+  const result = scanEncodedStringPointerControls(strings, image, {
+    shifts: [0, 8],
+    dynamicFunctionNames: ['ONE'],
+  });
+  assert.deepEqual(result.baseline, {
+    shift: 0,
+    matchedRecordCount: 3,
+    matchedUniqueTextCount: 2,
+    matchedDynamicFunctionNameCount: 1,
+  });
+  assert.deepEqual(result.measurements[1], {
+    shift: 8,
+    matchedRecordCount: 1,
+    matchedUniqueTextCount: 1,
+    matchedDynamicFunctionNameCount: 1,
+  });
+  assert.deepEqual(result.controlRanges, {
+    matchedRecordCount: { min: 1, max: 1 },
+    matchedUniqueTextCount: { min: 1, max: 1 },
+    matchedDynamicFunctionNameCount: { min: 1, max: 1 },
+  });
+});
+
 test('accepts the complete retained PLL layout and cross-reference counts', () => {
   const path = new URL('../../introspection/static-image-index.json', import.meta.url);
   const index = JSON.parse(readFileSync(path, 'utf8'));
@@ -310,6 +344,24 @@ test('accepts the complete retained PLL layout and cross-reference counts', () =
     { offset: 0x610c8, encodedWords: 59, payloadLength: 118 },
     { offset: 0x611e8, encodedWords: 178, payloadLength: 356 },
   ]);
+  const pointerControls = index.crossReference.encodedStringPointerControls;
+  assert.deepEqual(pointerControls.encoding, {
+    base: 0x20000000,
+    tag: 1,
+    expression: 'base + PLL string-object offset + tag + shift',
+  });
+  assert.equal(pointerControls.nonemptyPllRecordCount, 53038);
+  assert.deepEqual(pointerControls.baseline, {
+    shift: 0,
+    matchedRecordCount: 42798,
+    matchedUniqueTextCount: 42747,
+    matchedDynamicFunctionNameCount: 1129,
+  });
+  assert.deepEqual(pointerControls.controlRanges, {
+    matchedRecordCount: { min: 42781, max: 42809 },
+    matchedUniqueTextCount: { min: 42730, max: 42758 },
+    matchedDynamicFunctionNameCount: { min: 1123, max: 1131 },
+  });
   const brush = index.pll.selectedSymbols.find(({ name }) => name === 'BRUSH-STROKE');
   assert.deepEqual(
     { recordOffset: brush.recordOffset, objectOffset: brush.objectOffset, key: brush.key },
