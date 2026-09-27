@@ -58,8 +58,24 @@ later `RECORD-BRUSH` snapshot showed ID 2 bound to `BRUSH`. The trace places
 when `SELECT-BRUSH` enters; it therefore does not establish `ASSIGN-COLORS` as
 the direct caller. The function-constant report lists references to
 `ALL-BRUSHES`, `ENVIR`, and `COMMON-GRAPHICS:ID`, but does not identify called
-functions. A stack-aware trace is needed to establish the caller; helper calls
-inside the compiled function also remain unknown.
+functions.
+
+A follow-up attempted Allegro's `TRACE :show-stack` option. The oracle runtime
+could not load `trace.fasl` (`"trace.fasl" does not exist, cannot load`), and
+the `:autozoom` module was also unavailable. The remaining wrapper trace shows
+`SELECT-BRUSH` inside `DISPLAY-COLOR-PATCHES`, then `MAIN`, `DOIT`, and
+`RUN-AARON`; it does not prove which function directly calls the selector.
+Allegro documents the stack-printing option in its
+[debugging reference](https://franz.com/support/documentation/debugging.html),
+but the archived runtime lacks the module needed to use it here. The direct
+caller and any unobserved helper calls remain unknown.
+
+The caller-instrumented run produced AA0 hash
+`042d0d37489a6d14434c788ff482c3230da3b728887a102ca1747f2d521a50e3`, which
+differs from the controlled seed-1234 hash. A fresh transition control using
+the same `C:\temp` symlink produced the established hash
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`. Treat
+the caller-probe output as diagnostic only, not parity evidence.
 
 See [`scene-context-findings.md`](../scene-context-findings.md) for the natural
 scene observations and [`stroke-findings.md`](../stroke-findings.md) for the

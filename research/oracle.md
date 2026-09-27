@@ -99,9 +99,9 @@ powershell -ExecutionPolicy Bypass -File research\oracle\run-oracle.ps1 `
 ### Local Windows 10 scene oracle (2026-09-26–27)
 
 The current Windows 10 Pro 22H2 machine runs the original `AARON.exe` from a
-disposable copy of the extracted files. The local scene-state runner needs an
-existing, ordinary `C:\temp` directory; it refuses to overwrite known AARON
-files already there. After the verified installer is extracted, run from the
+disposable copy of the extracted files. The local scene-state runner needs a
+resolvable, writable `C:\temp` path; it refuses to overwrite known AARON files
+already there. After the verified installer is extracted, run from the
 repository root:
 
 ```powershell
@@ -167,6 +167,54 @@ writer tape. `research/tools/derive-screen-unit-evidence.mjs` checks their
 point-to-writer calls and byte slices, then writes the compact retained
 fixture. `-Mode screen-unit-seed-5678` repeats this capture on an independent
 painting. Both completed runs preserved their respective baseline AA0 hashes.
+
+#### `C:\temp` staging and permissions
+
+The archived application and its Lisp probes use absolute paths such as
+`C:\temp\image` and `C:\temp\scene-state-snapshot.cl`. Changing `%TEMP%` does
+not redirect those paths. The runner first checks for reserved filenames,
+then creates and removes a uniquely named write-probe file before it creates
+`-OutputRoot`. This catches the case where `C:\temp` exists but the current
+execution context cannot write there.
+
+On this Codex workspace, the physical `C:\temp` directory was outside the
+default writable area and staging failed with `Access Denied`. On 2026-09-27,
+`C:\temp` was changed to a symbolic link targeting
+`D:\ReverseEngineerAaron\research\artifacts\temp`. `Get-Item C:\temp` confirmed
+the target, and a default-sandbox create/delete probe succeeded there. This
+works because the target is inside the writable repository. A symlink only
+redirects the path; it does not grant NTFS permission. If the target is moved
+outside a writable area or its ACL denies access, the runner's preflight will
+still fail. Check the link with:
+
+```powershell
+Get-Item -LiteralPath C:\temp -Force |
+  Format-List FullName,LinkType,Target,Attributes
+```
+
+The `C:\temp` preflight is separate from the registry access the oracle needs.
+The runner creates or updates
+`HKCU:\Software\Kurzweil CyberArt Technologies\AARON`, saves its previous
+values, and restores them in `finally`. The default Codex sandbox denied that
+registry write even after the symlink made `C:\temp` writable. In Codex, run
+the local oracle with scoped elevated permission for this script; on a normal
+PowerShell session, use an account allowed to update that per-user key. The
+runner does not change the system clock.
+
+The runner leaves pre-existing reserved files untouched and stops if one is
+present. Inspect and back up a collision before moving it out of the way; do
+not delete an unknown `C:\temp` file just to start a run. A failure after
+`-OutputRoot` creation can leave a partial folder under ignored
+`research/extracted/local-oracle/`; use a fresh unused output path for the next
+attempt. The runner stages its own named files and normally copies them into
+the capture folder, then removes those staged copies in `finally`.
+
+One Allegro-specific path detail was also found while loading the call-trace
+probe through this symlink. The probe creates its checkpoint file and then
+appends the setup report to that same path; reopening it with `:supersede`
+stopped after the checkpoint on this setup. The second open now uses
+`:append`, and the setup proceeds through `TRACE-READY`.
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,

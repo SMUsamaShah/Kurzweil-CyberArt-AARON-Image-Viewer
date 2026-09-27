@@ -22,7 +22,9 @@
     (write-line "STAGE-0-LOAD-FORM-REACHED" checkpoint)
     (finish-output checkpoint))
   (with-open-file (report "C:\\temp\\aaron-planning-call-trace.txt"
-                          :direction :output :if-exists :supersede
+                          ;; The checkpoint file already exists; append the
+                          ;; setup report instead of superseding it again.
+                          :direction :output :if-exists :append
                           :if-does-not-exist :create)
     (write-line "STAGE-1-SECOND-FORM-REACHED" report)
     (finish-output report)

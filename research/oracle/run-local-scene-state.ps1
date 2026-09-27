@@ -92,7 +92,23 @@ if (-not (Test-Path -LiteralPath 'C:\temp' -PathType Container)) {
 }
 foreach ($name in $temporaryNames) {
     if (Test-Path -LiteralPath (Join-Path 'C:\temp' $name)) {
-        throw "C:\temp already contains $name; preserve or remove it before this run"
+        throw "C:\temp already contains $name; it was left untouched. Inspect and back it up before moving it."
+    }
+}
+$writeProbe = Join-Path 'C:\temp' ('.aaron-oracle-write-probe-' +
+    [Guid]::NewGuid().ToString('N') + '.tmp')
+try {
+    [IO.File]::WriteAllText($writeProbe, 'AARON oracle C:\temp write preflight')
+}
+catch {
+    throw ('C:\temp exists but this PowerShell execution context cannot write there. ' +
+        'Run this script with an approved elevated sandbox permission, or from a ' +
+        'normal user PowerShell session that can write to C:\temp. No oracle ' +
+        'output directory was created. Original error: ' + $_.Exception.Message)
+}
+finally {
+    if (Test-Path -LiteralPath $writeProbe) {
+        Remove-Item -LiteralPath $writeProbe -Force -ErrorAction SilentlyContinue
     }
 }
 if (Test-Path -LiteralPath $output) {
