@@ -249,8 +249,9 @@ The isolated writer report has 240 cases, with one recorded PLOT call each,
 216 successful outputs, and 24 VECTOR/NIL-previous PROGRAM-ERROR cases.
 The PLOT function is replaced, not forwarded, and `RESTORED T` is required.
 The clean-room writer now matches those output bytes and previous-point states,
-including the observed two-decimal truncation (`1.125` -> `1.12`,
-`-20.375` -> `-20.37`) and signed `-0.00`. See
+including observed half-cent ties toward zero (`1.125` -> `1.12`,
+`-20.375` -> `-20.37`) and signed `-0.00`. A later natural VECTOR call also
+establishes nearest-cent rounding away from exact ties. See
 [stroke-findings.md](../../stroke-findings.md) for the scoped parity claim.
 
 The first two FREE-PATH reports each contain 12 failures before any RAN or
@@ -897,3 +898,144 @@ the same 20 named joint bindings in order, and return the final delta. The
 raw report and the surrounding planning trace remain in the expiring workflow
 artifacts; only this normalized evidence and the clean-room fixture are kept
 in the repository.
+
+## Local Windows 10 scene-state snapshots
+
+[`scene-state-local-windows10-baseline-20260926.txt`](scene-state-local-windows10-baseline-20260926.txt)
+and [`scene-state-local-windows10-seed1234-20260926.txt`](scene-state-local-windows10-seed1234-20260926.txt)
+are sanitized original-engine reports from the local Windows 10 Pro 22H2
+oracle. The baseline report SHA-256 is
+`d570fd3c420e24db0f236b7ea08df0879a80e2df8707a0d6d7d3f6766b4c9be1`;
+its complete AA0 SHA-256 is
+`556ec49cb9b6d358d66d7d8b5608ef315c8affb4340986042805390bba6d92f7`.
+The two fresh seed-1234 reports both have SHA-256
+`ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b`;
+their complete AA0 files both have SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+The seed-1234 report is retained once because the copies are identical.
+
+All three runs used archived installer SHA-256
+`8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54`
+and disposable patched DLL copies: `registry.dll` SHA-256
+`d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8`
+and `license.dll` SHA-256
+`751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9`.
+The reports came from local run IDs `win10-scene-baseline-v2`,
+`win10-scene-seed-1234-a`, and `win10-scene-seed-1234-b`. The runner, patch
+details, and cleanup are documented in [`../../oracle.md`](../../oracle.md).
+
+[`scene-state-local-windows10-writer-seed1234-20260926.txt`](scene-state-local-windows10-writer-seed1234-20260926.txt)
+adds the first real `STORE-IN-FILE` and `PREP-LINE` entry/exit snapshots from
+two fresh local runs, `win10-writer-seed-1234-b` and
+`win10-writer-seed-1234-c`. Their 25,469-byte reports are byte-identical,
+SHA-256 `3c142146407a3d7bcb82f58147a832f71bb0a00324dcf246da9b12655c63ce1f`.
+Both complete AA0 files still match the simpler controlled seed-1234 run,
+SHA-256 `0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+Only one sanitized report is retained. The bound argument and state findings
+are summarized in [`../../scene-context-findings.md`](../../scene-context-findings.md).
+
+[`scene-state-local-windows10-transition-seed1234-20260926.txt`](scene-state-local-windows10-transition-seed1234-20260926.txt)
+records first natural colour/brush transition boundaries from local runs
+`transition-seed-1234-v5-a` and `transition-seed-1234-v5-b`. Their 93,942-byte
+sanitized reports are byte-identical, SHA-256
+`de6101789722dedc9e7a122e1f3e742f7735daf80e4620e799de83b55e8c6476`.
+Both complete AA0 files still have SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+The first natural `SELECT-BRUSH(7131)` returns `PAINT-BRUSH` ID 2; the later
+bound `BRUSH` at `RECORD-BRUSH` entry is also ID 2. The snapshots establish
+ordering, not the identity of the intervening mutator.
+
+[`scene-state-local-windows10-plan-seed1234-20260926.txt`](scene-state-local-windows10-plan-seed1234-20260926.txt)
+records natural `SCRIPT(PLAN)` arguments and return summaries from local runs
+`plan-seed-1234-b` and `plan-seed-1234-c`. Their 24,139-byte sanitized reports
+are byte-identical, SHA-256
+`9467c691ba88128fa869aed78bf29a519a8de1bd1a7c8d8cfd588bd893047ee2`.
+Both complete AA0 files have the same controlled seed-1234 SHA-256 above.
+The first return is `NIL`; a later return is a one-element proper list of
+`BLOX`. This is a live PLAN-specialized method call; its body, slot semantics,
+returned object's contents, and caller semantics remain unobserved.
+
+[`scene-state-local-windows10-writer-stream-seed1234-20260926.txt`](scene-state-local-windows10-writer-stream-seed1234-20260926.txt)
+records the first natural `STORE-IN-FILE(VECTOR)` point details and `*TEMP*`
+stream positions from local runs `writer-stream-seed-1234-b` and
+`writer-stream-seed-1234-c`. Their 25,951-byte sanitized reports are
+byte-identical, SHA-256
+`a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415`;
+both AA0 SHA-256 values match the seed-1234 control. The output stream moves
+from position 0 to 36 around this call. In each local capture, the first 36
+bytes of `image` are `am 106.92 384.16\r\nad 109.11 385.81\r\n`, and the
+whole 124,575-byte `image` equals the AA0 suffix at byte offset 2381. The
+captured `image` and AA0 files remain ignored; only the sanitized report and
+[`writer-image-link-local-windows10-seed1234-20260926.json`](writer-image-link-local-windows10-seed1234-20260926.json)
+are retained. The two runs produced byte-identical verification records,
+SHA-256 `64c95fdca90b5058954b16dfdd21d36e074c19f5316a39567c7981d046096eeb`.
+See
+[`../../scene-context-findings.md`](../../scene-context-findings.md).
+
+[`scene-state-local-windows10-writer-sequence-seed1234-20260926.txt`](scene-state-local-windows10-writer-sequence-seed1234-20260926.txt)
+and [`writer-sequence-local-windows10-seed1234-20260926.json`](writer-sequence-local-windows10-seed1234-20260926.json)
+retain the bounded 64-call writer sequence from two fresh local runs,
+`writer-sequence-seed-1234-a` and `writer-sequence-seed-1234-b`. Both runs
+produced the same 51,563-byte report, SHA-256
+`d0332c2b432636eeb8f4830b162b4dd7e7f803cd2b28e30cf69b7fd23990d006`,
+and the same 33,787-byte fixture, SHA-256
+`cc0f62f2a25a994d392435fc94addadefb16a3177f72e06299af83230fcb330a`.
+The AA0 SHA-256 remains the controlled seed-1234 value. All 64 paired calls
+are natural `VECTOR` calls; their exact output slices span contiguous bytes
+0–1224 of `image`. The fixture was generated by
+[`../../tools/summarize-writer-sequence.mjs`](../../tools/summarize-writer-sequence.mjs),
+which verifies that `image` is the AA0 suffix. It omits the remaining original
+output and executable files.
+
+[`scene-state-local-windows10-writer-windows-seed1234-20260926.txt`](scene-state-local-windows10-writer-windows-seed1234-20260926.txt)
+and [`writer-windows-local-windows10-seed1234-20260926.json`](writer-windows-local-windows10-seed1234-20260926.json)
+retain 299 sampled natural writer calls spanning all nine selector families
+used in the controlled painting. Runs `writer-windows-seed-1234-g` and
+`writer-windows-seed-1234-h` produced identical 390,307-byte reports, SHA-256
+`03291fec7f6205f411d15f16113e52af854565bd21a11dd7c3a9ac279e82f898`.
+Their ignored 124,575-byte image streams also match, SHA-256
+`42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881`,
+and both complete AA0 hashes equal the seed-1234 control. The 578,383-byte
+portable fixture has SHA-256
+`6d00da0085441040e8f73f1c0695d4d74da10dc7e1a00cd94c15172fdbeac3a0`.
+It includes bounded arguments, point coordinates, exact command slices, and
+the original previous point before and after each call. `?FILE-SIZE?` is
+`SMALL` at every sampled call. The selector census
+counts all 28,075 natural calls. `END` closes the stream; the fixture marks
+its exit boundary as derived from the archived image length. No generated AA
+or proprietary executable bytes are retained here.
+
+[`writer-full-local-windows10-seed1234-20260927.json`](writer-full-local-windows10-seed1234-20260927.json)
+and [`writer-full-local-windows10-seed5678-20260927.json`](writer-full-local-windows10-seed5678-20260927.json)
+summarize two complete buffered natural writer captures. The controlled seeds
+have 28,075 and 33,198 paired `STORE-IN-FILE` calls respectively. Both tapes
+are under the 50,000-call cap, have contiguous output positions, and replay
+through one JavaScript writer with exact byte and previous-point state parity.
+The original parsed palette values plus the JS-generated command bytes compose
+complete byte-identical AA0 files for both seeds. The raw tapes and generated
+AA0 files remain in ignored `research/extracted/`; these compact records retain
+hashes, selector counts, and the dependency limits. The tools are
+[`../../tools/replay-full-writer.mjs`](../../tools/replay-full-writer.mjs) and
+[`../../tools/compose-full-aa0.mjs`](../../tools/compose-full-aa0.mjs).
+
+## Controlled natural path and screen-unit captures (2026-09-27)
+
+The retained [seed-1234 natural FREE-PATH](natural-free-path-seed-1234-a.json)
+and [seed-5678 holdout](natural-free-path-seed-5678-a.json) evidence contains
+all typed input/output points, mutation checks, copied-state RNG previews,
+and JS comparisons. All four natural calls across the two controlled
+paintings match every returned coordinate and following RNG preview. The
+seed-1234 evidence also binds the nested RAN trace proving that its third
+call selects 13 steps but stops after 12 randomized iterations. The strict
+parser rejects Lisp reader evaluation syntax and incomplete captures.
+
+The [SELECT-BRUSH matrix](select-brush-matrix-seed1234-20260927.json) holds
+25 original input/result pairs and unchanged brush/RNG state. Its measured
+band boundaries are implemented in JavaScript.
+
+The [seed-1234 screen-unit fixture](screen-units-seed-1234-b.json) and
+[seed-5678 holdout](screen-units-seed-5678-a.json) cover the first eight natural
+`SCREEN-AND-STORE` calls in each controlled painting. They link 551 input
+path points to 551 writer point calls plus 28 colour changes and validate
+2,014 exact original bytes. Colour decisions and screen-unit RNG behavior
+remain original-supplied dependencies.

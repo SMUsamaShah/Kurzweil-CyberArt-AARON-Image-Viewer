@@ -24,12 +24,12 @@
       "objects": 5,
       "shapes": 31,
       "acceptedFigures": 2,
-      "outlineOperations": 3026,
+      "outlineOperations": 3041,
       "paintOperations": 68836,
-      "outlineSha256": "7c99c6afaf4d7af89ed86af1f18339b8ff5cc33d15f8c9f4d6a86a0b47734294",
+      "outlineSha256": "d7ce023bc35a43b09952912ae7be007446e25af0c3c344bc0225c45f796dfe5f",
       "paintSha256": "140f01c08c2678439df2611c2c304581475851f67ca688a5896a78df04ac9f0b",
-      "serializedSha256": "61a684184ae3a2f82dfaeb8d4b0fdb12b73e68cc7887c41928190b2502df0a05",
-      "serializedBytes": 230439
+      "serializedSha256": "936472d7f5e056bd25cb3cb67a907e8fbcd8b5c03eb31cc02717ad8cb4dbba4f",
+      "serializedBytes": 230793
     },
     {
       "sceneSeed": 5678,
@@ -39,12 +39,12 @@
       "objects": 5,
       "shapes": 30,
       "acceptedFigures": 2,
-      "outlineOperations": 2909,
+      "outlineOperations": 2914,
       "paintOperations": 76550,
-      "outlineSha256": "afa0e935a2f9c4fa4152a7cda3da0c544aa91e73b6e575d382ebe0cbc83ef4b9",
+      "outlineSha256": "0b7155aab348d96be4d7a5109f65b8a73a49e86df940ad4e55d5b71376231b5e",
       "paintSha256": "22ea1fcba51d3915549efda318993b3b8c7233a71433101cca2522b4aba77455",
-      "serializedSha256": "5b4262e764668513dbcbfcb7d897f1409be74f52be80a3971d93f846c2151a33",
-      "serializedBytes": 242740
+      "serializedSha256": "8ef02973ce41d0ecfa457dd3758d9b7a132731b205327c93196674dc3dff3461",
+      "serializedBytes": 242890
     }
   ]
 }

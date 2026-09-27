@@ -1,0 +1,1579 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "runId": "screen-unit-seed-5678-a",
+    "mode": "screen-unit-seed-5678",
+    "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+    "reportSha256": "33950540e8a534ab3006199a23190775e09880d799b72d1706bde60149043a5d",
+    "writerTapeSha256": "f0b207c778a123890d8e789d1e2b0a071025c7d01da88d52a597a9c7bc776db1",
+    "imageSha256": "9c6af3a38bedc932f8d4ea223dda58d9090b460eebf9373557b6ee4b242ea234",
+    "scope": "first eight natural SCREEN-AND-STORE calls; AARGB decisions remain captured inputs"
+  },
+  "units": [
+    {
+      "id": 1,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 297
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 298
+        },
+        {
+          "type": "TWOPT",
+          "x": 134,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 299
+        },
+        {
+          "type": "TWOPT",
+          "x": 133,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 300
+        },
+        {
+          "type": "TRIPT",
+          "x": 132,
+          "y": 300
+        },
+        {
+          "type": "TWOPT",
+          "x": 131,
+          "y": 300
+        },
+        {
+          "type": "TRIPT",
+          "x": 131,
+          "y": 301
+        },
+        {
+          "type": "TWOPT",
+          "x": 130,
+          "y": 301
+        },
+        {
+          "type": "TRIPT",
+          "x": 130,
+          "y": 302
+        },
+        {
+          "type": "TWOPT",
+          "x": 129,
+          "y": 302
+        },
+        {
+          "type": "TRIPT",
+          "x": 129,
+          "y": 303
+        },
+        {
+          "type": "TWOPT",
+          "x": 128,
+          "y": 303
+        },
+        {
+          "type": "TRIPT",
+          "x": 128,
+          "y": 304
+        },
+        {
+          "type": "TWOPT",
+          "x": 127,
+          "y": 304
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 305
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 306
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 307
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42276,
+      "rngBefore": [
+        72,
+        53,
+        16
+      ],
+      "end": 42356,
+      "rngAfter": [
+        7,
+        68,
+        23
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 0,
+          "index": 35
+        },
+        {
+          "beforePoint": 6,
+          "index": 34
+        }
+      ],
+      "writerOrdinals": [
+        2214,
+        2234
+      ],
+      "writerCallCount": 21,
+      "byteLength": 80,
+      "byteSha256": "f0d0103217f8e869cb931e06306ba8a8320f12656ec0735e30146f066e99ee17"
+    },
+    {
+      "id": 2,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 277
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 278
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 279
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 280
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 281
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 282
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 283
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 139,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 138,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 132,
+          "y": 297
+        },
+        {
+          "type": "TRIPT",
+          "x": 131,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 130,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 129,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 128,
+          "y": 300
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 301
+        },
+        {
+          "type": "TRIPT",
+          "x": 126,
+          "y": 302
+        },
+        {
+          "type": "TRIPT",
+          "x": 125,
+          "y": 303
+        },
+        {
+          "type": "TRIPT",
+          "x": 125,
+          "y": 304
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42356,
+      "rngBefore": [
+        68,
+        90,
+        97
+      ],
+      "end": 42472,
+      "rngAfter": [
+        76,
+        13,
+        59
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 10,
+          "index": 35
+        },
+        {
+          "beforePoint": 17,
+          "index": 34
+        }
+      ],
+      "writerOrdinals": [
+        2235,
+        2267
+      ],
+      "writerCallCount": 33,
+      "byteLength": 116,
+      "byteSha256": "0f2b95731d5c630c4937185e41904bf2ba8e627c9580fae749a5749569099f42"
+    },
+    {
+      "id": 3,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 91,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 92,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 93,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 94,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 95,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 96,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 97,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 98,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 99,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 100,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 101,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 102,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 103,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 104,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 105,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 106,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 107,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 108,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 109,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 110,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 111,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 112,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 113,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 114,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 115,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 116,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 117,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 118,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 118,
+          "y": 297
+        },
+        {
+          "type": "TRIPT",
+          "x": 119,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 300
+        },
+        {
+          "type": "TRIPT",
+          "x": 121,
+          "y": 301
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 302
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42472,
+      "rngBefore": [
+        25,
+        5,
+        86
+      ],
+      "end": 42589,
+      "rngAfter": [
+        32,
+        6,
+        37
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 23,
+          "index": 33
+        }
+      ],
+      "writerOrdinals": [
+        2268,
+        2302
+      ],
+      "writerCallCount": 35,
+      "byteLength": 117,
+      "byteSha256": "d17c292212f648b16c2336bf3e1ee7292a2f63f4961609d759ce00a152d5c0f1"
+    },
+    {
+      "id": 4,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 266
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 267
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 268
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 269
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 270
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 271
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 272
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 273
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 274
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 275
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 276
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 277
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 278
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 279
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 280
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 281
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 282
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 283
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 137,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 136,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 132,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 131,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 130,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 129,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 128,
+          "y": 297
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 126,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 125,
+          "y": 300
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42589,
+      "rngBefore": [
+        67,
+        4,
+        87
+      ],
+      "end": 42719,
+      "rngAfter": [
+        26,
+        37,
+        85
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 23,
+          "index": 35
+        }
+      ],
+      "writerOrdinals": [
+        2303,
+        2341
+      ],
+      "writerCallCount": 39,
+      "byteLength": 130,
+      "byteSha256": "25772dadacbcd822d72e13e29738a9ae6701e3109664444299a394e162b44ec2"
+    },
+    {
+      "id": 5,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 88,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 88,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 88,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 89,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 89,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 90,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 91,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 92,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 93,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 94,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 95,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 96,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 97,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 98,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 99,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 100,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 101,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 102,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 103,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 104,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 105,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 106,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 107,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 108,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 109,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 110,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 111,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 112,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 113,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 114,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 115,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 116,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 117,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 118,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 119,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 121,
+          "y": 297
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 299
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42719,
+      "rngBefore": [
+        61,
+        69,
+        39
+      ],
+      "end": 42861,
+      "rngAfter": [
+        75,
+        56,
+        93
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 0,
+          "index": 34
+        },
+        {
+          "beforePoint": 24,
+          "index": 35
+        }
+      ],
+      "writerOrdinals": [
+        2342,
+        2383
+      ],
+      "writerCallCount": 42,
+      "byteLength": 142,
+      "byteSha256": "b97441035acb9432b6ed427996959832813d8ce6e6a9950ef5b96b8c9532f321"
+    },
+    {
+      "id": 6,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 118,
+          "y": 297
+        },
+        {
+          "type": "TWOPT",
+          "x": 118,
+          "y": 298
+        },
+        {
+          "type": "TRIPT",
+          "x": 119,
+          "y": 298
+        },
+        {
+          "type": "TWOPT",
+          "x": 119,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 299
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 300
+        },
+        {
+          "type": "TWOPT",
+          "x": 120,
+          "y": 301
+        },
+        {
+          "type": "TRIPT",
+          "x": 121,
+          "y": 301
+        },
+        {
+          "type": "TWOPT",
+          "x": 121,
+          "y": 302
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 302
+        },
+        {
+          "type": "TWOPT",
+          "x": 122,
+          "y": 303
+        },
+        {
+          "type": "TRIPT",
+          "x": 123,
+          "y": 303
+        },
+        {
+          "type": "TWOPT",
+          "x": 123,
+          "y": 304
+        },
+        {
+          "type": "TRIPT",
+          "x": 124,
+          "y": 304
+        },
+        {
+          "type": "TWOPT",
+          "x": 124,
+          "y": 305
+        },
+        {
+          "type": "TRIPT",
+          "x": 125,
+          "y": 305
+        },
+        {
+          "type": "TWOPT",
+          "x": 125,
+          "y": 306
+        },
+        {
+          "type": "TRIPT",
+          "x": 126,
+          "y": 306
+        },
+        {
+          "type": "TRIPT",
+          "x": 126,
+          "y": 307
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42861,
+      "rngBefore": [
+        76,
+        67,
+        2
+      ],
+      "end": 42948,
+      "rngAfter": [
+        84,
+        84,
+        58
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 0,
+          "index": 33
+        },
+        {
+          "beforePoint": 6,
+          "index": 34
+        },
+        {
+          "beforePoint": 12,
+          "index": 35
+        }
+      ],
+      "writerOrdinals": [
+        2384,
+        2405
+      ],
+      "writerCallCount": 22,
+      "byteLength": 87,
+      "byteSha256": "b8f9610e02d2dc3b5c1906ebbfde7cb40bc15d86f9a4922a63505836e6d3ac1e"
+    },
+    {
+      "id": 7,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 96,
+          "y": 283
+        },
+        {
+          "type": "TRIPT",
+          "x": 95,
+          "y": 283
+        },
+        {
+          "type": "TRIPT",
+          "x": 94,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 93,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 94,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 95,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 96,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 97,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 98,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 99,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 100,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 101,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 102,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 103,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 104,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 105,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 106,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 107,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 108,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 109,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 110,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 111,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 112,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 113,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 114,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 115,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 116,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 117,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 118,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 119,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 120,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 121,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 122,
+          "y": 295
+        },
+        {
+          "type": "TRIPT",
+          "x": 123,
+          "y": 296
+        },
+        {
+          "type": "TRIPT",
+          "x": 124,
+          "y": 297
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 42948,
+      "rngBefore": [
+        17,
+        3,
+        94
+      ],
+      "end": 43078,
+      "rngAfter": [
+        21,
+        89,
+        44
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 14,
+          "index": 34
+        },
+        {
+          "beforePoint": 26,
+          "index": 35
+        }
+      ],
+      "writerOrdinals": [
+        2406,
+        2443
+      ],
+      "writerCallCount": 38,
+      "byteLength": 130,
+      "byteSha256": "76d99397d9a984ea316b66c192a69099cd535fb122f8d4600c633b7afbaed19e"
+    },
+    {
+      "id": 8,
+      "points": [
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 264
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 264
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 264
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 265
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 266
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 267
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 268
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 269
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 270
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 271
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 272
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 273
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 274
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 275
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 276
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 277
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 278
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 279
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 280
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 281
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 282
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 283
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 284
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 285
+        },
+        {
+          "type": "TRIPT",
+          "x": 135,
+          "y": 286
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 287
+        },
+        {
+          "type": "TRIPT",
+          "x": 134,
+          "y": 288
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 289
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 290
+        },
+        {
+          "type": "TRIPT",
+          "x": 133,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 132,
+          "y": 291
+        },
+        {
+          "type": "TRIPT",
+          "x": 131,
+          "y": 292
+        },
+        {
+          "type": "TRIPT",
+          "x": 130,
+          "y": 293
+        },
+        {
+          "type": "TRIPT",
+          "x": 129,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 128,
+          "y": 294
+        },
+        {
+          "type": "TRIPT",
+          "x": 127,
+          "y": 295
+        }
+      ],
+      "screenArgs": [
+        1,
+        0
+      ],
+      "start": 43078,
+      "rngBefore": [
+        49,
+        92,
+        72
+      ],
+      "end": 43209,
+      "rngAfter": [
+        0,
+        4,
+        5
+      ],
+      "colorEvents": [
+        {
+          "beforePoint": 0,
+          "index": 34
+        },
+        {
+          "beforePoint": 21,
+          "index": 35
+        }
+      ],
+      "writerOrdinals": [
+        2444,
+        2481
+      ],
+      "writerCallCount": 38,
+      "byteLength": 131,
+      "byteSha256": "a1c3e6c829c912b94f1cdaf69c40c57b97420c9ce03ec5303ae5200b005f8887"
+    }
+  ]
+}

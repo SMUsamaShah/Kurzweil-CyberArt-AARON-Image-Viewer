@@ -71,8 +71,8 @@ fixture covers one polygon case and two FREE-PATH cases in
 | Case | Objects / shapes | Outline ops | Paint ops | Serialized bytes | Serialized SHA-256 |
 |---|---:|---:|---:|---:|---|
 | seed 1234, polygon | 5 / 31 | 283 | 68,836 | 163,018 | `3016bc28…1474ac3` |
-| seed 1234, FREE-PATH | 5 / 31 | 3,026 | 68,836 | 230,439 | `61a68418…2df0a05` |
-| seed 5678, FREE-PATH | 5 / 30 | 2,909 | 76,550 | 242,740 | `5b4262e7…2151a33` |
+| seed 1234, FREE-PATH | 5 / 31 | 3,041 | 68,836 | 230,793 | `936472d7…dbba4f` |
+| seed 5678, FREE-PATH | 5 / 30 | 2,914 | 76,550 | 242,890 | `8ef02973…f3461` |
 
 The manifest is a structural clean-room aid. Its `provisional-clean-room`
 label covers the current figure, plant, table, outline-caller, and scanline
@@ -100,8 +100,12 @@ Its two deterministic cases produce:
 
 | Scene seed | Outline seed | Input edges | Emitted outline points | Paint operations | Serialized bytes |
 |---:|---:|---:|---:|---:|---:|
-| 1234 | 1234 | 252 | 3,026 | 68,836 | 230,439 |
-| 5678 | 1234 | 242 | 2,909 | 76,550 | 242,740 |
+| 1234 | 1234 | 252 | 3,041 | 68,836 | 230,793 |
+| 5678 | 1234 | 242 | 2,914 | 76,550 | 242,890 |
+
+These local fixture values were refreshed after natural original calls showed
+that `FREE-PATH` may stop before its selected step ceiling when its accumulated
+steps reach the edge length. The paint operations remain identical.
 
 These hashes identify clean-room integration output only. They are not original
 painting references. The experimental outlines can overshoot the source

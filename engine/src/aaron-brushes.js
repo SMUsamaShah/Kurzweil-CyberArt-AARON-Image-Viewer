@@ -45,28 +45,33 @@ export function getAaronBrushProfile(id) {
 }
 
 /**
- * Return the profile whose measured ENVIR band contains `value`.
+ * Return the measured SELECT-BRUSH result for an environment value.
  *
- * The original SELECT-BRUSH body has not been invoked yet.  This helper uses
- * the natural half-open interpretation [low, high) only as a convenient,
- * explicitly provisional selector for the measured bands; it is not a claim
- * about the original boundary comparison.
+ * Integer samples immediately around the ENVIR endpoints support the
+ * `low < value <= high` rule for selectable profiles; the matrix did not
+ * exhaust every value inside each band. None of its samples returned the
+ * zero-valued sentinel profile. It also shows -1 and 200001 returning the
+ * last profile. Mapping the rest of either outside tail to that profile is an
+ * adapter extrapolation from those two samples. Fractional values have not
+ * been probed.
  */
 export function findAaronBrushBand(value) {
   if (!Number.isFinite(value)) throw new TypeError('environment value must be finite');
+  const lastProfile = AARON_BRUSH_PROFILES.at(-1);
+  if (value < 0 || value > lastProfile.envir[1]) return lastProfile;
   return AARON_BRUSH_PROFILES.find((profile) => {
+    if (profile.id === 0) return false;
     const [low, high] = profile.envir;
-    return value >= low && value < high;
+    return value > low && value <= high;
   });
 }
 
 /**
- * Select a measured brush profile using the provisional ENVIR-band adapter.
+ * Select a brush profile using the measured SELECT-BRUSH boundary behavior.
  *
- * `SELECT-BRUSH` has not yet been exercised with a live call, so the default
- * policy deliberately returns `undefined` outside the observed bands.  The
- * optional `clamp` policy is useful for exploratory scenes but is a local
- * caller choice, not a recovered AARON rule.
+ * The original returns NIL for the tested values 0, 1, 99, and 100. The
+ * optional `clamp` policy remains a local choice that fills this low gap with
+ * the sentinel profile; it does not change the measured default behavior.
  */
 export function selectAaronBrushProfile(value, {outOfRange = 'none'} = {}) {
   if (outOfRange !== 'none' && outOfRange !== 'clamp') {
@@ -74,7 +79,7 @@ export function selectAaronBrushProfile(value, {outOfRange = 'none'} = {}) {
   }
   const profile = findAaronBrushBand(value);
   if (profile || outOfRange === 'none') return profile;
-  return value < AARON_BRUSH_PROFILES[0].envir[0]
+  return value <= AARON_BRUSH_PROFILES[1].envir[0]
     ? AARON_BRUSH_PROFILES[0]
     : AARON_BRUSH_PROFILES.at(-1);
 }

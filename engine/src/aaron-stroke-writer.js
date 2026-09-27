@@ -17,9 +17,10 @@ function numericPoint(point) {
 /**
  * Format the two-decimal `~$` values used by VECTOR and FILL.
  *
- * The observed Allegro/ACL formatter truncates toward zero at the half-cent
- * (1.125 -> 1.12, -20.375 -> -20.37) and preserves a negative sign when a
- * negative value truncates to zero (-0.004 -> -0.00).
+ * The observed Allegro/ACL formatter rounds to the nearest cent, resolving an
+ * exact half-cent toward zero (1.125 -> 1.12, -20.375 -> -20.37). A natural
+ * integrated point at 106.918... becomes 106.92. It preserves a negative
+ * sign when a negative value rounds to zero (-0.004 -> -0.00).
  * This deliberately stays small and deterministic rather than using
  * JavaScript's `toFixed`, whose binary tie handling differs for 1.125.
  */
@@ -27,7 +28,7 @@ function formatFixed(value, digits = 2) {
   if (!Number.isFinite(value)) throw new TypeError('writer coordinates must be finite');
   const scale = 10 ** digits;
   const scaled = Math.abs(value) * scale;
-  const rounded = Math.floor(scaled);
+  const rounded = Math.ceil(scaled - 0.5);
 
   const sign = value < 0 || Object.is(value, -0) ? '-' : '';
   const whole = Math.floor(rounded / scale);

@@ -181,6 +181,11 @@ function formatNumber(value, digits = 6) {
   return Number(value.toFixed(digits)).toString();
 }
 
+function formatOriginalPaletteChannel(value) {
+  if (!Number.isFinite(value)) throw new TypeError('AA palette channels must be finite');
+  return value.toFixed(2);
+}
+
 function serializeOperation(operation, digits) {
   switch (operation.command) {
     case 'am':
@@ -206,7 +211,11 @@ function serializeOperation(operation, digits) {
   }
 }
 
-/** Serialize a parsed or generated document back to the plain-text AA form. */
+/**
+ * Serialize a parsed or generated document back to the plain-text AA form.
+ * `originalPrelude: true` writes its header and palette as fixed-two-decimal
+ * CRLF records while leaving drawing-command formatting unchanged.
+ */
 export function serializeAaFile(document, options = {}) {
   if (!document || !Number.isInteger(document.width) || !Number.isInteger(document.height)) {
     throw new TypeError('AA document must contain integer width and height');
@@ -215,25 +224,32 @@ export function serializeAaFile(document, options = {}) {
     throw new TypeError('AA document must contain a non-empty palette');
   }
   const digits = options.coordinateDigits ?? 6;
-  const lines = [`${document.width} ${document.height} ${document.palette.length}`];
+  const originalPrelude = options.originalPrelude === true;
+  const preludeLines = [`${document.width} ${document.height} ${document.palette.length}`];
   for (const rgb of document.palette) {
     if (!Array.isArray(rgb) || rgb.length !== 3) {
       throw new TypeError('AA palette entries must contain three channels');
     }
-    lines.push(rgb.map((channel) => formatNumber(channel, digits)).join(' '));
+    preludeLines.push(rgb.map((channel) => originalPrelude
+      ? formatOriginalPaletteChannel(channel)
+      : formatNumber(channel, digits)).join(' '));
   }
+  const preludeLineEnding = originalPrelude ? '\r\n' : '\n';
+  const prelude = `${preludeLines.join(preludeLineEnding)}${preludeLineEnding}`;
+
+  const commandLines = [];
   // Do not spread large operation arrays into Array#push.  The recovered
   // full-HD compact path can contain hundreds of thousands of paint commands,
   // which would exceed V8's argument-count limit.
   for (const operation of document.outline ?? []) {
-    lines.push(serializeOperation(operation, digits));
+    commandLines.push(serializeOperation(operation, digits));
   }
-  lines.push('color');
+  commandLines.push('color');
   for (const operation of document.paint ?? []) {
-    lines.push(serializeOperation(operation, digits));
+    commandLines.push(serializeOperation(operation, digits));
   }
-  lines.push('end');
-  return `${lines.join('\n')}\n`;
+  commandLines.push('end');
+  return `${prelude}${commandLines.join('\n')}\n`;
 }
 
 function cssColor(rgb) {

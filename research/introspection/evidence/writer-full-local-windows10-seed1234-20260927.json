@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "scope": "controlled post-INIT-RANDOM seed 1234; original STORE-IN-FILE decisions captured, JavaScript writer replayed continuously",
+  "runnerMode": "writer-full-seed-1234",
+  "runId": "writer-full-seed-1234-a",
+  "complete": true,
+  "overflow": false,
+  "writerCalls": 28075,
+  "enterExitPairs": 28075,
+  "selectorCounts": {
+    "VECTOR": 656,
+    "COLOR": 1,
+    "BRUSH": 25,
+    "AARGB": 1454,
+    "MOVE-TO": 772,
+    "DRAW-TO": 24903,
+    "HUE": 2,
+    "FILL": 261,
+    "END": 1
+  },
+  "fullTapeSha256": "1c08a16fd4d7b07f8266e7a9c0a93fc13f4f8dc452342b6db262fd898992e6b8",
+  "imageBytes": 124575,
+  "imageSha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+  "aa0Bytes": 126956,
+  "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+  "aa0CommandOffset": 2381,
+  "aa0PrefixSha256": "835d62d859659d6184c842c63e3228d3ba7fb541e23acb51448817bddf8079f3",
+  "continuousJavaScriptReplay": {
+    "perCallBytesMatch": true,
+    "perCallPreviousCoordinatesMatch": true,
+    "perCallPreviousVisibilityTransitionMatch": true,
+    "writerPositionsContiguous": true,
+    "completeImageMatches": true,
+    "aa0SuffixMatches": true,
+    "finalPreviousCoordinates": [269, 96]
+  },
+  "originalPreludeFromParsedPaletteMatches": true,
+  "completeAa0ComposedFromParsedPaletteAndGeneratedCommandsMatches": true,
+  "limits": [
+    "The original program supplied every writer call and its arguments.",
+    "The original AA0 supplied the palette values; the seeded palette algorithm is not reconstructed.",
+    "This run did not emit a natural DIMS selector call.",
+    "Screen effects and upstream painter and generator decisions are outside this replay."
+  ]
+}

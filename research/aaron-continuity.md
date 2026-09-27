@@ -18,7 +18,58 @@ conversation boundary.
 - Exactness policy: label results **Measured**, **Inferred**, or **Provisional**;
   passing a JS self-test is not evidence of original-engine parity.
 
-## Last verified state
+## Current verified state (2026-09-26)
+
+The `reverse-engineer-aaron-js` branch was checked out on the user's Windows
+10 Pro 22H2 machine at `D:\ReverseEngineerAaron`, HEAD `4883d54` before this
+local work. The verified archived installer was extracted under ignored
+`research/extracted/` without running it. The local scene oracle
+[`oracle/run-local-scene-state.ps1`](oracle/run-local-scene-state.ps1) patches
+only disposable runtime DLL copies, uses the existing ordinary `C:\temp`
+directory, and restores its temporary files and per-user registry values.
+It runs without changing the Windows system clock. Exact steps and patch
+scope are in [`oracle.md`](oracle.md).
+
+One corrected baseline and two fresh post-`INIT-RANDOM` seed-1234 scene probes
+completed. The two seeded scene reports are byte-identical (SHA-256
+`ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b`),
+as are their complete AA0 files (SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`).
+The first `DRAW-CFORM` entry occurs before the outermost `RPARSE` return.
+At the first `SCREEN-AND-STORE`, `MPLAN` is a `PLAN`, `BRUSH` is a
+`PAINT-BRUSH`, `RPLANE` is a fixnum, and `RGB-MAP` has become a nonempty
+list of `AARGB` objects. This is bounded state evidence, not a recovered
+composition rule. The reports and detailed values are in
+[`scene-context-findings.md`](scene-context-findings.md).
+
+Two further local seeded runs with transparent `PREP-LINE` and `STORE-IN-FILE`
+wrappers yielded identical seven-snapshot reports and the same complete AA0
+bytes as the simpler seed control. The first `STORE-IN-FILE` entry occurs
+before outermost `RPARSE` returns, with `RGB-MAP` still `NIL` and `BRUSH`
+unbound. The first `PREP-LINE` entry occurs later with arguments `NIL` and 5,
+`RGB-MAP` populated, `BRUSH` a `PAINT-BRUSH`, and `RPLANE` 79. Entry/exit
+summaries of the 15 tracked bindings agree for each first call; untracked
+state and stream effects remain open. The retained writer report hash is
+`3c142146407a3d7bcb82f58147a832f71bb0a00324dcf246da9b12655c63ce1f`.
+
+The newer windowed writer capture records 299 natural calls from a complete
+seed-1234 painting, covering all nine selectors it uses. The original
+`PREV-STORED-PT` is observed before and after every sampled call, starting at
+`(0,0)`. The JS writer matches all 299 output byte slices and previous-point
+transitions in `small` hop mode. Two local runs have identical reports and AA0
+hashes. The retained fixture, method counts, and scope are documented in
+[`stroke-findings.md`](stroke-findings.md). This is bounded file-writer parity;
+the composition and screen paths still need reconstruction.
+
+The active next steps are in [execution-plan.md](execution-plan.md): complete
+continuous writer replay, with brush-selection and natural FREE-PATH work in
+parallel, then move to a complete drawing unit with higher-level inputs. PLAN
+metadata should be targeted when a selected caller needs it. The JS
+planner, colour pipeline, figures, and whole-painting generation
+remain far from exact parity. The local code changes and evidence have not
+been published by this checkpoint; inspect `git status` before continuing.
+
+## Earlier 2026-09-08 checkpoint
 
 As of 2026-09-08, the recovered checkout is clean at local commit
 `311792d321b52e0980faf8f6a49e46f69598a4a0` (`Add independent DXL
@@ -210,32 +261,18 @@ Local verification:
    candidate-residue validation, tagged-pointer controls, and the anonymous
    control-flow profile.
 
-## Current in-flight scene-context checkpoint
+## Scene-context probe boundary
 
-The next local-first target is now prepared but is not yet original-engine
-evidence. `research/introspection/scene-state-snapshot.cl` loads the existing
-validated call trace and adds observation wrappers around `RPARSE`,
-`DRAW-CFORM`, `SCREEN-AND-STORE`, and `MAIN`. It snapshots exactly 15
-package-qualified bindings at three boundaries: after the first successful
-outermost `RPARSE`, at the first post-parse `DRAW-CFORM`, and at the first
-post-parse `SCREEN-AND-STORE`. It records bounded scalar/type/list/array shape
-summaries only; it does not print live objects, manufacture a `PLAN`, or call
-unverified readers. The current evidence therefore records
-`PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS` in every completed
-snapshot.
-
-`research/introspection/scene-state-snapshot-seeded-1234.cl` supplies the
-already validated post-`INIT-RANDOM` seed-1234 calibration seam, and
-`.github/workflows/aaron-scene-state.yml` runs one baseline plus two fresh
-seeded repeat controls on Windows Server 2022. The local parser
-`research/tools/parse-scene-state-report.mjs` and its four tests validate
-marker order, target installation, exactly 15 unique binding rows per
-snapshot, explicit PLAN-reader omission, and explicit non-observations. The
-probe source uses `UNWIND-PROTECT` for depth/finalization cleanup so original
-conditions and nonlocal exits are not caught or re-signaled. No Windows result
-should be treated as evidence until the report is complete, the AA0 bytes and
-random controls match across the two seeded jobs, and all three reports
-normalize successfully.
+`research/introspection/scene-state-snapshot.cl` loads the validated call
+trace and adds observation wrappers around `RPARSE`, `DRAW-CFORM`,
+`SCREEN-AND-STORE`, and `MAIN`. It records only bounded scalar/type/list/array
+shape summaries for 15 package-qualified bindings. It does not print live
+objects, manufacture a `PLAN`, or call unverified readers. The parser checks
+target installation, unique binding rows, marker completeness, and explicit
+non-observations. The companion uses `UNWIND-PROTECT` to maintain depth and
+finalization state while preserving original conditions and nonlocal exits.
+The local Windows baseline and two seeded repeat controls have all passed
+those checks; their report details are linked in the current state above.
 
 ## Honest progress estimate
 
@@ -253,8 +290,8 @@ the historical scene rules have been recovered.
 | AA parser, renderer, serializer, corpus tools | Mostly complete for observed records |
 | Allegro random source and numeric boundaries | Strongly measured; normal startup seed remains unresolved |
 | Angles, distance, `LOCK-WIGGLE`, measured `FREE-PATH` subset | Measured fixtures and implementations |
-| Stream/writer selectors | Isolated behavior measured; integrated screen/file path remains open |
-| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints, repeated-vertex idempotency, and an edge error boundary; selection, integrated clipping, fill, colour, and state remain open |
+| Stream/writer selectors | Isolated behavior measured; 64 consecutive natural VECTOR calls now have exact VISPT points and stream slices through byte 1224 of the AA0 command suffix, all matched by JS. Remaining integrated calls and screen state remain open |
+| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints, repeated-vertex idempotency, and an edge error boundary. One natural `SELECT-BRUSH(7131)` returns ID 2; thresholds, integrated clipping, fill, colour, and state remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
 | Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
@@ -290,7 +327,10 @@ planner, figure rules, clipping/brush policy, and downstream emission. They
 should therefore remain opt-in or clearly labelled provisional until an
 original-engine trace supports their caller semantics.
 
-## Immediate next move
+## Earlier investigation frontier (superseded)
+
+The following records the prior frontier. The active order is now
+[execution-plan.md](execution-plan.md), linked at the top of this handoff.
 
 Use the local-first workflow:
 
@@ -303,37 +343,46 @@ Use the local-first workflow:
    fixtures locally.
 2. Extend only behavior already supported by evidence in the JS model and
    tests; do not guess at `SELECT-BRUSH`, clipping, or scene semantics.
-3. When a new original-engine observation is required, use the Windows Server
-   2022 GitHub Actions oracle with a narrowly scoped probe, preserving a
-   baseline and restoring wrappers/bindings with `UNWIND-PROTECT`.
+3. When a new original-engine observation is required, use the local Windows
+   10 oracle with a narrowly scoped probe, preserving a baseline and restoring
+   wrappers/bindings with `UNWIND-PROTECT`. Use the Windows Server 2022 GitHub
+   Actions workflow for cross-host checks or if local execution fails.
 4. Record normalized evidence and update the roadmap before promoting a rule
    from provisional or inferred to measured.
 
-The current research roadmap's next oracle frontier is the real scene context
-around `SCREEN-AND-STORE`, followed by downstream `PREP-LINE`/writer tracing.
+The local transition probe now brackets `RPLANE`, `RGB-MAP`, and `BRUSH`
+changes between selected natural calls, and a naturally invoked `SCRIPT(PLAN)`
+returns `NIL` then a one-element `BLOX` list. The next oracle frontier is the
+actual state mutator/caller sequence, the content and use of the returned
+`BLOX`, or other integrated writer selectors and screen effects. A 64-call
+natural VECTOR sequence exposed and corrected the JS formatter's non-tie
+rounding, then validated later line continuations and breaks. These
+observations do not yet justify an exact JS scene rule.
 Existing high-fanout wrappers should be removed only deliberately so later
 brush, fill, and message-loop calls become visible without changing the
 original call graph.
 
 ## Execution split and model handoff
 
-- Local Linux work: JavaScript implementation, parsers, fixture generation,
-  report normalization, static analysis, tests, and documentation.
-- Windows oracle work: execution of the archived AARON binary and new runtime
-  measurements. The current Linux workspace has no reliable Wine/QEMU/Docker
-  path; Windows Server 2022 Actions is the reproducible environment. A local
-  Windows VM could run the same PowerShell harness.
-- Use an Astra Low effort agent only when genuinely stuck on a very complex,
-  scoped issue (especially oracle-probe design, compiled-runtime/object-layout
-  interpretation, FLA/brush/scene semantics, or exactness decisions). Continue
-  routine implementation, testing, and documentation directly.
+- Local Windows work: JavaScript implementation, parsers, fixture generation,
+  report normalization, static analysis, tests, documentation, and bounded
+  original-engine execution from disposable runtime copies.
+- Windows Server 2022 Actions remains an independent oracle environment for
+  cross-host checks.
+- Use GPT-6 Luna at Max effort in successive batches for bounded investigations,
+  candidate algorithms, capture tooling, implementations, and independent
+  validation. The primary agent reviews probe design, ambiguous semantics,
+  integration, and exactness claims. See the active plan for initial packets
+  and file ownership; keep shared local oracle runs under one owner.
 
 ## Resume checklist
 
-1. Read this file, then `research/reverse-engineering-plan.md`.
+1. Read this file, `research/execution-plan.md`, then relevant roadmap evidence.
 2. Check the branch and worktree; preserve any unrelated user changes.
-3. Run `cd engine && npm test` and
-   `node --test research/tools/test/*.test.mjs` from the repository root.
+3. Run `node --test --test-isolation=none` in `engine/` and
+   `node --test --test-isolation=none research/tools/test/*.test.mjs` from the
+   repository root on this machine. The default parallel test-worker launch
+   is blocked by the current sandbox.
 4. Inspect the newest evidence under `research/introspection/evidence/` and
    the referenced probe before making a claim.
 5. Report progress, remaining work, next action, and blockers in the next

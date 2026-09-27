@@ -1,0 +1,1053 @@
+{
+  "schema": "aaron-natural-free-path-evidence-v1",
+  "source": {
+    "reportPath": "research/extracted/local-oracle/natural-free-path-seed-5678-a/capture/aaron-free-path-natural.txt",
+    "reportSha256": "ae7bbbe290deb08a44524c2837c0e328cfaa62281b8365e6ce2df36bc7174848",
+    "runId": "natural-free-path-seed-5678-a",
+    "mode": "natural-free-path-seed-5678",
+    "sceneRunComplete": true,
+    "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+    "sceneReportSha256": "2b4333b0dd91fac9b90281ad62c44465b84368244ff74122a4a947e6c5825fe5"
+  },
+  "capture": {
+    "caps": {
+      "calls": 256,
+      "pointsPerList": 256
+    },
+    "installation": {
+      "target": "FREE-PATH",
+      "originalType": "FUNCTION"
+    },
+    "callCount": 1,
+    "returnCount": 1,
+    "completed": true,
+    "overflows": [],
+    "aborts": [],
+    "conditions": [],
+    "calls": [
+      {
+        "id": 1,
+        "status": "returned",
+        "argCount": 1,
+        "edgeBefore": {
+          "points": [
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "28.268482"
+              ],
+              [
+                "DOUBLE-FLOAT",
+                "152.11380149899685d0"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "291.7315"
+              ],
+              [
+                "DOUBLE-FLOAT",
+                "152.11380149899685d0"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "291.7315"
+              ],
+              [
+                "SINGLE-FLOAT",
+                "432.49997"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "28.268482"
+              ],
+              [
+                "SINGLE-FLOAT",
+                "432.49997"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ]
+          ],
+          "shown": 4,
+          "truncated": false,
+          "proper": true,
+          "improperTail": null
+        },
+        "bindingsBefore": [
+          {
+            "name": "FDEX",
+            "bound": false
+          },
+          {
+            "name": "TDEX",
+            "bound": false
+          },
+          {
+            "name": "FROM",
+            "bound": false
+          },
+          {
+            "name": "TO",
+            "bound": false
+          }
+        ],
+        "rngBefore": {
+          "random100": [
+            96,
+            82,
+            3
+          ]
+        },
+        "return": {
+          "valuesCount": 1,
+          "first": {
+            "points": [
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "28.268482"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.11380149899685d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "54.14012295007706d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.40026043831074d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "78.95684552192688d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "151.57781316815579d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "104.7732697725296d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.39846306024754d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "122.78120427578688d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.44786085663998d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "145.16985616832972d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "151.4524497586366d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "161.3126361966133d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.23937902330124d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "183.5261633992195d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.00050138412678d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "209.6267346739769d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "151.60464938460552d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "225.9825283885002d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.24725245414936d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "243.35179416835308d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "151.7386724549409d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "266.1323982030153d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "151.7327812510606d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "291.7315"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.11380149899685d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "291.7315"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.11380149899685d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.86651372909546d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "168.26857285677158d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "292.26610004901886d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "194.14275894044602d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.46610164642334d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "216.46984969555103d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "292.18506720662117d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "240.27370498059952d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.29908487200737d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "261.51671658931934d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "292.0889402925968d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "279.50314704804384d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.853287152946d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "295.6065355437871d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.1115993857384d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "319.1103784452256d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.4521358013153d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "342.02205856620037d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "292.22314861416817d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "364.7848401564237d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.57069121301174d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "380.6047937023517d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.4941665530205d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "395.6111092465993d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "291.89930084347725d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "410.7268154817697d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "291.7315"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.49997"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "291.7315"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.49997"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "268.58234"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.85934"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "241.83347"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "433.14615"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "206.22415"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "431.7478"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "176.51512"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "431.8661"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "151.6308"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.3876"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "121.95706"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "433.34988"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "88.52621"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.6424"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "55.95002"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.0509"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "28.268482"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.49997"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "28.268482"
+                ],
+                [
+                  "SINGLE-FLOAT",
+                  "432.49997"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "29.01820427179337d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "392.07813280820847d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "28.575962424278263d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "365.96515542268753d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "27.932033181190498d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "328.22397869825363d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "28.838066875934608d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "300.769612044096d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "27.660354733467113d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "260.7549433782697d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "28.22238234430553d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "224.98083448410034d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "DOUBLE-FLOAT",
+                  "28.439091742038745d0"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "187.09885334968567d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ],
+              [
+                "VISPT",
+                [
+                  "SINGLE-FLOAT",
+                  "28.268482"
+                ],
+                [
+                  "DOUBLE-FLOAT",
+                  "152.11380149899685d0"
+                ],
+                [
+                  "FIXNUM",
+                  "1"
+                ]
+              ]
+            ],
+            "shown": 47,
+            "truncated": false,
+            "proper": true,
+            "improperTail": null
+          },
+          "extra": []
+        },
+        "edgeAfter": {
+          "points": [
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "28.268482"
+              ],
+              [
+                "DOUBLE-FLOAT",
+                "152.11380149899685d0"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "291.7315"
+              ],
+              [
+                "DOUBLE-FLOAT",
+                "152.11380149899685d0"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "291.7315"
+              ],
+              [
+                "SINGLE-FLOAT",
+                "432.49997"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ],
+            [
+              "VISPT",
+              [
+                "SINGLE-FLOAT",
+                "28.268482"
+              ],
+              [
+                "SINGLE-FLOAT",
+                "432.49997"
+              ],
+              [
+                "FIXNUM",
+                "1"
+              ]
+            ]
+          ],
+          "shown": 4,
+          "truncated": false,
+          "proper": true,
+          "improperTail": null
+        },
+        "bindingsAfter": [
+          {
+            "name": "FDEX",
+            "bound": false
+          },
+          {
+            "name": "TDEX",
+            "bound": false
+          },
+          {
+            "name": "FROM",
+            "bound": false
+          },
+          {
+            "name": "TO",
+            "bound": false
+          }
+        ],
+        "rngAfter": {
+          "random100": [
+            23,
+            37,
+            8
+          ]
+        },
+        "inputMutation": {
+          "changed": false,
+          "changedPointIndexes": [],
+          "beforePointCount": 4,
+          "afterPointCount": 4
+        },
+        "conditions": []
+      }
+    ]
+  },
+  "comparison": {
+    "method": "reconstruct incoming Allegro501Random state by advancing the verified seed stream with nextInt(100), match three-value cloned previews, then call aaronFreePath with typed numeric inputs and edge precision double when any endpoint coordinate is DOUBLE-FLOAT; captured random returns are never used as inputs",
+    "seed": 5678,
+    "offsetUnit": "Allegro501Random nextInt(100) draws from seed state, zero-based position before preview",
+    "searchLimit": 20000,
+    "previewOffsetCandidates": [
+      {
+        "callId": 1,
+        "offsets": [
+          2527
+        ]
+      }
+    ],
+    "calls": [
+      {
+        "callId": 1,
+        "incomingPreview": [
+          96,
+          82,
+          3
+        ],
+        "candidateOffsets": [
+          2527
+        ],
+        "edgePrecisions": [
+          "double",
+          "double",
+          "single",
+          "double"
+        ],
+        "candidates": [
+          {
+            "offset": 2527,
+            "previewBefore": [
+              96,
+              82,
+              3
+            ],
+            "previewBeforeMatches": true,
+            "expectedPointCount": 47,
+            "jsPointCount": 47,
+            "pointCountMatches": true,
+            "coordinateMismatchCount": 0,
+            "firstDivergence": null,
+            "rawRandomWordsConsumed": 133,
+            "previewAfter": [
+              23,
+              37,
+              8
+            ],
+            "previewAfterMatches": true,
+            "nextPreviewOffset": 2660,
+            "edgePrecisions": [
+              "double",
+              "double",
+              "single",
+              "double"
+            ],
+            "legacyAuto": {
+              "previewBefore": [
+                96,
+                82,
+                3
+              ],
+              "previewBeforeMatches": true,
+              "expectedPointCount": 47,
+              "jsPointCount": 47,
+              "pointCountMatches": true,
+              "coordinateMismatchCount": 16,
+              "firstDivergence": {
+                "index": 29,
+                "axes": [
+                  "x",
+                  "y"
+                ],
+                "expected": [
+                  268.58233642578125,
+                  432.8593444824219,
+                  1
+                ],
+                "actual": [
+                  268.58235308527946,
+                  432.8593499660492,
+                  1
+                ]
+              },
+              "rawRandomWordsConsumed": 133,
+              "previewAfter": [
+                23,
+                37,
+                8
+              ],
+              "previewAfterMatches": true,
+              "nextPreviewOffset": 2660
+            },
+            "nextNaturalCallOffsets": [],
+            "nextOffsetMatchesNaturalCall": null,
+            "nextPreviewOffsetCandidates": [
+              2660
+            ],
+            "nextOffsetMatchesReportedAfterPreview": true
+          }
+        ]
+      }
+    ],
+    "precisionDiagnostics": [],
+    "alignedSequence": true
+  }
+}

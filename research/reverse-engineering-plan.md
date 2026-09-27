@@ -34,10 +34,10 @@ probe scripts, normalized reports, and clean-room implementations are kept.
 | 1. AA protocol | Mostly complete | Parser, serializer, renderer, corpus analysis, palettes, outline/paint phases, and compact direction commands are implemented for observed records. | Round-trip and corpus checks cover every observed command and edge case. |
 | 2. Numeric foundation | Measured for recovered primitives; startup state partially measured | Allegro RNG matches 6,140 validation values; floating `RAN` matches 512 values plus 64 state checks; angle helpers match 218 double observations and 20 range calls. The corrected seed constructor installs `CL:*RANDOM-STATE*`; the visible `rseed` serializer is a fixed 3,030-byte truncated dump that `GET-RANDOM` cannot read; a controlled post-`INIT-RANDOM` reinstall makes seed-1234 output byte-stable across fresh processes and matches 512 normalized engine-local `RAN` calls. A contextual bridge now partitions those calls across `DEVELOP-PLAN`, `RPARSE`, `GENERATE-PERSON`, and `BUILD-FIGURE`; larger integer limits and the no-consumption equal-endpoint boundary are measured. | The normal startup state transition and generator random draw order are recovered, or the controlled calibration seam is explicitly adopted for all remaining measurements. |
 | 3. Geometry and hand helpers | Partially measured | `XYDIST` and `LOCK-WIGGLE` match 320 paths, 80 distances, and 80 subsequent random states. A controlled post-`INIT-RANDOM` trace also establishes `RAN-HAND` as a 20-joint, 20-sample single-float perturbation helper across four repeated calls; its caller and role in the complete FLA are unresolved. | The complete line path and its caller chain match original point sequences. |
-| 4. Stream emission | Isolated writer selectors measured | `MOVE-TO`/`DRAW-TO` match 96 byte/state captures. `VECTOR`/`FILL` match all 240 isolated cases (216 successful outputs and 24 expected NIL-previous errors), including two-decimal truncation and signed `-0.00`; the screen PLOT function is replaced. Basic formatter constants are inferred. | Real screen/file emission, stream ownership, and unmodified GUI/file integration remain to be measured; isolated evidence stays separate from those paths. |
+| 4. Stream emission | Isolated selectors and 299 natural file-writer calls measured | `MOVE-TO`/`DRAW-TO` match 96 isolated byte/state captures. `VECTOR`/`FILL` match all 240 isolated cases (216 outputs and 24 expected NIL-previous errors), including half-cent ties and signed `-0.00`. A repeated seeded scene counts all 28,075 writer calls and samples 299 across every selector it uses. Exact stream bytes and original previous-point state match the JS writer on all 299, including colour, brush, hop, fill, and close commands. | Measure screen effects, unsampled branches, and cross-seed behavior; keep the bounded file-writer result scoped to this controlled painting. |
 | 5. Freehand line algorithm | Partially measured | `FREE-PATH(EDGE)` now matches 16 traced-versus-unwrapped sequences and following random states, including visibility gating, closed-edge traversal, 8–14 step counts, and single/double arithmetic. The integrated startup trace reaches `FREE-PATH` from `DRAW-CFORM` with a real four-point `VISPT` edge. The JS engine now has an opt-in clean-room outline adapter around that measured primitive, with a separate random stream and fixture-tested metrics; its historical caller policy and clipping are still unresolved. | Recover all edge-list branches and connect this subset to DRAW-CFORM/brush output; validate integrated caller state and termination beyond the tested shapes. |
 | 6. Brush and colour pipeline | Early research, first fill writes measured | Seven startup brush profiles and complete ordered perimeter/core masks are captured; `INIT-MAPS` matches private map dimensions, element widths, zero initialization, return value, replacement behavior, and binding restoration. Isolated `BRUSH-STROKE` probes now measure empty/singleton boundaries, direct value propagation, brush-1/2/3/4 two-point footprints, a non-interpolated gapped brush-1 path, first-coordinate-major map indexing, aligned CDEX/SDEX holdouts with unchanged isolated map effects, repeated-vertex idempotency, one exact screen-forwarding call under a rejecting predicate, and aligned CDEX/SDEX forwarding to that dependency. The local adapter now keeps the measured predicate count/write gate and single full-path forwarding boundary explicit. The integrated startup trace reaches `BRUSH-STROKE` with an eight-`TRIPT` path and shows `BRUSH`, `RPLANE`, `RGB-MAP`, and the private fill map initialized before `SCREEN-AND-STORE`; it also reaches `WATCH-FOR-MESSAGES` and `PREP-LINE`. Selection boundaries, overlaps, clipping, real screen/file emission, colour transitions, and brush state remain open. | Brush selection, colour transitions, fill paths, scene context, and brush state match captured original calls. |
-| 7. Composition and figures | Runtime frontier measured; semantics provisional | The original startup trace now reaches three `GENERATE-PERSON`/`BUILD-FIGURE`/`DRAW-FIGURE-CFORMS` passes, 118 `DRAW-CFORM` calls, and 55 `PAINT-FILL` calls in bounded holdouts. Numeric traces measure the default compact transition (`640x480` engine state to `320x480` picture canvas) and two controlled high-resolution holdouts: requested 1024x768 selects 512x768, while 1920x1080 selects 960x1080. The JS planner now exposes accepted rectangular frame contracts and fits provisional figures into those frames; a 900-case local sweep found no invariant violations. A frozen scene manifest now attributes generated geometry and both AA stages to stable object/shape IDs, but it intentionally records current caller policy rather than historical semantics. Scene rules, poses, body parts, plants, pots, garments, and occlusion are not byte-equivalent. | Seeded scenes reproduce object ordering, placements, geometry, and branch decisions across holdouts. |
+| 7. Composition and figures | Runtime frontier measured; semantics provisional | The original startup trace now reaches three `GENERATE-PERSON`/`BUILD-FIGURE`/`DRAW-FIGURE-CFORMS` passes, 118 `DRAW-CFORM` calls, and 55 `PAINT-FILL` calls in bounded holdouts. A local Windows 10 scene probe now measures 15 bindings at the first draw, after outermost `RPARSE`, and at first `SCREEN-AND-STORE`; two fresh seed-1234 reports and complete AA0 files match byte-for-byte. Numeric traces measure the default compact transition (`640x480` engine state to `320x480` picture canvas) and two controlled high-resolution holdouts: requested 1024x768 selects 512x768, while 1920x1080 selects 960x1080. The JS planner now exposes accepted rectangular frame contracts and fits provisional figures into those frames; a 900-case local sweep found no invariant violations. A frozen scene manifest now attributes generated geometry and both AA stages to stable object/shape IDs, but it intentionally records current caller policy rather than historical semantics. Scene rules, poses, body parts, plants, pots, garments, and occlusion are not byte-equivalent. | Seeded scenes reproduce object ordering, placements, geometry, and branch decisions across holdouts. |
 | 8. Integrated generator | Control flow measured; local attribution added; parity not started | A complete bounded trace reaches `MAIN` return, `DISPLAY-COLOR-PATCHES`, 43 fill calls, and one `WRITE-PAINTING-RECORD` for image 0. The oracle emits complete compact and high-resolution `aa0` records, including 512x768 and 960x1080 controlled holdouts, but no whole-painting equivalence test has passed. The JS generator now exposes exact per-shape outline/paint ranges, per-shape hashes, and serialized-AA fixture hashes for local regression and future oracle comparison. | Same controlled startup/input produces matching structural statistics, command/state traces, and—where deterministic—matching AA output. |
 | 9. Productization | Later | Keep the viewer, engine API, browser demo, corpus analyzer, and contributor documentation coherent. | Users can load, generate, inspect, and save AA files without research-only tooling. |
 
@@ -45,7 +45,19 @@ The honest overall status is: the file format and several low-level primitives
 are strong; the generative core is still early. The project is not close to a
 complete equivalent port until phases 5–8 are recovered.
 
-## Immediate work queue
+## Active execution order
+
+Follow [the current execution plan](execution-plan.md) for the next work.
+Its first targets are continuous full-stream writer replay, exact brush
+selection, and natural FREE-PATH parity, followed by a complete drawing unit
+and progressively higher-level generation. It defines what information still
+comes from the EXE at each milestone and how to divide work among Luna agents.
+
+## Historical investigation queue and reference leads
+
+The entries below preserve the earlier experiments and remaining leads. They
+are not the next tasks in priority order; several "next" steps describe a
+historical checkpoint that newer local observations have already advanced.
 
 0. Keep the local static image index as the first step before another Windows
    run. The complete PLL's two indexed tables resolve 53,039 tagged string
@@ -141,15 +153,24 @@ complete equivalent port until phases 5–8 are recovered.
    shape-level geometry/stage attribution. Use it to compare provisional
    output slices while the oracle caller remains unresolved; it does not
    replace the next original-engine context trace.
-   A local-only companion is now prepared at
-   `introspection/scene-state-snapshot.cl`: it snapshots the 15
-   package-qualified scene bindings after the first successful outermost
-   `RPARSE`, at the first post-parse `DRAW-CFORM`, and at the first post-parse
-   `SCREEN-AND-STORE`. It never manufactures a `PLAN` or calls guessed
-   accessors; the current evidence therefore records an explicit
-   `NO-VERIFIED-READERS` decision. Its parser/tests run locally, while the
-   isolated three-case Windows workflow supplies a baseline and two seeded
-   repeat controls only when execution is required.
+   The companion at `introspection/scene-state-snapshot.cl` has now run on
+   local Windows 10 with one baseline and two fresh post-`INIT-RANDOM`
+   seed-1234 controls. It snapshots 15 package-qualified bindings at the
+   first `DRAW-CFORM`, after the first successful outermost `RPARSE`, and at
+   the first post-parse `SCREEN-AND-STORE`. The first draw actually precedes
+   that `RPARSE` return. The two seeded reports and complete AA0 files match
+   byte-for-byte. It never manufactures a `PLAN` or calls guessed accessors;
+   each snapshot records `NO-VERIFIED-READERS` for direct extra accessor calls.
+   A focused local probe subsequently observed natural `SCRIPT(PLAN)` calls:
+   first return `NIL`, then a one-element `BLOX` list; this verifies the live
+   reader path without exposing `BLOX` contents. The optional writer-seeded
+   follow-up also captured first `STORE-IN-FILE` and `PREP-LINE` entry/exit
+   states and arguments twice, with byte-identical seven-snapshot reports and
+   the same AA0 as the simpler seeded run. See `scene-context-findings.md`
+   for values and evidence. A repeated transition probe brackets `RPLANE`
+   becoming 79, `RGB-MAP` becoming a list, and `BRUSH` becoming ID 2; natural
+   `SELECT-BRUSH(7131)` returns ID 2. Next find the actual state mutators and
+   caller sequence before interpreting these transitions as scene rules.
 5. Continue controlled `FREE-PATH(EDGE)` probes. DRAW-CFORM references it next
    to FREEHAND-FLAG; its constants include distance, heading, RAN and POL-VPT.
    Preserve construction, return/mutation, global-state and dependency-call
@@ -158,11 +179,20 @@ complete equivalent port until phases 5–8 are recovered.
    dependency wrappers against unwrapped baselines before porting the result.
    Use LOCK-WIGGLE as a measured helper, not proof of the whole FLA.
 7. The isolated VECTOR/FILL matrix is complete: the writer matches all 240
-   captured cases, including endpoint continuity, redraw families, float
-   truncation, signed zero, and the NIL-previous error boundary. Keep this
-   fixture as a regression boundary while measuring the real PLOT/screen/file
-   path; do not promote the stubbed selector result to integrated parity.
-8. Directly measure remaining writer selectors and stream ownership. The
+   captured cases, including endpoint continuity, redraw families, half-cent
+   ties, signed zero, and the NIL-previous error boundary. A repeated natural
+   VECTOR call now measures two VISPT arguments, `*TEMP*` positions 0→36, and
+   the matching first 36 bytes of the AA0 command suffix. That integrated
+   call corrected the JS formatter from broad truncation to nearest-cent
+   rounding with observed ties toward zero. A repeated 64-call natural VECTOR
+   trace also matches the JS writer's file output through four move and
+   60 draw-only intervals. A later windowed trace records original
+   `PREV-STORED-PT` before and after each sampled call, including `(0,0)` at
+   the first natural VECTOR. It counts every selector in one painting and
+   captures 299 calls across all nine selectors; exact command bytes and
+   previous-point state match the JS writer on all 299. Keep these bounded
+   fixtures as regressions while measuring the real screen path.
+8. Measure the unsampled writer branches and screen effects. The
    controls-visible matrix is complete; its failures are not parity data.
 9. Recover brush/fill/colour state and then connect those methods to the AA
    writer.
@@ -196,7 +226,7 @@ The earlier publishing blockage is historical, not a current prerequisite.
 The project can be split safely between the two models, but the work type—not
 the model name—determines the handoff:
 
-### Astra oversight required
+### Primary-agent oversight
 
 - Designing or changing an oracle probe.
 - Interpreting compiled-function constants, object layouts, or ambiguous
@@ -207,7 +237,7 @@ the model name—determines the handoff:
 - Reviewing integration changes before publishing or calling a subsystem
   complete.
 
-### Luna is suitable
+### Luna 6 at Max effort
 
 - Implementing a rule already marked measured in this document.
 - Adding parsers, report summarizers, fixtures, unit tests, validation, and
@@ -215,12 +245,17 @@ the model name—determines the handoff:
 - Mechanical refactors that preserve public behavior.
 - Running the full test suite and checking formatting, hashes, and generated
   reports.
+- Independently investigating a bounded semantic question, proposing candidate
+  rules or probe changes, and identifying evidence that would disprove them.
+- Building a pipeline comparison from an agreed capture schema and reviewing
+  another worker's result against the original-engine evidence.
 
-Every handoff should begin by reading this file and the referenced findings
-document. A Luna change that touches an ambiguous algorithm should stop at a
-testable scaffold and leave the decision for Astra review; it should not guess
-at original behavior. Astra should review Luna’s commits in batches rather
-than redoing routine test/documentation work.
+Every handoff should name the bounded task, relevant evidence, owned files,
+and acceptance check in the current execution plan. Luna can investigate and
+implement candidate algorithms while clearly labelling unresolved assumptions.
+The primary agent reviews ambiguous semantics and the supporting comparisons
+before accepting an exactness claim. Review workers' changes in coherent
+batches and keep shared local oracle runs under one owner.
 
 ## Definition of done
 

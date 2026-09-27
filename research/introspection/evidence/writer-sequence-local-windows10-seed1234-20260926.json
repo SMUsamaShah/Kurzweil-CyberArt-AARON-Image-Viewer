@@ -1,0 +1,1167 @@
+{
+  "schemaVersion": 1,
+  "sceneReportSha256": "d0332c2b432636eeb8f4830b162b4dd7e7f803cd2b28e30cf69b7fd23990d006",
+  "imageSha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+  "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+  "aa0CommandOffset": 2381,
+  "totalWriterCalls": 28075,
+  "recordedWriterCalls": 64,
+  "limit": 64,
+  "firstEntry": 0,
+  "lastExit": 1224,
+  "contiguous": true,
+  "cases": [
+    {
+      "index": 0,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:106.91827677510554",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:384.1616650397512",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:109.11479859934074",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:385.81143739727474",
+        "vis": "INT:1"
+      },
+      "enter": 0,
+      "exit": 36,
+      "output": "am 106.92 384.16\r\nad 109.11 385.81\r\n"
+    },
+    {
+      "index": 1,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:109.11479859934074",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:385.81143739727474",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:111.24483374151407",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:387.41027906051073",
+        "vis": "INT:1"
+      },
+      "enter": 36,
+      "exit": 54,
+      "output": "ad 111.24 387.41\r\n"
+    },
+    {
+      "index": 2,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:111.24483374151407",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:387.41027906051073",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:113.47157677294736",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:389.0815419494211",
+        "vis": "INT:1"
+      },
+      "enter": 54,
+      "exit": 72,
+      "output": "ad 113.47 389.08\r\n"
+    },
+    {
+      "index": 3,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:113.47157677294736",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:389.0815419494211",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:116.51796407410257",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:391.36945517893844",
+        "vis": "INT:1"
+      },
+      "enter": 72,
+      "exit": 90,
+      "output": "ad 116.52 391.37\r\n"
+    },
+    {
+      "index": 4,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:116.51796407410257",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:391.36945517893844",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:118.87261051249943",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:393.13949737170117",
+        "vis": "INT:1"
+      },
+      "enter": 90,
+      "exit": 108,
+      "output": "ad 118.87 393.14\r\n"
+    },
+    {
+      "index": 5,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:118.87261051249943",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:393.13949737170117",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:121.26647350951505",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:394.9406380593888",
+        "vis": "INT:1"
+      },
+      "enter": 108,
+      "exit": 126,
+      "output": "ad 121.27 394.94\r\n"
+    },
+    {
+      "index": 6,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:121.26647350951505",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:394.9406380593888",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:123.42451108485403",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:396.56549338927783",
+        "vis": "INT:1"
+      },
+      "enter": 126,
+      "exit": 144,
+      "output": "ad 123.42 396.57\r\n"
+    },
+    {
+      "index": 7,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:123.42451108485403",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:396.56549338927783",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:124.37173699624674",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:396.9011989042739",
+        "vis": "INT:1"
+      },
+      "enter": 144,
+      "exit": 162,
+      "output": "ad 124.37 396.90\r\n"
+    },
+    {
+      "index": 8,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:124.37173699624674",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:396.9011989042739",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:127.58027865261472",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:398.175417760517",
+        "vis": "INT:1"
+      },
+      "enter": 162,
+      "exit": 180,
+      "output": "ad 127.58 398.18\r\n"
+    },
+    {
+      "index": 9,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:127.58027865261472",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:398.175417760517",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:130.0600947553974",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:399.23248581521517",
+        "vis": "INT:1"
+      },
+      "enter": 180,
+      "exit": 198,
+      "output": "ad 130.06 399.23\r\n"
+    },
+    {
+      "index": 10,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:130.0600947553974",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:399.23248581521517",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:132.7906166143114",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:400.4187806617453",
+        "vis": "INT:1"
+      },
+      "enter": 198,
+      "exit": 216,
+      "output": "ad 132.79 400.42\r\n"
+    },
+    {
+      "index": 11,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:132.7906166143114",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:400.4187806617453",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:135.68379172475983",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:401.6804743145266",
+        "vis": "INT:1"
+      },
+      "enter": 216,
+      "exit": 234,
+      "output": "ad 135.68 401.68\r\n"
+    },
+    {
+      "index": 12,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:135.68379172475983",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:401.6804743145266",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:139.80083938121606",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:403.61281504691783",
+        "vis": "INT:1"
+      },
+      "enter": 234,
+      "exit": 252,
+      "output": "ad 139.80 403.61\r\n"
+    },
+    {
+      "index": 13,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:139.80083938121606",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:403.61281504691783",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:142.39645514239453",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.9343199697106",
+        "vis": "INT:1"
+      },
+      "enter": 252,
+      "exit": 270,
+      "output": "ad 142.40 404.93\r\n"
+    },
+    {
+      "index": 14,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:142.39645514239453",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.9343199697106",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:145.44107392751755",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:406.60289813575514",
+        "vis": "INT:1"
+      },
+      "enter": 270,
+      "exit": 288,
+      "output": "ad 145.44 406.60\r\n"
+    },
+    {
+      "index": 15,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:145.44107392751755",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:406.60289813575514",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:148.0303113171765",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.1454253448799",
+        "vis": "INT:1"
+      },
+      "enter": 288,
+      "exit": 306,
+      "output": "ad 148.03 408.15\r\n"
+    },
+    {
+      "index": 16,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:148.0303113171765",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.1454253448799",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:150.90604158053725",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:410.0058810647842",
+        "vis": "INT:1"
+      },
+      "enter": 306,
+      "exit": 324,
+      "output": "ad 150.91 410.01\r\n"
+    },
+    {
+      "index": 17,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:150.90604158053725",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:410.0058810647842",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:153.19425946690325",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:411.5794662926402",
+        "vis": "INT:1"
+      },
+      "enter": 324,
+      "exit": 342,
+      "output": "ad 153.19 411.58\r\n"
+    },
+    {
+      "index": 18,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:153.19425946690325",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:411.5794662926402",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.3378167894479",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:409.8921413690743",
+        "vis": "INT:1"
+      },
+      "enter": 342,
+      "exit": 360,
+      "output": "ad 155.34 409.89\r\n"
+    },
+    {
+      "index": 19,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.3378167894479",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:409.8921413690743",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:157.52068740109573",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.3945325923158",
+        "vis": "INT:1"
+      },
+      "enter": 360,
+      "exit": 378,
+      "output": "ad 157.52 408.39\r\n"
+    },
+    {
+      "index": 20,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:157.52068740109573",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.3945325923158",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:159.81822845746404",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:406.85412186350555",
+        "vis": "INT:1"
+      },
+      "enter": 378,
+      "exit": 396,
+      "output": "ad 159.82 406.85\r\n"
+    },
+    {
+      "index": 21,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:159.81822845746404",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:406.85412186350555",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:162.96880360755668",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.75736922984123",
+        "vis": "INT:1"
+      },
+      "enter": 396,
+      "exit": 414,
+      "output": "ad 162.97 404.76\r\n"
+    },
+    {
+      "index": 22,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:162.96880360755668",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.75736922984123",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:165.41217800716822",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:403.1482979507414",
+        "vis": "INT:1"
+      },
+      "enter": 414,
+      "exit": 432,
+      "output": "ad 165.41 403.15\r\n"
+    },
+    {
+      "index": 23,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:165.41217800716822",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:403.1482979507414",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:167.9120292351451",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:401.5353726073359",
+        "vis": "INT:1"
+      },
+      "enter": 432,
+      "exit": 450,
+      "output": "ad 167.91 401.54\r\n"
+    },
+    {
+      "index": 24,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:167.9120292351451",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:401.5353726073359",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:170.1847308557161",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:400.11064481041353",
+        "vis": "INT:1"
+      },
+      "enter": 450,
+      "exit": 468,
+      "output": "ad 170.18 400.11\r\n"
+    },
+    {
+      "index": 25,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:168.08351681879176",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:423.18363460164863",
+        "vis": "INT:0"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:167.7169855056606",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.2133075986576",
+        "vis": "INT:1"
+      },
+      "enter": 468,
+      "exit": 504,
+      "output": "am 168.08 423.18\r\nad 167.72 424.21\r\n"
+    },
+    {
+      "index": 26,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:167.7169855056606",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.2133075986576",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:165.09101616554094",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.05744456015697",
+        "vis": "INT:1"
+      },
+      "enter": 504,
+      "exit": 522,
+      "output": "ad 165.09 425.06\r\n"
+    },
+    {
+      "index": 27,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:165.09101616554094",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.05744456015697",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:162.38474439653652",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.8984478636918",
+        "vis": "INT:1"
+      },
+      "enter": 522,
+      "exit": 540,
+      "output": "ad 162.38 424.90\r\n"
+    },
+    {
+      "index": 28,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:162.38474439653652",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.8984478636918",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:158.11043588529395",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.65498464261645",
+        "vis": "INT:1"
+      },
+      "enter": 540,
+      "exit": 558,
+      "output": "ad 158.11 424.65\r\n"
+    },
+    {
+      "index": 29,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:158.11043588529395",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.65498464261645",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.40696904897976",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.8429366013305",
+        "vis": "INT:1"
+      },
+      "enter": 558,
+      "exit": 576,
+      "output": "ad 155.41 424.84\r\n"
+    },
+    {
+      "index": 30,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.40696904897976",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.8429366013305",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:152.31044910535036",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.3318019370762",
+        "vis": "INT:1"
+      },
+      "enter": 576,
+      "exit": 594,
+      "output": "ad 152.31 425.33\r\n"
+    },
+    {
+      "index": 31,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:152.31044910535036",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.3318019370762",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:149.43594731014133",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.8387071793711",
+        "vis": "INT:1"
+      },
+      "enter": 594,
+      "exit": 612,
+      "output": "ad 149.44 425.84\r\n"
+    },
+    {
+      "index": 32,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:149.43594731014133",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.8387071793711",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:146.34141445396696",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.87759436395214",
+        "vis": "INT:1"
+      },
+      "enter": 612,
+      "exit": 630,
+      "output": "ad 146.34 425.88\r\n"
+    },
+    {
+      "index": 33,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:146.34141445396696",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.87759436395214",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:143.80932251155915",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.3005606518312",
+        "vis": "INT:1"
+      },
+      "enter": 630,
+      "exit": 648,
+      "output": "ad 143.81 425.30\r\n"
+    },
+    {
+      "index": 34,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:143.80932251155915",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:425.3005606518312",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:141.15226361781174",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.43241236061965",
+        "vis": "INT:1"
+      },
+      "enter": 648,
+      "exit": 666,
+      "output": "ad 141.15 424.43\r\n"
+    },
+    {
+      "index": 35,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:141.15226361781174",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:424.43241236061965",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:138.66282430807226",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:423.5261753365109",
+        "vis": "INT:1"
+      },
+      "enter": 666,
+      "exit": 684,
+      "output": "ad 138.66 423.53\r\n"
+    },
+    {
+      "index": 36,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:138.66282430807226",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:423.5261753365109",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:135.4108283815381",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:422.3168334498929",
+        "vis": "INT:1"
+      },
+      "enter": 684,
+      "exit": 702,
+      "output": "ad 135.41 422.32\r\n"
+    },
+    {
+      "index": 37,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:135.4108283815381",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:422.3168334498929",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:132.79605746738508",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:421.38358748502526",
+        "vis": "INT:1"
+      },
+      "enter": 702,
+      "exit": 720,
+      "output": "ad 132.80 421.38\r\n"
+    },
+    {
+      "index": 38,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:132.79605746738508",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:421.38358748502526",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:129.00699868921987",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:420.1051613766781",
+        "vis": "INT:1"
+      },
+      "enter": 720,
+      "exit": 738,
+      "output": "ad 129.01 420.11\r\n"
+    },
+    {
+      "index": 39,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:129.00699868921987",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:420.1051613766781",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:125.63034567224027",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:419.0469677498755",
+        "vis": "INT:1"
+      },
+      "enter": 738,
+      "exit": 756,
+      "output": "ad 125.63 419.05\r\n"
+    },
+    {
+      "index": 40,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:125.63034567224027",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:419.0469677498755",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:122.70978910754127",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:418.175479665038",
+        "vis": "INT:1"
+      },
+      "enter": 756,
+      "exit": 774,
+      "output": "ad 122.71 418.18\r\n"
+    },
+    {
+      "index": 41,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:122.70978910754127",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:418.175479665038",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:119.76332705261531",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:417.32238142146576",
+        "vis": "INT:1"
+      },
+      "enter": 774,
+      "exit": 792,
+      "output": "ad 119.76 417.32\r\n"
+    },
+    {
+      "index": 42,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:119.76332705261531",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:417.32238142146576",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:117.22904194089814",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:416.59171321273215",
+        "vis": "INT:1"
+      },
+      "enter": 792,
+      "exit": 810,
+      "output": "ad 117.23 416.59\r\n"
+    },
+    {
+      "index": 43,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:117.22904194089814",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:416.59171321273215",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:114.31380858812778",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:415.71635183628257",
+        "vis": "INT:1"
+      },
+      "enter": 810,
+      "exit": 828,
+      "output": "ad 114.31 415.72\r\n"
+    },
+    {
+      "index": 44,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:114.31380858812778",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:415.71635183628257",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:111.8901168615235",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:414.04367903929915",
+        "vis": "INT:1"
+      },
+      "enter": 828,
+      "exit": 846,
+      "output": "ad 111.89 414.04\r\n"
+    },
+    {
+      "index": 45,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:111.8901168615235",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:414.04367903929915",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:110.45038472529201",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:411.5302100834835",
+        "vis": "INT:1"
+      },
+      "enter": 846,
+      "exit": 864,
+      "output": "ad 110.45 411.53\r\n"
+    },
+    {
+      "index": 46,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:110.45038472529201",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:411.5302100834835",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:109.33818433727404",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.943109312685",
+        "vis": "INT:1"
+      },
+      "enter": 864,
+      "exit": 882,
+      "output": "ad 109.34 408.94\r\n"
+    },
+    {
+      "index": 47,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:109.33818433727404",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:408.943109312685",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:107.57452736873185",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.7637947631112",
+        "vis": "INT:1"
+      },
+      "enter": 882,
+      "exit": 900,
+      "output": "ad 107.57 404.76\r\n"
+    },
+    {
+      "index": 48,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:107.57452736873185",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:404.7637947631112",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:106.33507276536272",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:402.13489378193674",
+        "vis": "INT:1"
+      },
+      "enter": 900,
+      "exit": 918,
+      "output": "ad 106.34 402.13\r\n"
+    },
+    {
+      "index": 49,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:106.33507276536272",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:402.13489378193674",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:105.14960102831033",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:399.83901524445696",
+        "vis": "INT:1"
+      },
+      "enter": 918,
+      "exit": 936,
+      "output": "ad 105.15 399.84\r\n"
+    },
+    {
+      "index": 50,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:105.14960102831033",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:399.83901524445696",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:103.69990288166333",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:397.18328890193476",
+        "vis": "INT:1"
+      },
+      "enter": 936,
+      "exit": 954,
+      "output": "ad 103.70 397.18\r\n"
+    },
+    {
+      "index": 51,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:103.69990288166333",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:397.18328890193476",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:102.20787769685771",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:394.5155938355559",
+        "vis": "INT:1"
+      },
+      "enter": 954,
+      "exit": 972,
+      "output": "ad 102.21 394.52\r\n"
+    },
+    {
+      "index": 52,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:102.20787769685771",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:394.5155938355559",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:100.99859877800415",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:392.2406563437428",
+        "vis": "INT:1"
+      },
+      "enter": 972,
+      "exit": 990,
+      "output": "ad 101.00 392.24\r\n"
+    },
+    {
+      "index": 53,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:106.25715410209065",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:383.2258817672469",
+        "vis": "INT:0"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:106.91827677510554",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:384.1616650397512",
+        "vis": "INT:1"
+      },
+      "enter": 990,
+      "exit": 1026,
+      "output": "am 106.26 383.23\r\nad 106.92 384.16\r\n"
+    },
+    {
+      "index": 54,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:137.5346221161692",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:347.53892580419637",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:140.22285444117182",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:348.8583455859084",
+        "vis": "INT:1"
+      },
+      "enter": 1026,
+      "exit": 1062,
+      "output": "am 137.53 347.54\r\nad 140.22 348.86\r\n"
+    },
+    {
+      "index": 55,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:140.22285444117182",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:348.8583455859084",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:142.78888962306698",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:350.0698794754893",
+        "vis": "INT:1"
+      },
+      "enter": 1062,
+      "exit": 1080,
+      "output": "ad 142.79 350.07\r\n"
+    },
+    {
+      "index": 56,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:142.78888962306698",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:350.0698794754893",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:144.98769215986283",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:351.0978028088771",
+        "vis": "INT:1"
+      },
+      "enter": 1080,
+      "exit": 1098,
+      "output": "ad 144.99 351.10\r\n"
+    },
+    {
+      "index": 57,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:144.98769215986283",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:351.0978028088771",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:147.32636374829107",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:352.18947371295934",
+        "vis": "INT:1"
+      },
+      "enter": 1098,
+      "exit": 1116,
+      "output": "ad 147.33 352.19\r\n"
+    },
+    {
+      "index": 58,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:147.32636374829107",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:352.18947371295934",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:150.6746182642276",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:353.80357192342774",
+        "vis": "INT:1"
+      },
+      "enter": 1116,
+      "exit": 1134,
+      "output": "ad 150.67 353.80\r\n"
+    },
+    {
+      "index": 59,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:150.6746182642276",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:353.80357192342774",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:152.80248829072332",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:354.86791668902094",
+        "vis": "INT:1"
+      },
+      "enter": 1134,
+      "exit": 1152,
+      "output": "ad 152.80 354.87\r\n"
+    },
+    {
+      "index": 60,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:152.80248829072332",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:354.86791668902094",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.3238636732151",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:356.17187261675724",
+        "vis": "INT:1"
+      },
+      "enter": 1152,
+      "exit": 1170,
+      "output": "ad 155.32 356.17\r\n"
+    },
+    {
+      "index": 61,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:155.3238636732151",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:356.17187261675724",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:157.4947094216683",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:357.33516849785184",
+        "vis": "INT:1"
+      },
+      "enter": 1170,
+      "exit": 1188,
+      "output": "ad 157.49 357.34\r\n"
+    },
+    {
+      "index": 62,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:157.4947094216683",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:357.33516849785184",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:159.64629701707827",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:358.5259125103066",
+        "vis": "INT:1"
+      },
+      "enter": 1188,
+      "exit": 1206,
+      "output": "ad 159.65 358.53\r\n"
+    },
+    {
+      "index": 63,
+      "selector": "VECTOR",
+      "redraw": "T",
+      "pta": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:159.64629701707827",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:358.5259125103066",
+        "vis": "INT:1"
+      },
+      "ptb": {
+        "x": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:161.9204042689723",
+        "y": "FLOAT:COMMON-LISP::DOUBLE-FLOAT:359.81256305338326",
+        "vis": "INT:1"
+      },
+      "enter": 1206,
+      "exit": 1224,
+      "output": "ad 161.92 359.81\r\n"
+    }
+  ]
+}

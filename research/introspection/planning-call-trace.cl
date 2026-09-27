@@ -31,9 +31,8 @@
           (*print-circle* nil)
           (*print-pretty* nil)
           (owner nil)
-          ;; SCRIPT is intentionally left unwrapped below: the original
-          ;; planner calls it once per script item and its generic edge can
-          ;; consume a bounded report before figure/drawing calls appear.
+          ;; The default trace leaves high-fanout SCRIPT unwrapped. A focused
+          ;; companion may observe it without emitting per-call trace rows.
           (event-limit 1024)
           (event-count 0)
           (overflow-written nil)
@@ -49,6 +48,7 @@
           ;; closed lexical stream captured by the wrappers.
           (stream-open t)
           (targets nil)
+          (quiet-targets nil)
           (state-names nil)
           ;; Optional observer installed by a companion probe.  The normal
           ;; trace remains unchanged when this is NIL.  A companion can use
@@ -84,6 +84,35 @@
               "SMALL-IMAGE-SCREEN-WIDTH" "SMALL-IMAGE-SCREEN-HEIGHT"
               "NARROW" "VERTICAL" "HORIZONTAL" "WIDE" "OFFSET"
               "RIGHTMAX" "TOPMAX"))
+      ;; A focused companion may request the writer boundaries, or those
+      ;; boundaries plus five colour/brush candidates. The default trace
+      ;; remains unchanged for existing fixtures.
+      (when (and (boundp 'aaron-planning-extra-targets)
+                 (symbol-value 'aaron-planning-extra-targets))
+        (unless (or
+                 (equal (symbol-value 'aaron-planning-extra-targets)
+                        '("PREP-LINE" "STORE-IN-FILE"))
+                 (equal (symbol-value 'aaron-planning-extra-targets)
+                        '("PREP-LINE" "STORE-IN-FILE" "MAKE-DYETAB"
+                          "COLORING" "ASSIGN-COLORS" "SELECT-BRUSH"
+                          "RECORD-BRUSH"))
+                 (equal (symbol-value 'aaron-planning-extra-targets)
+                        '("SCRIPT")))
+          (error "Unsupported planning trace extra targets"))
+        (setf targets (append targets (symbol-value 'aaron-planning-extra-targets))))
+      (when (and (boundp 'aaron-planning-return-targets)
+                 (symbol-value 'aaron-planning-return-targets)
+                 (not (or (equal (symbol-value 'aaron-planning-return-targets)
+                                 '("SCRIPT"))
+                          (equal (symbol-value 'aaron-planning-return-targets)
+                                 '("SELECT-BRUSH")))))
+        (error "Unsupported planning trace return targets"))
+      (when (and (boundp 'aaron-planning-quiet-targets)
+                 (symbol-value 'aaron-planning-quiet-targets))
+        (unless (equal (symbol-value 'aaron-planning-quiet-targets)
+                       '("SCRIPT"))
+          (error "Unsupported planning trace quiet targets"))
+        (setf quiet-targets (symbol-value 'aaron-planning-quiet-targets)))
       (setf scene-hook
             (and (boundp 'aaron-scene-state-hook)
                  (symbol-value 'aaron-scene-state-hook)))
@@ -213,21 +242,24 @@
              (setf trace-stack (cons name trace-stack))
              (set 'aaron-trace-current-stack (copy-list trace-stack))
              (scene-event :enter name args entry-depth)
-             (when (next-event)
-               (emit-form "TRACE-ENTER ~D DEPTH ~D NAME ~A ARGS ~S STATE ~S"
-                          event-count entry-depth name (args-summary args)
-                          (binding-state))))
+             (unless (member name quiet-targets :test #'string=)
+               (when (next-event)
+                 (emit-form "TRACE-ENTER ~D DEPTH ~D NAME ~A ARGS ~S STATE ~S"
+                            event-count entry-depth name (args-summary args)
+                            (binding-state)))))
            (trace-exit (name entry-depth)
              (scene-event :exit name nil entry-depth)
-             (when (next-event)
-               (emit-form "TRACE-EXIT ~D DEPTH ~D NAME ~A STATE ~S"
-                          event-count entry-depth name (binding-state))))
+             (unless (member name quiet-targets :test #'string=)
+               (when (next-event)
+                 (emit-form "TRACE-EXIT ~D DEPTH ~D NAME ~A STATE ~S"
+                            event-count entry-depth name (binding-state)))))
            (trace-error (name entry-depth problem)
              (scene-event :error name problem entry-depth)
-             (when (next-event)
-               (emit-form "TRACE-ERROR ~D DEPTH ~D NAME ~A TYPE ~S STATE ~S"
-                          event-count entry-depth name (safe-type problem)
-                          (binding-state))))
+             (unless (member name quiet-targets :test #'string=)
+               (when (next-event)
+                 (emit-form "TRACE-ERROR ~D DEPTH ~D NAME ~A TYPE ~S STATE ~S"
+                            event-count entry-depth name (safe-type problem)
+                            (binding-state)))))
            (install (name)
              (handler-case
                  (let ((symbol (and owner (find-symbol name owner))))
@@ -237,7 +269,12 @@
                      ((not (fboundp symbol))
                       (emit-form "TARGET ~A UNBOUND-FUNCTION" name))
                      (t
-                      (let ((original (symbol-function symbol)))
+                      (let ((original (symbol-function symbol))
+                            (capture-return
+                              (and (boundp 'aaron-planning-return-targets)
+                                   (member name
+                                           (symbol-value 'aaron-planning-return-targets)
+                                           :test #'string=))))
                         ;; Capture the function object lexically.  The wrapper
                         ;; never re-reads its own function cell, so nested
                         ;; calls go to the original exactly once per edge.
@@ -247,13 +284,24 @@
                                   (incf depth)
                                   (trace-enter name args entry-depth)
                                   (handler-case
-                                      (multiple-value-prog1
-                                          (apply original args)
-                                        (trace-exit name entry-depth)
-                                        (setf trace-stack (cdr trace-stack))
-                                        (set 'aaron-trace-current-stack
-                                             (copy-list trace-stack))
-                                        (decf depth))
+                                      (if capture-return
+                                          (multiple-value-call
+                                              (lambda (&rest results)
+                                                (scene-event :return name results entry-depth)
+                                                (trace-exit name entry-depth)
+                                                (setf trace-stack (cdr trace-stack))
+                                                (set 'aaron-trace-current-stack
+                                                     (copy-list trace-stack))
+                                                (decf depth)
+                                                (values-list results))
+                                            (apply original args))
+                                        (multiple-value-prog1
+                                            (apply original args)
+                                          (trace-exit name entry-depth)
+                                          (setf trace-stack (cdr trace-stack))
+                                          (set 'aaron-trace-current-stack
+                                               (copy-list trace-stack))
+                                          (decf depth)))
                                     (error (problem)
                                       (trace-error name entry-depth problem)
                                       (setf trace-stack (cdr trace-stack))

@@ -1,10 +1,20 @@
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import { analyzeAaDocument } from '../src/aa-analysis.js';
-import { AaFormatError, parseAaFile } from '../src/aa-format.js';
+import { AaFormatError, parseAaFile, serializeAaFile } from '../src/aa-format.js';
 import { Mt19937, mt19937Reference } from '../src/random.js';
+
+const captureAa0Url = new URL(
+  '../../research/extracted/local-oracle/writer-windows-seed-1234-h/capture/aa0',
+  import.meta.url,
+);
+const captureImageUrl = new URL(
+  '../../research/extracted/local-oracle/writer-windows-seed-1234-h/capture/image',
+  import.meta.url,
+);
 
 async function sample(name) {
   return readFile(new URL(`../../${name}`, import.meta.url), 'utf8');
@@ -68,6 +78,50 @@ test('parses absolute z-path outline commands', () => {
     { command: 'zm', x: 1, y: 2, lineNumber: 3 },
     { command: 'zd', x: 3.5, y: 4.5, lineNumber: 4 },
   ]);
+});
+
+test('serializes an original-style header and fixed two-decimal CRLF palette prelude', () => {
+  const palette = Array.from({ length: 148 }, () => [0, 0.5, 1]);
+  const text = serializeAaFile({
+    width: 320,
+    height: 480,
+    palette,
+    outline: [],
+    paint: [],
+  }, { originalPrelude: true });
+  const expectedPrelude = Buffer.from(
+    `320 480 148\r\n${'0.00 0.50 1.00\r\n'.repeat(148)}`,
+    'ascii',
+  );
+
+  assert.deepEqual(Buffer.from(text, 'utf8').subarray(0, expectedPrelude.length), expectedPrelude);
+  assert.equal(text.slice(expectedPrelude.length), 'color\nend\n');
+});
+
+test('original-style prelude reproduces the ignored captured AA0 prefix when available', {
+  skip: !existsSync(captureAa0Url) || !existsSync(captureImageUrl),
+}, async () => {
+  const aaBytes = await readFile(captureAa0Url);
+  const imageBytes = await readFile(captureImageUrl);
+  const document = parseAaFile(aaBytes.toString('utf8'));
+  const serialized = Buffer.from(serializeAaFile(document, { originalPrelude: true }), 'utf8');
+  const prefixLength = aaBytes.length - imageBytes.length;
+
+  assert.equal(prefixLength, 2_381);
+  assert.deepEqual(aaBytes.subarray(prefixLength), imageBytes);
+  assert.deepEqual(serialized.subarray(0, prefixLength), aaBytes.subarray(0, prefixLength));
+});
+
+test('keeps the default serializer output unchanged', () => {
+  const text = serializeAaFile({
+    width: 320,
+    height: 480,
+    palette: [[0.5, 0.25, 1]],
+    outline: [],
+    paint: [],
+  });
+
+  assert.equal(text, '320 480 1\n0.5 0.25 1\ncolor\nend\n');
 });
 
 test('produces comparable corpus measurements', async () => {

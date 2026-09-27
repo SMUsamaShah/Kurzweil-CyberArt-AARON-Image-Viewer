@@ -367,11 +367,11 @@ absent controls field in the historical report and an explicit `NIL` value.
   family; it does not prevent a compact command when one is available.
 - The probed PLOT Boolean does not affect these two methods.
 
-The writer produces stream fragments, not complete painting documents. Its
-current API intentionally requires integer coordinates; float formatting,
-headers, colour/brush records, and end-of-stream behavior are
-separate recovery tasks. The existing AaBuilder remains a general format
-builder and is not relabelled as an exact implementation of these decisions.
+At this stage the writer produced stream fragments with integer coordinates.
+The later natural writer probes below added float formatting, colour/brush
+records, end-of-stream behavior, and complete document replay. The existing
+AaBuilder remains a general format builder and is not relabelled as an exact
+implementation of the original writer decisions.
 
 The successful STORE-IN-FILE method constants also retain formatter trees for
 the basic records. `AaronStrokeWriter` now emits the inferred strings
@@ -403,13 +403,100 @@ after PLOT, before emitting anything.
 - Both use two-decimal output and ignore SMALL/LARGE in this matrix; VECTOR
   does not substitute a compact hop for the tested unit step.
 
-The integer `vector()` and `fill()` JS methods match all 72 successful integer
-captures and reject the eight integer VECTOR/NIL cases without changing state.
-The remaining 144 successful captures use doubles and are preserved as
-evidence, but floating formatting is not implemented. For example 11.125d0
-prints `11.12`, -20.375d0 prints `-20.37`, and -0.004d0 prints `-0.00`.
-JavaScript `toFixed(2)` does not reproduce all these observations. More format
-probes are needed before choosing a general rounding rule.
+The JS `vector()` and `fill()` methods match all 240 isolated selector cases,
+including the 216 successful captures and 24 VECTOR/NIL errors. Doubles such
+as 11.125d0 print `11.12`, -20.375d0 prints `-20.37`, and -0.004d0 prints
+`-0.00`. JavaScript `toFixed(2)` does not reproduce every observed tie.
+
+A subsequent unmodified seeded scene captured the first natural
+`STORE-IN-FILE(VECTOR)` call with VISPT coordinates and `*TEMP*` output
+positions 0→36. Its two emitted commands are
+`am 106.92 384.16\r\nad 109.11 385.81\r\n`, and the complete temporary
+`image` stream equals the AA0 command suffix at byte 2381. This natural input
+revealed that the previous JS formatter's general truncation was too broad:
+106.918... rounds to 106.92. The corrected formatter rounds to the nearest
+cent with measured exact half-cent ties toward zero. The integrated first
+vector and all 240 isolated cases pass. See
+[`scene-context-findings.md`](scene-context-findings.md) and the retained
+[`writer-stream report`](introspection/evidence/scene-state-local-windows10-writer-stream-seed1234-20260926.txt).
+
+The next local probe retained 64 consecutive natural `STORE-IN-FILE(VECTOR)`
+calls with their exact `image` stream slices. They cover four move-and-draw
+branches and 60 draw-only branches, including two inputs whose starting VISPT
+has visibility 0. Stream intervals are contiguous through byte 1224. The
+current JS writer reproduces all 64 slices after CRLF normalization, carrying
+its previous point forward from each captured call. The first previous point
+was not observed, so its move branch is tested using a distinct sentinel;
+this fixture does not establish the original initial previous-point value.
+The complete output hash remains unchanged. The retained
+[`sequence fixture`](introspection/evidence/writer-sequence-local-windows10-seed1234-20260926.json)
+and [`call report`](introspection/evidence/scene-state-local-windows10-writer-sequence-seed1234-20260926.txt)
+are repeat-verified.
+
+A later windowed trace counted all 28,075 natural writer calls and sampled 299
+of them, including the first call of every selector used in this painting.
+The nine selector totals are `VECTOR` 656, `COLOR` 1, `BRUSH` 25, `AARGB`
+1454, `MOVE-TO` 772, `DRAW-TO` 24903, `HUE` 2, `FILL` 261, and `END` 1.
+The observer recorded each sampled call's real arguments, output-stream byte
+interval, and `PREV-STORED-PT` coordinates before and after. The first natural
+previous point is `(0,0)`, resolving the older fixture's initial-state gap.
+The JS writer in `small` hop mode reproduces all 299 command slices and all
+299 previous-point transitions exactly after translating its line endings to
+the original Windows CRLF stream. The original `?FILE-SIZE?` binding is
+`SMALL` at every sampled call, so the hop mode is observed directly. This
+includes compact hops, colour and brush
+commands, fixed-two-decimal fill, and `END`'s `am 320 480` / `end` tail. `END`
+closes the stream, so its exit position comes from the verified archived image
+length rather than a post-close `FILE-POSITION` query. Two runs produced the
+same report and complete AA0 hashes. See the
+[`windowed fixture`](introspection/evidence/writer-windows-local-windows10-seed1234-20260926.json)
+and [`natural-call report`](introspection/evidence/scene-state-local-windows10-writer-windows-seed1234-20260926.txt).
+This established parity for sampled calls in one controlled painting. The
+complete capture below checks the previously unsampled calls.
+
+## Complete continuous writer and AA0 replay
+
+The `writer-full-seed-1234` local mode captured every natural `STORE-IN-FILE`
+entry and exit in the controlled post-`INIT-RANDOM` seed-1234 painting. A
+single buffered tape contains 28,075 sequential, paired calls with typed
+arguments, picture dimensions, file-size mode, output positions, and previous
+point state. It did not overflow its 50,000-call cap. Every entry position
+follows the previous exit. The run preserved the earlier AA0 SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+
+[`replay-full-writer.mjs`](tools/replay-full-writer.mjs) initializes one
+`AaronStrokeWriter` from the first observed state and carries it through all
+28,075 calls. The original previous point is checked at each boundary, never
+injected into the JS writer after initialization. A separate modeled visibility
+transition also agrees at every call. Every generated command slice matches
+the original `image` bytes, including CRLF, and the whole 124,575-byte image
+matches SHA-256 `42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881`.
+The final writer state is `(269,96)`. The original painting has no natural
+`DIMS` selector call; its dimensions occur in the separate AA0 prelude.
+
+The prelude is a 13-byte `320 480 148` CRLF header followed by 148 palette
+records, each 16 bytes with three fixed two-decimal channels and CRLF.
+`serializeAaFile(..., {originalPrelude: true})` regenerates its 2,381 bytes
+from the palette values parsed from the original AA0. Then
+[`compose-full-aa0.mjs`](tools/compose-full-aa0.mjs) appends the JS-generated
+writer commands and checks every byte of the resulting 126,956-byte AA0
+against the original. This is exact reconstruction **from captured writer
+decisions and original palette values**. The upstream path, colour, brush,
+palette-generation, and scene-generation rules are still required to create a
+painting from a seed alone. See the compact
+[`full-writer evidence`](introspection/evidence/writer-full-local-windows10-seed1234-20260927.json);
+raw captures remain in the ignored local `research/extracted/` directory.
+
+The independent seed-5678 holdout also passed the unchanged replay and
+composition tools. It has 33,198 paired writer calls and a different selector
+mix: 2,212 `VECTOR`, 49 `BRUSH`, 1,822 `AARGB`, 986 `MOVE-TO`, 28,115
+`DRAW-TO`, 10 `FILL`, plus `COLOR` 1, `HUE` 2, and `END` 1. All 156,452
+generated command bytes and all 158,833 composed AA0 bytes match the original;
+the AA0 SHA-256 is
+`0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086`.
+This matches the earlier seed-5678 reference painting and confirms the same
+writer implementation across two distinct controlled paintings. See the
+[`seed-5678 full-writer evidence`](introspection/evidence/writer-full-local-windows10-seed5678-20260927.json).
 
 ## Direct SCREEN-AND-STORE frontier
 
@@ -444,14 +531,47 @@ preserves the full forwarded path, and leaves the unresolved screen/file,
 colour, clipping, and brush-state logic outside its scope. The generator does
 not use this adapter yet.
 
-## Provisional ENVIR selection adapter
+## Measured SELECT-BRUSH boundary
 
-The startup census provides six non-sentinel `PAINT-BRUSH` environment bands
-and one zero-width sentinel. `engine/src/aaron-brushes.js` now exposes
-`selectAaronBrushProfile(value)` over those measured bands with an explicit
-half-open `[low, high)` interpretation. This is useful for local experiments
-and tests the exact observed boundary values, but it is not yet the historical
-`SELECT-BRUSH` implementation: the live selector body has not been invoked,
-and the function's reported `COUNT` argument remains unresolved. The default
-out-of-range result is `undefined`; clamping to the first or last profile is
-available only when a caller opts into that provisional policy.
+A controlled, pass-through 25-input matrix now resolves every integer neighbor
+of the six selectable ENVIR boundaries. The original returns brush 1 for
+`101..3000`, 2 for `3001..8000`, 3 for `8001..16000`, 4 for
+`16001..60000`, 5 for `60001..120000`, and 6 for `120001..200000`.
+The tested values `0`, `1`, `99`, and `100` return NIL, while `-1` and
+`200001` return brush 6. Each non-NIL object is EQ to the corresponding
+`ALL-BRUSHES` entry. All seven startup profiles, `BRUSH` binding, and cloned
+random previews stayed unchanged. The natural `7131` call returns brush 2.
+
+`engine/src/aaron-brushes.js` now matches this matrix, and the test compares
+every case with [the compact evidence](introspection/evidence/select-brush-matrix-seed1234-20260927.json).
+Extending the two observed tails to other out-of-range values and selecting
+for fractional inputs remain adapter inferences. The matrix establishes
+selection behavior at these inputs; integrated brush assignment, clipping,
+and output drawing are separate downstream work.
+
+## Natural SCREEN-AND-STORE point emission
+
+The controlled seed-1234 screen-unit capture brackets the first eight natural
+`SCREEN-AND-STORE` calls with the full writer tape. Its AA0 and writer-tape
+hashes equal the prior controlled run. All eight input paths are complete,
+unmodified, and consist of 298 ordered integer points across `TRIPT` and
+`TWOPT` objects. Each input point maps in order to exactly one writer call:
+the first becomes `MOVE-TO`, and every later point becomes `DRAW-TO` with
+`REDRAW=T`. The eight units contain 13 additional `AARGB` calls placed
+between points. Their byte ranges total 1,081 bytes.
+
+The [compact screen-unit evidence](introspection/evidence/screen-units-seed-1234-b.json)
+retains input paths, colour-event positions and indices, writer ordinals,
+byte-range hashes, and copied-state RNG previews. The derivation checks each
+writer call and contiguous file position against the original path, then
+replays the path in JavaScript through
+[`emitAaronScreenPath`](../engine/src/aaron-screen-path.js). All eight generated
+byte ranges match the original exactly. Colour-event placement and index are
+still supplied from the original tape; the routine also does not model the
+RNG consumed elsewhere inside `SCREEN-AND-STORE`. Those are the first
+remaining decisions at this drawing boundary.
+
+The independent [seed-5678 holdout](introspection/evidence/screen-units-seed-5678-a.json)
+confirms the same one-to-one point rule for its first eight natural calls:
+253 input points, 15 supplied colour events, and 933 exact original bytes.
+Across both paintings, the rule covers 16 units, 551 points, and 2,014 bytes.

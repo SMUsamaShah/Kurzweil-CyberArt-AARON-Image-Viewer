@@ -30,9 +30,11 @@ and file-writing routines without executing untrusted software.
 
 ### Dynamic analysis
 
-Run the archived build only in an isolated Windows VM or disposable CI runner.
-Trace file, registry, random-number, timing, and process activity. Vary one
-input at a time and retain generated AA files as temporary research artifacts.
+Run the archived build from a disposable, verified runtime copy on Windows.
+The local Windows 10 scene oracle and the disposable CI runner are both
+documented in [`oracle.md`](oracle.md). Trace file, registry, random-number,
+timing, and process activity. Vary one input at a time and retain generated AA
+files as temporary research artifacts.
 
 ### Behavioural reconstruction
 
@@ -51,8 +53,9 @@ of our own implementation.
   chains, exact indexed string references, artifact completeness boundary, and
   the anonymous bounded x86-like candidate profile.
 - [`scene-context-findings.md`](scene-context-findings.md) — package-qualified
-  scene target checklist joined from static names, constants, and one bounded
-  startup state trace.
+  scene targets joined from static names and traces, plus controlled local
+  snapshots around drawing, file emission, colour/brush selection, and a
+  naturally invoked PLAN reader.
 - [`clean-room-integration.md`](clean-room-integration.md) — current local
   composition-frame and measured FREE-PATH integration checkpoint, with sweep
   metrics and explicit provisional boundaries.
@@ -92,14 +95,33 @@ worklist, boundary controls, and uncertainty categories; it does not map
 machine code to Lisp symbols or retain executable payload bytes.
 
 `tools/parse-scene-state-report.mjs` validates the sanitized report from the
-focused scene-context companion. The companion and its isolated Windows
-workflow are staged only when a live `RPARSE`/drawing boundary is needed; the
-parser, tests, and report-shape checks remain local.
+focused scene-context companion. The local Windows runner
+`oracle/run-local-scene-state.ps1` now produces baseline and controlled seeded
+reports, plus focused writer, transition, and PLAN-return snapshots, without
+changing the system clock; see
+[`scene-context-findings.md`](scene-context-findings.md).
+`tools/verify-writer-image-suffix.mjs` checks a captured temporary `image`
+stream against the final AA0 command suffix and retains only bounded hashes,
+offsets, and the first natural writer slice.
+`tools/summarize-writer-sequence.mjs` turns a bounded natural writer trace
+into a portable per-call input/output fixture after checking every captured
+stream slice against the complete AA0 command suffix.
+The repeat-verified windowed fixture covers 299 calls across all nine selector
+families used by one controlled painting, with exact original previous-point
+state. See [`stroke-findings.md`](stroke-findings.md).
+The [active execution plan](execution-plan.md) prioritizes continuous whole
+writer replay and then moves the JS drawing boundary upstream, with explicit
+milestones and Luna-agent work packets.
 
 `tools/patch-registry-running.ps1` is a disposable-oracle diagnostic. It
 requires the exact extracted `registry.dll` hash before applying temporary
 entry-point patches to the legacy process/version and trial-age checks; it is
 not part of the clean-room JavaScript engine.
+
+`tools/patch-license-user-registry.ps1` redirects two `license.dll` registry
+API root arguments to the per-user hive in a hash-verified disposable copy.
+Together with the registry patch, it enables trial-mode local execution with
+no system clock change. Details and scope are in [`oracle.md`](oracle.md).
 
 `tools/patch-license-version.ps1` is a separate, hash-guarded diagnostic for
 the exported `license.dll!KCATversion` Boolean. It is used only on the

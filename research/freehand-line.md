@@ -161,8 +161,8 @@ For the closed point lists tested, the recovered behavior is:
    edge, so shared vertices appear twice.
 2. If the target point's numeric `VIS` is zero, copy the edge directly and do
    not consume random state.
-3. Otherwise call `XYDIST`, choose an inclusive integer step count with
-   `RAN(8,14)`, and use the edge heading. For every step, consume
+3. Otherwise call `XYDIST`, choose an inclusive integer step ceiling with
+   `RAN(8,14)`, and use the edge heading. For every executed step, consume
    `RAN(.7,1.3)`, `RAN(.015,.03)`, advance a spine by
    `distance/count * scale`, consume `RAN(0.0,6.28)`, and calculate a small
    polar offset with `offset = step * wiggle`. The final offset is calculated
@@ -175,3 +175,27 @@ double-coordinate headings use the recovered bounded trig helper while their
 random offsets retain single-float deltas. This is a measured `FREE-PATH`
 subset, not yet the complete DRAW-CFORM/brush pipeline or proof that every
 edge-list shape uses the same traversal.
+
+The controlled local seed-1234 painting supplies three natural `FREE-PATH`
+calls. Their complete 48-, 16-, and 19-point results, unchanged input lists,
+and following random-state previews are retained in
+[seed-1234 natural path evidence](introspection/evidence/natural-free-path-seed-1234-a.json).
+All three now reproduce exactly in JavaScript from their typed input points
+and aligned incoming RNG state, consuming 136, 28, and 37 raw words. The
+third call's only visible edge selects 13 with `RAN(8,14)` but executes 12
+scale/wiggle/angle triples: their cumulative step lengths pass the edge
+distance at the twelfth step. The JS helper now stops at that crossing or
+the selected ceiling, whichever comes first. This distance-stop condition
+is supported by this natural call and the isolated fixtures; exact behavior
+at close floating-point boundaries remains open.
+
+The natural first call mixes single and double coordinates. Its third edge
+has only single-float endpoints; treating its printed decimals as doubles
+changes point 27. An explicit per-edge precision vector, derived from the
+input's retained Lisp numeric types, matches all returned coordinates.
+
+The independent controlled seed-5678 painting supplies one natural 47-point
+call. [Its evidence](introspection/evidence/natural-free-path-seed-5678-a.json)
+also matches exactly, including 133 raw random words and the following RNG
+preview. These two seeds cover the natural calls observed in those scenes;
+other configurations and close numeric boundaries remain to be checked.

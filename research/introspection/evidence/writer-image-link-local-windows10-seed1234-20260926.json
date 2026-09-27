@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+  "imageSha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+  "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+  "imageLength": 124575,
+  "aa0Length": 126956,
+  "aa0CommandOffset": 2381,
+  "firstWriterEnter": 0,
+  "firstWriterExit": 36,
+  "firstWriterSliceHex": "616d203130362e3932203338342e31360d0a6164203130392e3131203338352e38310d0a",
+  "firstWriterSliceAscii": "am 106.92 384.16\r\nad 109.11 385.81\r\n"
+}

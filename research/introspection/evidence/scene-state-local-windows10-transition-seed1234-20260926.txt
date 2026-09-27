@@ -1,0 +1,551 @@
+BEGIN scene-state-snapshot
+SOURCE-ENTERED
+TARGET-INSTALLED name=MAKE-ARTWORK actual-package=COMMON-GRAPHICS-USER actual-name=MAKE-ARTWORK kind=MAKE-ARTWORK
+TARGET-INSTALLED name=INITIALISE-PICTURE-PLANE actual-package=COMMON-GRAPHICS-USER actual-name=INITIALISE-PICTURE-PLANE kind=INITIALISE-PICTURE-PLANE
+TARGET-INSTALLED name=MAIN actual-package=COMMON-GRAPHICS-USER actual-name=MAIN kind=MAIN
+TARGET-INSTALLED name=MAKE-PAINTING-COLORS actual-package=COMMON-GRAPHICS-USER actual-name=MAKE-PAINTING-COLORS kind=MAKE-PAINTING-COLORS
+TARGET-INSTALLED name=MAKE-COLORSPEC actual-package=COMMON-GRAPHICS-USER actual-name=MAKE-COLORSPEC kind=MAKE-COLORSPEC
+TARGET-INSTALLED name=PROTOCOL actual-package=COMMON-GRAPHICS-USER actual-name=PROTOCOL kind=PROTOCOL
+TARGET-INSTALLED name=RPARSE actual-package=COMMON-GRAPHICS-USER actual-name=RPARSE kind=RPARSE
+TARGET-INSTALLED name=DRAW-CFORM actual-package=COMMON-GRAPHICS-USER actual-name=DRAW-CFORM kind=DRAW-CFORM
+TARGET-INSTALLED name=SCREEN-AND-STORE actual-package=COMMON-GRAPHICS-USER actual-name=SCREEN-AND-STORE kind=SCREEN-AND-STORE
+TARGET-INSTALLED name=PAINT-FILL actual-package=COMMON-GRAPHICS-USER actual-name=PAINT-FILL kind=PAINT-FILL
+TARGET-INSTALLED name=DISPLAY-COLOR-PATCHES actual-package=COMMON-GRAPHICS-USER actual-name=DISPLAY-COLOR-PATCHES kind=DISPLAY-COLOR-PATCHES
+TARGET-INSTALLED name=PREP-LINE actual-package=COMMON-GRAPHICS-USER actual-name=PREP-LINE kind=PREP-LINE
+TARGET-INSTALLED name=STORE-IN-FILE actual-package=COMMON-GRAPHICS-USER actual-name=STORE-IN-FILE kind=STORE-IN-FILE
+TARGET-INSTALLED name=MAKE-DYETAB actual-package=COMMON-GRAPHICS-USER actual-name=MAKE-DYETAB kind=MAKE-DYETAB
+TARGET-INSTALLED name=ASSIGN-COLORS actual-package=COMMON-GRAPHICS-USER actual-name=ASSIGN-COLORS kind=ASSIGN-COLORS
+TARGET-INSTALLED name=SELECT-BRUSH actual-package=COMMON-GRAPHICS-USER actual-name=SELECT-BRUSH kind=SELECT-BRUSH
+TARGET-INSTALLED name=RECORD-BRUSH actual-package=COMMON-GRAPHICS-USER actual-name=RECORD-BRUSH kind=RECORD-BRUSH
+TRACE-LOADED
+READY required-targets=3 installed-targets=3
+PROBE-READY
+BOUNDARY label=FIRST-MAKE-DYETAB-ENTER
+SNAPSHOT-BEGIN label=FIRST-MAKE-DYETAB-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-MAKE-DYETAB-ENTER rows=15
+BOUNDARY label=FIRST-MAKE-DYETAB-EXIT
+SNAPSHOT-BEGIN label=FIRST-MAKE-DYETAB-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-MAKE-DYETAB-EXIT rows=15
+BOUNDARY label=FIRST-PROTOCOL-ENTER
+SNAPSHOT-BEGIN label=FIRST-PROTOCOL-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:-1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:0
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PROTOCOL-ENTER rows=15
+BOUNDARY label=FIRST-PROTOCOL-EXIT
+SNAPSHOT-BEGIN label=FIRST-PROTOCOL-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:-1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:0
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PROTOCOL-EXIT rows=15
+BOUNDARY label=FIRST-DRAW-CFORM
+SNAPSHOT-BEGIN label=FIRST-DRAW-CFORM
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-DRAW-CFORM rows=15
+BOUNDARY label=FIRST-INITIALISE-PICTURE-PLANE-ENTER
+SNAPSHOT-BEGIN label=FIRST-INITIALISE-PICTURE-PLANE-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-INITIALISE-PICTURE-PLANE-ENTER rows=15
+BOUNDARY label=FIRST-INITIALISE-PICTURE-PLANE-EXIT
+SNAPSHOT-BEGIN label=FIRST-INITIALISE-PICTURE-PLANE-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-INITIALISE-PICTURE-PLANE-EXIT rows=15
+BOUNDARY label=FIRST-STORE-IN-FILE-ENTER
+SNAPSHOT-BEGIN label=FIRST-STORE-IN-FILE-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-LISP::SYMBOL summary=SYMBOL:COMMON-LISP::VECTOR
+ARGUMENT index=1 type=COMMON-LISP::SYMBOL summary=SYMBOL:KEYWORD::PTA
+ARGUMENT index=2 type=COMMON-GRAPHICS-USER::VISPT summary=OBJECT:COMMON-GRAPHICS-USER::VISPT
+ARGUMENT index=3 type=COMMON-LISP::SYMBOL summary=SYMBOL:KEYWORD::PTB
+ARGUMENT index=4 type=COMMON-GRAPHICS-USER::VISPT summary=OBJECT:COMMON-GRAPHICS-USER::VISPT
+ARGUMENT index=5 type=COMMON-LISP::SYMBOL summary=SYMBOL:KEYWORD::REDRAW
+ARGUMENT index=6 type=COMMON-LISP::SYMBOL summary=SYMBOL:COMMON-LISP::T
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-STORE-IN-FILE-ENTER rows=15
+BOUNDARY label=FIRST-STORE-IN-FILE-EXIT
+SNAPSHOT-BEGIN label=FIRST-STORE-IN-FILE-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-STORE-IN-FILE-EXIT rows=15
+BOUNDARY label=AFTER-RPARSE
+SNAPSHOT-BEGIN label=AFTER-RPARSE
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=AFTER-RPARSE rows=15
+BOUNDARY label=FIRST-DISPLAY-COLOR-PATCHES-ENTER
+SNAPSHOT-BEGIN label=FIRST-DISPLAY-COLOR-PATCHES-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-DISPLAY-COLOR-PATCHES-ENTER rows=15
+BOUNDARY label=FIRST-DISPLAY-PROTOCOL-ENTER
+SNAPSHOT-BEGIN label=FIRST-DISPLAY-PROTOCOL-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-DISPLAY-PROTOCOL-ENTER rows=15
+BOUNDARY label=FIRST-DISPLAY-PROTOCOL-EXIT
+SNAPSHOT-BEGIN label=FIRST-DISPLAY-PROTOCOL-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-DISPLAY-PROTOCOL-EXIT rows=15
+BOUNDARY label=FIRST-ASSIGN-COLORS-ENTER
+SNAPSHOT-BEGIN label=FIRST-ASSIGN-COLORS-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-ASSIGN-COLORS-ENTER rows=15
+BOUNDARY label=FIRST-ASSIGN-COLORS-EXIT
+SNAPSHOT-BEGIN label=FIRST-ASSIGN-COLORS-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-ASSIGN-COLORS-EXIT rows=15
+BOUNDARY label=FIRST-SELECT-BRUSH-ENTER
+SNAPSHOT-BEGIN label=FIRST-SELECT-BRUSH-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-LISP::FIXNUM summary=INT:7131
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-SELECT-BRUSH-ENTER rows=15
+BOUNDARY label=FIRST-SELECT-BRUSH-RETURN
+SNAPSHOT-BEGIN label=FIRST-SELECT-BRUSH-RETURN
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+ARGUMENT-BRUSH-ID index=0 value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-SELECT-BRUSH-RETURN rows=15
+BOUNDARY label=FIRST-SELECT-BRUSH-EXIT
+SNAPSHOT-BEGIN label=FIRST-SELECT-BRUSH-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-SELECT-BRUSH-EXIT rows=15
+BOUNDARY label=FIRST-RECORD-BRUSH-ENTER
+SNAPSHOT-BEGIN label=FIRST-RECORD-BRUSH-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-LISP::FIXNUM summary=INT:1
+ARGUMENT index=1 type=COMMON-LISP::FIXNUM summary=INT:1
+BRUSH-ID value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-RECORD-BRUSH-ENTER rows=15
+BOUNDARY label=FIRST-PREP-LINE-ENTER
+SNAPSHOT-BEGIN label=FIRST-PREP-LINE-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-LISP::NULL summary=NIL
+ARGUMENT index=1 type=COMMON-LISP::FIXNUM summary=INT:5
+BRUSH-ID value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PREP-LINE-ENTER rows=15
+BOUNDARY label=FIRST-PREP-LINE-EXIT
+SNAPSHOT-BEGIN label=FIRST-PREP-LINE-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+BRUSH-ID value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PREP-LINE-EXIT rows=15
+BOUNDARY label=FIRST-RECORD-BRUSH-EXIT
+SNAPSHOT-BEGIN label=FIRST-RECORD-BRUSH-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+BRUSH-ID value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-RECORD-BRUSH-EXIT rows=15
+BOUNDARY label=FIRST-PAINT-FILL-ENTER
+SNAPSHOT-BEGIN label=FIRST-PAINT-FILL-ENTER
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+ARGUMENT index=0 type=COMMON-LISP::FIXNUM summary=INT:1
+ARGUMENT index=1 type=COMMON-LISP::FIXNUM summary=INT:1
+ARGUMENT index=2 type=COMMON-LISP::FIXNUM summary=INT:87
+BRUSH-ID value=INT:2
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PAINT-FILL-ENTER rows=15
+BOUNDARY label=FIRST-SCREEN-AND-STORE
+SNAPSHOT-BEGIN label=FIRST-SCREEN-AND-STORE
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+BRUSH-ID value=INT:1
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-SCREEN-AND-STORE rows=15
+BOUNDARY label=FIRST-PAINT-FILL-EXIT
+SNAPSHOT-BEGIN label=FIRST-PAINT-FILL-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:1
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-GRAPHICS-USER::PAINT-BRUSH summary=OBJECT:COMMON-GRAPHICS-USER::PAINT-BRUSH
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+BRUSH-ID value=INT:1
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-PAINT-FILL-EXIT rows=15
+BOUNDARY label=FIRST-DISPLAY-COLOR-PATCHES-EXIT
+SNAPSHOT-BEGIN label=FIRST-DISPLAY-COLOR-PATCHES-EXIT
+BINDING name=MPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=MPLAN bound=T type=COMMON-GRAPHICS-USER::PLAN summary=OBJECT:COMMON-GRAPHICS-USER::PLAN
+BINDING name=SCRIPT requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SCRIPT bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=SDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=SDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=FIGDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FIGDEX bound=T type=COMMON-LISP::FIXNUM summary=INT:2
+BINDING name=CFLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=IDLIST requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=IDLIST bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=CFRAME requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=CFRAME bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=COMPLAN requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COMPLAN bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=RPLANE requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RPLANE bound=T type=COMMON-LISP::FIXNUM summary=INT:79
+BINDING name=PLACES requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PLACES bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=BRUSH requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=BRUSH bound=T type=COMMON-LISP::NULL summary=NIL
+BINDING name=FILL-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=FILL-MAP bound=T type=TYPE-OBJECT summary=ARRAY-RANK=2-D0=320,D1=480-TOTAL=153600-ELEMENT=CONS
+BINDING name=RGB-MAP requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=RGB-MAP bound=T type=COMMON-LISP::CONS summary=CONS-STEPS=16-PROPER=NIL-DOTTED=NIL-CAPPED=T-ITEMS=OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB,OBJECT:COMMON-GRAPHICS-USER::AARGB
+BINDING name=COLORDEX requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=COLORDEX bound=NIL type=UNBOUND summary=UNBOUND
+BINDING name=PREFS requested-package=COMMON-GRAPHICS-USER package-status=FOUND symbol-status=INTERNAL actual-package=COMMON-GRAPHICS-USER actual-name=PREFS bound=NIL type=UNBOUND summary=UNBOUND
+PLAN-ACCESSORS-SKIPPED reason=NO-VERIFIED-READERS
+SNAPSHOT-END label=FIRST-DISPLAY-COLOR-PATCHES-EXIT rows=15
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-ARTWORK-ENTER reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-ARTWORK-EXIT reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-PAINTING-COLORS-ENTER reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-PAINTING-COLORS-EXIT reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-COLORSPEC-ENTER reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-MAKE-COLORSPEC-EXIT reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-COLORING-ENTER reason=MAIN-RETURNED
+BOUNDARY-NOT-OBSERVED label=FIRST-COLORING-EXIT reason=MAIN-RETURNED
+END scene-state-snapshot

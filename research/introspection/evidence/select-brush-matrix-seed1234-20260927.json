@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "runId": "select-brush-matrix-seed-1234-a",
+    "mode": "select-brush-matrix-seed-1234",
+    "matrixReport": "research/extracted/local-oracle/select-brush-matrix-seed-1234-a/capture/aaron-select-brush-matrix.txt",
+    "matrixReportSha256": "5e7d8f601fd22195bb5bcc7b7116d06bac47e51f998eb8f4140434db0519182d",
+    "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+    "sceneReportSha256": "de6101789722dedc9e7a122e1f3e742f7735daf80e4620e799de83b55e8c6476",
+    "baselineRunIds": [
+      "transition-seed-1234-v5-a",
+      "transition-seed-1234-v5-b"
+    ],
+    "baselineComparison": "AA0 and scene report hashes match retained controlled seed-1234 transition captures"
+  },
+  "trigger": {
+    "input": 7131,
+    "status": "VALUE",
+    "resultId": 2,
+    "allBrushesIndex": 2
+  },
+  "profiles": [
+    {
+      "id": 0,
+      "envir": [
+        0,
+        100
+      ]
+    },
+    {
+      "id": 1,
+      "envir": [
+        100,
+        3000
+      ]
+    },
+    {
+      "id": 2,
+      "envir": [
+        3000,
+        8000
+      ]
+    },
+    {
+      "id": 3,
+      "envir": [
+        8000,
+        16000
+      ]
+    },
+    {
+      "id": 4,
+      "envir": [
+        16000,
+        60000
+      ]
+    },
+    {
+      "id": 5,
+      "envir": [
+        60000,
+        120000
+      ]
+    },
+    {
+      "id": 6,
+      "envir": [
+        120000,
+        200000
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "input": -1,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE"
+    },
+    {
+      "input": 0,
+      "status": "NIL",
+      "valueCount": 1,
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE"
+    },
+    {
+      "input": 1,
+      "status": "NIL",
+      "valueCount": 1,
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE"
+    },
+    {
+      "input": 99,
+      "status": "NIL",
+      "valueCount": 1,
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE"
+    },
+    {
+      "input": 100,
+      "status": "NIL",
+      "valueCount": 1,
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE"
+    },
+    {
+      "input": 101,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE"
+    },
+    {
+      "input": 2999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE"
+    },
+    {
+      "input": 3000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE"
+    },
+    {
+      "input": 3001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE"
+    },
+    {
+      "input": 7999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE"
+    },
+    {
+      "input": 8000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE"
+    },
+    {
+      "input": 8001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE"
+    },
+    {
+      "input": 15999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE"
+    },
+    {
+      "input": 16000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE"
+    },
+    {
+      "input": 16001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE"
+    },
+    {
+      "input": 59999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE"
+    },
+    {
+      "input": 60000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE"
+    },
+    {
+      "input": 60001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE"
+    },
+    {
+      "input": 119999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE"
+    },
+    {
+      "input": 120000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE"
+    },
+    {
+      "input": 120001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE"
+    },
+    {
+      "input": 199999,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE"
+    },
+    {
+      "input": 200000,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE"
+    },
+    {
+      "input": 200001,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE"
+    },
+    {
+      "input": 7131,
+      "status": "VALUE",
+      "valueCount": 1,
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE"
+    }
+  ],
+  "stateChecks": {
+    "profileIdsAndEnvirPrePostEqual": true,
+    "brushUnboundBeforeAndAfterEveryCase": true,
+    "rngPreviewPerCase": "1210,62228,39458",
+    "rngUnchangedEveryCase": true,
+    "ambientRngUnchanged": true,
+    "allReturnedBrushObjectsEqualTheirAllBrushesEntry": true
+  },
+  "interpretation": {
+    "selectableBands": [
+      {
+        "id": 1,
+        "lowerBoundary": "exclusive",
+        "lower": 100,
+        "upperBoundary": "inclusive",
+        "upper": 3000
+      },
+      {
+        "id": 2,
+        "lowerBoundary": "exclusive",
+        "lower": 3000,
+        "upperBoundary": "inclusive",
+        "upper": 8000
+      },
+      {
+        "id": 3,
+        "lowerBoundary": "exclusive",
+        "lower": 8000,
+        "upperBoundary": "inclusive",
+        "upper": 16000
+      },
+      {
+        "id": 4,
+        "lowerBoundary": "exclusive",
+        "lower": 16000,
+        "upperBoundary": "inclusive",
+        "upper": 60000
+      },
+      {
+        "id": 5,
+        "lowerBoundary": "exclusive",
+        "lower": 60000,
+        "upperBoundary": "inclusive",
+        "upper": 120000
+      },
+      {
+        "id": 6,
+        "lowerBoundary": "exclusive",
+        "lower": 120000,
+        "upperBoundary": "inclusive",
+        "upper": 200000
+      }
+    ],
+    "nilSamples": [
+      0,
+      1,
+      99,
+      100
+    ],
+    "selectedTailSamples": [
+      {
+        "input": -1,
+        "id": 6
+      },
+      {
+        "input": 200001,
+        "id": 6
+      }
+    ],
+    "notes": [
+      "Bands describe observed integer neighbors; unsampled integer gaps and fractional inputs are not exhaustively measured.",
+      "Extending the two observed tail results to all negative values and all values above 200000 is an adapter inference."
+    ]
+  }
+}

@@ -108,6 +108,7 @@ function freePathEdge(from, to, random, doubleCoordinates) {
   const dy = single(to[1]) - single(from[1]);
   const heading = doubleCoordinates ? Math.atan2(dy, dx) : single(Math.atan2(dy, dx));
   let spine = doubleCoordinates ? [from[0], from[1]] : [single(from[0]), single(from[1])];
+  let progressed = 0;
   const result = [];
   for (let index = 0; index < count; index += 1) {
     const scale = random.ranFloat(0.7, 1.3, { aPrecision: 'single', bPrecision: 'single' });
@@ -121,10 +122,16 @@ function freePathEdge(from, to, random, doubleCoordinates) {
     const offset = polarVisPoint(spine, angle, single(step * wiggle), 1, {
       baseDouble: doubleCoordinates,
     });
-    // The original still computes the final offset (and consumes its random
-    // angle), but drops it before appending the endpoint.
-    if (index < count - 1) result.push(offset);
+    result.push(offset);
+    progressed = single(progressed + step);
+    // The natural seed-1234 third call stops after 12 of 13 selected steps:
+    // its first 12 scale factors advance beyond the edge distance. Keep the
+    // selected count as a ceiling and stop at that measured crossing.
+    if (distance > 0 && progressed >= distance) break;
   }
+  // The final calculated offset and its random angle are consumed, but the
+  // endpoint replaces that offset in the returned path.
+  result.pop();
   return result;
 }
 
@@ -136,9 +143,10 @@ function freePathEdge(from, to, random, doubleCoordinates) {
  * the recovered 8–14-step randomized path and preserve the duplicate vertex
  * between successive edges. `precision: 'auto'` treats non-integer coordinates
  * as double-float inputs; callers can select single/double explicitly when
- * the original Lisp numeric type is known.
+ * the original Lisp numeric type is known. `edgePrecisions` supplies the
+ * precision of each edge when its endpoints have mixed Lisp numeric types.
  */
-export function aaronFreePath(points, random, { precision = 'auto' } = {}) {
+export function aaronFreePath(points, random, { precision = 'auto', edgePrecisions } = {}) {
   if (!Array.isArray(points) || points.length < 2) {
     throw new TypeError('FREE-PATH requires at least two points');
   }
@@ -147,6 +155,11 @@ export function aaronFreePath(points, random, { precision = 'auto' } = {}) {
   }
   if (!['auto', 'single', 'double'].includes(precision)) {
     throw new RangeError('FREE-PATH precision must be auto, single, or double');
+  }
+  if (edgePrecisions !== undefined &&
+      (!Array.isArray(edgePrecisions) || edgePrecisions.length !== points.length ||
+       !edgePrecisions.every(value => value === 'single' || value === 'double'))) {
+    throw new RangeError('edgePrecisions must provide single or double for each edge');
   }
   for (const point of points) {
     if (!Array.isArray(point) || point.length !== 3 || !point.every(Number.isFinite)) {
@@ -160,8 +173,10 @@ export function aaronFreePath(points, random, { precision = 'auto' } = {}) {
     // Each segment starts with its source vertex. This intentionally retains
     // the duplicate vertices visible in the original returned list.
     if (index > 0) result.push([...from]);
-    const doubleCoordinates = precision === 'double'
-      || (precision === 'auto' && from.slice(0, 2).some(value => !Number.isInteger(value)));
+    const doubleCoordinates = edgePrecisions
+      ? edgePrecisions[index] === 'double'
+      : precision === 'double' || (precision === 'auto' &&
+          from.slice(0, 2).some(value => !Number.isInteger(value)));
     if (to[2] !== 0) result.push(...freePathEdge(from, to, random, doubleCoordinates));
     result.push([...to]);
   }
