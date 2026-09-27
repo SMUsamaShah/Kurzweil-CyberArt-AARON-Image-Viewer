@@ -291,7 +291,7 @@ the historical scene rules have been recovered.
 | Allegro random source and numeric boundaries | Strongly measured; normal startup seed remains unresolved |
 | Angles, distance, `LOCK-WIGGLE`, measured `FREE-PATH` subset | Measured fixtures and implementations |
 | Stream/writer selectors | Isolated behavior measured; 64 consecutive natural VECTOR calls now have exact VISPT points and stream slices through byte 1224 of the AA0 command suffix, all matched by JS. Remaining integrated calls and screen state remain open |
-| Brush profiles, maps, isolated `BRUSH-STROKE` subset | Early measured subset; a direct Stage 23 matrix reproduces adjacent brush-1/2/3/4 footprints, repeated-vertex idempotency, and an edge error boundary. One natural `SELECT-BRUSH(7131)` returns ID 2; thresholds, integrated clipping, fill, colour, and state remain open |
+| Brush profiles, maps, isolated `BRUSH-STROKE` subset | `SELECT-BRUSH` is now measured for every integer from 0 through 200,000 and matches in JS; 52 diagnostic integers also sample nearby out-of-range behavior. Brush-stroke footprints and an edge error boundary are measured. Integrated brush assignment, clipping, fill, and colour remain open |
 | `RAN-HAND` | Four repeated post-`INIT-RANDOM` calls measured and implemented |
 | Local composition frame integration | Accepted planner frames now control provisional figure count and geometry; 900-case sweep has zero invariant violations |
 | Local `FREE-PATH` outline integration | Opt-in clean-room mode is deterministic and fixture-tested; caller policy and clipping remain unresolved |
@@ -341,8 +341,9 @@ Use the local-first workflow:
    dossier to choose conservative read-only runtime targets, then inspect the
    existing brush-stroke, map, integrated-trace, and new clean-room integration
    fixtures locally.
-2. Extend only behavior already supported by evidence in the JS model and
-   tests; do not guess at `SELECT-BRUSH`, clipping, or scene semantics.
+2. Extend behavior already supported by evidence in the JS model and tests.
+   Use the measured `SELECT-BRUSH` rule, and continue investigating integrated
+   brush assignment, clipping, and scene semantics from original-engine traces.
 3. When a new original-engine observation is required, use the local Windows
    10 oracle with a narrowly scoped probe, preserving a baseline and restoring
    wrappers/bindings with `UNWIND-PROTECT`. Use the Windows Server 2022 GitHub

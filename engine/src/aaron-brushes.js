@@ -45,15 +45,13 @@ export function getAaronBrushProfile(id) {
 }
 
 /**
- * Return the measured SELECT-BRUSH result for an environment value.
+ * Return the original SELECT-BRUSH result for integer counts in 0..200000.
  *
- * Integer samples immediately around the ENVIR endpoints support the
- * `low < value <= high` rule for selectable profiles; the matrix did not
- * exhaust every value inside each band. None of its samples returned the
- * zero-valued sentinel profile. It also shows -1 and 200001 returning the
- * last profile. Mapping the rest of either outside tail to that profile is an
- * adapter extrapolation from those two samples. Fractional values have not
- * been probed.
+ * The local oracle exhaustively tested every integer in that range and found
+ * seven contiguous result bands. Fifty-two additional integer samples
+ * confirmed NIL for the low gap and brush 6 for nearby negative and high
+ * values. Inputs farther outside those samples, and fractional values, have
+ * not been exhaustively characterized.
  */
 export function findAaronBrushBand(value) {
   if (!Number.isFinite(value)) throw new TypeError('environment value must be finite');
@@ -67,9 +65,9 @@ export function findAaronBrushBand(value) {
 }
 
 /**
- * Select a brush profile using the measured SELECT-BRUSH boundary behavior.
+ * Select a brush profile using the exhaustively measured integer-domain rule.
  *
- * The original returns NIL for the tested values 0, 1, 99, and 100. The
+ * The original returns NIL for every integer from 0 through 100. The
  * optional `clamp` policy remains a local choice that fills this low gap with
  * the sentinel profile; it does not change the measured default behavior.
  */

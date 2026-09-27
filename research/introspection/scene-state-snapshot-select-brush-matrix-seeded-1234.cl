@@ -1,8 +1,8 @@
-;;; One-shot SELECT-BRUSH boundary matrix layered over the transition trace.
+;;; SELECT-BRUSH integer-domain probe layered over the transition trace.
 ;;;
-;;; Load the natural transition observer first, then wrap its SELECT-BRUSH
-;;; trace wrapper. Matrix calls go directly to that saved trace wrapper, so
-;;; they are traced once and cannot recursively launch another matrix.
+;;; Load the natural transition observer first, then run the isolated selector
+;;; probe after the first natural STORE-IN-FILE call. Controlled selector calls
+;;; use the saved compiled function and bypass per-call trace overhead.
 (in-package :cl-user)
 
 (unless (boundp 'aaron-scene-select-brush-matrix-seeded-1234-loaded)
@@ -78,6 +78,47 @@
                 (setf first nil))
               (when rest (write-string "+TRUNCATED" stream))))
         (if rest "NONE+TRUNCATED" "NONE"))))
+
+  (defun aaron-select-brush-matrix-result-code (results brushes)
+    (cond
+      ((null results) :zero-values)
+      ((cdr results) :multiple-values)
+      ((null (car results)) :nil)
+      (t
+       (let ((rest brushes) (index 0) (found nil))
+         (do ()
+             ((or found (not (consp rest)) (>= index 16)))
+           (when (eq (car results) (car rest))
+             (setf found index))
+           (setf rest (cdr rest))
+           (incf index))
+         (if found found :unknown)))))
+
+  (defun aaron-select-brush-matrix-result-code-token (code)
+    (cond
+      ((eq code :nil) "NIL")
+      ((integerp code) (format nil "ID:~D" code))
+      ((eq code :unknown) "UNKNOWN")
+      ((eq code :zero-values) "ZERO-VALUES")
+      ((eq code :multiple-values) "MULTIPLE-VALUES")
+      (t "INVALID")))
+
+  (defun aaron-select-brush-matrix-profile-signature
+      (brushes id-symbol envir-symbol)
+    (with-output-to-string (stream)
+      (aaron-select-brush-matrix-profile-rows
+       stream "STATE" brushes id-symbol envir-symbol)))
+
+  (defun aaron-select-brush-matrix-current-profile-signature
+      (all-symbol id-symbol envir-symbol)
+    (let ((current
+            (and all-symbol (boundp all-symbol)
+                 (handler-case (copy-list (symbol-value all-symbol))
+                   (error () :unreadable)))))
+      (if (eq current :unreadable)
+          "UNREADABLE"
+        (aaron-select-brush-matrix-profile-signature
+         current id-symbol envir-symbol))))
 
   (defun aaron-select-brush-matrix-binding-fields (symbol id-symbol brushes)
     (handler-case
@@ -157,7 +198,7 @@
                     (t "DOTTED")))))
 
   (defun aaron-select-brush-matrix-case
-      (stream saved-trace-wrapper input index brush-symbol brushes
+      (stream target-function input index brush-symbol brushes
        id-symbol random-state)
     (let* ((was-bound (and brush-symbol (boundp brush-symbol)))
            (old-value (and was-bound (symbol-value brush-symbol)))
@@ -178,7 +219,7 @@
                 random-before (aaron-select-brush-matrix-random-preview))
           (handler-case
               (setf results
-                    (multiple-value-list (funcall saved-trace-wrapper input)))
+                    (multiple-value-list (funcall target-function input)))
             (error (caught)
               (setf problem caught)))
           (setf brush-after
@@ -198,48 +239,145 @@
               index random-before random-after
               (if (equal random-before random-after) "T" "NIL"))))
 
-  (defun aaron-select-brush-matrix-run
-      (saved-trace-wrapper natural-args natural-results)
+  (defun aaron-select-brush-matrix-exhaustive-sweep
+      (stream target-function all-symbol brushes brush-symbol
+       id-symbol envir-symbol random-state)
+    (let* ((was-bound (and brush-symbol (boundp brush-symbol)))
+           (old-value (and was-bound (symbol-value brush-symbol)))
+           (binding-symbols (if brush-symbol (list brush-symbol) nil))
+           (binding-values (if was-bound (list old-value) nil))
+           (counts (make-array 10 :initial-element 0))
+           (input-count 0)
+           (range-start 0)
+           (previous-code :not-started)
+           (problem nil)
+           (random-before nil)
+           (random-after nil)
+           (brush-before nil)
+           (brush-after nil)
+           (profiles-before
+             (aaron-select-brush-matrix-profile-signature
+              brushes id-symbol envir-symbol))
+           (profiles-after nil))
+      (let ((*random-state* (make-random-state random-state)))
+        (progv binding-symbols binding-values
+          (setf brush-before
+                (aaron-select-brush-matrix-binding-fields
+                 brush-symbol id-symbol brushes)
+                random-before (aaron-select-brush-matrix-random-preview))
+          (let ((input 0))
+            (do ()
+                ((or (> input 200000) problem))
+              (let ((results nil))
+                (handler-case
+                    (setf results
+                          (multiple-value-list (funcall target-function input)))
+                  (error (caught)
+                    (setf problem caught)))
+                (unless problem
+                  (let* ((code
+                           (aaron-select-brush-matrix-result-code
+                            results brushes))
+                         (count-index
+                           (cond ((eq code :nil) 0)
+                                 ((integerp code) (1+ code))
+                                 ((eq code :unknown) 8)
+                                 (t 9))))
+                    (when (and (not (eq previous-code :not-started))
+                               (not (equal code previous-code)))
+                      (format stream
+                              "SWEEP-RANGE from=~D through=~D result=~A~%"
+                              range-start (1- input)
+                              (aaron-select-brush-matrix-result-code-token
+                               previous-code))
+                      (setf range-start input))
+                    (when (eq previous-code :not-started)
+                      (setf range-start input))
+                    (setf previous-code code)
+                    (incf (aref counts count-index))
+                    (incf input-count)
+                    (incf input)))))
+            (when (and (not problem)
+                       (not (eq previous-code :not-started)))
+              (format stream
+                      "SWEEP-RANGE from=~D through=200000 result=~A~%"
+                      range-start
+                      (aaron-select-brush-matrix-result-code-token
+                       previous-code))))
+          (setf brush-after
+                (aaron-select-brush-matrix-binding-fields
+                 brush-symbol id-symbol brushes)
+                random-after (aaron-select-brush-matrix-random-preview)))
+        (setf profiles-after
+              (aaron-select-brush-matrix-current-profile-signature
+               all-symbol id-symbol envir-symbol)))
+      (when problem
+        (format stream "SWEEP-ERROR input=~D condition=~A~%"
+                input-count (aaron-select-brush-matrix-reader-error problem)))
+      (format stream
+              "SWEEP-STATE inputs=~D nil=~D id0=~D id1=~D id2=~D id3=~D id4=~D id5=~D id6=~D unknown=~D other=~D rng-unchanged=~A brush-unchanged=~A profiles-unchanged=~A~%"
+              input-count
+              (aref counts 0) (aref counts 1) (aref counts 2)
+              (aref counts 3) (aref counts 4) (aref counts 5)
+              (aref counts 6) (aref counts 7)
+              (aref counts 8) (aref counts 9)
+              (if (equal random-before random-after) "T" "NIL")
+              (if (equal brush-before brush-after) "T" "NIL")
+              (if (equal profiles-before profiles-after) "T" "NIL"))
+      (format stream "SWEEP-STATUS status=~A inputs=~D lower=0 upper-inclusive=200000~%"
+              (if (and (null problem)
+                       (= input-count 200001)
+                       (= (aref counts 8) 0)
+                       (= (aref counts 9) 0)
+                       (equal random-before random-after)
+                       (equal brush-before brush-after)
+                       (equal profiles-before profiles-after))
+                  "COMPLETE"
+                "FAILED")
+              input-count)))
+
+  (defun aaron-select-brush-matrix-run (natural-args natural-results)
     (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
            (brush-symbol (and owner (find-symbol "BRUSH" owner)))
            (all-symbol (and owner (find-symbol "ALL-BRUSHES" owner)))
+           (target-function
+             (and (boundp 'aaron-original-select-brush-function)
+                  (symbol-value 'aaron-original-select-brush-function)))
            (graphics-package (find-package "COMMON-GRAPHICS"))
            (id-symbol (and graphics-package
                            (find-symbol "ID" graphics-package)))
            (envir-symbol (and owner (find-symbol "ENVIR" owner)))
-           (natural-count (car natural-args))
-           (natural-value (car natural-results))
            (ambient-state (make-random-state *random-state*))
            (ambient-preview-before (aaron-select-brush-matrix-random-preview))
            (brushes
              (and all-symbol (boundp all-symbol)
                   (handler-case (copy-list (symbol-value all-symbol))
                     (error () nil))))
-           (inputs '(-1 0 1 99 100 101
-                     2999 3000 3001 7999 8000 8001
-                     15999 16000 16001 59999 60000 60001
-                     119999 120000 120001 199999 200000 200001
-                     7131))
+           (inputs '(-200001 -200000 -120001
+                     -120000 -60001 -60000 -16001 -16000 -8001 -8000
+                     -3001 -3000 -101 -100 -99 -2 -1
+                     0 1 50 99 100 101 150 1000 1500 2999 3000 3001
+                     5000 7131 7999 8000 8001 12000 15999 16000 16001
+                     35000 59999 60000 60001 90000 119999 120000 120001
+                     160000 199999 200000 200001 200002 201000))
            (completed 0)
            (contents nil))
+      ;; Leave a durable marker in the capture if the runtime exits while the
+      ;; controlled calls are running, so startup failures are distinguishable
+      ;; from a selector-sweep failure.
+      (with-open-file (report "C:\\temp\\aaron-select-brush-matrix.txt"
+                              :direction :output
+                              :if-exists :append
+                              :if-does-not-exist :create)
+        (write-line "STATUS TRIGGERED" report)
+        (finish-output report))
       (setf contents
             (with-output-to-string (buffer)
               (write-line "BEGIN select-brush-boundary-matrix" buffer)
-              (format buffer "TRIGGER natural-count=~A natural-type=~A natural-id=~A natural-eq-indices=~A~%"
-                      (if (integerp natural-count)
-                          (format nil "~D" natural-count)
-                        "NON-INTEGER")
-                      (if natural-results
-                          (aaron-select-brush-matrix-type-token natural-value)
-                        "NO-VALUES")
-                      (if natural-results
-                          (aaron-select-brush-matrix-id-token
-                           natural-value id-symbol)
-                        "NA")
-                      (if natural-results
-                          (aaron-select-brush-matrix-eq-indices
-                           natural-value brushes)
-                        "NA"))
+              (format buffer "TRIGGER source=FIRST-STORE-IN-FILE arg-count=~D result-count=~D~%"
+                      (length natural-args) (length natural-results))
+              (unless (functionp target-function)
+                (error "The original SELECT-BRUSH function was not saved"))
               (format buffer "EXPECTED-CASES ~D~%" (length inputs))
               (aaron-select-brush-matrix-profile-rows
                buffer "PRE" brushes id-symbol envir-symbol)
@@ -247,11 +385,14 @@
                 (do ()
                     ((not (consp rest)))
                   (aaron-select-brush-matrix-case
-                   buffer saved-trace-wrapper (car rest) index brush-symbol
+                   buffer target-function (car rest) index brush-symbol
                    brushes id-symbol ambient-state)
                   (incf completed)
                   (incf index)
                   (setf rest (cdr rest))))
+              (aaron-select-brush-matrix-exhaustive-sweep
+               buffer target-function all-symbol brushes brush-symbol
+               id-symbol envir-symbol ambient-state)
               (aaron-select-brush-matrix-profile-rows
                buffer "POST" brushes id-symbol envir-symbol)
               (let ((ambient-preview-after
@@ -271,12 +412,12 @@
 
   (defun aaron-select-brush-matrix-install ()
     (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
-           (target (and owner (find-symbol "SELECT-BRUSH" owner)))
+           (target (and owner (find-symbol "STORE-IN-FILE" owner)))
            (saved-trace-wrapper (and target (fboundp target)
                                      (symbol-function target)))
            (done nil))
       (unless saved-trace-wrapper
-        (error "SELECT-BRUSH trace wrapper is not installed"))
+        (error "STORE-IN-FILE trace wrapper is not installed"))
       (unless (boundp 'aaron-trace-current-stack)
         (error "Planning trace did not complete before matrix installation"))
       (setf (symbol-function target)
@@ -290,7 +431,7 @@
                       (setf done t)
                       (handler-case
                           (aaron-select-brush-matrix-run
-                           saved-trace-wrapper args results)
+                           args results)
                         (error (problem)
                           (let ((failure
                                   (with-output-to-string (buffer)
@@ -313,7 +454,7 @@
         (finish-output report))))
 
   ;; This transition source installs the trace via its writer/seeded wrappers.
-  ;; Installation below therefore captures the completed trace wrapper.
+  ;; Run the one-shot selector probe after the first natural writer call.
   (load "C:\\temp\\scene-state-snapshot-transition-seeded-1234.cl")
   (aaron-select-brush-matrix-install)
   (set 'aaron-scene-select-brush-matrix-seeded-1234-loaded t))

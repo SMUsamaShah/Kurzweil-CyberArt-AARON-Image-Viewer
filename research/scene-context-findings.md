@@ -134,8 +134,10 @@ report is
 The first `SELECT-BRUSH` receives integer 7131 and naturally returns a
 `PAINT-BRUSH` with verified `COMMON-GRAPHICS:ID` value 2. At the later
 `RECORD-BRUSH` entry, the bound `BRUSH` also has ID 2. This is one interior
-selection sample, consistent with the provisional JS selector; it does not
-prove its thresholds or endpoint policy. The snapshots bracket when `RPLANE`,
+selection sample in this scene trace. A later direct sweep of the saved
+original `SELECT-BRUSH` function established its result for every integer
+from 0 through 200,000; see the complete-domain fixture described in
+`stroke-findings.md`. These snapshots still only bracket when `RPLANE`,
 `RGB-MAP`, and `BRUSH` change. They do not identify which function assigns
 each value. `MAKE-ARTWORK`, `MAKE-PAINTING-COLORS`, `MAKE-COLORSPEC`, and
 `COLORING` had no observed first call in this run's selected scope.

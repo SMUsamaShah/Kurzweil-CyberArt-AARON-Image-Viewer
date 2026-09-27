@@ -357,9 +357,10 @@ if ($Mode -eq 'screen-unit-seed-1234') {
 if ($Mode -eq 'select-brush-matrix-seed-1234') {
     $brushMatrix = Join-Path $capture 'aaron-select-brush-matrix.txt'
     if (-not (Test-Path -LiteralPath $brushMatrix -PathType Leaf) -or
-        -not (Select-String -LiteralPath $brushMatrix -Pattern '^SWEEP-STATUS status=COMPLETE cases=25$' -Quiet) -or
+        -not (Select-String -LiteralPath $brushMatrix -Pattern '^SWEEP-STATUS status=COMPLETE cases=[0-9]+$' -Quiet) -or
+        -not (Select-String -LiteralPath $brushMatrix -Pattern '^SWEEP-STATUS status=COMPLETE inputs=200001 lower=0 upper-inclusive=200000$' -Quiet) -or
         -not (Select-String -LiteralPath $brushMatrix -Pattern '^END select-brush-boundary-matrix$' -Quiet)) {
-        throw "The SELECT-BRUSH matrix did not finish; inspect $output"
+        throw "The SELECT-BRUSH matrix or exhaustive integer sweep did not finish; inspect $output"
     }
 }
 if ($Mode -in @('natural-free-path-seed-1234', 'natural-free-path-seed-5678',

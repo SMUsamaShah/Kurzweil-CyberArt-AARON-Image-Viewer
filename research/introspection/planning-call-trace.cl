@@ -275,6 +275,11 @@
                                    (member name
                                            (symbol-value 'aaron-planning-return-targets)
                                            :test #'string=))))
+                        ;; Keep the unwrapped selector for isolated domain
+                        ;; sweeps.  Those sweeps must avoid this diagnostic
+                        ;; wrapper's per-call tracing overhead.
+                        (when (string= name "SELECT-BRUSH")
+                          (set 'aaron-original-select-brush-function original))
                         ;; Capture the function object lexically.  The wrapper
                         ;; never re-reads its own function cell, so nested
                         ;; calls go to the original exactly once per edge.

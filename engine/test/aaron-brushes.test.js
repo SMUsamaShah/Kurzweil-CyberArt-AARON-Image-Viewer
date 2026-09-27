@@ -16,6 +16,10 @@ const selectMatrixEvidencePath = new URL(
   '../../research/introspection/evidence/select-brush-matrix-seed1234-20260927.json',
   import.meta.url,
 );
+const selectDomainEvidencePath = new URL(
+  '../../research/introspection/evidence/select-brush-domain-seed1234-20260927.json',
+  import.meta.url,
+);
 
 function points(text) {
   return [...text.matchAll(/\((-?\d+) (-?\d+)\)/g)].map((match) => [
@@ -170,4 +174,74 @@ test('SELECT-BRUSH adapter reproduces the archived integer boundary matrix', () 
     () => selectAaronBrushProfile(1, {outOfRange: 'error'}),
     /outOfRange/,
   );
+});
+
+test('SELECT-BRUSH matches the original across its exhaustive integer domain', () => {
+  const evidence = JSON.parse(fs.readFileSync(selectDomainEvidencePath, 'utf8'));
+  assert.equal(evidence.schemaVersion, 1);
+  assert.equal(evidence.source.runId, 'select-brush-domain-seed1234-d');
+  assert.equal(evidence.source.mode, 'select-brush-matrix-seed-1234');
+  assert.equal(evidence.source.smallImage, false);
+  assert.match(evidence.source.matrixReportSha256, /^[a-f0-9]{64}$/);
+  assert.equal(
+    evidence.source.aa0Sha256,
+    '0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1',
+  );
+  assert.equal(
+    evidence.source.sceneReportSha256,
+    'de6101789722dedc9e7a122e1f3e742f7735daf80e4620e799de83b55e8c6476',
+  );
+
+  const { sweep } = evidence;
+  assert.deepEqual(sweep.domain, { type: 'integer', lower: 0, upperInclusive: 200000 });
+  assert.equal(sweep.inputs, 200001);
+  assert.deepEqual(
+    sweep.ranges.map(({from, through, resultId}) => [from, through, resultId]),
+    [
+      [0, 100, null],
+      [101, 3000, 1],
+      [3001, 8000, 2],
+      [8001, 16000, 3],
+      [16001, 60000, 4],
+      [60001, 120000, 5],
+      [120001, 200000, 6],
+    ],
+  );
+  assert.deepEqual(sweep.counts, {
+    nil: 101,
+    id0: 0,
+    id1: 2900,
+    id2: 5000,
+    id3: 8000,
+    id4: 44000,
+    id5: 60000,
+    id6: 80000,
+    unknown: 0,
+    other: 0,
+  });
+  assert.deepEqual(sweep.stateChecks, {
+    randomStateUnchanged: true,
+    brushBindingUnchanged: true,
+    brushProfilesUnchanged: true,
+    ambientRandomStateUnchanged: true,
+  });
+
+  let rangeIndex = 0;
+  for (let input = sweep.domain.lower; input <= sweep.domain.upperInclusive; input += 1) {
+    while (input > sweep.ranges[rangeIndex].through) rangeIndex += 1;
+    const actual = selectAaronBrushProfile(input);
+    const expectedId = sweep.ranges[rangeIndex].resultId;
+    assert.equal(actual?.id ?? null, expectedId);
+  }
+
+  assert.equal(evidence.edgeCases.length, 52);
+  for (const sample of evidence.edgeCases) {
+    const actual = selectAaronBrushProfile(sample.input);
+    assert.equal(actual?.id ?? null, sample.resultId);
+    assert.equal(sample.allBrushesIndex, sample.resultId);
+    assert.equal(sample.condition, 'NONE');
+    assert.equal(sample.randomStateUnchanged, true);
+  }
+  assert.equal(evidence.interpretation.integerDomainComplete, true);
+  assert.equal(evidence.interpretation.edgeSamplesAreNotAnExhaustiveSpecificationOutsideDomain, true);
 });

@@ -533,21 +533,26 @@ not use this adapter yet.
 
 ## Measured SELECT-BRUSH boundary
 
-A controlled, pass-through 25-input matrix now resolves every integer neighbor
-of the six selectable ENVIR boundaries. The original returns brush 1 for
-`101..3000`, 2 for `3001..8000`, 3 for `8001..16000`, 4 for
-`16001..60000`, 5 for `60001..120000`, and 6 for `120001..200000`.
-The tested values `0`, `1`, `99`, and `100` return NIL, while `-1` and
-`200001` return brush 6. Each non-NIL object is EQ to the corresponding
-`ALL-BRUSHES` entry. All seven startup profiles, `BRUSH` binding, and cloned
-random previews stayed unchanged. The natural `7131` call returns brush 2.
+A direct call through the saved original compiled function now covers every
+integer input from `0` through `200000` inclusive (200,001 calls). It returns
+NIL for `0..100`, then brush IDs 1 through 6 for `101..3000`, `3001..8000`,
+`8001..16000`, `16001..60000`, `60001..120000`, and `120001..200000`.
+Every non-NIL result is the matching object in `ALL-BRUSHES`. The sweep reports
+one return value for every input and unchanged random state, `BRUSH` binding,
+and startup profiles. The 52 diagnostic calls also report one value each and
+unchanged random state and `BRUSH`; the full profile list is unchanged across
+the probe. The natural `7131` call also returns brush 2.
 
-`engine/src/aaron-brushes.js` now matches this matrix, and the test compares
-every case with [the compact evidence](introspection/evidence/select-brush-matrix-seed1234-20260927.json).
-Extending the two observed tails to other out-of-range values and selecting
-for fractional inputs remain adapter inferences. The matrix establishes
-selection behavior at these inputs; integrated brush assignment, clipping,
-and output drawing are separate downstream work.
+The original-function sweep is archived in
+[the complete-domain evidence](introspection/evidence/select-brush-domain-seed1234-20260927.json);
+the earlier 25-case boundary matrix remains available as
+[the compact boundary evidence](introspection/evidence/select-brush-matrix-seed1234-20260927.json).
+JavaScript now matches all 200,001 recorded results. The 52 additional inputs
+include nearby negative and above-range integers, but do not establish the
+entire out-of-range tails. Fractional and non-number inputs remain untested.
+Integrated brush assignment, clipping, and output drawing are separate
+downstream work. See the [focused `SELECT-BRUSH` record](introspection/select-brush.md)
+for the probe method, side-effect checks, and limits of the current call trace.
 
 ## Natural SCREEN-AND-STORE point emission
 

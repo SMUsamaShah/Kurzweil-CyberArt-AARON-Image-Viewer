@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "runId": "select-brush-domain-seed1234-d",
+    "mode": "select-brush-matrix-seed-1234",
+    "smallImage": false,
+    "matrixReportSha256": "fff0e467f66e7707020035e6a93963f4fea5795369bdce24b179c3a30f06bed9",
+    "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+    "sceneReportSha256": "de6101789722dedc9e7a122e1f3e742f7735daf80e4620e799de83b55e8c6476"
+  },
+  "trigger": {
+    "source": "FIRST-STORE-IN-FILE",
+    "argumentCount": 7,
+    "resultCount": 1
+  },
+  "profiles": [
+    {
+      "index": 0,
+      "id": 0,
+      "envir": [
+        0,
+        100
+      ]
+    },
+    {
+      "index": 1,
+      "id": 1,
+      "envir": [
+        100,
+        3000
+      ]
+    },
+    {
+      "index": 2,
+      "id": 2,
+      "envir": [
+        3000,
+        8000
+      ]
+    },
+    {
+      "index": 3,
+      "id": 3,
+      "envir": [
+        8000,
+        16000
+      ]
+    },
+    {
+      "index": 4,
+      "id": 4,
+      "envir": [
+        16000,
+        60000
+      ]
+    },
+    {
+      "index": 5,
+      "id": 5,
+      "envir": [
+        60000,
+        120000
+      ]
+    },
+    {
+      "index": 6,
+      "id": 6,
+      "envir": [
+        120000,
+        200000
+      ]
+    }
+  ],
+  "edgeCases": [
+    {
+      "index": 0,
+      "input": -200001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 1,
+      "input": -200000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 2,
+      "input": -120001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 3,
+      "input": -120000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 4,
+      "input": -60001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 5,
+      "input": -60000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 6,
+      "input": -16001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 7,
+      "input": -16000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 8,
+      "input": -8001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 9,
+      "input": -8000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 10,
+      "input": -3001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 11,
+      "input": -3000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 12,
+      "input": -101,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 13,
+      "input": -100,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 14,
+      "input": -99,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 15,
+      "input": -2,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 16,
+      "input": -1,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 17,
+      "input": 0,
+      "status": "NIL",
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 18,
+      "input": 1,
+      "status": "NIL",
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 19,
+      "input": 50,
+      "status": "NIL",
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 20,
+      "input": 99,
+      "status": "NIL",
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 21,
+      "input": 100,
+      "status": "NIL",
+      "resultId": null,
+      "allBrushesIndex": null,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 22,
+      "input": 101,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 23,
+      "input": 150,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 24,
+      "input": 1000,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 25,
+      "input": 1500,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 26,
+      "input": 2999,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 27,
+      "input": 3000,
+      "status": "VALUE",
+      "resultId": 1,
+      "allBrushesIndex": 1,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 28,
+      "input": 3001,
+      "status": "VALUE",
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 29,
+      "input": 5000,
+      "status": "VALUE",
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 30,
+      "input": 7131,
+      "status": "VALUE",
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 31,
+      "input": 7999,
+      "status": "VALUE",
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 32,
+      "input": 8000,
+      "status": "VALUE",
+      "resultId": 2,
+      "allBrushesIndex": 2,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 33,
+      "input": 8001,
+      "status": "VALUE",
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 34,
+      "input": 12000,
+      "status": "VALUE",
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 35,
+      "input": 15999,
+      "status": "VALUE",
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 36,
+      "input": 16000,
+      "status": "VALUE",
+      "resultId": 3,
+      "allBrushesIndex": 3,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 37,
+      "input": 16001,
+      "status": "VALUE",
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 38,
+      "input": 35000,
+      "status": "VALUE",
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 39,
+      "input": 59999,
+      "status": "VALUE",
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 40,
+      "input": 60000,
+      "status": "VALUE",
+      "resultId": 4,
+      "allBrushesIndex": 4,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 41,
+      "input": 60001,
+      "status": "VALUE",
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 42,
+      "input": 90000,
+      "status": "VALUE",
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 43,
+      "input": 119999,
+      "status": "VALUE",
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 44,
+      "input": 120000,
+      "status": "VALUE",
+      "resultId": 5,
+      "allBrushesIndex": 5,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 45,
+      "input": 120001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 46,
+      "input": 160000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 47,
+      "input": 199999,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 48,
+      "input": 200000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 49,
+      "input": 200001,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 50,
+      "input": 200002,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    },
+    {
+      "index": 51,
+      "input": 201000,
+      "status": "VALUE",
+      "resultId": 6,
+      "allBrushesIndex": 6,
+      "condition": "NONE",
+      "randomStateUnchanged": true
+    }
+  ],
+  "sweep": {
+    "domain": {
+      "type": "integer",
+      "lower": 0,
+      "upperInclusive": 200000
+    },
+    "inputs": 200001,
+    "ranges": [
+      {
+        "from": 0,
+        "through": 100,
+        "resultId": null
+      },
+      {
+        "from": 101,
+        "through": 3000,
+        "resultId": 1
+      },
+      {
+        "from": 3001,
+        "through": 8000,
+        "resultId": 2
+      },
+      {
+        "from": 8001,
+        "through": 16000,
+        "resultId": 3
+      },
+      {
+        "from": 16001,
+        "through": 60000,
+        "resultId": 4
+      },
+      {
+        "from": 60001,
+        "through": 120000,
+        "resultId": 5
+      },
+      {
+        "from": 120001,
+        "through": 200000,
+        "resultId": 6
+      }
+    ],
+    "counts": {
+      "nil": 101,
+      "id0": 0,
+      "id1": 2900,
+      "id2": 5000,
+      "id3": 8000,
+      "id4": 44000,
+      "id5": 60000,
+      "id6": 80000,
+      "unknown": 0,
+      "other": 0
+    },
+    "stateChecks": {
+      "randomStateUnchanged": true,
+      "brushBindingUnchanged": true,
+      "brushProfilesUnchanged": true,
+      "ambientRandomStateUnchanged": true
+    }
+  },
+  "interpretation": {
+    "integerDomainComplete": true,
+    "edgeSamplesAreNotAnExhaustiveSpecificationOutsideDomain": true,
+    "unprobedInputKinds": [
+      "fractional numbers",
+      "non-numbers"
+    ]
+  }
+}

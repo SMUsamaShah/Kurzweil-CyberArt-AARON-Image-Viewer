@@ -1030,8 +1030,14 @@ call selects 13 steps but stops after 12 randomized iterations. The strict
 parser rejects Lisp reader evaluation syntax and incomplete captures.
 
 The [SELECT-BRUSH matrix](select-brush-matrix-seed1234-20260927.json) holds
-25 original input/result pairs and unchanged brush/RNG state. Its measured
-band boundaries are implemented in JavaScript.
+25 original input/result pairs from the initial boundary probe. The later
+[complete-domain fixture](select-brush-domain-seed1234-20260927.json) records
+all 200,001 original integer results from 0 through 200,000, seven contiguous
+result bands, 52 additional integer samples, and unchanged random and brush
+state. The JavaScript test compares every input in the complete domain with
+the original results. The
+[focused function record](../select-brush.md) documents its argument, probe
+method, side-effect checks, and known call-path limits.
 
 The [seed-1234 screen-unit fixture](screen-units-seed-1234-b.json) and
 [seed-5678 holdout](screen-units-seed-5678-a.json) cover the first eight natural
