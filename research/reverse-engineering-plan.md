@@ -67,7 +67,9 @@ historical checkpoint that newer local observations have already advanced.
    `PAINT-BRUSH`, and `MPLAN`; do not infer their values, package ownership,
    or code boundaries from names alone. The first table now also has a
    measured 7,723-object `0x6c` span tiling that ends exactly at the string
-   table, but no named function has been assigned to one of those objects.
+   table. The 2026-10-04 [native caller investigation](introspection/select-brush-caller.md)
+   now assigns five named compiled functions to unique complete objects by
+   exact live-byte matches; other functions remain unassigned.
    The cross-image payload pass finds three exact anonymous 66-byte matches in
    the DXL, each with a matching `0x216c` header and aligned start; all padded
    spans differ. Keep this as a structural anchor report, not a function or

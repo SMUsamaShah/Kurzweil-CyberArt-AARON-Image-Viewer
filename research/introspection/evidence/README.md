@@ -1,5 +1,19 @@
 # Original-engine report excerpts
 
+## Local native caller evidence, 2026-10-04
+
+[`select-brush-native-caller-seed1234-20261004.json`](select-brush-native-caller-seed1234-20261004.json)
+retains five exact named PLL object mappings, bounded instruction anchors and
+two runtime breakpoint observations of
+`DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH`. Both runs matched a fresh
+control's AA0 and scene-state report byte for byte. REA 3.2.1 imported and
+exported a canonical external Ghidra record; that is recorded as an external
+analysis, with no REA native provider session claimed.
+See [the caller findings](../select-brush-caller.md) for the method, hashes and
+scope. Full images, memory windows, payloads and decompiler output stay ignored.
+
+## Earlier GitHub excerpts
+
 These reports are extracted from GitHub job logs for run
 [33986804721](https://github.com/SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer/actions/runs/33986804721),
 commit `4046acfe27080d30b4a2d1caa7c2374151bfc508`.

@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "status": "measured",
+  "observedApplicationCallPath": [
+    "DISPLAY-COLOR-PATCHES",
+    "BRUSH-FILL",
+    "SELECT-BRUSH"
+  ],
+  "scope": "First SELECT-BRUSH entry in each fresh seed-1234 writer-stream scene, using exact PLL byte matches and an execute hardware breakpoint",
+  "nativeMapSha256": "61d3e4cc0feb4c4b363efc77590bf9345a46f8edad0d37e49bcd3105d44c6cee",
+  "pll": {
+    "bytes": 4573464,
+    "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+    "indexedObjects": 7723
+  },
+  "namedFunctions": [
+    {
+      "name": "SELECT-BRUSH",
+      "runtime": {
+        "entry": "0x1fe2491c",
+        "objectBase": "0x1fe24918",
+        "headerOffsetInWindow": 60
+      },
+      "pll": {
+        "recordOffset": 44376,
+        "objectOffset": 2640152,
+        "payloadOffset": 2640156,
+        "rawEnd": 2640484,
+        "nextBoundary": 2640488,
+        "tableSecondWord": 160
+      },
+      "header": "0xa46c",
+      "encodedWords": 164,
+      "objectBytes": 332,
+      "objectSha256": "26441b5c14990a1d24b31539d0dcb7d38b9f5ecfacb63c80b64553866c233d1b",
+      "payloadBytes": 328,
+      "payloadSha256": "c74414ed02ffba13595863693bfa516007f6570410484edd3e8203d39e8b90b4",
+      "uniqueCompleteObjectByteMatch": true
+    },
+    {
+      "name": "BRUSH-FILL",
+      "runtime": {
+        "entry": "0x1fe1924c",
+        "objectBase": "0x1fe19248",
+        "headerOffsetInWindow": 60
+      },
+      "pll": {
+        "recordOffset": 60616,
+        "objectOffset": 2593352,
+        "payloadOffset": 2593356,
+        "rawEnd": 2595342,
+        "nextBoundary": 2595344,
+        "tableSecondWord": 989
+      },
+      "header": "0x3e16c",
+      "encodedWords": 993,
+      "objectBytes": 1990,
+      "objectSha256": "596c8900f4d53f747f0d170deee0a740060ad959fa85f9f4439ebd55bc037909",
+      "payloadBytes": 1986,
+      "payloadSha256": "016b613a592e6f5cc18a7b6fc0d04264a9038c485fdb05b91c458464a59f0957",
+      "uniqueCompleteObjectByteMatch": true
+    },
+    {
+      "name": "DISPLAY-COLOR-PATCHES",
+      "runtime": {
+        "entry": "0x1fe0103c",
+        "objectBase": "0x1fe01038",
+        "headerOffsetInWindow": 56
+      },
+      "pll": {
+        "recordOffset": 58312,
+        "objectOffset": 2494520,
+        "payloadOffset": 2494524,
+        "rawEnd": 2495572,
+        "nextBoundary": 2495576,
+        "tableSecondWord": 520
+      },
+      "header": "0x20c6c",
+      "encodedWords": 524,
+      "objectBytes": 1052,
+      "objectSha256": "99cc53070ceb6f58986d01faa37f0a697fb542fc24c01afdc0bcd530faa663d4",
+      "payloadBytes": 1048,
+      "payloadSha256": "cf8618856b7d70ced1723ccf35d39bf7e4f43f76e5d4fe449d7077dd01a73efa",
+      "uniqueCompleteObjectByteMatch": true
+    },
+    {
+      "name": "PAINT-FILL",
+      "runtime": {
+        "entry": "0x1fe181d4",
+        "objectBase": "0x1fe181d0",
+        "headerOffsetInWindow": 60
+      },
+      "pll": {
+        "recordOffset": 55960,
+        "objectOffset": 2589136,
+        "payloadOffset": 2589140,
+        "rawEnd": 2589922,
+        "nextBoundary": 2589928,
+        "tableSecondWord": 387
+      },
+      "header": "0x1876c",
+      "encodedWords": 391,
+      "objectBytes": 786,
+      "objectSha256": "c41c951400ad8f0df9da465ea66ebdb2d70d816dfd71ea44ea5661827951434b",
+      "payloadBytes": 782,
+      "payloadSha256": "c8af1b1e68435f1f18748c812341e136ceded0c86cad44b5d2dd38d374445978",
+      "uniqueCompleteObjectByteMatch": true
+    },
+    {
+      "name": "RECORD-BRUSH",
+      "runtime": {
+        "entry": "0x1fe018d4",
+        "objectBase": "0x1fe018d0",
+        "headerOffsetInWindow": 60
+      },
+      "pll": {
+        "recordOffset": 42424,
+        "objectOffset": 2496720,
+        "payloadOffset": 2496724,
+        "rawEnd": 2497022,
+        "nextBoundary": 2497024,
+        "tableSecondWord": 145
+      },
+      "header": "0x956c",
+      "encodedWords": 149,
+      "objectBytes": 302,
+      "objectSha256": "f1e2927ec4bfa8d7082be73e099488c598fec1e03608a02ccf7e1247d3d4b6fe",
+      "payloadBytes": 298,
+      "payloadSha256": "ed4126ec3cd14bfa3212ddef7f25796fcfe19a920b8e1c741af528fcb3c307c0",
+      "uniqueCompleteObjectByteMatch": true
+    }
+  ],
+  "constantReferences": [
+    {
+      "function": "BRUSH-FILL",
+      "index": 25,
+      "symbol": "COMMON-GRAPHICS-USER:SUBP-COUNT"
+    },
+    {
+      "function": "BRUSH-FILL",
+      "index": 26,
+      "symbol": "COMMON-GRAPHICS-USER:SELECT-BRUSH"
+    },
+    {
+      "function": "BRUSH-FILL",
+      "index": 27,
+      "symbol": "COMMON-GRAPHICS-USER:BRUSH"
+    },
+    {
+      "function": "DISPLAY-COLOR-PATCHES",
+      "index": 21,
+      "symbol": "COMMON-GRAPHICS-USER:BRUSH-FILL"
+    }
+  ],
+  "constantScan": {
+    "ownApplicationBindings": 1347,
+    "compiledObjectsScanned": 1380,
+    "selectorReferences": 1,
+    "referenceFunction": "BRUSH-FILL",
+    "referenceIndex": 26,
+    "errors": 0,
+    "truncated": 0,
+    "scope": "Own CGU bindings and nested compiled constants; generic method bodies are not comprehensively scanned"
+  },
+  "callSites": [
+    {
+      "name": "BRUSH-FILL",
+      "start": 1649,
+      "end": 1685,
+      "callee": "SELECT-BRUSH",
+      "constantIndex": 26,
+      "loadOffset": 1666,
+      "callOffset": 1674,
+      "returnOffset": 1676,
+      "ghidraReportSha256": "e8297cb2d72cb540771ec50ad82e63e7d804d79210d6ceb71615085b3839c40f",
+      "instructions": [
+        {
+          "address": "0x1fe198bd",
+          "offset": 1649,
+          "bytes": "8b8e96000000",
+          "text": "MOV ECX,dword ptr [ESI + 0x96]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198c3"
+        },
+        {
+          "address": "0x1fe198c3",
+          "offset": 1655,
+          "bytes": "8b410d",
+          "text": "MOV EAX,dword ptr [ECX + 0xd]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198c6"
+        },
+        {
+          "address": "0x1fe198c6",
+          "offset": 1658,
+          "bytes": "3b47bf",
+          "text": "CMP EAX,dword ptr [EDI + -0x41]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198c9"
+        },
+        {
+          "address": "0x1fe198c9",
+          "offset": 1661,
+          "bytes": "7503",
+          "text": "JNZ 0x1fe198ce",
+          "flowType": "CONDITIONAL_JUMP",
+          "flows": [
+            "0x1fe198ce"
+          ],
+          "fallThrough": "0x1fe198cb"
+        },
+        {
+          "address": "0x1fe198cb",
+          "offset": 1663,
+          "bytes": "ff578f",
+          "text": "CALL dword ptr [EDI + -0x71]",
+          "flowType": "COMPUTED_CALL",
+          "flows": [],
+          "fallThrough": "0x1fe198ce"
+        },
+        {
+          "address": "0x1fe198ce",
+          "offset": 1666,
+          "bytes": "8b9e9a000000",
+          "text": "MOV EBX,dword ptr [ESI + 0x9a]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198d4"
+        },
+        {
+          "address": "0x1fe198d4",
+          "offset": 1672,
+          "bytes": "b101",
+          "text": "MOV CL,0x1",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198d6"
+        },
+        {
+          "address": "0x1fe198d6",
+          "offset": 1674,
+          "bytes": "ffd7",
+          "text": "CALL EDI",
+          "flowType": "COMPUTED_CALL",
+          "flows": [],
+          "fallThrough": "0x1fe198d8"
+        },
+        {
+          "address": "0x1fe198d8",
+          "offset": 1676,
+          "bytes": "8b969e000000",
+          "text": "MOV EDX,dword ptr [ESI + 0x9e]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198de"
+        },
+        {
+          "address": "0x1fe198de",
+          "offset": 1682,
+          "bytes": "ff577b",
+          "text": "CALL dword ptr [EDI + 0x7b]",
+          "flowType": "COMPUTED_CALL",
+          "flows": [],
+          "fallThrough": "0x1fe198e1"
+        },
+        {
+          "address": "0x1fe198e1",
+          "offset": 1685,
+          "bytes": "8b8e9e000000",
+          "text": "MOV ECX,dword ptr [ESI + 0x9e]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe198e7"
+        }
+      ]
+    },
+    {
+      "name": "DISPLAY-COLOR-PATCHES",
+      "start": 846,
+      "end": 858,
+      "callee": "BRUSH-FILL",
+      "constantIndex": 21,
+      "loadOffset": 849,
+      "callOffset": 855,
+      "returnOffset": 858,
+      "ghidraReportSha256": "e050564fbf3874792c3ce20644d04d8aaef1711c6d23ba3a13fc7bf846354fef",
+      "instructions": [
+        {
+          "address": "0x1fe0138a",
+          "offset": 846,
+          "bytes": "8b45e4",
+          "text": "MOV EAX,dword ptr [EBP + -0x1c]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe0138d"
+        },
+        {
+          "address": "0x1fe0138d",
+          "offset": 849,
+          "bytes": "8b9e86000000",
+          "text": "MOV EBX,dword ptr [ESI + 0x86]",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe01393"
+        },
+        {
+          "address": "0x1fe01393",
+          "offset": 855,
+          "bytes": "ff5727",
+          "text": "CALL dword ptr [EDI + 0x27]",
+          "flowType": "COMPUTED_CALL",
+          "flows": [],
+          "fallThrough": "0x1fe01396"
+        },
+        {
+          "address": "0x1fe01396",
+          "offset": 858,
+          "bytes": "33d2",
+          "text": "XOR EDX,EDX",
+          "flowType": "FALL_THROUGH",
+          "flows": [],
+          "fallThrough": "0x1fe01398"
+        }
+      ]
+    }
+  ],
+  "callerRuns": [
+    {
+      "runId": "select-brush-native-caller-20261004-j",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "86e1191c15e5f8fece34b858deae74500f7319efc87874a7c96b31689014613a",
+      "probeOutputNames": [
+        "aaron-select-brush-native-links.txt"
+      ],
+      "preSceneProbePauseSeconds": 90,
+      "complete": true,
+      "startedAt": "2026-10-04T18:18:40.9414996+00:00",
+      "finishedAt": "2026-10-04T18:19:15.5775042+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "d73f3cc46039b4750ca249350ec33082cff2fb88c3419fdee26b69d3b39eef63",
+      "breakpoint": {
+        "reportSha256": "39b038a832778e21cd49668fa18543e61824306e67a8edfb85056061fe1ba43d",
+        "metadataSha256": "834b189aa7dc05e16885a892b2c05285beabfce6c5b3650b015d97ab317c30ad",
+        "capturedAt": "2026-10-04T18:19:07.4782867Z",
+        "processId": 10084,
+        "threadId": 7288,
+        "firstChance": 1,
+        "exceptionCode": "0x4000001e",
+        "eip": "0x1fe2491c",
+        "eax": "0x00006f6c",
+        "ecx": "0x00000001",
+        "esp": "0x06b19934",
+        "ebp": "0x06b199f8",
+        "immediateReturn": {
+          "address": "0x1fe198d8",
+          "function": "BRUSH-FILL",
+          "offset": 1676
+        },
+        "firstCallerFrameReturn": {
+          "address": "0x1fe01396",
+          "function": "DISPLAY-COLOR-PATCHES",
+          "offset": 858
+        },
+        "armedThreads": 4,
+        "debugRegistersRestored": true,
+        "detached": true
+      }
+    },
+    {
+      "runId": "select-brush-native-caller-20261004-h",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "86e1191c15e5f8fece34b858deae74500f7319efc87874a7c96b31689014613a",
+      "probeOutputNames": [
+        "aaron-select-brush-native-links.txt"
+      ],
+      "preSceneProbePauseSeconds": 90,
+      "complete": true,
+      "startedAt": "2026-10-04T18:04:24.0218700+00:00",
+      "finishedAt": "2026-10-04T18:05:14.7969087+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "7d6f4259a3a0c4f6840d0a232911d3198236c8a99fc89ef3056763f3bfe0f98b",
+      "breakpoint": {
+        "reportSha256": "f8dd367eeff194e437adcc65e93b646ad68492750fd7e4229ade34ee43d9d04d",
+        "metadataSha256": "834b189aa7dc05e16885a892b2c05285beabfce6c5b3650b015d97ab317c30ad",
+        "capturedAt": "2026-10-04T18:05:07.5070513Z",
+        "processId": 20320,
+        "threadId": 15548,
+        "firstChance": 1,
+        "exceptionCode": "0x4000001e",
+        "eip": "0x1fe2491c",
+        "eax": "0x00006f6c",
+        "ecx": "0x00000001",
+        "esp": "0x07989934",
+        "ebp": "0x079899f8",
+        "immediateReturn": {
+          "address": "0x1fe198d8",
+          "function": "BRUSH-FILL",
+          "offset": 1676
+        },
+        "firstCallerFrameReturn": {
+          "address": "0x1fe01396",
+          "function": "DISPLAY-COLOR-PATCHES",
+          "offset": 858
+        },
+        "armedThreads": 5,
+        "debugRegistersRestored": true,
+        "detached": true
+      }
+    }
+  ],
+  "controlRun": {
+    "runId": "select-brush-caller-control-20261004-f",
+    "mode": "writer-stream-seed-1234",
+    "smallImage": false,
+    "preSceneProbeSha256": null,
+    "probeOutputNames": [],
+    "preSceneProbePauseSeconds": 0,
+    "complete": true,
+    "startedAt": "2026-10-04T17:40:00.0823840+00:00",
+    "finishedAt": "2026-10-04T17:40:16.8781634+00:00",
+    "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+    "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+    "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+    "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+    "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+    "summarySha256": "67f30948410c706ce1c86364fa52e0629b6e1e5ef8c6e7f7d6d8b2f3ef71f7fa"
+  },
+  "comparisons": [
+    {
+      "callerRun": "select-brush-native-caller-20261004-j",
+      "controlRun": "select-brush-caller-control-20261004-f",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true
+    },
+    {
+      "callerRun": "select-brush-native-caller-20261004-h",
+      "controlRun": "select-brush-caller-control-20261004-f",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true
+    }
+  ],
+  "rea": {
+    "version": "3.2.1",
+    "ghidraVersion": "12.1.4",
+    "nativeProviderSession": false,
+    "provider": {
+      "id": "ghidra-standalone",
+      "name": "Ghidra standalone JSON report",
+      "version": "12.1.4"
+    },
+    "evidenceId": "ev_1c4c28f334f754db3e68eb13066d052e0746a537e13b8e46f4f2d5ee05a00b1d",
+    "bundleSha256": "1f34ef6282475f2a54f784c4fbadf08d16f62f945f17b85e1dfa5559e6b36552",
+    "canonicalExportSha256": "1f34ef6282475f2a54f784c4fbadf08d16f62f945f17b85e1dfa5559e6b36552",
+    "importResult": {
+      "imported": 1,
+      "unknowns_added": 0,
+      "total": 1
+    },
+    "exportedRecords": 1,
+    "interpretation": "Canonical record validation and offline import/export of an external Ghidra report; not authentication of native analysis"
+  },
+  "limitations": [
+    "Addresses belong to these runs; rediscover and validate entries before every new debugger attachment.",
+    "Only one entry hit per captured run is measured. Other branches, scenes and dynamic rebinding are not established.",
+    "The Ghidra Windows x86 compiler specification does not model Allegro Lisp types, tagged values or register calling conventions.",
+    "The entry EAX word 0x6f6c agrees with the prior 7131 observation under a two-bit fixnum shift; this report does not establish a general numeric ABI.",
+    "The complete BRUSH-FILL algorithm, upstream SUBP-COUNT generation, and integrated JavaScript brush assignment remain to be characterized.",
+    "Complete binary windows, payloads, decompiler output and REA bundles remain local and ignored."
+  ]
+}

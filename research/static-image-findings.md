@@ -5,6 +5,11 @@ Status: **Measured locally from the preserved binary images.** The parser in
 two-word index records, and tagged string objects only. It never loads or
 evaluates a DXL/PLL image.
 
+The separate 2026-10-04 [native caller investigation](introspection/select-brush-caller.md)
+now links five named compiled functions to unique complete PLL objects using
+exact runtime byte matches. The historical static-only limitations below
+still apply to functions without that runtime correlation.
+
 ## Artifact integrity
 
 The complete extracted library is required for static indexing. The copy in

@@ -6,6 +6,36 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
+## Latest checkpoint: 2026-10-04
+
+The first seed-1234 selector call now has a measured native caller path:
+`DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH`. Five named compiled
+functions were linked to unique complete PLL objects by exact live-byte
+matches. Standalone Ghidra decoded their payloads; two separate WOW64
+hardware-breakpoint runs confirmed the return PCs. Both AA0 and scene reports
+matched a fresh control byte for byte. The selector's existing exhaustive
+integer behavior and JS implementation are unchanged.
+
+Read [the caller evidence](introspection/select-brush-caller.md) and
+[the native workflow](native-analysis-workflow.md) before another attempt at
+Lisp disassembly or a provider setup. REA 3.2.1 was installed and used for
+diagnostics and canonical external evidence import/export; its stock Windows
+native provider rejected this host. Standalone Ghidra and the targeted WOW64
+helper supplied the native evidence.
+
+`C:\temp` still resolves to `research/artifacts/temp` on D:. Its documented
+preflight, collisions, registry permissions and fresh-output rules are in
+[oracle.md](oracle.md#ctemp-staging-and-permissions). The new optional pre-scene
+probe/pause workflow records the staged probe hash and an owned pause request;
+capture helpers release that pause on completion or setup failure. Run only
+one oracle at a time and do not change the system clock.
+
+The next caller boundary is `BRUSH-FILL`'s count input and brush assignment:
+measure `SUBP-COUNT` creation, `SCAN-ROW` and the `BRUSH-FILL-SUBPART` branch
+before adding a JS caller policy. The notes below retain older checkpoints;
+their earlier unresolved name-to-code and selector-caller limits are superseded
+only for the five matched functions and two measured scenes above.
+
 ## Project identity
 
 - Repository: `SMUsamaShah/Kurzweil-CyberArt-AARON-Image-Viewer`

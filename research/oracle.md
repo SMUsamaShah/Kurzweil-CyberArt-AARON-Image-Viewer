@@ -192,6 +192,10 @@ Get-Item -LiteralPath C:\temp -Force |
   Format-List FullName,LinkType,Target,Attributes
 ```
 
+On 2026-10-04, the same link target and a default-sandbox write/read/delete
+probe were revalidated. After the final native caller run, `C:\temp` was empty
+and no AARON process remained. Recheck the link and write preflight each session.
+
 The `C:\temp` preflight is separate from the registry access the oracle needs.
 The runner creates or updates
 `HKCU:\Software\Kurzweil CyberArt Technologies\AARON`, saves its previous
@@ -208,6 +212,16 @@ not delete an unknown `C:\temp` file just to start a run. A failure after
 `research/extracted/local-oracle/`; use a fresh unused output path for the next
 attempt. The runner stages its own named files and normally copies them into
 the capture folder, then removes those staged copies in `finally`.
+
+Optional native probes use `-PreSceneProbePath`, declared
+`-ProbeOutputNames`, and a bounded `-PreSceneProbePauseSeconds` shorter than
+`RunSeconds`. The runner hashes the staged probe before launch and writes an
+owned `pre-scene-probe-request.json`. The release marker
+`aaron-native-code-release.txt` is reserved; capture helpers require a positive
+pause request for the selected runtime and release it after capture or setup
+failure. The marker and declared outputs are archived and cleaned alongside
+the runner's other files. The complete native workflow is in
+[native-analysis-workflow.md](native-analysis-workflow.md).
 
 One Allegro-specific path detail was also found while loading the call-trace
 probe through this symlink. The probe creates its checkpoint file and then

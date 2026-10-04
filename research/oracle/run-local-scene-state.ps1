@@ -26,7 +26,15 @@ param(
     [ValidateRange(10, 600)]
     [int]$RunSeconds = 120,
 
-    [switch]$SmallImage
+    [switch]$SmallImage,
+
+    [string]$PreSceneProbePath,
+
+    [ValidateRange(0, 300)]
+    [int]$PreSceneProbePauseSeconds = 0,
+
+    [ValidatePattern('^[a-z][a-z0-9-]*\.(txt|bin|json)$')]
+    [string[]]$ProbeOutputNames = @()
 )
 
 Set-StrictMode -Version Latest
@@ -36,6 +44,21 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $extracted = (Resolve-Path -LiteralPath $ExtractedRoot).Path
 $output = [IO.Path]::GetFullPath($OutputRoot)
 $application = Join-Path $extracted 'application'
+$preSceneProbeSource = $null
+$stagedPreSceneProbeSha256 = $null
+if ($PreSceneProbePath) {
+    $preSceneProbeSource = (Resolve-Path -LiteralPath $PreSceneProbePath).Path
+    if (-not (Test-Path -LiteralPath $preSceneProbeSource -PathType Leaf) -or
+        [IO.Path]::GetExtension($preSceneProbeSource) -ne '.cl') {
+        throw 'PreSceneProbePath must identify a saved .cl file'
+    }
+}
+if ($PreSceneProbePauseSeconds -gt 0 -and -not $preSceneProbeSource) {
+    throw 'A pre-scene pause requires PreSceneProbePath'
+}
+if ($PreSceneProbePauseSeconds -ge $RunSeconds) {
+    throw 'The pre-scene pause must be shorter than RunSeconds'
+}
 $manifest = Get-Content -LiteralPath (Join-Path $extracted 'manifest.json') -Raw |
     ConvertFrom-Json
 $sourceName = switch ($Mode) {
@@ -86,6 +109,18 @@ $temporaryNames = @(
     'scene-state-snapshot-transition-seeded-1234.cl',
     'scene-state-snapshot-plan-seeded-1234.cl'
 ) + @(0..15 | ForEach-Object { "aa$_" })
+foreach ($name in $ProbeOutputNames) {
+    if ($name -in $temporaryNames -or $name -eq 'aaron-native-code-release.txt') {
+        throw "Probe output name is reserved by the scene runner: $name"
+    }
+}
+$temporaryNames += @($ProbeOutputNames | Select-Object -Unique)
+if ($preSceneProbeSource) {
+    $temporaryNames += @('aaron-pre-scene-probe.cl', 'aaron-probe-loader.cl')
+}
+if ($PreSceneProbePauseSeconds -gt 0) {
+    $temporaryNames += 'aaron-native-code-release.txt'
+}
 
 if (-not (Test-Path -LiteralPath 'C:\temp' -PathType Container)) {
     throw 'AARON requires an existing C:\temp directory'
@@ -170,6 +205,18 @@ $sources = @{
 }
 $stagedNames = @('planning-call-trace.cl', 'planning-random-seed-common.cl',
                  'scene-state-snapshot.cl')
+$launchSourceName = $sourceName
+if ($preSceneProbeSource) {
+    $sources['aaron-pre-scene-probe.cl'] = $preSceneProbeSource
+    $launchSourceName = 'aaron-probe-loader.cl'
+    $loaderPath = Join-Path $runtime $launchSourceName
+    $loaderSource = "(set 'aaron-pre-scene-probe-pause-seconds $PreSceneProbePauseSeconds)" + "`r`n" +
+        '(load "C:\\temp\\aaron-pre-scene-probe.cl")' + "`r`n" +
+        '(load "C:\\temp\\' + $sourceName + '")' + "`r`n"
+    [IO.File]::WriteAllText($loaderPath, $loaderSource, [Text.UTF8Encoding]::new($false))
+    $sources[$launchSourceName] = $loaderPath
+    $stagedNames += @('aaron-pre-scene-probe.cl', $launchSourceName)
+}
 if ($Mode -ne 'baseline') { $stagedNames += 'scene-state-snapshot-seeded-1234.cl' }
 if ($Mode -in @('writer-seed-1234', 'writer-stream-seed-1234',
                'writer-sequence-seed-1234', 'writer-windows-seed-1234',
@@ -248,8 +295,23 @@ try {
     foreach ($name in $stagedNames) {
         Copy-Item -LiteralPath $sources[$name] -Destination (Join-Path 'C:\temp' $name)
     }
+    if ($preSceneProbeSource) {
+        $stagedPreSceneProbeSha256 = (Get-FileHash -LiteralPath 'C:\temp\aaron-pre-scene-probe.cl' `
+            -Algorithm SHA256).Hash.ToLowerInvariant()
+        $probeRequest = [ordered]@{
+            schemaVersion = 1
+            runId = $RunId
+            runtimeExecutable = (Join-Path $runtime 'AARON.exe')
+            probeSha256 = $stagedPreSceneProbeSha256
+            pauseSeconds = $PreSceneProbePauseSeconds
+            releaseFile = 'C:\temp\aaron-native-code-release.txt'
+            probeOutputNames = @($ProbeOutputNames)
+        }
+        [IO.File]::WriteAllText((Join-Path $output 'pre-scene-probe-request.json'),
+            ($probeRequest | ConvertTo-Json -Depth 5), [Text.UTF8Encoding]::new($false))
+    }
     foreach ($initName in @('.clinit.cl', 'clinit.cl')) {
-        Copy-Item -LiteralPath $sources[$sourceName] `
+        Copy-Item -LiteralPath $sources[$launchSourceName] `
             -Destination (Join-Path $runtime $initName)
     }
 
@@ -277,7 +339,7 @@ try {
     if ($SmallImage) { $env:KCAT_AARON_SMALL_IMAGE = '1' }
 
     $process = Start-Process -FilePath (Join-Path $runtime 'AARON.exe') `
-        -ArgumentList @('-L', (Join-Path 'C:\temp' $sourceName), '--', 'screen-saver') `
+        -ArgumentList @('-L', (Join-Path 'C:\temp' $launchSourceName), '--', 'screen-saver') `
         -WorkingDirectory $runtime -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput (Join-Path $output 'stdout.txt') `
         -RedirectStandardError (Join-Path $output 'stderr.txt')
@@ -406,6 +468,9 @@ $summary = [ordered]@{
     runId = $RunId
     mode = $Mode
     smallImage = [bool]$SmallImage
+    preSceneProbeSha256 = $stagedPreSceneProbeSha256
+    probeOutputNames = @($ProbeOutputNames)
+    preSceneProbePauseSeconds = $PreSceneProbePauseSeconds
     complete = $complete
     startedAt = $started.ToString('o')
     finishedAt = $finished.ToString('o')

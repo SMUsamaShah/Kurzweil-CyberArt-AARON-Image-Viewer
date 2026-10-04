@@ -1,6 +1,6 @@
 # Next AARON execution plan
 
-Prepared and updated 2026-09-27. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-04. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for
@@ -8,7 +8,10 @@ controlled seeds 1234 and 5678. JavaScript carries writer state through 28,075
 and 33,198 original calls, respectively, and reproduces every command byte.
 Given the original files' parsed palette values, it also serializes the AA0
 prelude and composes both complete byte-identical paintings. The 25-case
-original SELECT-BRUSH matrix now has a matching JavaScript selector. The next
+original SELECT-BRUSH matrix and its exhaustive 0–200,000 integer sweep now
+have a matching JavaScript selector. Its first natural direct caller is also
+confirmed as `BRUSH-FILL`, beneath `DISPLAY-COLOR-PATCHES`, by exact PLL matches
+and native runtime breakpoints. The next
 priority is to replace original writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
@@ -100,23 +103,29 @@ and enough bounded original cases for portable regression tests.
 
 ## 2. Recover two useful upstream rules in parallel
 
-### Brush selection — measured matrix implemented
+### Brush selection — integer domain and first caller measured
 
-SELECT-BRUSH was the smallest promising decision function. Its 25-case matrix
-now includes all selectable band boundaries, low-gap values, two out-of-range
-samples, and the natural `7131 -> brush ID 2` call. JavaScript matches every
-observed case. The 0–100 samples return NIL, bands are low-exclusive and
+SELECT-BRUSH was the smallest promising decision function. Its integer sweep
+now covers all 200,001 inputs from 0 through 200,000; JavaScript matches every
+result. Additional diagnostic integers sample the nearby tails. The natural
+`7131 -> brush ID 2` call remains the first observed selector input.
+The 0–100 inputs return NIL, bands are low-exclusive and
 high-inclusive, and the two tested tails return brush 6. The original painting
 and scene-report hashes remained identical to the controlled baseline.
 
-The matrix used real startup brush objects and recorded result identity,
+The probes used real startup brush objects and recorded result identity,
 binding changes, and copied-state random previews. Tail extrapolations and
 fractional inputs remain unmeasured. The implementation does not claim
 integrated brush assignment.
 
-If the painter needs the BRUSH assignment next, bracket BRUSH-FILL and
-BRUSH-FILL-SUBPART around SELECT-BRUSH/RECORD-BRUSH, comparing object identity
-as well as ID. Only pursue this mutation detail when it enables integration.
+The first native caller path is now measured as
+`DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH`; two breakpoint runs matched
+a fresh control's AA0 and scene report. See
+[the caller report](introspection/select-brush-caller.md) and
+[the native tool workflow](native-analysis-workflow.md).
+Next, characterize BRUSH-FILL's SUBP-COUNT input and the BRUSH assignment,
+including SCAN-ROW and BRUSH-FILL-SUBPART. Compare object identity as well as
+ID before using the caller policy in the JS painter.
 
 ### Natural FREE-PATH calls — first controlled corpus matched
 

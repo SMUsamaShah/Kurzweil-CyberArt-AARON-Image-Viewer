@@ -5,6 +5,13 @@ with the documented compatibility probes, read its AA output, and inspect
 retained Lisp metadata. The JavaScript scene rules are provisional, and no
 controlled whole-painting equivalence test has passed yet.
 
+The 2026-10-04 [native caller capture](introspection/select-brush-caller.md)
+correlates five named compiled functions with exact PLL objects and confirms
+`DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH` in two seed-1234 runs.
+Both AA0 and scene-state reports matched a fresh control byte for byte.
+This is bounded caller evidence; the full brush filler and integrated JS
+assignment policy remain unmeasured.
+
 ## Verified evidence
 
 | Report | Original-engine run | Result |

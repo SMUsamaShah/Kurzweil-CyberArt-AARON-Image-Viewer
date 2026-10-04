@@ -8,6 +8,10 @@ policy are in [reverse-engineering-plan.md](reverse-engineering-plan.md).
 The short cross-conversation resumption record is
 [aaron-continuity.md](aaron-continuity.md).
 
+The current [native analysis workflow](native-analysis-workflow.md) combines
+exact PLL byte matching, standalone Ghidra and runtime caller capture. Its first
+result is the [measured SELECT-BRUSH caller](introspection/select-brush-caller.md).
+
 ## Principles
 
 - Preserve the original viewer and its history.

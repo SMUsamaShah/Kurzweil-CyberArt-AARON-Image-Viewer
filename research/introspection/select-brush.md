@@ -47,8 +47,8 @@ The JavaScript test checks all 200,001 captured inputs against the result bands.
 
 ## Scope and next link in the call path
 
-This is an observed input/output specification, not recovered source code or
-assembly. Fractional and non-number inputs were not tested. The nearby negative
+The integer-domain result is an observed input/output specification.
+Fractional and non-number inputs were not tested. The nearby negative
 and above-range samples returned brush 6, but the JavaScript tail behavior
 outside those samples remains an inference.
 
@@ -68,14 +68,29 @@ the `:autozoom` module was also unavailable. The remaining wrapper trace shows
 Allegro documents the stack-printing option in its
 [debugging reference](https://franz.com/support/documentation/debugging.html),
 but the archived runtime lacks the module needed to use it here. The direct
-caller and any unobserved helper calls remain unknown.
+caller remained unknown at that checkpoint.
 
 The caller-instrumented run produced AA0 hash
 `042d0d37489a6d14434c788ff482c3230da3b728887a102ca1747f2d521a50e3`, which
 differs from the controlled seed-1234 hash. A fresh transition control using
 the same `C:\temp` symlink produced the established hash
 `0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`. Treat
-the caller-probe output as diagnostic only, not parity evidence.
+that earlier caller-probe output as diagnostic only, not parity evidence.
+
+### Native caller confirmation, 2026-10-04
+
+Two fresh runtime hardware-breakpoint captures now establish
+`DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH` for the first selector
+entry in the seed-1234 scene. All five selected named native objects matched
+the complete PLL byte for byte. The selector's immediate return address was
+`BRUSH-FILL +0x68c`, after the decoded indirect call at `+0x68a`; the caller's
+frame returned to `DISPLAY-COLOR-PATCHES +0x35a`.
+
+Both new caller runs matched a fresh control's AA0 and scene-state report
+byte for byte. This resolves the measured direct caller while leaving other
+branches and the full brush-filling policy open. The detailed evidence and
+limits are in [select-brush-caller.md](select-brush-caller.md), with reproducible
+commands in [native-analysis-workflow.md](../native-analysis-workflow.md).
 
 See [`scene-context-findings.md`](../scene-context-findings.md) for the natural
 scene observations and [`stroke-findings.md`](../stroke-findings.md) for the
