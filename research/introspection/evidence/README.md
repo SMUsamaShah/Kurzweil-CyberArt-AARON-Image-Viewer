@@ -1,5 +1,26 @@
 # Original-engine report excerpts
 
+## Brush count and assignment, 2026-10-04
+
+[`brush-fill-count-and-assignment-20261004.json`](brush-fill-count-and-assignment-20261004.json)
+retains two complete observer/control comparisons, all 274 selector counts,
+their completed subform producers and the next assignment observations.
+All results match the existing JS selector; all 70 subpart/record entries use
+the selected object. Ten subparts change the brush binding by exit. The count
+changes occur inside MY-FILL(SUBFORM); 5,805 SCAN-ROW entry/exit counts agree.
+
+Six ordinary functions and the two actual MY-FILL methods have exact complete
+PLL matches and Ghidra reports. The generated generic dispatcher is retained
+as a zero-match observation. Four bounded method call sites are explicitly
+static candidates for FILL-STRATEGY/POST-FILL. The full count algorithm is
+unrecovered. Geometry is summarized and partial, even though paired event,
+count and brush observations are complete within the wrapped boundaries.
+
+Natural-report hashes are computed during offline derivation; optional report
+bytes were not independently hashed by their original run summary. Full raw
+reports, native windows, payloads and decompiler output remain ignored.
+See [the function findings](../brush-fill-count.md) for scope and commands.
+
 ## Local native caller evidence, 2026-10-04
 
 [`select-brush-native-caller-seed1234-20261004.json`](select-brush-native-caller-seed1234-20261004.json)

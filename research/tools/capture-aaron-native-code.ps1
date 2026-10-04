@@ -1,16 +1,21 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [string]$OracleOutputRoot,
-    [string]$MetadataPath = 'C:\temp\aaron-select-brush-native-links.txt'
+    [string]$MetadataPath = 'C:\temp\aaron-select-brush-native-links.txt',
+    [string]$MetadataEndMarker = 'END select-brush-native-links',
+    [ValidateRange(1, 64)] [int]$ExpectedFunctionCount = 5
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $output = (Resolve-Path -LiteralPath $OracleOutputRoot).Path
 $expectedRuntime = Join-Path $output 'runtime\AARON.exe'
+$metadataFullPath = [IO.Path]::GetFullPath($MetadataPath)
+$metadataName = [IO.Path]::GetFileName($metadataFullPath)
 $request = Get-Content -LiteralPath (Join-Path $output 'pre-scene-probe-request.json') -Raw | ConvertFrom-Json
 if ($request.schemaVersion -ne 1 -or $request.runtimeExecutable -ne $expectedRuntime -or
     $request.pauseSeconds -le 0 -or $request.releaseFile -ne 'C:\temp\aaron-native-code-release.txt' -or
-    'aaron-select-brush-native-links.txt' -notin $request.probeOutputNames) {
+    [IO.Path]::GetDirectoryName($metadataFullPath) -ne 'C:\temp' -or
+    $metadataName -notin $request.probeOutputNames -or [string]::IsNullOrWhiteSpace($MetadataEndMarker)) {
     throw 'Capture requires this runner-owned paused native metadata probe'
 }
 $processes = @(Get-Process AARON -ErrorAction SilentlyContinue | Where-Object {
@@ -22,11 +27,11 @@ try {
     $deadline = [DateTime]::UtcNow.AddSeconds(20)
     while ([DateTime]::UtcNow -lt $deadline) {
         if ((Test-Path -LiteralPath $MetadataPath) -and
-            (Select-String -LiteralPath $MetadataPath -SimpleMatch 'END select-brush-native-links' -Quiet)) { break }
+            (Select-String -LiteralPath $MetadataPath -SimpleMatch $MetadataEndMarker -Quiet)) { break }
         Start-Sleep -Milliseconds 100
     }
     $metadata = [IO.File]::ReadAllText($MetadataPath)
-    if ($metadata -notmatch 'END select-brush-native-links') { throw 'Native metadata capture is incomplete' }
+    if (-not $metadata.Contains($MetadataEndMarker)) { throw 'Native metadata capture is incomplete' }
 
     Add-Type -TypeDefinition @'
 using System;
@@ -78,7 +83,7 @@ public static class AaronNativeCodeReader {
     [IO.Directory]::CreateDirectory($captureRoot) | Out-Null
     [IO.File]::WriteAllText((Join-Path $captureRoot 'function-object-metadata.txt'), $metadata, [Text.UTF8Encoding]::new($false))
     $records = @()
-    foreach ($match in [regex]::Matches($metadata, '(?m)^HEADER name="([A-Z-]+)" bytes=([0-9a-fA-F]{128})\r?$')) {
+    foreach ($match in [regex]::Matches($metadata, '(?m)^HEADER name="([A-Z][A-Z0-9-]*)" bytes=([0-9a-fA-F]{128})\r?$')) {
         $name = $match.Groups[1].Value
         $hex = $match.Groups[2].Value
         $header = [byte[]]@(0..63 | ForEach-Object { [Convert]::ToByte($hex.Substring($_ * 2, 2), 16) })
@@ -115,7 +120,7 @@ public static class AaronNativeCodeReader {
             sha256 = (Get-FileHash -LiteralPath $filePath -Algorithm SHA256).Hash.ToLowerInvariant()
         }
     }
-    if ($records.Count -ne 5) { throw 'Expected all five selected compiled-function candidates' }
+    if ($records.Count -ne $ExpectedFunctionCount) { throw "Expected all $ExpectedFunctionCount selected compiled-function candidates" }
     $manifest = [ordered]@{
         schemaVersion = 1
         method = 'Bounded ReadProcessMemory windows around pointer candidates from function-object metadata; no process memory writes'

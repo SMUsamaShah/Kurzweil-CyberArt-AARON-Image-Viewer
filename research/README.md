@@ -11,6 +11,9 @@ The short cross-conversation resumption record is
 The current [native analysis workflow](native-analysis-workflow.md) combines
 exact PLL byte matching, standalone Ghidra and runtime caller capture. Its first
 result is the [measured SELECT-BRUSH caller](introspection/select-brush-caller.md).
+The follow-up [count and assignment capture](introspection/brush-fill-count.md)
+tracks all 274 selectors across two controlled paintings and maps the actual
+MY-FILL generic methods. Count-generation internals remain the next boundary.
 
 ## Principles
 

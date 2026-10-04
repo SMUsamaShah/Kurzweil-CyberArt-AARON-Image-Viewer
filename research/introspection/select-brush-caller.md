@@ -120,11 +120,13 @@ remain under ignored `research/extracted/`.
 
 ## Next function boundary
 
-Characterize how `BRUSH-FILL` obtains and updates `SUBP-COUNT`, including the
-`SCAN-ROW` boundary and the `BRUSH-FILL-SUBPART` branch. Record natural caller
-arguments, count values, selected brush identity and assignment outcomes
-across complete scenes before integrating this policy into JavaScript.
-The full filler, palette rules and whole generator are still unrecovered.
+The follow-up [count and assignment investigation](brush-fill-count.md) now
+measures these boundaries across two complete scenes: 274 selector counts and
+70 subpart entries agree, with matching controls. Changes are located inside
+MY-FILL(SUBFORM); its actual methods now have exact PLL matches. The next
+candidate writer lies among FILL-STRATEGY, POST-FILL and the other
+method callees. Full relevant map/geometry inputs, the filler, palette rules
+and whole generator remain unrecovered.
 
 See [native-analysis-workflow.md](../native-analysis-workflow.md) for the
 reproducible tool and oracle commands.

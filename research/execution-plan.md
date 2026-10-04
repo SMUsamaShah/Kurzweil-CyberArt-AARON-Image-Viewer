@@ -11,8 +11,12 @@ prelude and composes both complete byte-identical paintings. The 25-case
 original SELECT-BRUSH matrix and its exhaustive 0–200,000 integer sweep now
 have a matching JavaScript selector. Its first natural direct caller is also
 confirmed as `BRUSH-FILL`, beneath `DISPLAY-COLOR-PATCHES`, by exact PLL matches
-and native runtime breakpoints. The next
-priority is to replace original writer decisions and palette values with
+and native runtime breakpoints. The count boundary is now measured across two
+complete scenes: all 274 selectors consume MY-FILL(SUBFORM)'s count, and the
+following BRUSH binding equals the returned object or NIL.
+The actual generic methods also have exact PLL matches. The next priority is
+to locate the count writer inside those methods' callees and replace original
+writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
 following RNG states. A first path-to-writer drawing unit is measured; palette
@@ -103,7 +107,7 @@ and enough bounded original cases for portable regression tests.
 
 ## 2. Recover two useful upstream rules in parallel
 
-### Brush selection — integer domain and first caller measured
+### Brush selection — integer domain, caller and assignment boundary measured
 
 SELECT-BRUSH was the smallest promising decision function. Its integer sweep
 now covers all 200,001 inputs from 0 through 200,000; JavaScript matches every
@@ -123,9 +127,19 @@ The first native caller path is now measured as
 a fresh control's AA0 and scene report. See
 [the caller report](introspection/select-brush-caller.md) and
 [the native tool workflow](native-analysis-workflow.md).
-Next, characterize BRUSH-FILL's SUBP-COUNT input and the BRUSH assignment,
-including SCAN-ROW and BRUSH-FILL-SUBPART. Compare object identity as well as
-ID before using the caller policy in the JS painter.
+The follow-up [count/assignment evidence](introspection/brush-fill-count.md)
+now accounts for all 274 natural selector calls in seeds 1234 and 5678. All
+70 subpart entries use the exact selected object; ten change the brush to 1
+by exit. Every observed SCAN-ROW entry/exit count is unchanged. MY-FILL's
+EQL SUBFORM and EQL CFORM methods have exact complete PLL matches, while its
+generated dispatcher remains explicitly unmapped.
+
+Next, locate count changes across FILL-STRATEGY, POST-FILL and the
+other calls inside MY-FILL's SUBFORM method. Their native sites are static
+candidates, not measured named callee entries. Capture complete relevant
+map/frame inputs before deriving a JS count algorithm. The two iris paths per
+scene and the subpart brush changes also need characterization before
+integrating a caller policy.
 
 ### Natural FREE-PATH calls — first controlled corpus matched
 

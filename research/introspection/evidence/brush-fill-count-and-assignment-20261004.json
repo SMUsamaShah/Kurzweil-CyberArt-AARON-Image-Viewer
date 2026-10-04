@@ -1,0 +1,5562 @@
+{
+  "schemaVersion": 1,
+  "status": "measured",
+  "derivationSha256": "4942e38f0295317e6a44942c09c1429463c844a89b8ec25866070e120c57115d",
+  "selectorImplementationSha256": "93eaa5c091db89e33b82a660322e1835125f68bdeb26ba22dd4780c3c21f3cd6",
+  "scope": "Count and brush-object boundaries across complete scenes for controlled seeds 1234 and 5678; argument geometry is summarized",
+  "native": {
+    "run": {
+      "runId": "brush-fill-native-code-20261004-a",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "14e8c720c7c881595cb50aa5547808c6d288c8e29ce14e26a8c363a46e7fbd05",
+      "probeOutputNames": [
+        "aaron-brush-fill-native-links.txt"
+      ],
+      "preSceneProbePauseSeconds": 90,
+      "complete": true,
+      "startedAt": "2026-10-04T19:51:35.0964088+00:00",
+      "finishedAt": "2026-10-04T19:52:05.9722934+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "444c6bef7258e7dc6c2470095ac8edfa345712b1eb3026250b2760fb8d9864dd"
+    },
+    "comparison": {
+      "observedRun": "brush-fill-native-code-20261004-a",
+      "controlRun": "brush-fill-control-20261004-g",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true
+    },
+    "mapSha256": "9943211dbec574c5ad372cf52d9c218044ae12d6c0d54364ad9e1c8fcf302d53",
+    "metadataSha256": "9653dc5fb0c7ad4ff153b56b007cce14e743cd860ada1e1f8aa5253e1035fcfc",
+    "pll": {
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "indexedObjects": 7723
+    },
+    "namedFunctions": [
+      {
+        "name": "BRUSH-FILL",
+        "runtime": {
+          "entry": "0x1fe1924c",
+          "objectBase": "0x1fe19248",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 60616,
+          "objectOffset": 2593352,
+          "payloadOffset": 2593356,
+          "rawEnd": 2595342,
+          "nextBoundary": 2595344,
+          "tableSecondWord": 989
+        },
+        "objectBytes": 1990,
+        "objectSha256": "596c8900f4d53f747f0d170deee0a740060ad959fa85f9f4439ebd55bc037909",
+        "payloadBytes": 1986,
+        "payloadSha256": "016b613a592e6f5cc18a7b6fc0d04264a9038c485fdb05b91c458464a59f0957",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "9f8b5e32bf25ce9f817ed38b50d50915b72b3fc6c180bf579ff3f8ecec540a9d",
+        "disassembledInstructions": 651
+      },
+      {
+        "name": "SCAN-ROW",
+        "runtime": {
+          "entry": "0x1fe210d4",
+          "objectBase": "0x1fe210d0",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 45872,
+          "objectOffset": 2625744,
+          "payloadOffset": 2625748,
+          "rawEnd": 2626102,
+          "nextBoundary": 2626104,
+          "tableSecondWord": 173
+        },
+        "objectBytes": 358,
+        "objectSha256": "08d081071c330f3fa847c994c34c399a85c5c638135f7293908ca8a6b25e420c",
+        "payloadBytes": 354,
+        "payloadSha256": "d932e7cb4c0ddc32c7625c7efe1b158b7b60ed8acd6154ef1ed557d8ec5a0b2f",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "ae35dba87e667b015d7684316bc4c619fb496dd2aa4e5efc48981ab1995c0914",
+        "disassembledInstructions": 137
+      },
+      {
+        "name": "LIST-FRAME",
+        "runtime": {
+          "entry": "0x1fe2e82c",
+          "objectBase": "0x1fe2e828",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 53944,
+          "objectOffset": 2680872,
+          "payloadOffset": 2680876,
+          "rawEnd": 2681508,
+          "nextBoundary": 2681512,
+          "tableSecondWord": 312
+        },
+        "objectBytes": 636,
+        "objectSha256": "54f2e80e6c547d733c393d8b18e4e207f8f930362777665cd0fa5c92bab66c76",
+        "payloadBytes": 632,
+        "payloadSha256": "630bbb1adc44929423789aecf1ce28306ad515dc86ba52cdbe1ac4505d32586f",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "a458fde69274e586e2958fda554cf41776d6e8021eb0924eabb71b3159714f08",
+        "disassembledInstructions": 207
+      },
+      {
+        "name": "FILL-IRIS",
+        "runtime": {
+          "entry": "0x1fe23b9c",
+          "objectBase": "0x1fe23b98",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 59768,
+          "objectOffset": 2636696,
+          "payloadOffset": 2636700,
+          "rawEnd": 2638084,
+          "nextBoundary": 2638088,
+          "tableSecondWord": 688
+        },
+        "objectBytes": 1388,
+        "objectSha256": "336f9141a7c24440a5e161010fea4f5aecf30c1aeb3b8866c289e498705aca89",
+        "payloadBytes": 1384,
+        "payloadSha256": "405dcbec1b81b7ba2d1f44c7da4a89961eed17634ecd5b441071249743bcf00e",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "6ba1ae87282b65fbacc0e7c33e2c9b85ec5a630a15d0e682491b8083c98976c6",
+        "disassembledInstructions": 459
+      },
+      {
+        "name": "BRUSH-FILL-SUBPART",
+        "runtime": {
+          "entry": "0x1fe133c4",
+          "objectBase": "0x1fe133c0",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 56648,
+          "objectOffset": 2569152,
+          "payloadOffset": 2569156,
+          "rawEnd": 2569998,
+          "nextBoundary": 2570000,
+          "tableSecondWord": 417
+        },
+        "objectBytes": 846,
+        "objectSha256": "b7bd6238eaf8690e6b19232b2ae64f462bd74a93e2e89e40d26ca623f0c53fc5",
+        "payloadBytes": 842,
+        "payloadSha256": "e3a4c0c740034391f2a48b3a4cfbc77dc74dfa417d39777e291249e81bc2ff50",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "bf122bf741a9e51a0ec605a89ba09a3065c0bab53bd60de403b6e13f0f0f3684",
+        "disassembledInstructions": 293
+      },
+      {
+        "name": "SELECT-BRUSH",
+        "runtime": {
+          "entry": "0x1fe2491c",
+          "objectBase": "0x1fe24918",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 44376,
+          "objectOffset": 2640152,
+          "payloadOffset": 2640156,
+          "rawEnd": 2640484,
+          "nextBoundary": 2640488,
+          "tableSecondWord": 160
+        },
+        "objectBytes": 332,
+        "objectSha256": "26441b5c14990a1d24b31539d0dcb7d38b9f5ecfacb63c80b64553866c233d1b",
+        "payloadBytes": 328,
+        "payloadSha256": "c74414ed02ffba13595863693bfa516007f6570410484edd3e8203d39e8b90b4",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "726c71a4549df92df2702605800c5e18cbbfb7f82ec05251b643befa0ef15758",
+        "disassembledInstructions": 115
+      }
+    ],
+    "unmappedDispatchers": [
+      {
+        "name": "MY-FILL",
+        "observedType": "STANDARD-GENERIC-FUNCTION",
+        "entryCandidate": "0x200226d4",
+        "windowSha256": "b130bc5ee27c898032abe239c04986bf4f4d85f659e77f1b5ef420eca7a5639d",
+        "exactPllMatches": 0,
+        "mappingFailure": "Expected one complete PLL byte match for MY-FILL; found 0",
+        "limitation": "This live generic dispatcher is not a recovered method body. Observe methods separately."
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "seed": 1234,
+      "observedRun": {
+        "runId": "brush-fill-natural-20261004-f",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": "76f375e5027da098b484e2eccdd1b31385a849c13610b6ad0f843aaccf95d6bd",
+        "probeOutputNames": [
+          "aaron-brush-fill-natural.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-04T20:22:35.3290949+00:00",
+        "finishedAt": "2026-10-04T20:22:53.9409863+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "06e563c7f77ddd7533a62f41bd6c786888bd11a00cf5104dafcc15de81fcf7f9"
+      },
+      "controlRun": {
+        "runId": "brush-fill-control-20261004-g",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-04T20:23:39.3295433+00:00",
+        "finishedAt": "2026-10-04T20:23:57.9145614+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "313fc02f4a9d0fac99dd4bf2c0b26313d6cb529075f648f8c739dc3c5854f6c9"
+      },
+      "comparison": {
+        "observedRun": "brush-fill-natural-20261004-f",
+        "controlRun": "brush-fill-control-20261004-g",
+        "aa0ByteIdentical": true,
+        "sceneReportByteIdentical": true
+      },
+      "reportSha256": "6e862e4df8a545281f26adf07fc26f701cc9cb0dcabe04757c2cebb54f966ae1",
+      "parserSha256": "780c8668d1723beddf6dccd27acdf004bd8c632bb12daa106dbf79862dd3afec",
+      "reportDigestOrigin": "Computed during offline derivation; the oracle summary does not independently hash this optional observation report",
+      "lispRecordParserSha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee",
+      "observationScope": {
+        "eventStreamComplete": true,
+        "countAndBrushObservationsComplete": true,
+        "argumentGeometryComplete": false,
+        "argumentGeometryRepresentation": "bounded datum summaries; list prefixes are capped and opaque object internals are omitted",
+        "truncatedLists": 37,
+        "omittedLists": 0,
+        "improperLists": 0,
+        "opaqueObjects": 7333
+      },
+      "totals": {
+        "BRUSH-FILL": 60,
+        "SCAN-ROW": 2748,
+        "LIST-FRAME": 95,
+        "MY-FILL": 162,
+        "FILL-IRIS": 2,
+        "SELECT-BRUSH": 93,
+        "BRUSH-FILL-SUBPART": 23,
+        "RECORD-BRUSH": 23
+      },
+      "myFill": {
+        "cformCalls": 67,
+        "cformCountChanges": 0,
+        "subformCalls": 95,
+        "subformCountChanges": 57,
+        "cformReturnRange": [
+          0,
+          70027
+        ],
+        "subformReturnRange": [
+          -5675,
+          3004
+        ],
+        "countAfterMinimum": 0,
+        "countAfterMaximum": 75702,
+        "returnEqualsCountAfter": 0,
+        "boundedExamples": [
+          {
+            "call": 159,
+            "fill": 154,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              }
+            ],
+            "before": {
+              "kind": "unbound"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 7131,
+              "raw": "7131"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 302,
+                "raw": "302"
+              }
+            ]
+          },
+          {
+            "call": 175,
+            "fill": 154,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 7131,
+              "raw": "7131"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 37,
+              "raw": "37"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 265,
+                "raw": "265"
+              }
+            ]
+          },
+          {
+            "call": 179,
+            "fill": 154,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 37,
+              "raw": "37"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 228,
+                "raw": "228"
+              }
+            ]
+          },
+          {
+            "call": 259,
+            "fill": 154,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 228,
+                "raw": "228"
+              }
+            ]
+          },
+          {
+            "call": 263,
+            "fill": 154,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 228,
+                "raw": "228"
+              }
+            ]
+          }
+        ]
+      },
+      "scanRow": {
+        "calls": 2748,
+        "observedEntryExitCountChanges": 0
+      },
+      "selectors": {
+        "calls": 93,
+        "integerDomainMatches": 93,
+        "resultCounts": {
+          "1": 17,
+          "2": 3,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "NIL": 70
+        },
+        "countFromLatestCompletedSubformMatches": 93,
+        "nextObservedAssignmentMatches": 93,
+        "rows": [
+          {
+            "call": 160,
+            "fill": 154,
+            "producer": 159,
+            "input": 7131,
+            "brushId": 2,
+            "brushIndex": 2,
+            "assignmentObservation": {
+              "call": 161,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 320,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 176,
+            "fill": 154,
+            "producer": 175,
+            "input": 37,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 177,
+              "name": "SCAN-ROW",
+              "event": 352,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 180,
+            "fill": 154,
+            "producer": 179,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 181,
+              "name": "SCAN-ROW",
+              "event": 360,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 260,
+            "fill": 154,
+            "producer": 259,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 261,
+              "name": "SCAN-ROW",
+              "event": 520,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 264,
+            "fill": 154,
+            "producer": 263,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 265,
+              "name": "SCAN-ROW",
+              "event": 528,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 486,
+            "fill": 266,
+            "producer": 485,
+            "input": 870,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 487,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 972,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 492,
+            "fill": 266,
+            "producer": 491,
+            "input": 25,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 493,
+              "name": "SCAN-ROW",
+              "event": 984,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 496,
+            "fill": 266,
+            "producer": 495,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 497,
+              "name": "SCAN-ROW",
+              "event": 992,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 590,
+            "fill": 266,
+            "producer": 589,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 591,
+              "name": "SCAN-ROW",
+              "event": 1180,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 594,
+            "fill": 266,
+            "producer": 593,
+            "input": 33,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 595,
+              "name": "SCAN-ROW",
+              "event": 1188,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 620,
+            "fill": 611,
+            "producer": 619,
+            "input": 239,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 621,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1240,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 632,
+            "fill": 624,
+            "producer": 631,
+            "input": 247,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 633,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1264,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 853,
+            "fill": 636,
+            "producer": 852,
+            "input": 11026,
+            "brushId": 3,
+            "brushIndex": 3,
+            "assignmentObservation": {
+              "call": 854,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1706,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 952,
+            "fill": 636,
+            "producer": 951,
+            "input": 2432,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 953,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1904,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1043,
+            "fill": 636,
+            "producer": 1042,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1044,
+              "name": "SCAN-ROW",
+              "event": 2086,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1047,
+            "fill": 636,
+            "producer": 1046,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1048,
+              "name": "SCAN-ROW",
+              "event": 2094,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1053,
+            "fill": 636,
+            "producer": 1052,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1054,
+              "name": "SCAN-ROW",
+              "event": 2106,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1057,
+            "fill": 636,
+            "producer": 1056,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1058,
+              "name": "SCAN-ROW",
+              "event": 2114,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1094,
+            "fill": 636,
+            "producer": 1093,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1095,
+              "name": "SCAN-ROW",
+              "event": 2188,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1098,
+            "fill": 636,
+            "producer": 1097,
+            "input": 101,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1099,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2196,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1114,
+            "fill": 1104,
+            "producer": 1113,
+            "input": 1412,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1115,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2228,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1120,
+            "fill": 1104,
+            "producer": 1119,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1121,
+              "name": "SCAN-ROW",
+              "event": 2240,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1163,
+            "fill": 1157,
+            "producer": 1162,
+            "input": 405,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1164,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2326,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1172,
+            "fill": 1157,
+            "producer": 1171,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1173,
+              "name": "SCAN-ROW",
+              "event": 2344,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1176,
+            "fill": 1157,
+            "producer": 1175,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1177,
+              "name": "SCAN-ROW",
+              "event": 2352,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1206,
+            "fill": 1157,
+            "producer": 1205,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1207,
+              "name": "SCAN-ROW",
+              "event": 2412,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1210,
+            "fill": 1157,
+            "producer": 1209,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1211,
+              "name": "SCAN-ROW",
+              "event": 2420,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1218,
+            "fill": 1213,
+            "producer": 1217,
+            "input": 6080,
+            "brushId": 2,
+            "brushIndex": 2,
+            "assignmentObservation": {
+              "call": 1219,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2436,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1224,
+            "fill": 1213,
+            "producer": 1223,
+            "input": 20,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1225,
+              "name": "SCAN-ROW",
+              "event": 2448,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1278,
+            "fill": 1213,
+            "producer": 1277,
+            "input": 17,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1279,
+              "name": "SCAN-ROW",
+              "event": 2556,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1287,
+            "fill": 1213,
+            "producer": 1286,
+            "input": 5,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1288,
+              "name": "SCAN-ROW",
+              "event": 2574,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1291,
+            "fill": 1213,
+            "producer": 1290,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1292,
+              "name": "SCAN-ROW",
+              "event": 2582,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1295,
+            "fill": 1213,
+            "producer": 1294,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1296,
+              "name": "SCAN-ROW",
+              "event": 2590,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1301,
+            "fill": 1213,
+            "producer": 1300,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1302,
+              "name": "SCAN-ROW",
+              "event": 2602,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1305,
+            "fill": 1213,
+            "producer": 1304,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1306,
+              "name": "SCAN-ROW",
+              "event": 2610,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1323,
+            "fill": 1318,
+            "producer": 1322,
+            "input": 762,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1324,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2646,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1367,
+            "fill": 1362,
+            "producer": 1366,
+            "input": 1285,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1368,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2734,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1374,
+            "fill": 1362,
+            "producer": 1373,
+            "input": 16,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1375,
+              "name": "SCAN-ROW",
+              "event": 2748,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1399,
+            "fill": 1362,
+            "producer": 1398,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1400,
+              "name": "SCAN-ROW",
+              "event": 2798,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1403,
+            "fill": 1362,
+            "producer": 1402,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1404,
+              "name": "SCAN-ROW",
+              "event": 2806,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1423,
+            "fill": 1362,
+            "producer": 1422,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1424,
+              "name": "SCAN-ROW",
+              "event": 2846,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1433,
+            "fill": 1427,
+            "producer": 1432,
+            "input": 926,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1434,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2866,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1468,
+            "fill": 1427,
+            "producer": 1467,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1469,
+              "name": "SCAN-ROW",
+              "event": 2936,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1472,
+            "fill": 1427,
+            "producer": 1471,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1473,
+              "name": "SCAN-ROW",
+              "event": 2944,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1476,
+            "fill": 1427,
+            "producer": 1475,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1477,
+              "name": "SCAN-ROW",
+              "event": 2952,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1489,
+            "fill": 1482,
+            "producer": 1488,
+            "input": 1235,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1490,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2978,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1511,
+            "fill": 1482,
+            "producer": 1510,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1512,
+              "name": "SCAN-ROW",
+              "event": 3022,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1515,
+            "fill": 1482,
+            "producer": 1514,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1516,
+              "name": "SCAN-ROW",
+              "event": 3030,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1560,
+            "fill": 1554,
+            "producer": 1559,
+            "input": 1064,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1561,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3120,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1566,
+            "fill": 1554,
+            "producer": 1565,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1567,
+              "name": "SCAN-ROW",
+              "event": 3132,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1571,
+            "fill": 1554,
+            "producer": 1570,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1572,
+              "name": "SCAN-ROW",
+              "event": 3142,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1575,
+            "fill": 1554,
+            "producer": 1574,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1576,
+              "name": "SCAN-ROW",
+              "event": 3150,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1582,
+            "fill": 1554,
+            "producer": 1581,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1583,
+              "name": "SCAN-ROW",
+              "event": 3164,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1586,
+            "fill": 1554,
+            "producer": 1585,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1587,
+              "name": "SCAN-ROW",
+              "event": 3172,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1610,
+            "fill": 1554,
+            "producer": 1609,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1611,
+              "name": "SCAN-ROW",
+              "event": 3220,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1614,
+            "fill": 1554,
+            "producer": 1613,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1615,
+              "name": "SCAN-ROW",
+              "event": 3228,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1637,
+            "fill": 1632,
+            "producer": 1636,
+            "input": 495,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1638,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3274,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1643,
+            "fill": 1632,
+            "producer": 1642,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1644,
+              "name": "SCAN-ROW",
+              "event": 3286,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1725,
+            "fill": 1632,
+            "producer": 1724,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1726,
+              "name": "SCAN-ROW",
+              "event": 3450,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1729,
+            "fill": 1632,
+            "producer": 1728,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1730,
+              "name": "SCAN-ROW",
+              "event": 3458,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1738,
+            "fill": 1733,
+            "producer": 1737,
+            "input": 934,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1739,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3476,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1744,
+            "fill": 1733,
+            "producer": 1743,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1745,
+              "name": "SCAN-ROW",
+              "event": 3488,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1754,
+            "fill": 1733,
+            "producer": 1753,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1755,
+              "name": "SCAN-ROW",
+              "event": 3508,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1797,
+            "fill": 1733,
+            "producer": 1796,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1798,
+              "name": "SCAN-ROW",
+              "event": 3594,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2025,
+            "fill": 1989,
+            "producer": 2024,
+            "input": 188,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2026,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4050,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2304,
+            "fill": 2029,
+            "producer": 2303,
+            "input": 16343,
+            "brushId": 4,
+            "brushIndex": 4,
+            "assignmentObservation": {
+              "call": 2305,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4608,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2387,
+            "fill": 2029,
+            "producer": 2386,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2388,
+              "name": "SCAN-ROW",
+              "event": 4774,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2391,
+            "fill": 2029,
+            "producer": 2390,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2392,
+              "name": "SCAN-ROW",
+              "event": 4782,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2522,
+            "fill": 2029,
+            "producer": 2521,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2523,
+              "name": "SCAN-ROW",
+              "event": 5044,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2526,
+            "fill": 2029,
+            "producer": 2525,
+            "input": 53,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2527,
+              "name": "SCAN-ROW",
+              "event": 5052,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2533,
+            "fill": 2528,
+            "producer": 2532,
+            "input": 75702,
+            "brushId": 5,
+            "brushIndex": 5,
+            "assignmentObservation": {
+              "call": 2534,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5066,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2558,
+            "fill": 2537,
+            "producer": 2557,
+            "input": 5236,
+            "brushId": 2,
+            "brushIndex": 2,
+            "assignmentObservation": {
+              "call": 2559,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5116,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2564,
+            "fill": 2537,
+            "producer": 2563,
+            "input": 19,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2565,
+              "name": "SCAN-ROW",
+              "event": 5128,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2600,
+            "fill": 2537,
+            "producer": 2599,
+            "input": 98,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2601,
+              "name": "SCAN-ROW",
+              "event": 5200,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2610,
+            "fill": 2537,
+            "producer": 2609,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2611,
+              "name": "SCAN-ROW",
+              "event": 5220,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2614,
+            "fill": 2537,
+            "producer": 2613,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2615,
+              "name": "SCAN-ROW",
+              "event": 5228,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2665,
+            "fill": 2537,
+            "producer": 2664,
+            "input": 587,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2666,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5330,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2671,
+            "fill": 2537,
+            "producer": 2670,
+            "input": 7,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2672,
+              "name": "SCAN-ROW",
+              "event": 5342,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2677,
+            "fill": 2537,
+            "producer": 2676,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2678,
+              "name": "SCAN-ROW",
+              "event": 5354,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2681,
+            "fill": 2537,
+            "producer": 2680,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2682,
+              "name": "SCAN-ROW",
+              "event": 5362,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2707,
+            "fill": 2537,
+            "producer": 2706,
+            "input": 3,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2708,
+              "name": "SCAN-ROW",
+              "event": 5414,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2711,
+            "fill": 2537,
+            "producer": 2710,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2712,
+              "name": "SCAN-ROW",
+              "event": 5422,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2720,
+            "fill": 2537,
+            "producer": 2719,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2721,
+              "name": "SCAN-ROW",
+              "event": 5440,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2724,
+            "fill": 2537,
+            "producer": 2723,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2725,
+              "name": "SCAN-ROW",
+              "event": 5448,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2732,
+            "fill": 2537,
+            "producer": 2731,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2733,
+              "name": "SCAN-ROW",
+              "event": 5464,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2736,
+            "fill": 2537,
+            "producer": 2735,
+            "input": 2,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2737,
+              "name": "SCAN-ROW",
+              "event": 5472,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3006,
+            "fill": 2738,
+            "producer": 3005,
+            "input": 2175,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3007,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6012,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3012,
+            "fill": 2738,
+            "producer": 3011,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3013,
+              "name": "SCAN-ROW",
+              "event": 6024,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3016,
+            "fill": 2738,
+            "producer": 3015,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3017,
+              "name": "SCAN-ROW",
+              "event": 6032,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3096,
+            "fill": 2738,
+            "producer": 3095,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3097,
+              "name": "SCAN-ROW",
+              "event": 6192,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3100,
+            "fill": 2738,
+            "producer": 3099,
+            "input": 15,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3101,
+              "name": "SCAN-ROW",
+              "event": 6200,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3115,
+            "fill": 2738,
+            "producer": 3114,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3116,
+              "name": "SCAN-ROW",
+              "event": 6230,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3119,
+            "fill": 2738,
+            "producer": 3118,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3120,
+              "name": "SCAN-ROW",
+              "event": 6238,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          }
+        ]
+      },
+      "brushSubparts": {
+        "calls": 23,
+        "selectedObjectEntryMatches": 23,
+        "exitEqSelected": 17,
+        "boundedExamples": [
+          {
+            "call": 161,
+            "fill": 154,
+            "selection": 160,
+            "brushId": 2,
+            "brushIndex": 2,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": false
+          },
+          {
+            "call": 487,
+            "fill": 266,
+            "selection": 486,
+            "brushId": 1,
+            "brushIndex": 1,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": true
+          },
+          {
+            "call": 621,
+            "fill": 611,
+            "selection": 620,
+            "brushId": 1,
+            "brushIndex": 1,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": true
+          }
+        ]
+      },
+      "brushRecords": {
+        "calls": 23,
+        "selectedObjectEntryMatches": 23,
+        "exitEqSelected": 23
+      },
+      "irises": [
+        {
+          "call": 601,
+          "fill": 596,
+          "producer": 600,
+          "args": [
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 4,
+              "raw": "4"
+            },
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1,
+              "raw": "1"
+            }
+          ],
+          "countBefore": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 91,
+            "raw": "91"
+          },
+          "countAfter": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 91,
+            "raw": "91"
+          }
+        },
+        {
+          "call": 609,
+          "fill": 603,
+          "producer": 608,
+          "args": [
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 5,
+              "raw": "5"
+            },
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1,
+              "raw": "1"
+            }
+          ],
+          "countBefore": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 96,
+            "raw": "96"
+          },
+          "countAfter": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 96,
+            "raw": "96"
+          }
+        }
+      ],
+      "cformCountScalarBindingStatuses": [
+        "UNBOUND"
+      ]
+    },
+    {
+      "seed": 5678,
+      "observedRun": {
+        "runId": "brush-fill-natural-20261004-d",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": "76f375e5027da098b484e2eccdd1b31385a849c13610b6ad0f843aaccf95d6bd",
+        "probeOutputNames": [
+          "aaron-brush-fill-natural.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-04T20:14:29.8430116+00:00",
+        "finishedAt": "2026-10-04T20:15:18.7737599+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "42d1b922cdc0b346334ea493f593585fd83de1f5432a2e891367b9f94264a1e7"
+      },
+      "controlRun": {
+        "runId": "brush-fill-control-20261004-e",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-04T20:17:04.0519887+00:00",
+        "finishedAt": "2026-10-04T20:17:50.8218993+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "22beba05b52629f3c8bc54b9e5dc7f92607721d5cf91277a2f4aeb7530720710"
+      },
+      "comparison": {
+        "observedRun": "brush-fill-natural-20261004-d",
+        "controlRun": "brush-fill-control-20261004-e",
+        "aa0ByteIdentical": true,
+        "sceneReportByteIdentical": true
+      },
+      "reportSha256": "8c077c1718e2fbbf2a62cd126988181882753d8796e88b8b9180a1d091723a9d",
+      "parserSha256": "780c8668d1723beddf6dccd27acdf004bd8c632bb12daa106dbf79862dd3afec",
+      "reportDigestOrigin": "Computed during offline derivation; the oracle summary does not independently hash this optional observation report",
+      "lispRecordParserSha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee",
+      "observationScope": {
+        "eventStreamComplete": true,
+        "countAndBrushObservationsComplete": true,
+        "argumentGeometryComplete": false,
+        "argumentGeometryRepresentation": "bounded datum summaries; list prefixes are capped and opaque object internals are omitted",
+        "truncatedLists": 31,
+        "omittedLists": 0,
+        "improperLists": 0,
+        "opaqueObjects": 10084
+      },
+      "totals": {
+        "BRUSH-FILL": 74,
+        "SCAN-ROW": 3057,
+        "LIST-FRAME": 183,
+        "MY-FILL": 265,
+        "FILL-IRIS": 2,
+        "SELECT-BRUSH": 181,
+        "BRUSH-FILL-SUBPART": 47,
+        "RECORD-BRUSH": 47
+      },
+      "myFill": {
+        "cformCalls": 82,
+        "cformCountChanges": 0,
+        "subformCalls": 183,
+        "subformCountChanges": 124,
+        "cformReturnRange": [
+          0,
+          29185
+        ],
+        "subformReturnRange": [
+          -34,
+          29171
+        ],
+        "countAfterMinimum": 0,
+        "countAfterMaximum": 28425,
+        "returnEqualsCountAfter": 0,
+        "boundedExamples": [
+          {
+            "call": 233,
+            "fill": 211,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 0,
+                "raw": "0"
+              }
+            ],
+            "before": {
+              "kind": "unbound"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1359,
+              "raw": "1359"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 2668,
+                "raw": "2668"
+              }
+            ]
+          },
+          {
+            "call": 289,
+            "fill": 211,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 0,
+                "raw": "0"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1359,
+              "raw": "1359"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1632,
+              "raw": "1632"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1036,
+                "raw": "1036"
+              }
+            ]
+          },
+          {
+            "call": 303,
+            "fill": 211,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 0,
+                "raw": "0"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1632,
+              "raw": "1632"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 736,
+              "raw": "736"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 300,
+                "raw": "300"
+              }
+            ]
+          },
+          {
+            "call": 351,
+            "fill": 211,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 0,
+                "raw": "0"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 736,
+              "raw": "736"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 300,
+                "raw": "300"
+              }
+            ]
+          },
+          {
+            "call": 355,
+            "fill": 211,
+            "args": [
+              {
+                "kind": "symbol",
+                "package": "COMMON-GRAPHICS-USER",
+                "name": "SUBFORM"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 1,
+                "raw": "1"
+              },
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 0,
+                "raw": "0"
+              }
+            ],
+            "before": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "after": {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 0,
+              "raw": "0"
+            },
+            "returnValues": [
+              {
+                "kind": "number",
+                "type": "FIXNUM",
+                "value": 300,
+                "raw": "300"
+              }
+            ]
+          }
+        ]
+      },
+      "scanRow": {
+        "calls": 3057,
+        "observedEntryExitCountChanges": 0
+      },
+      "selectors": {
+        "calls": 181,
+        "integerDomainMatches": 181,
+        "resultCounts": {
+          "1": 43,
+          "2": 2,
+          "4": 2,
+          "NIL": 134
+        },
+        "countFromLatestCompletedSubformMatches": 181,
+        "nextObservedAssignmentMatches": 181,
+        "rows": [
+          {
+            "call": 234,
+            "fill": 211,
+            "producer": 233,
+            "input": 1359,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 235,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 468,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 290,
+            "fill": 211,
+            "producer": 289,
+            "input": 1632,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 291,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 580,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 304,
+            "fill": 211,
+            "producer": 303,
+            "input": 736,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 305,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 608,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 352,
+            "fill": 211,
+            "producer": 351,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 353,
+              "name": "SCAN-ROW",
+              "event": 704,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 356,
+            "fill": 211,
+            "producer": 355,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 357,
+              "name": "SCAN-ROW",
+              "event": 712,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 360,
+            "fill": 211,
+            "producer": 359,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 361,
+              "name": "SCAN-ROW",
+              "event": 720,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 364,
+            "fill": 211,
+            "producer": 363,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 365,
+              "name": "SCAN-ROW",
+              "event": 728,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 373,
+            "fill": 367,
+            "producer": 372,
+            "input": 1850,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 374,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 746,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 379,
+            "fill": 367,
+            "producer": 378,
+            "input": 5,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 380,
+              "name": "SCAN-ROW",
+              "event": 758,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 387,
+            "fill": 367,
+            "producer": 386,
+            "input": 1396,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 388,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 774,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 425,
+            "fill": 367,
+            "producer": 424,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 426,
+              "name": "SCAN-ROW",
+              "event": 850,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 429,
+            "fill": 367,
+            "producer": 428,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 430,
+              "name": "SCAN-ROW",
+              "event": 858,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 433,
+            "fill": 367,
+            "producer": 432,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 434,
+              "name": "SCAN-ROW",
+              "event": 866,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 441,
+            "fill": 367,
+            "producer": 440,
+            "input": 14,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 442,
+              "name": "SCAN-ROW",
+              "event": 882,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 445,
+            "fill": 367,
+            "producer": 444,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 446,
+              "name": "SCAN-ROW",
+              "event": 890,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 468,
+            "fill": 367,
+            "producer": 467,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 469,
+              "name": "SCAN-ROW",
+              "event": 936,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 481,
+            "fill": 367,
+            "producer": 480,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 482,
+              "name": "SCAN-ROW",
+              "event": 962,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 485,
+            "fill": 367,
+            "producer": 484,
+            "input": 20,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 486,
+              "name": "SCAN-ROW",
+              "event": 970,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 490,
+            "fill": 367,
+            "producer": 489,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 491,
+              "name": "SCAN-ROW",
+              "event": 980,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 494,
+            "fill": 367,
+            "producer": 493,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 495,
+              "name": "SCAN-ROW",
+              "event": 988,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 511,
+            "fill": 367,
+            "producer": 510,
+            "input": 1209,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 512,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1022,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 517,
+            "fill": 367,
+            "producer": 516,
+            "input": 11,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 518,
+              "name": "SCAN-ROW",
+              "event": 1034,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 559,
+            "fill": 367,
+            "producer": 558,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 560,
+              "name": "SCAN-ROW",
+              "event": 1118,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 611,
+            "fill": 606,
+            "producer": 610,
+            "input": 224,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 612,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1222,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 620,
+            "fill": 615,
+            "producer": 619,
+            "input": 812,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 621,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1240,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 626,
+            "fill": 615,
+            "producer": 625,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 627,
+              "name": "SCAN-ROW",
+              "event": 1252,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 648,
+            "fill": 615,
+            "producer": 647,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 649,
+              "name": "SCAN-ROW",
+              "event": 1296,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 668,
+            "fill": 663,
+            "producer": 667,
+            "input": 84,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 669,
+              "name": "SCAN-ROW",
+              "event": 1336,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 676,
+            "fill": 670,
+            "producer": 675,
+            "input": 417,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 677,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1352,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 687,
+            "fill": 680,
+            "producer": 686,
+            "input": 1341,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 688,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1374,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 693,
+            "fill": 680,
+            "producer": 692,
+            "input": 16,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 694,
+              "name": "SCAN-ROW",
+              "event": 1386,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 705,
+            "fill": 680,
+            "producer": 704,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 706,
+              "name": "SCAN-ROW",
+              "event": 1410,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 709,
+            "fill": 680,
+            "producer": 708,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 710,
+              "name": "SCAN-ROW",
+              "event": 1418,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 927,
+            "fill": 819,
+            "producer": 926,
+            "input": 842,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 928,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1854,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 936,
+            "fill": 931,
+            "producer": 935,
+            "input": 469,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 937,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1872,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 953,
+            "fill": 940,
+            "producer": 952,
+            "input": 1621,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 954,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 1906,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 959,
+            "fill": 940,
+            "producer": 958,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 960,
+              "name": "SCAN-ROW",
+              "event": 1918,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 963,
+            "fill": 940,
+            "producer": 962,
+            "input": 9,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 964,
+              "name": "SCAN-ROW",
+              "event": 1926,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1059,
+            "fill": 940,
+            "producer": 1058,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1060,
+              "name": "SCAN-ROW",
+              "event": 2118,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1063,
+            "fill": 940,
+            "producer": 1062,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1064,
+              "name": "SCAN-ROW",
+              "event": 2126,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1072,
+            "fill": 940,
+            "producer": 1071,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1073,
+              "name": "SCAN-ROW",
+              "event": 2144,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1076,
+            "fill": 940,
+            "producer": 1075,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1077,
+              "name": "SCAN-ROW",
+              "event": 2152,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1080,
+            "fill": 940,
+            "producer": 1079,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1081,
+              "name": "SCAN-ROW",
+              "event": 2160,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1084,
+            "fill": 940,
+            "producer": 1083,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1085,
+              "name": "SCAN-ROW",
+              "event": 2168,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1212,
+            "fill": 1094,
+            "producer": 1211,
+            "input": 472,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1213,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2424,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1224,
+            "fill": 1218,
+            "producer": 1223,
+            "input": 56,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1225,
+              "name": "SCAN-ROW",
+              "event": 2448,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1228,
+            "fill": 1218,
+            "producer": 1227,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1229,
+              "name": "SCAN-ROW",
+              "event": 2456,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1232,
+            "fill": 1218,
+            "producer": 1231,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1233,
+              "name": "SCAN-ROW",
+              "event": 2464,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1241,
+            "fill": 1218,
+            "producer": 1240,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1242,
+              "name": "SCAN-ROW",
+              "event": 2482,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1245,
+            "fill": 1218,
+            "producer": 1244,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1246,
+              "name": "SCAN-ROW",
+              "event": 2490,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1276,
+            "fill": 1218,
+            "producer": 1275,
+            "input": 249,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1277,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2552,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1366,
+            "fill": 1360,
+            "producer": 1365,
+            "input": 415,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1367,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2732,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1375,
+            "fill": 1370,
+            "producer": 1374,
+            "input": 317,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1376,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 2750,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1527,
+            "fill": 1472,
+            "producer": 1526,
+            "input": 130,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1528,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3054,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1551,
+            "fill": 1531,
+            "producer": 1550,
+            "input": 786,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 1552,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3102,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1569,
+            "fill": 1555,
+            "producer": 1568,
+            "input": 42,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1570,
+              "name": "SCAN-ROW",
+              "event": 3138,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1595,
+            "fill": 1571,
+            "producer": 1594,
+            "input": 14,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1596,
+              "name": "SCAN-ROW",
+              "event": 3190,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1599,
+            "fill": 1571,
+            "producer": 1598,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1600,
+              "name": "SCAN-ROW",
+              "event": 3198,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1605,
+            "fill": 1571,
+            "producer": 1604,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1606,
+              "name": "SCAN-ROW",
+              "event": 3210,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1609,
+            "fill": 1571,
+            "producer": 1608,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1610,
+              "name": "SCAN-ROW",
+              "event": 3218,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1613,
+            "fill": 1571,
+            "producer": 1612,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1614,
+              "name": "SCAN-ROW",
+              "event": 3226,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1617,
+            "fill": 1571,
+            "producer": 1616,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1618,
+              "name": "SCAN-ROW",
+              "event": 3234,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1632,
+            "fill": 1571,
+            "producer": 1631,
+            "input": 28425,
+            "brushId": 4,
+            "brushIndex": 4,
+            "assignmentObservation": {
+              "call": 1633,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3264,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1638,
+            "fill": 1571,
+            "producer": 1637,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1639,
+              "name": "SCAN-ROW",
+              "event": 3276,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1644,
+            "fill": 1571,
+            "producer": 1643,
+            "input": 17,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1645,
+              "name": "SCAN-ROW",
+              "event": 3288,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1650,
+            "fill": 1571,
+            "producer": 1649,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1651,
+              "name": "SCAN-ROW",
+              "event": 3300,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1654,
+            "fill": 1571,
+            "producer": 1653,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1655,
+              "name": "SCAN-ROW",
+              "event": 3308,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1660,
+            "fill": 1571,
+            "producer": 1659,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1661,
+              "name": "SCAN-ROW",
+              "event": 3320,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1664,
+            "fill": 1571,
+            "producer": 1663,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1665,
+              "name": "SCAN-ROW",
+              "event": 3328,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1668,
+            "fill": 1571,
+            "producer": 1667,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1669,
+              "name": "SCAN-ROW",
+              "event": 3336,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1672,
+            "fill": 1571,
+            "producer": 1671,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1673,
+              "name": "SCAN-ROW",
+              "event": 3344,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1676,
+            "fill": 1571,
+            "producer": 1675,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1677,
+              "name": "SCAN-ROW",
+              "event": 3352,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1680,
+            "fill": 1571,
+            "producer": 1679,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1681,
+              "name": "SCAN-ROW",
+              "event": 3360,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1684,
+            "fill": 1571,
+            "producer": 1683,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1685,
+              "name": "SCAN-ROW",
+              "event": 3368,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1688,
+            "fill": 1571,
+            "producer": 1687,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1689,
+              "name": "SCAN-ROW",
+              "event": 3376,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1692,
+            "fill": 1571,
+            "producer": 1691,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1693,
+              "name": "SCAN-ROW",
+              "event": 3384,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1701,
+            "fill": 1571,
+            "producer": 1700,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1702,
+              "name": "SCAN-ROW",
+              "event": 3402,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1705,
+            "fill": 1571,
+            "producer": 1704,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1706,
+              "name": "SCAN-ROW",
+              "event": 3410,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1728,
+            "fill": 1571,
+            "producer": 1727,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1729,
+              "name": "SCAN-ROW",
+              "event": 3456,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1908,
+            "fill": 1571,
+            "producer": 1907,
+            "input": 91,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1909,
+              "name": "SCAN-ROW",
+              "event": 3816,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1912,
+            "fill": 1571,
+            "producer": 1911,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1913,
+              "name": "SCAN-ROW",
+              "event": 3824,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1939,
+            "fill": 1571,
+            "producer": 1938,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 1940,
+              "name": "SCAN-ROW",
+              "event": 3878,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 1946,
+            "fill": 1941,
+            "producer": 1945,
+            "input": 20680,
+            "brushId": 4,
+            "brushIndex": 4,
+            "assignmentObservation": {
+              "call": 1947,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 3892,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2027,
+            "fill": 1941,
+            "producer": 2026,
+            "input": 2,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2028,
+              "name": "SCAN-ROW",
+              "event": 4054,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2050,
+            "fill": 1941,
+            "producer": 2049,
+            "input": 12,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2051,
+              "name": "SCAN-ROW",
+              "event": 4100,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2054,
+            "fill": 1941,
+            "producer": 2053,
+            "input": 5,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2055,
+              "name": "SCAN-ROW",
+              "event": 4108,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2061,
+            "fill": 1941,
+            "producer": 2060,
+            "input": 2,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2062,
+              "name": "SCAN-ROW",
+              "event": 4122,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2065,
+            "fill": 1941,
+            "producer": 2064,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2066,
+              "name": "SCAN-ROW",
+              "event": 4130,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2082,
+            "fill": 1941,
+            "producer": 2081,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2083,
+              "name": "SCAN-ROW",
+              "event": 4164,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2096,
+            "fill": 1941,
+            "producer": 2095,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2097,
+              "name": "SCAN-ROW",
+              "event": 4192,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2105,
+            "fill": 1941,
+            "producer": 2104,
+            "input": 3,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2106,
+              "name": "SCAN-ROW",
+              "event": 4210,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2109,
+            "fill": 1941,
+            "producer": 2108,
+            "input": 28,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2110,
+              "name": "SCAN-ROW",
+              "event": 4218,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2116,
+            "fill": 1941,
+            "producer": 2115,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2117,
+              "name": "SCAN-ROW",
+              "event": 4232,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2120,
+            "fill": 1941,
+            "producer": 2119,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2121,
+              "name": "SCAN-ROW",
+              "event": 4240,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2170,
+            "fill": 2155,
+            "producer": 2169,
+            "input": 303,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2171,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4340,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2243,
+            "fill": 2198,
+            "producer": 2242,
+            "input": 275,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2244,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4486,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2249,
+            "fill": 2198,
+            "producer": 2248,
+            "input": 3,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2250,
+              "name": "SCAN-ROW",
+              "event": 4498,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2263,
+            "fill": 2198,
+            "producer": 2262,
+            "input": 41,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2264,
+              "name": "SCAN-ROW",
+              "event": 4526,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2275,
+            "fill": 2269,
+            "producer": 2274,
+            "input": 206,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2276,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4550,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2286,
+            "fill": 2279,
+            "producer": 2285,
+            "input": 76,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2287,
+              "name": "SCAN-ROW",
+              "event": 4572,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2301,
+            "fill": 2296,
+            "producer": 2300,
+            "input": 1630,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2302,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4602,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2333,
+            "fill": 2296,
+            "producer": 2332,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2334,
+              "name": "SCAN-ROW",
+              "event": 4666,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2343,
+            "fill": 2296,
+            "producer": 2342,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2344,
+              "name": "SCAN-ROW",
+              "event": 4686,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2347,
+            "fill": 2296,
+            "producer": 2346,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2348,
+              "name": "SCAN-ROW",
+              "event": 4694,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2368,
+            "fill": 2296,
+            "producer": 2367,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2369,
+              "name": "SCAN-ROW",
+              "event": 4736,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2376,
+            "fill": 2296,
+            "producer": 2375,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2377,
+              "name": "SCAN-ROW",
+              "event": 4752,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2380,
+            "fill": 2296,
+            "producer": 2379,
+            "input": 4,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2381,
+              "name": "SCAN-ROW",
+              "event": 4760,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2405,
+            "fill": 2296,
+            "producer": 2404,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2406,
+              "name": "SCAN-ROW",
+              "event": 4810,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2409,
+            "fill": 2296,
+            "producer": 2408,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2410,
+              "name": "SCAN-ROW",
+              "event": 4818,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2413,
+            "fill": 2296,
+            "producer": 2412,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2414,
+              "name": "SCAN-ROW",
+              "event": 4826,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2422,
+            "fill": 2417,
+            "producer": 2421,
+            "input": 304,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2423,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4844,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2472,
+            "fill": 2467,
+            "producer": 2471,
+            "input": 317,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2473,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4944,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2493,
+            "fill": 2480,
+            "producer": 2492,
+            "input": 146,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2494,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 4986,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2739,
+            "fill": 2497,
+            "producer": 2738,
+            "input": 127,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2740,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5478,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2749,
+            "fill": 2743,
+            "producer": 2748,
+            "input": 1023,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2750,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5498,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2802,
+            "fill": 2793,
+            "producer": 2801,
+            "input": 2363,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2803,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5604,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2961,
+            "fill": 2955,
+            "producer": 2960,
+            "input": 1064,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 2962,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 5922,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2967,
+            "fill": 2955,
+            "producer": 2966,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2968,
+              "name": "SCAN-ROW",
+              "event": 5934,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2979,
+            "fill": 2955,
+            "producer": 2978,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2980,
+              "name": "SCAN-ROW",
+              "event": 5958,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2983,
+            "fill": 2955,
+            "producer": 2982,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2984,
+              "name": "SCAN-ROW",
+              "event": 5966,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 2998,
+            "fill": 2955,
+            "producer": 2997,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 2999,
+              "name": "SCAN-ROW",
+              "event": 5996,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3002,
+            "fill": 2955,
+            "producer": 3001,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3003,
+              "name": "SCAN-ROW",
+              "event": 6004,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3006,
+            "fill": 2955,
+            "producer": 3005,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3007,
+              "name": "SCAN-ROW",
+              "event": 6012,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3010,
+            "fill": 2955,
+            "producer": 3009,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3011,
+              "name": "SCAN-ROW",
+              "event": 6020,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3023,
+            "fill": 2955,
+            "producer": 3022,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3024,
+              "name": "SCAN-ROW",
+              "event": 6046,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3045,
+            "fill": 3039,
+            "producer": 3044,
+            "input": 1857,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3046,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6090,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3052,
+            "fill": 3039,
+            "producer": 3051,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3053,
+              "name": "SCAN-ROW",
+              "event": 6104,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3131,
+            "fill": 3039,
+            "producer": 3130,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3132,
+              "name": "SCAN-ROW",
+              "event": 6262,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3351,
+            "fill": 3277,
+            "producer": 3350,
+            "input": 317,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3352,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6702,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3361,
+            "fill": 3355,
+            "producer": 3360,
+            "input": 1980,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3362,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6722,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3377,
+            "fill": 3365,
+            "producer": 3376,
+            "input": 223,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3378,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6754,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3383,
+            "fill": 3365,
+            "producer": 3382,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3384,
+              "name": "SCAN-ROW",
+              "event": 6766,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3388,
+            "fill": 3365,
+            "producer": 3387,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3389,
+              "name": "SCAN-ROW",
+              "event": 6776,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3392,
+            "fill": 3365,
+            "producer": 3391,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3393,
+              "name": "SCAN-ROW",
+              "event": 6784,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3396,
+            "fill": 3365,
+            "producer": 3395,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3397,
+              "name": "SCAN-ROW",
+              "event": 6792,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3410,
+            "fill": 3365,
+            "producer": 3409,
+            "input": 17,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3411,
+              "name": "SCAN-ROW",
+              "event": 6820,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3418,
+            "fill": 3412,
+            "producer": 3417,
+            "input": 2984,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3419,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6836,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3424,
+            "fill": 3412,
+            "producer": 3423,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3425,
+              "name": "SCAN-ROW",
+              "event": 6848,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3428,
+            "fill": 3412,
+            "producer": 3427,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3429,
+              "name": "SCAN-ROW",
+              "event": 6856,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3432,
+            "fill": 3412,
+            "producer": 3431,
+            "input": 1239,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3433,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6864,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3438,
+            "fill": 3412,
+            "producer": 3437,
+            "input": 4057,
+            "brushId": 2,
+            "brushIndex": 2,
+            "assignmentObservation": {
+              "call": 3439,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6876,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3453,
+            "fill": 3412,
+            "producer": 3452,
+            "input": 107,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3454,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 6906,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3478,
+            "fill": 3412,
+            "producer": 3477,
+            "input": 3,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3479,
+              "name": "SCAN-ROW",
+              "event": 6956,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3483,
+            "fill": 3412,
+            "producer": 3482,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3484,
+              "name": "SCAN-ROW",
+              "event": 6966,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3498,
+            "fill": 3412,
+            "producer": 3497,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3499,
+              "name": "SCAN-ROW",
+              "event": 6996,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3533,
+            "fill": 3412,
+            "producer": 3532,
+            "input": 2258,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3534,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7066,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3539,
+            "fill": 3412,
+            "producer": 3538,
+            "input": 29,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3540,
+              "name": "SCAN-ROW",
+              "event": 7078,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3550,
+            "fill": 3412,
+            "producer": 3549,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3551,
+              "name": "SCAN-ROW",
+              "event": 7100,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3554,
+            "fill": 3412,
+            "producer": 3553,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3555,
+              "name": "SCAN-ROW",
+              "event": 7108,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3571,
+            "fill": 3412,
+            "producer": 3570,
+            "input": 144,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3572,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7142,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3577,
+            "fill": 3412,
+            "producer": 3576,
+            "input": 1,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3578,
+              "name": "SCAN-ROW",
+              "event": 7154,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3581,
+            "fill": 3412,
+            "producer": 3580,
+            "input": 5,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3582,
+              "name": "SCAN-ROW",
+              "event": 7162,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3590,
+            "fill": 3412,
+            "producer": 3589,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3591,
+              "name": "SCAN-ROW",
+              "event": 7180,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3594,
+            "fill": 3412,
+            "producer": 3593,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3595,
+              "name": "SCAN-ROW",
+              "event": 7188,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3606,
+            "fill": 3412,
+            "producer": 3605,
+            "input": 145,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3607,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7212,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3617,
+            "fill": 3412,
+            "producer": 3616,
+            "input": 2,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3618,
+              "name": "SCAN-ROW",
+              "event": 7234,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3621,
+            "fill": 3412,
+            "producer": 3620,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3622,
+              "name": "SCAN-ROW",
+              "event": 7242,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3628,
+            "fill": 3412,
+            "producer": 3627,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3629,
+              "name": "SCAN-ROW",
+              "event": 7256,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3634,
+            "fill": 3412,
+            "producer": 3633,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3635,
+              "name": "SCAN-ROW",
+              "event": 7268,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3638,
+            "fill": 3412,
+            "producer": 3637,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3639,
+              "name": "SCAN-ROW",
+              "event": 7276,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3651,
+            "fill": 3412,
+            "producer": 3650,
+            "input": 166,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3652,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7302,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3658,
+            "fill": 3412,
+            "producer": 3657,
+            "input": 4,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3659,
+              "name": "SCAN-ROW",
+              "event": 7316,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3662,
+            "fill": 3412,
+            "producer": 3661,
+            "input": 2838,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3663,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7324,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3668,
+            "fill": 3412,
+            "producer": 3667,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3669,
+              "name": "SCAN-ROW",
+              "event": 7336,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3685,
+            "fill": 3412,
+            "producer": 3684,
+            "input": 3275,
+            "brushId": 2,
+            "brushIndex": 2,
+            "assignmentObservation": {
+              "call": 3686,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7370,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3691,
+            "fill": 3412,
+            "producer": 3690,
+            "input": 3,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3692,
+              "name": "SCAN-ROW",
+              "event": 7382,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3698,
+            "fill": 3412,
+            "producer": 3697,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3699,
+              "name": "SCAN-ROW",
+              "event": 7396,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3702,
+            "fill": 3412,
+            "producer": 3701,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3703,
+              "name": "SCAN-ROW",
+              "event": 7404,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3713,
+            "fill": 3412,
+            "producer": 3712,
+            "input": 2546,
+            "brushId": 1,
+            "brushIndex": 1,
+            "assignmentObservation": {
+              "call": 3714,
+              "name": "BRUSH-FILL-SUBPART",
+              "event": 7426,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3738,
+            "fill": 3412,
+            "producer": 3737,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3739,
+              "name": "SCAN-ROW",
+              "event": 7476,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3742,
+            "fill": 3412,
+            "producer": 3741,
+            "input": 4,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3743,
+              "name": "SCAN-ROW",
+              "event": 7484,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3761,
+            "fill": 3412,
+            "producer": 3760,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3762,
+              "name": "SCAN-ROW",
+              "event": 7522,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3765,
+            "fill": 3412,
+            "producer": 3764,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3766,
+              "name": "SCAN-ROW",
+              "event": 7530,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3776,
+            "fill": 3412,
+            "producer": 3775,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3777,
+              "name": "SCAN-ROW",
+              "event": 7552,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3780,
+            "fill": 3412,
+            "producer": 3779,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3781,
+              "name": "SCAN-ROW",
+              "event": 7560,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3824,
+            "fill": 3412,
+            "producer": 3823,
+            "input": 22,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3825,
+              "name": "SCAN-ROW",
+              "event": 7648,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3828,
+            "fill": 3412,
+            "producer": 3827,
+            "input": 4,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3829,
+              "name": "SCAN-ROW",
+              "event": 7656,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3832,
+            "fill": 3412,
+            "producer": 3831,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3833,
+              "name": "SCAN-ROW",
+              "event": 7664,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3836,
+            "fill": 3412,
+            "producer": 3835,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3837,
+              "name": "SCAN-ROW",
+              "event": 7672,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3849,
+            "fill": 3412,
+            "producer": 3848,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3850,
+              "name": "SCAN-ROW",
+              "event": 7698,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          },
+          {
+            "call": 3853,
+            "fill": 3412,
+            "producer": 3852,
+            "input": 0,
+            "brushId": null,
+            "brushIndex": null,
+            "assignmentObservation": {
+              "call": 3854,
+              "name": "SCAN-ROW",
+              "event": 7706,
+              "phase": "entry",
+              "exactSelectedValue": true
+            }
+          }
+        ]
+      },
+      "brushSubparts": {
+        "calls": 47,
+        "selectedObjectEntryMatches": 47,
+        "exitEqSelected": 43,
+        "boundedExamples": [
+          {
+            "call": 235,
+            "fill": 211,
+            "selection": 234,
+            "brushId": 1,
+            "brushIndex": 1,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": true
+          },
+          {
+            "call": 291,
+            "fill": 211,
+            "selection": 290,
+            "brushId": 1,
+            "brushIndex": 1,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": true
+          },
+          {
+            "call": 305,
+            "fill": 211,
+            "selection": 304,
+            "brushId": 1,
+            "brushIndex": 1,
+            "exactSelectedObject": true,
+            "exitBrush": {
+              "status": "BOUND",
+              "value": {
+                "kind": "brush",
+                "index": 1,
+                "id": 1
+              }
+            },
+            "exitEqSelected": true
+          }
+        ]
+      },
+      "brushRecords": {
+        "calls": 47,
+        "selectedObjectEntryMatches": 47,
+        "exitEqSelected": 47
+      },
+      "irises": [
+        {
+          "call": 2183,
+          "fill": 2176,
+          "producer": 2182,
+          "args": [
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 4,
+              "raw": "4"
+            },
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1,
+              "raw": "1"
+            }
+          ],
+          "countBefore": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 2,
+            "raw": "2"
+          },
+          "countAfter": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 2,
+            "raw": "2"
+          }
+        },
+        {
+          "call": 2192,
+          "fill": 2185,
+          "producer": 2191,
+          "args": [
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 5,
+              "raw": "5"
+            },
+            {
+              "kind": "number",
+              "type": "FIXNUM",
+              "value": 1,
+              "raw": "1"
+            }
+          ],
+          "countBefore": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 2,
+            "raw": "2"
+          },
+          "countAfter": {
+            "kind": "number",
+            "type": "FIXNUM",
+            "value": 2,
+            "raw": "2"
+          }
+        }
+      ],
+      "cformCountScalarBindingStatuses": [
+        "UNBOUND"
+      ]
+    }
+  ],
+  "methods": {
+    "run": {
+      "runId": "brush-fill-methods-20261004-k",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "9d792854aee79ffe9b69bfff3f1369395d1180434088f04d9e35983023d271d5",
+      "probeOutputNames": [
+        "aaron-brush-fill-methods.txt"
+      ],
+      "preSceneProbePauseSeconds": 90,
+      "complete": true,
+      "startedAt": "2026-10-04T20:35:35.6858330+00:00",
+      "finishedAt": "2026-10-04T20:36:26.5498455+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "3b50133349eccff4d536a3f755a0bada7ab2529a5d116cf79154dc7a7c4b8a55"
+    },
+    "comparison": {
+      "observedRun": "brush-fill-methods-20261004-k",
+      "controlRun": "brush-fill-control-20261004-g",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true
+    },
+    "metadataSha256": "336cb351186fefbcee0945961376fcf80c427613f2ce2638600c650318c9394a",
+    "mapSha256": "e089992de2ea7606220bd4e78b54b07eaab5c18a286b10f657ff0afb1fe36f50",
+    "methodCount": 2,
+    "errors": 0,
+    "truncations": 0,
+    "methodDescriptions": [
+      {
+        "index": 0,
+        "function": "MY-FILL-METHOD-0",
+        "qualifiers": [],
+        "arglist": [
+          "WOT",
+          "CDEX",
+          "SDEX"
+        ],
+        "symbolConstants": [
+          {
+            "index": 0,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SDEX"
+          },
+          {
+            "index": 1,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SUB-FRAME"
+          },
+          {
+            "index": 2,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SET-MEDIANS"
+          },
+          {
+            "index": 3,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "FLASH-SPOT"
+          },
+          {
+            "index": 4,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "GOOD-START"
+          },
+          {
+            "index": 5,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "FILL-STRATEGY"
+          },
+          {
+            "index": 6,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SUBFORM"
+          },
+          {
+            "index": 7,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "POST-FILL"
+          }
+        ],
+        "specializers": [
+          {
+            "eql": {
+              "package": "COMMON-GRAPHICS-USER",
+              "name": "SUBFORM"
+            }
+          },
+          {
+            "class": "COMMON-LISP:T"
+          },
+          {
+            "class": "COMMON-LISP:T"
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "function": "MY-FILL-METHOD-1",
+        "qualifiers": [],
+        "arglist": [
+          "WOT",
+          "CDEX",
+          "SDEX"
+        ],
+        "symbolConstants": [
+          {
+            "index": 0,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SDEX"
+          },
+          {
+            "index": 1,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "MPLAN"
+          },
+          {
+            "index": 2,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SCRIPT"
+          },
+          {
+            "index": 3,
+            "package": "COMMON-LISP",
+            "name": "NTHCDR"
+          },
+          {
+            "index": 4,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "CFLIST"
+          },
+          {
+            "index": 5,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "PATCHID"
+          },
+          {
+            "index": 7,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "OUT-LIST"
+          },
+          {
+            "index": 8,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "WRITE-LIST-TO-FILL-MAP"
+          },
+          {
+            "index": 9,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "CFRAME"
+          },
+          {
+            "index": 10,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "SET-MEDIANS"
+          },
+          {
+            "index": 11,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "GOOD-START"
+          },
+          {
+            "index": 12,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "FILL-STRATEGY"
+          },
+          {
+            "index": 13,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "CFORM"
+          },
+          {
+            "index": 14,
+            "package": "COMMON-GRAPHICS-USER",
+            "name": "POST-FILL"
+          }
+        ],
+        "specializers": [
+          {
+            "eql": {
+              "package": "COMMON-GRAPHICS-USER",
+              "name": "CFORM"
+            }
+          },
+          {
+            "class": "COMMON-LISP:T"
+          },
+          {
+            "class": "COMMON-LISP:T"
+          }
+        ]
+      }
+    ],
+    "namedFunctions": [
+      {
+        "name": "MY-FILL-METHOD-0",
+        "runtime": {
+          "entry": "0x1fddec64",
+          "objectBase": "0x1fddec60",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 27104,
+          "objectOffset": 2354272,
+          "payloadOffset": 2354276,
+          "rawEnd": 2354430,
+          "nextBoundary": 2354432,
+          "tableSecondWord": 73
+        },
+        "objectBytes": 158,
+        "objectSha256": "8ac023fc1bc7d3d6126715f926543c06c04fd79b815ffd21ae9df3b19780abdf",
+        "payloadBytes": 154,
+        "payloadSha256": "8256e8d07646bf57cedd123ca264f82d42042339fa57bdc31cf6e8a0411d06f7",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "a6fc6a4217511e1faf0336a73280cae45b975ff4bfc940d6e4056fc58f4889b9",
+        "disassembledInstructions": 60
+      },
+      {
+        "name": "MY-FILL-METHOD-1",
+        "runtime": {
+          "entry": "0x1fdded04",
+          "objectBase": "0x1fdded00",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 47672,
+          "objectOffset": 2354432,
+          "payloadOffset": 2354436,
+          "rawEnd": 2354828,
+          "nextBoundary": 2354832,
+          "tableSecondWord": 192
+        },
+        "objectBytes": 396,
+        "objectSha256": "922bbc06a5645f522f3c40048c2e02532c076821b766f011a6bffd218d18b6d6",
+        "payloadBytes": 392,
+        "payloadSha256": "dde23cb82cf59fbaa087c16be9e6d64a44743e708324fffaf79ee8c62945cf69",
+        "uniqueCompleteObjectByteMatch": true,
+        "ghidraReportSha256": "78cde1f314b9102759c97bd4fd66b98edc86190a0bf9356728cf2e40b660e6b0",
+        "disassembledInstructions": 146
+      }
+    ],
+    "callCandidates": [
+      {
+        "method": "MY-FILL-METHOD-0",
+        "callee": "FILL-STRATEGY",
+        "constantIndex": 5,
+        "loadOffset": 77,
+        "callOffset": 82,
+        "cl": 0,
+        "interpretation": "Static candidate from a measured symbol constant and computed call; no named native entry hit",
+        "instructions": [
+          {
+            "offset": 77,
+            "bytes": "8b5e46",
+            "text": "MOV EBX,dword ptr [ESI + 0x46]"
+          },
+          {
+            "offset": 80,
+            "bytes": "b100",
+            "text": "MOV CL,0x0"
+          },
+          {
+            "offset": 82,
+            "bytes": "ffd7",
+            "text": "CALL EDI"
+          }
+        ]
+      },
+      {
+        "method": "MY-FILL-METHOD-0",
+        "callee": "POST-FILL",
+        "constantIndex": 7,
+        "loadOffset": 122,
+        "callOffset": 127,
+        "cl": 3,
+        "interpretation": "Static candidate from a measured symbol constant and computed call; no named native entry hit",
+        "instructions": [
+          {
+            "offset": 122,
+            "bytes": "8b5e4e",
+            "text": "MOV EBX,dword ptr [ESI + 0x4e]"
+          },
+          {
+            "offset": 125,
+            "bytes": "b103",
+            "text": "MOV CL,0x3"
+          },
+          {
+            "offset": 127,
+            "bytes": "ffd7",
+            "text": "CALL EDI"
+          }
+        ]
+      },
+      {
+        "method": "MY-FILL-METHOD-1",
+        "callee": "FILL-STRATEGY",
+        "constantIndex": 12,
+        "loadOffset": 310,
+        "callOffset": 315,
+        "cl": 0,
+        "interpretation": "Static candidate from a measured symbol constant and computed call; no named native entry hit",
+        "instructions": [
+          {
+            "offset": 310,
+            "bytes": "8b5e62",
+            "text": "MOV EBX,dword ptr [ESI + 0x62]"
+          },
+          {
+            "offset": 313,
+            "bytes": "b100",
+            "text": "MOV CL,0x0"
+          },
+          {
+            "offset": 315,
+            "bytes": "ffd7",
+            "text": "CALL EDI"
+          }
+        ]
+      },
+      {
+        "method": "MY-FILL-METHOD-1",
+        "callee": "POST-FILL",
+        "constantIndex": 14,
+        "loadOffset": 348,
+        "callOffset": 353,
+        "cl": 3,
+        "interpretation": "Static candidate from a measured symbol constant and computed call; no named native entry hit",
+        "instructions": [
+          {
+            "offset": 348,
+            "bytes": "8b5e6a",
+            "text": "MOV EBX,dword ptr [ESI + 0x6a]"
+          },
+          {
+            "offset": 351,
+            "bytes": "b103",
+            "text": "MOV CL,0x3"
+          },
+          {
+            "offset": 353,
+            "bytes": "ffd7",
+            "text": "CALL EDI"
+          }
+        ]
+      }
+    ],
+    "scope": "Read-only method enumeration and exact compiled-object mapping; method bodies were not invoked by the metadata probe"
+  },
+  "limitations": [
+    "The observer records function-cell calls, not native entry hits. The previous separate breakpoint evidence establishes the first native SELECT-BRUSH caller.",
+    "MY-FILL entry/exit delimits count changes but does not establish which internal instruction writes them.",
+    "Unchanged SCAN-ROW entry/exit values do not rule out transient changes or unobserved indirect effects.",
+    "Only these two seeded scenes and their observed branches are characterized; the full count-generation algorithm and JavaScript caller remain unrecovered.",
+    "Bounded lists and opaque object summaries cannot reconstruct input geometry or fill-map contents.",
+    "CFORM-COUNT being unbound as a scalar does not imply its callable accessor or per-form slots are absent.",
+    "Ghidra inferred C does not model the Allegro Lisp ABI; complete native reports and original files remain ignored."
+  ]
+}

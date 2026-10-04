@@ -105,6 +105,45 @@ candidates without assigning their meaning. The mapper then requires one
 exact complete match in the PLL's structurally validated object table. Only
 after that match should those bytes be treated as a named function payload.
 
+### Other bounded metadata probes
+
+The helper's defaults still capture the five selector-caller candidates.
+Other probes can specify `-MetadataPath`, `-MetadataEndMarker` and
+`-ExpectedFunctionCount`. The metadata path must be directly under `C:\temp`
+and its basename must be a declared output in the runner's owned positive
+pause request. Function names may include digits, as method capture names do.
+
+The [count/assignment follow-up](introspection/brush-fill-count.md) used:
+
+| Probe | Declared output | END marker | Headers |
+|---|---|---|---:|
+| `brush-fill-native-links.cl` | `aaron-brush-fill-native-links.txt` | `END brush-fill-native-links` | 7 |
+| `brush-fill-methods.cl` | `aaron-brush-fill-methods.txt` | `END brush-fill-methods` | 2 |
+
+Use the same terminal-A pattern, substituting its probe/output names and
+keeping a positive pause. Before capturing methods, require the final
+metadata summary to show complete enumeration, zero errors and zero
+truncations. An END marker is diagnostic framing and does not establish
+success. For the retained two-method MY-FILL capture, terminal B used:
+
+```powershell
+.\research\tools\capture-aaron-native-code.ps1 `
+  -OracleOutputRoot research\extracted\local-oracle\methods-new-run `
+  -MetadataPath C:\temp\aaron-brush-fill-methods.txt `
+  -MetadataEndMarker 'END brush-fill-methods' -ExpectedFunctionCount 2
+```
+
+Then use the ordinary exact PLL mapper and Ghidra runner. Method functions
+must be distinguished from generic dispatchers: the seven-header brush probe
+includes MY-FILL's generated dispatcher, which has zero PLL matches.
+`map-brush-fill-native-code.mjs` explicitly verifies that failed match and
+maps the other six objects. It does not weaken the ordinary matcher's
+unique-complete-object requirement. The dedicated method probe enumerates
+the actual EQL SUBFORM and EQL CFORM method bodies; both match.
+
+These custom maps are for decoding their selected objects. The selector
+breakpoint helper below still requires its original five-function caller map.
+
 ## 2. Decode the matched payloads
 
 ```powershell

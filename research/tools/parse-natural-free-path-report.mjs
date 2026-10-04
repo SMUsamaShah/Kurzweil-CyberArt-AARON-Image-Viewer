@@ -68,7 +68,7 @@ function parseExpr(source, start = 0) {
   return { value, end: index };
 }
 
-function parseRecord(line, expectedName) {
+export function parseLispRecord(line, expectedName) {
   if (!line.startsWith(`${expectedName} `)) throw new Error(`Expected ${expectedName} record`);
   let index = expectedName.length;
   const fields = Object.create(null);
@@ -87,6 +87,8 @@ function parseRecord(line, expectedName) {
   }
   return fields;
 }
+
+const parseRecord = parseLispRecord;
 
 function symbolName(value, label) {
   if (!value || value.kind !== 'symbol') throw new Error(`${label} must be a Lisp symbol`);

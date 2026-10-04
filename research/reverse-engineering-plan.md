@@ -47,6 +47,14 @@ complete equivalent port until phases 5–8 are recovered.
 
 ## Active execution order
 
+The current function checkpoint is
+[BRUSH-FILL count and assignment](introspection/brush-fill-count.md): 274
+selectors and 70 selected-object subpart entries across two controlled scenes,
+with byte-identical controls and exact native mappings for both MY-FILL
+methods. Locating the count writer across that method's callees remains the
+next boundary. This supersedes the older unresolved selector/caller scope in the
+phase table only for the observations documented in that report.
+
 Follow [the current execution plan](execution-plan.md) for the next work.
 Its first targets are continuous full-stream writer replay, exact brush
 selection, and natural FREE-PATH parity, followed by a complete drawing unit

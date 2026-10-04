@@ -8,6 +8,31 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-04
 
+Two complete paintings now measure the brush fill's count/assignment boundary.
+All 274 natural selectors consume the count left by the preceding
+`MY-FILL(SUBFORM, ...)` and match the existing JS selector. At the next
+observed boundary, `BRUSH` equals the selected object or NIL. All 70 subpart
+entries use that exact object; ten subparts change it to brush 1 by exit.
+Both paintings and scene reports match fresh controls byte for byte.
+
+Read [the count and assignment findings](introspection/brush-fill-count.md)
+and [portable evidence](introspection/evidence/brush-fill-count-and-assignment-20261004.json).
+Six ordinary functions and both actual MY-FILL methods have exact complete
+PLL matches and standalone Ghidra reports. MY-FILL's generated generic
+dispatcher has no PLL match and must remain distinct from its method bodies.
+The methods specialize on EQL SUBFORM and EQL CFORM. Their computed calls
+associated with `FILL-STRATEGY` and `POST-FILL` are static candidates.
+
+Next, inspect/trace those helper boundaries, especially the computed call
+associated with `POST-FILL` inside MY-FILL's SUBFORM method, to locate the
+count writer. Helper arguments and types remain to be measured. The capture locates changes
+inside MY-FILL but does not identify its internal writer. All 5,805 SCAN-ROW
+entry/exit counts are unchanged. Argument geometry is bounded and partial;
+capture full relevant frame/map inputs before porting the count algorithm.
+No new engine implementation or unit tests belong to this milestone.
+
+### Previous caller checkpoint
+
 The first seed-1234 selector call now has a measured native caller path:
 `DISPLAY-COLOR-PATCHES → BRUSH-FILL → SELECT-BRUSH`. Five named compiled
 functions were linked to unique complete PLL objects by exact live-byte
@@ -30,9 +55,9 @@ probe/pause workflow records the staged probe hash and an owned pause request;
 capture helpers release that pause on completion or setup failure. Run only
 one oracle at a time and do not change the system clock.
 
-The next caller boundary is `BRUSH-FILL`'s count input and brush assignment:
-measure `SUBP-COUNT` creation, `SCAN-ROW` and the `BRUSH-FILL-SUBPART` branch
-before adding a JS caller policy. The notes below retain older checkpoints;
+The count/assignment investigation above follows that caller checkpoint;
+the integrated JS caller and full count algorithm remain unrecovered.
+The notes below retain older checkpoints;
 their earlier unresolved name-to-code and selector-caller limits are superseded
 only for the five matched functions and two measured scenes above.
 
