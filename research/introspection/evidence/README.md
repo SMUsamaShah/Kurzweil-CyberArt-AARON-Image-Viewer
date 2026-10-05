@@ -1,5 +1,24 @@
 # Original-engine report excerpts
 
+## Row scanner and threshold neighbor count, 2026-10-05
+
+[`scan-row-parity-20261005.json`](scan-row-parity-20261005.json) binds all 5,805
+natural SCAN-ROW calls and 6,984 nested NEIGHBORS returns to fresh controls.
+Each painting also repeats 44,544 local mask cases and 10,368 small-map row
+queries. NEIGHBORS returns the matching in-picture count capped at three;
+SCAN-ROW excludes RX, accepts the first matching cell with three neighbors
+and returns TRIPT Z=4. The recovered row point composes all 278 linked SUBFORM
+fills with 85,401,600 final map-cell comparisons. Complete scan-time map
+equality checks cover 1,783,296,000 elements across both paints.
+
+Fresh native maps/instruction bytes and canonical REA external records are
+revalidated. The v1 return-value instrumentation bug is bound and excluded;
+v2 preserves original multiple values. Prior boundary runs requested
+SmallImage, scanner/control runs did not, but both have the same measured
+320x480 maps and identical AA0/scene bytes; cross-capture scope is explicit.
+Caller row bounds/MAX/patch selection, earlier maps and FLASH-SPOT graphics
+remain dependencies. See [the findings](../scan-row.md).
+
 ## SUBFORM boundary construction and composition, 2026-10-05
 
 [`subform-boundary-parity-20261005.json`](subform-boundary-parity-20261005.json)

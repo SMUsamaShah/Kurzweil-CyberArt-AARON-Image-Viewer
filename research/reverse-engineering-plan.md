@@ -52,9 +52,12 @@ The current function checkpoint is
 outlines, LIST-FRAME bounds and a composed fill match all 278 natural cases
 and 85,401,600 complete output-map cell comparisons across two scenes. Both
 existing maps are preserved upstream through outline/frame construction.
-Original scan-row inputs and earlier map history remain required; SCAN-ROW,
-NEIGHBORS, CFORM POST-FILL and the integrated drawing caller are next
-boundaries. The previous [boundary-map helpers](introspection/boundary-map.md)
+The [row scanner and neighbor rule](introspection/scan-row.md) now match all
+5,805 natural scans, 6,984 nested calls and the repeated 44,544 neighbor /
+10,368 scan matrix cases. Row seeds compose all 278 SUBFORM fills with matching
+complete maps. Caller row bounds, MAX, patch selection and earlier map history
+remain inputs; BRUSH-FILL preparation, CFORM POST-FILL and the integrated
+drawing caller are next boundaries. The previous [boundary-map helpers](introspection/boundary-map.md)
 still cover 149 list writes, 70 inclusive clears and 33,638,400 complete output
 cells; all 149 CFORM preparation compositions match. These measured scopes supersede the older open
 selector, count and boundary-helper items in the phase table; the generative

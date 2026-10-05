@@ -209,10 +209,23 @@ and 85,401,600 complete output-map cell comparisons in two paintings.
 Outline/frame construction preserves both existing maps; PATCH-EDGE changes the start's
 direction. All observed outlines close and contain integer TRIPT points.
 Stranded/MAX termination, fractional/empty frame inputs and POST-FILL's value-2
-conversion remain native interpretation. SCAN-ROW/NEIGHBORS and earlier map
-history remain upstream dependencies; this is not an integrated BRUSH-FILL or
+conversion remain native interpretation. Caller row bounds/MAX/patch selection
+and earlier map history remain upstream dependencies; this is not an integrated BRUSH-FILL or
 scene generator. See
 [`../research/introspection/subform-boundary.md`](../research/introspection/subform-boundary.md).
+
+`aaron-scan-row.js` supplies `countAaronPatchNeighbors`, `scanAaronPatchRow`
+and `fillAaronSubformFromRow`. NEIGHBORS counts matching in-picture neighbors
+up to three; SCAN-ROW searches `[lx, rx)` for the first matching cell with three
+neighbors and returns Z=4. Y=-1 returns NIL; more-negative Y is native
+interpretation. An optional `flashSpot`
+callback preserves the separate zero-argument graphics boundary. All 5,805
+natural scans and 6,984 nested calls match; each painting also repeats 44,544
+neighbor masks and 10,368 synthetic scans. Composed row seeds match all 278
+SUBFORM final maps. Full map identity/content and copied random previews are
+preserved while scanning. Original map history, scan schedule, MAX and form
+counts remain inputs. See
+[`../research/introspection/scan-row.md`](../research/introspection/scan-row.md).
 
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512

@@ -8,6 +8,39 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+SCAN-ROW and NEIGHBORS are now recovered for the measured integer domain.
+All 5,805 natural scans and 6,984 nested neighbor calls match independent JS.
+NEIGHBORS returns min(3, matching in-picture neighbors); SCAN-ROW searches
+[LX,RX), rejects Y=-1 before FLASH-SPOT and returns the first qualifying
+TRIPT with Z=4. Each painting repeats 44,544 neighbor masks and 10,368 scan
+queries over 48 layouts. Both drawings and scene reports equal fresh controls.
+Scan-time complete map equality checks cover 1,783,296,000 elements. Row seeds
+compose all 278 SUBFORM fills and 85,401,600 final map cells; start object
+identity links are measured. Read [the scanner findings](introspection/scan-row.md)
+and [portable evidence](introspection/evidence/scan-row-parity-20261005.json).
+
+Frozen v2 observer preserves multiple values with MULTIPLE-VALUE-PROG1 across
+the later logging flush. V1 finished without observation errors but replaced
+SCAN returns with NIL; its changed drawing and zero PATCH calls are excluded.
+Successful observer roots are scan-row-seed1234-20261005-c and
+scan-row-seed5678-20261005-e, with fresh controls -d and -f. Earlier boundary
+roots requested SmallImage and these runs did not; their measured dimensions
+and full outputs match, and that cross-capture scope is explicit.
+
+The user requested autonomous continuation across targets. An active hourly
+same-thread heartbeat named "Continue AARON reverse engineering" was created
+with id continue-aaron-reverse-engineering. Continue from this record without
+waiting for another continue message; read-only investigation can progress
+while oracle work remains serialized. Do not create duplicate automations.
+
+Next, recover BRUSH-FILL input preparation: SCRIPT(MPLAN)/CFLIST selection,
+form frame/patch inputs, scan ranges/row schedule and PATCH-EDGE MAX. No MAX
+equals the latest naturally returned CFORM-COUNT in these cases, so do not
+substitute that count for its budget. CFORM POST-FILL, map history and subpart
+painting/clearing still follow. FLASH-SPOT graphics effects remain a boundary.
+
+### Previous SUBFORM construction checkpoint
+
 SUBFORM boundary construction and a composed fill now match all 278 natural
 cases in the two controlled paintings. PATCH-EDGE derives the complete
 outline and updates the original start point's direction; LIST-FRAME derives

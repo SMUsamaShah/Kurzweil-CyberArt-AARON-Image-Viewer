@@ -33,8 +33,11 @@ frame construction remain original inputs for those CFORM cases. SUBFORM
 boundary construction now derives its outline and frame with PATCH-EDGE and
 LIST-FRAME, and the composed fill matches all 278 cases and 85,401,600 complete
 output-map cell comparisons. Existing maps are preserved before filling;
-SCAN-ROW's start/MAX/patch inputs and earlier map history remain original.
-The next priority is SCAN-ROW/NEIGHBORS and CFORM POST-FILL, then replacing original
+The row seed is now derived by recovered SCAN-ROW/NEIGHBORS: all 5,805 natural
+scans and 6,984 neighbor calls match, including 278 composed SUBFORM fills.
+The 44,544 neighbor and 10,368 scan matrix cases repeat in each painting.
+Caller row bounds, MAX, patch selection and earlier map history remain original.
+The next priority is BRUSH-FILL input preparation and CFORM POST-FILL, then replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
@@ -172,8 +175,8 @@ CFORM list writers and 70 frame clears, and composes the writer with the
 preparation helpers. The [SUBFORM boundary comparison](introspection/subform-boundary.md)
 now derives outlines and frames for all 278 natural calls and composes the
 strategy and POST-FILL with complete maps. Its upstream map equality checks
-show existing state is carried into MY-FILL. Recover SCAN-ROW/NEIGHBORS to
-derive its start/MAX/patch inputs next; earlier map history, CFORM POST-FILL
+show existing state is carried into MY-FILL. SCAN-ROW/NEIGHBORS now derive the
+row point; recover BRUSH-FILL's bounds/MAX/patch selection next. Earlier map history, CFORM POST-FILL
 and the integrated callers remain open. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.

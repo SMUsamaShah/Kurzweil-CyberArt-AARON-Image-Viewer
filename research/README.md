@@ -24,8 +24,12 @@ now derives PATCH-EDGE outlines and LIST-FRAME bounds for all 278 natural
 cases, and composes them through POST-FILL with 85,401,600 complete output-map
 cell comparisons. Both maps equal their input state at PATCH-EDGE exit and
 MY-FILL entry, before the composed fill changes them.
-Original scan-row inputs and earlier map history remain required; SCAN-ROW,
-NEIGHBORS and CFORM POST-FILL are the next upstream boundaries.
+The [row scanner and neighbor rule](introspection/scan-row.md) now match all
+5,805 natural scans, 6,984 nested neighbor calls, and the 44,544 neighbor /
+10,368 scan matrix cases repeated in each painting. Independent row seeds
+compose all 278 SUBFORM fills with the same complete-map parity. Caller row
+bounds, MAX, patch selection and earlier map history remain original inputs;
+BRUSH-FILL preparation and CFORM POST-FILL are the next boundaries.
 
 ## Principles
 

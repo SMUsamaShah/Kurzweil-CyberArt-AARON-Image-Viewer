@@ -247,6 +247,15 @@ unresolved. Treat extra readers as executable calls, and compare fresh control
 bytes even when the probe's error count is zero. See
 [the preparation findings](introspection/fill-preparation.md).
 
+A trailing logging/flush form can also replace an original return value. The
+first SCAN-ROW observer finished with zero errors, but a WHEN after its
+UNWIND-PROTECT returned NIL to the caller instead of the captured TRIPT. The
+drawing changed and PATCH-EDGE was never entered. Preserve original multiple
+values with MULTIPLE-VALUE-PROG1 when logging follows the original call, as
+well as through cleanup. Review what each complete wrapper returns, not just
+what its RETURN record prints. Frozen v2 and both fresh controls pass; v1 is
+diagnostic only. See [the scanner findings](introspection/scan-row.md).
+
 Large map observers can exceed the run limit without a staging permission
 failure. The first SUBFORM observer also required SUBP-COUNT before its first
 binding; record the unbound state explicitly rather than treating it as a
