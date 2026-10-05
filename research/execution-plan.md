@@ -3,6 +3,13 @@
 Prepared 2026-09-27; updated 2026-10-05. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
+The 2026-10-06 native checkpoint maps six painting/buffer objects and validates
+1,364 instruction rows against the PLL, with fresh drawing/scene controls.
+See [the native findings](introspection/brush-painting-native.md). The current
+buffer experiment requires complete per-child map boundaries; its first tape
+is excluded for missing MAIN/READY and COMPLETE/END. Native setter references
+are candidates until natural complete captures establish their behavior.
+
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for
 controlled seeds 1234 and 5678. JavaScript carries writer state through 28,075
 and 33,198 original calls, respectively, and reproduces every command byte.

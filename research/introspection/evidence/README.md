@@ -1,5 +1,17 @@
 # Original-engine report excerpts
 
+## Native painting and buffer mapping, 2026-10-06
+
+[`brush-buffer-native-20261006.json`](brush-buffer-native-20261006.json)
+binds six unique complete PLL objects, 1,364 byte-checked instruction rows
+covering 3,829 payload bytes, canonical external REA records and two native
+runs whose complete drawings/scenes equal a fresh uninstrumented control.
+BUFFER-FEATURE and BUFFER-HOLE expose candidate native setter sites;
+their natural behavior and attribution remain to be captured completely.
+The bounded BUFFER-HEAD constant list is a prefix, not a four-feature census.
+No REA Windows native-provider session or immediate-caller capture is claimed.
+See [the native findings](../brush-painting-native.md).
+
 ## Natural BRUSH-STROKE value-3 marking and clears, 2026-10-05
 
 [`brush-stroke-boundary-parity-20261005.json`](brush-stroke-boundary-parity-20261005.json)

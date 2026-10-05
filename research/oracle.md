@@ -279,6 +279,17 @@ An interrupted or timed-out runner may archive partial reports without writing
 `summary.json`; those reports are diagnostics, not completed evidence. See
 [the SUBFORM boundary findings](introspection/subform-boundary.md).
 
+The runner's `summary.complete` checks the scene report and AA0 terminator;
+it does not require completion of an arbitrary `-ProbeOutputNames` report.
+Once those scene files finish, it stops the process and archives staged files.
+Require the observer's own installation/READY, paired calls, COMPLETE and END
+before using its tape. The first buffer observer preserved the drawing but
+never logged MAIN installation/READY and ended during the last clear, with no
+footer. Its last installation was an experimental `.INV-S-AREF` replacement;
+the exact installation error is not captured. That tape is diagnostic only.
+The replacement observes complete natural function boundaries without that
+primitive hook. An archived partial report is not a staging-permission failure.
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,

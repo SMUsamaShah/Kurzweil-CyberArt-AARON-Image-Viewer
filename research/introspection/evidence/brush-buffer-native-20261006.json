@@ -1,0 +1,1195 @@
+{
+  "schemaVersion": 1,
+  "kind": "Seed-1234 brush buffer native mapping with byte-validated standalone Ghidra reports and canonical REA evidence round-trips",
+  "rea": {
+    "package": "rea-agents",
+    "version": "3.2.1",
+    "packageJsonSha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411"
+  },
+  "nativeRuns": [
+    {
+      "runId": "brush-painting-native-seed1234-20261005-a",
+      "root": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "summarySha256": "7be92a852f52c70e77f106a1a7e3221c72e5c5cc9a55f256f61fa13873d5bbfc",
+      "requestSha256": "40e2de4319f8e7d075a3424e531a8483e349a4137cab53527bd4bec03e763e1a",
+      "probeSourceSha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "stagedProbeSha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "outputNames": [
+        "aaron-brush-painting-native-links.txt"
+      ],
+      "pauseSeconds": 90,
+      "releaseMarkerSha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "nativeLinksSha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "functionObjectMetadataSha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "metadataSummary": {
+        "logicalRecordCounts": {
+          "target": 4,
+          "arglist": 4,
+          "header": 4,
+          "constantcount": 4,
+          "constant": 77
+        },
+        "targetNames": [
+          "SCREEN-AND-STORE",
+          "BRUSH-FILL-SUBPART",
+          "BUFFER-HEAD",
+          "BUFFER-ANYTHING"
+        ],
+        "headers": [
+          {
+            "name": "SCREEN-AND-STORE",
+            "bytesHex": "3720f77b4e20671b31207f1b312008801e006c4ae21ff19f0000bfc233205a4ae21f91c54120000000000000000048000000d7e835201f0c362057dc37202707"
+          },
+          {
+            "name": "BRUSH-FILL-SUBPART",
+            "bytesHex": "2e20170b36200f994e2051e0a12008801e00c433e11f1ca00000d7c83320b233e11fb1942b20000000000000000024000000d7e83520dfcc3320170e3620f7e3"
+          },
+          {
+            "name": "BUFFER-HEAD",
+            "bytesHex": "00000b0d0020a269252091ca4120088004003420e31ff99f0000575f34202220e31f791a3420000000000000000004000000d7e8352089c441209fb33620f7cc"
+          },
+          {
+            "name": "BUFFER-ANYTHING",
+            "bytesHex": "3520ffd637205f774e2051e0a12008800d00ccbfdf1ffa9f00001fcf3320babfdf1fb1942b2000000000000000003c000000d7e83520270736204fe935202799"
+          }
+        ],
+        "pointerCandidates": [
+          {
+            "name": "SCREEN-AND-STORE",
+            "entryCandidate": "0x1fe24a6c",
+            "taggedVectorCandidate": "0x1fe24a5a",
+            "vectorBaseCandidate": "0x1fe24a58"
+          },
+          {
+            "name": "BRUSH-FILL-SUBPART",
+            "entryCandidate": "0x1fe133c4",
+            "taggedVectorCandidate": "0x1fe133b2",
+            "vectorBaseCandidate": "0x1fe133b0"
+          },
+          {
+            "name": "BUFFER-HEAD",
+            "entryCandidate": "0x1fe32034",
+            "taggedVectorCandidate": "0x1fe32022",
+            "vectorBaseCandidate": "0x1fe32020"
+          },
+          {
+            "name": "BUFFER-ANYTHING",
+            "entryCandidate": "0x1fdfbfcc",
+            "taggedVectorCandidate": "0x1fdfbfba",
+            "vectorBaseCandidate": "0x1fdfbfb8"
+          }
+        ],
+        "reportedTotals": {
+          "targets": 4,
+          "functions": 4,
+          "headers": 4,
+          "constants": 77,
+          "errors": 0,
+          "truncations": 0
+        },
+        "declaredConstantCounts": [
+          {
+            "name": "SCREEN-AND-STORE",
+            "count": 30
+          },
+          {
+            "name": "BRUSH-FILL-SUBPART",
+            "count": 30
+          },
+          {
+            "name": "BUFFER-HEAD",
+            "count": 4
+          },
+          {
+            "name": "BUFFER-ANYTHING",
+            "count": 13
+          }
+        ],
+        "physicallyWrappedLogicalRecordCount": 0,
+        "boundedNestedSummaries": [
+          {
+            "functionName": "BUFFER-HEAD",
+            "index": 1,
+            "marker": "(:TYPE CONS)"
+          }
+        ],
+        "constantValueInterpretation": "Raw metadata is byte-hashed and record-head counted. Nested printed cons summaries marked (:TYPE CONS) are depth-bounded and are not treated as complete constant lists."
+      },
+      "manifestSha256": "89a424ce03a6f77624eef3faf60da877179838cde5dfb0810425fcc8e054833a",
+      "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "runId": "brush-buffer-native-seed1234-20261005-c",
+      "root": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "summarySha256": "0e4aa45dd96a3a095284aaac7fd6511152bf62dbc7048d326f234db4e5b3fb79",
+      "requestSha256": "1f02a2edf7634494b27be8ce5f0c40283a5e4d6cb7d10d6cf488fe8b7e764dd7",
+      "probeSourceSha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "stagedProbeSha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "outputNames": [
+        "aaron-brush-buffer-native-links.txt"
+      ],
+      "pauseSeconds": 90,
+      "releaseMarkerSha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "nativeLinksSha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "functionObjectMetadataSha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "metadataSummary": {
+        "logicalRecordCounts": {
+          "target": 2,
+          "arglist": 2,
+          "header": 2,
+          "constantcount": 2,
+          "constant": 27
+        },
+        "targetNames": [
+          "BUFFER-FEATURE",
+          "BUFFER-HOLE"
+        ],
+        "headers": [
+          {
+            "name": "BUFFER-FEATURE",
+            "bytesHex": "352061a73420c7c633200fe7352008800f001417e01ff89f0000f7cc33200217e01fb1942b20000000000000000028000000d7e83520270736204fe935202799"
+          },
+          {
+            "name": "BUFFER-HOLE",
+            "bytesHex": "35200fe435202a662520f7e3352008880c003c2ce11ffb9f0000efc833202a2ce11f89c941200000000000000000280000005fd737201fcc3320070c362097be"
+          }
+        ],
+        "pointerCandidates": [
+          {
+            "name": "BUFFER-FEATURE",
+            "entryCandidate": "0x1fe01714",
+            "taggedVectorCandidate": "0x1fe01702",
+            "vectorBaseCandidate": "0x1fe01700"
+          },
+          {
+            "name": "BUFFER-HOLE",
+            "entryCandidate": "0x1fe12c3c",
+            "taggedVectorCandidate": "0x1fe12c2a",
+            "vectorBaseCandidate": "0x1fe12c28"
+          }
+        ],
+        "reportedTotals": {
+          "targets": 2,
+          "functions": 2,
+          "headers": 2,
+          "constants": 27,
+          "errors": 0,
+          "truncations": 0
+        },
+        "declaredConstantCounts": [
+          {
+            "name": "BUFFER-FEATURE",
+            "count": 15
+          },
+          {
+            "name": "BUFFER-HOLE",
+            "count": 12
+          }
+        ],
+        "physicallyWrappedLogicalRecordCount": 0,
+        "boundedNestedSummaries": [],
+        "constantValueInterpretation": "Raw metadata is byte-hashed and record-head counted. Nested printed cons summaries marked (:TYPE CONS) are depth-bounded and are not treated as complete constant lists."
+      },
+      "manifestSha256": "45d119a9681d64599476b35bcc122a6ac4d7f6723ca8b0baf1cf3a915badef6a",
+      "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    }
+  ],
+  "control": {
+    "runId": "brush-painting-native-control-seed1234-20261005-b",
+    "root": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b",
+    "summarySha256": "30ab5920cbfe3686e60140a0524aad79768b5d6ebfb9f319567fec6bf03aa13d",
+    "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+    "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+    "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+    "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+  },
+  "drawingParity": {
+    "aa0ByteIdenticalToFreshControl": true,
+    "sceneReportByteIdenticalToFreshControl": true,
+    "sameSetupHashes": true,
+    "checkedNativeRunIds": [
+      "brush-painting-native-seed1234-20261005-a",
+      "brush-buffer-native-seed1234-20261005-c"
+    ],
+    "setup": {
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    }
+  },
+  "nativeMapping": {
+    "uniqueCompletePllObjects": 6,
+    "functions": [
+      {
+        "name": "SCREEN-AND-STORE",
+        "nativeRunId": "brush-painting-native-seed1234-20261005-a",
+        "runtimeEntryForThisRun": "0x1fe24a6c",
+        "capture": {
+          "windowFile": "screen-and-store.native-window.bin",
+          "windowSha256": "38d636f56b905291c0d19afe5ec05bd8084347a7fd95f0978dce1de1d2a06e20",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe24a2c",
+          "functionObjectHeaderHex": "3720f77b4e20671b31207f1b312008801e006c4ae21ff19f0000bfc233205a4ae21f91c54120000000000000000048000000d7e835201f0c362057dc37202707"
+        },
+        "pll": {
+          "recordOffset": 59264,
+          "objectOffset": 2640488,
+          "payloadOffset": 2640492,
+          "rawEnd": 2641716,
+          "nextBoundary": 2641720,
+          "tableSecondWord": 608
+        },
+        "compiledObject": {
+          "header": "0x2646c",
+          "encodedWords": 612,
+          "objectBytes": 1228,
+          "objectSha256": "f96487d52953a1e8d5748d6d5b0d168a8eca65d0ab83eb2cecab478c80c0b54a",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "screen-and-store.native-payload.bin",
+          "bytes": 1224,
+          "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "f555f5ef6b8f6704c6f19bb55c38d5355d78915dade995e5cee80d4d4debfe94",
+          "headlessLogSha256": "90b7287dfe02487744381c3cbfaa708a80517811f5d51d83482fbe319a3ff593",
+          "decompilationCompleted": true,
+          "instructionCount": 424,
+          "instructionBytesCompared": 1216,
+          "payloadBytes": 1224,
+          "payloadInstructionCoveragePercent": 99.3464,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 1216,
+              "bytes": 1216
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 1216,
+              "endExclusive": 1224,
+              "bytes": 8
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_3f4788e0b9ed83168f495a4d466214b620ee1dee7f3db5716bb045945a30d7bd",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+          "canonicalExportSha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "f555f5ef6b8f6704c6f19bb55c38d5355d78915dade995e5cee80d4d4debfe94",
+          "importResultPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-export.json"
+        }
+      },
+      {
+        "name": "BRUSH-FILL-SUBPART",
+        "nativeRunId": "brush-painting-native-seed1234-20261005-a",
+        "runtimeEntryForThisRun": "0x1fe133c4",
+        "capture": {
+          "windowFile": "brush-fill-subpart.native-window.bin",
+          "windowSha256": "0d2bedb27027070fdbdb364ab689c73e90a1e68cd76c516836b8bfe3d7b12012",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe13384",
+          "functionObjectHeaderHex": "2e20170b36200f994e2051e0a12008801e00c433e11f1ca00000d7c83320b233e11fb1942b20000000000000000024000000d7e83520dfcc3320170e3620f7e3"
+        },
+        "pll": {
+          "recordOffset": 56648,
+          "objectOffset": 2569152,
+          "payloadOffset": 2569156,
+          "rawEnd": 2569998,
+          "nextBoundary": 2570000,
+          "tableSecondWord": 417
+        },
+        "compiledObject": {
+          "header": "0x1a56c",
+          "encodedWords": 421,
+          "objectBytes": 846,
+          "objectSha256": "b7bd6238eaf8690e6b19232b2ae64f462bd74a93e2e89e40d26ca623f0c53fc5",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "brush-fill-subpart.native-payload.bin",
+          "bytes": 842,
+          "sha256": "e3a4c0c740034391f2a48b3a4cfbc77dc74dfa417d39777e291249e81bc2ff50"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "2ac31f3dbf68b80bf3a72d0cc220acce266d38f0fa553eabf490d975b5dc6ec2",
+          "headlessLogSha256": "969d386d3592bfa25241894bbed3c93e4c182bdd1e20ca3c9b654b4470f5fdca",
+          "decompilationCompleted": true,
+          "instructionCount": 293,
+          "instructionBytesCompared": 834,
+          "payloadBytes": 842,
+          "payloadInstructionCoveragePercent": 99.0499,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 834,
+              "bytes": 834
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 834,
+              "endExclusive": 842,
+              "bytes": 8
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_a15671da13589366d17ba66b6a8e45b83f8ac5c639a27716372607a94d063c3d",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+          "canonicalExportSha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "2ac31f3dbf68b80bf3a72d0cc220acce266d38f0fa553eabf490d975b5dc6ec2",
+          "importResultPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-export.json"
+        }
+      },
+      {
+        "name": "BUFFER-HEAD",
+        "nativeRunId": "brush-painting-native-seed1234-20261005-a",
+        "runtimeEntryForThisRun": "0x1fe32034",
+        "capture": {
+          "windowFile": "buffer-head.native-window.bin",
+          "windowSha256": "f74f9e782cadaab2884693bf07c22bf746e0514af7f004d289715d7845dc9dfb",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe32000",
+          "functionObjectHeaderHex": "00000b0d0020a269252091ca4120088004003420e31ff99f0000575f34202220e31f791a3420000000000000000004000000d7e8352089c441209fb33620f7cc"
+        },
+        "pll": {
+          "recordOffset": 25544,
+          "objectOffset": 2695216,
+          "payloadOffset": 2695220,
+          "rawEnd": 2695366,
+          "nextBoundary": 2695368,
+          "tableSecondWord": 69
+        },
+        "compiledObject": {
+          "header": "0x496c",
+          "encodedWords": 73,
+          "objectBytes": 150,
+          "objectSha256": "0484d2f1aec8af7e650b8ad5bd90331014722d139b79a49fa08db75576f5a6b1",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "buffer-head.native-payload.bin",
+          "bytes": 146,
+          "sha256": "3e1d6450d5ab9d6b81399aa10c945befa7ce1393018a7cbec7461d5f4db1565f"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "0e9579e9bbc1f4a00e7efd5aa6b77d516f5b10c86c77837b75c650012dcacaba",
+          "headlessLogSha256": "3022d30f8519728e959f247d1167b170e74d89a03e6ae558e82585a424d60d1b",
+          "decompilationCompleted": true,
+          "instructionCount": 55,
+          "instructionBytesCompared": 138,
+          "payloadBytes": 146,
+          "payloadInstructionCoveragePercent": 94.5205,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 138,
+              "bytes": 138
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 138,
+              "endExclusive": 146,
+              "bytes": 8
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_f12182e3aff4030d81e91ff6c7c43ba2c7f43ee11430a579f1fd6e5ca42c8220",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+          "canonicalExportSha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "0e9579e9bbc1f4a00e7efd5aa6b77d516f5b10c86c77837b75c650012dcacaba",
+          "importResultPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-export.json"
+        }
+      },
+      {
+        "name": "BUFFER-ANYTHING",
+        "nativeRunId": "brush-painting-native-seed1234-20261005-a",
+        "runtimeEntryForThisRun": "0x1fdfbfcc",
+        "capture": {
+          "windowFile": "buffer-anything.native-window.bin",
+          "windowSha256": "1286596f2be43fcd76aed9ef5cee9ff1b79baa092001babc4f70ed0186c57704",
+          "windowBytes": 16384,
+          "windowBase": "0x1fdfbf8c",
+          "functionObjectHeaderHex": "3520ffd637205f774e2051e0a12008800d00ccbfdf1ffa9f00001fcf3320babfdf1fb1942b2000000000000000003c000000d7e83520270736204fe935202799"
+        },
+        "pll": {
+          "recordOffset": 55664,
+          "objectOffset": 2473928,
+          "payloadOffset": 2473932,
+          "rawEnd": 2474682,
+          "nextBoundary": 2474688,
+          "tableSecondWord": 371
+        },
+        "compiledObject": {
+          "header": "0x1776c",
+          "encodedWords": 375,
+          "objectBytes": 754,
+          "objectSha256": "b9e382f164263f419700a484b6de0600dead3c458f999f4300765b9b27d5cdaf",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "buffer-anything.native-payload.bin",
+          "bytes": 750,
+          "sha256": "8e09df53ad8efd01c2b9794a2196e6a9e13aa80165834103dd0492193b5a8dc4"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "8830ff331fb1ba15fbc0351d951fdba7343e4f2401c6346494828fd1e17aa8c0",
+          "headlessLogSha256": "3cb79ded31ced6da0271eab458534b32d324270e8382afd8a4b7e114eca7aeec",
+          "decompilationCompleted": true,
+          "instructionCount": 258,
+          "instructionBytesCompared": 741,
+          "payloadBytes": 750,
+          "payloadInstructionCoveragePercent": 98.8,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 741,
+              "bytes": 741
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 741,
+              "endExclusive": 750,
+              "bytes": 9
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_f1e1bdcb29957f5accbe04208b659e828ee4617fec794c77d82b62e480d6dab3",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+          "canonicalExportSha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "8830ff331fb1ba15fbc0351d951fdba7343e4f2401c6346494828fd1e17aa8c0",
+          "importResultPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-export.json"
+        }
+      },
+      {
+        "name": "BUFFER-FEATURE",
+        "nativeRunId": "brush-buffer-native-seed1234-20261005-c",
+        "runtimeEntryForThisRun": "0x1fe01714",
+        "capture": {
+          "windowFile": "buffer-feature.native-window.bin",
+          "windowSha256": "6717b6aa76064e0ba8cf14ee5b31ecddd679cb48fb698811df01898d220a3a62",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe016d4",
+          "functionObjectHeaderHex": "352061a73420c7c633200fe7352008800f001417e01ff89f0000f7cc33200217e01fb1942b20000000000000000028000000d7e83520270736204fe935202799"
+        },
+        "pll": {
+          "recordOffset": 49424,
+          "objectOffset": 2496272,
+          "payloadOffset": 2496276,
+          "rawEnd": 2496720,
+          "nextBoundary": 2496720,
+          "tableSecondWord": 218
+        },
+        "compiledObject": {
+          "header": "0xde6c",
+          "encodedWords": 222,
+          "objectBytes": 448,
+          "objectSha256": "987498ef8786a15e566c5b320fff469018ef88d47c5480711ea1006f441d380b",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "buffer-feature.native-payload.bin",
+          "bytes": 444,
+          "sha256": "8d8ae305b450897b99edc85d8ee6d32ef0cadaea6e208f2d7cdb155200273bba"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "d66f817d6ae5fc4aafe657f5c9bfd52bc82b8e7444c334764a51034d19e9fb1d",
+          "headlessLogSha256": "fcd9813feeb38e02accbc503ae82eacee15b73de5e90be354d1666f2cf83e78b",
+          "decompilationCompleted": true,
+          "instructionCount": 164,
+          "instructionBytesCompared": 435,
+          "payloadBytes": 444,
+          "payloadInstructionCoveragePercent": 97.973,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 435,
+              "bytes": 435
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 435,
+              "endExclusive": 444,
+              "bytes": 9
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_497186abd6ae969249f590caf636a5187795a9f868310167ffaa17967e48a9fc",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+          "canonicalExportSha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "d66f817d6ae5fc4aafe657f5c9bfd52bc82b8e7444c334764a51034d19e9fb1d",
+          "importResultPath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-export.json"
+        }
+      },
+      {
+        "name": "BUFFER-HOLE",
+        "nativeRunId": "brush-buffer-native-seed1234-20261005-c",
+        "runtimeEntryForThisRun": "0x1fe12c3c",
+        "capture": {
+          "windowFile": "buffer-hole.native-window.bin",
+          "windowSha256": "d8d575449a8f94d89d1c90fdad9b7b47d4a56d5852d43d4e71664b273ff9df47",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe12bfc",
+          "functionObjectHeaderHex": "35200fe435202a662520f7e3352008880c003c2ce11ffb9f0000efc833202a2ce11f89c941200000000000000000280000005fd737201fcc3320070c362097be"
+        },
+        "pll": {
+          "recordOffset": 50240,
+          "objectOffset": 2567224,
+          "payloadOffset": 2567228,
+          "rawEnd": 2567702,
+          "nextBoundary": 2567704,
+          "tableSecondWord": 233
+        },
+        "compiledObject": {
+          "header": "0xed6c",
+          "encodedWords": 237,
+          "objectBytes": 478,
+          "objectSha256": "49b1db708765f95d4fedbfa760225871e6a48f92f4c7f15dd47dd8757193494e",
+          "uniqueCompleteObjectByteMatch": true
+        },
+        "payload": {
+          "file": "buffer-hole.native-payload.bin",
+          "bytes": 474,
+          "sha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649",
+          "headlessLogSha256": "39664226fa479642c8d48542ae3dbe3b3ccb5fd03abdc7fa542bd79cb7e68949",
+          "decompilationCompleted": true,
+          "instructionCount": 170,
+          "instructionBytesCompared": 465,
+          "payloadBytes": 474,
+          "payloadInstructionCoveragePercent": 98.1013,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 465,
+              "bytes": 465
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 465,
+              "endExclusive": 474,
+              "bytes": 9
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_b0504783b0779751ebd798c160f65b2840d8c9a24a02937dede318853ffd072e",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+          "canonicalExportSha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649",
+          "importResultPath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-export.json"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "REA Evidence was imported from standalone Ghidra JSON using provider id ghidra-standalone and operation standalone_ghidra_function_analysis; no REA native Ghidra provider session was launched.",
+    "REA 3.2.1 has no raw-binary subject format. Each bundle preserves reported_format raw in its result and parameters while representing the Evidence subject format as unknown.",
+    "The REA bundle helper verifies report structure and subject-file SHA binding; this derivation independently compares every reported instruction byte to the exact mapped PLL payload but does not authenticate how Ghidra produced the JSON.",
+    "The x86 Windows compiler specification does not model Allegro Lisp register conventions or tagged objects; Ghidra C types, arguments and expressions are not recovered Lisp source.",
+    "Native metadata is preserved byte-for-byte and hash-bound. Bounded nested cons summaries marked (:TYPE CONS) are not treated as full constant lists, and metadata does not establish dynamic calls or a complete call graph.",
+    "Only six selected functions from these seed-1234 captures are included; runtime entry addresses are per-run observations, not fixed addresses across builds.",
+    "Only reachable Ghidra instructions are reported. Uncovered payload ranges are retained and not labeled as code or data."
+  ],
+  "sourceHashes": [
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleCommands.js",
+      "sha256": "e8c7f31cc64d589256f8903324e3088a8e395f6ec5487c415ca42e1e5db3c3d9",
+      "bytes": 2149
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleFiles.js",
+      "sha256": "3171e7a656f43710c2ee0a38391751df87f21b3329c825ff4fa3d0a9928fda5e",
+      "bytes": 1430
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceLedger.js",
+      "sha256": "2a63701c3cc5de15269e7e504ce3b33d6108b64dc1a50cc7d5fe94ee3a457a1e",
+      "bytes": 11902
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/cliEvidenceCommands.js",
+      "sha256": "4c6f9cd33303d53a5c5692343702ecec75633460a9130ff13e0bc538c77ec094",
+      "bytes": 2419
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/analysisProfile.js",
+      "sha256": "76d1b0c2a2f472ae201b77ef93db29c0901e3964538c864a8fe133ab407b65f8",
+      "bytes": 2059
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidence.js",
+      "sha256": "b277c68d4b619d38a2e9d7d1faed08b0200ee7b678044cf666367034ccfb3b89",
+      "bytes": 8050
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidenceBundle.js",
+      "sha256": "7bd7b066f0ed8c6a403d2c12feca0fa18eb1f3f9e1cef39f94224897f31a85ca",
+      "bytes": 12582
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/package.json",
+      "sha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411",
+      "bytes": 10943
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/scripts/rea.mjs",
+      "sha256": "293fa0e5a2f55194964eb89f50296685ab14827c42cbdf5b72f82f4b867ffeef",
+      "bytes": 2549
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-brush-buffer-native-links.txt",
+      "sha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "bytes": 3456
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-native-code-release.txt",
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "bytes": 36
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-pre-scene-probe.cl",
+      "sha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "bytes": 8664
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-probe-loader.cl",
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+      "bytes": 162
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/buffer-feature.native-window.bin",
+      "sha256": "6717b6aa76064e0ba8cf14ee5b31ecddd679cb48fb698811df01898d220a3a62",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/buffer-hole.native-window.bin",
+      "sha256": "d8d575449a8f94d89d1c90fdad9b7b47d4a56d5852d43d4e71664b273ff9df47",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/function-object-metadata.txt",
+      "sha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "bytes": 3456
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/manifest.json",
+      "sha256": "45d119a9681d64599476b35bcc122a6ac4d7f6723ca8b0baf1cf3a915badef6a",
+      "bytes": 1930
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/buffer-feature.native-payload.bin",
+      "sha256": "8d8ae305b450897b99edc85d8ee6d32ef0cadaea6e208f2d7cdb155200273bba",
+      "bytes": 444
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/buffer-hole.native-payload.bin",
+      "sha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98",
+      "bytes": 474
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.ghidra.json",
+      "sha256": "d66f817d6ae5fc4aafe657f5c9bfd52bc82b8e7444c334764a51034d19e9fb1d",
+      "bytes": 40129
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.headless.log",
+      "sha256": "fcd9813feeb38e02accbc503ae82eacee15b73de5e90be354d1666f2cf83e78b",
+      "bytes": 8133
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-bundle.json",
+      "sha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+      "bytes": 51482
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-export.json",
+      "sha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+      "bytes": 51482
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.ghidra.json",
+      "sha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649",
+      "bytes": 42134
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.headless.log",
+      "sha256": "39664226fa479642c8d48542ae3dbe3b3ccb5fd03abdc7fa542bd79cb7e68949",
+      "bytes": 8097
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-bundle.json",
+      "sha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+      "bytes": 54191
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-export.json",
+      "sha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+      "bytes": 54191
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/native-code-map.json",
+      "sha256": "99e3db2f55e41b99f6d92d62f840645fee02350b431f044c2089c12e3eec84fd",
+      "bytes": 3122
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/pre-scene-probe-request.json",
+      "sha256": "1f02a2edf7634494b27be8ce5f0c40283a5e4d6cb7d10d6cf488fe8b7e764dd7",
+      "bytes": 473
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/summary.json",
+      "sha256": "0e4aa45dd96a3a095284aaac7fd6511152bf62dbc7048d326f234db4e5b3fb79",
+      "bytes": 907
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/summary.json",
+      "sha256": "30ab5920cbfe3686e60140a0524aad79768b5d6ebfb9f319567fec6bf03aa13d",
+      "bytes": 807
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-brush-painting-native-links.txt",
+      "sha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "bytes": 8868
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-native-code-release.txt",
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "bytes": 36
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-pre-scene-probe.cl",
+      "sha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "bytes": 8739
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-probe-loader.cl",
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+      "bytes": 162
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/brush-fill-subpart.native-window.bin",
+      "sha256": "0d2bedb27027070fdbdb364ab689c73e90a1e68cd76c516836b8bfe3d7b12012",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/buffer-anything.native-window.bin",
+      "sha256": "1286596f2be43fcd76aed9ef5cee9ff1b79baa092001babc4f70ed0186c57704",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/buffer-head.native-window.bin",
+      "sha256": "f74f9e782cadaab2884693bf07c22bf746e0514af7f004d289715d7845dc9dfb",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/function-object-metadata.txt",
+      "sha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "bytes": 8868
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/manifest.json",
+      "sha256": "89a424ce03a6f77624eef3faf60da877179838cde5dfb0810425fcc8e054833a",
+      "bytes": 3312
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/brush-fill-subpart.native-payload.bin",
+      "sha256": "e3a4c0c740034391f2a48b3a4cfbc77dc74dfa417d39777e291249e81bc2ff50",
+      "bytes": 842
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/buffer-anything.native-payload.bin",
+      "sha256": "8e09df53ad8efd01c2b9794a2196e6a9e13aa80165834103dd0492193b5a8dc4",
+      "bytes": 750
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/buffer-head.native-payload.bin",
+      "sha256": "3e1d6450d5ab9d6b81399aa10c945befa7ce1393018a7cbec7461d5f4db1565f",
+      "bytes": 146
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.ghidra.json",
+      "sha256": "2ac31f3dbf68b80bf3a72d0cc220acce266d38f0fa553eabf490d975b5dc6ec2",
+      "bytes": 71193
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.headless.log",
+      "sha256": "969d386d3592bfa25241894bbed3c93e4c182bdd1e20ca3c9b654b4470f5fdca",
+      "bytes": 8195
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-bundle.json",
+      "sha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+      "bytes": 87429
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-export.json",
+      "sha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+      "bytes": 87429
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.ghidra.json",
+      "sha256": "8830ff331fb1ba15fbc0351d951fdba7343e4f2401c6346494828fd1e17aa8c0",
+      "bytes": 61873
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.headless.log",
+      "sha256": "3cb79ded31ced6da0271eab458534b32d324270e8382afd8a4b7e114eca7aeec",
+      "bytes": 8159
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-bundle.json",
+      "sha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+      "bytes": 75927
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-export.json",
+      "sha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+      "bytes": 75927
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.ghidra.json",
+      "sha256": "0e9579e9bbc1f4a00e7efd5aa6b77d516f5b10c86c77837b75c650012dcacaba",
+      "bytes": 14433
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.headless.log",
+      "sha256": "3022d30f8519728e959f247d1167b170e74d89a03e6ae558e82585a424d60d1b",
+      "bytes": 8110
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-bundle.json",
+      "sha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+      "bytes": 21998
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-export.json",
+      "sha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+      "bytes": 21998
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.ghidra.json",
+      "sha256": "f555f5ef6b8f6704c6f19bb55c38d5355d78915dade995e5cee80d4d4debfe94",
+      "bytes": 102045
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.headless.log",
+      "sha256": "90b7287dfe02487744381c3cbfaa708a80517811f5d51d83482fbe319a3ff593",
+      "bytes": 8172
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-bundle.json",
+      "sha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+      "bytes": 122718
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-export.json",
+      "sha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+      "bytes": 122718
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/native-code-map.json",
+      "sha256": "6945b1cd077613e96a9b86fa0c45ce04138e581793ede6ffcaa55d45909d1e2e",
+      "bytes": 5594
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/screen-and-store.native-payload.bin",
+      "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+      "bytes": 1224
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/screen-and-store.native-window.bin",
+      "sha256": "38d636f56b905291c0d19afe5ec05bd8084347a7fd95f0978dce1de1d2a06e20",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/pre-scene-probe-request.json",
+      "sha256": "40e2de4319f8e7d075a3424e531a8483e349a4137cab53527bd4bec03e763e1a",
+      "bytes": 479
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/summary.json",
+      "sha256": "7be92a852f52c70e77f106a1a7e3221c72e5c5cc9a55f256f61fa13873d5bbfc",
+      "bytes": 911
+    },
+    {
+      "path": "research/introspection/brush-buffer-native-links.cl",
+      "sha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "bytes": 8664
+    },
+    {
+      "path": "research/introspection/brush-painting-native-links.cl",
+      "sha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "bytes": 8739
+    },
+    {
+      "path": "research/tools/derive-brush-buffer-native-evidence.mjs",
+      "sha256": "1e30bf353d4cf8ac0c0b6f063e9a9abbdcc8a465a6654932109e834bd7340f20",
+      "bytes": 44376
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-native-evidence.mjs",
+      "sha256": "745e1fc1db2c3f7abd2a229cfd63c6567b0708a8eb255fc6019b2452e184b97d",
+      "bytes": 26930
+    },
+    {
+      "path": "research/tools/ghidra/AaronNativeReport.java",
+      "sha256": "63e268a025e1ff3225f10baa8d2acc0a2f3669b58206c27a6c67be22d55e2fbc",
+      "bytes": 5753
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee",
+      "bytes": 41726
+    },
+    {
+      "path": "research/tools/map-native-code-to-pll.mjs",
+      "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+      "bytes": 5906
+    },
+    {
+      "path": "research/tools/rea-evidence-bundle.mjs",
+      "sha256": "81bd072f7959655bf80ef3ecf240ec08f30ecbe85344a8f8941d9ea33752e601",
+      "bytes": 14465
+    },
+    {
+      "path": "research/tools/run-aaron-ghidra.ps1",
+      "sha256": "0a9fed5e071a59d5818ca6ade10f4d3b0164d9cccb83f63173a6602310f0767d",
+      "bytes": 3269
+    }
+  ]
+}

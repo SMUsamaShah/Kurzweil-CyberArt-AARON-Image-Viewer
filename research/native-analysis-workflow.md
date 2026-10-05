@@ -166,6 +166,15 @@ two LOOP forms with DOTIMES eliminated the observation errors and restored
 control-byte equality. The saved condition types alone do not prove the exact
 autoload path. Reject such a tape even when the scene runner reports completion.
 
+The 64-byte `SYSTEM::MEMREF` report describes the live compiled-function
+metadata; it is not the serialized PLL code header. In the six-function buffer
+mapping, the complete code-object slice in the captured window matched the
+PLL, while the MEMREF report did not equal that slice. Use the measured entry,
+window base and decoded object length to choose the comparison range. A window
+can be clamped at a memory-region boundary, so its code-header offset is not
+always 60. Keep the unique complete-object match; do not substitute a partial
+payload or a fixed window offset when reusing this workflow.
+
 ## 2. Decode the matched payloads
 
 ```powershell

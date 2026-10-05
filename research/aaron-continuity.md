@@ -6,7 +6,25 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-05
+## Latest checkpoint: 2026-10-06
+
+Six painting/buffer functions now have unique complete PLL matches and 1,364
+byte-checked Ghidra instruction rows covering 3,829 payload bytes. Both native
+runs equal a fresh uninstrumented drawing/scene control. Read
+[the native findings](introspection/brush-painting-native.md) and
+[portable evidence](introspection/evidence/brush-buffer-native-20261006.json).
+BUFFER-FEATURE and BUFFER-HOLE expose candidate native setter sites. The
+bounded BUFFER-HEAD constant list is a prefix; natural traversal remains open.
+This is external Ghidra/REA evidence, not a Windows native-provider session.
+
+Current work: complete buffer input/output maps and attribution of the 6,965
+additional clear-entry value-3 positions below. The first buffer tape
+`brush-buffer-capture-seed1234-20261005-d` is diagnostic only: it lacks
+MAIN/READY and COMPLETE/END despite the matching drawing. Frozen v2 removes
+the primitive setter hook and adds full per-child maps. Require its own
+complete footer and fresh controls before promoting behavior.
+
+### Previous natural boundary checkpoint
 
 Natural BRUSH-STROKE's long value-3 boundary branch now matches all 70 markers,
 296,912 ordered candidate/predicate results and 10,752,000 complete output
