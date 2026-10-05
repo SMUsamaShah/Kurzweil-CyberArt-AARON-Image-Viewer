@@ -147,10 +147,10 @@ truncation and signed `-0.00` behavior; the real screen/file consumer and
 complete brush semantics remain under investigation.
 `aaron-brushes.js` now contains the seven startup `PAINT-BRUSH` profiles
 measured from the original build, including ordered perimeter/core masks and
-the separate `CELLS` scalars. Its ENVIR-band lookup is explicitly provisional:
-the original `SELECT-BRUSH` boundary comparison has not been invoked yet.
-`selectAaronBrushProfile(value)` exposes that lookup as an explicit
-exploration adapter, returning no profile outside the measured range by
+the separate `CELLS` scalars. Its integer `SELECT-BRUSH` lookup matches every
+original result from 0 through 200,000. Fractional inputs and most out-of-range
+values remain uncharacterized. `selectAaronBrushProfile(value)` returns no
+profile outside the measured range by
 default; `{outOfRange: 'clamp'}` is available only as a local caller policy.
 `aaron-maps.js` models the measured `INIT-MAPS` allocation: fresh zeroed
 `Uint16Array` patch storage and `Uint8Array` fill storage for the requested
@@ -161,6 +161,16 @@ applies the measured brush-core union for nonempty vertices; it matches the
 brush-1 through brush-4 two-point fixtures and the measured brush-1 gapped
 path without interpolating across the gap. It is not yet the complete
 `BRUSH-STROKE` routine.
+
+`aaron-post-fill.js` supplies the independent SUBFORM count/map rule. It
+matches all 278 captured original calls and 1,130,814 output map cells in two
+controlled paintings, given their complete frame/map regions and naturally
+read target ID/count. Only fill values 0/1 and FLAG-BIT 32768 are directly
+compared; its native value-2 conversion remains inferred. The helper returns
+the new count and remaining-count result. Scene planning, map production and
+the integrated BRUSH-FILL caller remain upstream work. See
+[`../research/introspection/post-fill-count.md`](../research/introspection/post-fill-count.md).
+
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

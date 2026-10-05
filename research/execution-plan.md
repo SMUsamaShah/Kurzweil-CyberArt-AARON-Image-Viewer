@@ -1,6 +1,6 @@
 # Next AARON execution plan
 
-Prepared 2026-09-27; updated 2026-10-04. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-05. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for
@@ -14,8 +14,14 @@ confirmed as `BRUSH-FILL`, beneath `DISPLAY-COLOR-PATCHES`, by exact PLL matches
 and native runtime breakpoints. The count boundary is now measured across two
 complete scenes: all 274 selectors consume MY-FILL(SUBFORM)'s count, and the
 following BRUSH binding equals the returned object or NIL.
-The actual generic methods also have exact PLL matches. The next priority is
-to locate the count writer inside those methods' callees and replace original
+The actual generic methods also have exact PLL matches. The count writer is
+now located inside POST-FILL's SUBFORM method: 427 MY-FILL/POST-FILL pairs and
+181 count changes agree in complete controlled traces. Both POST-FILL methods
+and four ordinary helpers match exact PLL objects. The independent SUBFORM
+post-fill helper now matches all 278 counts/returns and 1,130,814 captured
+output map cells in those scenes. Fill values 0/1 and FLAG-BIT 32768 are the
+observed domain; the value-2 conversion remains a native inference. The next
+priority is to recover FILL-STRATEGY's map production and replace original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
@@ -134,10 +140,16 @@ by exit. Every observed SCAN-ROW entry/exit count is unchanged. MY-FILL's
 EQL SUBFORM and EQL CFORM methods have exact complete PLL matches, while its
 generated dispatcher remains explicitly unmapped.
 
-Next, locate count changes across FILL-STRATEGY, POST-FILL and the
-other calls inside MY-FILL's SUBFORM method. Their native sites are static
-candidates, not measured named callee entries. Capture complete relevant
-map/frame inputs before deriving a JS count algorithm. The two iris paths per
+The [POST-FILL investigation](introspection/post-fill-count.md) now locates
+the count reset and increment inside its actual SUBFORM method. All 427
+MY-FILL/POST-FILL pairs agree at their count boundaries; FILL-STRATEGY and the
+other three observed helpers show no entry/exit count changes. Both POST-FILL
+methods have exact complete PLL matches. The
+[SUBFORM map comparison](introspection/evidence/post-fill-map-parity-20261005.json)
+matches every captured cell, count and return in all 278 calls. Complete
+original frame/map regions and natural target readers remain inputs. Next,
+capture FILL-STRATEGY's map production and retain a separate original holdout
+for fill value 2. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.
 

@@ -119,6 +119,7 @@ The [count/assignment follow-up](introspection/brush-fill-count.md) used:
 |---|---|---|---:|
 | `brush-fill-native-links.cl` | `aaron-brush-fill-native-links.txt` | `END brush-fill-native-links` | 7 |
 | `brush-fill-methods.cl` | `aaron-brush-fill-methods.txt` | `END brush-fill-methods` | 2 |
+| `brush-fill-helper-links.cl` | `aaron-brush-fill-helper-links.txt` | `END brush-fill-helper-links` | 6 |
 
 Use the same terminal-A pattern, substituting its probe/output names and
 keeping a positive pause. Before capturing methods, require the final
@@ -143,6 +144,27 @@ the actual EQL SUBFORM and EQL CFORM method bodies; both match.
 
 These custom maps are for decoding their selected objects. The selector
 breakpoint helper below still requires its original five-function caller map.
+
+The [POST-FILL follow-up](introspection/post-fill-count.md) captures both
+actual POST-FILL methods and four ordinary helpers. Its metadata requires
+five targets, two methods, six code headers, zero errors and zero truncations.
+It excludes the generated generic dispatcher. All six objects match the PLL
+exactly and decode with the same ordinary mapper/Ghidra runner.
+
+Before executing a new Lisp probe, check form structure as well as delimiter
+balance: LABELS definitions must be peers; LET binding lists and HANDLER-CASE
+protected forms/clauses must have their intended scope. A balanced file can
+still place a helper definition inside another helper. Require the complete
+successful metadata summary after the runtime run too.
+
+Use DOTIMES/DOLIST for probe iteration. The shipped Lisp image can try to
+autoload an unavailable `loop.fasl` when a probe uses LOOP; that failure is
+documented in the older [method inspection evidence](introspection/evidence/README.md#holdout-and-successful-method-inspection).
+The first POST-FILL map attempt produced one FILE-ERROR and 379 subsequent
+UNBOUND-VARIABLE conditions, incomplete maps and a changed AA0. Replacing its
+two LOOP forms with DOTIMES eliminated the observation errors and restored
+control-byte equality. The saved condition types alone do not prove the exact
+autoload path. Reject such a tape even when the scene runner reports completion.
 
 ## 2. Decode the matched payloads
 

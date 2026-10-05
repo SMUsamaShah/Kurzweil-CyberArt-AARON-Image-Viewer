@@ -8,6 +8,7 @@ import { sha256 } from './index-allegro-image.mjs';
 
 const TARGETS = ['BRUSH-FILL', 'SCAN-ROW', 'LIST-FRAME', 'MY-FILL',
   'FILL-IRIS', 'SELECT-BRUSH', 'BRUSH-FILL-SUBPART', 'RECORD-BRUSH'];
+const HELPER_TARGETS = [...TARGETS, 'SET-MEDIANS', 'GOOD-START', 'FLASH-SPOT', 'FILL-STRATEGY', 'POST-FILL'];
 const MAX_CAPS = { calls: 50000, listItems: 128, listDepth: 3, values: 16 };
 const keyword = (value) => value?.kind === 'keyword' ? value.name : null;
 
@@ -192,13 +193,13 @@ function rejectDiagnosis(line) {
   }
 }
 
-export function parseBrushFillReport(text) {
+function parseBoundaryReport(text, prefix, TARGETS) {
   if (Buffer.byteLength(text) > 256 * 1024 * 1024) throw new Error('Report exceeds byte cap');
   const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
   while (lines.at(-1) === '') lines.pop();
-  const version = lines[0] === 'BEGIN brush-fill-natural v2' ? 2
-    : lines[0] === 'BEGIN brush-fill-natural v1' ? 1 : 0;
-  if (!version || lines.at(-1) !== 'END brush-fill-natural') throw new Error('Report framing is incomplete');
+  const version = lines[0] === `BEGIN ${prefix} v2` ? 2
+    : prefix === 'brush-fill-natural' && lines[0] === 'BEGIN brush-fill-natural v1' ? 1 : 0;
+  if (!version || lines.at(-1) !== `END ${prefix}`) throw new Error('Report framing is incomplete');
   if (lines.length < 4) throw new Error('Report is too short');
   const caps = parseCaps(lines[1], version);
 
@@ -284,13 +285,14 @@ export function parseBrushFillReport(text) {
     throw new Error(`Unexpected record or invalid phase: ${line.slice(0, 80)}`);
   }
 
-  if (!complete || phase !== 'complete' || lines[index] !== 'END brush-fill-natural'
+  if (!complete || phase !== 'complete' || lines[index] !== `END ${prefix}`
       || calls.length !== calls.filter((call) => Object.hasOwn(call, 'returnEvent')).length
       || eventOrdinal !== calls.length * 2) throw new Error('Incomplete capture or event stream');
 
   return {
     schemaVersion: 1,
     protocolVersion: version,
+    ...(prefix === 'brush-fill-helpers' ? { captureKind: prefix } : {}),
     caps,
     installed,
     totals,
@@ -308,11 +310,21 @@ export function parseBrushFillReport(text) {
   };
 }
 
+export function parseBrushFillReport(text) {
+  return parseBoundaryReport(text, 'brush-fill-natural', TARGETS);
+}
+
+export function parseBrushFillHelperReport(text) {
+  return parseBoundaryReport(text, 'brush-fill-helpers', HELPER_TARGETS);
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [input, output, ...extra] = process.argv.slice(2);
   if (!input || !output || extra.length) throw new Error('Usage: node parse-brush-fill-report.mjs <report.txt> <fresh-report.json>');
   const bytes = readFileSync(input);
-  const report = parseBrushFillReport(bytes.toString('utf8'));
+  const source = bytes.toString('utf8');
+  const report = source.replace(/^\uFEFF/, '').startsWith('BEGIN brush-fill-helpers ')
+    ? parseBrushFillHelperReport(source) : parseBrushFillReport(source);
   report.sourceSha256 = sha256(bytes);
   writeFileSync(output, `${JSON.stringify(report, null, 2)}\n`, { flag: 'wx' });
   console.log(JSON.stringify({ output, protocolVersion: report.protocolVersion, totals: report.totals,

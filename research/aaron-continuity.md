@@ -6,7 +6,39 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-04
+## Latest checkpoint: 2026-10-05
+
+The SUBP-COUNT writer is located inside POST-FILL's SUBFORM method. Across two
+complete paintings, all 427 MY-FILL calls have one matching POST-FILL child:
+arguments, return values and count boundaries agree. All 181 observed count
+changes occur inside the 278 SUBFORM POST-FILL calls. The other four observed
+helpers have no entry/exit count change. Both paintings and scene reports
+match fresh controls byte for byte.
+
+Both actual POST-FILL methods and four ordinary helpers have unique complete
+PLL matches and Ghidra reports. The SUBFORM method contains the SUBP-COUNT
+reset and accepted-cell increment. REA imported/exported its standalone
+Ghidra record with external-provider provenance.
+
+Read [the POST-FILL findings](introspection/post-fill-count.md) and
+[portable helper evidence](introspection/evidence/post-fill-helper-boundaries-20261005.json).
+The independent SUBFORM helper now matches all 278 counts and returns and
+1,130,814 captured output map cells, using complete original frame/map inputs
+and natural PATCHDEX/CFORM-COUNT reader values. See
+[the map evidence](introspection/evidence/post-fill-map-parity-20261005.json).
+Both paintings remain byte-identical to controls. Only fill values 0/1 and
+FLAG-BIT 32768 occur; the native 2-to-1 branch remains inferred. Cells outside
+the captured rectangles are unobserved. CFORM-COUNT's scalar binding is
+unbound in older tapes; the method uses its function to read a form's count.
+
+Next, characterize FILL-STRATEGY's frame/map inputs and changes to move those
+inputs upstream into JavaScript. Its exact native body is already captured.
+CFORM POST-FILL, iris branching and subpart brush changes remain open. Use
+DOTIMES/DOLIST in probes: the rejected first map attempt hit a FILE-ERROR and
+379 UNBOUND-VARIABLE conditions with LOOP, despite writable staging. Replacing
+LOOP restored complete map capture and control-byte equality.
+
+### Previous count and assignment checkpoint
 
 Two complete paintings now measure the brush fill's count/assignment boundary.
 All 274 natural selectors consume the count left by the preceding
@@ -55,11 +87,12 @@ probe/pause workflow records the staged probe hash and an owned pause request;
 capture helpers release that pause on completion or setup failure. Run only
 one oracle at a time and do not change the system clock.
 
-The count/assignment investigation above follows that caller checkpoint;
-the integrated JS caller and full count algorithm remain unrecovered.
+The count/assignment investigation above follows that caller checkpoint.
+SUBFORM post-fill has a measured JS comparison for the captured inputs;
+the integrated JS caller and creation of those inputs remain unrecovered.
 The notes below retain older checkpoints;
 their earlier unresolved name-to-code and selector-caller limits are superseded
-only for the five matched functions and two measured scenes above.
+only for the exact matched objects and observed contexts documented above.
 
 ## Project identity
 

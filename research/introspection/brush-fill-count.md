@@ -2,6 +2,10 @@
 
 ## Measured result, 2026-10-04
 
+Follow-up: [POST-FILL count and map findings](post-fill-count.md) now locate
+the internal writer and compare its independent SUBFORM helper against all
+278 captured calls. The observations below remain the earlier boundary evidence.
+
 Two complete controlled paintings establish the observed count-to-brush
 boundary after the [native caller investigation](select-brush-caller.md).
 Each of their 274 `SELECT-BRUSH` calls receives the `SUBP-COUNT` left by the

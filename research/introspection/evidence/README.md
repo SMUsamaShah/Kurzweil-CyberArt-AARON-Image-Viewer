@@ -1,5 +1,36 @@
 # Original-engine report excerpts
 
+## SUBFORM POST-FILL map comparison, 2026-10-05
+
+[`post-fill-map-parity-20261005.json`](post-fill-map-parity-20261005.json)
+retains 278 complete count/return comparisons, per-region before/after hashes,
+frame bounds, natural target reader inputs and control provenance. JavaScript
+matches all 1,130,814 captured output map cells. Both AA0 files and scene
+reports match their fresh same-mode controls byte for byte.
+
+Only fill values 0/1 and FLAG-BIT 32768 occur. The native value-2 conversion
+remains inferred, and cells outside the declared rectangles are unobserved.
+Original scene planning, frame construction and pre-fill maps remain inputs.
+Raw maps stay ignored; the strict parser and derivation reproduce the
+comparison from local captures. See [the findings](../post-fill-count.md).
+
+## POST-FILL helper and native count writer, 2026-10-05
+
+[`post-fill-helper-boundaries-20261005.json`](post-fill-helper-boundaries-20261005.json)
+retains 427 paired MY-FILL/POST-FILL calls in two controlled paintings. All
+arguments, return values and count boundaries agree; all 181 count changes
+occur inside SUBFORM POST-FILL. The four other observed helpers have no
+entry/exit count change. All 274 selector inputs match their completed
+POST-FILL count and the existing measured JavaScript selector.
+
+Both POST-FILL methods and four ordinary helpers have exact complete PLL
+matches and Ghidra reports. Bounded native instructions identify the
+SUBP-COUNT reset and accepted-cell increment in the SUBFORM method. REA
+import/export preserves one canonical external analysis record. Both natural
+paintings, their scene reports and the metadata run match fresh controls.
+See [the focused findings](../post-fill-count.md) and the complete map
+comparison above, which follows this helper-boundary capture.
+
 ## Brush count and assignment, 2026-10-04
 
 [`brush-fill-count-and-assignment-20261004.json`](brush-fill-count-and-assignment-20261004.json)

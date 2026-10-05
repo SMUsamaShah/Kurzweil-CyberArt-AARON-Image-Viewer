@@ -229,6 +229,14 @@ appends the setup report to that same path; reopening it with `:supersede`
 stopped after the checkpoint on this setup. The second open now uses
 `:append`, and the setup proceeds through `TRACE-READY`.
 
+A Lisp FILE-ERROR does not establish a `C:\temp` permission problem. Probe
+macros can attempt to load missing runtime modules: earlier logs identify an
+unavailable `loop.fasl`. Use DOTIMES/DOLIST rather than LOOP in new probes.
+The 2026-10-05 map attempt failed inside iteration even though staging was
+writable; its replacement captured complete maps and restored the control AA0.
+Check the probe's own errors/completion and control bytes, as well as the
+runner summary. See [the POST-FILL findings](introspection/post-fill-count.md).
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,
