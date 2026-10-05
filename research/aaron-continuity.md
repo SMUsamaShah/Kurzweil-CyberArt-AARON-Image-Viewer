@@ -8,6 +8,38 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+Three fill-preparation functions now match their complete captured outputs:
+SET-MEDIANS, GOOD-START and FILL-STRATEGY, with 427 calls each in the two
+controlled paintings. JavaScript rounds median rows to the nearest integer
+with ties to even, rotates the complete outline at the first three distinct X
+values with equal successive differences, and toggles scan columns while
+preserving fill value 2. All 63,414 outline point positions
+and 1,883,204 output cell comparisons summed over per-call captured regions
+agree. Both drawings and scene reports equal fresh controls byte for byte.
+
+Read [the fill-preparation findings](introspection/fill-preparation.md) and
+[portable evidence](introspection/evidence/fill-preparation-parity-20261005.json).
+The independent module is `engine/src/aaron-fill-preparation.js`. Original
+LY/TY inputs, outlines and initial boundary maps remain inputs; the comparison
+computes its own intermediate medians and rotated outlines. Captured frames
+are MAPFRAME, point objects are VISPT/TRIPT and map values are 0/1/2. Other
+domains and cells outside the padded capture rectangles remain unmeasured.
+
+The initial observer had zero errors but changed AA0. A copied-state diagnostic
+localized one random-state advance to its first extra RX read. The final probe
+reads only the needed LY/TY and passes all 2,562 snapshot preview checks plus
+whole-output control equality. Do not assume additional accessor calls are
+passive; preserve this observer lesson alongside the C:\temp and LOOP rules.
+The internal RX mechanism is unresolved. No clock changes or debugger attach
+were needed for this milestone.
+
+Next, recover initial boundary-map production around WRITE-LIST-TO-FILL-MAP,
+then connect these helpers to the measured SUBFORM POST-FILL rule. CFORM
+POST-FILL, iris branching, subpart brush changes and the integrated JS caller
+remain open. POST-FILL's separate value-2-to-1 branch is still unobserved.
+
+### Previous POST-FILL checkpoint
+
 The SUBP-COUNT writer is located inside POST-FILL's SUBFORM method. Across two
 complete paintings, all 427 MY-FILL calls have one matching POST-FILL child:
 arguments, return values and count boundaries agree. All 181 observed count
@@ -31,8 +63,8 @@ FLAG-BIT 32768 occur; the native 2-to-1 branch remains inferred. Cells outside
 the captured rectangles are unobserved. CFORM-COUNT's scalar binding is
 unbound in older tapes; the method uses its function to read a form's count.
 
-Next, characterize FILL-STRATEGY's frame/map inputs and changes to move those
-inputs upstream into JavaScript. Its exact native body is already captured.
+FILL-STRATEGY's frame/map inputs and changes were the next boundary at this
+checkpoint; the new comparison above now covers that step.
 CFORM POST-FILL, iris branching and subpart brush changes remain open. Use
 DOTIMES/DOLIST in probes: the rejected first map attempt hit a FILE-ERROR and
 379 UNBOUND-VARIABLE conditions with LOOP, despite writable staging. Replacing

@@ -13,7 +13,11 @@ exact PLL byte matching, standalone Ghidra and runtime caller capture. Its first
 result is the [measured SELECT-BRUSH caller](introspection/select-brush-caller.md).
 The follow-up [count and assignment capture](introspection/brush-fill-count.md)
 tracks all 274 selectors across two controlled paintings and maps the actual
-MY-FILL generic methods. Count-generation internals remain the next boundary.
+MY-FILL generic methods. The [POST-FILL comparison](introspection/post-fill-count.md)
+reproduces its SUBFORM count rule, and [three fill-preparation functions](introspection/fill-preparation.md)
+now match 427 calls each and 1,883,204 output cell comparisons summed over
+their captured regions. Initial
+boundary-map production remains the next upstream boundary.
 
 ## Principles
 

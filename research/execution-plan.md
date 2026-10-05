@@ -20,9 +20,14 @@ now located inside POST-FILL's SUBFORM method: 427 MY-FILL/POST-FILL pairs and
 and four ordinary helpers match exact PLL objects. The independent SUBFORM
 post-fill helper now matches all 278 counts/returns and 1,130,814 captured
 output map cells in those scenes. Fill values 0/1 and FLAG-BIT 32768 are the
-observed domain; the value-2 conversion remains a native inference. The next
-priority is to recover FILL-STRATEGY's map production and replace original
-writer decisions and palette values with
+observed domain; the value-2 conversion remains a native inference. Three
+fill-preparation helpers now match 427 calls each and all 1,883,204 output cell
+comparisons summed over per-call captured regions: SET-MEDIANS, GOOD-START
+and FILL-STRATEGY. The comparison
+computes its own medians and complete outline rotation. Initial boundary maps
+and outline/frame construction remain original inputs. The next priority is
+to recover boundary-map production around WRITE-LIST-TO-FILL-MAP and replace
+original writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
 following RNG states. A first path-to-writer drawing unit is measured; palette
@@ -147,11 +152,22 @@ other three observed helpers show no entry/exit count changes. Both POST-FILL
 methods have exact complete PLL matches. The
 [SUBFORM map comparison](introspection/evidence/post-fill-map-parity-20261005.json)
 matches every captured cell, count and return in all 278 calls. Complete
-original frame/map regions and natural target readers remain inputs. Next,
-capture FILL-STRATEGY's map production and retain a separate original holdout
-for fill value 2. The two iris paths per
+original frame/map regions and natural target readers remain inputs. The
+[fill-preparation comparison](introspection/fill-preparation.md) now reproduces
+SET-MEDIANS, GOOD-START and FILL-STRATEGY for all 427 complete outlines and
+1,883,204 output cell comparisons summed over those calls. Fill values 0/1/2
+and both VISPT/TRIPT point
+types occur; FILL-STRATEGY's value-2 guard is measured, while POST-FILL's
+separate value-2 conversion still needs an original holdout. Next, recover
+initial boundary-map production around WRITE-LIST-TO-FILL-MAP and connect
+the independent helpers. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.
+
+The rejected first preparation observer changed the drawing despite zero
+reported errors. An extra RX reader call advanced the random-state preview.
+Use only required readers and require fresh control-byte equality; the final
+observer passes all 2,562 snapshot preview checks and both complete controls.
 
 ### Natural FREE-PATH calls — first controlled corpus matched
 

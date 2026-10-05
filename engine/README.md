@@ -171,6 +171,17 @@ the new count and remaining-count result. Scene planning, map production and
 the integrated BRUSH-FILL caller remain upstream work. See
 [`../research/introspection/post-fill-count.md`](../research/introspection/post-fill-count.md).
 
+`aaron-fill-preparation.js` supplies three independent helpers: median rounding
+to the nearest integer with ties to even, complete outline rotation at a
+qualifying X sequence, and the cyclic fill-map column scan. All 427 original
+calls per helper and 1,883,204
+output cell comparisons summed over per-call captured regions match across
+two controlled paintings. The scan toggles bit 0 and preserves value 2.
+Original integer frames, ordered VISPT/TRIPT
+coordinates and initial boundary maps remain inputs; scene construction and
+the integrated MY-FILL/BRUSH-FILL caller remain open. See
+[`../research/introspection/fill-preparation.md`](../research/introspection/fill-preparation.md).
+
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

@@ -1,5 +1,22 @@
 # Original-engine report excerpts
 
+## Three fill-preparation functions, 2026-10-05
+
+[`fill-preparation-parity-20261005.json`](fill-preparation-parity-20261005.json)
+retains 427 calls each to SET-MEDIANS, GOOD-START and FILL-STRATEGY, with
+complete outline comparisons and 1,883,204 matching output cell comparisons
+summed over the captured regions for each call.
+JavaScript computes its own median rows and outline rotation before scanning.
+Both AA0 files and scene reports match fresh controls byte for byte.
+
+The evidence binds original frame inputs, outline/map digests, return and
+identity behavior, native payload digests, per-call coverage and control
+provenance. Values 0/1/2 and VISPT/TRIPT coordinates occur. Initial outlines
+and boundary maps remain original inputs; cells beyond captured rectangles
+remain unobserved. Full captures stay ignored. The derivation also retains
+the rejected observer's measured extra-RX random-state advance. See
+[the findings](../fill-preparation.md) for scope and reproduction.
+
 ## SUBFORM POST-FILL map comparison, 2026-10-05
 
 [`post-fill-map-parity-20261005.json`](post-fill-map-parity-20261005.json)

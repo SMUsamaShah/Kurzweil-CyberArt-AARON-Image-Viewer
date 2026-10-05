@@ -237,6 +237,16 @@ writable; its replacement captured complete maps and restored the control AA0.
 Check the probe's own errors/completion and control bytes, as well as the
 runner summary. See [the POST-FILL findings](introspection/post-fill-count.md).
 
+An error-free probe can still perturb output. The first 2026-10-05
+fill-preparation observer produced a different AA0: copied random-state
+previews localized one advance to its first additional RX accessor call.
+Removing the unused LX/RX reads restored whole-output equality in both seeds;
+the final probe observes only the needed LY/TY frame values and checks copied
+previews around every snapshot. The accessor's internal mechanism remains
+unresolved. Treat extra readers as executable calls, and compare fresh control
+bytes even when the probe's error count is zero. See
+[the preparation findings](introspection/fill-preparation.md).
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,
