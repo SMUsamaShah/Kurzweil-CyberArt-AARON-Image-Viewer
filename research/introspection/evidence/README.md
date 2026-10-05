@@ -1,5 +1,16 @@
 # Original-engine report excerpts
 
+## Complete natural BRUSH-STROKE census, 2026-10-05
+
+[`brush-stroke-census-20261005.json`](brush-stroke-census-20261005.json)
+binds all 3,881 stroke calls, 3,811 value-0 screen calls, 70 value-3 calls and
+70 clears to fresh complete drawing/scene controls. It retains every group
+aggregate, first-seen CORE geometry, source/request/report hashes and the
+canonical complete parsed-call array hashes. Empty/singleton value-0 behavior
+differs from older isolated adapter cases. Counts do not prove map writes,
+per-event ordering, return identity or direct callers. See
+[the findings](../brush-stroke-census.md).
+
 ## Complete CFORM POST-FILL and composition, 2026-10-05
 
 [`cform-post-fill-parity-20261005.json`](cform-post-fill-parity-20261005.json)

@@ -34,7 +34,10 @@ rows, 138 selections, 5,805 row inputs and 278 budgets match the natural
 plan/frame inputs. The complete schedule and earlier maps remain dependencies;
 [CFORM POST-FILL](introspection/cform-post-fill.md) now matches all 149 calls,
 45,772,800 full output cells and the complete outline-to-fill composition.
-Natural brush-stroke map history and the complete BRUSH-FILL schedule follow.
+The [complete natural stroke census](introspection/brush-stroke-census.md)
+pairs all 3,881 strokes, including 70 value-3 strokes, and 70 clears with fresh
+controls. It measures counts and first-seen CORE geometry; natural brush-stroke
+map history and the complete BRUSH-FILL schedule follow.
 
 ## Principles
 

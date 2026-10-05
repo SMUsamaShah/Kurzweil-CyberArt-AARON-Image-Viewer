@@ -8,6 +8,23 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+The complete natural BRUSH-STROKE census now covers 3,881 calls in the two
+controlled paintings: 3,811 value-0 strokes, 70 value-3 strokes, 3,811 screen
+calls and 70 clears. All calls are paired, with zero observation errors,
+aborts or overflow; both complete drawings and scene reports equal fresh
+uninstrumented controls. Empty and singleton natural value-0 paths differ
+from the older isolated adapter cases. Read
+[the census findings](introspection/brush-stroke-census.md) and
+[portable evidence](introspection/evidence/brush-stroke-census-20261005.json).
+The census retains counts and first-seen CORE geometry, not map writes,
+returned-object identity or caller stacks. Continue with complete value-3
+path/mask/predicate/map boundaries and natural CFRAME reads during clears,
+then the complete BRUSH-FILL schedule and subpart painting.
+Frozen census roots: brush-stroke-census-seed1234-20261005-a and
+brush-stroke-census-seed5678-20261005-c; fresh controls -b and -d.
+
+### Previous CFORM POST-FILL checkpoint
+
 CFORM POST-FILL matches all 149 natural calls and 45,772,800 complete output
 map cells. It clears positive fill cells in [LX,RX)×[LY,TY), assigns the form
 patch where PATCH-MAP equals BACKGND, and returns the accepted count.

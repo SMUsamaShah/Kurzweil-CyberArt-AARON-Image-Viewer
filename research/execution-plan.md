@@ -42,8 +42,12 @@ data. The aligned complete SUBFORM comparison passes again. Four later row
 jumps, plan creation and earlier map history remain unresolved.
 CFORM POST-FILL matches 149 calls and 45,772,800 complete output cells,
 including the composed outline pipeline and 22,886,400 full entry fill cells.
-Its rectangle excludes RX/TY; target0/1/2 and BACKGND0 are measured. The next
-priority is natural BRUSH-STROKE value-3 provenance and the complete
+Its rectangle excludes RX/TY; target0/1/2 and BACKGND0 are measured.
+The complete natural BRUSH-STROKE census now pairs all 3,881 strokes,
+including 70 value-3 strokes and 70 clears, with fresh drawing/scene controls.
+It measures counts and first-seen CORE geometry; map writes and return
+identities remain open. The next priority is natural BRUSH-STROKE value-3
+provenance and the complete
 BRUSH-FILL schedule, then replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one

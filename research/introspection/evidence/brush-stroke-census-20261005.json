@@ -1,0 +1,3040 @@
+{
+  "schemaVersion": 1,
+  "kind": "Complete natural BRUSH-STROKE call census with byte-identical uninstrumented controls",
+  "probeSha256": "6f487f3dbbf0b6e81043f80926cd2c159d9721455cc5cc94763723bb73ca6aa5",
+  "sources": [
+    {
+      "path": "research/introspection/brush-stroke-census-capture.cl",
+      "sha256": "6f487f3dbbf0b6e81043f80926cd2c159d9721455cc5cc94763723bb73ca6aa5"
+    },
+    {
+      "path": "research/tools/parse-brush-stroke-census-report.mjs",
+      "sha256": "49280d78bb4853b0dc612f1e18141b60528461a32c289fb4e72c1745baba1407"
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-census-evidence.mjs",
+      "sha256": "53fb8b165d9196ab40b086e565dc1a52c3d0852257a70dc0faa71142887aa1da"
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee"
+    },
+    {
+      "path": "research/tools/parse-natural-free-path-report.mjs",
+      "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee"
+    }
+  ],
+  "scenes": [
+    {
+      "seed": 1234,
+      "mode": "writer-stream-seed-1234",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true,
+      "setupIdentical": true,
+      "observed": {
+        "root": "brush-stroke-census-seed1234-20261005-a",
+        "runId": "brush-stroke-census-seed1234-20261005-a",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "summarySha256": "0c58cc8a333f7531cd3f8646894d7b67fb87b41972e9fdc4298a5856399f4947",
+        "requestSha256": "99da94e2c17b308d42297a2bec34a73c60af1320bdaaf7c98116b58c517f6675",
+        "stagedProbeSha256": "6f487f3dbbf0b6e81043f80926cd2c159d9721455cc5cc94763723bb73ca6aa5",
+        "rawCensusSha256": "8c5ffe5fc969df12fadfbb4e79c6710d386ff3e3a1404be7e9e4f06042a57015",
+        "request": {
+          "present": true,
+          "schemaVersion": 1,
+          "runId": "brush-stroke-census-seed1234-20261005-a",
+          "runtimeExecutableBasename": "AARON.exe",
+          "runtimeRunRoot": "brush-stroke-census-seed1234-20261005-a",
+          "runtimeRootMatches": true,
+          "pauseSeconds": 0,
+          "probeOutputNames": [
+            "aaron-brush-stroke-census.txt"
+          ]
+        },
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "outputBytes": {
+          "aa0": 126956,
+          "sceneReport": 25951
+        }
+      },
+      "control": {
+        "root": "brush-stroke-census-control-seed1234-20261005-b",
+        "runId": "brush-stroke-census-control-seed1234-20261005-b",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "summarySha256": "d7c96e91570e20fc685524d1370074524a4dfaaed69ee5643c1d02c6a76f8046",
+        "request": {
+          "present": false,
+          "preSceneProbeSha256": null,
+          "pauseSeconds": 0,
+          "probeOutputNames": []
+        },
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "outputBytes": {
+          "aa0": 126956,
+          "sceneReport": 25951
+        }
+      },
+      "setup": {
+        "smallImage": false,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+      },
+      "census": {
+        "callArrayCommitment": {
+          "count": 1426,
+          "canonicalJsonUtf8Bytes": 403845,
+          "canonicalJsonSha256": "39826085ff57990611f576a1fbb0c7594fec3c96c05b0a9290b60e463737caa5",
+          "canonicalization": "UTF-8 bytes of JSON.stringify(strictly parsed census.calls array)",
+          "sampledRows": {
+            "selection": "first observed row for each VALUE and path kind; these samples are illustrative and are not the complete call list",
+            "byValueAndPath": {
+              "0": {
+                "multi": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 2,
+                    "pathLength": 74,
+                    "pathKind": "multi",
+                    "value": 0,
+                    "cdex": 1,
+                    "sdex": 1,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 592,
+                      "screenPredicates": 0,
+                      "accepted": 592,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 293,
+                      "yReads": 183,
+                      "coreReads": 0
+                    }
+                  }
+                },
+                "empty": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 81,
+                    "pathLength": 0,
+                    "pathKind": "empty",
+                    "value": 0,
+                    "cdex": 3,
+                    "sdex": 1,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "nil"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 0,
+                      "screenPredicates": 0,
+                      "accepted": 0,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 1
+                    }
+                  }
+                },
+                "singleton": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 149,
+                    "pathLength": 1,
+                    "pathKind": "singleton",
+                    "value": 0,
+                    "cdex": 6,
+                    "sdex": 1,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 9,
+                      "screenPredicates": 0,
+                      "accepted": 9,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 1
+                    }
+                  }
+                }
+              },
+              "3": {
+                "multi": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 1,
+                    "pathLength": 326,
+                    "pathKind": "multi",
+                    "value": 3,
+                    "cdex": 1,
+                    "sdex": 1,
+                    "brushIndex": 2,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 5216,
+                      "screenPredicates": 0,
+                      "accepted": 3921,
+                      "rejected": 1295,
+                      "screens": 0,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "aggregates": {
+          "calls": 1426,
+          "byValue": {
+            "0": {
+              "value": 0,
+              "calls": 1403,
+              "pathKinds": {
+                "empty": 629,
+                "multi": 772,
+                "singleton": 2
+              },
+              "screensPerCall": {
+                "1": 1403
+              },
+              "screenCalls": 1403,
+              "withinStrokePredicateCalls": 1455795,
+              "acceptedPredicateResults": 1455795,
+              "rejectedPredicateResults": 0,
+              "resultDescriptors": {
+                "nil": 629,
+                "object:CONS": 774
+              }
+            },
+            "3": {
+              "value": 3,
+              "calls": 23,
+              "pathKinds": {
+                "multi": 23
+              },
+              "screensPerCall": {
+                "0": 23
+              },
+              "screenCalls": 0,
+              "withinStrokePredicateCalls": 164696,
+              "acceptedPredicateResults": 143285,
+              "rejectedPredicateResults": 21411,
+              "resultDescriptors": {
+                "object:CONS": 23
+              }
+            }
+          },
+          "byValueAndPath": {
+            "0": {
+              "multi": {
+                "calls": 772,
+                "screensPerCall": {
+                  "1": 772
+                },
+                "returnArities": {
+                  "1": 772
+                },
+                "resultDescriptors": {
+                  "object:CONS": 772
+                }
+              },
+              "empty": {
+                "calls": 629,
+                "screensPerCall": {
+                  "1": 629
+                },
+                "returnArities": {
+                  "1": 629
+                },
+                "resultDescriptors": {
+                  "nil": 629
+                }
+              },
+              "singleton": {
+                "calls": 2,
+                "screensPerCall": {
+                  "1": 2
+                },
+                "returnArities": {
+                  "1": 2
+                },
+                "resultDescriptors": {
+                  "object:CONS": 2
+                }
+              }
+            },
+            "3": {
+              "multi": {
+                "calls": 23,
+                "screensPerCall": {
+                  "0": 23
+                },
+                "returnArities": {
+                  "1": 23
+                },
+                "resultDescriptors": {
+                  "object:CONS": 23
+                }
+              }
+            }
+          },
+          "pathKinds": {
+            "empty": 629,
+            "multi": 795,
+            "singleton": 2
+          },
+          "byBrush": {
+            "1": {
+              "brushIndex": 1,
+              "brushType": "PAINT-BRUSH",
+              "calls": 960,
+              "byValue": {
+                "0": {
+                  "calls": 943,
+                  "pathKinds": {
+                    "empty": 615,
+                    "multi": 326,
+                    "singleton": 2
+                  }
+                },
+                "3": {
+                  "calls": 17,
+                  "pathKinds": {
+                    "multi": 17
+                  }
+                }
+              },
+              "pathKinds": {
+                "empty": 615,
+                "multi": 343,
+                "singleton": 2
+              },
+              "screensPerCall": {
+                "0": 17,
+                "1": 943
+              },
+              "screenCalls": 943
+            },
+            "2": {
+              "brushIndex": 2,
+              "brushType": "PAINT-BRUSH",
+              "calls": 168,
+              "byValue": {
+                "0": {
+                  "calls": 165,
+                  "pathKinds": {
+                    "multi": 165
+                  }
+                },
+                "3": {
+                  "calls": 3,
+                  "pathKinds": {
+                    "multi": 3
+                  }
+                }
+              },
+              "pathKinds": {
+                "multi": 168
+              },
+              "screensPerCall": {
+                "0": 3,
+                "1": 165
+              },
+              "screenCalls": 165
+            },
+            "3": {
+              "brushIndex": 3,
+              "brushType": "PAINT-BRUSH",
+              "calls": 76,
+              "byValue": {
+                "0": {
+                  "calls": 75,
+                  "pathKinds": {
+                    "empty": 14,
+                    "multi": 61
+                  }
+                },
+                "3": {
+                  "calls": 1,
+                  "pathKinds": {
+                    "multi": 1
+                  }
+                }
+              },
+              "pathKinds": {
+                "empty": 14,
+                "multi": 62
+              },
+              "screensPerCall": {
+                "0": 1,
+                "1": 75
+              },
+              "screenCalls": 75
+            },
+            "4": {
+              "brushIndex": 4,
+              "brushType": "PAINT-BRUSH",
+              "calls": 54,
+              "byValue": {
+                "0": {
+                  "calls": 53,
+                  "pathKinds": {
+                    "multi": 53
+                  }
+                },
+                "3": {
+                  "calls": 1,
+                  "pathKinds": {
+                    "multi": 1
+                  }
+                }
+              },
+              "pathKinds": {
+                "multi": 54
+              },
+              "screensPerCall": {
+                "0": 1,
+                "1": 53
+              },
+              "screenCalls": 53
+            },
+            "5": {
+              "brushIndex": 5,
+              "brushType": "PAINT-BRUSH",
+              "calls": 168,
+              "byValue": {
+                "0": {
+                  "calls": 167,
+                  "pathKinds": {
+                    "multi": 167
+                  }
+                },
+                "3": {
+                  "calls": 1,
+                  "pathKinds": {
+                    "multi": 1
+                  }
+                }
+              },
+              "pathKinds": {
+                "multi": 168
+              },
+              "screensPerCall": {
+                "0": 1,
+                "1": 167
+              },
+              "screenCalls": 167
+            }
+          },
+          "screensPerCall": {
+            "0": 23,
+            "1": 1403
+          },
+          "naturalReturnValueArities": {
+            "1": 1426
+          },
+          "naturalReturnDescriptors": {
+            "object:CONS": 797,
+            "nil": 629
+          },
+          "predicateCounts": {
+            "naturalCallsGlobal": 1694383,
+            "inStrokeCalls": 1620491,
+            "inStrokeNonScreenCalls": 1620491,
+            "inStrokeScreenCalls": 0,
+            "acceptedResults": 1599080,
+            "rejectedResults": 21411,
+            "outsideStrokeCalls": 73892
+          },
+          "naturalReaderAndBoundaryCounts": {
+            "clears": 23,
+            "screensGlobal": 1403,
+            "screensWithinStrokes": 1403,
+            "xReadsGlobal": 1710869,
+            "xReadsWithinStrokes": 101384,
+            "yReadsGlobal": 1489526,
+            "yReadsWithinStrokes": 72266,
+            "coreReadsGlobal": 1301,
+            "coreReadsWithinStrokes": 895,
+            "randomPreviewChecks": 1426
+          }
+        },
+        "brushes": [
+          {
+            "index": 2,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                1,
+                -2
+              ]
+            ]
+          },
+          {
+            "index": 1,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          {
+            "index": 3,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -1,
+                4
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                -2,
+                3
+              ],
+              [
+                -1,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                -3,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                -4,
+                1
+              ],
+              [
+                -3,
+                1
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                -4,
+                0
+              ],
+              [
+                -3,
+                0
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                -4,
+                -1
+              ],
+              [
+                -3,
+                -1
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                3,
+                -1
+              ],
+              [
+                4,
+                -1
+              ],
+              [
+                -3,
+                -2
+              ],
+              [
+                -2,
+                -2
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                1,
+                -2
+              ],
+              [
+                2,
+                -2
+              ],
+              [
+                3,
+                -2
+              ],
+              [
+                -3,
+                -3
+              ],
+              [
+                -2,
+                -3
+              ],
+              [
+                -1,
+                -3
+              ],
+              [
+                0,
+                -3
+              ],
+              [
+                1,
+                -3
+              ],
+              [
+                2,
+                -3
+              ],
+              [
+                3,
+                -3
+              ],
+              [
+                -1,
+                -4
+              ],
+              [
+                0,
+                -4
+              ],
+              [
+                1,
+                -4
+              ]
+            ]
+          },
+          {
+            "index": 4,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -2,
+                5
+              ],
+              [
+                -1,
+                5
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                -3,
+                4
+              ],
+              [
+                -2,
+                4
+              ],
+              [
+                -1,
+                4
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                -4,
+                3
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                -2,
+                3
+              ],
+              [
+                -1,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                -5,
+                2
+              ],
+              [
+                -4,
+                2
+              ],
+              [
+                -3,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                -5,
+                1
+              ],
+              [
+                -4,
+                1
+              ],
+              [
+                -3,
+                1
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                -5,
+                0
+              ],
+              [
+                -4,
+                0
+              ],
+              [
+                -3,
+                0
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                -5,
+                -1
+              ],
+              [
+                -4,
+                -1
+              ],
+              [
+                -3,
+                -1
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                5,
+                -1
+              ],
+              [
+                4,
+                -1
+              ],
+              [
+                3,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                -5,
+                -2
+              ],
+              [
+                -4,
+                -2
+              ],
+              [
+                -3,
+                -2
+              ],
+              [
+                -2,
+                -2
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                5,
+                -2
+              ],
+              [
+                4,
+                -2
+              ],
+              [
+                3,
+                -2
+              ],
+              [
+                2,
+                -2
+              ],
+              [
+                1,
+                -2
+              ],
+              [
+                -4,
+                -3
+              ],
+              [
+                -3,
+                -3
+              ],
+              [
+                -2,
+                -3
+              ],
+              [
+                -1,
+                -3
+              ],
+              [
+                0,
+                -3
+              ],
+              [
+                4,
+                -3
+              ],
+              [
+                3,
+                -3
+              ],
+              [
+                2,
+                -3
+              ],
+              [
+                1,
+                -3
+              ],
+              [
+                -3,
+                -4
+              ],
+              [
+                -2,
+                -4
+              ],
+              [
+                -1,
+                -4
+              ],
+              [
+                0,
+                -4
+              ],
+              [
+                3,
+                -4
+              ],
+              [
+                2,
+                -4
+              ],
+              [
+                1,
+                -4
+              ],
+              [
+                -2,
+                -5
+              ],
+              [
+                -1,
+                -5
+              ],
+              [
+                0,
+                -5
+              ],
+              [
+                1,
+                -5
+              ],
+              [
+                2,
+                -5
+              ]
+            ]
+          },
+          {
+            "index": 5,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -2,
+                7
+              ],
+              [
+                -1,
+                7
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                7
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                -4,
+                6
+              ],
+              [
+                -3,
+                6
+              ],
+              [
+                -2,
+                6
+              ],
+              [
+                -1,
+                6
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                -5,
+                5
+              ],
+              [
+                -4,
+                5
+              ],
+              [
+                -3,
+                5
+              ],
+              [
+                -2,
+                5
+              ],
+              [
+                -1,
+                5
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                -6,
+                4
+              ],
+              [
+                -5,
+                4
+              ],
+              [
+                -4,
+                4
+              ],
+              [
+                -3,
+                4
+              ],
+              [
+                -2,
+                4
+              ],
+              [
+                -1,
+                4
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                -5,
+                3
+              ],
+              [
+                -4,
+                3
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                -2,
+                3
+              ],
+              [
+                -1,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                -7,
+                2
+              ],
+              [
+                -6,
+                2
+              ],
+              [
+                -5,
+                2
+              ],
+              [
+                -4,
+                2
+              ],
+              [
+                -3,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                -7,
+                1
+              ],
+              [
+                -6,
+                1
+              ],
+              [
+                -5,
+                1
+              ],
+              [
+                -4,
+                1
+              ],
+              [
+                -3,
+                1
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                6,
+                1
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                -7,
+                0
+              ],
+              [
+                -6,
+                0
+              ],
+              [
+                -5,
+                0
+              ],
+              [
+                -4,
+                0
+              ],
+              [
+                -3,
+                0
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                -7,
+                -1
+              ],
+              [
+                -6,
+                -1
+              ],
+              [
+                -5,
+                -1
+              ],
+              [
+                -4,
+                -1
+              ],
+              [
+                -3,
+                -1
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                7,
+                -1
+              ],
+              [
+                6,
+                -1
+              ],
+              [
+                5,
+                -1
+              ],
+              [
+                4,
+                -1
+              ],
+              [
+                3,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -7,
+                -2
+              ],
+              [
+                -6,
+                -2
+              ],
+              [
+                -5,
+                -2
+              ],
+              [
+                -4,
+                -2
+              ],
+              [
+                -3,
+                -2
+              ],
+              [
+                -2,
+                -2
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                7,
+                -2
+              ],
+              [
+                6,
+                -2
+              ],
+              [
+                5,
+                -2
+              ],
+              [
+                4,
+                -2
+              ],
+              [
+                3,
+                -2
+              ],
+              [
+                2,
+                -2
+              ],
+              [
+                1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                -6,
+                -3
+              ],
+              [
+                -5,
+                -3
+              ],
+              [
+                -4,
+                -3
+              ],
+              [
+                -3,
+                -3
+              ],
+              [
+                -2,
+                -3
+              ],
+              [
+                -1,
+                -3
+              ],
+              [
+                0,
+                -3
+              ],
+              [
+                6,
+                -3
+              ],
+              [
+                5,
+                -3
+              ],
+              [
+                4,
+                -3
+              ],
+              [
+                3,
+                -3
+              ],
+              [
+                2,
+                -3
+              ],
+              [
+                1,
+                -3
+              ],
+              [
+                -6,
+                -4
+              ],
+              [
+                -5,
+                -4
+              ],
+              [
+                -4,
+                -4
+              ],
+              [
+                -3,
+                -4
+              ],
+              [
+                -2,
+                -4
+              ],
+              [
+                -1,
+                -4
+              ],
+              [
+                0,
+                -4
+              ],
+              [
+                6,
+                -4
+              ],
+              [
+                5,
+                -4
+              ],
+              [
+                4,
+                -4
+              ],
+              [
+                3,
+                -4
+              ],
+              [
+                2,
+                -4
+              ],
+              [
+                1,
+                -4
+              ],
+              [
+                -5,
+                -5
+              ],
+              [
+                -4,
+                -5
+              ],
+              [
+                -3,
+                -5
+              ],
+              [
+                -2,
+                -5
+              ],
+              [
+                -1,
+                -5
+              ],
+              [
+                0,
+                -5
+              ],
+              [
+                5,
+                -5
+              ],
+              [
+                4,
+                -5
+              ],
+              [
+                3,
+                -5
+              ],
+              [
+                2,
+                -5
+              ],
+              [
+                1,
+                -5
+              ],
+              [
+                -4,
+                -6
+              ],
+              [
+                -3,
+                -6
+              ],
+              [
+                -2,
+                -6
+              ],
+              [
+                -1,
+                -6
+              ],
+              [
+                0,
+                -6
+              ],
+              [
+                4,
+                -6
+              ],
+              [
+                3,
+                -6
+              ],
+              [
+                2,
+                -6
+              ],
+              [
+                1,
+                -6
+              ],
+              [
+                -2,
+                -7
+              ],
+              [
+                -1,
+                -7
+              ],
+              [
+                0,
+                -7
+              ],
+              [
+                1,
+                -7
+              ],
+              [
+                2,
+                -7
+              ]
+            ]
+          }
+        ],
+        "globalComplete": {
+          "calls": 1426,
+          "clears": 23,
+          "screens": 1403,
+          "predicates": 1694383,
+          "x-reads": 1710869,
+          "y-reads": 1489526,
+          "core-reads": 1301,
+          "checks": 1426,
+          "errors": 0,
+          "aborts": 0,
+          "localSums": {
+            "predicates": 1620491,
+            "screenPredicates": 0,
+            "accepted": 1599080,
+            "rejected": 21411,
+            "screens": 1403,
+            "xReads": 101384,
+            "yReads": 72266,
+            "coreReads": 895
+          }
+        }
+      }
+    },
+    {
+      "seed": 5678,
+      "mode": "writer-full-seed-5678",
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true,
+      "setupIdentical": true,
+      "observed": {
+        "root": "brush-stroke-census-seed5678-20261005-c",
+        "runId": "brush-stroke-census-seed5678-20261005-c",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "summarySha256": "516eeebf2d98345c5524225685c664179cbab902bb12b6c46e7cf882ed7a56c9",
+        "requestSha256": "d3a99b3d9dd3b2f508889c8dc41fe1c8af8f4b795a3cf4f44fd26353b61e91ec",
+        "stagedProbeSha256": "6f487f3dbbf0b6e81043f80926cd2c159d9721455cc5cc94763723bb73ca6aa5",
+        "rawCensusSha256": "cf183ccd981267157a1a4b49665b7415dd399609408c215324398949046ddced",
+        "request": {
+          "present": true,
+          "schemaVersion": 1,
+          "runId": "brush-stroke-census-seed5678-20261005-c",
+          "runtimeExecutableBasename": "AARON.exe",
+          "runtimeRunRoot": "brush-stroke-census-seed5678-20261005-c",
+          "runtimeRootMatches": true,
+          "pauseSeconds": 0,
+          "probeOutputNames": [
+            "aaron-brush-stroke-census.txt"
+          ]
+        },
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "outputBytes": {
+          "aa0": 158833,
+          "sceneReport": 25472
+        }
+      },
+      "control": {
+        "root": "brush-stroke-census-control-seed5678-20261005-d",
+        "runId": "brush-stroke-census-control-seed5678-20261005-d",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "summarySha256": "7470390b814518b646619d2c3b08eec6c05c3d230181222f251ffe1383978c59",
+        "request": {
+          "present": false,
+          "preSceneProbeSha256": null,
+          "pauseSeconds": 0,
+          "probeOutputNames": []
+        },
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "outputBytes": {
+          "aa0": 158833,
+          "sceneReport": 25472
+        }
+      },
+      "setup": {
+        "smallImage": false,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+      },
+      "census": {
+        "callArrayCommitment": {
+          "count": 2455,
+          "canonicalJsonUtf8Bytes": 687004,
+          "canonicalJsonSha256": "2bff5c22e88155561043d39fb94ae7047945f682ecf68a5ca06e84ad86c8d722",
+          "canonicalization": "UTF-8 bytes of JSON.stringify(strictly parsed census.calls array)",
+          "sampledRows": {
+            "selection": "first observed row for each VALUE and path kind; these samples are illustrative and are not the complete call list",
+            "byValueAndPath": {
+              "0": {
+                "multi": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 2,
+                    "pathLength": 19,
+                    "pathKind": "multi",
+                    "value": 0,
+                    "cdex": 1,
+                    "sdex": 0,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 152,
+                      "screenPredicates": 0,
+                      "accepted": 152,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 134,
+                      "yReads": 118,
+                      "coreReads": 0
+                    }
+                  }
+                },
+                "empty": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 20,
+                    "pathLength": 0,
+                    "pathKind": "empty",
+                    "value": 0,
+                    "cdex": 1,
+                    "sdex": 0,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "nil"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 0,
+                      "screenPredicates": 0,
+                      "accepted": 0,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 1
+                    }
+                  }
+                },
+                "singleton": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 1843,
+                    "pathLength": 1,
+                    "pathKind": "singleton",
+                    "value": 0,
+                    "cdex": 42,
+                    "sdex": 1,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 9,
+                      "screenPredicates": 0,
+                      "accepted": 9,
+                      "rejected": 0,
+                      "screens": 1,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 1
+                    }
+                  }
+                }
+              },
+              "3": {
+                "multi": {
+                  "selection": "first observed call for this VALUE and path kind",
+                  "row": {
+                    "id": 1,
+                    "pathLength": 159,
+                    "pathKind": "multi",
+                    "value": 3,
+                    "cdex": 1,
+                    "sdex": 0,
+                    "brushIndex": 1,
+                    "brushType": "PAINT-BRUSH",
+                    "mapDimensions": [
+                      320,
+                      480
+                    ],
+                    "returnedValues": [
+                      {
+                        "kind": "object",
+                        "type": "CONS"
+                      }
+                    ],
+                    "counts": {
+                      "predicates": 1272,
+                      "screenPredicates": 0,
+                      "accepted": 1254,
+                      "rejected": 18,
+                      "screens": 0,
+                      "xReads": 0,
+                      "yReads": 0,
+                      "coreReads": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "aggregates": {
+          "calls": 2455,
+          "byValue": {
+            "0": {
+              "value": 0,
+              "calls": 2408,
+              "pathKinds": {
+                "empty": 1420,
+                "multi": 986,
+                "singleton": 2
+              },
+              "screensPerCall": {
+                "1": 2408
+              },
+              "screenCalls": 2408,
+              "withinStrokePredicateCalls": 651603,
+              "acceptedPredicateResults": 651603,
+              "rejectedPredicateResults": 0,
+              "resultDescriptors": {
+                "nil": 1420,
+                "object:CONS": 988
+              }
+            },
+            "3": {
+              "value": 3,
+              "calls": 47,
+              "pathKinds": {
+                "multi": 47
+              },
+              "screensPerCall": {
+                "0": 47
+              },
+              "screenCalls": 0,
+              "withinStrokePredicateCalls": 132216,
+              "acceptedPredicateResults": 123735,
+              "rejectedPredicateResults": 8481,
+              "resultDescriptors": {
+                "object:CONS": 47
+              }
+            }
+          },
+          "byValueAndPath": {
+            "0": {
+              "multi": {
+                "calls": 986,
+                "screensPerCall": {
+                  "1": 986
+                },
+                "returnArities": {
+                  "1": 986
+                },
+                "resultDescriptors": {
+                  "object:CONS": 986
+                }
+              },
+              "empty": {
+                "calls": 1420,
+                "screensPerCall": {
+                  "1": 1420
+                },
+                "returnArities": {
+                  "1": 1420
+                },
+                "resultDescriptors": {
+                  "nil": 1420
+                }
+              },
+              "singleton": {
+                "calls": 2,
+                "screensPerCall": {
+                  "1": 2
+                },
+                "returnArities": {
+                  "1": 2
+                },
+                "resultDescriptors": {
+                  "object:CONS": 2
+                }
+              }
+            },
+            "3": {
+              "multi": {
+                "calls": 47,
+                "screensPerCall": {
+                  "0": 47
+                },
+                "returnArities": {
+                  "1": 47
+                },
+                "resultDescriptors": {
+                  "object:CONS": 47
+                }
+              }
+            }
+          },
+          "pathKinds": {
+            "empty": 1420,
+            "multi": 1033,
+            "singleton": 2
+          },
+          "byBrush": {
+            "1": {
+              "brushIndex": 1,
+              "brushType": "PAINT-BRUSH",
+              "calls": 2140,
+              "byValue": {
+                "0": {
+                  "calls": 2097,
+                  "pathKinds": {
+                    "empty": 1341,
+                    "multi": 754,
+                    "singleton": 2
+                  }
+                },
+                "3": {
+                  "calls": 43,
+                  "pathKinds": {
+                    "multi": 43
+                  }
+                }
+              },
+              "pathKinds": {
+                "empty": 1341,
+                "multi": 797,
+                "singleton": 2
+              },
+              "screensPerCall": {
+                "0": 43,
+                "1": 2097
+              },
+              "screenCalls": 2097
+            },
+            "2": {
+              "brushIndex": 2,
+              "brushType": "PAINT-BRUSH",
+              "calls": 125,
+              "byValue": {
+                "0": {
+                  "calls": 123,
+                  "pathKinds": {
+                    "empty": 46,
+                    "multi": 77
+                  }
+                },
+                "3": {
+                  "calls": 2,
+                  "pathKinds": {
+                    "multi": 2
+                  }
+                }
+              },
+              "pathKinds": {
+                "empty": 46,
+                "multi": 79
+              },
+              "screensPerCall": {
+                "0": 2,
+                "1": 123
+              },
+              "screenCalls": 123
+            },
+            "4": {
+              "brushIndex": 4,
+              "brushType": "PAINT-BRUSH",
+              "calls": 190,
+              "byValue": {
+                "0": {
+                  "calls": 188,
+                  "pathKinds": {
+                    "empty": 33,
+                    "multi": 155
+                  }
+                },
+                "3": {
+                  "calls": 2,
+                  "pathKinds": {
+                    "multi": 2
+                  }
+                }
+              },
+              "pathKinds": {
+                "empty": 33,
+                "multi": 157
+              },
+              "screensPerCall": {
+                "0": 2,
+                "1": 188
+              },
+              "screenCalls": 188
+            }
+          },
+          "screensPerCall": {
+            "0": 47,
+            "1": 2408
+          },
+          "naturalReturnValueArities": {
+            "1": 2455
+          },
+          "naturalReturnDescriptors": {
+            "object:CONS": 1035,
+            "nil": 1420
+          },
+          "predicateCounts": {
+            "naturalCallsGlobal": 791037,
+            "inStrokeCalls": 783819,
+            "inStrokeNonScreenCalls": 783819,
+            "inStrokeScreenCalls": 0,
+            "acceptedResults": 775338,
+            "rejectedResults": 8481,
+            "outsideStrokeCalls": 7218
+          },
+          "naturalReaderAndBoundaryCounts": {
+            "clears": 47,
+            "screensGlobal": 2408,
+            "screensWithinStrokes": 2408,
+            "xReadsGlobal": 1776900,
+            "xReadsWithinStrokes": 205018,
+            "yReadsGlobal": 1599587,
+            "yReadsWithinStrokes": 174352,
+            "coreReadsGlobal": 2429,
+            "coreReadsWithinStrokes": 1627,
+            "randomPreviewChecks": 2455
+          }
+        },
+        "brushes": [
+          {
+            "index": 1,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          {
+            "index": 4,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -2,
+                5
+              ],
+              [
+                -1,
+                5
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                -3,
+                4
+              ],
+              [
+                -2,
+                4
+              ],
+              [
+                -1,
+                4
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                -4,
+                3
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                -2,
+                3
+              ],
+              [
+                -1,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                -5,
+                2
+              ],
+              [
+                -4,
+                2
+              ],
+              [
+                -3,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                -5,
+                1
+              ],
+              [
+                -4,
+                1
+              ],
+              [
+                -3,
+                1
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                -5,
+                0
+              ],
+              [
+                -4,
+                0
+              ],
+              [
+                -3,
+                0
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                -5,
+                -1
+              ],
+              [
+                -4,
+                -1
+              ],
+              [
+                -3,
+                -1
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                5,
+                -1
+              ],
+              [
+                4,
+                -1
+              ],
+              [
+                3,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                -5,
+                -2
+              ],
+              [
+                -4,
+                -2
+              ],
+              [
+                -3,
+                -2
+              ],
+              [
+                -2,
+                -2
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                5,
+                -2
+              ],
+              [
+                4,
+                -2
+              ],
+              [
+                3,
+                -2
+              ],
+              [
+                2,
+                -2
+              ],
+              [
+                1,
+                -2
+              ],
+              [
+                -4,
+                -3
+              ],
+              [
+                -3,
+                -3
+              ],
+              [
+                -2,
+                -3
+              ],
+              [
+                -1,
+                -3
+              ],
+              [
+                0,
+                -3
+              ],
+              [
+                4,
+                -3
+              ],
+              [
+                3,
+                -3
+              ],
+              [
+                2,
+                -3
+              ],
+              [
+                1,
+                -3
+              ],
+              [
+                -3,
+                -4
+              ],
+              [
+                -2,
+                -4
+              ],
+              [
+                -1,
+                -4
+              ],
+              [
+                0,
+                -4
+              ],
+              [
+                3,
+                -4
+              ],
+              [
+                2,
+                -4
+              ],
+              [
+                1,
+                -4
+              ],
+              [
+                -2,
+                -5
+              ],
+              [
+                -1,
+                -5
+              ],
+              [
+                0,
+                -5
+              ],
+              [
+                1,
+                -5
+              ],
+              [
+                2,
+                -5
+              ]
+            ]
+          },
+          {
+            "index": 2,
+            "type": "PAINT-BRUSH",
+            "core": [
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                1,
+                -2
+              ]
+            ]
+          }
+        ],
+        "globalComplete": {
+          "calls": 2455,
+          "clears": 47,
+          "screens": 2408,
+          "predicates": 791037,
+          "x-reads": 1776900,
+          "y-reads": 1599587,
+          "core-reads": 2429,
+          "checks": 2455,
+          "errors": 0,
+          "aborts": 0,
+          "localSums": {
+            "predicates": 783819,
+            "screenPredicates": 0,
+            "accepted": 775338,
+            "rejected": 8481,
+            "screens": 2408,
+            "xReads": 205018,
+            "yReads": 174352,
+            "coreReads": 1627
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "The census records natural call arguments as compact path lengths, counters, brush index/type and a first-seen CORE snapshot; it does not record path coordinates or FILL-MAP contents/history.",
+    "Predicate counters are call attempts and outcomes, not unique pixels or verified array writes. Accepted results alone do not prove BRUSH-STROKE stored a value.",
+    "The wrappers do not retain caller stacks or event chronology, so they do not establish direct callers or the order of SCREEN-AND-STORE relative to other internal work.",
+    "Return values retain NIL, integer values or object type names only; they do not preserve object identity.",
+    "Brush CORE data is joined through the ALL-BRUSHES position and is captured once when each brush object is first seen; it does not prove the mask stayed unchanged across later calls.",
+    "The census does not report PERIM coordinates or path/candidate coordinates, so predicate-count ratios cannot establish PERIM use or per-offset coverage.",
+    "The VALUE=0 empty/singleton-path rows are natural observations distinct from the older dependency-isolated adapter cases; they are retained as observations, not generalized behavior rules.",
+    "Random preview checks compare copied-state snapshots around the observer read; they do not prove the original drawing functions consume no randomness.",
+    "Complete output parity binds separate observed/control runs for each seed. It does not make the instrumented scene a direct proof of map writes or call-graph edges."
+  ]
+}
