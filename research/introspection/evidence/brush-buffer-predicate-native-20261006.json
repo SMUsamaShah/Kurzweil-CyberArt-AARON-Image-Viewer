@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "kind": "Seed-1234 brush-buffer predicate native mapping with byte-validated standalone Ghidra reports and canonical REA evidence round-trips",
+  "rea": {
+    "package": "rea-agents",
+    "version": "3.2.1",
+    "packageJsonSha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411",
+    "toolchain": {
+      "path": "research/artifacts/rea-tools/toolchain.json",
+      "sha256": "90efe732cbd6662bddeebd1170f99ea60a623fe193dcb8fe8470e18b6cb4e431",
+      "ghidraHome": "D:\\ReverseEngineerAaron\\research\\artifacts\\rea-tools\\ghidra_12.1.4_PUBLIC",
+      "javaHome": "D:\\ReverseEngineerAaron\\research\\artifacts\\rea-tools\\jdk-21.0.12.1+1",
+      "reaCli": "D:\\ReverseEngineerAaron\\research\\artifacts\\rea-tools\\rea-3.2.1\\node_modules\\rea-agents\\scripts\\rea.mjs",
+      "ghidraLauncherSha256": "dd7b9d17d32ed70a71df82a43a21cdaed6c4ce67064e30f8642c149f81c2ae07",
+      "ghidraPropertiesSha256": "e84c26b08545eee63d24a1a8a4dd7905e4209538e2e7192093877c435c64eb67",
+      "javaExecutableSha256": "82051fdab26319d77d20cc0065045d05ec00b3e3d05f44935d7c06b96b621d55",
+      "javaReleaseSha256": "07117c72ce033949c14878e07fbf2fe23f59a1f8c90a6d1351b5c89099847ce7"
+    }
+  },
+  "nativeRuns": [
+    {
+      "runId": "brush-buffer-predicate-native-seed1234-20261006-a",
+      "root": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "summarySha256": "6a82297fa1c2916c593860dfc58b16b9a142aeb76642f2ebc7ada539f4b95a00",
+      "requestSha256": "1c18d0795fe752800448c43a98da52a887ca9093c3b23b42c2645d9d85544bb0",
+      "probeSourceSha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+      "stagedProbeSha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+      "outputNames": [
+        "aaron-brush-buffer-predicate-native-links.txt"
+      ],
+      "pauseSeconds": 90,
+      "releaseMarkerSha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "nativeLinksSha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+      "functionObjectMetadataSha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+      "metadataSummary": {
+        "logicalRecordCounts": {
+          "target": 2,
+          "arglist": 2,
+          "header": 2,
+          "constantcount": 2,
+          "constant": 14
+        },
+        "targetNames": [
+          "FOOB",
+          "ZERO-EDGE"
+        ],
+        "arglists": [
+          {
+            "name": "FOOB",
+            "values": "((COMMON-GRAPHICS-USER::X COMMON-GRAPHICS-USER::Y) T)"
+          },
+          {
+            "name": "ZERO-EDGE",
+            "values": "((COMMON-GRAPHICS-USER::START COMMON-GRAPHICS-USER::PERIM) T)"
+          }
+        ],
+        "constants": [
+          {
+            "name": "FOOB",
+            "index": 0,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"*PIC-WIDE*\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "FOOB",
+            "index": 1,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"*PIC-HIGH*\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 0,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"START\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 1,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"X\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 2,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"Y\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 3,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"Z\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 4,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"XINCS\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 5,
+            "printedValue": "(:SYMBOL \"COMMON-LISP\" \"NTHCDR\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 6,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"YINCS\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 7,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"FOOB\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 8,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"FILL-MAP\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 9,
+            "printedValue": "(:SYMBOL \"COMMON-LISP\" \"AREF\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 10,
+            "printedValue": "(:SYMBOL \"COMMON-GRAPHICS-USER\" \"MAKE-TRIPT\")",
+            "continuationLines": 0
+          },
+          {
+            "name": "ZERO-EDGE",
+            "index": 11,
+            "printedValue": "(:SYMBOL \"COMMON-LISP\" \"MOD\")",
+            "continuationLines": 0
+          }
+        ],
+        "headers": [
+          {
+            "name": "FOOB",
+            "bytesHex": "3620b73c3620071e3620850900200888020094a0df1fd09f000097cf332082a0df1f690f34200000000000000000080000006f393a209f393a2051e0a1200888"
+          },
+          {
+            "name": "ZERO-EDGE",
+            "bytesHex": "4e209f393a201f354d20677b452008800c003439e01ffc9f00001fcc33202239e01f81ca4120000000000000000048000000ef0b362007e33520efe235201fe3"
+          }
+        ],
+        "pointerCandidates": [
+          {
+            "name": "FOOB",
+            "entryCandidate": "0x1fdfa094",
+            "taggedVectorCandidate": "0x1fdfa082",
+            "vectorBaseCandidate": "0x1fdfa080"
+          },
+          {
+            "name": "ZERO-EDGE",
+            "entryCandidate": "0x1fe03934",
+            "taggedVectorCandidate": "0x1fe03922",
+            "vectorBaseCandidate": "0x1fe03920"
+          }
+        ],
+        "reportedTotals": {
+          "targets": 2,
+          "functions": 2,
+          "headers": 2,
+          "constants": 14,
+          "errors": 0,
+          "truncations": 0
+        },
+        "declaredConstantCounts": [
+          {
+            "name": "FOOB",
+            "count": 2
+          },
+          {
+            "name": "ZERO-EDGE",
+            "count": 12
+          }
+        ],
+        "physicallyWrappedLogicalRecordCount": 0,
+        "boundedNestedSummaries": [],
+        "constantValueInterpretation": "Raw metadata is byte-hashed and record-head counted. Nested printed cons summaries marked (:TYPE CONS) are depth-bounded and are not treated as complete constant lists."
+      },
+      "manifestSha256": "bf4b41e9e2de8b94206bdbf87168749a0ebcb51d48b59d61d7258f5276f0619d",
+      "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    }
+  ],
+  "control": {
+    "runId": "brush-buffer-predicate-native-control-seed1234-20261006-b",
+    "root": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b",
+    "summarySha256": "a3986fbe11a15a092ad78dcbfd0097df94829a047655213e3511c92c5b97bb82",
+    "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+    "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+    "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+    "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+  },
+  "drawingParity": {
+    "aa0ByteIdenticalToFreshControl": true,
+    "sceneReportByteIdenticalToFreshControl": true,
+    "sameSetupHashes": true,
+    "checkedNativeRunIds": [
+      "brush-buffer-predicate-native-seed1234-20261006-a"
+    ],
+    "setup": {
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    }
+  },
+  "nativeMapping": {
+    "uniqueCompletePllObjects": 2,
+    "functions": [
+      {
+        "name": "FOOB",
+        "nativeRunId": "brush-buffer-predicate-native-seed1234-20261006-a",
+        "runtimeEntryForThisRun": "0x1fdfa094",
+        "capture": {
+          "windowFile": "foob.native-window.bin",
+          "windowSha256": "a9ec2634e9f9c07a816cb2152467c79324c9b88efe494f057b096fb23fbca8bf",
+          "windowBytes": 16384,
+          "windowBase": "0x1fdfa054",
+          "functionObjectHeaderHex": "3620b73c3620071e3620850900200888020094a0df1fd09f000097cf332082a0df1f690f34200000000000000000080000006f393a209f393a2051e0a1200888",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 42352,
+          "objectOffset": 2465936,
+          "payloadOffset": 2465940,
+          "rawEnd": 2466238,
+          "nextBoundary": 2466240,
+          "tableSecondWord": 145
+        },
+        "compiledObject": {
+          "header": "0x956c",
+          "encodedWords": 149,
+          "objectBytes": 302,
+          "objectSha256": "b0fd91739722bb93891fd887490e41b4c952a1d2458c0c5a4954fda27c567a6d",
+          "uniqueCompleteObjectByteMatch": true,
+          "runtimeObjectBase": "0x1fdfa090",
+          "liveWindowSliceSha256": "b0fd91739722bb93891fd887490e41b4c952a1d2458c0c5a4954fda27c567a6d"
+        },
+        "payload": {
+          "file": "foob.native-payload.bin",
+          "bytes": 298,
+          "sha256": "3576067de5650cf355e452e2a279b8ae4d8177b959d450bc3bcdd37d850c0d91"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "33d220a02b488629ac38afed8841d6cadddff37a28878bb2234f6a96fc94f160",
+          "headlessLogSha256": "b33315a4a90edc2923ca6e051ac01b13a8557794fb5b67464f7555cca28f75a4",
+          "decompilationCompleted": true,
+          "instructionCount": 110,
+          "instructionBytesCompared": 289,
+          "payloadBytes": 298,
+          "payloadInstructionCoveragePercent": 96.9799,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 289,
+              "bytes": 289
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 289,
+              "endExclusive": 298,
+              "bytes": 9
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_1869915c87e200fc2d5db6ebae37e2d0c18fef7d6ed9205103889c4fb38eea75",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+          "canonicalExportSha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "33d220a02b488629ac38afed8841d6cadddff37a28878bb2234f6a96fc94f160",
+          "importResultPath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-export.json"
+        }
+      },
+      {
+        "name": "ZERO-EDGE",
+        "nativeRunId": "brush-buffer-predicate-native-seed1234-20261006-a",
+        "runtimeEntryForThisRun": "0x1fe03934",
+        "capture": {
+          "windowFile": "zero-edge.native-window.bin",
+          "windowSha256": "562f56e6a50b09dfadfc18cd2dc25ee9d89c97478b0b0d2826e7f84ab31a84c6",
+          "windowBytes": 16384,
+          "windowBase": "0x1fe038f4",
+          "functionObjectHeaderHex": "4e209f393a201f354d20677b452008800c003439e01ffc9f00001fcc33202239e01f81ca4120000000000000000048000000ef0b362007e33520efe235201fe3",
+          "headerOffsetInWindow": 60
+        },
+        "pll": {
+          "recordOffset": 57816,
+          "objectOffset": 2505008,
+          "payloadOffset": 2505012,
+          "rawEnd": 2505994,
+          "nextBoundary": 2506000,
+          "tableSecondWord": 487
+        },
+        "compiledObject": {
+          "header": "0x1eb6c",
+          "encodedWords": 491,
+          "objectBytes": 986,
+          "objectSha256": "bfc1a06d25e47533b553c7ddd6236cfefa912951923621132f96135f748e46ac",
+          "uniqueCompleteObjectByteMatch": true,
+          "runtimeObjectBase": "0x1fe03930",
+          "liveWindowSliceSha256": "bfc1a06d25e47533b553c7ddd6236cfefa912951923621132f96135f748e46ac"
+        },
+        "payload": {
+          "file": "zero-edge.native-payload.bin",
+          "bytes": 982,
+          "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736"
+        },
+        "ghidra": {
+          "version": "12.1.4",
+          "languageId": "x86:LE:32:default",
+          "compilerSpecId": "windows",
+          "reportSha256": "fb52dbcd4d5a313f708131cdda527e6036ed515af399d6ff506abfa3d6bd75c3",
+          "headlessLogSha256": "cec30553e88123ce484490ede4ec0c20f2da38fe527622924876577ffd73d374",
+          "decompilationCompleted": true,
+          "instructionCount": 338,
+          "instructionBytesCompared": 973,
+          "payloadBytes": 982,
+          "payloadInstructionCoveragePercent": 99.0835,
+          "instructionRanges": [
+            {
+              "start": 0,
+              "endExclusive": 973,
+              "bytes": 973
+            }
+          ],
+          "uncoveredPayloadRanges": [
+            {
+              "start": 973,
+              "endExclusive": 982,
+              "bytes": 9
+            }
+          ]
+        },
+        "rea": {
+          "evidenceId": "ev_8475abdb163f8601a2e4b24583fa86a9eb02d0e8b3dabb715364e7131cba0b43",
+          "provider": {
+            "id": "ghidra-standalone",
+            "name": "Ghidra standalone JSON report",
+            "version": "12.1.4"
+          },
+          "operation": "standalone_ghidra_function_analysis",
+          "nativeProviderSession": false,
+          "authority": "shipped-artifact",
+          "confidence": "observed",
+          "bundleSha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+          "canonicalExportSha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+          "importResultSha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+          "importResult": {
+            "imported": 1,
+            "unknowns_added": 0,
+            "total": 1
+          },
+          "sourceReportSha256": "fb52dbcd4d5a313f708131cdda527e6036ed515af399d6ff506abfa3d6bd75c3",
+          "importResultPath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-import.json",
+          "bundlePath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-bundle.json",
+          "exportPath": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-export.json"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "REA Evidence was imported from standalone Ghidra JSON using provider id ghidra-standalone and operation standalone_ghidra_function_analysis; no REA native Ghidra provider session was launched.",
+    "REA 3.2.1 has no raw-binary subject format. Each bundle preserves reported_format raw in its result and parameters while representing the Evidence subject format as unknown.",
+    "The REA bundle helper verifies report structure and subject-file SHA binding; this derivation independently compares every reported instruction byte to the exact mapped PLL payload but does not authenticate how Ghidra produced the JSON.",
+    "The x86 Windows compiler specification does not model Allegro Lisp register conventions or tagged objects; Ghidra C types, arguments and expressions are not recovered Lisp source.",
+    "The captured 64-byte SYSTEM::MEMREF functionObjectHeaderHex is live function metadata, not the serialized PLL code header. Complete code-object bytes are checked at the mapper-reported entry-minus-window-base offset, which can vary when a captured window is clamped.",
+    "Native metadata is preserved byte-for-byte and hash-bound. Bounded nested cons summaries marked (:TYPE CONS) are not treated as full constant lists, and metadata does not establish dynamic calls or a complete call graph.",
+    "Only FOOB and ZERO-EDGE from this seed-1234 capture are included; runtime entry addresses are per-run observations, not fixed addresses across builds.",
+    "The target list and constant records are static inspection candidates; they do not establish that either function ran in the captured scene or that Ghidra C expressions reproduce Allegro Lisp semantics.",
+    "Only reachable Ghidra instructions are reported. Uncovered payload ranges are retained and not labeled as code or data."
+  ],
+  "sourceHashes": [
+    {
+      "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/Ghidra/application.properties",
+      "sha256": "e84c26b08545eee63d24a1a8a4dd7905e4209538e2e7192093877c435c64eb67",
+      "bytes": 659
+    },
+    {
+      "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/support/analyzeHeadless.bat",
+      "sha256": "dd7b9d17d32ed70a71df82a43a21cdaed6c4ce67064e30f8642c149f81c2ae07",
+      "bytes": 2930
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/bin/java.exe",
+      "sha256": "82051fdab26319d77d20cc0065045d05ec00b3e3d05f44935d7c06b96b621d55",
+      "bytes": 50304
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/release",
+      "sha256": "07117c72ce033949c14878e07fbf2fe23f59a1f8c90a6d1351b5c89099847ce7",
+      "bytes": 1664
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleCommands.js",
+      "sha256": "e8c7f31cc64d589256f8903324e3088a8e395f6ec5487c415ca42e1e5db3c3d9",
+      "bytes": 2149
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleFiles.js",
+      "sha256": "3171e7a656f43710c2ee0a38391751df87f21b3329c825ff4fa3d0a9928fda5e",
+      "bytes": 1430
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceLedger.js",
+      "sha256": "2a63701c3cc5de15269e7e504ce3b33d6108b64dc1a50cc7d5fe94ee3a457a1e",
+      "bytes": 11902
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/cliEvidenceCommands.js",
+      "sha256": "4c6f9cd33303d53a5c5692343702ecec75633460a9130ff13e0bc538c77ec094",
+      "bytes": 2419
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/analysisProfile.js",
+      "sha256": "76d1b0c2a2f472ae201b77ef93db29c0901e3964538c864a8fe133ab407b65f8",
+      "bytes": 2059
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidence.js",
+      "sha256": "b277c68d4b619d38a2e9d7d1faed08b0200ee7b678044cf666367034ccfb3b89",
+      "bytes": 8050
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidenceBundle.js",
+      "sha256": "7bd7b066f0ed8c6a403d2c12feca0fa18eb1f3f9e1cef39f94224897f31a85ca",
+      "bytes": 12582
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/package.json",
+      "sha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411",
+      "bytes": 10943
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/scripts/rea.mjs",
+      "sha256": "293fa0e5a2f55194964eb89f50296685ab14827c42cbdf5b72f82f4b867ffeef",
+      "bytes": 2549
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain.json",
+      "sha256": "90efe732cbd6662bddeebd1170f99ea60a623fe193dcb8fe8470e18b6cb4e431",
+      "bytes": 460
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/summary.json",
+      "sha256": "a3986fbe11a15a092ad78dcbfd0097df94829a047655213e3511c92c5b97bb82",
+      "bytes": 815
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-brush-buffer-predicate-native-links.txt",
+      "sha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+      "bytes": 2216
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-native-code-release.txt",
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "bytes": 36
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-pre-scene-probe.cl",
+      "sha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+      "bytes": 8710
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-probe-loader.cl",
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+      "bytes": 162
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/foob.native-window.bin",
+      "sha256": "a9ec2634e9f9c07a816cb2152467c79324c9b88efe494f057b096fb23fbca8bf",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/function-object-metadata.txt",
+      "sha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+      "bytes": 2216
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/manifest.json",
+      "sha256": "bf4b41e9e2de8b94206bdbf87168749a0ebcb51d48b59d61d7258f5276f0619d",
+      "bytes": 1920
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/foob.native-payload.bin",
+      "sha256": "3576067de5650cf355e452e2a279b8ae4d8177b959d450bc3bcdd37d850c0d91",
+      "bytes": 298
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.ghidra.json",
+      "sha256": "33d220a02b488629ac38afed8841d6cadddff37a28878bb2234f6a96fc94f160",
+      "bytes": 27328
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.headless.log",
+      "sha256": "b33315a4a90edc2923ca6e051ac01b13a8557794fb5b67464f7555cca28f75a4",
+      "bytes": 8084
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-bundle.json",
+      "sha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+      "bytes": 36441
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-export.json",
+      "sha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+      "bytes": 36441
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.ghidra.json",
+      "sha256": "fb52dbcd4d5a313f708131cdda527e6036ed515af399d6ff506abfa3d6bd75c3",
+      "bytes": 81628
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.headless.log",
+      "sha256": "cec30553e88123ce484490ede4ec0c20f2da38fe527622924876577ffd73d374",
+      "bytes": 8143
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-bundle.json",
+      "sha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+      "bytes": 99078
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-export.json",
+      "sha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+      "bytes": 99078
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/native-code-map.json",
+      "sha256": "a39d2c19697df7ed7af8d7a09a9ed3e219ead3ec89f23779e2c25f753973a8dd",
+      "bytes": 3087
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/zero-edge.native-payload.bin",
+      "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+      "bytes": 982
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/zero-edge.native-window.bin",
+      "sha256": "562f56e6a50b09dfadfc18cd2dc25ee9d89c97478b0b0d2826e7f84ab31a84c6",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/pre-scene-probe-request.json",
+      "sha256": "1c18d0795fe752800448c43a98da52a887ca9093c3b23b42c2645d9d85544bb0",
+      "bytes": 503
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/summary.json",
+      "sha256": "6a82297fa1c2916c593860dfc58b16b9a142aeb76642f2ebc7ada539f4b95a00",
+      "bytes": 927
+    },
+    {
+      "path": "research/introspection/brush-buffer-predicate-native-links.cl",
+      "sha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+      "bytes": 8710
+    },
+    {
+      "path": "research/oracle/run-local-scene-state.ps1",
+      "sha256": "6a99f345d92568584bc3d2fe48b85aa7c0c3c6fb6045308fba64bfbdfef7711b",
+      "bytes": 25088
+    },
+    {
+      "path": "research/tools/capture-aaron-native-code.ps1",
+      "sha256": "3407b9a60b6b5c66397197ac6026b0c4013b3cbd42f7b5f08400c7b6595d641a",
+      "bytes": 8189
+    },
+    {
+      "path": "research/tools/derive-brush-buffer-predicate-native-evidence.mjs",
+      "sha256": "75c581a731b19042c650f8fe6ae852af5745e129277cda9ade16c009c0792836",
+      "bytes": 49900
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-native-evidence.mjs",
+      "sha256": "745e1fc1db2c3f7abd2a229cfd63c6567b0708a8eb255fc6019b2452e184b97d",
+      "bytes": 26930
+    },
+    {
+      "path": "research/tools/ghidra/AaronNativeReport.java",
+      "sha256": "63e268a025e1ff3225f10baa8d2acc0a2f3669b58206c27a6c67be22d55e2fbc",
+      "bytes": 5753
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee",
+      "bytes": 41726
+    },
+    {
+      "path": "research/tools/map-native-code-to-pll.mjs",
+      "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+      "bytes": 5906
+    },
+    {
+      "path": "research/tools/rea-evidence-bundle.mjs",
+      "sha256": "81bd072f7959655bf80ef3ecf240ec08f30ecbe85344a8f8941d9ea33752e601",
+      "bytes": 14465
+    },
+    {
+      "path": "research/tools/run-aaron-ghidra.ps1",
+      "sha256": "0a9fed5e071a59d5818ca6ade10f4d3b0164d9cccb83f63173a6602310f0767d",
+      "bytes": 3269
+    }
+  ]
+}

@@ -11,7 +11,12 @@ predicates and 3,686,400 full output cells. All three head outputs compose
 exactly, and all 6,965 extra clear-entry 3 positions have captured feature
 changes. See [the feature findings](introspection/brush-feature-buffer.md).
 Its first tape is excluded for missing MAIN/READY and COMPLETE/END. Continue
-with FOOB/ZERO-EDGE, then the complete BRUSH-FILL row/iris schedule and
+with FOOB characterization: its native object and ZERO-EDGE now have separate
+unique complete PLL matches and 448 byte-checked instruction rows, with
+canonical external REA records and a fresh control. See
+[the predicate native findings](introspection/brush-buffer-predicate-native.md).
+Metadata does not establish their natural calls or behavior. Then investigate
+ZERO-EDGE and the complete BRUSH-FILL row/iris schedule and
 value-0 painting. Head feature selection and original geometry remain inputs.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for

@@ -28,6 +28,15 @@ probe, then the complete BRUSH-FILL row/iris schedule and value-0 painter.
 
 ### Native mapping checkpoint
 
+FOOB and ZERO-EDGE now have separate unique complete PLL matches, 448
+byte-checked instruction rows covering 1,262 of 1,280 payload bytes, canonical
+external REA records and a fresh byte-identical drawing/scene control. Read
+[the predicate native findings](introspection/brush-buffer-predicate-native.md)
+and [portable evidence](introspection/evidence/brush-buffer-predicate-native-20261006.json).
+The capture is metadata only: neither natural calls nor Lisp behavior follow
+from it. The next experiment measures FOOB's complete integer grid, mixed
+single/double fractional bounds and every natural argument/result pair.
+
 Six painting/buffer functions now have unique complete PLL matches and 1,364
 byte-checked Ghidra instruction rows covering 3,829 payload bytes. Both native
 runs equal a fresh uninstrumented drawing/scene control. Read

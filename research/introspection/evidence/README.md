@@ -1,5 +1,16 @@
 # Original-engine report excerpts
 
+## Native FOOB and ZERO-EDGE mapping, 2026-10-06
+
+[`brush-buffer-predicate-native-20261006.json`](brush-buffer-predicate-native-20261006.json)
+binds two unique complete PLL objects, 448 byte-checked instruction rows
+covering 1,262 of 1,280 payload bytes, canonical external REA records and a
+fresh byte-identical drawing/scene control. FOOB's only two constants are the
+picture dimensions; ZERO-EDGE's complete constant table includes FOOB and
+fill-map/coordinate helpers. This metadata capture establishes candidate
+dependencies, not natural calls or recovered Lisp semantics. See
+[the findings](../brush-buffer-predicate-native.md).
+
 ## Natural feature buffers and added boundary cells, 2026-10-06
 
 [`brush-feature-buffer-parity-20261006.json`](brush-feature-buffer-parity-20261006.json)

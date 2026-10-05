@@ -120,6 +120,7 @@ The [count/assignment follow-up](introspection/brush-fill-count.md) used:
 | `brush-fill-native-links.cl` | `aaron-brush-fill-native-links.txt` | `END brush-fill-native-links` | 7 |
 | `brush-fill-methods.cl` | `aaron-brush-fill-methods.txt` | `END brush-fill-methods` | 2 |
 | `brush-fill-helper-links.cl` | `aaron-brush-fill-helper-links.txt` | `END brush-fill-helper-links` | 6 |
+| `brush-buffer-predicate-native-links.cl` | `aaron-brush-buffer-predicate-native-links.txt` | `END brush-buffer-predicate-native-links` | 2 |
 
 Use the same terminal-A pattern, substituting its probe/output names and
 keeping a positive pause. Before capturing methods, require the final
@@ -174,6 +175,14 @@ window base and decoded object length to choose the comparison range. A window
 can be clamped at a memory-region boundary, so its code-header offset is not
 always 60. Keep the unique complete-object match; do not substitute a partial
 payload or a fixed window offset when reusing this workflow.
+
+The [FOOB/ZERO-EDGE capture](introspection/brush-buffer-predicate-native.md)
+uses the two-header probe above and the ordinary mapper/Ghidra runner.
+`derive-brush-buffer-predicate-native-evidence.mjs` validates both complete
+objects, all reported instruction bytes, the canonical REA round-trips,
+current/staged probe bytes and a fresh uninstrumented drawing/scene control.
+Use a fresh ignored output beneath that capture's `native-code/mapped/` root.
+These metadata targets have no dynamic-caller or behavioral claim.
 
 ## 2. Decode the matched payloads
 
