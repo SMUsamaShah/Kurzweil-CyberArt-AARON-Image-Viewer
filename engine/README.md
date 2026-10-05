@@ -167,7 +167,7 @@ matches all 278 captured original calls and 1,130,814 output map cells in two
 controlled paintings, given their complete frame/map regions and naturally
 read target ID/count. Only fill values 0/1 and FLAG-BIT 32768 are directly
 compared; its native value-2 conversion remains inferred. The helper returns
-the new count and remaining-count result. Scene planning, map production and
+the new count and remaining-count result. Scene planning, SUBFORM map production and
 the integrated BRUSH-FILL caller remain upstream work. See
 [`../research/introspection/post-fill-count.md`](../research/introspection/post-fill-count.md).
 
@@ -177,10 +177,27 @@ qualifying X sequence, and the cyclic fill-map column scan. All 427 original
 calls per helper and 1,883,204
 output cell comparisons summed over per-call captured regions match across
 two controlled paintings. The scan toggles bit 0 and preserves value 2.
-Original integer frames, ordered VISPT/TRIPT
-coordinates and initial boundary maps remain inputs; scene construction and
+Original integer frames and ordered VISPT/TRIPT coordinates remain inputs.
+The CFORM writer is now composed with these helpers below; SUBFORM initial
+boundary maps, scene construction and
 the integrated MY-FILL/BRUSH-FILL caller remain open. See
 [`../research/introspection/fill-preparation.md`](../research/introspection/fill-preparation.md).
+
+`aaron-boundary-map.js` supplies `writeAaronListToFillMap({maps, points, value})`
+and `clearAaronFillMap({maps, frame})`. The writer assigns the supplied value
+at in-picture integer coordinates; the clear zeros the inclusive LX/RX/LY/TY
+rectangle. Both mutate the fill map in place and return NIL (`null`). All 149
+natural value-2 writes and 70 clears match 33,638,400 full-map output cell
+comparisons, including clear-entry values 0/1/2/3 and unchanged cells outside
+the target. The two controlled paintings contain no out-of-picture writer
+point; that skip branch is native interpretation.
+
+Composing the writer with medians, start selection and strategy matches all
+149 CFORM cases and 1,295,917 strategy-region cells in the retained separate
+observations. The original writer entry map, ordered points and frame inputs
+are still supplied; input construction, SUBFORM initial maps, CFORM POST-FILL
+and the integrated caller remain open. See
+[`../research/introspection/boundary-map.md`](../research/introspection/boundary-map.md).
 
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512

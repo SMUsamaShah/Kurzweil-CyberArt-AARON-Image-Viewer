@@ -1,5 +1,26 @@
 # Original-engine report excerpts
 
+## Full boundary-map comparisons, 2026-10-05
+
+[`boundary-map-parity-20261005.json`](boundary-map-parity-20261005.json)
+retains all 149 WRITE-LIST-TO-FILL-MAP and 70 CLEAR-FILL-MAP calls in two
+complete paintings. Independent JS matches 35,905 list positions and
+33,638,400 full-map output cell comparisons. Both paintings and scene reports
+equal fresh controls byte for byte. The composed CFORM writer/median/start/
+strategy sequence matches all 149 cases and 1,295,917 prior strategy-region
+output cells in separate aligned observations of the same paintings.
+
+Writers assign value 2 at valid VISPT coordinates, with 652 repeated
+coordinates. Clears zero inclusive MAPFRAME rectangles, including observed
+values 1/2/3, and preserve every cell outside those rectangles. The evidence
+rederives both exact live-window/PLL matches, validates native instruction
+bytes and REA canonical external report import/export, and retains the
+initial observer's missing bound inputs. Out-of-picture writer guards are
+native interpretation; none is exercised here. Other domains, original
+input construction, SUBFORM initial maps and integrated callers remain open.
+Full original maps and native reports stay ignored. See
+[the findings](../boundary-map.md) for reproduction and scope.
+
 ## Three fill-preparation functions, 2026-10-05
 
 [`fill-preparation-parity-20261005.json`](fill-preparation-parity-20261005.json)

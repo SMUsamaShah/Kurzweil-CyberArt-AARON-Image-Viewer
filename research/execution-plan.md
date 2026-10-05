@@ -24,10 +24,14 @@ observed domain; the value-2 conversion remains a native inference. Three
 fill-preparation helpers now match 427 calls each and all 1,883,204 output cell
 comparisons summed over per-call captured regions: SET-MEDIANS, GOOD-START
 and FILL-STRATEGY. The comparison
-computes its own medians and complete outline rotation. Initial boundary maps
-and outline/frame construction remain original inputs. The next priority is
-to recover boundary-map production around WRITE-LIST-TO-FILL-MAP and replace
-original writer decisions and palette values with
+computes its own medians and complete outline rotation. The boundary-map
+helpers now match 149 list writes and 70 inclusive clears, comparing every
+cell of every output map: 33,638,400 comparisons across both paintings.
+All 149 CFORM writer/median/start/strategy compositions also match their
+1,295,917 captured strategy-region cells. Point lists, entry maps and selected
+frame construction remain original inputs. The next priority is SUBFORM
+initial boundary-map production and CFORM POST-FILL, then replacing original
+writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
 following RNG states. A first path-to-writer drawing unit is measured; palette
@@ -158,9 +162,12 @@ SET-MEDIANS, GOOD-START and FILL-STRATEGY for all 427 complete outlines and
 1,883,204 output cell comparisons summed over those calls. Fill values 0/1/2
 and both VISPT/TRIPT point
 types occur; FILL-STRATEGY's value-2 guard is measured, while POST-FILL's
-separate value-2 conversion still needs an original holdout. Next, recover
-initial boundary-map production around WRITE-LIST-TO-FILL-MAP and connect
-the independent helpers. The two iris paths per
+separate value-2 conversion still needs an original holdout. The
+[boundary-map comparison](introspection/boundary-map.md) now matches all 149
+CFORM list writers and 70 frame clears, and composes the writer with the
+preparation helpers. Next, recover SUBFORM initial maps before MY-FILL and
+connect their production to the strategy and SUBFORM POST-FILL rule. CFORM
+POST-FILL and the integrated callers remain open. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.
 

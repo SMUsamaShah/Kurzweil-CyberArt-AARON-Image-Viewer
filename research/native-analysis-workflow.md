@@ -190,6 +190,17 @@ field is the raw loader's base address. Ghidra can exit zero after a script
 error, so the runner also requires a valid report with the expected subject
 hash, function name, language and instruction count.
 
+The Windows Ghidra launcher can write
+`%APPDATA%\ghidra\ghidra_12.1.4_PUBLIC\java_home.save` even when the configured
+JDK and JAVA_HOME are valid. In the boundary-map run on 2026-10-05, the first
+launch failed with `FileNotFoundException` and `Access is denied` for that
+settings file, followed by misleading missing-JDK and interactive-input
+errors. Inspect the first exception before diagnosing a missing installation.
+After checking the saved toolchain paths, a scoped permission retry of the
+same runner into a fresh `ghidra-b` output directory produced both valid
+reports. No reinstall or global configuration edit was needed. A failed
+launcher log is not a completed analysis; require the report checks above.
+
 The Windows compiler specification is a decoding aid. Its inferred C types,
 arguments and expressions are not recovered Lisp source. Symbol constants
 and computed calls supply candidates; runtime evidence establishes an

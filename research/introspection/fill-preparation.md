@@ -121,6 +121,11 @@ The exact payload/report digests remain in the portable evidence. No debugger
 was attached for this milestone, and the Allegro ABI has not been recovered
 as a C ABI or original Lisp source.
 
+The later [boundary-map milestone](boundary-map.md) supplies the measured
+CFORM list writer and composes it with these helpers for all 149 CFORM cases.
+The original observations and bounded-region scope in this document remain
+the preparation checkpoint; SUBFORM initial map production is still open.
+
 The JavaScript adapter consumes original integer frame values, ordered point
 objects and an initial fill map. Captured points are VISPT and TRIPT objects,
 with integer X/Y coordinates. Creating those outlines and marking their
@@ -186,5 +191,7 @@ coverage and control provenance. Full maps, outlines, binaries and native
 analysis reports remain ignored. No new unit tests were added or suites run;
 syntax/AST checks and the original-runtime comparisons support this milestone.
 
-Next, recover initial boundary-map production around WRITE-LIST-TO-FILL-MAP,
-then connect these three helpers to the measured SUBFORM POST-FILL rule.
+WRITE-LIST-TO-FILL-MAP and CLEAR-FILL-MAP have since been recovered for their
+natural captured domains; see [the boundary-map findings](boundary-map.md).
+Next, recover SUBFORM initial boundary maps and connect their production to
+these helpers and the measured SUBFORM POST-FILL rule.

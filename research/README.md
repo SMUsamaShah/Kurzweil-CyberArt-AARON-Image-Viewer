@@ -16,8 +16,11 @@ tracks all 274 selectors across two controlled paintings and maps the actual
 MY-FILL generic methods. The [POST-FILL comparison](introspection/post-fill-count.md)
 reproduces its SUBFORM count rule, and [three fill-preparation functions](introspection/fill-preparation.md)
 now match 427 calls each and 1,883,204 output cell comparisons summed over
-their captured regions. Initial
-boundary-map production remains the next upstream boundary.
+their captured regions. The [boundary-map helpers](introspection/boundary-map.md)
+match all 149 list writes and 70 inclusive frame clears, with 33,638,400
+full-map output cell comparisons. All 149 composed CFORM preparation cases
+also match. SUBFORM initial boundary-map production remains the next upstream
+boundary; original outline/frame and writer-entry-map construction are still open.
 
 ## Principles
 

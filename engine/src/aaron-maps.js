@@ -6,11 +6,10 @@
  * original creates two independent, fresh, zero-filled rank-2 arrays. The
  * patch map has element type (UNSIGNED-BYTE 16); the fill map has element type
  * (UNSIGNED-BYTE 4). JavaScript has no four-bit typed array, so Uint8Array is
- * used for the fill storage and callers must keep its values in 0..15 until
- * WRITE-LIST-TO-FILL-MAP is recovered.
+ * used for the fill storage and callers must keep its values in 0..15.
  *
- * This module intentionally does not claim the original coordinate-to-index
- * convention or implement CLEAR-FILL-MAP/WRITE-LIST-TO-FILL-MAP.
+ * Cell indexing is measured separately below. The frame clear and point-list
+ * writer are implemented in aaron-boundary-map.js.
  */
 
 function positiveDimension(value, name) {
@@ -44,7 +43,8 @@ export function initializeAaronMaps(width, height) {
  * Convert the two measured map coordinates to Allegro's rank-2 row-major
  * offset.  The original arrays are dimensioned `(width height)` and the
  * brush probes establish `first * height + second` for the tested writes.
- * Coordinate names stay neutral because broader callers are not measured.
+ * The boundary-map captures establish X/Y for their two coordinates; this
+ * lower-level API retains the existing first/second parameter names.
  */
 export function aaronMapIndex(width, height, first, second) {
   const mapWidth = positiveDimension(width, 'width');

@@ -8,6 +8,43 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+Two boundary-map helpers now match all complete captured outputs:
+WRITE-LIST-TO-FILL-MAP assigns value 2 at the ordered list's in-picture
+coordinates; CLEAR-FILL-MAP zeros the selected inclusive frame rectangle.
+Across two paintings, all 149 writers, 70 clears, 35,905 list positions and
+33,638,400 full-map output cell comparisons agree. Both drawings and scene
+reports equal fresh controls byte for byte. Nonzero far-edge cells are cleared,
+and nonzero cells outside the frame are preserved. Clear entry includes values
+0/1/2/3, with 64,259 observed value-3-to-zero transitions.
+
+Read [the boundary-map findings](introspection/boundary-map.md) and
+[portable evidence](introspection/evidence/boundary-map-parity-20261005.json).
+The independent module is `engine/src/aaron-boundary-map.js`. All 149 CFORM
+cases also match the composed writer → medians → start → strategy sequence
+and 1,295,917 strategy-region output cells, aligned to the retained separate
+preparation captures. Original point lists, writer entry maps and selected
+frame inputs remain required. No out-of-picture writer point or VAL other
+than 2 occurs; those guards remain static interpretation.
+
+Both helpers have unique complete PLL matches, instruction-byte-validated
+standalone Ghidra reports and canonical REA external evidence import/export.
+The first full observer missed frame bounds despite matching control bytes:
+compiled accesses bypassed LX/RX/LY/TY function wrappers. Final capture reads
+the slots directly from the naturally returned CFRAME object, adding no
+application frame accessor calls. All 438 map-preview and 140 slot-preview
+checks pass. Keep the missing-input and earlier extra-RX lessons. A Ghidra
+settings-file permission failure and its scoped retry are documented in
+[the native workflow](native-analysis-workflow.md).
+
+Next, recover SUBFORM's initial boundary maps before MY-FILL, then compose
+their production with the measured strategy and SUBFORM POST-FILL rule.
+CFORM POST-FILL and the source of value-3 cells are useful next boundaries.
+Integrated MY-FILL/BRUSH-FILL, frame/outline construction, iris branching and
+subpart brush changes remain open. Do not infer direct native callers from
+the observed MY-FILL/BRUSH-FILL-SUBPART wrapper enclosures.
+
+### Previous fill-preparation checkpoint
+
 Three fill-preparation functions now match their complete captured outputs:
 SET-MEDIANS, GOOD-START and FILL-STRATEGY, with 427 calls each in the two
 controlled paintings. JavaScript rounds median rows to the nearest integer
@@ -33,8 +70,8 @@ passive; preserve this observer lesson alongside the C:\temp and LOOP rules.
 The internal RX mechanism is unresolved. No clock changes or debugger attach
 were needed for this milestone.
 
-Next, recover initial boundary-map production around WRITE-LIST-TO-FILL-MAP,
-then connect these helpers to the measured SUBFORM POST-FILL rule. CFORM
+At that checkpoint, initial boundary-map production around WRITE-LIST-TO-FILL-MAP
+was next, followed by connecting these helpers to SUBFORM POST-FILL. CFORM
 POST-FILL, iris branching, subpart brush changes and the integrated JS caller
 remain open. POST-FILL's separate value-2-to-1 branch is still unobserved.
 

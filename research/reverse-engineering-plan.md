@@ -48,12 +48,15 @@ complete equivalent port until phases 5–8 are recovered.
 ## Active execution order
 
 The current function checkpoint is
-[BRUSH-FILL count and assignment](introspection/brush-fill-count.md): 274
-selectors and 70 selected-object subpart entries across two controlled scenes,
-with byte-identical controls and exact native mappings for both MY-FILL
-methods. Locating the count writer across that method's callees remains the
-next boundary. This supersedes the older unresolved selector/caller scope in the
-phase table only for the observations documented in that report.
+[boundary-map production](introspection/boundary-map.md): 149 list writes,
+70 inclusive frame clears and 33,638,400 full-map output cell comparisons
+across two controlled scenes. The CFORM writer/median/start/strategy
+composition matches all 149 cases. The SUBFORM POST-FILL count writer and
+its captured map rule are also recovered. Initial SUBFORM maps, CFORM
+POST-FILL, frame/outline construction and the integrated drawing caller
+remain next boundaries. These measured scopes supersede the older open
+selector, count and boundary-helper items in the phase table; the generative
+core remains incomplete.
 
 Follow [the current execution plan](execution-plan.md) for the next work.
 Its first targets are continuous full-stream writer replay, exact brush
