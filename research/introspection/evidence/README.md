@@ -1,5 +1,18 @@
 # Original-engine report excerpts
 
+## Natural BRUSH-STROKE value-3 marking and clears, 2026-10-05
+
+[`brush-stroke-boundary-parity-20261005.json`](brush-stroke-boundary-parity-20261005.json)
+binds all 70 long value-3 markers and 70 clears to fresh drawing/scene controls,
+296,912 ordered predicates and 21,504,000 complete output-map comparisons.
+Every one of 3,881 natural stroke returns preserves path EQ identity. The
+PERIM branch and inclusive clipping match; short CORE paths remain a native
+interpretation without natural boundary coverage. Full native byte maps and
+canonical REA external records are revalidated. There are 6,965 additional
+clear-entry 3 positions that were 0/1 at marker exit; their writer is still
+unidentified. Accepted-predicate touch coordinates are not native store events.
+See [the findings](../brush-stroke-boundary.md).
+
 ## Complete natural BRUSH-STROKE census, 2026-10-05
 
 [`brush-stroke-census-20261005.json`](brush-stroke-census-20261005.json)

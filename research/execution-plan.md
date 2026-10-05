@@ -45,10 +45,14 @@ including the composed outline pipeline and 22,886,400 full entry fill cells.
 Its rectangle excludes RX/TY; target0/1/2 and BACKGND0 are measured.
 The complete natural BRUSH-STROKE census now pairs all 3,881 strokes,
 including 70 value-3 strokes and 70 clears, with fresh drawing/scene controls.
-It measures counts and first-seen CORE geometry; map writes and return
-identities remain open. The next priority is natural BRUSH-STROKE value-3
-provenance and the complete
-BRUSH-FILL schedule, then replacing original
+It measures counts and first-seen CORE geometry. The natural long value-3
+branch now matches 70 markers, 296,912 ordered predicates and 10,752,000 full
+output cells; all 3,881 stroke returns preserve original path identity. All
+70 natural clears match another 10,752,000 full output cells and fresh controls.
+Short CORE paths and value-0 painting remain open. There are 6,965 additional
+clear-entry value-3 positions that were 0/1 at marker exit; their writer is
+unidentified. The next priority is SCREEN-AND-STORE / BRUSH-FILL-SUBPART writer
+attribution, then the complete BRUSH-FILL row/iris schedule and replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and

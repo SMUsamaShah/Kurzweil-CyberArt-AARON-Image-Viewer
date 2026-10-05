@@ -8,6 +8,27 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+Natural BRUSH-STROKE's long value-3 boundary branch now matches all 70 markers,
+296,912 ordered candidate/predicate results and 10,752,000 complete output
+cells. It chooses PERIM for length > 3×WIDTH, clips inclusively to SUB-FRAME,
+writes 3, skips the screen and returns the original path by EQ. The short
+CORE branch has native support but is not naturally exercised here. All
+3,881 stroke return identities are observed; value-0 painting remains open.
+All 70 clears use their naturally returned CFRAME and match another 10,752,000
+full output cells. Both drawings/scenes equal fresh controls. Read
+[the boundary findings](introspection/brush-stroke-boundary.md) and
+[portable evidence](introspection/evidence/brush-stroke-boundary-parity-20261005.json).
+The accepted-coordinate touch set is not an individual native store trace.
+There are 6,965 additional clear-entry value-3 positions outside the linked
+marker's accepted set; every one was 0/1 at marker exit, so its net addition
+occurs during intervening work. Their writer and intermediate ownership remain
+open. Next: fresh SCREEN-AND-STORE / BRUSH-FILL-SUBPART mapping and natural
+writer attribution, followed by the complete BRUSH-FILL row/iris schedule.
+Frozen boundary roots: brush-stroke-boundary-seed1234-20261005-f and
+brush-stroke-boundary-seed5678-20261005-h; fresh controls -g/-i; native -e.
+
+### Previous natural census checkpoint
+
 The complete natural BRUSH-STROKE census now covers 3,881 calls in the two
 controlled paintings: 3,811 value-0 strokes, 70 value-3 strokes, 3,811 screen
 calls and 70 clears. All calls are paired, with zero observation errors,

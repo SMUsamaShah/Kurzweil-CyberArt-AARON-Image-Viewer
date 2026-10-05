@@ -36,8 +36,12 @@ plan/frame inputs. The complete schedule and earlier maps remain dependencies;
 45,772,800 full output cells and the complete outline-to-fill composition.
 The [complete natural stroke census](introspection/brush-stroke-census.md)
 pairs all 3,881 strokes, including 70 value-3 strokes, and 70 clears with fresh
-controls. It measures counts and first-seen CORE geometry; natural brush-stroke
-map history and the complete BRUSH-FILL schedule follow.
+controls. The [natural boundary branch](introspection/brush-stroke-boundary.md)
+now matches 70 value-3 markers, 296,912 ordered predicates and 70 later clears,
+comparing 21,504,000 complete output cells. All original stroke return
+identities agree. Short CORE paths, value-0 painting and the writer of 6,965
+additional value-3 clear-entry positions remain open, along with the complete
+BRUSH-FILL row/iris schedule.
 
 ## Principles
 
