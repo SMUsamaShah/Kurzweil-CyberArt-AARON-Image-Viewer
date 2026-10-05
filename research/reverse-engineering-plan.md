@@ -55,9 +55,11 @@ existing maps are preserved upstream through outline/frame construction.
 The [row scanner and neighbor rule](introspection/scan-row.md) now match all
 5,805 natural scans, 6,984 nested calls and the repeated 44,544 neighbor /
 10,368 scan matrix cases. Row seeds compose all 278 SUBFORM fills with matching
-complete maps. Caller row bounds, MAX, patch selection and earlier map history
-remain inputs; BRUSH-FILL preparation, CFORM POST-FILL and the integrated
-drawing caller are next boundaries. The previous [boundary-map helpers](introspection/boundary-map.md)
+complete maps. [BRUSH-FILL preparation](introspection/brush-fill-preparation.md)
+now derives 134 initial rows, 5,805 row bounds/patch inputs and 278 MAX budgets
+from the natural SCRIPT/CFLIST selection and form/frame data. Full row schedule,
+plan construction, earlier map history, CFORM POST-FILL and the integrated
+drawing caller remain open. The previous [boundary-map helpers](introspection/boundary-map.md)
 still cover 149 list writes, 70 inclusive clears and 33,638,400 complete output
 cells; all 149 CFORM preparation compositions match. These measured scopes supersede the older open
 selector, count and boundary-helper items in the phase table; the generative

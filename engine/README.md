@@ -227,6 +227,15 @@ preserved while scanning. Original map history, scan schedule, MAX and form
 counts remain inputs. See
 [`../research/introspection/scan-row.md`](../research/introspection/scan-row.md).
 
+`aaron-brush-fill-preparation.js` supplies `selectAaronBrushFillForm` and
+`prepareAaronBrushFillScan`. They project the original SCRIPT/CFLIST lists,
+preserve selected form identity and derive initial Y=TY, LX/RX/patch inputs
+and MAX=5*((RX-LX)+(TY-LY)). All 134 initial rows, 138 selections, 5,805 row
+inputs and 278 budgets match both controlled paintings. The aligned complete
+SUBFORM comparison passes again. Plan/frame construction, the complete row
+schedule and earlier map history remain inputs. See
+[`../research/introspection/brush-fill-preparation.md`](../research/introspection/brush-fill-preparation.md).
+
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

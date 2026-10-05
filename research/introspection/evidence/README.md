@@ -1,5 +1,18 @@
 # Original-engine report excerpts
 
+## BRUSH-FILL plan/frame/scan inputs, 2026-10-05
+
+[`brush-fill-preparation-parity-20261005.json`](brush-fill-preparation-parity-20261005.json)
+binds all 134 initial rows, 138 form selections, 5,805 scan bounds/patch inputs
+and 278 MAX values to naturally returned SCRIPT/CFLIST/CFRAME/PATCHDEX data.
+The selected form is SCRIPT[SDEX].CFLIST[CDEX]; first Y is TY and MAX is five
+times (RX-LX)+(TY-LY). Both whole drawings/scenes equal fresh controls. The
+aligned complete scanner/SUBFORM comparison passes again for 85,401,600 output
+cells. EQ identities, direct slot bounds, source/request/report hashes and
+the revalidated earlier BRUSH-FILL native object/instruction bytes are retained.
+Four later row jumps are explicit; complete schedule, plan construction and
+earlier maps remain dependencies. See [the findings](../brush-fill-preparation.md).
+
 ## Row scanner and threshold neighbor count, 2026-10-05
 
 [`scan-row-parity-20261005.json`](scan-row-parity-20261005.json) binds all 5,805

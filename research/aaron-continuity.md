@@ -8,6 +8,24 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+BRUSH-FILL preparation now selects SCRIPT(MPLAN)[SDEX].CFLIST[CDEX], uses its
+naturally returned CFRAME/PATCHDEX, starts the first scan at TY and derives
+MAX = 5*((RX-LX)+(TY-LY)). All 134 initial rows, 138 form selections, 5,805
+scan bounds/patch inputs and 278 walk budgets agree in both paintings. The
+aligned complete SUBFORM composition again matches 85,401,600 output cells;
+fresh controls match whole drawing/scene bytes. Read
+[the preparation findings](introspection/brush-fill-preparation.md) and
+[portable evidence](introspection/evidence/brush-fill-preparation-parity-20261005.json).
+Four later row jumps reach LY-2 after a second CFRAME read; that branch is not
+implemented by the initial-row adapter. Continue with CFORM POST-FILL, then
+natural BRUSH-STROKE value-3 provenance and the complete BRUSH-FILL schedule.
+Plan construction, earlier maps, form counts and painting decisions remain
+original dependencies. Successful preparation roots are -seed1234-...-b and
+-seed5678-...-d, with fresh controls -c and -e; frozen v2 source has SHA-256
+6717298a2b31e12626ae5ca2bc8fbe21075ad7426bc914dff27d18783e957d6e.
+
+### Previous scanner checkpoint
+
 SCAN-ROW and NEIGHBORS are now recovered for the measured integer domain.
 All 5,805 natural scans and 6,984 nested neighbor calls match independent JS.
 NEIGHBORS returns min(3, matching in-picture neighbors); SCAN-ROW searches
@@ -33,10 +51,8 @@ with id continue-aaron-reverse-engineering. Continue from this record without
 waiting for another continue message; read-only investigation can progress
 while oracle work remains serialized. Do not create duplicate automations.
 
-Next, recover BRUSH-FILL input preparation: SCRIPT(MPLAN)/CFLIST selection,
-form frame/patch inputs, scan ranges/row schedule and PATCH-EDGE MAX. No MAX
-equals the latest naturally returned CFORM-COUNT in these cases, so do not
-substitute that count for its budget. CFORM POST-FILL, map history and subpart
+At that checkpoint, BRUSH-FILL input preparation was next. It is now measured
+above; the complete row schedule, CFORM POST-FILL, map history and subpart
 painting/clearing still follow. FLASH-SPOT graphics effects remain a boundary.
 
 ### Previous SUBFORM construction checkpoint

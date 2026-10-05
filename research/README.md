@@ -28,8 +28,11 @@ The [row scanner and neighbor rule](introspection/scan-row.md) now match all
 5,805 natural scans, 6,984 nested neighbor calls, and the 44,544 neighbor /
 10,368 scan matrix cases repeated in each painting. Independent row seeds
 compose all 278 SUBFORM fills with the same complete-map parity. Caller row
-bounds, MAX, patch selection and earlier map history remain original inputs;
-BRUSH-FILL preparation and CFORM POST-FILL are the next boundaries.
+bounds, MAX and patch selection are now derived by
+[BRUSH-FILL preparation](introspection/brush-fill-preparation.md): 134 initial
+rows, 138 selections, 5,805 row inputs and 278 budgets match the natural
+plan/frame inputs. The complete schedule and earlier maps remain dependencies;
+CFORM POST-FILL and natural brush-stroke map history are the next boundaries.
 
 ## Principles
 
