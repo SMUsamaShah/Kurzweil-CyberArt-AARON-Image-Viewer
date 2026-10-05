@@ -236,6 +236,16 @@ SUBFORM comparison passes again. Plan/frame construction, the complete row
 schedule and earlier map history remain inputs. See
 [`../research/introspection/brush-fill-preparation.md`](../research/introspection/brush-fill-preparation.md).
 
+`aaron-cform-post-fill.js` supplies `postFillAaronCform` and
+`fillAaronCformFromOutline`. CFORM clears positive fill cells in `[LX,RX)×[LY,TY)`,
+assigns the form patch where the old patch equals BACKGND and returns the
+accepted count. All 149 natural returns and 45,772,800 complete output-map
+cells match. The outline/list/median/start/strategy/post composition also
+matches every output cell and 22,886,400 complete entry fill cells. Target
+values 0/1/2 and BACKGND 0 are measured; outline/frame construction and earlier
+map history remain inputs. See
+[`../research/introspection/cform-post-fill.md`](../research/introspection/cform-post-fill.md).
+
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512
 original values and 64 subsequent random-state checks. Its vectors and limitations are documented in

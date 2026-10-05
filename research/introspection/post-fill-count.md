@@ -107,9 +107,11 @@ The probe includes one extra right-hand X column where it fits. Map cells
 outside the declared rectangles are not captured or claimed as compared.
 
 Scene planning, frame construction, pre-fill map contents and form identifiers
-remain original inputs. CFORM POST-FILL, iris branching, subpart brush changes
-and the integrated BRUSH-FILL caller remain separate work. Next, characterize
-FILL-STRATEGY's map production so fewer inputs come from the original runtime.
+remain original inputs. Later captures recover
+[FILL-STRATEGY and its preparation](fill-preparation.md) and
+[CFORM POST-FILL](cform-post-fill.md), including the composed CFORM map output.
+Natural value-3 provenance, iris branching, subpart brush changes and the
+integrated BRUSH-FILL caller remain separate work.
 
 ### Rejected first map attempt
 

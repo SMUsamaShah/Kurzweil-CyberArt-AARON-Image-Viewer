@@ -40,8 +40,11 @@ BRUSH-FILL preparation now derives form selection, 134 initial rows, 5,805
 row bounds/patch inputs and 278 MAX values from naturally returned plan/frame
 data. The aligned complete SUBFORM comparison passes again. Four later row
 jumps, plan creation and earlier map history remain unresolved.
-The next priority is CFORM POST-FILL, natural BRUSH-STROKE value-3 provenance
-and the complete BRUSH-FILL schedule, then replacing original
+CFORM POST-FILL matches 149 calls and 45,772,800 complete output cells,
+including the composed outline pipeline and 22,886,400 full entry fill cells.
+Its rectangle excludes RX/TY; target0/1/2 and BACKGND0 are measured. The next
+priority is natural BRUSH-STROKE value-3 provenance and the complete
+BRUSH-FILL schedule, then replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
@@ -182,7 +185,8 @@ strategy and POST-FILL with complete maps. Its upstream map equality checks
 show existing state is carried into MY-FILL. SCAN-ROW/NEIGHBORS now derive the
 row point. [BRUSH-FILL preparation](introspection/brush-fill-preparation.md)
 now derives its initial bounds/MAX/patch selection from the natural plan and
-frame data. Earlier map history, CFORM POST-FILL, the complete row schedule
+frame data. [CFORM POST-FILL](introspection/cform-post-fill.md) now matches
+complete maps and the composed outline pipeline. Earlier map history and the complete row schedule
 and the integrated callers remain open. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.

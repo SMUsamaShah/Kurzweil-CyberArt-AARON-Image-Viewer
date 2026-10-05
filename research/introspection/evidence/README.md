@@ -1,5 +1,19 @@
 # Original-engine report excerpts
 
+## Complete CFORM POST-FILL and composition, 2026-10-05
+
+[`cform-post-fill-parity-20261005.json`](cform-post-fill-parity-20261005.json)
+binds all 149 calls and 45,772,800 complete output-map comparisons to fresh
+drawing/scene controls. Positive fill cells in [LX,RX)×[LY,TY) are cleared;
+background patch cells receive the natural form label and count. Excluded
+edges and all outside cells are preserved. Target0/1/2 and BACKGND0 are
+measured. The composed outline pipeline also matches every output cell and
+22,886,400 complete entry fill cells. Natural frame/patch EQ identities,
+no-read zero-count cases, native byte matching and canonical REA external
+records are retained. V1's shared-plist cache failure is excluded despite
+unchanged AA0; frozen v2 has complete maps and zero errors. See
+[the findings](../cform-post-fill.md).
+
 ## BRUSH-FILL plan/frame/scan inputs, 2026-10-05
 
 [`brush-fill-preparation-parity-20261005.json`](brush-fill-preparation-parity-20261005.json)
@@ -134,9 +148,11 @@ changes occur inside MY-FILL(SUBFORM); 5,805 SCAN-ROW entry/exit counts agree.
 Six ordinary functions and the two actual MY-FILL methods have exact complete
 PLL matches and Ghidra reports. The generated generic dispatcher is retained
 as a zero-match observation. Four bounded method call sites are explicitly
-static candidates for FILL-STRATEGY/POST-FILL. The full count algorithm is
-unrecovered. Geometry is summarized and partial, even though paired event,
-count and brush observations are complete within the wrapped boundaries.
+static candidates for FILL-STRATEGY/POST-FILL. At that checkpoint the full count
+algorithm was unrecovered; later preparation and POST-FILL map evidence above
+measures both method outputs. Geometry in this earlier capture is summarized
+and partial, even though paired event, count and brush observations are
+complete within the wrapped boundaries.
 
 Natural-report hashes are computed during offline derivation; optional report
 bytes were not independently hashed by their original run summary. Full raw

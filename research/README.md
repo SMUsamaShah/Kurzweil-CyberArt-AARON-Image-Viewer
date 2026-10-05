@@ -32,7 +32,9 @@ bounds, MAX and patch selection are now derived by
 [BRUSH-FILL preparation](introspection/brush-fill-preparation.md): 134 initial
 rows, 138 selections, 5,805 row inputs and 278 budgets match the natural
 plan/frame inputs. The complete schedule and earlier maps remain dependencies;
-CFORM POST-FILL and natural brush-stroke map history are the next boundaries.
+[CFORM POST-FILL](introspection/cform-post-fill.md) now matches all 149 calls,
+45,772,800 full output cells and the complete outline-to-fill composition.
+Natural brush-stroke map history and the complete BRUSH-FILL schedule follow.
 
 ## Principles
 

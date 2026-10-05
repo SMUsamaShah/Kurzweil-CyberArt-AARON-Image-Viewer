@@ -58,8 +58,10 @@ The [row scanner and neighbor rule](introspection/scan-row.md) now match all
 complete maps. [BRUSH-FILL preparation](introspection/brush-fill-preparation.md)
 now derives 134 initial rows, 5,805 row bounds/patch inputs and 278 MAX budgets
 from the natural SCRIPT/CFLIST selection and form/frame data. Full row schedule,
-plan construction, earlier map history, CFORM POST-FILL and the integrated
-drawing caller remain open. The previous [boundary-map helpers](introspection/boundary-map.md)
+plan construction and earlier map history remain open.
+[CFORM POST-FILL](introspection/cform-post-fill.md) matches 149 calls,
+45,772,800 complete output-map cells and the outline-to-fill composition.
+The integrated drawing caller remains open. The previous [boundary-map helpers](introspection/boundary-map.md)
 still cover 149 list writes, 70 inclusive clears and 33,638,400 complete output
 cells; all 149 CFORM preparation compositions match. These measured scopes supersede the older open
 selector, count and boundary-helper items in the phase table; the generative

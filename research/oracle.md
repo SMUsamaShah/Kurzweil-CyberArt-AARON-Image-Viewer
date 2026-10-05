@@ -256,6 +256,15 @@ well as through cleanup. Review what each complete wrapper returns, not just
 what its RETURN record prints. Frozen v2 and both fresh controls pass; v1 is
 diagnostic only. See [the scanner findings](introspection/scan-row.md).
 
+Map cache fields in a Lisp property list need careful ownership: SETF GETF of
+a new key can prepend it only to a helper's local list binding. The first CFORM
+POST-FILL observer preserved AA0 but recorded 67 AFTER errors and zero map
+cells because its outer context lacked those fields. Initialize every cache
+key before passing the list to helpers, or return and assign the updated list.
+Frozen v2 captures complete maps and passes both controls. Reject incomplete
+tapes even when output bytes match. See
+[the CFORM findings](introspection/cform-post-fill.md).
+
 Large map observers can exceed the run limit without a staging permission
 failure. The first SUBFORM observer also required SUBP-COUNT before its first
 binding; record the unbound state explicitly rather than treating it as a

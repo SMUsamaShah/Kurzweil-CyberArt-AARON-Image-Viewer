@@ -1,0 +1,5074 @@
+{
+  "schemaVersion": 1,
+  "kind": "Complete natural CFORM POST-FILL and composed outline-to-map comparison",
+  "sources": [
+    {
+      "path": "engine/src/aaron-cform-post-fill.js",
+      "sha256": "39b6861ccd0a87dc490d9db5b3ed3e62fa0ce895b8e8b478b55c0216c9ea6b36"
+    },
+    {
+      "path": "engine/src/aaron-boundary-map.js",
+      "sha256": "75225c5e054a843cab0d60ef1fb11a581a5889fc6f8ac2da4b0e3c538bcc3376"
+    },
+    {
+      "path": "engine/src/aaron-fill-preparation.js",
+      "sha256": "053daf66af0a8572db0ddc26111ce6778559bd3978c55acc8eb19a3446d47bf6"
+    },
+    {
+      "path": "engine/src/aaron-maps.js",
+      "sha256": "f245f1fa7cdd0dd8e6d0f85f6293c8d9675e11bc0ec27cb7d37114e5ecbeec1f"
+    },
+    {
+      "path": "research/introspection/cform-post-fill-capture.cl",
+      "sha256": "bdc7a4609090c14197ef045e53c1cd222eb9071dba099368d735a872add4e9f8"
+    },
+    {
+      "path": "research/introspection/boundary-map-capture.cl",
+      "sha256": "13431cf36376d6542a2b3b6109848279f880b5abedc963abcada6061ec3a66ca"
+    },
+    {
+      "path": "research/introspection/fill-preparation-capture.cl",
+      "sha256": "7001710d153fcca890def9b76ebeb66d31b86598a6af00dfb5e0cc806b59c3df"
+    },
+    {
+      "path": "research/introspection/brush-fill-helper-links.cl",
+      "sha256": "e1cd9e3b6650f51bb1910ebaa2c746427781ed8975477ed381a103978362ef1c"
+    },
+    {
+      "path": "research/tools/parse-cform-post-fill-report.mjs",
+      "sha256": "82a96f1e9b406dcd19cd759c849ae55d09796d4093e646ebaabbf21882cb6a02"
+    },
+    {
+      "path": "research/tools/derive-cform-post-fill-evidence.mjs",
+      "sha256": "d7746052a5618daebba1b74685e6eebf0498e28dda544432f6d19ca36c410c43"
+    },
+    {
+      "path": "research/tools/parse-boundary-map-report.mjs",
+      "sha256": "0e736ada59e6a957d411c2cc13fa0b9a07e38f049600c110f9139df97907cc52"
+    },
+    {
+      "path": "research/tools/parse-fill-preparation-report.mjs",
+      "sha256": "6da17ef902eb50e6015f6e4bcada5cfc3f2ac9b64f6e845511927c4dc6566035"
+    },
+    {
+      "path": "research/tools/parse-natural-free-path-report.mjs",
+      "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee"
+    },
+    {
+      "path": "research/tools/map-native-code-to-pll.mjs",
+      "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee"
+    },
+    {
+      "path": "research/tools/rea-evidence-bundle.mjs",
+      "sha256": "81bd072f7959655bf80ef3ecf240ec08f30ecbe85344a8f8941d9ea33752e601"
+    },
+    {
+      "path": "research/introspection/evidence/boundary-map-parity-20261005.json",
+      "sha256": "7c95a7a161e63b7e534dd62a2e11ac15545d7f65cdedfdf9232f83e8b025b3d5"
+    },
+    {
+      "path": "research/introspection/evidence/fill-preparation-parity-20261005.json",
+      "sha256": "5902a1fa9dc3dac23a4232ad41a05609eefbdaaa9319cfe994f6c966ecefe6e6"
+    }
+  ],
+  "native": {
+    "run": {
+      "runId": "brush-fill-helper-native-20261005-c",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "e1cd9e3b6650f51bb1910ebaa2c746427781ed8975477ed381a103978362ef1c",
+      "probeOutputNames": [
+        "aaron-brush-fill-helper-links.txt"
+      ],
+      "preSceneProbePauseSeconds": 90,
+      "complete": true,
+      "startedAt": "2026-10-04T23:23:41.9466769+00:00",
+      "finishedAt": "2026-10-04T23:24:30.8701525+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "73bcf4cc9d825d7038ffeb047c40573b417d7ce3d00b5b5f56c1669b76e925e2"
+    },
+    "name": "POST-FILL-METHOD-1",
+    "capture": {
+      "file": "post-fill-method-1.native-window.bin",
+      "sha256": "a76dd544a14ce699aaafe11ff07c9aaf08c3061e2ce317cb7799aa72a8ac4427",
+      "bytes": 16384,
+      "windowBase": "0x1fdde864",
+      "functionObjectHeaderHex": "3620afe6352017d737200f994e2008801200a4e8dd1f199f000021b52b2092e8dd1f29b52b20000000000000000040000000d7e83520270736204fe935202799"
+    },
+    "runtime": {
+      "entry": "0x1fdde8a4",
+      "objectBase": "0x1fdde8a0",
+      "headerOffsetInWindow": 60
+    },
+    "pll": {
+      "recordOffset": 57536,
+      "objectOffset": 2353312,
+      "payloadOffset": 2353316,
+      "rawEnd": 2354270,
+      "nextBoundary": 2354272,
+      "tableSecondWord": 473
+    },
+    "header": "0x1dd6c",
+    "encodedWords": 477,
+    "objectBytes": 958,
+    "objectSha256": "12bca95c68ca9fca39bd2df2aef85475baf706e4f567632fea83914d9705d64c",
+    "payloadBytes": 954,
+    "payloadSha256": "171859c1dfd1feea45e03c7d4d463b182bfbd65c40eafb3a059e8839b568ae6a",
+    "payloadFile": "post-fill-method-1.native-payload.bin",
+    "uniqueCompleteObjectByteMatch": true,
+    "prefixHex": "558bec5683ec6cff77d78f45f883f903",
+    "reportSha256": "768b4047ea79b05c7f1a84a31003e682113629ec5fcba29e604f66b44316bca4",
+    "instructionCount": 339,
+    "instructionBytesCompared": 946,
+    "liveWindowPllMatchRederived": true,
+    "rea": {
+      "version": "3.2.1",
+      "provider": {
+        "id": "ghidra-standalone",
+        "name": "Ghidra standalone JSON report",
+        "version": "12.1.4"
+      },
+      "evidenceId": "ev_0cd7b20731050963e0af19096892bca08b683111cfe7dc5d03a18d0c8a2f6297",
+      "nativeProviderSession": false,
+      "bundleSha256": "b97f70df92b38c592945b0e721034617ba615e798c83f4bd7bbab3765fcbde12",
+      "canonicalExportSha256": "b97f70df92b38c592945b0e721034617ba615e798c83f4bd7bbab3765fcbde12",
+      "importResult": {
+        "imported": 1,
+        "unknowns_added": 0,
+        "total": 1
+      }
+    },
+    "scope": "Existing exact method capture/report revalidated; canonical external Ghidra evidence through REA, not a new live capture or native provider session."
+  },
+  "scenes": [
+    {
+      "seed": 1234,
+      "observed": {
+        "runId": "cform-post-fill-seed1234-20261005-c",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": "bdc7a4609090c14197ef045e53c1cd222eb9071dba099368d735a872add4e9f8",
+        "probeOutputNames": [
+          "aaron-cform-post-fill.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T17:19:55.7460857+00:00",
+        "finishedAt": "2026-10-05T17:23:29.6008788+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "9fd73cce9df787abfd24e4d4c2e4dbc519ba12b2f309b0c3ba7b94b0b5909cf3",
+        "rawReportSha256": "122690a9906da6ea5e1343b44d16e86d6a7140cde6df9e6f1c2cdba10aaa12b0"
+      },
+      "control": {
+        "runId": "cform-post-fill-control-seed1234-20261005-d",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T17:24:09.6479690+00:00",
+        "finishedAt": "2026-10-05T17:24:28.3743624+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "d45f9d54ae1eae5af98e0efd994adec47db7d23512563b090cb0de57609eb246"
+      },
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true,
+      "complete": {
+        "calls": 67,
+        "objects": 134,
+        "checks": 201,
+        "readers": 143475,
+        "cells": 41164800,
+        "runs": 467540,
+        "frames": 67
+      },
+      "coverage": {
+        "calls": 67,
+        "mapCellsCompared": 20582400,
+        "composedCalls": 67,
+        "composedMapCellsCompared": 20582400,
+        "composedInputFillCellsCompared": 10291200,
+        "outlinePositions": 21399,
+        "naturalFrameReads": 67,
+        "naturalPatchReads": 143475,
+        "callsWithoutPatchRead": 41,
+        "acceptedCells": 143475,
+        "rejectedPositiveCells": 427544,
+        "targetFillValues": {
+          "0": 283910,
+          "1": 551615,
+          "2": 19404
+        },
+        "targetFillTransitions": {
+          "0->0": 283910,
+          "2->0": 19404,
+          "1->0": 551615
+        },
+        "backgroundValues": {
+          "0": 67
+        },
+        "patchIds": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "15": 1,
+          "16": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1,
+          "21": 1,
+          "22": 1,
+          "23": 1,
+          "24": 1,
+          "25": 1,
+          "67": 1
+        },
+        "frameTypes": {
+          "MAPFRAME": 67
+        },
+        "outsideNonzeroFillPreserved": 23599,
+        "excludedEdgePositiveFillPreserved": {
+          "rx": 233,
+          "ty": 1447,
+          "corner": 10
+        },
+        "returnRange": [
+          0,
+          70027
+        ],
+        "snapshotPreviewChecks": 201
+      },
+      "rows": [
+        {
+          "id": 1,
+          "cdex": 16,
+          "sdex": 1,
+          "form": 1,
+          "frame": {
+            "id": 2,
+            "lx": 99,
+            "rx": 172,
+            "ly": 382,
+            "ty": 427
+          },
+          "patchRead": {
+            "calls": 1423,
+            "form": 1,
+            "value": 1
+          },
+          "background": 0,
+          "returnValue": 1423,
+          "inputFillSha256": "e5c532267cd2d68b26476bbb31140efca1d00bc4c1539135e3964dd43d0b3629",
+          "inputPatchSha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "0ae05fe22a7385f725f8fba6da018a4880259e81edc9ab3484fc60a6fbaeaa1b",
+          "previousWriterCall": 1,
+          "previousPreparationFill": 1,
+          "outlinePositions": 179,
+          "rotationIndex": 14,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 2,
+          "cdex": 18,
+          "sdex": 1,
+          "form": 3,
+          "frame": {
+            "id": 4,
+            "lx": 104,
+            "rx": 171,
+            "ly": 346,
+            "ty": 404
+          },
+          "patchRead": {
+            "calls": 1352,
+            "form": 3,
+            "value": 2
+          },
+          "background": 0,
+          "returnValue": 1352,
+          "inputFillSha256": "65edf29219d3b105f618782785212eda9a80e9e6f4b82fa44028f35917485869",
+          "inputPatchSha256": "0ae05fe22a7385f725f8fba6da018a4880259e81edc9ab3484fc60a6fbaeaa1b",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "a41d66228433deb6a9d486cb392e4b968270618d3c8bbd28074a8dec3d5075cd",
+          "previousWriterCall": 2,
+          "previousPreparationFill": 2,
+          "outlinePositions": 192,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 3,
+          "cdex": 4,
+          "sdex": 1,
+          "form": 5,
+          "frame": {
+            "id": 6,
+            "lx": 129,
+            "rx": 144,
+            "ly": 388,
+            "ty": 403
+          },
+          "patchRead": {
+            "calls": 125,
+            "form": 5,
+            "value": 3
+          },
+          "background": 0,
+          "returnValue": 125,
+          "inputFillSha256": "01e23969a5ac7018b94150cff73d08b0271cfcfb5746c69a328bc6a25f97c949",
+          "inputPatchSha256": "a41d66228433deb6a9d486cb392e4b968270618d3c8bbd28074a8dec3d5075cd",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "4d56fd2ec4383e5be16aeeaff184c18ff3b0406820af817ab569409cd12c460c",
+          "previousWriterCall": 3,
+          "previousPreparationFill": 3,
+          "outlinePositions": 42,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 4,
+          "cdex": 6,
+          "sdex": 1,
+          "form": 7,
+          "frame": {
+            "id": 8,
+            "lx": 122,
+            "rx": 151,
+            "ly": 381,
+            "ty": 410
+          },
+          "patchRead": {
+            "calls": 302,
+            "form": 7,
+            "value": 4
+          },
+          "background": 0,
+          "returnValue": 302,
+          "inputFillSha256": "65e68e3bd1a0ea1f8cc4bf9da30138ff90eb1b5908bcad4a7689007557df55e3",
+          "inputPatchSha256": "4d56fd2ec4383e5be16aeeaff184c18ff3b0406820af817ab569409cd12c460c",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "1d5e6fca6a06cf239368645500c7afd0a6ad7afe249d02b76ff9836c54c2586f",
+          "previousWriterCall": 4,
+          "previousPreparationFill": 4,
+          "outlinePositions": 79,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 5,
+          "cdex": 12,
+          "sdex": 1,
+          "form": 9,
+          "frame": {
+            "id": 10,
+            "lx": 45,
+            "rx": 174,
+            "ly": 403,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 6398,
+            "form": 9,
+            "value": 5
+          },
+          "background": 0,
+          "returnValue": 6398,
+          "inputFillSha256": "2ad295d3ec25da3208f5eedb0fc801ba0f9df3691af3daed15f709485bcaf8df",
+          "inputPatchSha256": "1d5e6fca6a06cf239368645500c7afd0a6ad7afe249d02b76ff9836c54c2586f",
+          "outputFillSha256": "34c2b652e92931977ae9328296e61793d45c022b0bf588ba18875f103bcadab7",
+          "outputPatchSha256": "8c2092453646904cd5b70f296bc0f9a434fde51971d831026bce017667033be5",
+          "previousWriterCall": 5,
+          "previousPreparationFill": 5,
+          "outlinePositions": 343,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 6,
+          "cdex": 14,
+          "sdex": 1,
+          "form": 11,
+          "frame": {
+            "id": 12,
+            "lx": 104,
+            "rx": 172,
+            "ly": 368,
+            "ty": 415
+          },
+          "patchRead": {
+            "calls": 780,
+            "form": 11,
+            "value": 6
+          },
+          "background": 0,
+          "returnValue": 780,
+          "inputFillSha256": "632664590e9c125b5c74b1faa8f34e1d03074945e8a609329ff33f7dbd209f25",
+          "inputPatchSha256": "8c2092453646904cd5b70f296bc0f9a434fde51971d831026bce017667033be5",
+          "outputFillSha256": "34c2b652e92931977ae9328296e61793d45c022b0bf588ba18875f103bcadab7",
+          "outputPatchSha256": "20959ddf14344d810bcc4041342b325c733dac147face61558621d1363ee5bfa",
+          "previousWriterCall": 6,
+          "previousPreparationFill": 6,
+          "outlinePositions": 151,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 7,
+          "cdex": 22,
+          "sdex": 1,
+          "form": 13,
+          "frame": {
+            "id": 14,
+            "lx": 0,
+            "rx": 44,
+            "ly": 395,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 633,
+            "form": 13,
+            "value": 7
+          },
+          "background": 0,
+          "returnValue": 633,
+          "inputFillSha256": "9f1d2c1c79484c1debf7dabd7cb9679acc9ea219ee0a8df16300e2a1ee284c62",
+          "inputPatchSha256": "20959ddf14344d810bcc4041342b325c733dac147face61558621d1363ee5bfa",
+          "outputFillSha256": "9d0b68055eeebbcd40e48fd7c0e199cde69f3a01914b4fd9b32493a8acf451cb",
+          "outputPatchSha256": "4c5e91bdd2b8cd3bb098eb52bdd57c7239c2667beee4751a4caa704a2b975ab9",
+          "previousWriterCall": 7,
+          "previousPreparationFill": 7,
+          "outlinePositions": 246,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 8,
+          "cdex": 20,
+          "sdex": 1,
+          "form": 15,
+          "frame": {
+            "id": 16,
+            "lx": 44,
+            "rx": 177,
+            "ly": 471,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 12,
+            "form": 15,
+            "value": 8
+          },
+          "background": 0,
+          "returnValue": 12,
+          "inputFillSha256": "5dd7326c8c2fd345e9393c31d1e38a0f036397e97c69ff8e8b1031d29eef0870",
+          "inputPatchSha256": "4c5e91bdd2b8cd3bb098eb52bdd57c7239c2667beee4751a4caa704a2b975ab9",
+          "outputFillSha256": "4592d70e362856821855b2d0395f0f431ef5bfa0ad32b7289795dccfdd7257d0",
+          "outputPatchSha256": "dc474ec9e03f6fda6c7a719f788e6695367b800cfdeaaf1913222f664ff598e6",
+          "previousWriterCall": 8,
+          "previousPreparationFill": 8,
+          "outlinePositions": 259,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 9,
+          "cdex": 24,
+          "sdex": 1,
+          "form": 17,
+          "frame": {
+            "id": 18,
+            "lx": 170,
+            "rx": 262,
+            "ly": 295,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 6767,
+            "form": 17,
+            "value": 9
+          },
+          "background": 0,
+          "returnValue": 6767,
+          "inputFillSha256": "4c260c3c6585f0d03077e6aa05d12919e3d226842b02e2ef6ba8c09f14ef1969",
+          "inputPatchSha256": "dc474ec9e03f6fda6c7a719f788e6695367b800cfdeaaf1913222f664ff598e6",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "25c58356049631e4343beeaabd5e99ec4698f8cf79efc8a2a32391abc6577f3b",
+          "previousWriterCall": 9,
+          "previousPreparationFill": 9,
+          "outlinePositions": 483,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 10,
+          "cdex": 11,
+          "sdex": 1,
+          "form": 19,
+          "frame": {
+            "id": 20,
+            "lx": 180,
+            "rx": 265,
+            "ly": 240,
+            "ty": 276
+          },
+          "patchRead": {
+            "calls": 529,
+            "form": 19,
+            "value": 10
+          },
+          "background": 0,
+          "returnValue": 529,
+          "inputFillSha256": "d9403bd6b44d1307600253495a84fac46ab9d7f7eab34b97dcdd5fc1c7190c0c",
+          "inputPatchSha256": "25c58356049631e4343beeaabd5e99ec4698f8cf79efc8a2a32391abc6577f3b",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "4c714672c49d3e83dbee122e9cbf96ea0d8a8badb59bc1e19a45b8e0b9d5a797",
+          "previousWriterCall": 10,
+          "previousPreparationFill": 10,
+          "outlinePositions": 185,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 11,
+          "cdex": 10,
+          "sdex": 1,
+          "form": 21,
+          "frame": {
+            "id": 22,
+            "lx": 179,
+            "rx": 265,
+            "ly": 230,
+            "ty": 272
+          },
+          "patchRead": {
+            "calls": 1564,
+            "form": 21,
+            "value": 11
+          },
+          "background": 0,
+          "returnValue": 1564,
+          "inputFillSha256": "32a70d99941268b49a5f8ff5a420a3303f044f1cd2a1f9bdff035b90a9b61ae5",
+          "inputPatchSha256": "4c714672c49d3e83dbee122e9cbf96ea0d8a8badb59bc1e19a45b8e0b9d5a797",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "1eeee9c658e92482b6b309736a995d65c6df74d63fc4248c1e6ad864e126b20c",
+          "previousWriterCall": 11,
+          "previousPreparationFill": 11,
+          "outlinePositions": 200,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 12,
+          "cdex": 17,
+          "sdex": 1,
+          "form": 23,
+          "frame": {
+            "id": 24,
+            "lx": 212,
+            "rx": 273,
+            "ly": 434,
+            "ty": 472
+          },
+          "patchRead": {
+            "calls": 1056,
+            "form": 23,
+            "value": 12
+          },
+          "background": 0,
+          "returnValue": 1056,
+          "inputFillSha256": "5115588efb6e44a3908d5a80ae2f388e54ae96c671d6babd27f3dd45063f9d69",
+          "inputPatchSha256": "1eeee9c658e92482b6b309736a995d65c6df74d63fc4248c1e6ad864e126b20c",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "6b33ec0850a6768efda492b844f119a518cbb210347911652afd86c83f39c38a",
+          "previousWriterCall": 12,
+          "previousPreparationFill": 12,
+          "outlinePositions": 164,
+          "rotationIndex": 25,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 13,
+          "cdex": 19,
+          "sdex": 1,
+          "form": 25,
+          "frame": {
+            "id": 26,
+            "lx": 213,
+            "rx": 269,
+            "ly": 393,
+            "ty": 442
+          },
+          "patchRead": {
+            "calls": 1197,
+            "form": 25,
+            "value": 13
+          },
+          "background": 0,
+          "returnValue": 1197,
+          "inputFillSha256": "4e41549ed227ac7770a61129995fc6a3fd07853fd873c8aae58cd26e66f32786",
+          "inputPatchSha256": "6b33ec0850a6768efda492b844f119a518cbb210347911652afd86c83f39c38a",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "f638c20cc84d5a75199332c38c56d744f3e478310e2a272793d870be68a3dcd2",
+          "previousWriterCall": 13,
+          "previousPreparationFill": 13,
+          "outlinePositions": 195,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 14,
+          "cdex": 5,
+          "sdex": 1,
+          "form": 27,
+          "frame": {
+            "id": 28,
+            "lx": 230,
+            "rx": 245,
+            "ly": 435,
+            "ty": 450
+          },
+          "patchRead": {
+            "calls": 128,
+            "form": 27,
+            "value": 14
+          },
+          "background": 0,
+          "returnValue": 128,
+          "inputFillSha256": "0501a6455cc5a2284df984fb97919564cfa2bbe6e0c987ae39c5b5c22b9ffad5",
+          "inputPatchSha256": "f638c20cc84d5a75199332c38c56d744f3e478310e2a272793d870be68a3dcd2",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "60c600c71f6294780d2074a67cf1fe0551fa202d8f938d99d1f26a89391df87e",
+          "previousWriterCall": 14,
+          "previousPreparationFill": 14,
+          "outlinePositions": 44,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 15,
+          "cdex": 7,
+          "sdex": 1,
+          "form": 29,
+          "frame": {
+            "id": 30,
+            "lx": 223,
+            "rx": 252,
+            "ly": 428,
+            "ty": 457
+          },
+          "patchRead": {
+            "calls": 308,
+            "form": 29,
+            "value": 15
+          },
+          "background": 0,
+          "returnValue": 308,
+          "inputFillSha256": "a7dd331567daa19ac75849f1ee69f6313dbd9ce865db51da7c31c354fab33578",
+          "inputPatchSha256": "60c600c71f6294780d2074a67cf1fe0551fa202d8f938d99d1f26a89391df87e",
+          "outputFillSha256": "970c46244b4d54fa35858ce5e755ee8c6f1614f497a47550f1d5541e8ec1500b",
+          "outputPatchSha256": "6f5c953e96aec46493962b219a60730e4176a69588f80386e40b9ac391939c53",
+          "previousWriterCall": 15,
+          "previousPreparationFill": 15,
+          "outlinePositions": 81,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 16,
+          "cdex": 13,
+          "sdex": 1,
+          "form": 31,
+          "frame": {
+            "id": 32,
+            "lx": 204,
+            "rx": 298,
+            "ly": 443,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 862,
+            "form": 31,
+            "value": 16
+          },
+          "background": 0,
+          "returnValue": 862,
+          "inputFillSha256": "35d0a62004c98f5ddb64c04d1005c2fc732433eb1592d80d4c47335ccd4e7e6f",
+          "inputPatchSha256": "6f5c953e96aec46493962b219a60730e4176a69588f80386e40b9ac391939c53",
+          "outputFillSha256": "8da4c5431a16edbe060efa624a1078aa35f40ee1773aadc1217f1804eb4e7a33",
+          "outputPatchSha256": "b64e11688cfb63689719d4079d91ea2d9cd6af82da481b04019c7596b3f98da6",
+          "previousWriterCall": 16,
+          "previousPreparationFill": 16,
+          "outlinePositions": 206,
+          "rotationIndex": 35,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 17,
+          "cdex": 15,
+          "sdex": 1,
+          "form": 33,
+          "frame": {
+            "id": 34,
+            "lx": 212,
+            "rx": 269,
+            "ly": 414,
+            "ty": 458
+          },
+          "patchRead": {
+            "calls": 598,
+            "form": 33,
+            "value": 17
+          },
+          "background": 0,
+          "returnValue": 598,
+          "inputFillSha256": "adf8f7f9b8c4d935ed222eb4c89610cd236b9d0464ce7f7747ea9fca808ed9a2",
+          "inputPatchSha256": "b64e11688cfb63689719d4079d91ea2d9cd6af82da481b04019c7596b3f98da6",
+          "outputFillSha256": "8da4c5431a16edbe060efa624a1078aa35f40ee1773aadc1217f1804eb4e7a33",
+          "outputPatchSha256": "fb2ec2da50df7c3b1f51c9f3bcb5dd38c8ebe6788f10c897bcab54e5626353cf",
+          "previousWriterCall": 17,
+          "previousPreparationFill": 17,
+          "outlinePositions": 140,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 18,
+          "cdex": 23,
+          "sdex": 1,
+          "form": 35,
+          "frame": {
+            "id": 36,
+            "lx": 277,
+            "rx": 319,
+            "ly": 427,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 1040,
+            "form": 35,
+            "value": 18
+          },
+          "background": 0,
+          "returnValue": 1040,
+          "inputFillSha256": "85f7922d787f46a4ea509fcf8a58d15b6eed38b68d46dbcc04131515f49a28aa",
+          "inputPatchSha256": "fb2ec2da50df7c3b1f51c9f3bcb5dd38c8ebe6788f10c897bcab54e5626353cf",
+          "outputFillSha256": "4375925893b68324f4fd834d898f7fb1187032599fab24a2fd0233da53eac41f",
+          "outputPatchSha256": "a1914c862dc239a427bf6d9ce80362de30e5da1347ab4a1416a63feca1208c24",
+          "previousWriterCall": 18,
+          "previousPreparationFill": 18,
+          "outlinePositions": 148,
+          "rotationIndex": 26,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 19,
+          "cdex": 42,
+          "sdex": 1,
+          "form": 37,
+          "frame": {
+            "id": 38,
+            "lx": 0,
+            "rx": 309,
+            "ly": 124,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 70027,
+            "form": 37,
+            "value": 19
+          },
+          "background": 0,
+          "returnValue": 70027,
+          "inputFillSha256": "fc6d5f017c611dffe36103ec4d4c6570491c1f4bf7733551f6e89a9aaaa0f0c1",
+          "inputPatchSha256": "a1914c862dc239a427bf6d9ce80362de30e5da1347ab4a1416a63feca1208c24",
+          "outputFillSha256": "db3526f352c045994d6481e0fb4c1367a91adab8851e95da1d96b58df6a1d8ac",
+          "outputPatchSha256": "b9c899d7a91829c10068b30af9363292b5f17a07a0774070f343c6383eeb4da4",
+          "previousWriterCall": 19,
+          "previousPreparationFill": 19,
+          "outlinePositions": 1138,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 20,
+          "cdex": 1,
+          "sdex": 1,
+          "form": 39,
+          "frame": {
+            "id": 40,
+            "lx": 228,
+            "rx": 319,
+            "ly": 0,
+            "ty": 92
+          },
+          "patchRead": {
+            "calls": 7433,
+            "form": 39,
+            "value": 20
+          },
+          "background": 0,
+          "returnValue": 7433,
+          "inputFillSha256": "720d9449b7a868b050095d7648dc3ed09288d9d91c0f813e254146ef82804b07",
+          "inputPatchSha256": "b9c899d7a91829c10068b30af9363292b5f17a07a0774070f343c6383eeb4da4",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "16d39ddb736f5a069fa18a704f73ca45ec2568d11e1a59a49f87033f8f6ec44c",
+          "previousWriterCall": 20,
+          "previousPreparationFill": 20,
+          "outlinePositions": 328,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 21,
+          "cdex": 41,
+          "sdex": 1,
+          "form": 41,
+          "frame": {
+            "id": 42,
+            "lx": 0,
+            "rx": 219,
+            "ly": 0,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 16751,
+            "form": 41,
+            "value": 21
+          },
+          "background": 0,
+          "returnValue": 16751,
+          "inputFillSha256": "3fc0cec9dd2ae41f65d061469615bbfec991d09c6390a7c58432579c0a5a3b0f",
+          "inputPatchSha256": "16d39ddb736f5a069fa18a704f73ca45ec2568d11e1a59a49f87033f8f6ec44c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "6d8d1b109fd5443ba0e2707261f914e7c56b0b9eff9a3f8fabdc5d5439573dac",
+          "previousWriterCall": 21,
+          "previousPreparationFill": 21,
+          "outlinePositions": 1237,
+          "rotationIndex": 42,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 22,
+          "cdex": 40,
+          "sdex": 1,
+          "form": 43,
+          "frame": {
+            "id": 44,
+            "lx": 193,
+            "rx": 319,
+            "ly": 0,
+            "ty": 44
+          },
+          "patchRead": {
+            "calls": 249,
+            "form": 43,
+            "value": 22
+          },
+          "background": 0,
+          "returnValue": 249,
+          "inputFillSha256": "7738333fce0bb45376cffe7cc0008ab2e212ca8b34939996d4101f95ff663248",
+          "inputPatchSha256": "6d8d1b109fd5443ba0e2707261f914e7c56b0b9eff9a3f8fabdc5d5439573dac",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "073de6c5336bff865bc1a5b980b3a7e0c1db8073bf278d8687be020b443d1e88",
+          "previousWriterCall": 22,
+          "previousPreparationFill": 22,
+          "outlinePositions": 293,
+          "rotationIndex": 43,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 23,
+          "cdex": 8,
+          "sdex": 1,
+          "form": 45,
+          "frame": {
+            "id": 46,
+            "lx": 2,
+            "rx": 256,
+            "ly": 2,
+            "ty": 437
+          },
+          "patchRead": {
+            "calls": 14030,
+            "form": 45,
+            "value": 23
+          },
+          "background": 0,
+          "returnValue": 14030,
+          "inputFillSha256": "a4f79bb60e85ad61088668d52b02ab99997f1025aac2649b8b929a456b65b790",
+          "inputPatchSha256": "073de6c5336bff865bc1a5b980b3a7e0c1db8073bf278d8687be020b443d1e88",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "e32f1bbb6f29e9f77dd4ead316abe8ebb702571560f398fc2ba05b8c1227c844",
+          "previousWriterCall": 23,
+          "previousPreparationFill": 23,
+          "outlinePositions": 1058,
+          "rotationIndex": 352,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 24,
+          "cdex": 43,
+          "sdex": 1,
+          "form": 47,
+          "frame": {
+            "id": 48,
+            "lx": 0,
+            "rx": 319,
+            "ly": 0,
+            "ty": 149
+          },
+          "patchRead": {
+            "calls": 6499,
+            "form": 47,
+            "value": 24
+          },
+          "background": 0,
+          "returnValue": 6499,
+          "inputFillSha256": "bc9003d75dd5a05651ea316d97036a68f69525d14fb96b3a145e67ecb7eaf9fc",
+          "inputPatchSha256": "e32f1bbb6f29e9f77dd4ead316abe8ebb702571560f398fc2ba05b8c1227c844",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "4da92dda9c3f8a6fc9d31f3f612f54a9c08e362797f3e62a06ae01d74f3bd942",
+          "previousWriterCall": 24,
+          "previousPreparationFill": 24,
+          "outlinePositions": 825,
+          "rotationIndex": 8,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 25,
+          "cdex": 3,
+          "sdex": 1,
+          "form": 49,
+          "frame": {
+            "id": 50,
+            "lx": 0,
+            "rx": 196,
+            "ly": 42,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 1049,
+            "form": 49,
+            "value": 25
+          },
+          "background": 0,
+          "returnValue": 1049,
+          "inputFillSha256": "fd68938a383d334411e5d1888e32d4ebcfb59b0df00ea521fe2f84626b825c5e",
+          "inputPatchSha256": "4da92dda9c3f8a6fc9d31f3f612f54a9c08e362797f3e62a06ae01d74f3bd942",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 25,
+          "previousPreparationFill": 25,
+          "outlinePositions": 4559,
+          "rotationIndex": 436,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 26,
+          "cdex": 37,
+          "sdex": 2,
+          "form": 51,
+          "frame": {
+            "id": 52,
+            "lx": 119,
+            "rx": 160,
+            "ly": 289,
+            "ty": 343
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "f8ba46255ba8298e2e61bdb594e1453c7e5e242478e0b76f98472e5ce33312b3",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 26,
+          "previousPreparationFill": 26,
+          "outlinePositions": 319,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 27,
+          "cdex": 39,
+          "sdex": 2,
+          "form": 53,
+          "frame": {
+            "id": 54,
+            "lx": 166,
+            "rx": 245,
+            "ly": 295,
+            "ty": 393
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "084e47c5ef9505e286f2d2ee60e83e69912580cbf29260c93555e9c2f0fda79d",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 27,
+          "previousPreparationFill": 27,
+          "outlinePositions": 245,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 28,
+          "cdex": 38,
+          "sdex": 2,
+          "form": 55,
+          "frame": {
+            "id": 56,
+            "lx": 149,
+            "rx": 245,
+            "ly": 286,
+            "ty": 319
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "1f2ef1b94ae8e8414296da1e2bf85ef2b7194c4eeb2fdfe0a2dcfdb35e2c7a72",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 28,
+          "previousPreparationFill": 28,
+          "outlinePositions": 197,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 29,
+          "cdex": 34,
+          "sdex": 2,
+          "form": 57,
+          "frame": {
+            "id": 58,
+            "lx": 71,
+            "rx": 130,
+            "ly": 239,
+            "ty": 287
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "519f26bb1b9a082a7c41f5ea5b2ae97fde406a204e4563fd86ca195868c328ca",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 29,
+          "previousPreparationFill": 29,
+          "outlinePositions": 181,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 30,
+          "cdex": 35,
+          "sdex": 2,
+          "form": 59,
+          "frame": {
+            "id": 60,
+            "lx": 56,
+            "rx": 90,
+            "ly": 276,
+            "ty": 339
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "a7e9f656d9bc0973226bcd65869ab9d3e1b9bb2520636b731fa6f7b3dc8e44f0",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 30,
+          "previousPreparationFill": 30,
+          "outlinePositions": 160,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 31,
+          "cdex": 36,
+          "sdex": 2,
+          "form": 61,
+          "frame": {
+            "id": 62,
+            "lx": 51,
+            "rx": 94,
+            "ly": 325,
+            "ty": 398
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "aa19c4bc7986eccc5b66598b2171fc0ad67fe3a32c5265425de33ef9af09ef2f",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 31,
+          "previousPreparationFill": 31,
+          "outlinePositions": 209,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 32,
+          "cdex": 27,
+          "sdex": 2,
+          "form": 63,
+          "frame": {
+            "id": 64,
+            "lx": 148,
+            "rx": 165,
+            "ly": 432,
+            "ty": 459
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "669be344a0d5c6fad01aad077cea8d3d033253f183c8181067947ad75fcf669f",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 32,
+          "previousPreparationFill": 32,
+          "outlinePositions": 60,
+          "rotationIndex": 21,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 33,
+          "cdex": 24,
+          "sdex": 2,
+          "form": 65,
+          "frame": {
+            "id": 66,
+            "lx": 116,
+            "rx": 167,
+            "ly": 435,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "a991d85f70182240930a0f8a2231b23d12d689a7abad7d6ffc99456dad203e80",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 33,
+          "previousPreparationFill": 33,
+          "outlinePositions": 152,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 34,
+          "cdex": 23,
+          "sdex": 2,
+          "form": 67,
+          "frame": {
+            "id": 68,
+            "lx": 89,
+            "rx": 122,
+            "ly": 447,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "e4939db304790b48c6b7f107d4ae46f20842b2184d200c1d75648545d3ba0fed",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 34,
+          "previousPreparationFill": 34,
+          "outlinePositions": 104,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 35,
+          "cdex": 22,
+          "sdex": 2,
+          "form": 69,
+          "frame": {
+            "id": 70,
+            "lx": 120,
+            "rx": 139,
+            "ly": 452,
+            "ty": 457
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "4259d265171af58eab6e255ef735cfa0aebabfa390a125ec5622f83132158b62",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 35,
+          "previousPreparationFill": 35,
+          "outlinePositions": 34,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 36,
+          "cdex": 21,
+          "sdex": 2,
+          "form": 71,
+          "frame": {
+            "id": 72,
+            "lx": 98,
+            "rx": 109,
+            "ly": 455,
+            "ty": 464
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "c30b81545d8cd0ee82f3af10c98ffedf144599d9d22342540ba0f22a8ffa0aa2",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 36,
+          "previousPreparationFill": 36,
+          "outlinePositions": 28,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 37,
+          "cdex": 18,
+          "sdex": 2,
+          "form": 73,
+          "frame": {
+            "id": 74,
+            "lx": 120,
+            "rx": 135,
+            "ly": 447,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "19f780c2f852819fde9a46150f08a2e52ba24e4021dc52c9a7a2907b8afc9373",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 37,
+          "previousPreparationFill": 37,
+          "outlinePositions": 34,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 38,
+          "cdex": 20,
+          "sdex": 2,
+          "form": 75,
+          "frame": {
+            "id": 76,
+            "lx": 120,
+            "rx": 134,
+            "ly": 443,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "8aa7cba81f90ff2f63ddff99756a9249a25574de8a355ba935662fb22fce9c33",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 38,
+          "previousPreparationFill": 38,
+          "outlinePositions": 35,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 39,
+          "cdex": 6,
+          "sdex": 2,
+          "form": 77,
+          "frame": {
+            "id": 78,
+            "lx": 125,
+            "rx": 130,
+            "ly": 448,
+            "ty": 453
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "7e696e7bf56a17acdba03fa72ae4de1c3bd0645b137960e65c29767b300d4764",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 39,
+          "previousPreparationFill": 39,
+          "outlinePositions": 9,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 40,
+          "cdex": 8,
+          "sdex": 2,
+          "form": 79,
+          "frame": {
+            "id": 80,
+            "lx": 124,
+            "rx": 131,
+            "ly": 447,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "f06a026f9ecb97c4bdbcc6fd5a8da03bf3b40e8e2183982fb43001eb7f4d90b7",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 40,
+          "previousPreparationFill": 40,
+          "outlinePositions": 17,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 41,
+          "cdex": 14,
+          "sdex": 2,
+          "form": 81,
+          "frame": {
+            "id": 82,
+            "lx": 120,
+            "rx": 139,
+            "ly": 449,
+            "ty": 458
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "5a2c2b981a3351adfce6c71e06ff8df3e6b899f7e91a0bb6a404d2850ed9ed2c",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 41,
+          "previousPreparationFill": 41,
+          "outlinePositions": 41,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 42,
+          "cdex": 16,
+          "sdex": 2,
+          "form": 83,
+          "frame": {
+            "id": 84,
+            "lx": 120,
+            "rx": 134,
+            "ly": 445,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "325c97c9840de8168651ffbc6ff580e1649c1fc533f41954c8b453961add0d88",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 42,
+          "previousPreparationFill": 42,
+          "outlinePositions": 29,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 43,
+          "cdex": 25,
+          "sdex": 2,
+          "form": 85,
+          "frame": {
+            "id": 86,
+            "lx": 106,
+            "rx": 124,
+            "ly": 430,
+            "ty": 458
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "e3b1bf47321651fb8979c209b021c93bb3c61ff89863ef3753b414add96dc053",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 43,
+          "previousPreparationFill": 43,
+          "outlinePositions": 86,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 44,
+          "cdex": 17,
+          "sdex": 2,
+          "form": 87,
+          "frame": {
+            "id": 88,
+            "lx": 100,
+            "rx": 113,
+            "ly": 449,
+            "ty": 457
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "9b9fad2de59a63f0add2e70bdf62927418e8ce37c3bdfd02b1003d67e7acd408",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 44,
+          "previousPreparationFill": 44,
+          "outlinePositions": 28,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 45,
+          "cdex": 19,
+          "sdex": 2,
+          "form": 89,
+          "frame": {
+            "id": 90,
+            "lx": 101,
+            "rx": 113,
+            "ly": 444,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "860d0f919a158f7923d834111bde895719b48ed9e681960835a3f94ed1e37ce7",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 45,
+          "previousPreparationFill": 45,
+          "outlinePositions": 30,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 46,
+          "cdex": 5,
+          "sdex": 2,
+          "form": 91,
+          "frame": {
+            "id": 92,
+            "lx": 104,
+            "rx": 109,
+            "ly": 450,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "bd22da1f838c892fb3932167ffda7e2d50e06f75c01174e5193b4bd95bb5ecba",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 46,
+          "previousPreparationFill": 46,
+          "outlinePositions": 9,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 47,
+          "cdex": 7,
+          "sdex": 2,
+          "form": 93,
+          "frame": {
+            "id": 94,
+            "lx": 103,
+            "rx": 111,
+            "ly": 449,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "b5074e425d65e45cf2bb114ef230cff44d6112757f326d0e9d106cd41fad22b2",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 47,
+          "previousPreparationFill": 47,
+          "outlinePositions": 17,
+          "rotationIndex": 7,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 48,
+          "cdex": 13,
+          "sdex": 2,
+          "form": 95,
+          "frame": {
+            "id": 96,
+            "lx": 97,
+            "rx": 114,
+            "ly": 452,
+            "ty": 464
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "15ab75e5b773279316872dc0c1f796270d98d5453f4b0fda0a6ff84654865e96",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 48,
+          "previousPreparationFill": 48,
+          "outlinePositions": 41,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 49,
+          "cdex": 15,
+          "sdex": 2,
+          "form": 97,
+          "frame": {
+            "id": 98,
+            "lx": 101,
+            "rx": 113,
+            "ly": 447,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "32c9dbd4961c45d5c3c74805ccc69041d2548d9b719d1c8c3f1f4a05db866763",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 49,
+          "previousPreparationFill": 49,
+          "outlinePositions": 29,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 50,
+          "cdex": 12,
+          "sdex": 2,
+          "form": 99,
+          "frame": {
+            "id": 100,
+            "lx": 106,
+            "rx": 122,
+            "ly": 422,
+            "ty": 429
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "281ba2b04db8629f0fa7c6d3b1740a9456b37600e427853c975937c8fd714e0e",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 50,
+          "previousPreparationFill": 50,
+          "outlinePositions": 33,
+          "rotationIndex": 8,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 51,
+          "cdex": 11,
+          "sdex": 2,
+          "form": 101,
+          "frame": {
+            "id": 102,
+            "lx": 105,
+            "rx": 122,
+            "ly": 419,
+            "ty": 429
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "0c150bab84832637ad4d8f3f4aac8c2809ad4f692a3d9f6eec78bf5f9b101687",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 51,
+          "previousPreparationFill": 51,
+          "outlinePositions": 42,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 52,
+          "cdex": 43,
+          "sdex": 2,
+          "form": 103,
+          "frame": {
+            "id": 104,
+            "lx": 96,
+            "rx": 162,
+            "ly": 405,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "42788581e95bf664306e311845e474626e213a686a633556b7faf14b52258258",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 52,
+          "previousPreparationFill": 52,
+          "outlinePositions": 230,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 53,
+          "cdex": 26,
+          "sdex": 2,
+          "form": 105,
+          "frame": {
+            "id": 106,
+            "lx": 101,
+            "rx": 108,
+            "ly": 441,
+            "ty": 470
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "c5c5247167f42b8d8b7ba5ea91706611d7a24cfbd9c23f4e75a1f38d71c21b39",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 53,
+          "previousPreparationFill": 53,
+          "outlinePositions": 54,
+          "rotationIndex": 30,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 54,
+          "cdex": 2,
+          "sdex": 2,
+          "form": 107,
+          "frame": {
+            "id": 108,
+            "lx": 68,
+            "rx": 191,
+            "ly": 253,
+            "ty": 403
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "41d7354033729871d6264ed4271dde61d150f2bb22d173ec73b229e5f8fc8b42",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 54,
+          "previousPreparationFill": 54,
+          "outlinePositions": 492,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 55,
+          "cdex": 3,
+          "sdex": 2,
+          "form": 109,
+          "frame": {
+            "id": 110,
+            "lx": 67,
+            "rx": 181,
+            "ly": 256,
+            "ty": 391
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "ff1723b2a1a95d548aeebd93bab9ef90e566ebccc179a8060451bd6110a9f518",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 55,
+          "previousPreparationFill": 55,
+          "outlinePositions": 403,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 56,
+          "cdex": 42,
+          "sdex": 2,
+          "form": 111,
+          "frame": {
+            "id": 112,
+            "lx": 109,
+            "rx": 154,
+            "ly": 375,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "d99e6a06781a025557f7a06c6290709580b0729380077927f6a3afb0f95c3798",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 56,
+          "previousPreparationFill": 56,
+          "outlinePositions": 243,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 57,
+          "cdex": 41,
+          "sdex": 2,
+          "form": 113,
+          "frame": {
+            "id": 114,
+            "lx": 78,
+            "rx": 171,
+            "ly": 255,
+            "ty": 390
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "e283e0d1870358eeb2dc49733de91ce0f62cc6763c12e59ae160c7918b30e4b4",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 57,
+          "previousPreparationFill": 57,
+          "outlinePositions": 417,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 58,
+          "cdex": 9,
+          "sdex": 2,
+          "form": 115,
+          "frame": {
+            "id": 116,
+            "lx": 108,
+            "rx": 144,
+            "ly": 385,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "d9547a84e03b86acb62beea2f7771449fa230f4c27d7b51322df94a0937e7886",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 58,
+          "previousPreparationFill": 58,
+          "outlinePositions": 172,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 59,
+          "cdex": 44,
+          "sdex": 2,
+          "form": 117,
+          "frame": {
+            "id": 118,
+            "lx": 75,
+            "rx": 189,
+            "ly": 255,
+            "ty": 414
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "abedb42357997fa586492358963bb54950c0fc1072e8466544dfd4ed9638e546",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 59,
+          "previousPreparationFill": 59,
+          "outlinePositions": 442,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 60,
+          "cdex": 4,
+          "sdex": 2,
+          "form": 119,
+          "frame": {
+            "id": 120,
+            "lx": 80,
+            "rx": 195,
+            "ly": 367,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "b23aba5e5e595340ab39db0fd52ef05a1192447f462c85be4b0be8890fae8aa0",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 60,
+          "previousPreparationFill": 60,
+          "outlinePositions": 370,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 61,
+          "cdex": 1,
+          "sdex": 2,
+          "form": 121,
+          "frame": {
+            "id": 122,
+            "lx": 116,
+            "rx": 210,
+            "ly": 122,
+            "ty": 303
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "51ec97e5b47c7f7782d14e9912fb09ab483568440b1f4c7dc3855885ce0c7af1",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 61,
+          "previousPreparationFill": 61,
+          "outlinePositions": 434,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 62,
+          "cdex": 33,
+          "sdex": 2,
+          "form": 123,
+          "frame": {
+            "id": 124,
+            "lx": 142,
+            "rx": 208,
+            "ly": 60,
+            "ty": 282
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "8bda0439aa3b33bbebb3504b93c461aef3b8bc617944c5b367f1d05b683b6884",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 62,
+          "previousPreparationFill": 62,
+          "outlinePositions": 473,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 63,
+          "cdex": 32,
+          "sdex": 2,
+          "form": 125,
+          "frame": {
+            "id": 126,
+            "lx": 141,
+            "rx": 181,
+            "ly": 0,
+            "ty": 74
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "fb678adea280e3d0a2f7b0995e9f8291e733f7687444329173dcb105948ff841",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 63,
+          "previousPreparationFill": 63,
+          "outlinePositions": 199,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 64,
+          "cdex": 0,
+          "sdex": 2,
+          "form": 127,
+          "frame": {
+            "id": 128,
+            "lx": 52,
+            "rx": 185,
+            "ly": 127,
+            "ty": 303
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "f6564ac3f2a957d6d38cc9829baafbea591c96201e4022fbe53f61a2631f6bbc",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 64,
+          "previousPreparationFill": 64,
+          "outlinePositions": 458,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 65,
+          "cdex": 30,
+          "sdex": 2,
+          "form": 129,
+          "frame": {
+            "id": 130,
+            "lx": 42,
+            "rx": 159,
+            "ly": 66,
+            "ty": 277
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "556e4cd6e9c68091864f5e87dd00347bf4550ad73f9a851273c6dfe590270825",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 65,
+          "previousPreparationFill": 65,
+          "outlinePositions": 457,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 66,
+          "cdex": 29,
+          "sdex": 2,
+          "form": 131,
+          "frame": {
+            "id": 132,
+            "lx": 32,
+            "rx": 70,
+            "ly": 0,
+            "ty": 87
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "9a2dce765adc24fe1dee1ed989c2379003bfc9a0f2857b644edb0910f4bc4680",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "previousWriterCall": 66,
+          "previousPreparationFill": 66,
+          "outlinePositions": 211,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 67,
+          "cdex": 0,
+          "sdex": 0,
+          "form": 133,
+          "frame": {
+            "id": 134,
+            "lx": 29,
+            "rx": 291,
+            "ly": 0,
+            "ty": 443
+          },
+          "patchRead": {
+            "calls": 2363,
+            "form": 133,
+            "value": 67
+          },
+          "background": 0,
+          "returnValue": 2363,
+          "inputFillSha256": "12b59d8bb570a9f646b48513d4d7d37921482819cd8cca042c8f40060717ec53",
+          "inputPatchSha256": "b07f6f9ab29ef8185334198b3a63d8660d5dffce026a0bb1e5ff93e720862d0c",
+          "outputFillSha256": "42ee56204a086e4b7fbd63fcfe9099504a6014efa9a68a57bddf00d3aa957977",
+          "outputPatchSha256": "5e855257162d323490c8d1c02d875a02cb0689a1511b8ec9e95ec65bc410affc",
+          "previousWriterCall": 67,
+          "previousPreparationFill": 67,
+          "outlinePositions": 1400,
+          "rotationIndex": 24,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        }
+      ],
+      "previousBoundary": {
+        "runId": "boundary-map-20261005-g",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": "13431cf36376d6542a2b3b6109848279f880b5abedc963abcada6061ec3a66ca",
+        "probeOutputNames": [
+          "aaron-boundary-map.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T10:44:07.9615631+00:00",
+        "finishedAt": "2026-10-05T10:46:13.2455607+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "79d45ee9d8ad77f5675191282a295381f967190a15b819b5d812adb108e48bd5",
+        "rawReportSha256": "75d879feb4547642d8847fd65186a01b7d2dde77d5d1be407c799de50201a4c5"
+      },
+      "previousPreparation": {
+        "runId": "fill-preparation-20261005-f",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": "7001710d153fcca890def9b76ebeb66d31b86598a6af00dfb5e0cc806b59c3df",
+        "probeOutputNames": [
+          "aaron-fill-preparation.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T09:27:02.4180012+00:00",
+        "finishedAt": "2026-10-05T09:27:49.4472805+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "summarySha256": "4bac6f5e4908a076c33652c56f7dc762fca3d25eac48bce8acf09209221b5446",
+        "rawReportSha256": "42b2935052c1da96c40c6b1f3d73170b8309b05de6aa1fe0e280b0bac500b1f1"
+      }
+    },
+    {
+      "seed": 5678,
+      "observed": {
+        "runId": "cform-post-fill-seed5678-20261005-e",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": "bdc7a4609090c14197ef045e53c1cd222eb9071dba099368d735a872add4e9f8",
+        "probeOutputNames": [
+          "aaron-cform-post-fill.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T17:25:25.1378982+00:00",
+        "finishedAt": "2026-10-05T17:29:53.4830093+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "9cfd8d607b39e953f5ccf7f6feba31271ecf0219836928aeb14b30ef1e7075d2",
+        "rawReportSha256": "2c9d661a900d38d290d2e8e29c63e798addb5c47e977c2a115b0c5680c730f33"
+      },
+      "control": {
+        "runId": "cform-post-fill-control-seed5678-20261005-f",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T17:33:58.2129304+00:00",
+        "finishedAt": "2026-10-05T17:34:47.2010073+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "9d60cdba8901750f2745be4a81569b0466161ffcbc51deeaee190ddc464625dc"
+      },
+      "aa0ByteIdentical": true,
+      "sceneReportByteIdentical": true,
+      "complete": {
+        "calls": 82,
+        "objects": 164,
+        "checks": 246,
+        "readers": 105073,
+        "cells": 50380800,
+        "runs": 534972,
+        "frames": 82
+      },
+      "coverage": {
+        "calls": 82,
+        "mapCellsCompared": 25190400,
+        "composedCalls": 82,
+        "composedMapCellsCompared": 25190400,
+        "composedInputFillCellsCompared": 12595200,
+        "outlinePositions": 14506,
+        "naturalFrameReads": 82,
+        "naturalPatchReads": 105073,
+        "callsWithoutPatchRead": 8,
+        "acceptedCells": 105073,
+        "rejectedPositiveCells": 162922,
+        "targetFillValues": {
+          "0": 169702,
+          "1": 254048,
+          "2": 13947
+        },
+        "targetFillTransitions": {
+          "0->0": 169702,
+          "2->0": 13947,
+          "1->0": 254048
+        },
+        "backgroundValues": {
+          "0": 82
+        },
+        "patchIds": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "15": 1,
+          "16": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1,
+          "21": 1,
+          "22": 1,
+          "23": 1,
+          "24": 1,
+          "25": 1,
+          "26": 1,
+          "27": 1,
+          "28": 1,
+          "29": 1,
+          "30": 1,
+          "31": 1,
+          "32": 1,
+          "33": 1,
+          "35": 1,
+          "38": 1,
+          "39": 1,
+          "40": 1,
+          "41": 1,
+          "42": 1,
+          "45": 1,
+          "46": 1,
+          "47": 1,
+          "48": 1,
+          "49": 1,
+          "50": 1,
+          "51": 1,
+          "52": 1,
+          "53": 1,
+          "54": 1,
+          "56": 1,
+          "57": 1,
+          "59": 1,
+          "60": 1,
+          "61": 1,
+          "62": 1,
+          "63": 1,
+          "64": 1,
+          "65": 1,
+          "66": 1,
+          "67": 1,
+          "68": 1,
+          "69": 1,
+          "70": 1,
+          "71": 1,
+          "72": 1,
+          "74": 1,
+          "75": 1,
+          "76": 1,
+          "77": 1,
+          "78": 1,
+          "79": 1,
+          "80": 1,
+          "81": 1,
+          "82": 1
+        },
+        "frameTypes": {
+          "MAPFRAME": 82
+        },
+        "outsideNonzeroFillPreserved": 8064,
+        "excludedEdgePositiveFillPreserved": {
+          "rx": 0,
+          "ty": 436,
+          "corner": 6
+        },
+        "returnRange": [
+          0,
+          29185
+        ],
+        "snapshotPreviewChecks": 246
+      },
+      "rows": [
+        {
+          "id": 1,
+          "cdex": 33,
+          "sdex": 1,
+          "form": 1,
+          "frame": {
+            "id": 2,
+            "lx": 124,
+            "rx": 166,
+            "ly": 222,
+            "ty": 264
+          },
+          "patchRead": {
+            "calls": 1130,
+            "form": 1,
+            "value": 1
+          },
+          "background": 0,
+          "returnValue": 1130,
+          "inputFillSha256": "374ef59ecc2353f382680895f9dc0d633bf500ad1b2eddb8aadc601d82fc2161",
+          "inputPatchSha256": "7818f5542a0404157573be6cffc0e0c8e68ce3c0f5d17d07ccdd9313fb700baf",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "75f9e9557367d0373eb94af9eec95667c40bca9575f2a2a4a2ec6c0508bab48e",
+          "previousWriterCall": 1,
+          "previousPreparationFill": 1,
+          "outlinePositions": 173,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 2,
+          "cdex": 35,
+          "sdex": 1,
+          "form": 3,
+          "frame": {
+            "id": 4,
+            "lx": 3,
+            "rx": 171,
+            "ly": 290,
+            "ty": 380
+          },
+          "patchRead": {
+            "calls": 4724,
+            "form": 3,
+            "value": 2
+          },
+          "background": 0,
+          "returnValue": 4724,
+          "inputFillSha256": "57023df9b42f9744474253732187cd33545dc0fc139132060604854d6906b019",
+          "inputPatchSha256": "75f9e9557367d0373eb94af9eec95667c40bca9575f2a2a4a2ec6c0508bab48e",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "24690a0cda00ec5a6033dca0b5235565800955383c6a19a1c56dde8f966fd11c",
+          "previousWriterCall": 2,
+          "previousPreparationFill": 2,
+          "outlinePositions": 375,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 3,
+          "cdex": 34,
+          "sdex": 1,
+          "form": 5,
+          "frame": {
+            "id": 6,
+            "lx": 5,
+            "rx": 133,
+            "ly": 247,
+            "ty": 308
+          },
+          "patchRead": {
+            "calls": 2537,
+            "form": 5,
+            "value": 3
+          },
+          "background": 0,
+          "returnValue": 2537,
+          "inputFillSha256": "8878a452583d62ad4519afcd1727a1d2ed7525230c87fb0aeffc1c8123a4a0fe",
+          "inputPatchSha256": "24690a0cda00ec5a6033dca0b5235565800955383c6a19a1c56dde8f966fd11c",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "86552510e4ec0941d296abe07499f83b577349b696f13dac1c773376b99d996d",
+          "previousWriterCall": 3,
+          "previousPreparationFill": 3,
+          "outlinePositions": 265,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 4,
+          "cdex": 25,
+          "sdex": 1,
+          "form": 7,
+          "frame": {
+            "id": 8,
+            "lx": 140,
+            "rx": 160,
+            "ly": 435,
+            "ty": 470
+          },
+          "patchRead": {
+            "calls": 381,
+            "form": 7,
+            "value": 4
+          },
+          "background": 0,
+          "returnValue": 381,
+          "inputFillSha256": "eab0dee1261921d0a9bb18924f3a22af3bbb271053c5b29e99791ade349fc512",
+          "inputPatchSha256": "86552510e4ec0941d296abe07499f83b577349b696f13dac1c773376b99d996d",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "809b1da4487fba2cc89ab2e309fc2ebb54de0624f3d96f08efb741412e3a4ccd",
+          "previousWriterCall": 4,
+          "previousPreparationFill": 4,
+          "outlinePositions": 79,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 5,
+          "cdex": 16,
+          "sdex": 1,
+          "form": 9,
+          "frame": {
+            "id": 10,
+            "lx": 185,
+            "rx": 207,
+            "ly": 445,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 85,
+            "form": 9,
+            "value": 5
+          },
+          "background": 0,
+          "returnValue": 85,
+          "inputFillSha256": "5040bf7ce9bbd7424abb1e57a6aff31137102728e4a9d16e0a51e109ec680ce7",
+          "inputPatchSha256": "809b1da4487fba2cc89ab2e309fc2ebb54de0624f3d96f08efb741412e3a4ccd",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "6891ba02e99dcf7295f2f3e9030f08a64a86b5837fc294009b8406ed68f1ec5f",
+          "previousWriterCall": 5,
+          "previousPreparationFill": 5,
+          "outlinePositions": 49,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 6,
+          "cdex": 18,
+          "sdex": 1,
+          "form": 11,
+          "frame": {
+            "id": 12,
+            "lx": 186,
+            "rx": 206,
+            "ly": 438,
+            "ty": 450
+          },
+          "patchRead": {
+            "calls": 80,
+            "form": 11,
+            "value": 6
+          },
+          "background": 0,
+          "returnValue": 80,
+          "inputFillSha256": "198f3589b352e1dc7f2d88434761d4dd869c9d1289ac333a9b5d961f9edb8703",
+          "inputPatchSha256": "6891ba02e99dcf7295f2f3e9030f08a64a86b5837fc294009b8406ed68f1ec5f",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "c90e103ece3917cc7054ba4cf6056c3ea438b7b55a3817c30c24c83e956f68fb",
+          "previousWriterCall": 6,
+          "previousPreparationFill": 6,
+          "outlinePositions": 46,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 7,
+          "cdex": 4,
+          "sdex": 1,
+          "form": 13,
+          "frame": {
+            "id": 14,
+            "lx": 192,
+            "rx": 199,
+            "ly": 445,
+            "ty": 451
+          },
+          "patchRead": {
+            "calls": 8,
+            "form": 13,
+            "value": 7
+          },
+          "background": 0,
+          "returnValue": 8,
+          "inputFillSha256": "25b3622f9ebd61586905721ea65267154b3113db40e5ba68ac10d931dd5598e8",
+          "inputPatchSha256": "c90e103ece3917cc7054ba4cf6056c3ea438b7b55a3817c30c24c83e956f68fb",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "c271a25ec025138775c6daf9098da34070441309eef7e2b7a307fa1f29f60ace",
+          "previousWriterCall": 7,
+          "previousPreparationFill": 7,
+          "outlinePositions": 12,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 8,
+          "cdex": 6,
+          "sdex": 1,
+          "form": 15,
+          "frame": {
+            "id": 16,
+            "lx": 191,
+            "rx": 200,
+            "ly": 443,
+            "ty": 453
+          },
+          "patchRead": {
+            "calls": 16,
+            "form": 15,
+            "value": 8
+          },
+          "background": 0,
+          "returnValue": 16,
+          "inputFillSha256": "9cbe79f4abf2c32a7196fa009dc8e3f95a1fd195a2934fb1f03a09b4e296f545",
+          "inputPatchSha256": "c271a25ec025138775c6daf9098da34070441309eef7e2b7a307fa1f29f60ace",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "3410d3e0547a3eb325c976956a493a372cbfce25f42fbf18db33f592017da95f",
+          "previousWriterCall": 8,
+          "previousPreparationFill": 8,
+          "outlinePositions": 25,
+          "rotationIndex": 9,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 9,
+          "cdex": 12,
+          "sdex": 1,
+          "form": 17,
+          "frame": {
+            "id": 18,
+            "lx": 182,
+            "rx": 207,
+            "ly": 448,
+            "ty": 468
+          },
+          "patchRead": {
+            "calls": 266,
+            "form": 17,
+            "value": 9
+          },
+          "background": 0,
+          "returnValue": 266,
+          "inputFillSha256": "4bd507d87c873b65331609a2b87480594865a96e6f8efbc3d60fae04529d714a",
+          "inputPatchSha256": "3410d3e0547a3eb325c976956a493a372cbfce25f42fbf18db33f592017da95f",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "f1661993479c07e390c3efff85fc3b38f04efdd013112d26e9a67d68ab0d3f54",
+          "previousWriterCall": 9,
+          "previousPreparationFill": 9,
+          "outlinePositions": 71,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 10,
+          "cdex": 14,
+          "sdex": 1,
+          "form": 19,
+          "frame": {
+            "id": 20,
+            "lx": 185,
+            "rx": 206,
+            "ly": 442,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 10,
+            "form": 19,
+            "value": 10
+          },
+          "background": 0,
+          "returnValue": 10,
+          "inputFillSha256": "71c4bf7b12e88687557f465071902ddebed1001a4a02cfd348e13318c3bc1751",
+          "inputPatchSha256": "f1661993479c07e390c3efff85fc3b38f04efdd013112d26e9a67d68ab0d3f54",
+          "outputFillSha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+          "outputPatchSha256": "0f3bc3cafb58af44b8fbc86a82816df6213460f8a2e93fed859b355009dc61c7",
+          "previousWriterCall": 10,
+          "previousPreparationFill": 10,
+          "outlinePositions": 42,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 11,
+          "cdex": 22,
+          "sdex": 1,
+          "form": 21,
+          "frame": {
+            "id": 22,
+            "lx": 142,
+            "rx": 214,
+            "ly": 393,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 1811,
+            "form": 21,
+            "value": 11
+          },
+          "background": 0,
+          "returnValue": 1811,
+          "inputFillSha256": "0d92fb2513502ea6ce6962d51f3ea0511c514e0689e6195f31c4e8ce33a1ee1b",
+          "inputPatchSha256": "0f3bc3cafb58af44b8fbc86a82816df6213460f8a2e93fed859b355009dc61c7",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "14f5666187f8c15f4b03c5270335d11835768a35dd11de2a1dc40b7cad959896",
+          "previousWriterCall": 11,
+          "previousPreparationFill": 11,
+          "outlinePositions": 392,
+          "rotationIndex": 56,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 12,
+          "cdex": 20,
+          "sdex": 1,
+          "form": 23,
+          "frame": {
+            "id": 24,
+            "lx": 181,
+            "rx": 206,
+            "ly": 456,
+            "ty": 468
+          },
+          "patchRead": {
+            "calls": 12,
+            "form": 23,
+            "value": 12
+          },
+          "background": 0,
+          "returnValue": 12,
+          "inputFillSha256": "132e9d3f9d7e0a51871e3a6d624b297ae0db4382acb29c4046fb7c2256976267",
+          "inputPatchSha256": "14f5666187f8c15f4b03c5270335d11835768a35dd11de2a1dc40b7cad959896",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "43066597ebc6ff047e30bd8690a32f4ca0168979f8d2632cde7ea124aa640356",
+          "previousWriterCall": 12,
+          "previousPreparationFill": 12,
+          "outlinePositions": 51,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 13,
+          "cdex": 21,
+          "sdex": 1,
+          "form": 25,
+          "frame": {
+            "id": 26,
+            "lx": 219,
+            "rx": 234,
+            "ly": 458,
+            "ty": 469
+          },
+          "patchRead": {
+            "calls": 23,
+            "form": 25,
+            "value": 13
+          },
+          "background": 0,
+          "returnValue": 23,
+          "inputFillSha256": "c1cee95643d92329a39fb30427296b0abfdce40e328d7bef31090e4285f3c4a8",
+          "inputPatchSha256": "43066597ebc6ff047e30bd8690a32f4ca0168979f8d2632cde7ea124aa640356",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "7cfce5eb9ff59824129a7296fda58c9dbaf1e1acdf49f4ff07a07a80f1562234",
+          "previousWriterCall": 13,
+          "previousPreparationFill": 13,
+          "outlinePositions": 33,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 14,
+          "cdex": 24,
+          "sdex": 1,
+          "form": 27,
+          "frame": {
+            "id": 28,
+            "lx": 200,
+            "rx": 223,
+            "ly": 423,
+            "ty": 461
+          },
+          "patchRead": {
+            "calls": 328,
+            "form": 27,
+            "value": 14
+          },
+          "background": 0,
+          "returnValue": 328,
+          "inputFillSha256": "2dd6467155ae68f1acd37518d047f9cc22eabb22b275ef580891827dd6fa6cda",
+          "inputPatchSha256": "7cfce5eb9ff59824129a7296fda58c9dbaf1e1acdf49f4ff07a07a80f1562234",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "6a933198b389cef47ef52614a397268c61eda862817d24a29484cee769eb7dbd",
+          "previousWriterCall": 14,
+          "previousPreparationFill": 14,
+          "outlinePositions": 108,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 15,
+          "cdex": 11,
+          "sdex": 1,
+          "form": 29,
+          "frame": {
+            "id": 30,
+            "lx": 194,
+            "rx": 215,
+            "ly": 417,
+            "ty": 423
+          },
+          "patchRead": {
+            "calls": 41,
+            "form": 29,
+            "value": 15
+          },
+          "background": 0,
+          "returnValue": 41,
+          "inputFillSha256": "65e2cb0db1d8b5cf2bc19a400c13068a4191e5ee70c1809ab1d506686bace887",
+          "inputPatchSha256": "6a933198b389cef47ef52614a397268c61eda862817d24a29484cee769eb7dbd",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "98ccfd5bf77216932d587dc714fb54048b59165d3077655ce03166ce914840d5",
+          "previousWriterCall": 15,
+          "previousPreparationFill": 15,
+          "outlinePositions": 43,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 16,
+          "cdex": 10,
+          "sdex": 1,
+          "form": 31,
+          "frame": {
+            "id": 32,
+            "lx": 193,
+            "rx": 215,
+            "ly": 414,
+            "ty": 423
+          },
+          "patchRead": {
+            "calls": 50,
+            "form": 31,
+            "value": 16
+          },
+          "background": 0,
+          "returnValue": 50,
+          "inputFillSha256": "39803685aa5de0014717f4b5e00ca78aa73c0299397a209b92a4824c277f7f9e",
+          "inputPatchSha256": "98ccfd5bf77216932d587dc714fb54048b59165d3077655ce03166ce914840d5",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "e2a64b0aa253781604390d3aaf3ab6902ea18dbedaaac41d447dfa11bd9b0efa",
+          "previousWriterCall": 16,
+          "previousPreparationFill": 16,
+          "outlinePositions": 45,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 17,
+          "cdex": 17,
+          "sdex": 1,
+          "form": 33,
+          "frame": {
+            "id": 34,
+            "lx": 211,
+            "rx": 229,
+            "ly": 448,
+            "ty": 457
+          },
+          "patchRead": {
+            "calls": 56,
+            "form": 33,
+            "value": 17
+          },
+          "background": 0,
+          "returnValue": 56,
+          "inputFillSha256": "3f5c2844cd81107f4df0501331c91a4a9eb7716179e6936f5804f14215082f3e",
+          "inputPatchSha256": "e2a64b0aa253781604390d3aaf3ab6902ea18dbedaaac41d447dfa11bd9b0efa",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "58b4e8b588e75b3852603317cc474ede02863972146bd2fcc967af68e64ea171",
+          "previousWriterCall": 17,
+          "previousPreparationFill": 17,
+          "outlinePositions": 38,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 18,
+          "cdex": 19,
+          "sdex": 1,
+          "form": 35,
+          "frame": {
+            "id": 36,
+            "lx": 211,
+            "rx": 227,
+            "ly": 441,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 61,
+            "form": 35,
+            "value": 18
+          },
+          "background": 0,
+          "returnValue": 61,
+          "inputFillSha256": "b6b6bcde347219facb4d776353e6a27bf6355531ede11ce620d9ecee88c6f915",
+          "inputPatchSha256": "58b4e8b588e75b3852603317cc474ede02863972146bd2fcc967af68e64ea171",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "a1f315d1e22afba4bdac638681af262e7aa70bc20c9d6e1eaf066324eae32258",
+          "previousWriterCall": 18,
+          "previousPreparationFill": 18,
+          "outlinePositions": 44,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 19,
+          "cdex": 5,
+          "sdex": 1,
+          "form": 37,
+          "frame": {
+            "id": 38,
+            "lx": 215,
+            "rx": 222,
+            "ly": 448,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 9,
+            "form": 37,
+            "value": 19
+          },
+          "background": 0,
+          "returnValue": 9,
+          "inputFillSha256": "f38126dc5fe9acf0c60570f46f0d1e91615f6ed5236ccc66e52d99770369b238",
+          "inputPatchSha256": "a1f315d1e22afba4bdac638681af262e7aa70bc20c9d6e1eaf066324eae32258",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "954c10867d84a3e973d6959bd1ca87339269ec4014030181e334ea024dd6b07d",
+          "previousWriterCall": 19,
+          "previousPreparationFill": 19,
+          "outlinePositions": 15,
+          "rotationIndex": null,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 20,
+          "cdex": 7,
+          "sdex": 1,
+          "form": 39,
+          "frame": {
+            "id": 40,
+            "lx": 214,
+            "rx": 223,
+            "ly": 446,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 13,
+            "form": 39,
+            "value": 20
+          },
+          "background": 0,
+          "returnValue": 13,
+          "inputFillSha256": "07c398d61706e4e85d9add3a66d05ae22c7c2e613af1868ee1dee98d91537b7e",
+          "inputPatchSha256": "954c10867d84a3e973d6959bd1ca87339269ec4014030181e334ea024dd6b07d",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "b91ecdba2230453131f8ccf178d7323abb90c724f2c499543c6039e23d28d118",
+          "previousWriterCall": 20,
+          "previousPreparationFill": 20,
+          "outlinePositions": 26,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 21,
+          "cdex": 13,
+          "sdex": 1,
+          "form": 41,
+          "frame": {
+            "id": 42,
+            "lx": 209,
+            "rx": 233,
+            "ly": 451,
+            "ty": 469
+          },
+          "patchRead": {
+            "calls": 108,
+            "form": 41,
+            "value": 21
+          },
+          "background": 0,
+          "returnValue": 108,
+          "inputFillSha256": "e0c23698b80955d6a2cbb99da66c2878070e55ff038300a154ad620d46c8567a",
+          "inputPatchSha256": "b91ecdba2230453131f8ccf178d7323abb90c724f2c499543c6039e23d28d118",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "0927b851c9696f40015196276f511eeb051858ad3b192abf55be83083c958044",
+          "previousWriterCall": 21,
+          "previousPreparationFill": 21,
+          "outlinePositions": 58,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 22,
+          "cdex": 15,
+          "sdex": 1,
+          "form": 43,
+          "frame": {
+            "id": 44,
+            "lx": 211,
+            "rx": 228,
+            "ly": 445,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 6,
+            "form": 43,
+            "value": 22
+          },
+          "background": 0,
+          "returnValue": 6,
+          "inputFillSha256": "ac988c96b53762d456b148c761410811602bcf6efd99bcb0ec1d60519e3c9f84",
+          "inputPatchSha256": "0927b851c9696f40015196276f511eeb051858ad3b192abf55be83083c958044",
+          "outputFillSha256": "e7e9f5b6d9a9e915da4ad1ccf8f3a63bb6279f41637fdb84645cc47a43feea8e",
+          "outputPatchSha256": "b35457a02a029024addeff512d73d8c8034271e9566a6bff9553608492db5d69",
+          "previousWriterCall": 22,
+          "previousPreparationFill": 22,
+          "outlinePositions": 37,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 23,
+          "cdex": 23,
+          "sdex": 1,
+          "form": 45,
+          "frame": {
+            "id": 46,
+            "lx": 208,
+            "rx": 242,
+            "ly": 444,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 375,
+            "form": 45,
+            "value": 23
+          },
+          "background": 0,
+          "returnValue": 375,
+          "inputFillSha256": "981c3fc650a6c5cb5ca02c079306bebe27718295bb415bf8f1641323305566c4",
+          "inputPatchSha256": "b35457a02a029024addeff512d73d8c8034271e9566a6bff9553608492db5d69",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "e080916c204095a4a0176a85242b6397293a9fe90654d74cb354a83c9cca742e",
+          "previousWriterCall": 23,
+          "previousPreparationFill": 23,
+          "outlinePositions": 133,
+          "rotationIndex": 11,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 24,
+          "cdex": 42,
+          "sdex": 1,
+          "form": 47,
+          "frame": {
+            "id": 48,
+            "lx": 150,
+            "rx": 235,
+            "ly": 397,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 1946,
+            "form": 47,
+            "value": 24
+          },
+          "background": 0,
+          "returnValue": 1946,
+          "inputFillSha256": "8e9768896373e40e7ace71ebc6712aab92a75c88baf9ec8c0b1563aa212579ba",
+          "inputPatchSha256": "e080916c204095a4a0176a85242b6397293a9fe90654d74cb354a83c9cca742e",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "2936e45d49c9c21bbd27b6ee31e8b3aaca605dfb39b92d1a998a186049be7233",
+          "previousWriterCall": 24,
+          "previousPreparationFill": 24,
+          "outlinePositions": 266,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 25,
+          "cdex": 36,
+          "sdex": 1,
+          "form": 49,
+          "frame": {
+            "id": 50,
+            "lx": 202,
+            "rx": 255,
+            "ly": 191,
+            "ty": 243
+          },
+          "patchRead": {
+            "calls": 1261,
+            "form": 49,
+            "value": 25
+          },
+          "background": 0,
+          "returnValue": 1261,
+          "inputFillSha256": "f6202309443db3c2ce8c7bcbc2b71421686fed95af9966e989151c36f2341060",
+          "inputPatchSha256": "2936e45d49c9c21bbd27b6ee31e8b3aaca605dfb39b92d1a998a186049be7233",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "6e13024b0a1376409e0817a48718af6c8d8b02bc6fe7f9ba18d236fe0632835b",
+          "previousWriterCall": 25,
+          "previousPreparationFill": 25,
+          "outlinePositions": 349,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 26,
+          "cdex": 37,
+          "sdex": 1,
+          "form": 51,
+          "frame": {
+            "id": 52,
+            "lx": 240,
+            "rx": 294,
+            "ly": 191,
+            "ty": 278
+          },
+          "patchRead": {
+            "calls": 1970,
+            "form": 51,
+            "value": 26
+          },
+          "background": 0,
+          "returnValue": 1970,
+          "inputFillSha256": "ad28bc9eedf73d8c4dba3a14a5f92c7347dee66d48b22de09eb2ac471e606fd6",
+          "inputPatchSha256": "6e13024b0a1376409e0817a48718af6c8d8b02bc6fe7f9ba18d236fe0632835b",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "88bae575456cd5f77183872ce60b9f3046dac6b2d78ac6ea7128b46bee883889",
+          "previousWriterCall": 26,
+          "previousPreparationFill": 26,
+          "outlinePositions": 208,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 27,
+          "cdex": 38,
+          "sdex": 1,
+          "form": 53,
+          "frame": {
+            "id": 54,
+            "lx": 234,
+            "rx": 296,
+            "ly": 267,
+            "ty": 399
+          },
+          "patchRead": {
+            "calls": 3468,
+            "form": 53,
+            "value": 27
+          },
+          "background": 0,
+          "returnValue": 3468,
+          "inputFillSha256": "3cb6a3fccec989d3ed10c895b29bf36a1d73551437ed4715ea452477f726495b",
+          "inputPatchSha256": "88bae575456cd5f77183872ce60b9f3046dac6b2d78ac6ea7128b46bee883889",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "bce01c2f26ffd20d94142a73496833e8a9cd3873cb8635e3ab28b79d611f09f5",
+          "previousWriterCall": 27,
+          "previousPreparationFill": 27,
+          "outlinePositions": 321,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 28,
+          "cdex": 1,
+          "sdex": 1,
+          "form": 55,
+          "frame": {
+            "id": 56,
+            "lx": 127,
+            "rx": 252,
+            "ly": 230,
+            "ty": 403
+          },
+          "patchRead": {
+            "calls": 13205,
+            "form": 55,
+            "value": 28
+          },
+          "background": 0,
+          "returnValue": 13205,
+          "inputFillSha256": "003cbdbcd937c107311cd245f4d6a7a6f64824378f7dd6465571a6a8b12ef80d",
+          "inputPatchSha256": "bce01c2f26ffd20d94142a73496833e8a9cd3873cb8635e3ab28b79d611f09f5",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "55b1e5e3e8e4173722759f7c0f635ba68798e2196913341a144baebbc68a5ca8",
+          "previousWriterCall": 28,
+          "previousPreparationFill": 28,
+          "outlinePositions": 537,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 29,
+          "cdex": 2,
+          "sdex": 1,
+          "form": 57,
+          "frame": {
+            "id": 58,
+            "lx": 131,
+            "rx": 252,
+            "ly": 237,
+            "ty": 393
+          },
+          "patchRead": {
+            "calls": 386,
+            "form": 57,
+            "value": 29
+          },
+          "background": 0,
+          "returnValue": 386,
+          "inputFillSha256": "2e8423c406a75f190e06c82e90b5ca359dcd4ff6483cfb2fe17dbbd3fc79c2a6",
+          "inputPatchSha256": "55b1e5e3e8e4173722759f7c0f635ba68798e2196913341a144baebbc68a5ca8",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "a7c234e5376c61aadc0f446fa7acc643f923c66cb65f4362770feaf300bb0f1a",
+          "previousWriterCall": 29,
+          "previousPreparationFill": 29,
+          "outlinePositions": 445,
+          "rotationIndex": 76,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 30,
+          "cdex": 41,
+          "sdex": 1,
+          "form": 59,
+          "frame": {
+            "id": 60,
+            "lx": 155,
+            "rx": 209,
+            "ly": 373,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 393,
+            "form": 59,
+            "value": 30
+          },
+          "background": 0,
+          "returnValue": 393,
+          "inputFillSha256": "2ef9703f195fdd15e04ae0eb9f66298393c5318e424e9bbfd97dadb93efc27b3",
+          "inputPatchSha256": "a7c234e5376c61aadc0f446fa7acc643f923c66cb65f4362770feaf300bb0f1a",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "bd6457a88c7974c43854db52ecf1d01056d5f6ee35604fce56951abae562b923",
+          "previousWriterCall": 30,
+          "previousPreparationFill": 30,
+          "outlinePositions": 262,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 31,
+          "cdex": 40,
+          "sdex": 1,
+          "form": 61,
+          "frame": {
+            "id": 62,
+            "lx": 147,
+            "rx": 245,
+            "ly": 230,
+            "ty": 392
+          },
+          "patchRead": {
+            "calls": 48,
+            "form": 61,
+            "value": 31
+          },
+          "background": 0,
+          "returnValue": 48,
+          "inputFillSha256": "bf134d9aca6c12e45b4cf9eef62eae90b67d567f3ae096bb1ce1833217aebf97",
+          "inputPatchSha256": "bd6457a88c7974c43854db52ecf1d01056d5f6ee35604fce56951abae562b923",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "dffd75f2868862c119053f34f8d9685d24997fe585d91ac695d0ff14eda3acb7",
+          "previousWriterCall": 31,
+          "previousPreparationFill": 31,
+          "outlinePositions": 456,
+          "rotationIndex": 72,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 32,
+          "cdex": 8,
+          "sdex": 1,
+          "form": 63,
+          "frame": {
+            "id": 64,
+            "lx": 163,
+            "rx": 214,
+            "ly": 383,
+            "ty": 457
+          },
+          "patchRead": {
+            "calls": 407,
+            "form": 63,
+            "value": 32
+          },
+          "background": 0,
+          "returnValue": 407,
+          "inputFillSha256": "d7bc500a13f2c06f999ff145ac6e0a2e68531c1774585049a33a0011f62ad996",
+          "inputPatchSha256": "dffd75f2868862c119053f34f8d9685d24997fe585d91ac695d0ff14eda3acb7",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "0d88696dd7e48fd105052c1f336ff866880001843dd9c28da9202b254a0b9d65",
+          "previousWriterCall": 32,
+          "previousPreparationFill": 32,
+          "outlinePositions": 193,
+          "rotationIndex": 64,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 33,
+          "cdex": 43,
+          "sdex": 1,
+          "form": 65,
+          "frame": {
+            "id": 66,
+            "lx": 129,
+            "rx": 246,
+            "ly": 230,
+            "ty": 415
+          },
+          "patchRead": {
+            "calls": 346,
+            "form": 65,
+            "value": 33
+          },
+          "background": 0,
+          "returnValue": 346,
+          "inputFillSha256": "f62b53213f9b20f12d01f1cc1bf0b4400bde5e19d03e1cf11a62d341c105a897",
+          "inputPatchSha256": "0d88696dd7e48fd105052c1f336ff866880001843dd9c28da9202b254a0b9d65",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "c27985e71e83eb606245e9370a3cfe50dbd75f1cfae3ed63c817419e86f32197",
+          "previousWriterCall": 33,
+          "previousPreparationFill": 33,
+          "outlinePositions": 498,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 34,
+          "cdex": 3,
+          "sdex": 1,
+          "form": 67,
+          "frame": {
+            "id": 68,
+            "lx": 161,
+            "rx": 198,
+            "ly": 460,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "0726351e5d83966314e38ca703b51065e40de32882b6b883273dad8388defa2d",
+          "inputPatchSha256": "c27985e71e83eb606245e9370a3cfe50dbd75f1cfae3ed63c817419e86f32197",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "c27985e71e83eb606245e9370a3cfe50dbd75f1cfae3ed63c817419e86f32197",
+          "previousWriterCall": 34,
+          "previousPreparationFill": 34,
+          "outlinePositions": 84,
+          "rotationIndex": 18,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 35,
+          "cdex": 0,
+          "sdex": 1,
+          "form": 69,
+          "frame": {
+            "id": 70,
+            "lx": 108,
+            "rx": 289,
+            "ly": 0,
+            "ty": 287
+          },
+          "patchRead": {
+            "calls": 29185,
+            "form": 69,
+            "value": 35
+          },
+          "background": 0,
+          "returnValue": 29185,
+          "inputFillSha256": "7ee82f44b69e6e0bac6f29eb083540799229c19f6e54801452c1b928438e39c2",
+          "inputPatchSha256": "c27985e71e83eb606245e9370a3cfe50dbd75f1cfae3ed63c817419e86f32197",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "previousWriterCall": 35,
+          "previousPreparationFill": 35,
+          "outlinePositions": 737,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 36,
+          "cdex": 29,
+          "sdex": 1,
+          "form": 71,
+          "frame": {
+            "id": 72,
+            "lx": 111,
+            "rx": 198,
+            "ly": 0,
+            "ty": 265
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "b7332583a9763b15efc542d813faa44342add1c1f1c551e454bb2a90721917b5",
+          "inputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "previousWriterCall": 36,
+          "previousPreparationFill": 36,
+          "outlinePositions": 568,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 37,
+          "cdex": 28,
+          "sdex": 1,
+          "form": 73,
+          "frame": {
+            "id": 74,
+            "lx": 158,
+            "rx": 191,
+            "ly": 0,
+            "ty": 15
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "c15ae080bca97cc02a6829cb3bca8a10146d112e84980d22870d85d61059be6e",
+          "inputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "previousWriterCall": 37,
+          "previousPreparationFill": 37,
+          "outlinePositions": 75,
+          "rotationIndex": 9,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 38,
+          "cdex": 32,
+          "sdex": 1,
+          "form": 75,
+          "frame": {
+            "id": 76,
+            "lx": 167,
+            "rx": 285,
+            "ly": 2,
+            "ty": 258
+          },
+          "patchRead": {
+            "calls": 169,
+            "form": 75,
+            "value": 38
+          },
+          "background": 0,
+          "returnValue": 169,
+          "inputFillSha256": "561fc980587ff25eaec59becbf1acd90841e5d3caae27544c1be256f42dba6f2",
+          "inputPatchSha256": "a0675ba68455c84e6f5658dd878db39b89f1b5bc6bead091c4ea1b7728f76a55",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "16a7134870141e72a1501bf66fefbfed0d40f5be449a37ff893787d12b5875e1",
+          "previousWriterCall": 38,
+          "previousPreparationFill": 38,
+          "outlinePositions": 549,
+          "rotationIndex": 40,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 39,
+          "cdex": 31,
+          "sdex": 1,
+          "form": 77,
+          "frame": {
+            "id": 78,
+            "lx": 259,
+            "rx": 284,
+            "ly": 0,
+            "ty": 27
+          },
+          "patchRead": {
+            "calls": 199,
+            "form": 77,
+            "value": 39
+          },
+          "background": 0,
+          "returnValue": 199,
+          "inputFillSha256": "def3ef3632416f3bd9bf07e6048bb104759279be56222ef383ec53cf781d3107",
+          "inputPatchSha256": "16a7134870141e72a1501bf66fefbfed0d40f5be449a37ff893787d12b5875e1",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "12728d9382743a1ced7d3e00a082faccb5819a8a18d75388951506eac1db0c5e",
+          "previousWriterCall": 39,
+          "previousPreparationFill": 39,
+          "outlinePositions": 90,
+          "rotationIndex": 7,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 40,
+          "cdex": 27,
+          "sdex": 2,
+          "form": 79,
+          "frame": {
+            "id": 80,
+            "lx": 112,
+            "rx": 124,
+            "ly": 442,
+            "ty": 461
+          },
+          "patchRead": {
+            "calls": 113,
+            "form": 79,
+            "value": 40
+          },
+          "background": 0,
+          "returnValue": 113,
+          "inputFillSha256": "db4a506ee2538b580f32715b6a4cbd004f595af319a17efaec3662f02324aaa1",
+          "inputPatchSha256": "12728d9382743a1ced7d3e00a082faccb5819a8a18d75388951506eac1db0c5e",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "cd69694ae7b720dc74d3a98981191b4a8021c38214c7869aea15e1b2dd633623",
+          "previousWriterCall": 40,
+          "previousPreparationFill": 40,
+          "outlinePositions": 45,
+          "rotationIndex": 22,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 41,
+          "cdex": 18,
+          "sdex": 2,
+          "form": 81,
+          "frame": {
+            "id": 82,
+            "lx": 89,
+            "rx": 100,
+            "ly": 451,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 22,
+            "form": 81,
+            "value": 41
+          },
+          "background": 0,
+          "returnValue": 22,
+          "inputFillSha256": "0afb209e99f0a07312d034c57ff791b0f1e1bc6605d19c2e9f212f854fe5ea08",
+          "inputPatchSha256": "cd69694ae7b720dc74d3a98981191b4a8021c38214c7869aea15e1b2dd633623",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "47238dafefb6a439da2106c54bf38e9b7898c94fe9082a61a9d7eda82fc1e45f",
+          "previousWriterCall": 41,
+          "previousPreparationFill": 41,
+          "outlinePositions": 19,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 42,
+          "cdex": 20,
+          "sdex": 2,
+          "form": 83,
+          "frame": {
+            "id": 84,
+            "lx": 90,
+            "rx": 100,
+            "ly": 449,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 15,
+            "form": 83,
+            "value": 42
+          },
+          "background": 0,
+          "returnValue": 15,
+          "inputFillSha256": "83a5861d147e8a1b702e6f4063ab5a46e65cae8fff43ef383a244a227a94daf9",
+          "inputPatchSha256": "47238dafefb6a439da2106c54bf38e9b7898c94fe9082a61a9d7eda82fc1e45f",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "previousWriterCall": 42,
+          "previousPreparationFill": 42,
+          "outlinePositions": 23,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 43,
+          "cdex": 6,
+          "sdex": 2,
+          "form": 85,
+          "frame": {
+            "id": 86,
+            "lx": 93,
+            "rx": 97,
+            "ly": 451,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "813990e7097dea6c936b4649f5bd949eff983daef56f4effb796921b0b089a05",
+          "inputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "previousWriterCall": 43,
+          "previousPreparationFill": 43,
+          "outlinePositions": 5,
+          "rotationIndex": null,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 44,
+          "cdex": 8,
+          "sdex": 2,
+          "form": 87,
+          "frame": {
+            "id": 88,
+            "lx": 92,
+            "rx": 98,
+            "ly": 450,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "f45b08916bf9155adedc8003872773f719aec30233d6281966c6f68267bc6d5a",
+          "inputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "previousWriterCall": 44,
+          "previousPreparationFill": 44,
+          "outlinePositions": 10,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 45,
+          "cdex": 14,
+          "sdex": 2,
+          "form": 89,
+          "frame": {
+            "id": 90,
+            "lx": 89,
+            "rx": 103,
+            "ly": 452,
+            "ty": 460
+          },
+          "patchRead": {
+            "calls": 23,
+            "form": 89,
+            "value": 45
+          },
+          "background": 0,
+          "returnValue": 23,
+          "inputFillSha256": "9bb1940bd9da8e3434546c8fb21d125017f2b1e42365240fb0e939a30cd804c0",
+          "inputPatchSha256": "d7206692b744980f6530c2e3ee75ee242b4dd8a08608cc88d49ffe24ce53e2c1",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "39fc80c60515dbaf77f07c4bf2d248a2370a12c8e097ac9b437566275670f942",
+          "previousWriterCall": 45,
+          "previousPreparationFill": 45,
+          "outlinePositions": 27,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 46,
+          "cdex": 16,
+          "sdex": 2,
+          "form": 91,
+          "frame": {
+            "id": 92,
+            "lx": 90,
+            "rx": 100,
+            "ly": 450,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 1,
+            "form": 91,
+            "value": 46
+          },
+          "background": 0,
+          "returnValue": 1,
+          "inputFillSha256": "0e8e2deaceb67900cba8a188361086b24c894239a441d400e721f667207b8b66",
+          "inputPatchSha256": "39fc80c60515dbaf77f07c4bf2d248a2370a12c8e097ac9b437566275670f942",
+          "outputFillSha256": "339708f314fa26c3ab6038d55934ca8a6aa574616acbe86a3ea5c651c2a0e692",
+          "outputPatchSha256": "681727f84b89460dfb59c75817cae2e4005ec0ec5ae9e17029675f69cee1ba7b",
+          "previousWriterCall": 46,
+          "previousPreparationFill": 46,
+          "outlinePositions": 20,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 47,
+          "cdex": 24,
+          "sdex": 2,
+          "form": 93,
+          "frame": {
+            "id": 94,
+            "lx": 79,
+            "rx": 126,
+            "ly": 447,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 938,
+            "form": 93,
+            "value": 47
+          },
+          "background": 0,
+          "returnValue": 938,
+          "inputFillSha256": "444a38f20d0a06fd3abfe3b7f6c27bcc7034bbf48c225901b7369cc9220dc96e",
+          "inputPatchSha256": "681727f84b89460dfb59c75817cae2e4005ec0ec5ae9e17029675f69cee1ba7b",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "be73d3cb5f95936fca4aea98b8354242e0d0dfc7591847feb664c2f68a46b0bd",
+          "previousWriterCall": 47,
+          "previousPreparationFill": 47,
+          "outlinePositions": 160,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 48,
+          "cdex": 22,
+          "sdex": 2,
+          "form": 95,
+          "frame": {
+            "id": 96,
+            "lx": 87,
+            "rx": 103,
+            "ly": 451,
+            "ty": 460
+          },
+          "patchRead": {
+            "calls": 3,
+            "form": 95,
+            "value": 48
+          },
+          "background": 0,
+          "returnValue": 3,
+          "inputFillSha256": "99f425ef83595729a827ce6809405e2f4271dee2fa03c67d0acfb29e8a5c1f93",
+          "inputPatchSha256": "be73d3cb5f95936fca4aea98b8354242e0d0dfc7591847feb664c2f68a46b0bd",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "5e3394a0fd44cc4b361f176629efc5327aecf9b44d14873435a4fad1ef54b48f",
+          "previousWriterCall": 48,
+          "previousPreparationFill": 48,
+          "outlinePositions": 36,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 49,
+          "cdex": 21,
+          "sdex": 2,
+          "form": 97,
+          "frame": {
+            "id": 98,
+            "lx": 72,
+            "rx": 83,
+            "ly": 451,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 16,
+            "form": 97,
+            "value": 49
+          },
+          "background": 0,
+          "returnValue": 16,
+          "inputFillSha256": "4ffea1c23f196162e64594a3f4473db85706761cc2333fcc2aa5625c43a47903",
+          "inputPatchSha256": "5e3394a0fd44cc4b361f176629efc5327aecf9b44d14873435a4fad1ef54b48f",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "d2f527282cac65a986e54c5374c1e1c267d9f5387402f99f9a9afbeb66e4da34",
+          "previousWriterCall": 49,
+          "previousPreparationFill": 49,
+          "outlinePositions": 21,
+          "rotationIndex": 2,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 50,
+          "cdex": 25,
+          "sdex": 2,
+          "form": 99,
+          "frame": {
+            "id": 100,
+            "lx": 80,
+            "rx": 92,
+            "ly": 437,
+            "ty": 455
+          },
+          "patchRead": {
+            "calls": 71,
+            "form": 99,
+            "value": 50
+          },
+          "background": 0,
+          "returnValue": 71,
+          "inputFillSha256": "5b917b0f0e01941d5675f43fbf4810e86fd500405d387ab352c8f281d888671a",
+          "inputPatchSha256": "d2f527282cac65a986e54c5374c1e1c267d9f5387402f99f9a9afbeb66e4da34",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "c170f692aa5635655c3e6ef4c86692909ccef4159b4089f53a774e6a7136b374",
+          "previousWriterCall": 50,
+          "previousPreparationFill": 50,
+          "outlinePositions": 59,
+          "rotationIndex": 19,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 51,
+          "cdex": 12,
+          "sdex": 2,
+          "form": 101,
+          "frame": {
+            "id": 102,
+            "lx": 82,
+            "rx": 97,
+            "ly": 431,
+            "ty": 437
+          },
+          "patchRead": {
+            "calls": 25,
+            "form": 101,
+            "value": 51
+          },
+          "background": 0,
+          "returnValue": 25,
+          "inputFillSha256": "1380b15034fdb0ca17efd5b1714036a660abae6fd6e5abbf91514085cd71a248",
+          "inputPatchSha256": "c170f692aa5635655c3e6ef4c86692909ccef4159b4089f53a774e6a7136b374",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "2426ddb675b334215b52b8f34078a75af0bbec738b90c3256dc16ab828410317",
+          "previousWriterCall": 51,
+          "previousPreparationFill": 51,
+          "outlinePositions": 32,
+          "rotationIndex": 5,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 52,
+          "cdex": 11,
+          "sdex": 2,
+          "form": 103,
+          "frame": {
+            "id": 104,
+            "lx": 82,
+            "rx": 97,
+            "ly": 431,
+            "ty": 436
+          },
+          "patchRead": {
+            "calls": 10,
+            "form": 103,
+            "value": 52
+          },
+          "background": 0,
+          "returnValue": 10,
+          "inputFillSha256": "b65a4145f4793f07598359bed42b8b22f059ae4609939f8685ffacf0fa032a44",
+          "inputPatchSha256": "2426ddb675b334215b52b8f34078a75af0bbec738b90c3256dc16ab828410317",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "dbc4f8e41050d6348819557000747f003f421d6d3cee7944e7a3bcf19305809d",
+          "previousWriterCall": 52,
+          "previousPreparationFill": 52,
+          "outlinePositions": 27,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 53,
+          "cdex": 17,
+          "sdex": 2,
+          "form": 105,
+          "frame": {
+            "id": 106,
+            "lx": 75,
+            "rx": 83,
+            "ly": 447,
+            "ty": 454
+          },
+          "patchRead": {
+            "calls": 16,
+            "form": 105,
+            "value": 53
+          },
+          "background": 0,
+          "returnValue": 16,
+          "inputFillSha256": "19d1e4a127386a38fb089a848c5180478b7e3c3639ff33975582f9e29ff79825",
+          "inputPatchSha256": "dbc4f8e41050d6348819557000747f003f421d6d3cee7944e7a3bcf19305809d",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "0a8d9eada6962d723f4d4c4b70430c7296ab3bdeff2fb9326aaacc7a8c72aece",
+          "previousWriterCall": 53,
+          "previousPreparationFill": 53,
+          "outlinePositions": 18,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 54,
+          "cdex": 19,
+          "sdex": 2,
+          "form": 107,
+          "frame": {
+            "id": 108,
+            "lx": 75,
+            "rx": 83,
+            "ly": 446,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 13,
+            "form": 107,
+            "value": 54
+          },
+          "background": 0,
+          "returnValue": 13,
+          "inputFillSha256": "8da4b6d421c5030026dedcb134c04d5dbda37bfc6ae82ee5923726c001ecd883",
+          "inputPatchSha256": "0a8d9eada6962d723f4d4c4b70430c7296ab3bdeff2fb9326aaacc7a8c72aece",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "3f8830e6c6d0807f93cde55f50f4794eea4cce4bc08ad82d13572aed2827e3f2",
+          "previousWriterCall": 54,
+          "previousPreparationFill": 54,
+          "outlinePositions": 19,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 55,
+          "cdex": 5,
+          "sdex": 2,
+          "form": 109,
+          "frame": {
+            "id": 110,
+            "lx": 77,
+            "rx": 81,
+            "ly": 448,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "dd3bbef1be42c737e368603e081b6db35debd04581f3bf8b0512b67439b76414",
+          "inputPatchSha256": "3f8830e6c6d0807f93cde55f50f4794eea4cce4bc08ad82d13572aed2827e3f2",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "3f8830e6c6d0807f93cde55f50f4794eea4cce4bc08ad82d13572aed2827e3f2",
+          "previousWriterCall": 55,
+          "previousPreparationFill": 55,
+          "outlinePositions": 5,
+          "rotationIndex": null,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 56,
+          "cdex": 7,
+          "sdex": 2,
+          "form": 111,
+          "frame": {
+            "id": 112,
+            "lx": 76,
+            "rx": 82,
+            "ly": 447,
+            "ty": 453
+          },
+          "patchRead": {
+            "calls": 1,
+            "form": 111,
+            "value": 56
+          },
+          "background": 0,
+          "returnValue": 1,
+          "inputFillSha256": "7321ac683cf7676c62561356ceea7d782f7f98edde35b40ae76b6c2a69f7580a",
+          "inputPatchSha256": "3f8830e6c6d0807f93cde55f50f4794eea4cce4bc08ad82d13572aed2827e3f2",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "00b79de07c286718899d27fa908bcfe788876710ecaa5df9dbd6c615a0460bd7",
+          "previousWriterCall": 56,
+          "previousPreparationFill": 56,
+          "outlinePositions": 12,
+          "rotationIndex": 10,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 57,
+          "cdex": 13,
+          "sdex": 2,
+          "form": 113,
+          "frame": {
+            "id": 114,
+            "lx": 72,
+            "rx": 84,
+            "ly": 449,
+            "ty": 456
+          },
+          "patchRead": {
+            "calls": 11,
+            "form": 113,
+            "value": 57
+          },
+          "background": 0,
+          "returnValue": 11,
+          "inputFillSha256": "555fe3f81dd7c9de8ddac647ee095cabe9ede16973c1fb1fb042aef4a0119aa0",
+          "inputPatchSha256": "00b79de07c286718899d27fa908bcfe788876710ecaa5df9dbd6c615a0460bd7",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "2c1ff113b3714293ed34e8b93d8aa883e924a70a2a7e1014da136910158bd137",
+          "previousWriterCall": 57,
+          "previousPreparationFill": 57,
+          "outlinePositions": 27,
+          "rotationIndex": 8,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 58,
+          "cdex": 15,
+          "sdex": 2,
+          "form": 115,
+          "frame": {
+            "id": 116,
+            "lx": 75,
+            "rx": 83,
+            "ly": 446,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "6af20c1a523aa47dc157adbafdc39b6909697794de03848bbd3e74bfb3c8f3d2",
+          "inputPatchSha256": "2c1ff113b3714293ed34e8b93d8aa883e924a70a2a7e1014da136910158bd137",
+          "outputFillSha256": "1c223a7c4e7f74256965f84d8994d4a59f268a10c4a600fcc25eda35fd411d72",
+          "outputPatchSha256": "2c1ff113b3714293ed34e8b93d8aa883e924a70a2a7e1014da136910158bd137",
+          "previousWriterCall": 58,
+          "previousPreparationFill": 58,
+          "outlinePositions": 17,
+          "rotationIndex": 6,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 59,
+          "cdex": 23,
+          "sdex": 2,
+          "form": 117,
+          "frame": {
+            "id": 118,
+            "lx": 67,
+            "rx": 87,
+            "ly": 444,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 299,
+            "form": 117,
+            "value": 59
+          },
+          "background": 0,
+          "returnValue": 299,
+          "inputFillSha256": "b1778f25b0dfadd209cb974502597f5404ed686de6d933ba8044354a028f5ee2",
+          "inputPatchSha256": "2c1ff113b3714293ed34e8b93d8aa883e924a70a2a7e1014da136910158bd137",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "98bbbfb64113fea6d5b3f07e5612878bd0838906c5e5d6f1026161306998751d",
+          "previousWriterCall": 59,
+          "previousPreparationFill": 59,
+          "outlinePositions": 92,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 60,
+          "cdex": 43,
+          "sdex": 2,
+          "form": 119,
+          "frame": {
+            "id": 120,
+            "lx": 68,
+            "rx": 124,
+            "ly": 422,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 832,
+            "form": 119,
+            "value": 60
+          },
+          "background": 0,
+          "returnValue": 832,
+          "inputFillSha256": "b67f4e4b3a4ade3c7fbdc861704405e76d3b1d836045c68ec1ab1d35e0160477",
+          "inputPatchSha256": "98bbbfb64113fea6d5b3f07e5612878bd0838906c5e5d6f1026161306998751d",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "80bdf35adbe322dac2ce64b4cfa72100d9c71bb1507cf7a6f43c60413b6720f2",
+          "previousWriterCall": 60,
+          "previousPreparationFill": 60,
+          "outlinePositions": 185,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 61,
+          "cdex": 38,
+          "sdex": 2,
+          "form": 121,
+          "frame": {
+            "id": 122,
+            "lx": 88,
+            "rx": 104,
+            "ly": 330,
+            "ty": 398
+          },
+          "patchRead": {
+            "calls": 380,
+            "form": 121,
+            "value": 61
+          },
+          "background": 0,
+          "returnValue": 380,
+          "inputFillSha256": "385214e0361c3b33978de0941963ee8f313d1baada653bd1329f71a38ecc3913",
+          "inputPatchSha256": "80bdf35adbe322dac2ce64b4cfa72100d9c71bb1507cf7a6f43c60413b6720f2",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "21bd307f0d8d93a23266b89e3ac22e745309cf9d6a881a7393269b06e5bb2c69",
+          "previousWriterCall": 61,
+          "previousPreparationFill": 61,
+          "outlinePositions": 141,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 62,
+          "cdex": 37,
+          "sdex": 2,
+          "form": 123,
+          "frame": {
+            "id": 124,
+            "lx": 69,
+            "rx": 101,
+            "ly": 390,
+            "ty": 423
+          },
+          "patchRead": {
+            "calls": 490,
+            "form": 123,
+            "value": 62
+          },
+          "background": 0,
+          "returnValue": 490,
+          "inputFillSha256": "c07cff59b3f67fd319c059d559bf1c5e61d42aceab0cf05ddb4acacec167bb7a",
+          "inputPatchSha256": "21bd307f0d8d93a23266b89e3ac22e745309cf9d6a881a7393269b06e5bb2c69",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "1aa43e74b05057edacb535426df35a6cad9bf4bad6a4571daa7c033edf719004",
+          "previousWriterCall": 62,
+          "previousPreparationFill": 62,
+          "outlinePositions": 140,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 63,
+          "cdex": 39,
+          "sdex": 2,
+          "form": 125,
+          "frame": {
+            "id": 126,
+            "lx": 89,
+            "rx": 136,
+            "ly": 330,
+            "ty": 418
+          },
+          "patchRead": {
+            "calls": 656,
+            "form": 125,
+            "value": 63
+          },
+          "background": 0,
+          "returnValue": 656,
+          "inputFillSha256": "b4aa9257c088a9f01d2543a2b3206ec8ae88bc78e9164f29830f04b41be60c85",
+          "inputPatchSha256": "1aa43e74b05057edacb535426df35a6cad9bf4bad6a4571daa7c033edf719004",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "733adb9700c280d1926d8f09b274c0a747e65410d170cc7c092da090cef5b88c",
+          "previousWriterCall": 63,
+          "previousPreparationFill": 63,
+          "outlinePositions": 201,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 64,
+          "cdex": 34,
+          "sdex": 2,
+          "form": 127,
+          "frame": {
+            "id": 128,
+            "lx": 71,
+            "rx": 102,
+            "ly": 257,
+            "ty": 290
+          },
+          "patchRead": {
+            "calls": 2,
+            "form": 127,
+            "value": 64
+          },
+          "background": 0,
+          "returnValue": 2,
+          "inputFillSha256": "26d77eb7618f8c56982ab3fe930e19a3bbe4e776dbaba1156a5a3c801afd8c89",
+          "inputPatchSha256": "733adb9700c280d1926d8f09b274c0a747e65410d170cc7c092da090cef5b88c",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "6d75bae0a600793880813f189298677d382c02ab1aacb330ecfe4920d0004f45",
+          "previousWriterCall": 64,
+          "previousPreparationFill": 64,
+          "outlinePositions": 113,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 65,
+          "cdex": 35,
+          "sdex": 2,
+          "form": 129,
+          "frame": {
+            "id": 130,
+            "lx": 62,
+            "rx": 86,
+            "ly": 285,
+            "ty": 355
+          },
+          "patchRead": {
+            "calls": 403,
+            "form": 129,
+            "value": 65
+          },
+          "background": 0,
+          "returnValue": 403,
+          "inputFillSha256": "ed3ef7b7fe047907d6acb0a115ed8c89b51ca7e66b1b412838eadb1a2cad11ad",
+          "inputPatchSha256": "6d75bae0a600793880813f189298677d382c02ab1aacb330ecfe4920d0004f45",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "71c296b063a19e08c2b6282c176032914ebcc4ac4a8716e5abaca1ac788fd91d",
+          "previousWriterCall": 65,
+          "previousPreparationFill": 65,
+          "outlinePositions": 159,
+          "rotationIndex": 70,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 66,
+          "cdex": 36,
+          "sdex": 2,
+          "form": 131,
+          "frame": {
+            "id": 132,
+            "lx": 49,
+            "rx": 77,
+            "ly": 348,
+            "ty": 425
+          },
+          "patchRead": {
+            "calls": 1032,
+            "form": 131,
+            "value": 66
+          },
+          "background": 0,
+          "returnValue": 1032,
+          "inputFillSha256": "e4dac55a5ed9e0be8f279658800c7d86cd32a3bce2c318bf34a434b672a92462",
+          "inputPatchSha256": "71c296b063a19e08c2b6282c176032914ebcc4ac4a8716e5abaca1ac788fd91d",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "244eebfe99fc8791530be69b2aaf85039d1974420526c14dc89f306e2f42d7ac",
+          "previousWriterCall": 66,
+          "previousPreparationFill": 66,
+          "outlinePositions": 174,
+          "rotationIndex": 40,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 67,
+          "cdex": 2,
+          "sdex": 2,
+          "form": 133,
+          "frame": {
+            "id": 134,
+            "lx": 56,
+            "rx": 138,
+            "ly": 290,
+            "ty": 432
+          },
+          "patchRead": {
+            "calls": 3168,
+            "form": 133,
+            "value": 67
+          },
+          "background": 0,
+          "returnValue": 3168,
+          "inputFillSha256": "9d3609a716add1b06d62a2c8591fdd1fb21f11d577e04b2f7f424ba5cfc98f14",
+          "inputPatchSha256": "244eebfe99fc8791530be69b2aaf85039d1974420526c14dc89f306e2f42d7ac",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "713b047c2c7795f9a282866cbdfcc05fed042597586866f6481345cb711c0ffe",
+          "previousWriterCall": 67,
+          "previousPreparationFill": 67,
+          "outlinePositions": 413,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 68,
+          "cdex": 3,
+          "sdex": 2,
+          "form": 135,
+          "frame": {
+            "id": 136,
+            "lx": 55,
+            "rx": 134,
+            "ly": 294,
+            "ty": 424
+          },
+          "patchRead": {
+            "calls": 74,
+            "form": 135,
+            "value": 68
+          },
+          "background": 0,
+          "returnValue": 74,
+          "inputFillSha256": "ea2017e71453c62efaa3e48f61112707958ff8d6e3cfc187098036780ab8069a",
+          "inputPatchSha256": "713b047c2c7795f9a282866cbdfcc05fed042597586866f6481345cb711c0ffe",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "5399d488714cdb8bd6b8e42872dc5618184514dabef0cbb91a672567309f00a6",
+          "previousWriterCall": 68,
+          "previousPreparationFill": 68,
+          "outlinePositions": 332,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 69,
+          "cdex": 42,
+          "sdex": 2,
+          "form": 137,
+          "frame": {
+            "id": 138,
+            "lx": 79,
+            "rx": 117,
+            "ly": 406,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 170,
+            "form": 137,
+            "value": 69
+          },
+          "background": 0,
+          "returnValue": 170,
+          "inputFillSha256": "ea3c4f20eb35b68b27726a56caad20d10b211b9902f5d8548ae6b9cdbeecc962",
+          "inputPatchSha256": "5399d488714cdb8bd6b8e42872dc5618184514dabef0cbb91a672567309f00a6",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "e4798cb4ab02131b6988b5eb5861f03c11c823cf381dbcc4b72b291984fa77c4",
+          "previousWriterCall": 69,
+          "previousPreparationFill": 69,
+          "outlinePositions": 182,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 70,
+          "cdex": 41,
+          "sdex": 2,
+          "form": 139,
+          "frame": {
+            "id": 140,
+            "lx": 62,
+            "rx": 125,
+            "ly": 291,
+            "ty": 421
+          },
+          "patchRead": {
+            "calls": 14,
+            "form": 139,
+            "value": 70
+          },
+          "background": 0,
+          "returnValue": 14,
+          "inputFillSha256": "5c738aca3165db8bfb9845e69febe9be688c53db6538ed9a8d4858f3fd48e1ca",
+          "inputPatchSha256": "e4798cb4ab02131b6988b5eb5861f03c11c823cf381dbcc4b72b291984fa77c4",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "f547937faaddcaf1cc93c71ee39d50c781fec4b6b6ce8d5b6fc6ea329d88057b",
+          "previousWriterCall": 70,
+          "previousPreparationFill": 70,
+          "outlinePositions": 340,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 71,
+          "cdex": 9,
+          "sdex": 2,
+          "form": 141,
+          "frame": {
+            "id": 142,
+            "lx": 83,
+            "rx": 109,
+            "ly": 413,
+            "ty": 452
+          },
+          "patchRead": {
+            "calls": 85,
+            "form": 141,
+            "value": 71
+          },
+          "background": 0,
+          "returnValue": 85,
+          "inputFillSha256": "d6f90cdf644ac02f6bf1b6c32f1e8f8378d4a7d885706808f446455a8259059b",
+          "inputPatchSha256": "f547937faaddcaf1cc93c71ee39d50c781fec4b6b6ce8d5b6fc6ea329d88057b",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "9a5f132ab656bf13fd5807fbfe8dd6db8e15b932f32aeac42f85dedb325a9e02",
+          "previousWriterCall": 71,
+          "previousPreparationFill": 71,
+          "outlinePositions": 102,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 72,
+          "cdex": 44,
+          "sdex": 2,
+          "form": 143,
+          "frame": {
+            "id": 144,
+            "lx": 60,
+            "rx": 136,
+            "ly": 291,
+            "ty": 440
+          },
+          "patchRead": {
+            "calls": 127,
+            "form": 143,
+            "value": 72
+          },
+          "background": 0,
+          "returnValue": 127,
+          "inputFillSha256": "5e976ac1d6437ec99ab18a64b36ac23b8f570727857176a9bace8de33dca02af",
+          "inputPatchSha256": "9a5f132ab656bf13fd5807fbfe8dd6db8e15b932f32aeac42f85dedb325a9e02",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "307384bc48a928a71cd70a8da98cb5eda2d826ef3ddaa75c6f652285ecfef495",
+          "previousWriterCall": 72,
+          "previousPreparationFill": 72,
+          "outlinePositions": 373,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 73,
+          "cdex": 4,
+          "sdex": 2,
+          "form": 145,
+          "frame": {
+            "id": 146,
+            "lx": 75,
+            "rx": 93,
+            "ly": 447,
+            "ty": 479
+          },
+          "patchRead": {
+            "calls": 0,
+            "form": 0,
+            "value": null
+          },
+          "background": 0,
+          "returnValue": 0,
+          "inputFillSha256": "c487ebd5f6f8e578c3c027582e9cc5f6e6b7c21c650ca9793e33a6abba0ead21",
+          "inputPatchSha256": "307384bc48a928a71cd70a8da98cb5eda2d826ef3ddaa75c6f652285ecfef495",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "307384bc48a928a71cd70a8da98cb5eda2d826ef3ddaa75c6f652285ecfef495",
+          "previousWriterCall": 73,
+          "previousPreparationFill": 73,
+          "outlinePositions": 80,
+          "rotationIndex": 24,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 74,
+          "cdex": 1,
+          "sdex": 2,
+          "form": 147,
+          "frame": {
+            "id": 148,
+            "lx": 86,
+            "rx": 143,
+            "ly": 206,
+            "ty": 332
+          },
+          "patchRead": {
+            "calls": 2280,
+            "form": 147,
+            "value": 74
+          },
+          "background": 0,
+          "returnValue": 2280,
+          "inputFillSha256": "879f11ef3fa9f6552cb65cbc323db8756f5bc4814df382da115ba267a78eefb3",
+          "inputPatchSha256": "307384bc48a928a71cd70a8da98cb5eda2d826ef3ddaa75c6f652285ecfef495",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "8cdb4ec39e2cb4d60d7632880e21b9d6c7b6c9851042ad80a06e0e34be9d8bb5",
+          "previousWriterCall": 74,
+          "previousPreparationFill": 74,
+          "outlinePositions": 299,
+          "rotationIndex": 67,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 75,
+          "cdex": 33,
+          "sdex": 2,
+          "form": 149,
+          "frame": {
+            "id": 150,
+            "lx": 97,
+            "rx": 142,
+            "ly": 159,
+            "ty": 320
+          },
+          "patchRead": {
+            "calls": 529,
+            "form": 149,
+            "value": 75
+          },
+          "background": 0,
+          "returnValue": 529,
+          "inputFillSha256": "ab1af5f0f901e22d0b57fa8b47b3807f572b0bc4946fc1b01e1a5057cffe9796",
+          "inputPatchSha256": "8cdb4ec39e2cb4d60d7632880e21b9d6c7b6c9851042ad80a06e0e34be9d8bb5",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "176d700509edf04e38c12bcbc78df5c25aa3d9b8095b5c25c26c20f0c69d0290",
+          "previousWriterCall": 75,
+          "previousPreparationFill": 75,
+          "outlinePositions": 341,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 76,
+          "cdex": 31,
+          "sdex": 2,
+          "form": 151,
+          "frame": {
+            "id": 152,
+            "lx": 92,
+            "rx": 117,
+            "ly": 23,
+            "ty": 64
+          },
+          "patchRead": {
+            "calls": 530,
+            "form": 151,
+            "value": 76
+          },
+          "background": 0,
+          "returnValue": 530,
+          "inputFillSha256": "9423f9cc28075f1f12a875d2e382512227fcade46d4beb2049a62754fa9421e3",
+          "inputPatchSha256": "176d700509edf04e38c12bcbc78df5c25aa3d9b8095b5c25c26c20f0c69d0290",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "079b0e8f449b4d621b8fde70edc2a5971164c4af488dfd87ab5dfb0d6ffa585e",
+          "previousWriterCall": 76,
+          "previousPreparationFill": 76,
+          "outlinePositions": 114,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 77,
+          "cdex": 32,
+          "sdex": 2,
+          "form": 153,
+          "frame": {
+            "id": 154,
+            "lx": 97,
+            "rx": 123,
+            "ly": 47,
+            "ty": 169
+          },
+          "patchRead": {
+            "calls": 1763,
+            "form": 153,
+            "value": 77
+          },
+          "background": 0,
+          "returnValue": 1763,
+          "inputFillSha256": "6320a8dc3d91cc797c4a1699213ae33508f944b6386ea86451ce445f0933cf66",
+          "inputPatchSha256": "079b0e8f449b4d621b8fde70edc2a5971164c4af488dfd87ab5dfb0d6ffa585e",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "a3390b94301280a3f51c9ae7a8d71a0d80b518906ba8f08a4e73ff789dc01b44",
+          "previousWriterCall": 77,
+          "previousPreparationFill": 77,
+          "outlinePositions": 253,
+          "rotationIndex": 4,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 78,
+          "cdex": 0,
+          "sdex": 2,
+          "form": 155,
+          "frame": {
+            "id": 156,
+            "lx": 49,
+            "rx": 129,
+            "ly": 207,
+            "ty": 332
+          },
+          "patchRead": {
+            "calls": 1747,
+            "form": 155,
+            "value": 78
+          },
+          "background": 0,
+          "returnValue": 1747,
+          "inputFillSha256": "bc15c70406d46eac0abf7c3251b2db0d63a3e7909d3b94d0203cf8fd6ae83c1d",
+          "inputPatchSha256": "a3390b94301280a3f51c9ae7a8d71a0d80b518906ba8f08a4e73ff789dc01b44",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "a60cb64fcca4f26b0bfe2bd32e56c7420fd14328bf4582c860dcbb09ee2ff86d",
+          "previousWriterCall": 78,
+          "previousPreparationFill": 78,
+          "outlinePositions": 320,
+          "rotationIndex": 49,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 79,
+          "cdex": 30,
+          "sdex": 2,
+          "form": 157,
+          "frame": {
+            "id": 158,
+            "lx": 44,
+            "rx": 115,
+            "ly": 161,
+            "ty": 315
+          },
+          "patchRead": {
+            "calls": 902,
+            "form": 157,
+            "value": 79
+          },
+          "background": 0,
+          "returnValue": 902,
+          "inputFillSha256": "f0763aa2f60bd0bc303617386e06b1f59dafc381485597abffaeee34c989d336",
+          "inputPatchSha256": "a60cb64fcca4f26b0bfe2bd32e56c7420fd14328bf4582c860dcbb09ee2ff86d",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "e0cacb2b28792ad2fd0fa5331db531feff4ad8b3d4bead5a6ca7cf703c7bfbf1",
+          "previousWriterCall": 79,
+          "previousPreparationFill": 79,
+          "outlinePositions": 344,
+          "rotationIndex": 3,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 80,
+          "cdex": 28,
+          "sdex": 2,
+          "form": 159,
+          "frame": {
+            "id": 160,
+            "lx": 27,
+            "rx": 56,
+            "ly": 35,
+            "ty": 68
+          },
+          "patchRead": {
+            "calls": 487,
+            "form": 159,
+            "value": 80
+          },
+          "background": 0,
+          "returnValue": 487,
+          "inputFillSha256": "45ee73087c8a19b5eea9284de12c7e8f808b8a338218b730258b4899074e5053",
+          "inputPatchSha256": "e0cacb2b28792ad2fd0fa5331db531feff4ad8b3d4bead5a6ca7cf703c7bfbf1",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "eecbd48a7a8333913decfc12872a641137c363689aa087dfa88a7e5052bf7389",
+          "previousWriterCall": 80,
+          "previousPreparationFill": 80,
+          "outlinePositions": 86,
+          "rotationIndex": 1,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 81,
+          "cdex": 29,
+          "sdex": 2,
+          "form": 161,
+          "frame": {
+            "id": 162,
+            "lx": 38,
+            "rx": 63,
+            "ly": 53,
+            "ty": 175
+          },
+          "patchRead": {
+            "calls": 1492,
+            "form": 161,
+            "value": 81
+          },
+          "background": 0,
+          "returnValue": 1492,
+          "inputFillSha256": "07bc2484ebc454a58aa82dba53edd60ddaa20bca151aade58909976e843a36ac",
+          "inputPatchSha256": "eecbd48a7a8333913decfc12872a641137c363689aa087dfa88a7e5052bf7389",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "5a8044d7312b0d4bc21ff6c6f65ab19cb28f35d0e2683379cfe6c33f325e9249",
+          "previousWriterCall": 81,
+          "previousPreparationFill": 81,
+          "outlinePositions": 253,
+          "rotationIndex": 9,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        },
+        {
+          "id": 82,
+          "cdex": 0,
+          "sdex": 0,
+          "form": 163,
+          "frame": {
+            "id": 164,
+            "lx": 26,
+            "rx": 294,
+            "ly": 150,
+            "ty": 435
+          },
+          "patchRead": {
+            "calls": 21220,
+            "form": 163,
+            "value": 82
+          },
+          "background": 0,
+          "returnValue": 21220,
+          "inputFillSha256": "a7f8c01e3913c793f87abe737afc2b23a5d58cf0bda1e3ff759d8ac0b5602acf",
+          "inputPatchSha256": "5a8044d7312b0d4bc21ff6c6f65ab19cb28f35d0e2683379cfe6c33f325e9249",
+          "outputFillSha256": "f07c69f63e560e5d682f7afcdf4de4c0819b07a68a4faa49d8b3be9ec4febeec",
+          "outputPatchSha256": "358b81e1dc3430c709241c3a4f7ef145e1077e850b6064cf87629b255af74ca4",
+          "previousWriterCall": 82,
+          "previousPreparationFill": 82,
+          "outlinePositions": 1089,
+          "rotationIndex": 281,
+          "allOutputCellsEqual": true,
+          "composedOutputCellsEqual": true
+        }
+      ],
+      "previousBoundary": {
+        "runId": "boundary-map-20261005-h",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": "13431cf36376d6542a2b3b6109848279f880b5abedc963abcada6061ec3a66ca",
+        "probeOutputNames": [
+          "aaron-boundary-map.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T10:50:17.1843336+00:00",
+        "finishedAt": "2026-10-05T10:53:45.1586187+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "ac97b8a3e907126db191ae88668cb15bdc9b34323f493b1f0c79bc715ae47d13",
+        "rawReportSha256": "efff154437cec5602e51f4004c67294ff48294209c25c221336016f2626ebfed"
+      },
+      "previousPreparation": {
+        "runId": "fill-preparation-20261005-g",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "preSceneProbeSha256": "7001710d153fcca890def9b76ebeb66d31b86598a6af00dfb5e0cc806b59c3df",
+        "probeOutputNames": [
+          "aaron-fill-preparation.txt"
+        ],
+        "preSceneProbePauseSeconds": 0,
+        "complete": true,
+        "startedAt": "2026-10-05T09:28:36.0919191+00:00",
+        "finishedAt": "2026-10-05T09:29:45.4434432+00:00",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "summarySha256": "1694d804c706f55313fa5d3ec567afeab5d8c2c90694b42212dc3eee3f2594e2",
+        "rawReportSha256": "a621fa548c2367f82610c86937774e1888a7c0a558cb2a20d67bdc99683270fa"
+      }
+    }
+  ],
+  "excludedDiagnostic": {
+    "run": {
+      "runId": "cform-post-fill-seed1234-20261005-a",
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "preSceneProbeSha256": "35bdf56db15a2e0495a1e01d0ace06a8de8690e01cf48c64ff36ce457f293046",
+      "probeOutputNames": [
+        "aaron-cform-post-fill.txt"
+      ],
+      "preSceneProbePauseSeconds": 0,
+      "complete": true,
+      "startedAt": "2026-10-05T17:15:00.8590332+00:00",
+      "finishedAt": "2026-10-05T17:15:27.6343532+00:00",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "summarySha256": "b7294d8a3dfc5904749b8ae33b9ca116c25a1341b622e8fb3d4eb6ce5870394b"
+    },
+    "rawReportSha256": "9e0f29db92d63bae5c2cdc7783add482572b568f69d14352fedeb5ebe5b22f9b",
+    "sourceSha256": "35bdf56db15a2e0495a1e01d0ace06a8de8690e01cf48c64ff36ce457f293046",
+    "completeCounters": {
+      "main": {
+        "kind": "keyword",
+        "name": "NORMAL"
+      },
+      "calls": {
+        "kind": "number",
+        "raw": "67",
+        "value": 67
+      },
+      "objects": {
+        "kind": "number",
+        "raw": "134",
+        "value": 134
+      },
+      "checks": {
+        "kind": "number",
+        "raw": "134",
+        "value": 134
+      },
+      "readers": {
+        "kind": "number",
+        "raw": "143475",
+        "value": 143475
+      },
+      "cells": {
+        "kind": "number",
+        "raw": "0",
+        "value": 0
+      },
+      "runs": {
+        "kind": "number",
+        "raw": "0",
+        "value": 0
+      },
+      "errors": {
+        "kind": "number",
+        "raw": "67",
+        "value": 67
+      },
+      "aborts": {
+        "kind": "number",
+        "raw": "0",
+        "value": 0
+      },
+      "overflow": null,
+      "active": null
+    },
+    "aa0ByteIdentical": true,
+    "sceneReportByteIdentical": true,
+    "reason": "Source review: helper-local SETF GETF of absent cache keys prepended fields only to its local context binding; outer AFTER saw missing maps. V2 initializes every cache key in the shared context. V1 map records are incomplete despite unchanged drawing/scene bytes."
+  },
+  "limitations": [
+    "Observed BACKGND and target fill/patch domains are retained; other values, malformed frames, invalid coordinates and original error behavior are not characterized.",
+    "Zero PATCHDEX-call cases do not measure the target label. Their accepted-cell count is zero; the comparison uses an arbitrary unused label and never presents it as an original read.",
+    "Map identities and complete cell outputs match; copied previews cover observation extraction, not all original function RNG behavior or every possible application side effect.",
+    "The composed pipeline links separate complete captures with identical outputs. Original writer-entry fill maps, point lists, frames and POST-FILL-entry patch maps remain inputs; this is not an integrated original MY-FILL caller proof.",
+    "Value-3 provenance, brush painting and the remaining BRUSH-FILL row branches remain separate investigations."
+  ]
+}

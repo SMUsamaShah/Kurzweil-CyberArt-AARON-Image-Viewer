@@ -8,6 +8,25 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+CFORM POST-FILL matches all 149 natural calls and 45,772,800 complete output
+map cells. It clears positive fill cells in [LX,RX)×[LY,TY), assigns the form
+patch where PATCH-MAP equals BACKGND, and returns the accepted count.
+Target fill0/1/2 and BACKGND0 are measured; excluded RX/TY positives and all
+outside cells are preserved. The outline/list/median/start/strategy/post
+composition matches 35,905 outline positions, 22,886,400 full entry fill cells
+and every output cell. Read [the CFORM findings](introspection/cform-post-fill.md)
+and [portable evidence](introspection/evidence/cform-post-fill-parity-20261005.json).
+Some zero-count calls have no PATCHDEX read; do not invent their original label.
+Frozen v2 roots: cform-post-fill-seed1234-20261005-c / seed5678-20261005-e;
+fresh controls -d / -f. V1 preserved output but lacked shared GETF cache fields,
+giving 67 AFTER errors and zero map cells; it is excluded. Exact earlier native
+method bytes and the new canonical external REA record are revalidated.
+Continue with natural BRUSH-STROKE value-3 provenance, then the complete
+BRUSH-FILL schedule/iris branch and subpart painting. Existing outlines/maps,
+frames and plan construction remain original inputs.
+
+### Previous BRUSH-FILL preparation checkpoint
+
 BRUSH-FILL preparation now selects SCRIPT(MPLAN)[SDEX].CFLIST[CDEX], uses its
 naturally returned CFRAME/PATCHDEX, starts the first scan at TY and derives
 MAX = 5*((RX-LX)+(TY-LY)). All 134 initial rows, 138 form selections, 5,805
