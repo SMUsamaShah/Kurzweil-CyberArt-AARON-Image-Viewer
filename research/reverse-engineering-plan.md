@@ -48,13 +48,15 @@ complete equivalent port until phases 5–8 are recovered.
 ## Active execution order
 
 The current function checkpoint is
-[boundary-map production](introspection/boundary-map.md): 149 list writes,
-70 inclusive frame clears and 33,638,400 full-map output cell comparisons
-across two controlled scenes. The CFORM writer/median/start/strategy
-composition matches all 149 cases. The SUBFORM POST-FILL count writer and
-its captured map rule are also recovered. Initial SUBFORM maps, CFORM
-POST-FILL, frame/outline construction and the integrated drawing caller
-remain next boundaries. These measured scopes supersede the older open
+[SUBFORM boundary construction](introspection/subform-boundary.md): PATCH-EDGE
+outlines, LIST-FRAME bounds and a composed fill match all 278 natural cases
+and 85,401,600 complete output-map cell comparisons across two scenes. Both
+existing maps are preserved upstream through outline/frame construction.
+Original scan-row inputs and earlier map history remain required; SCAN-ROW,
+NEIGHBORS, CFORM POST-FILL and the integrated drawing caller are next
+boundaries. The previous [boundary-map helpers](introspection/boundary-map.md)
+still cover 149 list writes, 70 inclusive clears and 33,638,400 complete output
+cells; all 149 CFORM preparation compositions match. These measured scopes supersede the older open
 selector, count and boundary-helper items in the phase table; the generative
 core remains incomplete.
 

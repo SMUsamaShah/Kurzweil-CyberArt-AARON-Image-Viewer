@@ -167,8 +167,9 @@ matches all 278 captured original calls and 1,130,814 output map cells in two
 controlled paintings, given their complete frame/map regions and naturally
 read target ID/count. Only fill values 0/1 and FLAG-BIT 32768 are directly
 compared; its native value-2 conversion remains inferred. The helper returns
-the new count and remaining-count result. Scene planning, SUBFORM map production and
-the integrated BRUSH-FILL caller remain upstream work. See
+the new count and remaining-count result. The SUBFORM composition below now
+builds its outline/frame; earlier map history, scene planning and the integrated
+BRUSH-FILL caller remain upstream work. See
 [`../research/introspection/post-fill-count.md`](../research/introspection/post-fill-count.md).
 
 `aaron-fill-preparation.js` supplies three independent helpers: median rounding
@@ -178,8 +179,8 @@ calls per helper and 1,883,204
 output cell comparisons summed over per-call captured regions match across
 two controlled paintings. The scan toggles bit 0 and preserves value 2.
 Original integer frames and ordered VISPT/TRIPT coordinates remain inputs.
-The CFORM writer is now composed with these helpers below; SUBFORM initial
-boundary maps, scene construction and
+The CFORM writer and SUBFORM boundary builders are now composed with these
+helpers below; earlier map state, scene construction and
 the integrated MY-FILL/BRUSH-FILL caller remain open. See
 [`../research/introspection/fill-preparation.md`](../research/introspection/fill-preparation.md).
 
@@ -195,9 +196,23 @@ point; that skip branch is native interpretation.
 Composing the writer with medians, start selection and strategy matches all
 149 CFORM cases and 1,295,917 strategy-region cells in the retained separate
 observations. The original writer entry map, ordered points and frame inputs
-are still supplied; input construction, SUBFORM initial maps, CFORM POST-FILL
+are still supplied; CFORM input construction, earlier map history, CFORM POST-FILL
 and the integrated caller remain open. See
 [`../research/introspection/boundary-map.md`](../research/introspection/boundary-map.md).
+
+`aaron-subform-boundary.js` supplies `traceAaronPatchEdge`,
+`makeAaronListFrame` and `fillAaronSubformFromBoundary`. Given complete maps,
+the natural start/MAX/patch inputs, FLAG-BIT and form count, it derives the
+outline, frame, medians and start rotation and composes strategy/POST-FILL.
+All 278 natural cases match 27,509 outline positions, all frames/counts/returns
+and 85,401,600 complete output-map cell comparisons in two paintings.
+Outline/frame construction preserves both existing maps; PATCH-EDGE changes the start's
+direction. All observed outlines close and contain integer TRIPT points.
+Stranded/MAX termination, fractional/empty frame inputs and POST-FILL's value-2
+conversion remain native interpretation. SCAN-ROW/NEIGHBORS and earlier map
+history remain upstream dependencies; this is not an integrated BRUSH-FILL or
+scene generator. See
+[`../research/introspection/subform-boundary.md`](../research/introspection/subform-boundary.md).
 
 `engine/src/allegro-random.js` contains the recovered Allegro 5.0.1 numeric
 source, including all four floating RAN signatures. The latter match 512

@@ -193,5 +193,7 @@ syntax/AST checks and the original-runtime comparisons support this milestone.
 
 WRITE-LIST-TO-FILL-MAP and CLEAR-FILL-MAP have since been recovered for their
 natural captured domains; see [the boundary-map findings](boundary-map.md).
-Next, recover SUBFORM initial boundary maps and connect their production to
-these helpers and the measured SUBFORM POST-FILL rule.
+The [SUBFORM boundary capture](subform-boundary.md) now builds its outline and
+frame and composes these helpers through POST-FILL with complete outputs.
+Existing maps are preserved through that construction; their earlier state
+and SCAN-ROW/NEIGHBORS inputs remain open.

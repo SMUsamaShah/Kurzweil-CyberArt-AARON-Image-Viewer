@@ -1,5 +1,25 @@
 # Original-engine report excerpts
 
+## SUBFORM boundary construction and composition, 2026-10-05
+
+[`subform-boundary-parity-20261005.json`](subform-boundary-parity-20261005.json)
+retains all 278 PATCH-EDGE/LIST-FRAME/SUBFORM fill chains in two complete
+paintings. Independent JS matches 27,509 outline positions, every derived
+frame, count and return, and 85,401,600 complete output-map cell comparisons.
+Both drawings and scene reports equal fresh controls byte for byte. Original
+outline/frame return identities match the natural downstream arguments.
+
+Both existing maps retain identity and contents through boundary construction;
+1,112 complete vector equality checks cover 170,803,200 elements. All outlines
+close and use integer TRIPT points; 241 start-Z mutations match. Some
+zero-count fills have no natural PATCHDEX read, recorded per chain. The
+evidence rederives exact PATCH-EDGE/LIST-FRAME/NEIGHBORS PLL mappings, validates
+every decoded instruction byte and canonical REA external import/export, and
+binds the two rejected incomplete captures. Full maps/native reports remain
+ignored. SCAN-ROW inputs, earlier map history and integrated callers remain
+open; stranded/MAX, fractional frame and POST-FILL value-2 conversion branches
+are not validated by these captures. See [the findings](../subform-boundary.md).
+
 ## Full boundary-map comparisons, 2026-10-05
 
 [`boundary-map-parity-20261005.json`](boundary-map-parity-20261005.json)
@@ -17,7 +37,8 @@ rederives both exact live-window/PLL matches, validates native instruction
 bytes and REA canonical external report import/export, and retains the
 initial observer's missing bound inputs. Out-of-picture writer guards are
 native interpretation; none is exercised here. Other domains, original
-input construction, SUBFORM initial maps and integrated callers remain open.
+input construction and integrated callers remain open. The SUBFORM follow-up
+above derives its outline/frame but still requires earlier map history.
 Full original maps and native reports stay ignored. See
 [the findings](../boundary-map.md) for reproduction and scope.
 

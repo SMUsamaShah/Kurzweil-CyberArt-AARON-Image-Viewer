@@ -205,7 +205,9 @@ Ghidra reports, tool installations and REA bundles remain ignored. No unit
 tests were added or suites run; syntax/AST checks and original-output
 comparisons support this milestone.
 
-Next, recover SUBFORM's initial boundary maps before MY-FILL, then connect
-their production to the measured strategy and SUBFORM POST-FILL helper.
+The follow-up [SUBFORM boundary capture](subform-boundary.md) now derives its
+outline/frame and composes strategy/POST-FILL for all 278 natural calls. Both
+maps are preserved from PATCH-EDGE entry to MY-FILL entry; their earlier
+history remains required. SCAN-ROW/NEIGHBORS inputs are the next upstream seam.
 CFORM POST-FILL and the source of the observed value-3 cells are also useful
 next boundaries.

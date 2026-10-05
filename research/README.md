@@ -19,8 +19,13 @@ now match 427 calls each and 1,883,204 output cell comparisons summed over
 their captured regions. The [boundary-map helpers](introspection/boundary-map.md)
 match all 149 list writes and 70 inclusive frame clears, with 33,638,400
 full-map output cell comparisons. All 149 composed CFORM preparation cases
-also match. SUBFORM initial boundary-map production remains the next upstream
-boundary; original outline/frame and writer-entry-map construction are still open.
+also match. [SUBFORM boundary construction](introspection/subform-boundary.md)
+now derives PATCH-EDGE outlines and LIST-FRAME bounds for all 278 natural
+cases, and composes them through POST-FILL with 85,401,600 complete output-map
+cell comparisons. Both maps equal their input state at PATCH-EDGE exit and
+MY-FILL entry, before the composed fill changes them.
+Original scan-row inputs and earlier map history remain required; SCAN-ROW,
+NEIGHBORS and CFORM POST-FILL are the next upstream boundaries.
 
 ## Principles
 

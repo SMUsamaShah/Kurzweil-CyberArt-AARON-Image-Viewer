@@ -8,6 +8,51 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-05
 
+SUBFORM boundary construction and a composed fill now match all 278 natural
+cases in the two controlled paintings. PATCH-EDGE derives the complete
+outline and updates the original start point's direction; LIST-FRAME derives
+its inclusive bounds. Independent JS computes those inputs, medians and start
+rotation and applies strategy/POST-FILL. All 27,509 outline positions,
+frames/counts/returns and 85,401,600 complete output-map cell comparisons
+agree. Both AA0 and scene reports equal fresh controls byte for byte.
+
+Read [the SUBFORM boundary findings](introspection/subform-boundary.md) and
+[portable evidence](introspection/evidence/subform-boundary-parity-20261005.json).
+The module is `engine/src/aaron-subform-boundary.js`. Both maps retain their
+object identity and complete contents from PATCH-EDGE entry to MY-FILL entry:
+1,112 whole-map equality checks cover 170,803,200 elements. The existing map
+state is carried into filling; its earlier scene history remains an input.
+All outlines close, all points are integer TRIPT, and all frames are MAPFRAME.
+All eight directions occur, with 241 observed start-Z changes. Stranded/MAX
+termination, fractional/empty frame inputs and POST-FILL's value-2 conversion
+remain native interpretation. The native start-tail object identity is not
+separately measured; output values and caller-argument mutation are.
+
+PATCH-EDGE, LIST-FRAME and NEIGHBORS have fresh exact complete PLL matches,
+instruction-byte-validated standalone Ghidra reports and canonical REA
+external import/export. NEIGHBORS is mapped but not ported. Natural returned
+outline/frame identities match LIST-FRAME/MY-FILL inputs; this establishes
+boundaries, not direct native callers. Keep the source of START/MAX/patch ID
+and natural CFORM-COUNT explicit. Some zero-count fills have no PATCHDEX read;
+the evidence retains each chain's reader count.
+
+The first observer required SUBP-COUNT before its initial binding and was
+stopped/excluded. The next repeated full maps but timed out at 280 seconds.
+Frozen v3 saves typed vectors using COPY-SEQ of displaced views, checks EQ and
+EQUALP at intermediate boundaries and captures complete maps at entry/exit.
+All 1,668 snapshot preview checks pass; a 600-second limit completed the larger
+seed-5678 painting in about 585 seconds. Partial failed runs may lack
+summary.json and are not successful evidence. Both failures, staging hashes
+and the new workflow lessons are retained. C:\temp is empty and no oracle
+remains after this checkpoint.
+
+Next, recover SCAN-ROW/NEIGHBORS to derive the start/MAX/patch inputs from a
+row and patch map. CFORM POST-FILL, the source of value-3 cells, subpart brush
+painting/clearing and an integrated BRUSH-FILL caller remain open. Earlier
+map history and scene construction are still original dependencies.
+
+### Previous boundary-map checkpoint
+
 Two boundary-map helpers now match all complete captured outputs:
 WRITE-LIST-TO-FILL-MAP assigns value 2 at the ordered list's in-picture
 coordinates; CLEAR-FILL-MAP zeros the selected inclusive frame rectangle.

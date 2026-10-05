@@ -29,8 +29,12 @@ helpers now match 149 list writes and 70 inclusive clears, comparing every
 cell of every output map: 33,638,400 comparisons across both paintings.
 All 149 CFORM writer/median/start/strategy compositions also match their
 1,295,917 captured strategy-region cells. Point lists, entry maps and selected
-frame construction remain original inputs. The next priority is SUBFORM
-initial boundary-map production and CFORM POST-FILL, then replacing original
+frame construction remain original inputs for those CFORM cases. SUBFORM
+boundary construction now derives its outline and frame with PATCH-EDGE and
+LIST-FRAME, and the composed fill matches all 278 cases and 85,401,600 complete
+output-map cell comparisons. Existing maps are preserved before filling;
+SCAN-ROW's start/MAX/patch inputs and earlier map history remain original.
+The next priority is SCAN-ROW/NEIGHBORS and CFORM POST-FILL, then replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and
@@ -165,9 +169,12 @@ types occur; FILL-STRATEGY's value-2 guard is measured, while POST-FILL's
 separate value-2 conversion still needs an original holdout. The
 [boundary-map comparison](introspection/boundary-map.md) now matches all 149
 CFORM list writers and 70 frame clears, and composes the writer with the
-preparation helpers. Next, recover SUBFORM initial maps before MY-FILL and
-connect their production to the strategy and SUBFORM POST-FILL rule. CFORM
-POST-FILL and the integrated callers remain open. The two iris paths per
+preparation helpers. The [SUBFORM boundary comparison](introspection/subform-boundary.md)
+now derives outlines and frames for all 278 natural calls and composes the
+strategy and POST-FILL with complete maps. Its upstream map equality checks
+show existing state is carried into MY-FILL. Recover SCAN-ROW/NEIGHBORS to
+derive its start/MAX/patch inputs next; earlier map history, CFORM POST-FILL
+and the integrated callers remain open. The two iris paths per
 scene and the subpart brush changes also need characterization before
 integrating a caller policy.
 

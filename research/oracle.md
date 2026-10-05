@@ -247,6 +247,20 @@ unresolved. Treat extra readers as executable calls, and compare fresh control
 bytes even when the probe's error count is zero. See
 [the preparation findings](introspection/fill-preparation.md).
 
+Large map observers can exceed the run limit without a staging permission
+failure. The first SUBFORM observer also required SUBP-COUNT before its first
+binding; record the unbound state explicitly rather than treating it as a
+missing map. Its next version captured valid boundaries but repeated full RLE
+snapshots did not finish within 280 seconds. The final observer saves typed
+input vectors using COPY-SEQ of a displaced rank-one view, checks full EQUALP
+contents and EQ map identities at intermediate boundaries, and serializes
+complete input/output maps once. Use the runner's 600-second limit for this
+large capture, require observer END/completion and fresh control bytes, and
+reject false equality flags until a full intermediate capture explains them.
+An interrupted or timed-out runner may archive partial reports without writing
+`summary.json`; those reports are diagnostics, not completed evidence. See
+[the SUBFORM boundary findings](introspection/subform-boundary.md).
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,
