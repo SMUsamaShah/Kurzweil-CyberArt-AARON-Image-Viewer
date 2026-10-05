@@ -75,11 +75,16 @@ keep that guard intact. REA 3.2.1 import/export validates external standalone
 Ghidra evidence. `nativeProviderSession` is false for all six objects; no stock
 REA Windows x86 native-provider session or debugger caller capture is claimed.
 
-## Limits and next work
+## Natural follow-up and next work
+
+The subsequent [complete feature-buffer capture](brush-feature-buffer.md)
+validates all 24 natural BUFFER-FEATURE calls and attributes the 6,965 extra
+endpoint positions to captured feature net changes. The three BUFFER-HEAD
+outputs compose from those measured child maps. BUFFER-HOLE/BUFFER-ANYTHING
+are not naturally called in these paintings.
 
 The static reports do not establish the natural return values, full map
 changes, feature traversal, FOOB semantics or ZERO-EDGE construction. The
 first buffer observer is excluded: it lacks MAIN/READY and a completion
-footer despite a complete matching drawing. Continue with complete per-call
-buffer maps and fresh drawing/scene controls, then move to the first remaining
-measured dependency.
+footer despite a complete matching drawing. Continue with FOOB and ZERO-EDGE,
+then the complete row/iris schedule and value-0 painter.

@@ -1,14 +1,18 @@
 # Next AARON execution plan
 
-Prepared 2026-09-27; updated 2026-10-05. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-06. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 The 2026-10-06 native checkpoint maps six painting/buffer objects and validates
 1,364 instruction rows against the PLL, with fresh drawing/scene controls.
 See [the native findings](introspection/brush-painting-native.md). The current
-buffer experiment requires complete per-child map boundaries; its first tape
-is excluded for missing MAIN/READY and COMPLETE/END. Native setter references
-are candidates until natural complete captures establish their behavior.
+buffer experiment now matches 24 natural feature calls, 81,110 ordered
+predicates and 3,686,400 full output cells. All three head outputs compose
+exactly, and all 6,965 extra clear-entry 3 positions have captured feature
+changes. See [the feature findings](introspection/brush-feature-buffer.md).
+Its first tape is excluded for missing MAIN/READY and COMPLETE/END. Continue
+with FOOB/ZERO-EDGE, then the complete BRUSH-FILL row/iris schedule and
+value-0 painting. Head feature selection and original geometry remain inputs.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for
 controlled seeds 1234 and 5678. JavaScript carries writer state through 28,075
@@ -57,9 +61,10 @@ branch now matches 70 markers, 296,912 ordered predicates and 10,752,000 full
 output cells; all 3,881 stroke returns preserve original path identity. All
 70 natural clears match another 10,752,000 full output cells and fresh controls.
 Short CORE paths and value-0 painting remain open. There are 6,965 additional
-clear-entry value-3 positions that were 0/1 at marker exit; their writer is
-unidentified. The next priority is SCREEN-AND-STORE / BRUSH-FILL-SUBPART writer
-attribution, then the complete BRUSH-FILL row/iris schedule and replacing original
+clear-entry value-3 positions that were 0/1 at marker exit. Complete feature
+boundaries now account for all of them, with matching JS maps and fresh
+controls. The next priority is FOOB/ZERO-EDGE, then the complete BRUSH-FILL
+row/iris schedule, value-0 painter and replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
 natural seed-5678 holdout call now reproduce their complete point lists and

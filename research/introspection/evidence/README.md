@@ -1,5 +1,17 @@
 # Original-engine report excerpts
 
+## Natural feature buffers and added boundary cells, 2026-10-06
+
+[`brush-feature-buffer-parity-20261006.json`](brush-feature-buffer-parity-20261006.json)
+binds all 24 feature calls, 81,110 ordered candidate/predicate results,
+3,686,400 complete feature output cells and three composed head-buffer maps
+to fresh drawing/scene controls. All 6,965 previously unexplained clear-entry
+3 positions have captured feature net changes. The model receives original
+EDGE lists, masks, frames and entry maps. Individual native stores, continuous
+ownership and general head selection remain unobserved. BUFFER-HOLE and
+BUFFER-ANYTHING are uncalled in both scenes. See
+[the findings](../brush-feature-buffer.md).
+
 ## Native painting and buffer mapping, 2026-10-06
 
 [`brush-buffer-native-20261006.json`](brush-buffer-native-20261006.json)

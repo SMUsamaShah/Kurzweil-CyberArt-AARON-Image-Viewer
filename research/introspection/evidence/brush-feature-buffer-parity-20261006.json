@@ -1,0 +1,4921 @@
+{
+  "schemaVersion": 1,
+  "kind": "Two-seed natural BUFFER-FEATURE boundaries and added value-3 provenance",
+  "nativeEvidence": {
+    "path": "research/introspection/evidence/brush-buffer-native-20261006.json",
+    "sha256": "aea8e8d8e08ba9c69d22aac4a1d2dcf52d3216a9dbd6612fc1464695c7f28322",
+    "sourceCount": 91,
+    "nativeRuns": [
+      {
+        "runId": "brush-painting-native-seed1234-20261005-a",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+      },
+      {
+        "runId": "brush-buffer-native-seed1234-20261005-c",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+      }
+    ],
+    "control": {
+      "runId": "brush-painting-native-control-seed1234-20261005-b",
+      "root": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b",
+      "summarySha256": "30ab5920cbfe3686e60140a0524aad79768b5d6ebfb9f319567fec6bf03aa13d",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    "functions": [
+      {
+        "name": "SCREEN-AND-STORE",
+        "runId": "brush-painting-native-seed1234-20261005-a",
+        "payloadSha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+        "reportSha256": "f555f5ef6b8f6704c6f19bb55c38d5355d78915dade995e5cee80d4d4debfe94",
+        "instructionCount": 424,
+        "instructionBytesCompared": 1216,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      },
+      {
+        "name": "BRUSH-FILL-SUBPART",
+        "runId": "brush-painting-native-seed1234-20261005-a",
+        "payloadSha256": "e3a4c0c740034391f2a48b3a4cfbc77dc74dfa417d39777e291249e81bc2ff50",
+        "reportSha256": "2ac31f3dbf68b80bf3a72d0cc220acce266d38f0fa553eabf490d975b5dc6ec2",
+        "instructionCount": 293,
+        "instructionBytesCompared": 834,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      },
+      {
+        "name": "BUFFER-HEAD",
+        "runId": "brush-painting-native-seed1234-20261005-a",
+        "payloadSha256": "3e1d6450d5ab9d6b81399aa10c945befa7ce1393018a7cbec7461d5f4db1565f",
+        "reportSha256": "0e9579e9bbc1f4a00e7efd5aa6b77d516f5b10c86c77837b75c650012dcacaba",
+        "instructionCount": 55,
+        "instructionBytesCompared": 138,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      },
+      {
+        "name": "BUFFER-ANYTHING",
+        "runId": "brush-painting-native-seed1234-20261005-a",
+        "payloadSha256": "8e09df53ad8efd01c2b9794a2196e6a9e13aa80165834103dd0492193b5a8dc4",
+        "reportSha256": "8830ff331fb1ba15fbc0351d951fdba7343e4f2401c6346494828fd1e17aa8c0",
+        "instructionCount": 258,
+        "instructionBytesCompared": 741,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      },
+      {
+        "name": "BUFFER-FEATURE",
+        "runId": "brush-buffer-native-seed1234-20261005-c",
+        "payloadSha256": "8d8ae305b450897b99edc85d8ee6d32ef0cadaea6e208f2d7cdb155200273bba",
+        "reportSha256": "d66f817d6ae5fc4aafe657f5c9bfd52bc82b8e7444c334764a51034d19e9fb1d",
+        "instructionCount": 164,
+        "instructionBytesCompared": 435,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      },
+      {
+        "name": "BUFFER-HOLE",
+        "runId": "brush-buffer-native-seed1234-20261005-c",
+        "payloadSha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98",
+        "reportSha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649",
+        "instructionCount": 170,
+        "instructionBytesCompared": 465,
+        "provider": "ghidra-standalone",
+        "nativeProviderSession": false
+      }
+    ],
+    "limitations": [
+      "REA Evidence was imported from standalone Ghidra JSON using provider id ghidra-standalone and operation standalone_ghidra_function_analysis; no REA native Ghidra provider session was launched.",
+      "REA 3.2.1 has no raw-binary subject format. Each bundle preserves reported_format raw in its result and parameters while representing the Evidence subject format as unknown.",
+      "The REA bundle helper verifies report structure and subject-file SHA binding; this derivation independently compares every reported instruction byte to the exact mapped PLL payload but does not authenticate how Ghidra produced the JSON.",
+      "The x86 Windows compiler specification does not model Allegro Lisp register conventions or tagged objects; Ghidra C types, arguments and expressions are not recovered Lisp source.",
+      "Native metadata is preserved byte-for-byte and hash-bound. Bounded nested cons summaries marked (:TYPE CONS) are not treated as full constant lists, and metadata does not establish dynamic calls or a complete call graph.",
+      "Only six selected functions from these seed-1234 captures are included; runtime entry addresses are per-run observations, not fixed addresses across builds.",
+      "Only reachable Ghidra instructions are reported. Uncovered payload ranges are retained and not labeled as code or data."
+    ]
+  },
+  "priorBoundaryEvidence": {
+    "path": "research/introspection/evidence/brush-stroke-boundary-parity-20261005.json",
+    "sha256": "738aa4d3f1cda3f47b2607dd004d042a6dfa931cbf06ea3d19ab31fd0c71754a",
+    "sceneRoots": [
+      {
+        "seed": 1234,
+        "observed": {
+          "root": "brush-stroke-boundary-seed1234-20261005-f",
+          "mode": "writer-stream-seed-1234",
+          "smallImage": false,
+          "summarySha256": "9ce9874ca4cc4ceb3e84e5ffa424027ea4d91dd3a7f7841b75a7d2966f012e78",
+          "requestSha256": "217c0f0683633bbeae9759ec787d93bc5da211c6c6224108ed77a892bf75f6a8",
+          "stagedProbeSha256": "c159c702361d96a5b17173e6ad67a0c09d4281aa72dce5ff4969121425f27967",
+          "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+          "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+          "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+          "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+          "rawReportSha256": "f6e5c0d7bbe1012c8ad064f18696995223975eb1a5750d937da36fdf44353fcf",
+          "rawReportBytes": 19971322,
+          "parserSource": {
+            "sha256": "f6e5c0d7bbe1012c8ad064f18696995223975eb1a5750d937da36fdf44353fcf"
+          },
+          "complete": {
+            "main": "NORMAL",
+            "strokes": 1426,
+            "sampled": 23,
+            "clears": 23,
+            "events": 1697258,
+            "predicates": 1694383,
+            "screens": 1403,
+            "frame-reads": 23,
+            "points": 13124,
+            "cells": 14131200,
+            "runs": 73791,
+            "objects": 7428,
+            "checks": 2944,
+            "errors": 0,
+            "aborts": 0,
+            "sampledPredicateRecords": 164696,
+            "sampledScreenRecords": 0,
+            "capturedFrameReads": 23,
+            "observations": {
+              "eventIdsUnique": 166168,
+              "entryAndReturnPairsMatch": true,
+              "clearFramesMatchCframeRecords": true
+            }
+          }
+        },
+        "control": {
+          "root": "brush-stroke-boundary-control-seed1234-20261005-g",
+          "mode": "writer-stream-seed-1234",
+          "smallImage": false,
+          "summarySha256": "c1c84c838469b9818b1c365e353aa26b12b4c553ad4555bd1e06fd9c8c2bdebd",
+          "requestSha256": null,
+          "stagedProbeSha256": null,
+          "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+          "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+          "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+          "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+        },
+        "rawTapeSha256": "f6e5c0d7bbe1012c8ad064f18696995223975eb1a5750d937da36fdf44353fcf",
+        "complete": {
+          "main": "NORMAL",
+          "strokes": 1426,
+          "sampled": 23,
+          "clears": 23,
+          "events": 1697258,
+          "predicates": 1694383,
+          "screens": 1403,
+          "frame-reads": 23,
+          "points": 13124,
+          "cells": 14131200,
+          "runs": 73791,
+          "objects": 7428,
+          "checks": 2944,
+          "errors": 0,
+          "aborts": 0,
+          "sampledPredicateRecords": 164696,
+          "sampledScreenRecords": 0,
+          "capturedFrameReads": 23,
+          "observations": {
+            "eventIdsUnique": 166168,
+            "entryAndReturnPairsMatch": true,
+            "clearFramesMatchCframeRecords": true
+          }
+        }
+      },
+      {
+        "seed": 5678,
+        "observed": {
+          "root": "brush-stroke-boundary-seed5678-20261005-h",
+          "mode": "writer-full-seed-5678",
+          "smallImage": false,
+          "summarySha256": "eaab8c8955b461c000643fdcd985f6f6cd8a1a4ee9916d2c68476e9f2b1030c1",
+          "requestSha256": "3a853aca846aaad15530dac76fbff1b834591747fd8cb3f2852e39f29e9f468b",
+          "stagedProbeSha256": "c159c702361d96a5b17173e6ad67a0c09d4281aa72dce5ff4969121425f27967",
+          "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+          "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+          "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+          "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+          "rawReportSha256": "4183dcfeb535eaac37d10a783170ddec6f6bf0a43366fe5cbb51f857e2575d63",
+          "rawReportBytes": 18148102,
+          "parserSource": {
+            "sha256": "4183dcfeb535eaac37d10a783170ddec6f6bf0a43366fe5cbb51f857e2575d63"
+          },
+          "complete": {
+            "main": "NORMAL",
+            "strokes": 2455,
+            "sampled": 47,
+            "clears": 47,
+            "events": 795994,
+            "predicates": 791037,
+            "screens": 2408,
+            "frame-reads": 47,
+            "points": 17726,
+            "cells": 28876800,
+            "runs": 150753,
+            "objects": 10015,
+            "checks": 5098,
+            "errors": 0,
+            "aborts": 0,
+            "sampledPredicateRecords": 132216,
+            "sampledScreenRecords": 0,
+            "capturedFrameReads": 47,
+            "observations": {
+              "eventIdsUnique": 134765,
+              "entryAndReturnPairsMatch": true,
+              "clearFramesMatchCframeRecords": true
+            }
+          }
+        },
+        "control": {
+          "root": "brush-stroke-boundary-control-seed5678-20261005-i",
+          "mode": "writer-full-seed-5678",
+          "smallImage": false,
+          "summarySha256": "aa48ef844975a5eb9d1b8cc4b84a7a0951653f1d56f8eb273acdbfd571df5e95",
+          "requestSha256": null,
+          "stagedProbeSha256": null,
+          "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+          "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+          "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+          "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053"
+        },
+        "rawTapeSha256": "4183dcfeb535eaac37d10a783170ddec6f6bf0a43366fe5cbb51f857e2575d63",
+        "complete": {
+          "main": "NORMAL",
+          "strokes": 2455,
+          "sampled": 47,
+          "clears": 47,
+          "events": 795994,
+          "predicates": 791037,
+          "screens": 2408,
+          "frame-reads": 47,
+          "points": 17726,
+          "cells": 28876800,
+          "runs": 150753,
+          "objects": 10015,
+          "checks": 5098,
+          "errors": 0,
+          "aborts": 0,
+          "sampledPredicateRecords": 132216,
+          "sampledScreenRecords": 0,
+          "capturedFrameReads": 47,
+          "observations": {
+            "eventIdsUnique": 134765,
+            "entryAndReturnPairsMatch": true,
+            "clearFramesMatchCframeRecords": true
+          }
+        }
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "seed": 1234,
+      "observed": {
+        "root": "brush-buffer-capture-seed1234-20261006-a",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "summarySha256": "041e59cbe83a51c444fa25892054789e06a5feb0152eab20850caceac0ae5528",
+        "requestSha256": "8a62f346f306c5383461137ee114b5a284db90cfd4a9309278b7d56143a3579a",
+        "stagedProbeSha256": "961476dc6dc805a2c0fe56c69e92cffa60adf143d6dbd2b08362cf627f24894c",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "rawReportSha256": "2f6d3e0caafc93804d56d16499bd9e5959c517dd8dcae556dbf2c2646808c1bc",
+        "rawReportBytes": 27382067,
+        "parserSource": {
+          "bytes": 27382067,
+          "sha256": "2f6d3e0caafc93804d56d16499bd9e5959c517dd8dcae556dbf2c2646808c1bc"
+        },
+        "complete": {
+          "main": {
+            "keyword": "NORMAL"
+          },
+          "parents": 23,
+          "buffers": 1,
+          "children": 8,
+          "strokes": 1426,
+          "markers": 23,
+          "clears": 23,
+          "predicates": 1758177,
+          "globalCounts": {
+            "BRUSH-FILL-SUBPART": 23,
+            "BUFFER-HEAD": 1,
+            "BUFFER-ANYTHING": 0,
+            "BUFFER-FEATURE": 8,
+            "BUFFER-HOLE": 0,
+            "EDGE": 4409,
+            "ZERO-EDGE": 0,
+            "CFRAME": 492,
+            "IN-SUB-FRAME": 1694383,
+            "FOOB": 63794,
+            "BRUSH-STROKE": 1426,
+            "CLEAR-FILL-MAP": 23
+          },
+          "sampledCounts": {
+            "BRUSH-FILL-SUBPART": 23,
+            "BUFFER-HEAD": 1,
+            "BUFFER-ANYTHING": 0,
+            "BUFFER-FEATURE": 8,
+            "BUFFER-HOLE": 0,
+            "EDGE": 8,
+            "ZERO-EDGE": 0,
+            "CFRAME": 152,
+            "IN-SUB-FRAME": 73892,
+            "FOOB": 0,
+            "BRUSH-STROKE": 1426,
+            "CLEAR-FILL-MAP": 23
+          },
+          "events": 151112,
+          "points": 6968,
+          "cells": 9830400,
+          "runs": 92102,
+          "objects": 7816,
+          "checks": 1650,
+          "errors": 0,
+          "aborts": 0,
+          "overflow": null,
+          "intervalActive": null,
+          "active": {
+            "parent": 0,
+            "buffer": 0,
+            "child": 0,
+            "stroke": 0,
+            "clear": 0
+          }
+        }
+      },
+      "control": {
+        "root": "brush-buffer-capture-control-seed1234-20261006-b",
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "summarySha256": "2080797fe7fd9b5e3b3d91d4cf380b8de6398be1d2fe9998efb69102ddbc8811",
+        "requestSha256": null,
+        "stagedProbeSha256": null,
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+      },
+      "previousBoundary": {
+        "root": "brush-stroke-boundary-seed1234-20261005-f",
+        "controlRoot": "brush-stroke-boundary-control-seed1234-20261005-g",
+        "rawReportSha256": "f6e5c0d7bbe1012c8ad064f18696995223975eb1a5750d937da36fdf44353fcf",
+        "complete": {
+          "main": "NORMAL",
+          "strokes": 1426,
+          "sampled": 23,
+          "clears": 23,
+          "events": 1697258,
+          "predicates": 1694383,
+          "screens": 1403,
+          "frame-reads": 23,
+          "points": 13124,
+          "cells": 14131200,
+          "runs": 73791,
+          "objects": 7428,
+          "checks": 2944,
+          "errors": 0,
+          "aborts": 0,
+          "sampledPredicateRecords": 164696,
+          "sampledScreenRecords": 0,
+          "capturedFrameReads": 23,
+          "observations": {
+            "eventIdsUnique": 166168,
+            "entryAndReturnPairsMatch": true,
+            "clearFramesMatchCframeRecords": true
+          }
+        }
+      },
+      "parity": {
+        "aa0ByteIdenticalToFreshControl": true,
+        "sceneReportByteIdenticalToFreshControl": true,
+        "runtimeFilesIdentical": true,
+        "setupIdentical": true
+      },
+      "comparison": {
+        "coverage": {
+          "naturalParents": 23,
+          "naturalBuffers": 1,
+          "featureCalls": 8,
+          "holeCalls": 0,
+          "childOutputCellsCompared": 1228800,
+          "bufferOutputCellsCompared": 153600,
+          "predicatesCompared": 73892,
+          "accepted": 73229,
+          "rejected": 663,
+          "edgePositions": 406,
+          "fractionalCoordinates": 808,
+          "childChangedCells": 8147,
+          "childTouchedCells": 17946,
+          "childTransitions": {
+            "1->3": 1802,
+            "0->3": 6345
+          },
+          "coordinatePrecisions": {
+            "double": 808,
+            "integer": 4
+          },
+          "brushWidths": {
+            "17": 8
+          },
+          "maskChoices": {
+            "core": 8
+          },
+          "matchedStrokeCalls": 1426,
+          "markerOutputCellsAligned": 3532800,
+          "clearInputCellsAligned": 3532800,
+          "markerToClearIntervals": 23,
+          "additionalValue3Positions": 6454,
+          "additionalValue3CoveredByChildChanges": 6454,
+          "additionalValue3Already3AtMarkerExit": 0,
+          "additionalValue3MarkerExitValues": {
+            "0": 6322,
+            "1": 132
+          }
+        },
+        "profiles": [
+          {
+            "sha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "width": 17,
+            "core": [
+              [
+                -2,
+                7
+              ],
+              [
+                -1,
+                7
+              ],
+              [
+                0,
+                7
+              ],
+              [
+                1,
+                7
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                -4,
+                6
+              ],
+              [
+                -3,
+                6
+              ],
+              [
+                -2,
+                6
+              ],
+              [
+                -1,
+                6
+              ],
+              [
+                0,
+                6
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                1,
+                6
+              ],
+              [
+                -5,
+                5
+              ],
+              [
+                -4,
+                5
+              ],
+              [
+                -3,
+                5
+              ],
+              [
+                -2,
+                5
+              ],
+              [
+                -1,
+                5
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                3,
+                5
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                1,
+                5
+              ],
+              [
+                -6,
+                4
+              ],
+              [
+                -5,
+                4
+              ],
+              [
+                -4,
+                4
+              ],
+              [
+                -3,
+                4
+              ],
+              [
+                -2,
+                4
+              ],
+              [
+                -1,
+                4
+              ],
+              [
+                0,
+                4
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                1,
+                4
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                -5,
+                3
+              ],
+              [
+                -4,
+                3
+              ],
+              [
+                -3,
+                3
+              ],
+              [
+                -2,
+                3
+              ],
+              [
+                -1,
+                3
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                -7,
+                2
+              ],
+              [
+                -6,
+                2
+              ],
+              [
+                -5,
+                2
+              ],
+              [
+                -4,
+                2
+              ],
+              [
+                -3,
+                2
+              ],
+              [
+                -2,
+                2
+              ],
+              [
+                -1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                -7,
+                1
+              ],
+              [
+                -6,
+                1
+              ],
+              [
+                -5,
+                1
+              ],
+              [
+                -4,
+                1
+              ],
+              [
+                -3,
+                1
+              ],
+              [
+                -2,
+                1
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                6,
+                1
+              ],
+              [
+                5,
+                1
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                1
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                -7,
+                0
+              ],
+              [
+                -6,
+                0
+              ],
+              [
+                -5,
+                0
+              ],
+              [
+                -4,
+                0
+              ],
+              [
+                -3,
+                0
+              ],
+              [
+                -2,
+                0
+              ],
+              [
+                -1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                5,
+                0
+              ],
+              [
+                4,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                -7,
+                -1
+              ],
+              [
+                -6,
+                -1
+              ],
+              [
+                -5,
+                -1
+              ],
+              [
+                -4,
+                -1
+              ],
+              [
+                -3,
+                -1
+              ],
+              [
+                -2,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                7,
+                -1
+              ],
+              [
+                6,
+                -1
+              ],
+              [
+                5,
+                -1
+              ],
+              [
+                4,
+                -1
+              ],
+              [
+                3,
+                -1
+              ],
+              [
+                2,
+                -1
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -7,
+                -2
+              ],
+              [
+                -6,
+                -2
+              ],
+              [
+                -5,
+                -2
+              ],
+              [
+                -4,
+                -2
+              ],
+              [
+                -3,
+                -2
+              ],
+              [
+                -2,
+                -2
+              ],
+              [
+                -1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                7,
+                -2
+              ],
+              [
+                6,
+                -2
+              ],
+              [
+                5,
+                -2
+              ],
+              [
+                4,
+                -2
+              ],
+              [
+                3,
+                -2
+              ],
+              [
+                2,
+                -2
+              ],
+              [
+                1,
+                -2
+              ],
+              [
+                0,
+                -2
+              ],
+              [
+                -6,
+                -3
+              ],
+              [
+                -5,
+                -3
+              ],
+              [
+                -4,
+                -3
+              ],
+              [
+                -3,
+                -3
+              ],
+              [
+                -2,
+                -3
+              ],
+              [
+                -1,
+                -3
+              ],
+              [
+                0,
+                -3
+              ],
+              [
+                6,
+                -3
+              ],
+              [
+                5,
+                -3
+              ],
+              [
+                4,
+                -3
+              ],
+              [
+                3,
+                -3
+              ],
+              [
+                2,
+                -3
+              ],
+              [
+                1,
+                -3
+              ],
+              [
+                -6,
+                -4
+              ],
+              [
+                -5,
+                -4
+              ],
+              [
+                -4,
+                -4
+              ],
+              [
+                -3,
+                -4
+              ],
+              [
+                -2,
+                -4
+              ],
+              [
+                -1,
+                -4
+              ],
+              [
+                0,
+                -4
+              ],
+              [
+                6,
+                -4
+              ],
+              [
+                5,
+                -4
+              ],
+              [
+                4,
+                -4
+              ],
+              [
+                3,
+                -4
+              ],
+              [
+                2,
+                -4
+              ],
+              [
+                1,
+                -4
+              ],
+              [
+                -5,
+                -5
+              ],
+              [
+                -4,
+                -5
+              ],
+              [
+                -3,
+                -5
+              ],
+              [
+                -2,
+                -5
+              ],
+              [
+                -1,
+                -5
+              ],
+              [
+                0,
+                -5
+              ],
+              [
+                5,
+                -5
+              ],
+              [
+                4,
+                -5
+              ],
+              [
+                3,
+                -5
+              ],
+              [
+                2,
+                -5
+              ],
+              [
+                1,
+                -5
+              ],
+              [
+                -4,
+                -6
+              ],
+              [
+                -3,
+                -6
+              ],
+              [
+                -2,
+                -6
+              ],
+              [
+                -1,
+                -6
+              ],
+              [
+                0,
+                -6
+              ],
+              [
+                4,
+                -6
+              ],
+              [
+                3,
+                -6
+              ],
+              [
+                2,
+                -6
+              ],
+              [
+                1,
+                -6
+              ],
+              [
+                -2,
+                -7
+              ],
+              [
+                -1,
+                -7
+              ],
+              [
+                0,
+                -7
+              ],
+              [
+                1,
+                -7
+              ],
+              [
+                2,
+                -7
+              ]
+            ],
+            "perim": [
+              [
+                0,
+                7
+              ],
+              [
+                0,
+                -7
+              ],
+              [
+                7,
+                0
+              ],
+              [
+                -7,
+                0
+              ],
+              [
+                1,
+                7
+              ],
+              [
+                2,
+                7
+              ],
+              [
+                2,
+                6
+              ],
+              [
+                3,
+                6
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                7,
+                1
+              ],
+              [
+                -1,
+                7
+              ],
+              [
+                -2,
+                7
+              ],
+              [
+                -2,
+                6
+              ],
+              [
+                -3,
+                6
+              ],
+              [
+                -4,
+                6
+              ],
+              [
+                -4,
+                5
+              ],
+              [
+                -5,
+                5
+              ],
+              [
+                -5,
+                4
+              ],
+              [
+                -6,
+                4
+              ],
+              [
+                -6,
+                3
+              ],
+              [
+                -6,
+                2
+              ],
+              [
+                -7,
+                2
+              ],
+              [
+                -7,
+                1
+              ],
+              [
+                1,
+                -7
+              ],
+              [
+                2,
+                -7
+              ],
+              [
+                2,
+                -6
+              ],
+              [
+                3,
+                -6
+              ],
+              [
+                4,
+                -6
+              ],
+              [
+                4,
+                -5
+              ],
+              [
+                5,
+                -5
+              ],
+              [
+                5,
+                -4
+              ],
+              [
+                6,
+                -4
+              ],
+              [
+                6,
+                -3
+              ],
+              [
+                6,
+                -2
+              ],
+              [
+                7,
+                -2
+              ],
+              [
+                7,
+                -1
+              ],
+              [
+                -1,
+                -7
+              ],
+              [
+                -2,
+                -7
+              ],
+              [
+                -2,
+                -6
+              ],
+              [
+                -3,
+                -6
+              ],
+              [
+                -4,
+                -6
+              ],
+              [
+                -4,
+                -5
+              ],
+              [
+                -5,
+                -5
+              ],
+              [
+                -5,
+                -4
+              ],
+              [
+                -6,
+                -4
+              ],
+              [
+                -6,
+                -3
+              ],
+              [
+                -6,
+                -2
+              ],
+              [
+                -7,
+                -2
+              ],
+              [
+                -7,
+                -1
+              ]
+            ]
+          }
+        ],
+        "children": [
+          {
+            "id": 1243,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              11,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2324,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 62,
+            "inputPointsSha256": "fdfe4b29aee47ab0d1766f5b983e68002d378102020d7d588454b9ca2c3be9fb",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 11284,
+            "accepted": 11284,
+            "rejected": 0,
+            "orderedCandidatesSha256": "b4a42b50b7c7c102e09bd75325d9f17c285668e9104aeba057bece0134e767f8",
+            "maskName": "core",
+            "inputMapSha256": "6b184128fafbd6509bafced8ab3ec857e1b07ee45d54ac1f9d939236285de197",
+            "outputMapSha256": "e50ae1af17fc8dfc7596ed8e4cec8475cc558d6faee6d9dcc594860de2e72967",
+            "outputCells": 153600,
+            "changedCells": 2040,
+            "changedPositionsSha256": "65a53262dc27fa70405c90d3a1219247886ada5b401dcabc3afe445ad816fbe3",
+            "transitions": {
+              "1->3": 888,
+              "0->3": 1152
+            },
+            "touchedCells": 2040,
+            "touchedPositionsSha256": "65a53262dc27fa70405c90d3a1219247886ada5b401dcabc3afe445ad816fbe3",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 12529,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              10,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2114,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 61,
+            "inputPointsSha256": "19767e7a470d92a9bceacf23c161954b56e40af73940c24565e891be1c6ceb82",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 11102,
+            "accepted": 11102,
+            "rejected": 0,
+            "orderedCandidatesSha256": "b10a90cb42256ba0b003bd0491b8479ab5f00d5e03e4c681a2b7acded55adc14",
+            "maskName": "core",
+            "inputMapSha256": "e50ae1af17fc8dfc7596ed8e4cec8475cc558d6faee6d9dcc594860de2e72967",
+            "outputMapSha256": "c4cff7599b4b89c61698d439486fd3f25df697e7a322a877afb72c632e740359",
+            "outputCells": 153600,
+            "changedCells": 1395,
+            "changedPositionsSha256": "d824d8fe12ff11c0b458e6dcb8f473ef1d0df6fbda6fcaf5cb6f8f3319055045",
+            "transitions": {
+              "1->3": 773,
+              "0->3": 622
+            },
+            "touchedCells": 3002,
+            "touchedPositionsSha256": "c3516b26e3464015be5315bf692fb7397c4df8243b1022c78de48eebc47e04e4",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 23633,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              17,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3267,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 56,
+            "inputPointsSha256": "b0fb4137159937cdb108afa37bdd32362adf0583c82395186b1900c2dc3d1e47",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 10192,
+            "accepted": 10192,
+            "rejected": 0,
+            "orderedCandidatesSha256": "4eb885435c15227441702b4d6be0dcbfd3dc831c912c385191debdaea0ffc766",
+            "maskName": "core",
+            "inputMapSha256": "c4cff7599b4b89c61698d439486fd3f25df697e7a322a877afb72c632e740359",
+            "outputMapSha256": "41df19f2ebbf3df1c39d61c6040ca9bfffdef2f23d6a80a196316f5b63015ecd",
+            "outputCells": 153600,
+            "changedCells": 1267,
+            "changedPositionsSha256": "ac3e9b56e3c5d25dedc9ed6f752f8a6f7617fa641f61496b45d00602e10c0b52",
+            "transitions": {
+              "1->3": 10,
+              "0->3": 1257
+            },
+            "touchedCells": 2255,
+            "touchedPositionsSha256": "329abb5a1fa0dd4d5a90e223d89dd3c8cda4f53afff51912d303c250107e0562",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 33827,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              16,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3088,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 56,
+            "inputPointsSha256": "44abe4f1b71987aeeb3f2d343247ec1c046ec89aa72027d605d7e90a3d077477",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 10192,
+            "accepted": 10192,
+            "rejected": 0,
+            "orderedCandidatesSha256": "e39b4975854cfca75b487ebec54d3922fb8874f2019fa836766dd781ee2552c3",
+            "maskName": "core",
+            "inputMapSha256": "41df19f2ebbf3df1c39d61c6040ca9bfffdef2f23d6a80a196316f5b63015ecd",
+            "outputMapSha256": "3962c71716bc001b2513493338dcde8a21f593964af18cc07a1fde87a2ae38ba",
+            "outputCells": 153600,
+            "changedCells": 1630,
+            "changedPositionsSha256": "42fc8d538efd52f29f2ce43b058c28656984b9905ca48303bd2832412072b1db",
+            "transitions": {
+              "0->3": 1630
+            },
+            "touchedCells": 2682,
+            "touchedPositionsSha256": "e99c0906fd6d960dea6ff63e26ff08de737cd8d1dbddbd42ca82a543ab7eacfe",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 44021,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              15,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 6494,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 61,
+            "inputPointsSha256": "60f8d9a37f78be722f98fb44848df5915c8a3786f992289a614679d6aec6d7b6",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 11102,
+            "accepted": 11102,
+            "rejected": 0,
+            "orderedCandidatesSha256": "a527a34a60326be84ad357f115153a484f2e1dc801942f2b5acd56cd049fce71",
+            "maskName": "core",
+            "inputMapSha256": "3962c71716bc001b2513493338dcde8a21f593964af18cc07a1fde87a2ae38ba",
+            "outputMapSha256": "89cf8b23c0ef705d449b486d84cc9520f6d6a5db0a9dc475c8363a4c56410226",
+            "outputCells": 153600,
+            "changedCells": 625,
+            "changedPositionsSha256": "de332c3c01437eab9d8318a1edd61e389cc407380f7fc385501204c489cb1f56",
+            "transitions": {
+              "1->3": 13,
+              "0->3": 612
+            },
+            "touchedCells": 2132,
+            "touchedPositionsSha256": "c6accd0dd86820dd29bff45010157b903fc6ebd79a3c089c8418bd556ebaf2ee",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 55125,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              14,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 6557,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 58,
+            "inputPointsSha256": "23dc91ef99b2c8dcd90526418a0c447e9a7e2b88f9d4574a8be2afd177ad4818",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 10556,
+            "accepted": 10556,
+            "rejected": 0,
+            "orderedCandidatesSha256": "f75c9ca9179b8da1643d19e29c338d852508615113e7a49fa001a638f42abba8",
+            "maskName": "core",
+            "inputMapSha256": "89cf8b23c0ef705d449b486d84cc9520f6d6a5db0a9dc475c8363a4c56410226",
+            "outputMapSha256": "4213697a5e1634025d19a6dcf361325f8057859a3c2cfd3055470807a96a1ad1",
+            "outputCells": 153600,
+            "changedCells": 791,
+            "changedPositionsSha256": "c1f6feb2971dac169426de9686c39f58582fb34955dd5ef2d8561fa7996c70bf",
+            "transitions": {
+              "0->3": 791
+            },
+            "touchedCells": 2421,
+            "touchedPositionsSha256": "6aac09c33539be65c33a7d40ecdd4feb19c805299d15facf82336b571cb82169",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 65683,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              13,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2896,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 23,
+            "inputPointsSha256": "fedd41a90965fc82253b035f4177cf9bc73fb4eef190d33f9227ebc5e2585ade",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 4186,
+            "accepted": 3974,
+            "rejected": 212,
+            "orderedCandidatesSha256": "001b6436ebcdf08f01ab43eab08590da8c7f174cd64868c69bf124b6c9b53246",
+            "maskName": "core",
+            "inputMapSha256": "4213697a5e1634025d19a6dcf361325f8057859a3c2cfd3055470807a96a1ad1",
+            "outputMapSha256": "7b5e82029657ff3d6af63a6cac9824cf3423bcbbf9969e013f0b0797d35884da",
+            "outputCells": 153600,
+            "changedCells": 292,
+            "changedPositionsSha256": "f28b5d5a37ca7298ea03d66e53a9aeb4ee3a1318a9768b2263bbc62263184508",
+            "transitions": {
+              "1->3": 114,
+              "0->3": 178
+            },
+            "touchedCells": 1423,
+            "touchedPositionsSha256": "eb201d5c15b666ecad153c1b612b156fd70c8c47301f2fd5d58803a2edfacb75",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 69871,
+            "target": "BUFFER-FEATURE",
+            "parent": 1240,
+            "buffer": 1242,
+            "args": [
+              12,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2644,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 29,
+            "inputPointsSha256": "29605e90daa992f603e9339aec369c8cca3ede3f09c8b386fa85ed8bcb091bca",
+            "brushProfileSha256": "2c65227f5eb4fb7b0f7b6d4a7e3c7d8a920184cfafcd3700b7bf7450c66e16e9",
+            "subFrame": {
+              "lx": 0,
+              "rx": 307,
+              "ly": 125,
+              "ty": 478
+            },
+            "predicateCalls": 5278,
+            "accepted": 4827,
+            "rejected": 451,
+            "orderedCandidatesSha256": "8f4e0bab2dfb7a986fb731578c2212e454578ce52aa4c7cc8f895972e64bf6ac",
+            "maskName": "core",
+            "inputMapSha256": "7b5e82029657ff3d6af63a6cac9824cf3423bcbbf9969e013f0b0797d35884da",
+            "outputMapSha256": "4c902fb4f20df7fb76ed498f8df02dcb7eb10de42ebc30a65448f0d36ca21cdd",
+            "outputCells": 153600,
+            "changedCells": 107,
+            "changedPositionsSha256": "a662135f019e29c37eb512e7554cdaef133ba57373acb74f57ee9d41d09c20d6",
+            "transitions": {
+              "0->3": 103,
+              "1->3": 4
+            },
+            "touchedCells": 1991,
+            "touchedPositionsSha256": "1a559889d004dc7ab8e942618aec79c2bc32018ab32b59d98c4cfbed9f7f7692",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          }
+        ],
+        "buffers": [
+          {
+            "id": 1242,
+            "target": "BUFFER-HEAD",
+            "parent": 1240,
+            "args": [
+              {
+                "kind": "integer",
+                "value": 1
+              }
+            ],
+            "orderedChildren": [
+              {
+                "id": 1243,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 11
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 12529,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 10
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 23633,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 17
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 33827,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 16
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 44021,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 15
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 55125,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 14
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 65683,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 13
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 69871,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 12
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              }
+            ],
+            "inputMapSha256": "6b184128fafbd6509bafced8ab3ec857e1b07ee45d54ac1f9d939236285de197",
+            "outputMapSha256": "4c902fb4f20df7fb76ed498f8df02dcb7eb10de42ebc30a65448f0d36ca21cdd",
+            "allOutputCellsEqual": true
+          }
+        ],
+        "intervals": [
+          {
+            "markerId": 2,
+            "clearId": 75,
+            "parent": 1,
+            "cdex": 1,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 78,
+            "clearId": 153,
+            "parent": 77,
+            "cdex": 3,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 156,
+            "clearId": 237,
+            "parent": 155,
+            "cdex": 6,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 240,
+            "clearId": 319,
+            "parent": 239,
+            "cdex": 7,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 322,
+            "clearId": 397,
+            "parent": 321,
+            "cdex": 8,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 400,
+            "clearId": 465,
+            "parent": 399,
+            "cdex": 8,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 468,
+            "clearId": 469,
+            "parent": 467,
+            "cdex": 8,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 472,
+            "clearId": 538,
+            "parent": 471,
+            "cdex": 10,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 541,
+            "clearId": 556,
+            "parent": 540,
+            "cdex": 11,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 559,
+            "clearId": 621,
+            "parent": 558,
+            "cdex": 12,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 624,
+            "clearId": 681,
+            "parent": 623,
+            "cdex": 13,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 684,
+            "clearId": 755,
+            "parent": 683,
+            "cdex": 16,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 758,
+            "clearId": 849,
+            "parent": 757,
+            "cdex": 17,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 852,
+            "clearId": 924,
+            "parent": 851,
+            "cdex": 18,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 927,
+            "clearId": 998,
+            "parent": 926,
+            "cdex": 19,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1001,
+            "clearId": 1056,
+            "parent": 1000,
+            "cdex": 22,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1059,
+            "clearId": 1118,
+            "parent": 1058,
+            "cdex": 23,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1121,
+            "clearId": 1167,
+            "parent": 1120,
+            "cdex": 40,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1170,
+            "clearId": 1238,
+            "parent": 1169,
+            "cdex": 41,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1241,
+            "clearId": 75339,
+            "parent": 1240,
+            "cdex": 42,
+            "sdex": 1,
+            "childIds": [
+              1243,
+              12529,
+              23633,
+              33827,
+              44021,
+              55125,
+              65683,
+              69871
+            ],
+            "additionalValue3Positions": 6454,
+            "additionalPositionsSha256": "f631404afd3799e1ed2010cbcebbcb6e234c73d41c1f3aa76921ef55fa56d18f",
+            "lastCapturedChildChanges": {
+              "BUFFER-FEATURE:69871": 103,
+              "BUFFER-FEATURE:33827": 1630,
+              "BUFFER-FEATURE:55125": 791,
+              "BUFFER-FEATURE:1243": 1186,
+              "BUFFER-FEATURE:12529": 681,
+              "BUFFER-FEATURE:65683": 194,
+              "BUFFER-FEATURE:23633": 1257,
+              "BUFFER-FEATURE:44021": 612
+            },
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 75342,
+            "clearId": 75400,
+            "parent": 75341,
+            "cdex": 43,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 75403,
+            "clearId": 75464,
+            "parent": 75402,
+            "cdex": 43,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 75467,
+            "clearId": 75532,
+            "parent": 75466,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          }
+        ],
+        "limits": [
+          "EDGE or ZERO-EDGE point lists, existing maps, brush masks and frame construction remain original inputs.",
+          "BUFFER-HOLE and BUFFER-ANYTHING are not naturally called in these two scenes and have no measured JS kernel here.",
+          "Complete function boundaries and native write sites are measured; individual array stores and continuous cell ownership are not traced.",
+          "BUFFER-HEAD feature indices and BUFFER-ANYTHING plan/frame selection are recorded, not independently generated.",
+          "No unobserved input domain, malformed input behavior or value-0 painter is claimed."
+        ]
+      }
+    },
+    {
+      "seed": 5678,
+      "observed": {
+        "root": "brush-buffer-capture-seed5678-20261006-c",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "summarySha256": "d11763c8a3f6fbea1fec354f9c962a61b4c24f6152dd73c5bc8c3e4c3ffc8c8b",
+        "requestSha256": "4a23a025a94eff1a12691890c7c136b6a987aebab4eea8b0370aeb58c2dc1ce1",
+        "stagedProbeSha256": "961476dc6dc805a2c0fe56c69e92cffa60adf143d6dbd2b08362cf627f24894c",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+        "rawReportSha256": "043d2ced58de856efa1a1496e0a0109344b39e469bed23dd41de7d10d8f6d2f2",
+        "rawReportBytes": 6157302,
+        "parserSource": {
+          "bytes": 6157302,
+          "sha256": "043d2ced58de856efa1a1496e0a0109344b39e469bed23dd41de7d10d8f6d2f2"
+        },
+        "complete": {
+          "main": {
+            "keyword": "NORMAL"
+          },
+          "parents": 47,
+          "buffers": 2,
+          "children": 16,
+          "strokes": 2455,
+          "markers": 47,
+          "clears": 47,
+          "predicates": 893315,
+          "globalCounts": {
+            "BRUSH-FILL-SUBPART": 47,
+            "BUFFER-HEAD": 2,
+            "BUFFER-ANYTHING": 0,
+            "BUFFER-FEATURE": 16,
+            "BUFFER-HOLE": 0,
+            "EDGE": 5722,
+            "ZERO-EDGE": 0,
+            "CFRAME": 964,
+            "IN-SUB-FRAME": 791037,
+            "FOOB": 102278,
+            "BRUSH-STROKE": 2455,
+            "CLEAR-FILL-MAP": 47
+          },
+          "sampledCounts": {
+            "BRUSH-FILL-SUBPART": 47,
+            "BUFFER-HEAD": 2,
+            "BUFFER-ANYTHING": 0,
+            "BUFFER-FEATURE": 16,
+            "BUFFER-HOLE": 0,
+            "EDGE": 16,
+            "ZERO-EDGE": 0,
+            "CFRAME": 546,
+            "IN-SUB-FRAME": 7218,
+            "FOOB": 0,
+            "BRUSH-STROKE": 2455,
+            "CLEAR-FILL-MAP": 47
+          },
+          "events": 20788,
+          "points": 9665,
+          "cells": 19968000,
+          "runs": 118927,
+          "objects": 10801,
+          "checks": 3147,
+          "errors": 0,
+          "aborts": 0,
+          "overflow": null,
+          "intervalActive": null,
+          "active": {
+            "parent": 0,
+            "buffer": 0,
+            "child": 0,
+            "stroke": 0,
+            "clear": 0
+          }
+        }
+      },
+      "control": {
+        "root": "brush-buffer-capture-control-seed5678-20261006-d",
+        "mode": "writer-full-seed-5678",
+        "smallImage": false,
+        "summarySha256": "4e718b3541ec9b302676270ec9710948344fc4b8320516f25a65ced8191c3fa7",
+        "requestSha256": null,
+        "stagedProbeSha256": null,
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+        "sceneReportSha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053"
+      },
+      "previousBoundary": {
+        "root": "brush-stroke-boundary-seed5678-20261005-h",
+        "controlRoot": "brush-stroke-boundary-control-seed5678-20261005-i",
+        "rawReportSha256": "4183dcfeb535eaac37d10a783170ddec6f6bf0a43366fe5cbb51f857e2575d63",
+        "complete": {
+          "main": "NORMAL",
+          "strokes": 2455,
+          "sampled": 47,
+          "clears": 47,
+          "events": 795994,
+          "predicates": 791037,
+          "screens": 2408,
+          "frame-reads": 47,
+          "points": 17726,
+          "cells": 28876800,
+          "runs": 150753,
+          "objects": 10015,
+          "checks": 5098,
+          "errors": 0,
+          "aborts": 0,
+          "sampledPredicateRecords": 132216,
+          "sampledScreenRecords": 0,
+          "capturedFrameReads": 47,
+          "observations": {
+            "eventIdsUnique": 134765,
+            "entryAndReturnPairsMatch": true,
+            "clearFramesMatchCframeRecords": true
+          }
+        }
+      },
+      "parity": {
+        "aa0ByteIdenticalToFreshControl": true,
+        "sceneReportByteIdenticalToFreshControl": true,
+        "runtimeFilesIdentical": true,
+        "setupIdentical": true
+      },
+      "comparison": {
+        "coverage": {
+          "naturalParents": 47,
+          "naturalBuffers": 2,
+          "featureCalls": 16,
+          "holeCalls": 0,
+          "childOutputCellsCompared": 2457600,
+          "bufferOutputCellsCompared": 307200,
+          "predicatesCompared": 7218,
+          "accepted": 7101,
+          "rejected": 117,
+          "edgePositions": 802,
+          "fractionalCoordinates": 1604,
+          "childChangedCells": 567,
+          "childTouchedCells": 1413,
+          "childTransitions": {
+            "1->3": 55,
+            "0->3": 512
+          },
+          "coordinatePrecisions": {
+            "double": 1604
+          },
+          "brushWidths": {
+            "3": 16
+          },
+          "maskChoices": {
+            "core": 16
+          },
+          "matchedStrokeCalls": 2455,
+          "markerOutputCellsAligned": 7219200,
+          "clearInputCellsAligned": 7219200,
+          "markerToClearIntervals": 47,
+          "additionalValue3Positions": 511,
+          "additionalValue3CoveredByChildChanges": 511,
+          "additionalValue3Already3AtMarkerExit": 0,
+          "additionalValue3MarkerExitValues": {
+            "0": 507,
+            "1": 4
+          }
+        },
+        "profiles": [
+          {
+            "sha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "width": 3,
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "perim": [
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          }
+        ],
+        "children": [
+          {
+            "id": 1148,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              12,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2926,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 58,
+            "inputPointsSha256": "45ee617d634e7230ef47ac39a89be84542d0d71c009cad5beaf1dd004ef5921f",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 522,
+            "accepted": 522,
+            "rejected": 0,
+            "orderedCandidatesSha256": "3fa47d06c86926659fcba084b210376d39dc7de9190dd8ea3a6133c4dc5f80c9",
+            "maskName": "core",
+            "inputMapSha256": "80b1127a96941a01f7d6ab213da5664fc1ac70770d13d356e1f22afa81b87540",
+            "outputMapSha256": "0608826564031ac08b4e9aac7b2c1de56588651de1052a7341cbe30302f73f1d",
+            "outputCells": 153600,
+            "changedCells": 65,
+            "changedPositionsSha256": "218ffafd5605886a0a77363d2d6361505a10014a36eedc15b19da28ec863ad7c",
+            "transitions": {
+              "1->3": 30,
+              "0->3": 35
+            },
+            "touchedCells": 65,
+            "touchedPositionsSha256": "218ffafd5605886a0a77363d2d6361505a10014a36eedc15b19da28ec863ad7c",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 1672,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              11,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 2986,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 52,
+            "inputPointsSha256": "3f3c37988b7e1219f750a245f0b80e934e061e4007778ec7c36a0dcc66b1a940",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 468,
+            "accepted": 468,
+            "rejected": 0,
+            "orderedCandidatesSha256": "2d44bc2a48892c03d73204ccb75b2bac248fbdeec7b7cf9a1486537fe5c5d990",
+            "maskName": "core",
+            "inputMapSha256": "0608826564031ac08b4e9aac7b2c1de56588651de1052a7341cbe30302f73f1d",
+            "outputMapSha256": "e3e59220279289d4496a62bfad87a6ac7969c40197a32a4afe7527d3e4d9d696",
+            "outputCells": 153600,
+            "changedCells": 9,
+            "changedPositionsSha256": "3d5cf1fa70e9cfe1fb180b8c509ddd34b712087b648d78e0eda0ebf44be78186",
+            "transitions": {
+              "1->3": 9
+            },
+            "touchedCells": 62,
+            "touchedPositionsSha256": "ddabc13aa999c803a157d1c6da2891e1790c73d9b07d72adb5c7ef338f2b4dc9",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 2142,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              18,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3040,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 49,
+            "inputPointsSha256": "62fa6fde839e2e273fa51015061fb486754327639942b249a3fe7f4963c9b37b",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 441,
+            "accepted": 441,
+            "rejected": 0,
+            "orderedCandidatesSha256": "2a5755c24b73bf08a7250cf1c2f6cfb3ff24a5d87f5ad39a53c562d82b05961a",
+            "maskName": "core",
+            "inputMapSha256": "e3e59220279289d4496a62bfad87a6ac7969c40197a32a4afe7527d3e4d9d696",
+            "outputMapSha256": "e0c3a37f24dec4541389bbefee1e8d8070625c37235960e7ef2f7a1a64eb4024",
+            "outputCells": 153600,
+            "changedCells": 37,
+            "changedPositionsSha256": "2a10f22d3794817326e2b55174c6bcc2659687844e31ed8b3535aa88d0461160",
+            "transitions": {
+              "0->3": 37
+            },
+            "touchedCells": 50,
+            "touchedPositionsSha256": "2f545ff548fa4c2c38bfc0eda5fe17ce1dab90f929980f1ee6599a9c1b3ce10a",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 2585,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              17,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3091,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 49,
+            "inputPointsSha256": "d0d725fa1325cfbfb67189caeda1a78abf0235017e6002d39c387e1d40394ce1",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 441,
+            "accepted": 441,
+            "rejected": 0,
+            "orderedCandidatesSha256": "1519ccbd36f567aa4a765f406008affa7eefc987e9c95ca7dfb24d4b2857d6e5",
+            "maskName": "core",
+            "inputMapSha256": "e0c3a37f24dec4541389bbefee1e8d8070625c37235960e7ef2f7a1a64eb4024",
+            "outputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputCells": 153600,
+            "changedCells": 23,
+            "changedPositionsSha256": "f9ef8e5fd141e5ab85536bbe236b102c03c27b53d1b8142d475a8b503fc3810b",
+            "transitions": {
+              "0->3": 23
+            },
+            "touchedCells": 44,
+            "touchedPositionsSha256": "ac7d487e39aacfc9511da7d218f9be81c92be76901ae2378e917659b03096906",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 3028,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              16,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3142,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 52,
+            "inputPointsSha256": "c2b0b936170fcea44ece4da3fbcd562411626e5c30be13a185f55b8ebc823464",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 468,
+            "accepted": 468,
+            "rejected": 0,
+            "orderedCandidatesSha256": "251dd72055eaa34c39a0f8013ccf7f95264ca4e2bd91a55ab523374993ab0749",
+            "maskName": "core",
+            "inputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputCells": 153600,
+            "changedCells": 0,
+            "changedPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "transitions": {},
+            "touchedCells": 48,
+            "touchedPositionsSha256": "cc0ef49b67a46be5b8a52f73ca35b75154cad209fdfc49540596a822502f7db2",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 3498,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              15,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3196,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 55,
+            "inputPointsSha256": "0471e59e031419090d86c69d2fbadaa8489fd8934fe3627b66f4a6754df3719f",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 495,
+            "accepted": 495,
+            "rejected": 0,
+            "orderedCandidatesSha256": "f39b87725b8ecca2a41c712600e2034284611fbfc88fd3cf93d07f9e65f65629",
+            "maskName": "core",
+            "inputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputCells": 153600,
+            "changedCells": 0,
+            "changedPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "transitions": {},
+            "touchedCells": 43,
+            "touchedPositionsSha256": "e13ddab6db742b78f7da8f0f4ff7c24458e4fd2ef730915663d45fe8c644f411",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 3995,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              14,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3253,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 44,
+            "inputPointsSha256": "9c4d3a8546447fcf3a03d0de78ec2c9354d382fc8513f0d31ff5911dc113c1d3",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 396,
+            "accepted": 396,
+            "rejected": 0,
+            "orderedCandidatesSha256": "4b2e6a9400058a204231e88d198df55855439149de989fc91aee6f31fe44fedd",
+            "maskName": "core",
+            "inputMapSha256": "97eda4e7dce8b9d22b281331ee77843f1e8495536625e4371b88c75413a45e81",
+            "outputMapSha256": "4acfde506295fa00af79ff719619ddf4f0dcdc53acdb732ec8093e4a154ed9fc",
+            "outputCells": 153600,
+            "changedCells": 22,
+            "changedPositionsSha256": "bfaa99d369fb4e17d155198aa5348917a8e1186516e3118b6cec861122859743",
+            "transitions": {
+              "0->3": 22
+            },
+            "touchedCells": 75,
+            "touchedPositionsSha256": "640c711c37d7a43468c8564228da5a3b92eddc2b38fe6b0b419a8c8949220ad4",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 4393,
+            "target": "BUFFER-FEATURE",
+            "parent": 1145,
+            "buffer": 1147,
+            "args": [
+              13,
+              0
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 3299,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 38,
+            "inputPointsSha256": "067fdeca5783f6c0fc66daec503252078cb26d42b79993a9595c2a92052f5f9a",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 75,
+              "rx": 116,
+              "ly": 423,
+              "ty": 463
+            },
+            "predicateCalls": 342,
+            "accepted": 300,
+            "rejected": 42,
+            "orderedCandidatesSha256": "c955c4006cd0d711c0a5295907ee6030b02f3cffff2402c9319211a43870a0c3",
+            "maskName": "core",
+            "inputMapSha256": "4acfde506295fa00af79ff719619ddf4f0dcdc53acdb732ec8093e4a154ed9fc",
+            "outputMapSha256": "2ae611908f6bcd4fcaa6950a028296c5961ba2395f0c240b4dd26de5f0f8522d",
+            "outputCells": 153600,
+            "changedCells": 14,
+            "changedPositionsSha256": "bb22776f39e88eae34ddc4fcdeafa72ff5e826597f59c2dfe4d196e0e17dec3a",
+            "transitions": {
+              "0->3": 14
+            },
+            "touchedCells": 52,
+            "touchedPositionsSha256": "a738272271ede751920067d760c1e83634772b4c63e9a074c2ab0e2a1f46b678",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 5736,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              11,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7707,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 56,
+            "inputPointsSha256": "b36cb0bdc9dbe33dfe0a48b0462c3f7531c50f212d12824b560664e512d17444",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 504,
+            "accepted": 504,
+            "rejected": 0,
+            "orderedCandidatesSha256": "813f55d9931d31df50e49755ae647cd03a97a07ac218e6823ab6d3f8f98686c0",
+            "maskName": "core",
+            "inputMapSha256": "cbb4de4971b733052d6989f6fd3af8c21a23385109aaa1218e6068727bcc12d8",
+            "outputMapSha256": "035550659f6195fa99c5362042fd690692568053cdf66c188851047b1c6701c1",
+            "outputCells": 153600,
+            "changedCells": 32,
+            "changedPositionsSha256": "7b262bac540acd8e21bff0e8e79223fe75bb0dfcc76a17a8f88dfaa3de58aec2",
+            "transitions": {
+              "0->3": 32
+            },
+            "touchedCells": 96,
+            "touchedPositionsSha256": "b0311cd873c07ab4688f70b09285f55a0f346c20de42d372480b584aae3523dc",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 6242,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              10,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7765,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 60,
+            "inputPointsSha256": "eb56121a05dded7ea22048d90c684016657fd0b05bbd9ac7f53151686472c442",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 540,
+            "accepted": 540,
+            "rejected": 0,
+            "orderedCandidatesSha256": "42c5695ad3ec8d87349f77822a18f302e47ba8d017e2c5bb42c5d43842a6a8f5",
+            "maskName": "core",
+            "inputMapSha256": "035550659f6195fa99c5362042fd690692568053cdf66c188851047b1c6701c1",
+            "outputMapSha256": "cdcb78eefd6f0572ddbf652a0fbda47d75b897d80b76eb196fc02852ea0e9959",
+            "outputCells": 153600,
+            "changedCells": 9,
+            "changedPositionsSha256": "4b9b4a732ca6b545dfdba79c25aa557d5064283fb9d3ef33e2ff2ca004ca4004",
+            "transitions": {
+              "0->3": 9
+            },
+            "touchedCells": 133,
+            "touchedPositionsSha256": "6269c270ff33c62d825ebc0cb39343b7dc86d3866a55ce2698865706e3a8028c",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 6784,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              17,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7827,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 50,
+            "inputPointsSha256": "c12553e2d7caa3fd8a1b099f6777967b1852c89541681cf7e75dfb78851626c3",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 450,
+            "accepted": 444,
+            "rejected": 6,
+            "orderedCandidatesSha256": "d06d4dfbf3d4058a60bf65781c72ec1c2a89b3de48941e598ceaa2f276752c76",
+            "maskName": "core",
+            "inputMapSha256": "cdcb78eefd6f0572ddbf652a0fbda47d75b897d80b76eb196fc02852ea0e9959",
+            "outputMapSha256": "84b989c8824814e4a2a4ebe8f169e02dcca26f73e644255ac73f522b9b353242",
+            "outputCells": 153600,
+            "changedCells": 81,
+            "changedPositionsSha256": "3c75b83c271b1dda358acc7a7b1d8c2d8e000bdd458a460095c37c702ffdb490",
+            "transitions": {
+              "1->3": 6,
+              "0->3": 75
+            },
+            "touchedCells": 109,
+            "touchedPositionsSha256": "3f9ed2b06e6d0160309528c0e7b34ce4e36506870da68a50c60fa9c105f46b5c",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 7236,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              16,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7879,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 50,
+            "inputPointsSha256": "12eb8f1c9f95f189a85c344c21a673919e0708de9d77bce70caf9247428874e7",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 450,
+            "accepted": 450,
+            "rejected": 0,
+            "orderedCandidatesSha256": "771b19248c4cdfeccb008ffaa502c17df51f73cb9217f1d8031de2763a23804c",
+            "maskName": "core",
+            "inputMapSha256": "84b989c8824814e4a2a4ebe8f169e02dcca26f73e644255ac73f522b9b353242",
+            "outputMapSha256": "602f9eb09bec779bf0b955a4a2c0e468337cc83e7ccf4b4070ac92ef78e7ccec",
+            "outputCells": 153600,
+            "changedCells": 125,
+            "changedPositionsSha256": "6ac1cb2c3e1b1594459d0fceab20fa4e12f71f098d27f469eb256f7610485759",
+            "transitions": {
+              "0->3": 125
+            },
+            "touchedCells": 141,
+            "touchedPositionsSha256": "b43b51106c08a1be97a7fa37e6dedd933eca1b1492e36d96debc79c964424460",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 7688,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              15,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7931,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 54,
+            "inputPointsSha256": "3357c7f13ce8c4affb9a60c4585b7417e1cae9495f3db87fb32c44d4fa99e44b",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 486,
+            "accepted": 486,
+            "rejected": 0,
+            "orderedCandidatesSha256": "61b61be6a629dd4b9116334a3ff4e218f780680473b48911a30087bd44d4f22a",
+            "maskName": "core",
+            "inputMapSha256": "602f9eb09bec779bf0b955a4a2c0e468337cc83e7ccf4b4070ac92ef78e7ccec",
+            "outputMapSha256": "0147c5136ea71ffb42767884c640cca51106b7fd449e6d54933b1f1c209771d7",
+            "outputCells": 153600,
+            "changedCells": 38,
+            "changedPositionsSha256": "dd5a18c4eb6ce2646a7f28586e8fe82faa2b552f9e4dd1fe94e832a3f2e63f18",
+            "transitions": {
+              "1->3": 3,
+              "0->3": 35
+            },
+            "touchedCells": 115,
+            "touchedPositionsSha256": "76a87115def116c0085b5aeac719115f71534ae91d968427d795d51a785ecfc7",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 8176,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              14,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 7987,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 54,
+            "inputPointsSha256": "8b33e1359587b5ce54a7f49fa728c8d7089eac29bbe492a87b2d271381ef6593",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 486,
+            "accepted": 486,
+            "rejected": 0,
+            "orderedCandidatesSha256": "267e70d4ae7434a36ff8b0a822caf5a04d010e83067e85dd9217d97e0be3b329",
+            "maskName": "core",
+            "inputMapSha256": "0147c5136ea71ffb42767884c640cca51106b7fd449e6d54933b1f1c209771d7",
+            "outputMapSha256": "2e1bc9f2aa9e4f9fe5efe73d9e7cf15193efdc7c09c3db4c64d592493b1286e7",
+            "outputCells": 153600,
+            "changedCells": 53,
+            "changedPositionsSha256": "f8d603b89b65f6a06081fac35882d94e009f385df2701c8d028164f8933b35ea",
+            "transitions": {
+              "0->3": 53
+            },
+            "touchedCells": 135,
+            "touchedPositionsSha256": "095d4be0b9bd0df2b23dd6e78120a4cf5b5c601a97fd8ba1d0293355dbb6da57",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 8664,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              13,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 8043,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 37,
+            "inputPointsSha256": "cbc457270e54c6f5b1ccb09734089525e3dc53deab64e274bea7d6bc04e47c53",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 333,
+            "accepted": 264,
+            "rejected": 69,
+            "orderedCandidatesSha256": "74156a684735d6f61c16e4519da65dce23133737c69582f1ba15d37a0aa23446",
+            "maskName": "core",
+            "inputMapSha256": "2e1bc9f2aa9e4f9fe5efe73d9e7cf15193efdc7c09c3db4c64d592493b1286e7",
+            "outputMapSha256": "dfe272a466f802dbe641c312e77d2162c91702f5a331c35a1487a9681ec4e6d9",
+            "outputCells": 153600,
+            "changedCells": 16,
+            "changedPositionsSha256": "72b2468f74c275e553c90e9bdd8a171f0dfaa5891c7b43d544f68fb813e55478",
+            "transitions": {
+              "1->3": 7,
+              "0->3": 9
+            },
+            "touchedCells": 92,
+            "touchedPositionsSha256": "b22584c8c5772d6e663d9438456ba814be7ade87ef5d5513e469daacc0d5d9a8",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          },
+          {
+            "id": 8999,
+            "target": "BUFFER-FEATURE",
+            "parent": 5733,
+            "buffer": 5735,
+            "args": [
+              12,
+              1
+            ],
+            "edgeHelper": "EDGE",
+            "edgeArguments": [
+              {
+                "kind": "object",
+                "id": 5530,
+                "type": "CFORM"
+              }
+            ],
+            "inputPointCount": 44,
+            "inputPointsSha256": "2ba37a4007f10d5866eaa69b8e3354331336c161629e5812cee5ca1f6c21a03b",
+            "brushProfileSha256": "0eaab1dc1b5ce9f1f84a478557974321b775a07c5694c3efb252282618d9c55d",
+            "subFrame": {
+              "lx": 165,
+              "rx": 228,
+              "ly": 398,
+              "ty": 477
+            },
+            "predicateCalls": 396,
+            "accepted": 396,
+            "rejected": 0,
+            "orderedCandidatesSha256": "29bd90b6c70af39d7eb756eb900e10660fabf21b902d943271da4e4b40da9a69",
+            "maskName": "core",
+            "inputMapSha256": "dfe272a466f802dbe641c312e77d2162c91702f5a331c35a1487a9681ec4e6d9",
+            "outputMapSha256": "be0f9f9ffa81bd7c1b55ee404d2270ed1290dd9e8cad51f65eb31b469b193067",
+            "outputCells": 153600,
+            "changedCells": 43,
+            "changedPositionsSha256": "df45b90c668b5ee78e29e34bd58ed6cba1489db741e017f445f78a1e7630f6a9",
+            "transitions": {
+              "0->3": 43
+            },
+            "touchedCells": 153,
+            "touchedPositionsSha256": "f51e6983f502419d843bba825586f0c1659137afd5bcdd7f1cc8c2aa17f38ed1",
+            "allOutputCellsEqual": true,
+            "originalReturn": "NIL"
+          }
+        ],
+        "buffers": [
+          {
+            "id": 1147,
+            "target": "BUFFER-HEAD",
+            "parent": 1145,
+            "args": [
+              {
+                "kind": "integer",
+                "value": 0
+              }
+            ],
+            "orderedChildren": [
+              {
+                "id": 1148,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 12
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 1672,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 11
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 2142,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 18
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 2585,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 17
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 3028,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 16
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 3498,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 15
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 3995,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 14
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              },
+              {
+                "id": 4393,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 13
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 0
+                  }
+                ]
+              }
+            ],
+            "inputMapSha256": "80b1127a96941a01f7d6ab213da5664fc1ac70770d13d356e1f22afa81b87540",
+            "outputMapSha256": "2ae611908f6bcd4fcaa6950a028296c5961ba2395f0c240b4dd26de5f0f8522d",
+            "allOutputCellsEqual": true
+          },
+          {
+            "id": 5735,
+            "target": "BUFFER-HEAD",
+            "parent": 5733,
+            "args": [
+              {
+                "kind": "integer",
+                "value": 1
+              }
+            ],
+            "orderedChildren": [
+              {
+                "id": 5736,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 11
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 6242,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 10
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 6784,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 17
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 7236,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 16
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 7688,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 15
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 8176,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 14
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 8664,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 13
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "id": 8999,
+                "target": "BUFFER-FEATURE",
+                "args": [
+                  {
+                    "kind": "integer",
+                    "value": 12
+                  },
+                  {
+                    "kind": "integer",
+                    "value": 1
+                  }
+                ]
+              }
+            ],
+            "inputMapSha256": "cbb4de4971b733052d6989f6fd3af8c21a23385109aaa1218e6068727bcc12d8",
+            "outputMapSha256": "be0f9f9ffa81bd7c1b55ee404d2270ed1290dd9e8cad51f65eb31b469b193067",
+            "allOutputCellsEqual": true
+          }
+        ],
+        "intervals": [
+          {
+            "markerId": 2,
+            "clearId": 69,
+            "parent": 1,
+            "cdex": 1,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 72,
+            "clearId": 145,
+            "parent": 71,
+            "cdex": 1,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 148,
+            "clearId": 209,
+            "parent": 147,
+            "cdex": 1,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 212,
+            "clearId": 276,
+            "parent": 211,
+            "cdex": 2,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 279,
+            "clearId": 351,
+            "parent": 278,
+            "cdex": 2,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 354,
+            "clearId": 418,
+            "parent": 353,
+            "cdex": 2,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 421,
+            "clearId": 461,
+            "parent": 420,
+            "cdex": 23,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 464,
+            "clearId": 543,
+            "parent": 463,
+            "cdex": 24,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 546,
+            "clearId": 616,
+            "parent": 545,
+            "cdex": 28,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 619,
+            "clearId": 679,
+            "parent": 618,
+            "cdex": 29,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 682,
+            "clearId": 742,
+            "parent": 681,
+            "cdex": 30,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 745,
+            "clearId": 804,
+            "parent": 744,
+            "cdex": 31,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 807,
+            "clearId": 872,
+            "parent": 806,
+            "cdex": 32,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 875,
+            "clearId": 932,
+            "parent": 874,
+            "cdex": 33,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 935,
+            "clearId": 981,
+            "parent": 934,
+            "cdex": 35,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 984,
+            "clearId": 1035,
+            "parent": 983,
+            "cdex": 37,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1038,
+            "clearId": 1105,
+            "parent": 1037,
+            "cdex": 38,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1108,
+            "clearId": 1143,
+            "parent": 1107,
+            "cdex": 42,
+            "sdex": 0,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 1146,
+            "clearId": 4804,
+            "parent": 1145,
+            "cdex": 43,
+            "sdex": 0,
+            "childIds": [
+              1148,
+              1672,
+              2142,
+              2585,
+              3028,
+              3498,
+              3995,
+              4393
+            ],
+            "additionalValue3Positions": 127,
+            "additionalPositionsSha256": "c34d071d772c7d0a5a301b1b482954b33c17c3c319b9751d6eceb25d0d0cc08f",
+            "lastCapturedChildChanges": {
+              "BUFFER-FEATURE:2585": 23,
+              "BUFFER-FEATURE:4393": 14,
+              "BUFFER-FEATURE:1148": 31,
+              "BUFFER-FEATURE:2142": 37,
+              "BUFFER-FEATURE:3995": 22
+            },
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 4807,
+            "clearId": 4911,
+            "parent": 4806,
+            "cdex": 0,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 4914,
+            "clearId": 5036,
+            "parent": 4913,
+            "cdex": 1,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5039,
+            "clearId": 5105,
+            "parent": 5038,
+            "cdex": 2,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5108,
+            "clearId": 5175,
+            "parent": 5107,
+            "cdex": 8,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5178,
+            "clearId": 5229,
+            "parent": 5177,
+            "cdex": 12,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5232,
+            "clearId": 5279,
+            "parent": 5231,
+            "cdex": 22,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5282,
+            "clearId": 5293,
+            "parent": 5281,
+            "cdex": 23,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5296,
+            "clearId": 5346,
+            "parent": 5295,
+            "cdex": 25,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5349,
+            "clearId": 5367,
+            "parent": 5348,
+            "cdex": 31,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5370,
+            "clearId": 5402,
+            "parent": 5369,
+            "cdex": 32,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5405,
+            "clearId": 5467,
+            "parent": 5404,
+            "cdex": 33,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5470,
+            "clearId": 5541,
+            "parent": 5469,
+            "cdex": 34,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5544,
+            "clearId": 5606,
+            "parent": 5543,
+            "cdex": 36,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5609,
+            "clearId": 5677,
+            "parent": 5608,
+            "cdex": 37,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5680,
+            "clearId": 5731,
+            "parent": 5679,
+            "cdex": 41,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 5734,
+            "clearId": 9487,
+            "parent": 5733,
+            "cdex": 42,
+            "sdex": 1,
+            "childIds": [
+              5736,
+              6242,
+              6784,
+              7236,
+              7688,
+              8176,
+              8664,
+              8999
+            ],
+            "additionalValue3Positions": 384,
+            "additionalPositionsSha256": "c20305014419f11ded5b1cc2ea744cf93f3e39f5566f1d4770f9c3869e4a9468",
+            "lastCapturedChildChanges": {
+              "BUFFER-FEATURE:8999": 43,
+              "BUFFER-FEATURE:7236": 125,
+              "BUFFER-FEATURE:8176": 53,
+              "BUFFER-FEATURE:5736": 32,
+              "BUFFER-FEATURE:6242": 9,
+              "BUFFER-FEATURE:6784": 77,
+              "BUFFER-FEATURE:7688": 36,
+              "BUFFER-FEATURE:8664": 9
+            },
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9490,
+            "clearId": 9545,
+            "parent": 9489,
+            "cdex": 43,
+            "sdex": 1,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9548,
+            "clearId": 9622,
+            "parent": 9547,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9625,
+            "clearId": 9718,
+            "parent": 9624,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9721,
+            "clearId": 9785,
+            "parent": 9720,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9788,
+            "clearId": 9899,
+            "parent": 9787,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9902,
+            "clearId": 9933,
+            "parent": 9901,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9936,
+            "clearId": 9984,
+            "parent": 9935,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 9987,
+            "clearId": 10071,
+            "parent": 9986,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 10074,
+            "clearId": 10133,
+            "parent": 10073,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 10136,
+            "clearId": 10204,
+            "parent": 10135,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 10207,
+            "clearId": 10272,
+            "parent": 10206,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          },
+          {
+            "markerId": 10275,
+            "clearId": 10346,
+            "parent": 10274,
+            "cdex": 0,
+            "sdex": 2,
+            "childIds": [],
+            "additionalValue3Positions": 0,
+            "additionalPositionsSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "lastCapturedChildChanges": {},
+            "everyAdditionalPositionChangedTo3WithinChild": true,
+            "scope": "Complete child boundaries prove net changes; intermediate stores and continuous ownership are not observed."
+          }
+        ],
+        "limits": [
+          "EDGE or ZERO-EDGE point lists, existing maps, brush masks and frame construction remain original inputs.",
+          "BUFFER-HOLE and BUFFER-ANYTHING are not naturally called in these two scenes and have no measured JS kernel here.",
+          "Complete function boundaries and native write sites are measured; individual array stores and continuous cell ownership are not traced.",
+          "BUFFER-HEAD feature indices and BUFFER-ANYTHING plan/frame selection are recorded, not independently generated.",
+          "No unobserved input domain, malformed input behavior or value-0 painter is claimed."
+        ]
+      }
+    }
+  ],
+  "aggregation": {
+    "policy": "Coverage and child/buffer/interval rows are retained per seed; no cross-seed numeric aggregation is asserted."
+  },
+  "limitations": [
+    "Only the two complete natural captures named here are compared. The incomplete -d diagnostic is not an input.",
+    "Feature results are restricted to the observed calls, masks, frames, existing maps and original EDGE point lists. DOUBLE-FLOAT and integer coordinates are measured.",
+    "BUFFER-HOLE and BUFFER-ANYTHING have zero natural calls in both tapes; no JS behavior is published for them.",
+    "The comparison observes complete function-boundary maps; it does not trace each underlying array store or continuous ownership between child calls.",
+    "BUFFER-HEAD feature indices and BUFFER-ANYTHING plan/frame selection remain captured inputs; this derivation does not independently generate those selections.",
+    "The six native functions are selected offline Ghidra reports with canonical standalone Evidence imports; no native REA provider session is claimed."
+  ],
+  "sourceHashes": [
+    {
+      "path": "engine/src/aaron-boundary-brush.js",
+      "sha256": "e7913e6111b243696ecc46cbe370b3ef640afc441f336dd03930f48ce5cb80c1",
+      "bytes": 3639
+    },
+    {
+      "path": "engine/src/aaron-boundary-map.js",
+      "sha256": "75225c5e054a843cab0d60ef1fb11a581a5889fc6f8ac2da4b0e3c538bcc3376",
+      "bytes": 2490
+    },
+    {
+      "path": "engine/src/aaron-buffer-brush.js",
+      "sha256": "884f510940feda102c6457bffa39be94789617bb69c37992e0ac77776b89864a",
+      "bytes": 3712
+    },
+    {
+      "path": "engine/src/aaron-maps.js",
+      "sha256": "f245f1fa7cdd0dd8e6d0f85f6293c8d9675e11bc0ec27cb7d37114e5ecbeec1f",
+      "bytes": 2932
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleCommands.js",
+      "sha256": "e8c7f31cc64d589256f8903324e3088a8e395f6ec5487c415ca42e1e5db3c3d9",
+      "bytes": 2149
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleFiles.js",
+      "sha256": "3171e7a656f43710c2ee0a38391751df87f21b3329c825ff4fa3d0a9928fda5e",
+      "bytes": 1430
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceLedger.js",
+      "sha256": "2a63701c3cc5de15269e7e504ce3b33d6108b64dc1a50cc7d5fe94ee3a457a1e",
+      "bytes": 11902
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/cliEvidenceCommands.js",
+      "sha256": "4c6f9cd33303d53a5c5692343702ecec75633460a9130ff13e0bc538c77ec094",
+      "bytes": 2419
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/analysisProfile.js",
+      "sha256": "76d1b0c2a2f472ae201b77ef93db29c0901e3964538c864a8fe133ab407b65f8",
+      "bytes": 2059
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidence.js",
+      "sha256": "b277c68d4b619d38a2e9d7d1faed08b0200ee7b678044cf666367034ccfb3b89",
+      "bytes": 8050
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidenceBundle.js",
+      "sha256": "7bd7b066f0ed8c6a403d2c12feca0fa18eb1f3f9e1cef39f94224897f31a85ca",
+      "bytes": 12582
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/package.json",
+      "sha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411",
+      "bytes": 10943
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/scripts/rea.mjs",
+      "sha256": "293fa0e5a2f55194964eb89f50296685ab14827c42cbdf5b72f82f4b867ffeef",
+      "bytes": 2549
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed1234-20261006-b/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed1234-20261006-b/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed1234-20261006-b/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed1234-20261006-b/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed1234-20261006-b/summary.json",
+      "sha256": "2080797fe7fd9b5e3b3d91d4cf380b8de6398be1d2fe9998efb69102ddbc8811",
+      "bytes": 806
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed5678-20261006-d/capture/aa0",
+      "sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+      "bytes": 158833
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed5678-20261006-d/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+      "bytes": 25472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed5678-20261006-d/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed5678-20261006-d/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-control-seed5678-20261006-d/summary.json",
+      "sha256": "4e718b3541ec9b302676270ec9710948344fc4b8320516f25a65ced8191c3fa7",
+      "bytes": 804
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/capture/aaron-brush-buffer.txt",
+      "sha256": "2f6d3e0caafc93804d56d16499bd9e5959c517dd8dcae556dbf2c2646808c1bc",
+      "bytes": 27382067
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/capture/aaron-pre-scene-probe.cl",
+      "sha256": "961476dc6dc805a2c0fe56c69e92cffa60adf143d6dbd2b08362cf627f24894c",
+      "bytes": 29327
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/capture/aaron-probe-loader.cl",
+      "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+      "bytes": 161
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/pre-scene-probe-request.json",
+      "sha256": "8a62f346f306c5383461137ee114b5a284db90cfd4a9309278b7d56143a3579a",
+      "bytes": 461
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed1234-20261006-a/summary.json",
+      "sha256": "041e59cbe83a51c444fa25892054789e06a5feb0152eab20850caceac0ae5528",
+      "bytes": 894
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/capture/aa0",
+      "sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+      "bytes": 158833
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/capture/aaron-brush-buffer.txt",
+      "sha256": "043d2ced58de856efa1a1496e0a0109344b39e469bed23dd41de7d10d8f6d2f2",
+      "bytes": 6157302
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/capture/aaron-pre-scene-probe.cl",
+      "sha256": "961476dc6dc805a2c0fe56c69e92cffa60adf143d6dbd2b08362cf627f24894c",
+      "bytes": 29327
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/capture/aaron-probe-loader.cl",
+      "sha256": "31c5e17e4b7be1d640e8bca72f2e0eff96a5e068a55875130eecc539325b0387",
+      "bytes": 159
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+      "bytes": 25472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/pre-scene-probe-request.json",
+      "sha256": "4a23a025a94eff1a12691890c7c136b6a987aebab4eea8b0370aeb58c2dc1ce1",
+      "bytes": 461
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-capture-seed5678-20261006-c/summary.json",
+      "sha256": "d11763c8a3f6fbea1fec354f9c962a61b4c24f6152dd73c5bc8c3e4c3ffc8c8b",
+      "bytes": 892
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-brush-buffer-native-links.txt",
+      "sha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "bytes": 3456
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-native-code-release.txt",
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "bytes": 36
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-pre-scene-probe.cl",
+      "sha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "bytes": 8664
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-probe-loader.cl",
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+      "bytes": 162
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/buffer-feature.native-window.bin",
+      "sha256": "6717b6aa76064e0ba8cf14ee5b31ecddd679cb48fb698811df01898d220a3a62",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/buffer-hole.native-window.bin",
+      "sha256": "d8d575449a8f94d89d1c90fdad9b7b47d4a56d5852d43d4e71664b273ff9df47",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/function-object-metadata.txt",
+      "sha256": "3b042e3f813912bc5f21b9437c446b8bdde1ee1e57ccc07232e693d5ccb767e1",
+      "bytes": 3456
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/manifest.json",
+      "sha256": "45d119a9681d64599476b35bcc122a6ac4d7f6723ca8b0baf1cf3a915badef6a",
+      "bytes": 1930
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/buffer-feature.native-payload.bin",
+      "sha256": "8d8ae305b450897b99edc85d8ee6d32ef0cadaea6e208f2d7cdb155200273bba",
+      "bytes": 444
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/buffer-hole.native-payload.bin",
+      "sha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98",
+      "bytes": 474
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.ghidra.json",
+      "sha256": "d66f817d6ae5fc4aafe657f5c9bfd52bc82b8e7444c334764a51034d19e9fb1d",
+      "bytes": 40129
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.headless.log",
+      "sha256": "fcd9813feeb38e02accbc503ae82eacee15b73de5e90be354d1666f2cf83e78b",
+      "bytes": 8133
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-bundle.json",
+      "sha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+      "bytes": 51482
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-export.json",
+      "sha256": "75f07a4a58d13a9c18677bf26fd6d7000c91e06fc05917b4f9bafc553dfb9c83",
+      "bytes": 51482
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-feature.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.ghidra.json",
+      "sha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649",
+      "bytes": 42134
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.headless.log",
+      "sha256": "39664226fa479642c8d48542ae3dbe3b3ccb5fd03abdc7fa542bd79cb7e68949",
+      "bytes": 8097
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-bundle.json",
+      "sha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+      "bytes": 54191
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-export.json",
+      "sha256": "73c3184dd950bbb9836416ee74a199677f320d6d0955b03685a20aa4bb58c380",
+      "bytes": 54191
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/native-code-map.json",
+      "sha256": "99e3db2f55e41b99f6d92d62f840645fee02350b431f044c2089c12e3eec84fd",
+      "bytes": 3122
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/pre-scene-probe-request.json",
+      "sha256": "1f02a2edf7634494b27be8ce5f0c40283a5e4d6cb7d10d6cf488fe8b7e764dd7",
+      "bytes": 473
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/summary.json",
+      "sha256": "0e4aa45dd96a3a095284aaac7fd6511152bf62dbc7048d326f234db4e5b3fb79",
+      "bytes": 907
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-control-seed1234-20261005-b/summary.json",
+      "sha256": "30ab5920cbfe3686e60140a0524aad79768b5d6ebfb9f319567fec6bf03aa13d",
+      "bytes": 807
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-brush-painting-native-links.txt",
+      "sha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "bytes": 8868
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-native-code-release.txt",
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+      "bytes": 36
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-pre-scene-probe.cl",
+      "sha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "bytes": 8739
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-probe-loader.cl",
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+      "bytes": 162
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/brush-fill-subpart.native-window.bin",
+      "sha256": "0d2bedb27027070fdbdb364ab689c73e90a1e68cd76c516836b8bfe3d7b12012",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/buffer-anything.native-window.bin",
+      "sha256": "1286596f2be43fcd76aed9ef5cee9ff1b79baa092001babc4f70ed0186c57704",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/buffer-head.native-window.bin",
+      "sha256": "f74f9e782cadaab2884693bf07c22bf746e0514af7f004d289715d7845dc9dfb",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/function-object-metadata.txt",
+      "sha256": "9c70f2ea05324b0695a42ea60319d836c9130120ad16e87e1e6501019162fda4",
+      "bytes": 8868
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/manifest.json",
+      "sha256": "89a424ce03a6f77624eef3faf60da877179838cde5dfb0810425fcc8e054833a",
+      "bytes": 3312
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/brush-fill-subpart.native-payload.bin",
+      "sha256": "e3a4c0c740034391f2a48b3a4cfbc77dc74dfa417d39777e291249e81bc2ff50",
+      "bytes": 842
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/buffer-anything.native-payload.bin",
+      "sha256": "8e09df53ad8efd01c2b9794a2196e6a9e13aa80165834103dd0492193b5a8dc4",
+      "bytes": 750
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/buffer-head.native-payload.bin",
+      "sha256": "3e1d6450d5ab9d6b81399aa10c945befa7ce1393018a7cbec7461d5f4db1565f",
+      "bytes": 146
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.ghidra.json",
+      "sha256": "2ac31f3dbf68b80bf3a72d0cc220acce266d38f0fa553eabf490d975b5dc6ec2",
+      "bytes": 71193
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.headless.log",
+      "sha256": "969d386d3592bfa25241894bbed3c93e4c182bdd1e20ca3c9b654b4470f5fdca",
+      "bytes": 8195
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-bundle.json",
+      "sha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+      "bytes": 87429
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-export.json",
+      "sha256": "88deed63cdc023b2a69cd89dc9f233153733515b9fc30aa8c2232dc188d15b72",
+      "bytes": 87429
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/brush-fill-subpart.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.ghidra.json",
+      "sha256": "8830ff331fb1ba15fbc0351d951fdba7343e4f2401c6346494828fd1e17aa8c0",
+      "bytes": 61873
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.headless.log",
+      "sha256": "3cb79ded31ced6da0271eab458534b32d324270e8382afd8a4b7e114eca7aeec",
+      "bytes": 8159
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-bundle.json",
+      "sha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+      "bytes": 75927
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-export.json",
+      "sha256": "9598df45cb5e6396f04faeb120548fd9bc940bd2a2fcfd019323f705716f86ec",
+      "bytes": 75927
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-anything.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.ghidra.json",
+      "sha256": "0e9579e9bbc1f4a00e7efd5aa6b77d516f5b10c86c77837b75c650012dcacaba",
+      "bytes": 14433
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.headless.log",
+      "sha256": "3022d30f8519728e959f247d1167b170e74d89a03e6ae558e82585a424d60d1b",
+      "bytes": 8110
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-bundle.json",
+      "sha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+      "bytes": 21998
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-export.json",
+      "sha256": "0c8ec1e7641675ffd5d836ebd26e2bf814c2cb067de0555500f94ae41d67bb81",
+      "bytes": 21998
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/buffer-head.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.ghidra.json",
+      "sha256": "f555f5ef6b8f6704c6f19bb55c38d5355d78915dade995e5cee80d4d4debfe94",
+      "bytes": 102045
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.headless.log",
+      "sha256": "90b7287dfe02487744381c3cbfaa708a80517811f5d51d83482fbe319a3ff593",
+      "bytes": 8172
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-bundle.json",
+      "sha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+      "bytes": 122718
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-export.json",
+      "sha256": "600b5cee34da91e0e9a24cc32f703217c4f4f11ea0beac5efd2c6722c1878121",
+      "bytes": 122718
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/ghidra/screen-and-store.rea-import.json",
+      "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+      "bytes": 57
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/native-code-map.json",
+      "sha256": "6945b1cd077613e96a9b86fa0c45ce04138e581793ede6ffcaa55d45909d1e2e",
+      "bytes": 5594
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/mapped/screen-and-store.native-payload.bin",
+      "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+      "bytes": 1224
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/native-code/screen-and-store.native-window.bin",
+      "sha256": "38d636f56b905291c0d19afe5ec05bd8084347a7fd95f0978dce1de1d2a06e20",
+      "bytes": 16384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/pre-scene-probe-request.json",
+      "sha256": "40e2de4319f8e7d075a3424e531a8483e349a4137cab53527bd4bec03e763e1a",
+      "bytes": 479
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-painting-native-seed1234-20261005-a/summary.json",
+      "sha256": "7be92a852f52c70e77f106a1a7e3221c72e5c5cc9a55f256f61fa13873d5bbfc",
+      "bytes": 911
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed1234-20261005-g/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed1234-20261005-g/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed1234-20261005-g/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed1234-20261005-g/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed1234-20261005-g/summary.json",
+      "sha256": "c1c84c838469b9818b1c365e353aa26b12b4c553ad4555bd1e06fd9c8c2bdebd",
+      "bytes": 807
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed5678-20261005-i/capture/aa0",
+      "sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+      "bytes": 158833
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed5678-20261005-i/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+      "bytes": 25472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed5678-20261005-i/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed5678-20261005-i/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-control-seed5678-20261005-i/summary.json",
+      "sha256": "aa48ef844975a5eb9d1b8cc4b84a7a0951653f1d56f8eb273acdbfd571df5e95",
+      "bytes": 805
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/capture/aa0",
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "bytes": 126956
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/capture/aaron-brush-stroke-boundary.txt",
+      "sha256": "f6e5c0d7bbe1012c8ad064f18696995223975eb1a5750d937da36fdf44353fcf",
+      "bytes": 19971322
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/capture/aaron-pre-scene-probe.cl",
+      "sha256": "c159c702361d96a5b17173e6ad67a0c09d4281aa72dce5ff4969121425f27967",
+      "bytes": 26028
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/capture/aaron-probe-loader.cl",
+      "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+      "bytes": 161
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "bytes": 25951
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/pre-scene-probe-request.json",
+      "sha256": "217c0f0683633bbeae9759ec787d93bc5da211c6c6224108ed77a892bf75f6a8",
+      "bytes": 472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed1234-20261005-f/summary.json",
+      "sha256": "9ce9874ca4cc4ceb3e84e5ffa424027ea4d91dd3a7f7841b75a7d2966f012e78",
+      "bytes": 904
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/capture/aa0",
+      "sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+      "bytes": 158833
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/capture/aaron-brush-stroke-boundary.txt",
+      "sha256": "4183dcfeb535eaac37d10a783170ddec6f6bf0a43366fe5cbb51f857e2575d63",
+      "bytes": 18148102
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/capture/aaron-pre-scene-probe.cl",
+      "sha256": "c159c702361d96a5b17173e6ad67a0c09d4281aa72dce5ff4969121425f27967",
+      "bytes": 26028
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/capture/aaron-probe-loader.cl",
+      "sha256": "31c5e17e4b7be1d640e8bca72f2e0eff96a5e068a55875130eecc539325b0387",
+      "bytes": 159
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/capture/aaron-scene-state-snapshot.txt",
+      "sha256": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+      "bytes": 25472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/pre-scene-probe-request.json",
+      "sha256": "3a853aca846aaad15530dac76fbff1b834591747fd8cb3f2852e39f29e9f468b",
+      "bytes": 472
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/runtime/AARON.exe",
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "bytes": 36864
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/runtime/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-boundary-seed5678-20261005-h/summary.json",
+      "sha256": "eaab8c8955b461c000643fdcd985f6f6cd8a1a4ee9916d2c68476e9f2b1030c1",
+      "bytes": 902
+    },
+    {
+      "path": "research/introspection/brush-buffer-capture.cl",
+      "sha256": "961476dc6dc805a2c0fe56c69e92cffa60adf143d6dbd2b08362cf627f24894c",
+      "bytes": 29327
+    },
+    {
+      "path": "research/introspection/brush-buffer-native-links.cl",
+      "sha256": "a3db9d8eb55c60cf00eb91270f33069909cd24c4548ce35fe1b1a1869adde1ac",
+      "bytes": 8664
+    },
+    {
+      "path": "research/introspection/brush-painting-native-links.cl",
+      "sha256": "3f58c9a3e3cc499d193f71e590f489cf478ea39dd4e2f0f390714dfdf238cd52",
+      "bytes": 8739
+    },
+    {
+      "path": "research/introspection/brush-stroke-boundary-capture.cl",
+      "sha256": "c159c702361d96a5b17173e6ad67a0c09d4281aa72dce5ff4969121425f27967",
+      "bytes": 26028
+    },
+    {
+      "path": "research/introspection/brush-stroke-census-capture.cl",
+      "sha256": "6f487f3dbbf0b6e81043f80926cd2c159d9721455cc5cc94763723bb73ca6aa5",
+      "bytes": 8146
+    },
+    {
+      "path": "research/introspection/brush-stroke-native-links.cl",
+      "sha256": "34864e38e05a237f2a12676285025ae665bfb54cf09a9576c6bc5aef3de246ff",
+      "bytes": 8644
+    },
+    {
+      "path": "research/introspection/evidence/brush-buffer-native-20261006.json",
+      "sha256": "aea8e8d8e08ba9c69d22aac4a1d2dcf52d3216a9dbd6612fc1464695c7f28322",
+      "bytes": 54873
+    },
+    {
+      "path": "research/introspection/evidence/brush-stroke-boundary-parity-20261005.json",
+      "sha256": "738aa4d3f1cda3f47b2607dd004d042a6dfa931cbf06ea3d19ab31fd0c71754a",
+      "bytes": 308370
+    },
+    {
+      "path": "research/introspection/evidence/brush-stroke-census-20261005.json",
+      "sha256": "d893c20bc6041329fb8f3b0f6cacc1e67ab274cc4a1c19e8f33a80cc59bd06eb",
+      "bytes": 69138
+    },
+    {
+      "path": "research/tools/compare-brush-buffer-capture.mjs",
+      "sha256": "419a8608bdc4b8c225aa6adc5305cf77e97cf95f1f97910811532f8e60f2e863",
+      "bytes": 15975
+    },
+    {
+      "path": "research/tools/derive-brush-buffer-evidence.mjs",
+      "sha256": "c7ef3782d4e6d3edff257a4ad3880f1128eb6909834a582c18a259d63881cd52",
+      "bytes": 21852
+    },
+    {
+      "path": "research/tools/derive-brush-buffer-native-evidence.mjs",
+      "sha256": "1e30bf353d4cf8ac0c0b6f063e9a9abbdcc8a465a6654932109e834bd7340f20",
+      "bytes": 44376
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-boundary-evidence.mjs",
+      "sha256": "257908fa0fcf4db34f6b9c33d62f49306e490cbb8be7f33ef004a5f3c4becee4",
+      "bytes": 24751
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-native-evidence.mjs",
+      "sha256": "745e1fc1db2c3f7abd2a229cfd63c6567b0708a8eb255fc6019b2452e184b97d",
+      "bytes": 26930
+    },
+    {
+      "path": "research/tools/ghidra/AaronNativeReport.java",
+      "sha256": "63e268a025e1ff3225f10baa8d2acc0a2f3669b58206c27a6c67be22d55e2fbc",
+      "bytes": 5753
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee",
+      "bytes": 41726
+    },
+    {
+      "path": "research/tools/map-native-code-to-pll.mjs",
+      "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+      "bytes": 5906
+    },
+    {
+      "path": "research/tools/parse-brush-buffer-report.mjs",
+      "sha256": "3406ed069f84b787c5f7f570d8b8eee716d608e0ea9a031902511caf03c64c45",
+      "bytes": 25585
+    },
+    {
+      "path": "research/tools/parse-brush-stroke-boundary-report.mjs",
+      "sha256": "e6123309518949603fe550236629df9ea2dc9b9b6ed1645f5f663f9e2f089d22",
+      "bytes": 41292
+    },
+    {
+      "path": "research/tools/parse-brush-stroke-census-report.mjs",
+      "sha256": "49280d78bb4853b0dc612f1e18141b60528461a32c289fb4e72c1745baba1407",
+      "bytes": 11612
+    },
+    {
+      "path": "research/tools/parse-natural-free-path-report.mjs",
+      "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee",
+      "bytes": 20265
+    },
+    {
+      "path": "research/tools/rea-evidence-bundle.mjs",
+      "sha256": "81bd072f7959655bf80ef3ecf240ec08f30ecbe85344a8f8941d9ea33752e601",
+      "bytes": 14465
+    },
+    {
+      "path": "research/tools/run-aaron-ghidra.ps1",
+      "sha256": "0a9fed5e071a59d5818ca6ade10f4d3b0164d9cccb83f63173a6602310f0767d",
+      "bytes": 3269
+    }
+  ]
+}

@@ -8,6 +8,26 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-06
 
+The feature buffer now matches all 24 natural BUFFER-FEATURE calls, 81,110
+ordered candidate/predicate checks and 3,686,400 complete feature output cells.
+Their maps compose to all three BUFFER-HEAD outputs (another 460,800 cells).
+Every one of the previous 6,965 extra clear-entry 3 positions changes to 3
+within a captured feature boundary. This is net boundary attribution, not an
+individual store trace or continuous ownership claim. Read
+[the feature findings](introspection/brush-feature-buffer.md) and
+[portable evidence](introspection/evidence/brush-feature-buffer-parity-20261006.json).
+Both complete tapes match fresh drawing/scene controls. Frozen v2 roots are
+brush-buffer-capture-seed1234-20261006-a / seed5678-20261006-c; controls
+brush-buffer-capture-control-seed1234-20261006-b / seed5678-20261006-d.
+
+DOUBLE-FLOAT and integer coordinates, CORE widths 17/3 and boundary value 3
+are observed. EDGE creation, masks, frames, map history and head feature
+selection remain inputs. BUFFER-ANYTHING/BUFFER-HOLE have no natural calls
+here. Next: map/characterize FOOB and ZERO-EDGE using the frozen new metadata
+probe, then the complete BRUSH-FILL row/iris schedule and value-0 painter.
+
+### Native mapping checkpoint
+
 Six painting/buffer functions now have unique complete PLL matches and 1,364
 byte-checked Ghidra instruction rows covering 3,829 payload bytes. Both native
 runs equal a fresh uninstrumented drawing/scene control. Read
@@ -17,8 +37,7 @@ BUFFER-FEATURE and BUFFER-HOLE expose candidate native setter sites. The
 bounded BUFFER-HEAD constant list is a prefix; natural traversal remains open.
 This is external Ghidra/REA evidence, not a Windows native-provider session.
 
-Current work: complete buffer input/output maps and attribution of the 6,965
-additional clear-entry value-3 positions below. The first buffer tape
+The first buffer tape
 `brush-buffer-capture-seed1234-20261005-d` is diagnostic only: it lacks
 MAIN/READY and COMPLETE/END despite the matching drawing. Frozen v2 removes
 the primitive setter hook and adds full per-child maps. Require its own
@@ -39,9 +58,10 @@ full output cells. Both drawings/scenes equal fresh controls. Read
 The accepted-coordinate touch set is not an individual native store trace.
 There are 6,965 additional clear-entry value-3 positions outside the linked
 marker's accepted set; every one was 0/1 at marker exit, so its net addition
-occurs during intervening work. Their writer and intermediate ownership remain
-open. Next: fresh SCREEN-AND-STORE / BRUSH-FILL-SUBPART mapping and natural
-writer attribution, followed by the complete BRUSH-FILL row/iris schedule.
+occurs during intervening work. The feature follow-up above now accounts for
+all of them at complete function boundaries; individual stores and continuous
+ownership remain open. The native mapping and feature attribution supersede
+the caller investigation that was queued at this checkpoint.
 Frozen boundary roots: brush-stroke-boundary-seed1234-20261005-f and
 brush-stroke-boundary-seed5678-20261005-h; fresh controls -g/-i; native -e.
 
