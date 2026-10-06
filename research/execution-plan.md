@@ -10,13 +10,17 @@ buffer experiment now matches 24 natural feature calls, 81,110 ordered
 predicates and 3,686,400 full output cells. All three head outputs compose
 exactly, and all 6,965 extra clear-entry 3 positions have captured feature
 changes. See [the feature findings](introspection/brush-feature-buffer.md).
-Its first tape is excluded for missing MAIN/READY and COMPLETE/END. Continue
-with FOOB characterization: its native object and ZERO-EDGE now have separate
+Its first tape is excluded for missing MAIN/READY and COMPLETE/END.
+FOOB now matches two complete 188,081-input integer grids, two 324-point
+single/double-float matrices and all 166,072 natural calls, with fresh controls.
+T means outside the inclusive 0..dimension-1 rectangle; 319.5 is outside a
+width-320 picture. See [the FOOB findings](introspection/foob.md).
+Its native object and ZERO-EDGE have separate
 unique complete PLL matches and 448 byte-checked instruction rows, with
 canonical external REA records and a fresh control. See
 [the predicate native findings](introspection/brush-buffer-predicate-native.md).
-Metadata does not establish their natural calls or behavior. Then investigate
-ZERO-EDGE and the complete BRUSH-FILL row/iris schedule and
+Metadata alone does not establish their natural calls or behavior. Continue
+with ZERO-EDGE's bounded explicit capture, then the complete BRUSH-FILL row/iris schedule and
 value-0 painting. Head feature selection and original geometry remain inputs.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for
@@ -68,7 +72,7 @@ output cells; all 3,881 stroke returns preserve original path identity. All
 Short CORE paths and value-0 painting remain open. There are 6,965 additional
 clear-entry value-3 positions that were 0/1 at marker exit. Complete feature
 boundaries now account for all of them, with matching JS maps and fresh
-controls. The next priority is FOOB/ZERO-EDGE, then the complete BRUSH-FILL
+controls. The next priority is ZERO-EDGE, then the complete BRUSH-FILL
 row/iris schedule, value-0 painter and replacing original
 writer decisions and palette values with
 upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one

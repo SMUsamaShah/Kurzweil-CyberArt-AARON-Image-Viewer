@@ -8,6 +8,23 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-06
 
+FOOB now matches every result in two complete captures: each repeats 188,081
+integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
+total. T means outside `0 <= X <= *PIC-WIDE*-1` and
+`0 <= Y <= *PIC-HIGH*-1`; fractional coordinates beyond the last integer
+pixel are outside. The measured dimensions are 320x480. Read
+[the FOOB findings](introspection/foob.md) and
+[portable evidence](introspection/evidence/foob-parity-20261006.json).
+Both drawings/scenes equal fresh controls. Full matrix map copies, map and
+BRUSH/SUB-FRAME identities and three-value copied RNG previews are unchanged;
+this is not a full RNG-state proof or a direct-caller capture.
+Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
+with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
+Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
+the BRUSH-FILL row/iris schedule and value-0 painter.
+
+### Feature buffer checkpoint
+
 The feature buffer now matches all 24 natural BUFFER-FEATURE calls, 81,110
 ordered candidate/predicate checks and 3,686,400 complete feature output cells.
 Their maps compose to all three BUFFER-HEAD outputs (another 460,800 cells).
@@ -25,6 +42,7 @@ are observed. EDGE creation, masks, frames, map history and head feature
 selection remain inputs. BUFFER-ANYTHING/BUFFER-HOLE have no natural calls
 here. Next: map/characterize FOOB and ZERO-EDGE using the frozen new metadata
 probe, then the complete BRUSH-FILL row/iris schedule and value-0 painter.
+The FOOB follow-up above supersedes that earlier queue; ZERO-EDGE is next.
 
 ### Native mapping checkpoint
 
@@ -34,8 +52,8 @@ external REA records and a fresh byte-identical drawing/scene control. Read
 [the predicate native findings](introspection/brush-buffer-predicate-native.md)
 and [portable evidence](introspection/evidence/brush-buffer-predicate-native-20261006.json).
 The capture is metadata only: neither natural calls nor Lisp behavior follow
-from it. The next experiment measures FOOB's complete integer grid, mixed
-single/double fractional bounds and every natural argument/result pair.
+from it. The separate FOOB behavior capture above now measures its complete
+integer grid, mixed single/double fractional bounds and natural results.
 
 Six painting/buffer functions now have unique complete PLL matches and 1,364
 byte-checked Ghidra instruction rows covering 3,829 payload bytes. Both native

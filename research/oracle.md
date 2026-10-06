@@ -213,6 +213,12 @@ not delete an unknown `C:\temp` file just to start a run. A failure after
 attempt. The runner stages its own named files and normally copies them into
 the capture folder, then removes those staged copies in `finally`.
 
+A cancelled tool call does not establish that the oracle stopped. Before
+starting another run, inspect the AARON process, reserved `C:\temp` files and
+the owned output root. The first FOOB run finished and archived a complete
+tape after its tool call was interrupted. Preserve that root and validate its
+summary, observer footer and control bytes; use a new root for any retry.
+
 Optional native probes use `-PreSceneProbePath`, declared
 `-ProbeOutputNames`, and a bounded `-PreSceneProbePauseSeconds` shorter than
 `RunSeconds`. The runner hashes the staged probe before launch and writes an

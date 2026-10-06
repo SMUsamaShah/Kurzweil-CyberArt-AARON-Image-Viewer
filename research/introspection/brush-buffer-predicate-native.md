@@ -1,5 +1,9 @@
 # Native predicate candidates: FOOB and ZERO-EDGE
 
+The later [FOOB behavior capture](foob.md) measures its bounds predicate
+separately. The evidence below records the earlier native mapping; ZERO-EDGE
+behavior remains unresolved.
+
 ## Capture and verified scope
 
 The metadata probe enumerated two compiled functions while AARON was paused:

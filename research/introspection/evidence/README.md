@@ -1,5 +1,18 @@
 # Original-engine report excerpts
 
+## FOOB picture bounds, 2026-10-06
+
+[`foob-parity-20261006.json`](foob-parity-20261006.json)
+binds two complete captures and fresh controls: each repeats 188,081 integer
+pairs and 324 single/double-float pairs; all 166,072 natural calls also match
+independent JavaScript. T means outside the inclusive 0..dimension-1 rectangle
+at measured dimensions 320x480. Fractional points beyond the last pixel are
+outside. Complete matrix map copies and binding identities match; the copied
+three-value RNG preview is unchanged. Other dimensions, rational/bignum and
+nonfinite behavior, original errors and mixed integer/float pairs remain
+outside the observed scope. No direct caller or complete generator parity is
+claimed. See [the findings](../foob.md).
+
 ## Native FOOB and ZERO-EDGE mapping, 2026-10-06
 
 [`brush-buffer-predicate-native-20261006.json`](brush-buffer-predicate-native-20261006.json)
