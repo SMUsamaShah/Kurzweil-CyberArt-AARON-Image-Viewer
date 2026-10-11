@@ -321,6 +321,15 @@ current source-bound controls and measured map dimensions; do not promote a
 match to an old hash into current parity, or diagnose a vector limit without
 the actual failing-stage record and condition.
 
+ZERO-EDGE's positive PERIM 3 sample returns a proper five-point list after
+the lower samples return NIL. Capture the complete bounded point coordinates,
+types and identities as well as the general typed return summary, and check
+their counts/shapes against each other. The last point is EQ the supplied
+START in this case. Neither that result nor a pattern among the earlier
+mutations establishes a general loop, PERIM meaning or natural caller. Keep
+each changed input source-bound and require the same original-state and
+fresh-control checks. See [the positive samples](introspection/zero-edge-positive.md).
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,

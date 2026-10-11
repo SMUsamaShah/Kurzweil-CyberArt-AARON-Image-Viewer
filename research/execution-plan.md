@@ -8,7 +8,19 @@ still rejects raw named PLL payloads; keep standalone Ghidra for that route.
 The old toolchain remains pinned for historical evidence. See
 [the update record](rea-update-20261011.md). The ZERO-EDGE constructor helper
 now derives identical portable evidence independently, with all 140 source
-bindings revalidated. Proceed to the separately controlled single call below.
+bindings revalidated. The subsequent explicit-call milestones follow below.
+
+Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
+UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
+five points in exact order (3,3,2), (3,2,4), (4,2,6), (4,3,0), (3,3,0),
+with the last point EQ original START and its final slots unchanged. All
+scratch cells stay zero; original full maps/bindings and both fresh controls
+pass. The portable aggregate has independent byte-identical derivations and
+230 source bindings. See [the positive samples](introspection/zero-edge-positive.md).
+Next change only START.Z to 1 with PERIM 3 and the zero scratch map. Then
+consider changing only scratch cell (3,2) to 1, with an explicit exact-map gate.
+The native map-value branch and that cell selection are hypotheses; these
+calls do not recover general traversal or a PERIM interpretation.
 
 The first explicit ZERO-EDGE call now completes in frozen single-call v3:
 START (3,3,0), PERIM 0, zero 7x7 UBYTE4 scratch map; one NIL return, supplied
@@ -16,8 +28,8 @@ START.Z changes to 6, all 49 scratch cells stay zero. Complete original map
 checks and restored bindings pass, and both fresh drawing/scene controls
 match. See [the isolated-call findings](introspection/zero-edge-traversal-single.md).
 Its portable publication passes independent byte equality and all 166 source
-bindings. Change only PERIM to 1 before extending
-direction/positive-budget samples. General traversal and PERIM meaning remain
+bindings. The positive-PERIM samples above supersede its earlier next step.
+General traversal and PERIM meaning remain
 unrecovered. Today's natural map dimensions are 768x1080; compare current
 captures to current controls, retaining the older 320x480 evidence separately.
 

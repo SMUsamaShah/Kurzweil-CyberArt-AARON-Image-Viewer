@@ -30,6 +30,25 @@ with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
 
+### ZERO-EDGE positive PERIM samples, 2026-10-11
+
+Three separate calls at START (3,3,0), on the same zero 7x7 UBYTE4 scratch
+map, now complete for PERIM 1/2/3. PERIM 1 and 2 return one NIL and leave
+START.Z at 4 and 2 respectively. PERIM 3 returns a proper five-TRIPT list in
+order (3,3,2), (3,2,4), (4,2,6), (4,3,0), (3,3,0); the last point is EQ
+the supplied START, whose final slots are unchanged. All scratch cells stay
+zero. Full original maps/bindings, copied previews and both fresh g/i drawing
+and scene controls pass. Read [the positive samples](introspection/zero-edge-positive.md).
+
+The shared immutable-specification deriver produces byte-identical independent
+agent/root outputs and revalidates all 230 source bindings, including the
+frozen native 56-source closure. See
+[portable evidence](introspection/evidence/zero-edge-positive-20261011.json).
+This is a three-input observation, not general traversal or a recovered PERIM
+meaning. Next change only START.Z to 1 at PERIM 3; then consider a separately
+gated one-cell scratch-map change at (3,2) to exercise a candidate map branch.
+That cell's relevance remains a hypothesis until the call is observed.
+
 ### ZERO-EDGE first explicit call, 2026-10-11
 
 Frozen single-call v3 completes one post-MAIN `ZERO-EDGE` call with

@@ -1,5 +1,23 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE positive PERIM samples, 2026-10-11
+
+[`zero-edge-positive-20261011.json`](zero-edge-positive-20261011.json) binds
+three separate original calls and two fresh uninstrumented controls. It is
+329,271 bytes, SHA-256
+`f31fbaf396970e041356a450fd05b738a7b542f6cccf868f0e7ddbe0e72f6bd3`.
+Independent agent/root derivations match and all 230 sources revalidate,
+including the frozen native 56-source closure.
+
+At START (3,3,0) on a zero 7x7 UBYTE4 map, PERIM 1/2 return NIL and change
+START.Z to 4/2. PERIM 3 returns a proper five-TRIPT list, with its last point
+EQ supplied START and final START unchanged. Complete path coordinates and
+identity fields are retained. All scratch cells remain zero; original map
+contents/identities, restored bindings, copied RNG previews and actual output
+bytes pass both fresh controls. These are three controlled input observations;
+PERIM meaning, general traversal and natural caller remain unresolved. See
+[the findings](../zero-edge-positive.md).
+
 ## ZERO-EDGE first explicit call, 2026-10-11
 
 [`zero-edge-traversal-single-20261011.json`](zero-edge-traversal-single-20261011.json)
