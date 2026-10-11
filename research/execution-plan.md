@@ -10,6 +10,17 @@ The old toolchain remains pinned for historical evidence. See
 now derives identical portable evidence independently, with all 140 source
 bindings revalidated. Proceed to the separately controlled single call below.
 
+The first explicit ZERO-EDGE call now completes in frozen single-call v3:
+START (3,3,0), PERIM 0, zero 7x7 UBYTE4 scratch map; one NIL return, supplied
+START.Z changes to 6, all 49 scratch cells stay zero. Complete original map
+checks and restored bindings pass, and both fresh drawing/scene controls
+match. See [the isolated-call findings](introspection/zero-edge-traversal-single.md).
+Its portable publication passes independent byte equality and all 166 source
+bindings. Change only PERIM to 1 before extending
+direction/positive-budget samples. General traversal and PERIM meaning remain
+unrecovered. Today's natural map dimensions are 768x1080; compare current
+captures to current controls, retaining the older 320x480 evidence separately.
+
 The 2026-10-06 native checkpoint maps six painting/buffer objects and validates
 1,364 instruction rows against the PLL, with fresh drawing/scene controls.
 See [the native findings](introspection/brush-painting-native.md). The current
@@ -30,8 +41,9 @@ The separate ZERO-EDGE contract capture now measures positional MAKE-TRIPT
 X/Y/Z and one (17,23,6) point's direct slots/getters after MAIN, with a complete
 zero-error footer and fresh drawing/scene control. Read
 [the contract findings](introspection/zero-edge-contract.md). ZERO-EDGE itself
-has not been invoked; PERIM's domain and traversal remain unresolved. Continue
-with its bounded explicit capture, then the complete BRUSH-FILL row/iris schedule and
+was not invoked by that constructor probe. The separate single-call v3
+observation above now measures one input; PERIM's domain and traversal remain
+unresolved. Continue with bounded positive-PERIM cases, then the complete BRUSH-FILL row/iris schedule and
 value-0 painting. Head feature selection and original geometry remain inputs.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for

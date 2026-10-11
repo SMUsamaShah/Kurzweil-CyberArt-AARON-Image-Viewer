@@ -30,6 +30,29 @@ with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
 
+### ZERO-EDGE first explicit call, 2026-10-11
+
+Frozen single-call v3 completes one post-MAIN `ZERO-EDGE` call with
+`MAKE-TRIPT(3,3,0)`, PERIM 0 and a zero 7x7 UBYTE4 scratch map. It returns one
+NIL and changes the supplied point's Z from 0 to 6; all 49 scratch cells stay
+zero. Copied three-draw previews stay (59,29,74). All seven observed original
+bindings and both original maps' identity/metadata/full 829,440 cells match
+after PROGV, and drawing/image/image-id/raw scene bytes match both fresh
+uninstrumented controls b/c. This is one input observation, not a traversal
+algorithm, PERIM interpretation, caller capture or complete-state proof. Read
+[the isolated-call findings](introspection/zero-edge-traversal-single.md).
+
+Today's natural maps are 768x1080; the earlier 320x480 corpus remains a
+separate captured configuration. The change's cause is uninvestigated. V1/a
+and v2/d single-call tapes are diagnostic: malformed post-MAIN IF, zero target
+calls, incomplete case, one observer error despite matching drawing bytes.
+V3 fixes the IF and avoids printer sharing labels in bounded report summaries.
+Portable publication now passes two byte-identical independent derivations
+and all 166 source bindings, including the frozen native 56-source baseline.
+See [the portable capture](introspection/evidence/zero-edge-traversal-single-20261011.json).
+Next: positive PERIM/direction samples with one changed input and fresh
+complete controls before broader claims.
+
 ### ZERO-EDGE construction contract
 
 Frozen v4 now has a complete zero-error capture in
@@ -47,9 +70,10 @@ two independent outputs are byte-identical, SHA-256
 `ae70bc92ee90788cda8370974f174de431e3d1ea8ddfcea273ff097eb9970267`.
 V4 SHA-256 is
 `400cf8a4a5bf1fecfa9fd5e302f1d6226827f34eb84e2382114912044bb2bca2`.
-The probe has not invoked or replaced ZERO-EDGE. PERIM's domain, traversal,
-natural calls and direct caller remain unresolved. Next: one bounded explicit
-call on a scratch map, then expand cases only after complete returned captures.
+This constructor probe did not invoke or replace ZERO-EDGE. The separate
+single-call observation above supersedes that earlier queue. PERIM's domain,
+traversal, natural calls and direct caller remain unresolved; expand cases
+only after complete returned captures and current controls pass.
 
 Earlier contract attempts remain diagnostic:
 

@@ -306,6 +306,21 @@ bytes, and do not move the sample back into pre-seed startup. See
 [the contract findings](introspection/zero-edge-contract.md). This probe does
 not call ZERO-EDGE or establish its PERIM argument's meaning.
 
+The 2026-10-11 ZERO-EDGE single-call v1/v2 observers preserve the drawing but
+fail before snapshots or a target call. V2's condition text says `malformed if
+statement`: its completion SETF is a fourth IF argument. Balanced delimiters
+and INSTALL/READY do not establish that every deferred observer body is valid.
+Check IF argument count as well as SETF pairs, handler clauses and lexical
+scope. Preserve rejected sources, repair in a separate version, and require
+the repaired report's own completion. See
+[the isolated-call record](introspection/zero-edge-traversal-single.md).
+
+Fresh controls on 2026-10-11 also record 768x1080 natural maps rather than the
+earlier 320x480 maps. The configuration change's cause is uninvestigated. Use
+current source-bound controls and measured map dimensions; do not promote a
+match to an old hash into current parity, or diagnose a vector limit without
+the actual failing-stage record and condition.
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,

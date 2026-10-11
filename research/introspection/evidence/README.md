@@ -1,5 +1,22 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE first explicit call, 2026-10-11
+
+[`zero-edge-traversal-single-20261011.json`](zero-edge-traversal-single-20261011.json)
+binds frozen single-call v3 to both fresh uninstrumented controls and 166
+revalidated source files. Two independent derivations are byte-identical:
+133,797 bytes, SHA-256
+`f3f8bd05a54513ffebc3f14b61060e2108e47c25888a08a51eba53d3b3856685`.
+One explicit ZERO-EDGE call with START (3,3,0), PERIM 0 and a zero 7x7 UBYTE4
+scratch map returns one NIL and changes START.Z to 6. All 49 scratch cells
+stay zero, copied three-draw previews remain stable, and both original maps'
+identities/metadata/all 829,440 cells plus seven original bindings match
+after PROGV. All four drawing/scene outputs match both fresh controls. This
+is one controlled observation; no general traversal/PERIM semantics, caller,
+natural census or complete RNG-state proof follows. Rejected v1/v2 tapes
+have zero target calls and a malformed IF. See
+[the findings](../zero-edge-traversal-single.md).
+
 ## ZERO-EDGE construction contract, 2026-10-06
 
 Portable derivation completed on 2026-10-11: 63,614 bytes, SHA-256
@@ -13,8 +30,9 @@ drawing/scene control. MAKE-TRIPT has positional X/Y/Z arguments; one sample
 (17,23,6) returns a TRIPT with matching direct slots and getters. START remains
 unbound, XINCS/YINCS retain their complete eight-integer contents and identity,
 and eleven copied three-value previews are stable. This is one point sample,
-not complete RNG-state or arbitrary-object preservation. ZERO-EDGE has not
-been invoked or replaced; PERIM and traversal remain unresolved. Earlier
+not complete RNG-state or arbitrary-object preservation. This constructor
+probe did not invoke or replace ZERO-EDGE; the separate observation above
+now measures one input while PERIM and traversal remain unresolved. Earlier
 v1/v2/v3 captures are excluded for serialization errors, changed controls or
 missing observer completion. See [the findings](../zero-edge-contract.md).
 
