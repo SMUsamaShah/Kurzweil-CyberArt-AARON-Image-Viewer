@@ -1,7 +1,14 @@
 # Next AARON execution plan
 
-Prepared 2026-09-27; updated 2026-10-06. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-11. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
+
+REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
+still rejects raw named PLL payloads; keep standalone Ghidra for that route.
+The old toolchain remains pinned for historical evidence. See
+[the update record](rea-update-20261011.md). The ZERO-EDGE constructor helper
+now derives identical portable evidence independently, with all 140 source
+bindings revalidated. Proceed to the separately controlled single call below.
 
 The 2026-10-06 native checkpoint maps six painting/buffer objects and validates
 1,364 instruction rows against the PLL, with fresh drawing/scene controls.
@@ -19,8 +26,12 @@ Its native object and ZERO-EDGE have separate
 unique complete PLL matches and 448 byte-checked instruction rows, with
 canonical external REA records and a fresh control. See
 [the predicate native findings](introspection/brush-buffer-predicate-native.md).
-Metadata alone does not establish their natural calls or behavior. Continue
-with ZERO-EDGE's bounded explicit capture, then the complete BRUSH-FILL row/iris schedule and
+The separate ZERO-EDGE contract capture now measures positional MAKE-TRIPT
+X/Y/Z and one (17,23,6) point's direct slots/getters after MAIN, with a complete
+zero-error footer and fresh drawing/scene control. Read
+[the contract findings](introspection/zero-edge-contract.md). ZERO-EDGE itself
+has not been invoked; PERIM's domain and traversal remain unresolved. Continue
+with its bounded explicit capture, then the complete BRUSH-FILL row/iris schedule and
 value-0 painting. Head feature selection and original geometry remain inputs.
 
 **Progress:** Milestone 1's complete writer and AA0 replay is achieved for

@@ -1,5 +1,16 @@
 # Native analysis of the archived AARON runtime
 
+## REA update, 2026-10-11
+
+REA 6.4.0 is now installed beside the historical 3.2.1 toolchain. Its Ghidra
+doctor passes all ten required checks, and a real read-only inspection of
+the original x86 AARON.exe succeeds with unchanged source bytes. The published
+Windows provider still rejects the raw ZERO-EDGE payload. Use
+`research/artifacts/rea-tools/toolchain-current.json` for new REA PE work;
+preserve the historical `toolchain.json` and 3.2.1 installation for the evidence
+derivations below. See [the update record](rea-update-20261011.md) for exact
+versions, checks, package/main differences and reproduction commands.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL
@@ -157,6 +168,27 @@ balance: LABELS definitions must be peers; LET binding lists and HANDLER-CASE
 protected forms/clauses must have their intended scope. A balanced file can
 still place a helper definition inside another helper. Require the complete
 successful metadata summary after the runtime run too.
+
+Check nested helpers too: every intended COND clause must remain inside COND,
+and a local helper's invocation must remain inside its LABELS body. The first
+ZERO-EDGE contract probe had balanced delimiters and the expected outer helper
+count, but closed its nested COND/LABELS too early. It recorded two
+UNDEFINED-FUNCTION conditions while summarizing XINCS/YINCS and correctly
+skipped the constructor. That capture is diagnostic even though its drawing
+and scene bytes equal the fresh control. The saved condition types alone do
+not identify the missing callee.
+
+Also validate SETF place/value pairs and the actual HANDLER-CASE clause list.
+The third ZERO-EDGE contract probe balanced its delimiters and kept all outer
+helpers as peers, but its MAIN installer put three following forms inside
+SETF, leaving an odd argument count. Its intended condition clause was inside
+the protected PROGN, so HANDLER-CASE had no clauses. The observer stopped at
+MAIN-GATE with no INSTALL, READY or completion footer; its painting and scene
+still matched the fresh control. Reject that capture. The source establishes
+the scope error, but no saved runtime exception identifies the condition.
+For an installer, check that the function-binding SETF has exactly one
+place/value pair, each intended following form is a PROGN peer, and the
+condition handler is an actual HANDLER-CASE clause.
 
 Use DOTIMES/DOLIST for probe iteration. The shipped Lisp image can try to
 autoload an unavailable `loop.fasl` when a probe uses LOOP; that failure is

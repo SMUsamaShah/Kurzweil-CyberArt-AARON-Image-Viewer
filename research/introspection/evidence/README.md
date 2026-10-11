@@ -1,5 +1,23 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE construction contract, 2026-10-06
+
+Portable derivation completed on 2026-10-11: 63,614 bytes, SHA-256
+`ae70bc92ee90788cda8370974f174de431e3d1ea8ddfcea273ff097eb9970267`,
+140 source bindings, two byte-identical independent derivations. The native
+baseline's 56-source closure also revalidates. No ZERO-EDGE behavior is claimed.
+
+[`zero-edge-contract-20261006.json`](zero-edge-contract-20261006.json)
+binds a complete post-MAIN constructor capture to a fresh uninstrumented
+drawing/scene control. MAKE-TRIPT has positional X/Y/Z arguments; one sample
+(17,23,6) returns a TRIPT with matching direct slots and getters. START remains
+unbound, XINCS/YINCS retain their complete eight-integer contents and identity,
+and eleven copied three-value previews are stable. This is one point sample,
+not complete RNG-state or arbitrary-object preservation. ZERO-EDGE has not
+been invoked or replaced; PERIM and traversal remain unresolved. Earlier
+v1/v2/v3 captures are excluded for serialization errors, changed controls or
+missing observer completion. See [the findings](../zero-edge-contract.md).
+
 ## FOOB picture bounds, 2026-10-06
 
 [`foob-parity-20261006.json`](foob-parity-20261006.json)

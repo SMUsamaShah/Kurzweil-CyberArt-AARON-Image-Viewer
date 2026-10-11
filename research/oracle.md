@@ -296,6 +296,16 @@ the exact installation error is not captured. That tape is diagnostic only.
 The replacement observes complete natural function boundaries without that
 primitive hook. An archived partial report is not a staging-permission failure.
 
+The ZERO-EDGE contract investigation has three excluded attempts: v1's
+serializer scope errors, v2's changed painting despite zero errors, and v3's
+incomplete MAIN installer despite matching painting/scene bytes. Frozen v4
+samples only after original MAIN returns, preserves its multiple values and
+errors, and records its own COMPLETE/END before closing the observer stream.
+Its fresh g/h control passes. Require the observer footer and actual control
+bytes, and do not move the sample back into pre-seed startup. See
+[the contract findings](introspection/zero-edge-contract.md). This probe does
+not call ZERO-EDGE or establish its PERIM argument's meaning.
+
 The runner verifies every extracted file against the manifest, patches only
 copies in its run directory, starts AARON without the XP compatibility
 environment, archives generated AA/report files, validates the scene report,

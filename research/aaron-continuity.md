@@ -6,7 +6,14 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-06
+## Latest checkpoint: 2026-10-11
+
+REA main has been fetched and the published 6.4.0 release installed beside
+3.2.1. The Ghidra doctor and real x86 launcher inspection pass; raw named PLL
+payloads still need standalone Ghidra. See [the update record](rea-update-20261011.md).
+Use ignored `toolchain-current.json` for new REA work and retain the frozen
+historical `toolchain.json` for existing evidence. The hourly automation is
+confirmed absent; continuation is manual.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
@@ -22,6 +29,53 @@ Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
 with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
+
+### ZERO-EDGE construction contract
+
+Frozen v4 now has a complete zero-error capture in
+`zero-edge-contract-seed1234-20261006-g`, with fresh uninstrumented control
+`zero-edge-contract-control-seed1234-20261006-h`. Their AA0, raw scene, image
+and image-id bytes match. MAKE-TRIPT has fixed positional X/Y/Z arguments;
+one sample (17,23,6) returns a TRIPT whose six direct slot reads and three
+getters agree. START stays unbound, and XINCS/YINCS retain identity and complete
+eight-integer summaries. Eleven copied three-draw previews stay (13,91,81);
+this is not complete RNG-state or arbitrary-object preservation. Read
+[the contract findings](introspection/zero-edge-contract.md) and
+[portable evidence](introspection/evidence/zero-edge-contract-20261006.json).
+Its portable derivation now completes with 140 revalidated source bindings;
+two independent outputs are byte-identical, SHA-256
+`ae70bc92ee90788cda8370974f174de431e3d1ea8ddfcea273ff097eb9970267`.
+V4 SHA-256 is
+`400cf8a4a5bf1fecfa9fd5e302f1d6226827f34eb84e2382114912044bb2bca2`.
+The probe has not invoked or replaced ZERO-EDGE. PERIM's domain, traversal,
+natural calls and direct caller remain unresolved. Next: one bounded explicit
+call on a scratch map, then expand cases only after complete returned captures.
+
+Earlier contract attempts remain diagnostic:
+
+FOOB is pushed as `59b97564efea279549361f0bf762974b61891af6`.
+The contract run `zero-edge-contract-seed1234-20261006-a` is diagnostic:
+two UNDEFINED-FUNCTION serialization errors, constructor skipped; its control
+`zero-edge-contract-control-seed1234-20261006-b` has equal drawing/scene bytes.
+Frozen v1 has misplaced nested COND/LABELS scope.
+
+Frozen v2 (`zero-edge-contract-v2.cl`, SHA-256
+`c79741fed7fb6fbaa530c80c40e54ed185282d58bd749aa440eff531e14ee3bd`)
+completes in run `zero-edge-contract-seed1234-20261006-c`: fixed positional
+MAKE-TRIPT X/Y/Z, eight integer direction entries, and one TRIPT sample
+(17,23,6), with zero errors. Its AA0/image/scene differ from the fresh control
+`zero-edge-contract-control-seed1234-20261006-d`; keep it diagnostic. Copied
+three-draw previews do not establish startup or complete-state preservation.
+The cause of the trajectory change is unresolved.
+`zero-edge-contract-v3.cl`, placing the sample after original MAIN and checking
+START/seeded-preview effects, is also diagnostic. Run e stops at MAIN-GATE
+with no INSTALL/READY/completion footer; its drawing, image and scene equal
+fresh control f. Its frozen source SHA-256 is
+`141f570aa58a1c37f69de259d81cb338a3068f7f7ac21354bfb196a315271623`.
+The MAIN installer has an odd SETF argument count and no actual HANDLER-CASE
+clauses despite balanced delimiters. V4 corrects those scopes. The source
+establishes the v3 defect, but the runtime exception was not captured.
+Do not use any of these rejected attempts as parity evidence.
 
 ### Feature buffer checkpoint
 
