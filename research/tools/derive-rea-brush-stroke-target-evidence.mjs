@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Offline evidence validation only. Never starts REA, Ghidra, AARON or a generated PE.
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { isDeepStrictEqual as same } from 'node:util';
@@ -30,6 +30,25 @@ const inside = (base, path) => {
   const rel = relative(base, path);
   return rel !== '' && rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel);
 };
+function assertSafeOutputParent(output) {
+  const root = resolve(ROOT), realRoot = realpathSync(root), parent = dirname(output);
+  assert(existsSync(parent), 'Output parent directory must already exist');
+  let cursor = resolve(parent);
+  while (true) {
+    const rel = relative(root, cursor);
+    assert(cursor.toLowerCase() === root.toLowerCase()
+      || (rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel)),
+    `Output parent escapes repository: ${cursor}`);
+    assert(!lstatSync(cursor).isSymbolicLink(), `Output parent contains a symlink/junction: ${cursor}`);
+    const real = realpathSync(cursor);
+    assert(real.toLowerCase() === realRoot.toLowerCase() || inside(realRoot, real),
+      `Output parent resolves outside repository: ${cursor}`);
+    if (cursor.toLowerCase() === root.toLowerCase()) break;
+    const next = dirname(cursor);
+    assert(next !== cursor, `Could not validate output ancestry: ${cursor}`);
+    cursor = next;
+  }
+}
 const projection = value => {
   const bytes = Buffer.from(JSON.stringify(value));
   return { sha256: sha(bytes), bytes: bytes.length };
@@ -86,15 +105,19 @@ async function derive() {
     'REA artifact output root is not explicitly ignored');
   const map = json(MAP, PIN.map), binding = json(`${LOCAL}/brush-stroke.binding.json`);
   const pll = read('research/extracted/aaron/application/AARON.pll', PIN.pll);
-  const fn = map.functions.find(row => row.name === 'BRUSH-STROKE');
+  const functionRows = map.functions.filter(row => row.name === 'BRUSH-STROKE');
+  assert(functionRows.length === 1, 'BRUSH-STROKE map entry is not unique');
+  const fn = functionRows[0];
   assert(map.pll.sha256 === PIN.pll && map.pll.bytes === pll.length && fn
     && fn.runtime.entry === '0x1fe435c4' && fn.payloadBytes === 564 && fn.payloadSha256 === PIN.payload
     && fn.uniqueCompleteObjectByteMatch === true && fn.objectSha256 === PIN.object, 'Archived BRUSH-STROKE map differs');
   const payloadPath = `research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/${fn.payloadFile}`;
   const payload = read(payloadPath, PIN.payload);
+  const completeObject = pll.subarray(fn.pll.objectOffset, fn.pll.rawEnd);
   assert(fn.pll.payloadOffset === 2766276 && fn.pll.rawEnd === 2766840
     && fn.pll.payloadOffset === fn.pll.objectOffset + 4 && fn.objectBytes === 568
-    && sha(pll.subarray(fn.pll.objectOffset, fn.pll.rawEnd)) === PIN.object
+    && completeObject.length === 568 && sha(completeObject) === PIN.object
+    && pll.indexOf(completeObject) === fn.pll.objectOffset && pll.lastIndexOf(completeObject) === fn.pll.objectOffset
     && payload.equals(pll.subarray(fn.pll.payloadOffset, fn.pll.rawEnd)), 'Exact PLL object/payload binding differs');
   assert(binding.schemaVersion === 1 && binding.functionName === 'BRUSH-STROKE'
     && binding.sourceMap.sha256 === PIN.map && binding.originalPll.sha256 === PIN.pll
@@ -230,9 +253,10 @@ async function derive() {
       knownOmittedInputs: flow.known_omitted_inputs, knownOmittedEdges: flow.known_omitted_edges,
       pcodeProjection: projection(flow) },
     queries: {
-      branchXrefs: { evidenceId: x.evidence_id, address: '0x1fe436bd', sources: ['0x1fe43609'],
+      branchXrefs: { evidenceId: x.evidence_id, profileDigest: x.analysis_profile.digest,
+        address: '0x1fe436bd', sources: ['0x1fe43609'],
         relation: 'conditional jump reference within the inferred function body' },
-      indirectCall: { evidenceId: c.evidence_id, callSite: '0x1fe4369e',
+      indirectCall: { evidenceId: c.evidence_id, profileDigest: c.analysis_profile.digest, callSite: '0x1fe4369e',
         instruction: 'CALL dword ptr [EDI + 0x57]', status: 'unresolved', mechanism: 'computed', targets: [] },
     },
     limitations: [
@@ -253,8 +277,11 @@ async function main() {
   const output = resolve(ROOT, args[1]), label = portable(relative(ROOT, output));
   const allowed = label.startsWith(`${LOCAL}/`) || label.startsWith('research/introspection/evidence/');
   assert(allowed && inside(ROOT, output) && !existsSync(output), 'Output must be fresh beneath the REA artifact or evidence directory');
+  assertSafeOutputParent(output);
   const evidence = await derive();
   const bytes = Buffer.from(`${JSON.stringify(evidence, null, 2)}\n`);
+  assert(!existsSync(output), 'Output appeared during derivation');
+  assertSafeOutputParent(output);
   writeFileSync(output, bytes, { flag: 'wx' });
   process.stdout.write(`${JSON.stringify({ output: label, sha256: sha(bytes), bytes: bytes.length,
     sources: evidence.sourceHashes.length, procedure: evidence.function.procedure,

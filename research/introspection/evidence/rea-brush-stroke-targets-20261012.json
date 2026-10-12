@@ -86,6 +86,7 @@
   "queries": {
     "branchXrefs": {
       "evidenceId": "ev_ce7d20052183d2133a6791dcd92a401adde1782ece16ddec3cb994cb165464be",
+      "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
       "address": "0x1fe436bd",
       "sources": [
         "0x1fe43609"
@@ -94,6 +95,7 @@
     },
     "indirectCall": {
       "evidenceId": "ev_1c4140a6b95854e5fb282e9fd1c172c7f76a5be223aaabd35b19ae59c117f831",
+      "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
       "callSite": "0x1fe4369e",
       "instruction": "CALL dword ptr [EDI + 0x57]",
       "status": "unresolved",
@@ -271,8 +273,8 @@
     },
     {
       "path": "research/tools/derive-rea-brush-stroke-target-evidence.mjs",
-      "sha256": "e90dcc4e6214b0a6ddb92f3e4a707371f9facf44f6ef0d844358151adbf9a3e5",
-      "bytes": 20098
+      "sha256": "0c7cddb62b81c0f026e84293caa29d2da7a4075c12885c79c0866d6693555006",
+      "bytes": 21627
     },
     {
       "path": "research/tools/prepare-rea-payload-pe.mjs",
