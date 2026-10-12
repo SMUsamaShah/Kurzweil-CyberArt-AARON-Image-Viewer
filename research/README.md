@@ -40,8 +40,10 @@ controls. The [natural boundary branch](introspection/brush-stroke-boundary.md)
 now matches 70 value-3 markers, 296,912 ordered predicates and 70 later clears,
 comparing 21,504,000 complete output cells. All original stroke return
 identities agree. Short CORE paths, value-0 painting and the writer of 6,965
-additional value-3 clear-entry positions remain open, along with the complete
-BRUSH-FILL row/iris schedule.
+additional value-3 clear-entry positions remain open. A new source-bound
+[BRUSH-FILL row/iris capture](introspection/brush-fill-row-iris.md) measures
+five `LY - 2` jumps and six positive scans without a same-fill patch start;
+the schedule and `FILL-IRIS` branch conditions remain unresolved.
 
 ## Principles
 

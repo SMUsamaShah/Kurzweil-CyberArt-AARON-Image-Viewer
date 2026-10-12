@@ -16,6 +16,31 @@ layout and seeds are analyst assertions, and the containers were never executed.
 Lisp dispatch remains unresolved; no new runtime behavior, original Lisp
 source or verified ABI is claimed. Read [the guide](../rea-payload-analysis.md).
 
+## BRUSH-FILL row and iris observations, 2026-10-12
+
+[`brush-fill-row-iris-20261012.json`](brush-fill-row-iris-20261012.json)
+binds two complete natural captures to fresh same-mode controls. It is
+3,165,950 bytes, SHA-256
+`18ff6115c16ba93c4b9245c72bf8a196ef29394219a8bdfa2e9622b8455a21f0`, and
+revalidates 196 source bindings plus the nested 70-source REA closure. Two
+fresh executions of the offline derivation produced byte-identical files.
+An independent read-only audit of both raw tapes rechecked the five row
+transitions, 440 point/EQ-matched later patches, six unmatched positive scans,
+five NIL iris returns and all 16 drawing/scene/runtime control artifacts per
+seed group; it found no discrepancies.
+The tapes contain 63,592 paired calls/returns across 137 `BRUSH-FILL`
+calls, with zero observer errors, aborts or overflows. Both captures' four
+drawing/scene outputs and all 12 runtime files match their fresh controls.
+
+Five non-unit scan jumps all land at current-frame `LY - 2` while the wrapped
+CFRAME identity changes. Of 446 positive `SCAN-ROW` returns, 440 have one
+later same-fill `PATCH-EDGE` start with matching EQ identity; six have no
+same-fill match. Five `FILL-IRIS` calls return NIL and preserve the captured
+global summaries and map identities/dimensions. These are finite observations:
+they do not recover the row or iris branch conditions, map-cell effects,
+unwrapped callers or general generator behavior. See
+[the findings](../brush-fill-row-iris.md).
+
 ## ZERO-EDGE holdout and JavaScript model, 2026-10-12
 
 [`zero-edge-holdout-20261012.json`](zero-edge-holdout-20261012.json) binds

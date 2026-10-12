@@ -53,12 +53,19 @@ bytes. No synthetic input was executed; generated headers/addresses remain
 analyst assertions. The isolated dossiers do not resolve Lisp dispatch or
 establish original source/ABI.
 
-Next: use the BRUSH-FILL/FILL-IRIS CFG and p-code to target a complete natural
-row/iris observer. Resolve the four later LY-2 jumps and positive scans without
-PATCH-EDGE, then continue value-0 painting. Current natural map dimensions
-are 768x1080; keep older 320x480 observations separate and use fresh controls.
-Natural ZERO-EDGE context, intermediate helper traces and general JS parity
-remain open.
+The complete natural BRUSH-FILL row/iris observer now covers two current
+768x1080 modes with fresh same-mode controls. It records 63,592 paired
+calls/returns across 137 BRUSH-FILL calls, resolves five observed non-unit
+transitions to `current LY - 2`, and links 440 positive scans to later
+same-fill PATCH-EDGE starts; six positive scans have no same-fill start. These
+measurements do not recover branch conditions or unwrapped callers. Read the
+[row/iris findings](introspection/brush-fill-row-iris.md) and
+[portable evidence](introspection/evidence/brush-fill-row-iris-20261012.json).
+
+Next: characterize value-0 painting, then choose the row/iris follow-up from
+its first concrete divergence. Keep older 320x480 observations separate and
+use fresh controls. Natural ZERO-EDGE context, intermediate helper traces and
+general JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
@@ -142,8 +149,9 @@ scans and 6,984 neighbor calls match, including 278 composed SUBFORM fills.
 The 44,544 neighbor and 10,368 scan matrix cases repeat in each painting.
 BRUSH-FILL preparation now derives form selection, 134 initial rows, 5,805
 row bounds/patch inputs and 278 MAX values from naturally returned plan/frame
-data. The aligned complete SUBFORM comparison passes again. Four later row
-jumps, plan creation and earlier map history remain unresolved.
+data. The aligned complete SUBFORM comparison passes again. The later row
+jumps now have a bounded follow-up in the 768x1080 evidence above; their cause,
+general schedule, plan creation and earlier map history remain unresolved.
 CFORM POST-FILL matches 149 calls and 45,772,800 complete output cells,
 including the composed outline pipeline and 22,886,400 full entry fill cells.
 Its rectangle excludes RX/TY; target0/1/2 and BACKGND0 are measured.
@@ -156,13 +164,13 @@ output cells; all 3,881 stroke returns preserve original path identity. All
 Short CORE paths and value-0 painting remain open. There are 6,965 additional
 clear-entry value-3 positions that were 0/1 at marker exit. Complete feature
 boundaries now account for all of them, with matching JS maps and fresh
-controls. The next priority is ZERO-EDGE, then the complete BRUSH-FILL
-row/iris schedule, value-0 painter and replacing original
-writer decisions and palette values with
-upstream JS rules. All three natural seed-1234 FREE-PATH calls and the one
-natural seed-5678 holdout call now reproduce their complete point lists and
-following RNG states. A first path-to-writer drawing unit is measured; palette
-construction and scene-level decisions remain unresolved.
+controls. The ZERO-EDGE and BRUSH-FILL row/iris milestones above supersede
+this earlier queue. Value-0 painting and replacing original writer decisions
+and palette values with upstream JS rules remain open. All three natural
+seed-1234 FREE-PATH calls and the one natural seed-5678 holdout call now
+reproduce their complete point lists and following RNG states. A first
+path-to-writer drawing unit is measured; palette construction and scene-level
+decisions remain unresolved.
 
 The target is independent JavaScript generation from an explicit seed and
 configuration. The fastest route is to finish one complete output boundary,

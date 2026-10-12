@@ -69,11 +69,32 @@ across 70 source bindings. Generated headers, seeds and layout are analyst
 assertions; these inputs were never executed. No original-source, Lisp ABI
 or cross-object caller recovery is claimed.
 
-Next: use these dossiers to investigate BRUSH-FILL's row/iris schedule,
-including the four later LY-2 jumps and positive scans without PATCH-EDGE,
-then the value-0 painting boundary. Natural observers still require complete
-source-bound captures and fresh current-configuration controls. Never reuse
-archived static addresses for a live attach.
+### Natural BRUSH-FILL row/iris capture, 2026-10-12
+
+The new frozen observer captures two current 768x1080 modes with complete
+same-mode controls: seed1234 writer-stream d with controls a/e, and seed5678
+natural-free-path f with controls c/g. Across 137 BRUSH-FILL calls it records
+63,592 paired calls/returns with no errors, aborts, overflows, depth failures
+or busy failures. The four drawing/scene outputs and all 12 runtime files
+match both controls per mode. Read
+[the findings](introspection/brush-fill-row-iris.md) and
+[portable evidence](introspection/evidence/brush-fill-row-iris-20261012.json).
+
+Five non-unit scan jumps land at current-frame LY-2 while the wrapped CFRAME
+identity changes. Of 446 positive scans, 440 have one later same-fill
+PATCH-EDGE start with matching EQ identity; six have no same-fill start. Five
+FILL-IRIS calls return NIL, with unchanged captured globals and map
+identities/dimensions. Two fresh executions of the deterministic deriver are
+byte-identical across 196 source bindings. A separate read-only audit of both
+raw tapes rechecked the scan links and controls without finding discrepancies.
+Row and iris conditions, map-cell effects, and unwrapped direct callers remain
+open.
+
+Next: investigate value-0 painting, then use any first divergence to choose
+whether the BRUSH-FILL row schedule needs another targeted input. Do not infer
+branch logic from the five jumps or six unmatched scan points. Older 320x480
+captures remain separate; never reuse archived static addresses for a live
+attach.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 
