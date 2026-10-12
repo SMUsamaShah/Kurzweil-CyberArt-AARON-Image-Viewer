@@ -109,12 +109,24 @@ reproduces all three final maps, but no individual array stores were traced.
 only; it has not been compared against raw maps or a scene. The older isolated
 adapter retains its separate contract. No general value-0 behavior is claimed.
 
-Next use REA 6.4.0 to inspect the BRUSH-STROKE branch/call cluster around
-static xrefs `0x1fe436e5` and `0x1fe436d3`, then choose an alternate natural
-sample that can distinguish the current candidate from other explanations.
-Keep the older 320x480 captures separate. Rediscover and byte-validate any
-live address before attaching a debugger; the current xrefs are archived
-static context only.
+### BRUSH-STROKE REA branch and call queries, 2026-10-12
+
+REA 6.4.0 adds branch-target xrefs at archived static addresses `0x1fe436e5`
+and `0x1fe436d3`, then three call-target queries at `0x1fe436de`, `0x1fe436f0`
+and `0x1fe436f8`. All three are unresolved computed calls with empty target
+lists. The source-bound evidence derives byte-identically twice across 49
+sources, and an independent read-only audit confirmed the requests, listing,
+report hashes and empty stderr files. These are static observations on the
+analyst-generated PE; they establish no runtime branch or call target. Read
+the [REA notes](introspection/rea-payload-analysis.md) and
+[v4 evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
+
+Next find a fresh natural VALUE=0 multi stroke whose brush or CORE geometry
+differs from the first captured sample, using the existing census to choose a
+discriminating case. Capture complete maps and fresh uninstrumented controls.
+For any native breakpoint work, rediscover and byte-validate the address in
+the new run; these archived xrefs are static context only. Keep the older
+320x480 captures separate.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 

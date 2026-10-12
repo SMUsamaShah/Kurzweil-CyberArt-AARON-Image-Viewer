@@ -11,6 +11,7 @@ const LOCAL = 'research/artifacts/rea-tools/brush-stroke-value0-20261012';
 const XREF_43613 = 'research/artifacts/rea-tools/brush-stroke-value0-xref-43613-20261012-f';
 const XREF_43639 = 'research/artifacts/rea-tools/brush-stroke-value0-xref-43639-20261012-e';
 const XREF_436E5_D3 = 'research/artifacts/rea-tools/brush-stroke-value0-xrefs-436e5-436d3-20261012-95c3f4d553';
+const CALL_CLUSTER = 'research/artifacts/rea-tools/brush-stroke-value0-call-cluster-20261012-ffcf03382e';
 const MAP = 'research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json';
 const PKG = 'research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents';
 const PIN = Object.freeze({
@@ -27,6 +28,10 @@ const PIN = Object.freeze({
   xrefs43639: 'd7fe2389efed704c3fbf169b133a17cf684d4f8515b5d277ab4bc67ad12a2163',
   xrefs436e5: 'a1a9eb07082947418550ec90b46f70c519d11a1888c2d6a05c72efe3ccc62345',
   xrefs436d3: '927f310873497206ef2478ffa28d8123593259a6502195d588a10ae9973bc54c',
+  callClusterRequest: 'bf60776271a0b6ef235f6f019a64303f2ab9b16a2a5af0bf59b60d168a91bfe6',
+  call436de: '1b2b3b263899350456736809468dbbb47d2ce5500d26ad7a9a28d063e9d9a023',
+  call436f0: 'e74439487cd108f971553dcffbfe6516c89b837e0f07e6f36315cc8ac3b35c12',
+  call436f8: '3aabe63bfc7f299ee71aa0da8a69bd12ed9f498feabbea67ae4cdf25343fde94',
   addon: 'c4fd9f377e567bcf15ba3fec3e0b0ed965d82b765a2adcdac49e46f14524b6d5',
 });
 const sources = new Map();
@@ -165,12 +170,19 @@ async function derive() {
   const rawXrefs43639 = json(`${XREF_43639}/stdout.json`, PIN.xrefs43639);
   const rawXrefs436e5 = json(`${XREF_436E5_D3}/xrefs-436e5.stdout.json`, PIN.xrefs436e5);
   const rawXrefs436d3 = json(`${XREF_436E5_D3}/xrefs-436d3.stdout.json`, PIN.xrefs436d3);
+  const callRequest = json(`${CALL_CLUSTER}/request.json`, PIN.callClusterRequest);
+  const rawCall436de = json(`${CALL_CLUSTER}/call-436de.stdout.json`, PIN.call436de);
+  const rawCall436f0 = json(`${CALL_CLUSTER}/call-436f0.stdout.json`, PIN.call436f0);
+  const rawCall436f8 = json(`${CALL_CLUSTER}/call-436f8.stdout.json`, PIN.call436f8);
   for (const stderr of [`${LOCAL}/rea-run-a/function.stderr.txt`, `${LOCAL}/rea-run-b/xrefs-loop-target.stderr.txt`,
     `${LOCAL}/rea-run-b/resolve-call-4369e.stderr.txt`, `${XREF_43613}/stderr.txt`, `${XREF_43639}/stderr.txt`,
-    `${XREF_436E5_D3}/xrefs-436e5.stderr.txt`, `${XREF_436E5_D3}/xrefs-436d3.stderr.txt`])
+    `${XREF_436E5_D3}/xrefs-436e5.stderr.txt`, `${XREF_436E5_D3}/xrefs-436d3.stderr.txt`,
+    `${CALL_CLUSTER}/call-436de.stderr.txt`, `${CALL_CLUSTER}/call-436f0.stderr.txt`,
+    `${CALL_CLUSTER}/call-436f8.stderr.txt`])
     assert(read(stderr).length === 0, `${stderr} is not empty`);
-  const evidence = [rawFunction, rawXrefs, rawCall, rawXrefs43613, rawXrefs43639, rawXrefs436e5, rawXrefs436d3].map(parseEvidence);
-  const [f, x, c, x13, x39, xE5, xD3] = evidence;
+  const evidence = [rawFunction, rawXrefs, rawCall, rawXrefs43613, rawXrefs43639,
+    rawXrefs436e5, rawXrefs436d3, rawCall436de, rawCall436f0, rawCall436f8].map(parseEvidence);
+  const [f, x, c, x13, x39, xE5, xD3, ...clusterEvidence] = evidence;
   for (const e of evidence) assert(e.subject.format === 'pe' && e.subject.architecture === 'x86'
     && e.subject.digest.sha256 === PIN.pe && e.subject.local_path === resolve(ROOT, pePath)
     && e.subject.name === resolve(ROOT, pePath) && e.provider.id === 'ghidra'
@@ -179,6 +191,15 @@ async function derive() {
   assert(evidence.every(e => e.analysis_profile.digest === f.analysis_profile.digest)
     && f.analysis_profile.digest === '964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823',
   'REA analysis-profile digest differs across queries');
+  assert(callRequest.schemaVersion === 1 && callRequest.target.sha256 === PIN.pe
+    && callRequest.target.seedSha256 === PIN.seed
+    && callRequest.target.expectedProfileDigest === f.analysis_profile.digest
+    && callRequest.queries.length === 3
+    && same(callRequest.queries.map(q => [q.address, q.instruction]), [
+      ['0x1fe436de', 'CALL dword ptr [EDI + 0x27]'],
+      ['0x1fe436f0', 'CALL dword ptr [EDI + -0x71]'],
+      ['0x1fe436f8', 'CALL EDI'],
+    ]), 'REA computed-call query request differs');
   const profile = f.analysis_profile.parameters;
   assert(f.operation === 'analyze_function' && same(f.parameters, { procedure: fn.runtime.entry })
     && f.raw_result.value.procedure.address === fn.runtime.entry && f.raw_result.value.procedure.name === 'BRUSH_STROKE'
@@ -252,6 +273,23 @@ async function derive() {
     && c.raw_result.call_site === '0x1fe4369e' && c.raw_result.procedure === fn.runtime.entry
     && c.raw_result.status === 'unresolved' && c.raw_result.mechanism === 'computed'
     && same(c.raw_result.targets, []), 'REA BRUSH-STROKE call-target boundary differs');
+  const callRows = [
+    { report: rawCall436de, evidence: clusterEvidence[0], address: '0x1fe436de',
+      instruction: 'CALL dword ptr [EDI + 0x27]' },
+    { report: rawCall436f0, evidence: clusterEvidence[1], address: '0x1fe436f0',
+      instruction: 'CALL dword ptr [EDI + -0x71]' },
+    { report: rawCall436f8, evidence: clusterEvidence[2], address: '0x1fe436f8', instruction: 'CALL EDI' },
+  ];
+  for (const row of callRows) {
+    const { report, evidence: item, address } = row;
+    assert(report.operation === 'resolve_native_call_targets'
+      && same(report.parameters, { address })
+      && report.raw_result.call_site === address && report.raw_result.procedure === fn.runtime.entry
+      && report.raw_result.status === 'unresolved' && report.raw_result.mechanism === 'computed'
+      && same(report.raw_result.targets, []) && same(report.raw_result, report.normalized_result)
+      && instruction(address) === `${address}: ${row.instruction}`,
+    `REA call-site result or pinned instruction differs at ${address}`);
+  }
 
   const sourceHashes = [...sources.values()].sort((a, b) => a.row.path.localeCompare(b.row.path)).map(({ absolute, row }) => {
     const bytes = readFileSync(absolute);
@@ -259,7 +297,7 @@ async function derive() {
     return row;
   });
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     investigation: 'rea-6.4-brush-stroke-static-control-flow-20261012',
     scope: { oracleRun: false, debuggerAttached: false, generatedExecutableRun: false,
       runtimeBehaviorEstablished: false, originalLispSourceRecovered: false, nativeLispAbiEstablished: false,
@@ -304,12 +342,17 @@ async function derive() {
         machineCondition: 'JNZ when (EAX | EDX) & 3 is nonzero; register meanings are unresolved' },
       indirectCall: { evidenceId: c.evidence_id, profileDigest: c.analysis_profile.digest, callSite: '0x1fe4369e',
         instruction: 'CALL dword ptr [EDI + 0x57]', status: 'unresolved', mechanism: 'computed', targets: [] },
+      branchTargetCallCluster: callRows.map(({ evidence: item, address, instruction: text }) => ({
+        evidenceId: item.evidence_id, profileDigest: item.analysis_profile.digest, callSite: address,
+        instruction: text, status: 'unresolved', mechanism: 'computed', targets: [],
+      })),
     },
     limitations: [
       'The archived entry address is static context, not a current live address.',
       'The PE headers, layout and seeded function name are analyst assertions; only the copied payload bytes are original.',
       'REA instruction, CFG and p-code outputs are Ghidra static-analysis results, not original Lisp source or a verified Lisp ABI.',
       'The xrefs queries are intra-container reference evidence. They do not identify register meanings, runtime branch outcomes, or a Lisp caller. The unresolved call query does not identify its runtime target.',
+      'The three call-site queries in the branch-target area are static ReferenceManager observations only; their computed targets and any runtime execution remain unresolved.',
       'No runtime branch outcome, drawing behavior, map effect, RNG effect or VALUE=0 behavior is established by this static dossier.',
     ],
     sourceHashes,
@@ -333,7 +376,10 @@ async function main() {
     sources: evidence.sourceHashes.length, procedure: evidence.function.procedure,
     branchSource: evidence.queries.branchXrefs.sources[0],
     branchNeighborSources: evidence.queries.branchNeighbors.map(query => query.sources),
-    callStatus: evidence.queries.indirectCall.status }, null, 2)}\n`);
+    callStatus: evidence.queries.indirectCall.status,
+    callCluster: evidence.queries.branchTargetCallCluster.map(query => ({
+      callSite: query.callSite, status: query.status, mechanism: query.mechanism, targets: query.targets,
+    })) }, null, 2)}\n`);
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   main().catch(error => { process.stderr.write(`${error.stack}\n`); process.exitCode = 1; });

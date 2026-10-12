@@ -77,11 +77,16 @@ all three captured final maps, but the observer did not trace individual stores.
 The existing isolated `applyMeasuredBrushStroke` adapter does not match this
 natural call order or the empty/singleton screen call. A separate
 `applyObservedNaturalBrushStrokeValue0` candidate is present but has only been
-syntax-checked; no JS/map or scene parity is claimed. Next use REA 6.4.0 to
-inspect the remaining BRUSH-STROKE branch/call cluster around the newly mapped
-static xrefs, then choose a fresh capture that distinguishes the candidate
-from alternatives. Keep older 320x480 observations separate and use fresh
-controls. Natural ZERO-EDGE context, intermediate helper traces, and general
+syntax-checked; no JS/map or scene parity is claimed. REA 6.4.0 has now
+extended the BRUSH-STROKE static dossier with both branch-target xrefs and
+three computed-call queries. The pinned reports remain unresolved, with no
+targets; see [REA analysis](introspection/rea-payload-analysis.md) and
+[portable evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
+Next select a fresh natural VALUE=0 stroke with a brush/CORE shape that
+distinguishes the current candidate, and capture complete maps with fresh
+controls. If tracing a native site, rediscover and byte-validate the live
+address before attaching a debugger. Keep older 320x480 observations
+separate. Natural ZERO-EDGE context, intermediate helper traces, and general
 JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7

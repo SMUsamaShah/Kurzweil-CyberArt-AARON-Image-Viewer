@@ -16,6 +16,24 @@ layout and seeds are analyst assertions, and the containers were never executed.
 Lisp dispatch remains unresolved; no new runtime behavior, original Lisp
 source or verified ABI is claimed. Read [the guide](../rea-payload-analysis.md).
 
+## BRUSH-STROKE REA call-site cluster, 2026-10-12
+
+[`rea-brush-stroke-control-flow-20261012-v4.json`](rea-brush-stroke-control-flow-20261012-v4.json)
+extends the source-bound static dossier with three additional
+`resolve-native-call-targets` reports. Each is an unresolved computed call
+with an empty target list; their exact requests and instruction-list entries
+are pinned to the same generated PE and Ghidra profile. This adds navigation
+points only. It does not identify a runtime callee, branch outcome, direct
+caller, or painting behavior. The generated PE was not executed. See the
+[analysis notes](../rea-payload-analysis.md).
+
+The portable report is 18,514 bytes, SHA-256
+`add7a2ad4e85aa1c49b121f15e02e72453853fdb7e9219da85dbb6f0e23af63b`;
+two offline derivations matched byte-for-byte across 49 source bindings. An
+independent read-only audit rechecked the three report hashes, request
+addresses, exact listing instructions, empty stderr files, shared PE/profile
+and empty target lists without finding discrepancies.
+
 ## BRUSH-FILL row and iris observations, 2026-10-12
 
 [`brush-fill-row-iris-20261012.json`](brush-fill-row-iris-20261012.json)

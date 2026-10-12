@@ -96,15 +96,35 @@ xref evidence only; the conditions do not identify Lisp argument meanings or
 runtime outcomes. Raw reports are retained under
 `research/artifacts/rea-tools/brush-stroke-value0-xrefs-436e5-436d3-20261012-95c3f4d553/`.
 
+Three more REA 6.4.0 `resolve-native-call-targets` queries cover call sites
+in the branch-target area:
+
+| Call site | Instruction from the pinned function listing | REA result |
+|---|---|---|
+| `0x1fe436de` | `CALL dword ptr [EDI + 0x27]` | unresolved computed call; `targets: []` |
+| `0x1fe436f0` | `CALL dword ptr [EDI + -0x71]` | unresolved computed call; `targets: []` |
+| `0x1fe436f8` | `CALL EDI` | unresolved computed call; `targets: []` |
+
+All three reports use the same generated PE SHA-256 and analysis-profile
+digest as the pinned BRUSH-STROKE function dossier, and have empty stderr.
+The offline derivation checks each report against its exact CLI request,
+profile, function entry, and instruction in the retained listing. These are
+static call-reference results: they do not say which branch ran, whether any
+site executes in AARON, or which runtime function a computed call reaches.
+Raw reports and request metadata remain under
+`research/artifacts/rea-tools/brush-stroke-value0-call-cluster-20261012-ffcf03382e/`.
+
 The first Java-backed REA queries were blocked under the default sandbox:
 `spawnSync(java.exe, ...)` returned `EPERM`, which REA surfaced as
 `runtime_missing` with no Java version. The configured Java and Ghidra paths
-were valid. On this host, rerun only the required REA CLI command with scoped
-permission to launch Java; do not reinstall the toolchain or weaken provider
-checks. This is a child-process permission boundary, not a missing runtime.
+were valid. A later scoped out-of-sandbox run succeeded without reinstalling
+or changing the toolchain, confirming this was a child-process permission
+boundary rather than a missing Java runtime. Continue to use scoped permission
+for Java-backed REA/oracle commands when the sandbox blocks the child process;
+do not weaken provider checks.
 
-See the separate [BRUSH-STROKE portable evidence](evidence/rea-brush-stroke-control-flow-20261012-v3.json),
-which supersedes the earlier derived view of the same investigation,
+See the separate [BRUSH-STROKE portable evidence](evidence/rea-brush-stroke-control-flow-20261012-v4.json),
+which adds and supersedes the earlier v3 view of this investigation,
 and its [offline derivation helper](../tools/derive-rea-brush-stroke-target-evidence.mjs).
 
 To repeat the static queries, keep the generated PE and seed in their existing
@@ -127,6 +147,9 @@ $exe = Join-Path $reaRoot 'brush-stroke.synthetic.exe'
 & $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe4369e --provider ghidra --format json
 & $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436e5 --provider ghidra --format json
 & $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436d3 --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe436de --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe436f0 --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe436f8 --provider ghidra --format json
 ```
 
 ## Retained inputs and reproduction
