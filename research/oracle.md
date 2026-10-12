@@ -205,6 +205,16 @@ the local oracle with scoped elevated permission for this script; on a normal
 PowerShell session, use an account allowed to update that per-user key. The
 runner does not change the system clock.
 
+On 2026-10-12, scoped elevated invocation completed three fresh controls and
+one v5 observer run at full resolution; all four runs were complete, and the
+runner removed its staging files. The permission boundary is the runner's
+per-user registry setup, not Java: the local original-runtime workflow
+launches `AARON.exe` and does not require a Java process. If the `C:\temp`
+preflight passes but the default sandbox rejects the registry operation, use
+scoped elevation for this exact PowerShell runner instead of changing the
+symlink target or machine ACLs. The link target and empty staging directory
+were rechecked after the sequence.
+
 The runner leaves pre-existing reserved files untouched and stops if one is
 present. Inspect and back up a collision before moving it out of the way; do
 not delete an unknown `C:\temp` file just to start a run. A failure after

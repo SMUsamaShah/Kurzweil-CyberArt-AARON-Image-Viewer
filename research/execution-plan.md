@@ -74,20 +74,30 @@ The multi path records 81 true predicates and 33 changed cells (20 1-to-0,
 the empty path has none. A predicate-coordinate zeroing candidate reproduces
 all three captured final maps, but the observer did not trace individual stores.
 
-The existing isolated `applyMeasuredBrushStroke` adapter does not match this
-natural call order or the empty/singleton screen call. A separate
-`applyObservedNaturalBrushStrokeValue0` candidate is present but has only been
-syntax-checked; no JS/map or scene parity is claimed. REA 6.4.0 has now
-extended the BRUSH-STROKE static dossier with both branch-target xrefs and
-three computed-call queries. The pinned reports remain unresolved, with no
-targets; see [REA analysis](introspection/rea-payload-analysis.md) and
+The existing isolated `applyMeasuredBrushStroke` adapter remains separate
+from natural call order and empty/singleton screen calls. A second, source-bound
+VALUE=0 capture now tests `applyObservedNaturalBrushStrokeValue0` on three
+selected raw maps, including the first natural MULTI path at `ALL-BRUSHES`
+index 5 and `WIDTH=17`: 83 points, 4,648 true predicates, and 1,575 changed
+cells. The 182-offset captured CORE matches the JS profile, and the function
+reproduces all three captured maps. Its callback receives the captured
+SCREEN-RETURN map, so this validates the adapter's map transition and order,
+not screen rendering or scene parity. Two independent portable derivations
+match; read the [updated findings](introspection/brush-stroke-value0.md) and
+[v5 evidence](introspection/evidence/brush-stroke-value0-20261012-index5-v5.json).
+
+REA 6.4.0 still reports all three BRUSH-STROKE computed calls unresolved with
+no targets; these are static observations on the analyst-generated PE. See
+[REA analysis](introspection/rea-payload-analysis.md) and
 [portable evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
-Next select a fresh natural VALUE=0 stroke with a brush/CORE shape that
-distinguishes the current candidate, and capture complete maps with fresh
-controls. If tracing a native site, rediscover and byte-validate the live
-address before attaching a debugger. Keep older 320x480 observations
-separate. Natural ZERO-EDGE context, intermediate helper traces, and general
-JS parity remain open.
+The retained seed-1234 and seed-5678 natural censuses contain no rejected
+`IN-SUB-FRAME` predicates for VALUE=0. Next capture a dynamically selected
+MULTI path at `ALL-BRUSHES` index 4, width 13, with its distinct 97-offset
+CORE; use complete maps and fresh controls. This broadens profile coverage but
+does not test an observed VALUE=0 rejection. Rediscover and byte-validate any
+native address before debugger attachment. General value-0 behavior, natural
+ZERO-EDGE context, intermediate helper traces, and scene-level JS parity remain
+open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

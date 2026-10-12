@@ -1,0 +1,767 @@
+;;; Bounded natural VALUE=0 BRUSH-STROKE observer, version 5.
+;;; This source is intentionally separate from the frozen value-3 boundary probe.
+;;; It reads slots/arrays directly, copies maps, and does not call extra AARON getters.
+(in-package :cl-user)
+
+(unless (boundp 'aaron-brush-stroke-value0-capture-v5-loaded)
+  (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+         (report nil)
+         (object-ids (make-hash-table :test #'eq)) (objects 0)
+         (originals (make-hash-table :test #'equal))
+         (wrappers (make-hash-table :test #'equal))
+         (outer-wrappers (make-hash-table :test #'equal))
+         (strokes 0) (sampled 0) (events 0) (predicates 0) (screens 0)
+         (points 0) (offsets 0) (cells 0) (runs 0) (snapshots 0)
+         (errors 0) (aborts 0) (checks 0) (rejected nil)
+         (capture-disabled nil) (report-full nil) (report-chars 0)
+         (current-stroke nil) (finished nil)
+         (footer-failed nil) (complete-written nil)
+         (sample-records (make-hash-table :test #'eql))
+         (overflow-kinds (make-hash-table :test #'eq))
+         (empty-selected nil) (singleton-selected nil) (multi-selected nil)
+         (empty-sample-id 0) (singleton-sample-id 0) (multi-sample-id 0))
+    (labels
+        ((tail-control (control)
+           ;; Match exact format strings: a prefix search for "END " also admits
+           ;; MAP-END and can hide a partial map after capture is disabled.
+           (and (stringp control)
+                (member control
+                  '("OVERFLOW kind=~S amount=~D"
+                    "ERROR phase=~S type=~S message=~S"
+                    "ABORT kind=:IN-SUB-FRAME event=~D"
+                    "ABORT kind=:SCREEN-AND-STORE event=~D"
+                    "ABORT kind=:BRUSH-STROKE id=~D"
+                    "CALL-ERROR phase=~S type=~S message=~S"
+                    "RESTORE name=~S status=:not-installed"
+                    "RESTORE name=~S status=:restored"
+                    "RESTORE name=~S status=:already-original"
+                    "RESTORE name=~S status=:outer-wrapper-preserved"
+                    "RESTORE name=~S status=:error type=~S"
+                    "RESTORE name=~S status=:changed"
+                    "SETUP-ERROR type=~S message=~S"
+                    "COMPLETE version=5 main=~S accepted=~S bindings-safe=~S strokes=~D sampled=~D empty-sample=~D singleton-sample=~D multi-sample=~D events=~D sampled-predicates=~D sample-screens=~D points=~D offsets=~D snapshots=~D cells=~D runs=~D objects=~D checks=~D errors=~D aborts=~D rejected=~S capture-disabled=~S samples-complete=~S current-stroke=~S"
+                    "END brush-stroke-value0-v5")
+                  :test #'string=)))
+         (completion-control (control)
+           (and (stringp control)
+                (string= control
+                  "COMPLETE version=5 main=~S accepted=~S bindings-safe=~S strokes=~D sampled=~D empty-sample=~D singleton-sample=~D multi-sample=~D events=~D sampled-predicates=~D sample-screens=~D points=~D offsets=~D snapshots=~D cells=~D runs=~D objects=~D checks=~D errors=~D aborts=~D rejected=~S capture-disabled=~S samples-complete=~S current-stroke=~S")))
+         (end-control (control)
+           (and (stringp control) (string= control "END brush-stroke-value0-v5")))
+         (terminal-control (control)
+           (or (completion-control control)
+               (end-control control)
+               (and (stringp control)
+                    (member control
+                      '("RESTORE name=~S status=:not-installed"
+                        "RESTORE name=~S status=:restored"
+                        "RESTORE name=~S status=:already-original"
+                        "RESTORE name=~S status=:outer-wrapper-preserved"
+                        "RESTORE name=~S status=:error type=~S"
+                        "RESTORE name=~S status=:changed")
+                      :test #'string=))))
+         (note-write (control)
+           (when (completion-control control)
+             (setf complete-written t)))
+         (condition-text (condition)
+           (let ((message (format nil "~A" condition)))
+             (subseq message 0 (min 1024 (length message)))))
+         (emit (control &rest args)
+           (when (and report
+                      (or (and (not report-full) (not capture-disabled))
+                          (tail-control control))
+                      (or (not (end-control control))
+                          (and complete-written (not footer-failed))))
+             (handler-case
+                 (let* ((*print-length* nil) (*print-level* nil) (*print-pretty* nil)
+                        (*print-circle* nil) (*print-readably* nil)
+                        (line (with-output-to-string (stream)
+                                (apply #'format stream control args)
+                                (terpri stream)))
+                        (line-chars (length line))
+                        ;; Four UTF-8 bytes per character is a conservative byte bound.
+                        (char-cap 67108864)
+                        ;; Preserve 8 KiB for overflow diagnostics and the bounded
+                        ;; restoration/COMPLETE/END footer. Nonterminal tail records
+                        ;; must leave this reserve untouched.
+                        (reserve 8192))
+                   (cond
+                     ((and report-full (terminal-control control))
+                       (if (<= (+ report-chars line-chars) char-cap)
+                           (progn
+                             (write-string line report)
+                             (incf report-chars line-chars)
+                             (note-write control))
+                         (progn
+                           (incf errors)
+                           (setf rejected t capture-disabled t footer-failed t))))
+                     ((and report-full (tail-control control))
+                       ;; Keep diagnostics bounded even after the main stream cap.
+                       (if (<= (+ report-chars line-chars reserve) char-cap)
+                           (progn (write-string line report) (incf report-chars line-chars))
+                         (progn (incf errors) (setf rejected t capture-disabled t footer-failed t))))
+                     ((and (terminal-control control)
+                           (<= (+ report-chars line-chars) char-cap))
+                      (write-string line report)
+                      (incf report-chars line-chars)
+                      (note-write control))
+                     ((<= (+ report-chars line-chars reserve) char-cap)
+                      (write-string line report)
+                      (incf report-chars line-chars))
+                     (t
+                      (setf report-full t rejected t capture-disabled t footer-failed t)
+                      (let* ((overflow-line "OVERFLOW kind=:REPORT-BYTE-CAP")
+                             (overflow-chars (1+ (length overflow-line))))
+                        (when (<= (+ report-chars overflow-chars reserve) char-cap)
+                          (write-line overflow-line report)
+                          (incf report-chars overflow-chars)
+                          (finish-output report))))))
+               (condition ()
+                 (incf errors)
+                 (setf rejected t capture-disabled t footer-failed t)))))
+         (problem (phase condition)
+           (incf errors)
+           (setf rejected t capture-disabled t footer-failed t)
+           (emit "ERROR phase=~S type=~S message=~S"
+                 phase (format nil "~S" (type-of condition)) (condition-text condition)))
+         (cap (kind amount)
+           (setf rejected t capture-disabled t footer-failed t)
+           (emit "OVERFLOW kind=~S amount=~D" kind amount)
+           (error "VALUE=0 observer cap"))
+         (mark-rejected (kind amount)
+           (setf rejected t footer-failed t)
+           (unless (gethash kind overflow-kinds)
+             (setf (gethash kind overflow-kinds) t)
+             (emit "OVERFLOW kind=~S amount=~D" kind amount)))
+         (next-event ()
+           (unless capture-disabled
+             (incf events)
+             (when (> events 5000000)
+               (mark-rejected :events events)
+               (setf capture-disabled t)))
+           events)
+         (global-symbol (name)
+           (let* ((symbol (and owner (find-symbol name owner)))
+                  (graphics (find-package "COMMON-GRAPHICS"))
+                  (fallback (and graphics (find-symbol name graphics))))
+             (cond ((and symbol (boundp symbol)) symbol)
+                   ((and fallback (boundp fallback)) fallback)
+                   (t nil))))
+         (global (name)
+           (let ((symbol (global-symbol name)))
+             (unless symbol (error "Missing binding ~A" name))
+             (symbol-value symbol)))
+         (slot-symbol (name)
+           (or (and owner (find-symbol name owner))
+               (let ((graphics (find-package "COMMON-GRAPHICS")))
+                 (and graphics (find-symbol name graphics)))
+               (error "Missing slot symbol ~A" name)))
+         (object-id (object)
+           (if (null object) 0
+             (or (gethash object object-ids)
+                 (let ((id (incf objects)))
+                   (when (> objects 30000) (cap :objects objects))
+                   (setf (gethash object object-ids) id)
+                   (emit "OBJECT id=~D type=~S" id (format nil "~S" (type-of object)))
+                   id))))
+         (descriptor (value)
+           (cond ((null value) (list :nil))
+                 ((integerp value) (list :integer value))
+                 ((characterp value) (list :character (char-code value)))
+                 ((stringp value)
+                  (list :string (subseq value 0 (min 256 (length value))) (length value)))
+                 ((symbolp value)
+                  (list :symbol (if (symbol-package value)
+                                    (package-name (symbol-package value)) "UNINTERNED")
+                        (symbol-name value)))
+                 ((numberp value) (list :number (format nil "~S" value)))
+                 (t (list :object (object-id value) (format nil "~S" (type-of value))))))
+         (descriptors (values)
+           (when (> (length values) 16) (cap :values (length values)))
+           (mapcar #'descriptor values))
+         (proper-length (value kind per-list-cap)
+           (let ((tail value) (count 0) (seen (make-hash-table :test #'eq)))
+             (do () ((not (consp tail)))
+               (when (gethash tail seen) (error "Cyclic ~A list" kind))
+               (setf (gethash tail seen) t)
+               (incf count)
+               (when (> count per-list-cap) (cap kind count))
+               (setf tail (cdr tail)))
+             (unless (null tail) (error "Improper ~A list" kind))
+             count))
+         (point-coordinates (point)
+           (let ((x (slot-value point (slot-symbol "X")))
+                 (y (slot-value point (slot-symbol "Y"))))
+             (unless (and (integerp x) (integerp y))
+               (error "Noninteger point coordinate"))
+             (values x y)))
+         (point-record (point)
+           (if (null point)
+               (list :id 0 :type "NULL" :x nil :y nil)
+             (multiple-value-bind (x y) (point-coordinates point)
+               (list :id (object-id point) :type (format nil "~S" (type-of point)) :x x :y y))))
+         (path-record (path)
+           (cond
+             ((null path) (list :id 0 :type "NULL" :length 0 :points nil))
+             ((consp path)
+              (let ((count (proper-length path :path 20000)) (path-points nil))
+                (when (> (+ points count) 120000) (cap :points (+ points count)))
+                (incf points count)
+                (dolist (point path) (push (point-record point) path-points))
+                (list :id (object-id path) :type (format nil "~S" (type-of path))
+                      :length count :points (nreverse path-points))))
+             (t (error "BRUSH-STROKE path is not NIL or a proper list"))))
+         (offset-list (brush slot-name)
+           (let* ((raw (slot-value brush (slot-symbol slot-name)))
+                  (count (proper-length raw slot-name 10000)))
+             (dolist (offset raw)
+               (unless (and (consp offset) (consp (cdr offset)) (null (cddr offset))
+                            (integerp (first offset)) (integerp (second offset)))
+                 (error "Malformed ~A offset" slot-name)))
+             (values raw count)))
+         (offset-record (raw slot-name)
+           (let ((count (proper-length raw slot-name 10000)))
+             (dolist (offset raw)
+               (unless (and (consp offset) (consp (cdr offset)) (null (cddr offset))
+                            (integerp (first offset)) (integerp (second offset)))
+                 (error "Malformed ~A offset" slot-name)))
+             (when (> (+ offsets count) 120000) (cap :offsets (+ offsets count)))
+             (incf offsets count)
+             (let ((result nil))
+               (dolist (offset raw) (push (list (first offset) (second offset)) result))
+               (list :length count :offsets (nreverse result)))))
+         (brush-index (brush)
+           (let ((tail (global "ALL-BRUSHES")) (index 0) (found nil) (answer nil)
+                 (seen (make-hash-table :test #'eq)))
+             (do () ((not (consp tail)))
+               (when (gethash tail seen) (error "Cyclic ALL-BRUSHES list"))
+               (setf (gethash tail seen) t)
+               (when (> index 1000) (cap :brush-list index))
+               (when (and (not found) (eq (car tail) brush))
+                 (setf found t answer index))
+               (incf index)
+               (setf tail (cdr tail)))
+             (unless (null tail) (error "Improper ALL-BRUSHES list"))
+             answer))
+         (brush-record ()
+           (let ((brush (global "BRUSH")))
+             (if (null brush)
+                 (list :id 0 :type "NULL" :index nil :width nil :perim nil :core nil)
+               (let ((width (slot-value brush (slot-symbol "WIDTH"))))
+                 (unless (integerp width) (error "Noninteger BRUSH WIDTH"))
+                 (list :id (object-id brush) :type (format nil "~S" (type-of brush))
+                       :index (brush-index brush) :width width
+                       :perim (offset-record (slot-value brush (slot-symbol "PERIM")) "PERIM")
+                       :core (offset-record (slot-value brush (slot-symbol "CORE")) "CORE"))))))
+         (binding-record (name)
+           (let ((symbol (global-symbol name)))
+             (if symbol (list :bound (descriptor (symbol-value symbol))) (list :unbound))))
+         (frame-coordinates (frame)
+           (let ((lx (slot-value frame (slot-symbol "LX")))
+                 (rx (slot-value frame (slot-symbol "RX")))
+                 (ly (slot-value frame (slot-symbol "LY")))
+                 (ty (slot-value frame (slot-symbol "TY"))))
+             (unless (every #'integerp (list lx rx ly ty))
+               (error "Noninteger SUB-FRAME bound"))
+             (values lx rx ly ty)))
+         (frame-record ()
+           (let ((frame (global "SUB-FRAME")))
+             (unless frame (error "SUB-FRAME is NIL"))
+             (multiple-value-bind (lx rx ly ty) (frame-coordinates frame)
+               (list :id (object-id frame) :type (format nil "~S" (type-of frame))
+                     :lx lx :rx rx :ly ly :ty ty))))
+         (configuration-record ()
+           (let* ((brush (global "BRUSH"))
+                  (width (and brush (slot-value brush (slot-symbol "WIDTH")))))
+             (unless (and brush (integerp width))
+               (error "Missing integer BRUSH WIDTH"))
+             (list :sub-frame (frame-record) :width width
+                   :boundary-value (binding-record "BOUNDARY-VALUE"))))
+         (map-data (map)
+           (unless (and (arrayp map) (= (array-rank map) 2)
+                        (equal (array-element-type map) '(unsigned-byte 4)))
+             (error "Expected rank-two unsigned-byte-4 FILL-MAP"))
+           (let ((width (array-dimension map 0)) (height (array-dimension map 1)))
+             (unless (and (plusp width) (plusp height) (<= (* width height) 829440))
+               (setf rejected t)
+               (error "FILL-MAP dimensions ~D by ~D; expected positive dimensions with at most 829440 cells" width height))
+             (values width height (* width height))))
+         (flat-map (map)
+           (multiple-value-bind (width height count) (map-data map)
+             (when (> count 829440) (cap :map-cells count))
+             (when (> (+ cells count) 14929920) (cap :total-cells (+ cells count)))
+             (incf cells count)
+             (list (copy-seq (make-array (array-total-size map)
+                                         :element-type '(unsigned-byte 4) :displaced-to map))
+                   width height map)))
+         (map-record (flat width height map phase stroke-id sample-id event)
+           (when (>= snapshots 18) (cap :snapshots (1+ snapshots)))
+           (let ((local-runs 0) (covered 0) (id (object-id map))
+                 (type (format nil "~S" (type-of map)))
+                 (element-type (array-element-type map)))
+             (emit "MAP-BEGIN phase=~S stroke=~D sample=~D event=~D id=~D type=~S element-type=~S width=~D height=~D cells=~D"
+                   phase stroke-id sample-id event id type element-type width height (* width height))
+             (dotimes (y height)
+               (let ((row nil) (last nil) (run-length 0) (row-covered 0))
+                 (dotimes (x width)
+                   (let ((next (aref flat (+ (* x height) y))))
+                     (if (and (> run-length 0) (= next last))
+                         (incf run-length)
+                       (progn
+                         (when (> run-length 0)
+                           (push (list last run-length) row)
+                           (incf local-runs)
+                           (incf row-covered run-length))
+                         (setf last next run-length 1)))))
+                 (when (> run-length 0)
+                   (push (list last run-length) row)
+                   (incf local-runs)
+                   (incf row-covered run-length))
+                 (unless (= row-covered width)
+                   (error "Incomplete map row ~D: ~D of ~D cells" y row-covered width))
+                 (incf covered row-covered)
+                 (emit "MAP-ROW phase=~S stroke=~D sample=~D event=~D y=~D runs=~S"
+                       phase stroke-id sample-id event y (nreverse row))))
+             (unless (= covered (* width height))
+               (error "Incomplete map: ~D of ~D cells" covered (* width height)))
+             (when (> (+ runs local-runs) 14929920)
+               (cap :runs (+ runs local-runs)))
+             (incf runs local-runs)
+             (incf snapshots)
+             (emit "MAP-END phase=~S stroke=~D sample=~D event=~D id=~D rows=~D cells=~D covered=~D runs=~D complete=T"
+                   phase stroke-id sample-id event id height (* width height) covered local-runs)
+             (list :id id :type type :element-type element-type :width width :height height
+                   :cells (* width height) :covered covered :complete t
+                   :runs local-runs)))
+         (copy-map-record (phase stroke-id sample-id event)
+           (let* ((map (global "FILL-MAP")) (copy (flat-map map))
+                  (record (map-record (first copy) (second copy) (third copy) (fourth copy)
+                                      phase stroke-id sample-id event)))
+             (when (and current-stroke (getf current-stroke :sample))
+               (incf (getf (getf current-stroke :sample) :snapshots)))
+             record))
+         (snapshot (phase thunk)
+           (let ((before (aaron-random-state-preview)) (after nil) (completed nil) (result nil))
+             (unwind-protect
+                 (progn (setf result (funcall thunk) completed t))
+               (setf after (aaron-random-state-preview))
+               (emit "RNG-PREVIEW phase=~S before=~S after=~S unchanged=~S"
+                     phase before after (equal before after)))
+             (unless (equal before after)
+               (setf rejected t)
+               (error "Observer changed copied random-state preview"))
+             (when completed (incf checks))
+             result))
+         (safe-observe (phase thunk)
+           (if capture-disabled
+               (list :capture-skipped phase)
+             (handler-case (snapshot phase thunk)
+               (condition (condition)
+                 (problem phase condition)
+                 (list :capture-error phase (format nil "~A" condition))))))
+         (safe-log (phase thunk)
+           (handler-case (funcall thunk)
+             (condition (condition) (problem phase condition) nil)))
+         (state-record (context values include-map phase event)
+           (let* ((args (getf context :args)) (path (first args))
+                  (brush (global "BRUSH")) (map (global "FILL-MAP"))
+                  (sample (getf context :sample))
+                  (map-data (when include-map
+                              (copy-map-record phase (getf context :id)
+                                               (if sample (getf sample :sample-id) 0) event))))
+             (list :path (path-record path) :brush (brush-record)
+                   :argument-value (if (> (length args) 1) (descriptor (second args)) :missing)
+                   :configuration (configuration-record)
+                   :values (and values (descriptors values))
+                   :return-path-eq (and values (eq (first values) path))
+                   :map (or map-data :not-requested)
+                   :map-object-id (object-id map) :brush-object-id (object-id brush))))
+         (map-screen-record (phase event)
+           (let* ((map (global "FILL-MAP"))
+                  (context current-stroke)
+                  (sample (and context (getf context :sample)))
+                  (copy-map (copy-map-record phase
+                                             (if context (getf context :id) 0)
+                                             (if sample (getf sample :sample-id) 0)
+                                             event)))
+             (list :map-object-id (object-id map) :map copy-map)))
+         (multi-brush-target-p ()
+           (let* ((brush-symbol (global-symbol "BRUSH"))
+                  (brush (and brush-symbol (symbol-value brush-symbol))))
+             (and brush
+                  (eql (brush-index brush) 5)
+                  (eql (slot-value brush (slot-symbol "WIDTH")) 17))))
+         (select-sample (args stroke-id)
+           (let* ((path (first args))
+                  (value (if (> (length args) 1) (second args) :missing)))
+             (when (eql value 0)
+               (cond
+                 ((null path)
+                  (unless empty-selected
+                    (setf empty-selected t)
+                    (incf sampled)
+                    (setf empty-sample-id sampled)
+                    (list :sample-id sampled :class :empty :path-length 0
+                          :stroke-id stroke-id :eligibility :natural-nil-path)))
+                 ((consp path)
+                  (let ((path-length (proper-length path :path 20000)))
+                    (cond
+                      ((= path-length 1)
+                       (unless singleton-selected
+                         (setf singleton-selected t)
+                         (incf sampled)
+                         (setf singleton-sample-id sampled)
+                         (list :sample-id sampled :class :singleton :path-length path-length
+                               :stroke-id stroke-id :eligibility :natural-singleton-path)))
+                      ((and (> path-length 1) (not multi-selected)
+                            (multi-brush-target-p))
+                       (setf multi-selected t)
+                       (incf sampled)
+                       (setf multi-sample-id sampled)
+                       (list :sample-id sampled :class :multi :path-length path-length
+                             :stroke-id stroke-id :eligibility :natural-multi-path))
+                      (t nil))))
+                 (t nil)))))
+         (record-call-error (phase condition)
+           (incf errors)
+           (setf rejected t footer-failed t)
+           (safe-log :call-error
+             (lambda ()
+               (emit "CALL-ERROR phase=~S type=~S message=~S"
+                     phase (format nil "~S" (type-of condition)) (condition-text condition)))))
+         (sample-complete (sample-id)
+           (let ((sample (gethash sample-id sample-records)))
+             (and sample
+                  (>= (getf sample :screens) 1)
+                  (<= (getf sample :screens) 2)
+                  (= (getf sample :snapshots)
+                     (+ 2 (* 2 (getf sample :screens)))))))
+         (note-outer-wrapper (name symbol)
+           (when (and symbol (fboundp symbol)
+                      (boundp 'aaron-planning-call-trace-loaded)
+                      (symbol-value 'aaron-planning-call-trace-loaded)
+                      (not (gethash name outer-wrappers)))
+             (let ((current (symbol-function symbol)))
+               (unless (eq current (gethash name wrappers))
+                 (setf (gethash name outer-wrappers) current)))))
+         (restore-one (name)
+           (let ((symbol (find-symbol name owner))
+                 (wrapper (gethash name wrappers))
+                 (original (gethash name originals)))
+             (cond
+               ((null wrapper) (emit "RESTORE name=~S status=:not-installed" name))
+               ((and symbol (fboundp symbol) (eq (symbol-function symbol) wrapper))
+                (handler-case
+                    (progn
+                      (setf (symbol-function symbol) original)
+                      (emit "RESTORE name=~S status=:restored" name))
+                  (condition (condition)
+                    (incf errors)
+                    (setf rejected t footer-failed t)
+                    (emit "RESTORE name=~S status=:error type=~S" name
+                          (format nil "~S" (type-of condition))))))
+               ((and (member name '("MAIN" "SCREEN-AND-STORE") :test #'string=)
+                     symbol original wrapper (gethash name outer-wrappers) (fboundp symbol)
+                     (eq (symbol-function symbol) (gethash name outer-wrappers)))
+                ;; The scene snapshot loads planning-call-trace after this
+                ;; pre-scene observer. Preserve the observed outer wrapper by
+                ;; identity instead of overwriting it with the original.
+                (emit "RESTORE name=~S status=:outer-wrapper-preserved" name))
+               ((and (member name '("MAIN" "SCREEN-AND-STORE") :test #'string=)
+                     symbol original (fboundp symbol)
+                     (eq (symbol-function symbol) original))
+                (emit "RESTORE name=~S status=:already-original" name))
+               (t
+                (incf errors)
+                (setf rejected t footer-failed t)
+                (emit "RESTORE name=~S status=:changed" name)))))
+         (bindings-safe ()
+           (and
+            (every (lambda (name)
+                     (let ((symbol (find-symbol name owner))
+                           (original (gethash name originals)))
+                       (and symbol original (fboundp symbol)
+                            (eq (symbol-function symbol) original))))
+                   '("IN-SUB-FRAME" "BRUSH-STROKE"))
+            (every (lambda (name)
+                     (let ((symbol (find-symbol name owner))
+                           (original (gethash name originals))
+                           (outer (gethash name outer-wrappers)))
+                       (and symbol original (fboundp symbol)
+                            (or (eq (symbol-function symbol) original)
+                                (and outer (eq (symbol-function symbol) outer))))))
+                   '("SCREEN-AND-STORE" "MAIN"))))
+         (record-finish (status)
+           (unless finished
+             (setf finished t)
+             (dolist (name '("BRUSH-STROKE" "SCREEN-AND-STORE" "IN-SUB-FRAME" "MAIN"))
+               (restore-one name))
+             (let* ((samples-complete
+                      (and empty-selected singleton-selected multi-selected
+                           (sample-complete empty-sample-id)
+                           (sample-complete singleton-sample-id)
+                           (sample-complete multi-sample-id)))
+                    (safe (bindings-safe))
+                    (normal (and (eq status :normal) (not rejected) (not capture-disabled)
+                                 (not report-full) (= errors 0) (= aborts 0)
+                                 (null current-stroke) safe))
+                    (accepted (and normal samples-complete)))
+               (emit "COMPLETE version=5 main=~S accepted=~S bindings-safe=~S strokes=~D sampled=~D empty-sample=~D singleton-sample=~D multi-sample=~D events=~D sampled-predicates=~D sample-screens=~D points=~D offsets=~D snapshots=~D cells=~D runs=~D objects=~D checks=~D errors=~D aborts=~D rejected=~S capture-disabled=~S samples-complete=~S current-stroke=~S"
+                     status accepted safe strokes sampled
+                     empty-sample-id singleton-sample-id multi-sample-id
+                     events predicates screens points offsets snapshots cells runs objects checks
+                     errors aborts rejected capture-disabled samples-complete (not (null current-stroke)))
+               (when report
+                 ;; Flush COMPLETE before allowing the required END marker.
+                 ;; A failed footer write must leave the runner's marker absent.
+                 (handler-case
+                     (finish-output report)
+                   (condition ()
+                     (incf errors)
+                     (setf rejected t capture-disabled t footer-failed t))))
+                (when (and accepted complete-written (not footer-failed))
+                  (emit "END brush-stroke-value0-v5"))
+               (when report
+                 (handler-case
+                     (finish-output report)
+                   (condition ()
+                     (incf errors)
+                     (setf rejected t capture-disabled t footer-failed t)))
+                 (handler-case
+                     (close report)
+                   (condition ()
+                     (incf errors)
+                     (setf rejected t capture-disabled t footer-failed t)))
+                  (setf report nil)))))
+         (install (name)
+           (let* ((symbol (or (and owner (find-symbol name owner))
+                              (error "Missing function symbol ~A" name)))
+                  (original (symbol-function symbol)))
+             (setf (gethash name originals) original)
+             (emit "INSTALL name=~S type=~S" name (format nil "~S" (type-of original)))
+             (cond
+               ((string= name "IN-SUB-FRAME")
+                (setf (symbol-function symbol)
+                      (lambda (&rest args)
+                        (block observer-call
+                          (when (or (not report) capture-disabled)
+                            (return-from observer-call (apply original args)))
+                          ;; Keep detailed predicate tracing only for the three
+                          ;; selected VALUE=0 samples. Every other natural call
+                          ;; passes through without event IDs or report counters.
+                          (unless (and current-stroke (getf current-stroke :sample))
+                            (return-from observer-call (apply original args)))
+                          (let* ((event (if report (next-event) 0))
+                               (sample (and current-stroke (getf current-stroke :sample)))
+                               (completed nil))
+                          (when report
+                            (incf predicates)
+                            (when (> predicates 4000000)
+                              (mark-rejected :predicates predicates)
+                              (setf capture-disabled t)))
+                          (when capture-disabled
+                            (return-from observer-call (apply original args)))
+                          (unwind-protect
+                              (handler-bind ((error (lambda (condition)
+                                                      (record-call-error :in-sub-frame condition))))
+                                (multiple-value-call
+                                    (lambda (&rest values)
+                                      (setf completed t)
+                                      (when (and report sample)
+                                        (incf (getf sample :predicates))
+                                        (safe-log :predicate
+                                          (lambda ()
+                                            (emit "IN-SUB-FRAME event=~D stroke=~D sample=~D args=~S values=~S"
+                                                  event (getf current-stroke :id)
+                                                  (getf sample :sample-id)
+                                                  (descriptors args) (descriptors values)))))
+                                      (values-list values))
+                                  (apply original args)))
+                            (unless completed
+                              (incf aborts)
+                              (setf rejected t footer-failed t)
+                              (emit "ABORT kind=:IN-SUB-FRAME event=~D" event))))))))
+               ((string= name "SCREEN-AND-STORE")
+                (setf (symbol-function symbol)
+                      (lambda (&rest args)
+                        (block observer-call
+                          (note-outer-wrapper name symbol)
+                          (when (or (not report) capture-disabled)
+                            (return-from observer-call (apply original args)))
+                          ;; Only selected VALUE=0 strokes need map snapshots.
+                          (unless (and current-stroke (getf current-stroke :sample))
+                            (return-from observer-call (apply original args)))
+                          (let* ((event (if report (next-event) 0))
+                               (sample (and current-stroke (getf current-stroke :sample)))
+                               (selected-screen nil) (completed nil))
+                          (when report
+                            (incf screens)
+                            (when (> screens 20000)
+                              (mark-rejected :screens screens)
+                              (setf capture-disabled t)))
+                          (when capture-disabled
+                            (return-from observer-call (apply original args)))
+                          (when sample
+                            (incf (getf sample :screens))
+                            (setf selected-screen (<= (getf sample :screens) 2))
+                            (unless selected-screen
+                              (mark-rejected :selected-screen-calls (getf sample :screens))
+                              (setf capture-disabled t)))
+                          (when capture-disabled
+                            (return-from observer-call (apply original args)))
+                          (when report
+                            (safe-log :screen-begin
+                              (lambda ()
+                                (emit "SCREEN-BEGIN event=~D stroke=~D sample=~D args=~S path-id=~D path-eq=~S sample-path-eq=~S cdex=~S sdex=~S detail=~S"
+                                      event
+                                      (if current-stroke (getf current-stroke :id) 0)
+                                      (if sample (getf sample :sample-id) 0)
+                                      (descriptors args)
+                                      (if args (object-id (first args)) 0)
+                                      (and args current-stroke
+                                           (eq (first args) (getf current-stroke :path)))
+                                      (and args sample (eq (first args) (getf sample :path)))
+                                      (if (> (length args) 1) (descriptor (second args)) (list :missing))
+                                      (if (> (length args) 2) (descriptor (third args)) (list :missing))
+                                      selected-screen))))
+                          (when (and sample selected-screen)
+                            (safe-observe :screen-entry
+                              (lambda ()
+                                (emit "SCREEN-MAP-ENTRY event=~D stroke=~D sample=~D data=~S"
+                                      event (getf current-stroke :id) (getf sample :sample-id)
+                                      (map-screen-record :screen-entry event)))))
+                          (unwind-protect
+                              (handler-bind ((error (lambda (condition)
+                                                      (record-call-error :screen-and-store condition))))
+                                (multiple-value-call
+                                    (lambda (&rest values)
+                                      (setf completed t)
+                                      (when report
+                                        (safe-log :screen-return
+                                          (lambda ()
+                                            (emit "SCREEN-RETURN event=~D stroke=~D sample=~D values=~S return-path-eq=~S"
+                                                  event
+                                                  (if current-stroke (getf current-stroke :id) 0)
+                                                  (if sample (getf sample :sample-id) 0)
+                                                  (descriptors values)
+                                                  (and values current-stroke
+                                                       (eq (first values) (getf current-stroke :path)))))))
+                                      (when (and sample selected-screen)
+                                        (safe-observe :screen-return
+                                          (lambda ()
+                                            (emit "SCREEN-MAP-RETURN event=~D stroke=~D sample=~D data=~S"
+                                                  event (getf current-stroke :id)
+                                                  (getf sample :sample-id)
+                                                  (map-screen-record :screen-return event)))))
+                                      (values-list values))
+                                  (apply original args)))
+                            (unless completed
+                              (incf aborts)
+                              (setf rejected t footer-failed t)
+                              (emit "ABORT kind=:SCREEN-AND-STORE event=~D" event))))))))
+               ((string= name "BRUSH-STROKE")
+                (setf (symbol-function symbol)
+                      (lambda (&rest args)
+                        (block observer-call
+                          (when (or (not report) capture-disabled)
+                            (return-from observer-call (apply original args)))
+                          (when (>= strokes 10000)
+                            (mark-rejected :strokes (1+ strokes))
+                            (setf capture-disabled t)
+                            (return-from observer-call (apply original args)))
+                          (let* ((id (incf strokes))
+                               (event (if report (next-event) 0))
+                               (value (if (> (length args) 1) (second args) :missing))
+                               (prior current-stroke)
+                               (choice (and report (not capture-disabled) (eql value 0)
+                                            (safe-observe :sample-selection
+                                              (lambda () (select-sample args id)))))
+                               (sample (and (listp choice) (getf choice :sample-id)
+                                            (append choice (list :path (first args)
+                                                                 :screens 0 :predicates 0
+                                                                 :snapshots 0))))
+                               (context (list :id id :event event :args args :path (first args)
+                                              :value value :sample sample
+                                              :sampled (not (null sample))))
+                               (completed nil))
+                          (when capture-disabled
+                            (return-from observer-call (apply original args)))
+                          (when report
+                            (safe-log :stroke-begin
+                              (lambda ()
+                                (emit "STROKE-BEGIN id=~D event=~D argc=~D args=~S value=~S path-kind=~S selected=~S sample=~D"
+                                      id event (length args) (descriptors args) (descriptor value)
+                                      (cond ((null (first args)) :empty)
+                                            ((consp (first args)) :list)
+                                            (t :other))
+                                      (not (null sample))
+                                      (if sample (getf sample :sample-id) 0)))))
+                          (setf current-stroke context)
+                          (when sample
+                            (setf (gethash (getf sample :sample-id) sample-records) sample)
+                            (emit "SAMPLE-SELECT id=~D class=~S path-length=~D eligibility=~S mask=~S"
+                                  id (getf sample :class) (getf sample :path-length)
+                                  (getf sample :eligibility) (getf sample :mask))
+                            (emit "STROKE-INPUT id=~D event=~D sample=~D data=~S"
+                                  id event (getf sample :sample-id)
+                                  (safe-observe :stroke-entry
+                                    (lambda () (state-record context nil t :stroke-entry event)))))
+                          (unwind-protect
+                              (handler-bind ((error (lambda (condition)
+                                                      (record-call-error :brush-stroke condition))))
+                                (multiple-value-call
+                                    (lambda (&rest values)
+                                      (setf completed t)
+                                      (if sample
+                                          (emit "STROKE-RETURN id=~D event=~D sample=~D predicates=~D screens=~D data=~S"
+                                                id event (getf sample :sample-id)
+                                                (getf sample :predicates) (getf sample :screens)
+                                                (safe-observe :stroke-return
+                                                  (lambda () (state-record context values t :stroke-return event))))
+                                        (safe-log :stroke-return
+                                          (lambda ()
+                                            (emit "STROKE-RETURN id=~D event=~D values=~S return-path-eq=~S"
+                                                  id event (descriptors values)
+                                                  (and values (eq (first values) (first args)))))))
+                                      (values-list values))
+                                  (apply original args)))
+                            (unless completed
+                              (incf aborts)
+                              (setf rejected t footer-failed t)
+                              (emit "ABORT kind=:BRUSH-STROKE id=~D" id))
+                            (setf current-stroke prior))))))))
+              (setf (gethash name wrappers) (symbol-function symbol))
+              )))
+    (handler-case
+        (progn
+          (setf report (open "C:\\temp\\aaron-brush-stroke-value0-v5-index5.txt"
+                             :direction :output :if-exists :supersede :if-does-not-exist :create))
+          (emit "BEGIN brush-stroke-value0 v5")
+          (emit "CAPS strokes=10000 sampled=3 events=5000000 sampled-predicates=4000000 sample-screens=20000 points=120000 offsets=120000 map-cells=829440 snapshots=18 total-cells=14929920 runs=14929920 objects=30000 values=16 path=20000 offsets-per-list=10000 report-bytes=268435456 report-char-cap=67108864 terminal-reserve-chars=8192 screen-calls-per-sample=2")
+          (dolist (name '("IN-SUB-FRAME" "SCREEN-AND-STORE" "BRUSH-STROKE"))
+            (install name))
+          (let* ((symbol (or (and owner (find-symbol "MAIN" owner))
+                             (error "Missing MAIN function symbol")))
+                 (original (symbol-function symbol)))
+            (setf (gethash "MAIN" originals) original)
+            (emit "INSTALL name=~S type=~S" "MAIN" (format nil "~S" (type-of original)))
+            (setf (symbol-function symbol)
+                  (lambda (&rest args)
+                    (let ((completed nil))
+                      (note-outer-wrapper "MAIN" symbol)
+                      (unwind-protect
+                          (handler-bind ((error (lambda (condition) (record-call-error :main condition))))
+                            (multiple-value-prog1 (apply original args)
+                              (setf completed t)
+                              (record-finish :normal)))
+                        (unless completed (record-finish :aborted))))))
+            (setf (gethash "MAIN" wrappers) (symbol-function symbol)))
+          (emit "READY")
+          (finish-output report)
+          (set 'aaron-brush-stroke-value0-capture-v5-loaded t))
+      (condition (condition)
+        (incf errors)
+        (setf rejected t capture-disabled t footer-failed t)
+        (emit "SETUP-ERROR type=~S message=~S"
+              (format nil "~S" (type-of condition)) (condition-text condition))
+         (record-finish :setup-failed))))))

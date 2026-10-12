@@ -105,9 +105,28 @@ cells (20 1-to-0, 13 3-to-0). The empty path still calls SCREEN-AND-STORE and
 has no predicates; the singleton makes that screen call and nine true
 predicates, with no net map change. A predicate-coordinate zeroing candidate
 reproduces all three final maps, but no individual array stores were traced.
-`applyObservedNaturalBrushStrokeValue0` is a new JS candidate, syntax-checked
-only; it has not been compared against raw maps or a scene. The older isolated
-adapter retains its separate contract. No general value-0 behavior is claimed.
+The separate `applyObservedNaturalBrushStrokeValue0` candidate has now been
+run on those three raw maps in a second source-bound capture. The v5 run
+selects its first natural MULTI VALUE=0 sample at `ALL-BRUSHES` index 5,
+`WIDTH=17`: stroke 1336, 83 path points, 4,648 true predicates, and 1,575
+changed cells (857 1-to-0, 718 3-to-0). Its 182-offset CORE exactly matches
+the JS profile, and the candidate reproduces all three final maps and returns
+the same JS path object. The test injects the captured SCREEN-RETURN fill map
+into the callback, so it does not implement the screen routine or establish
+scene-level parity. Read the updated [findings](introspection/brush-stroke-value0.md)
+and [v5 evidence](introspection/evidence/brush-stroke-value0-20261012-index5-v5.json).
+
+The portable v5 report binds eight code/configuration inputs, including the
+map writer and engine module metadata. Independent derivations are byte-
+identical at 2,567,587 bytes. The report SHA-256 is
+`5dac2e2213be2178849c8fda7c845699cc13654287a0b9bec196983fae89c95d`. The
+v5 observer SHA-256 is
+`0253d6f67f8b0c472f5e390975025b46e54162c6b03f1f031a6c6c0f090e1771`; its
+raw tape SHA-256 is
+`ffb7574d216cdb1735391660246627b1581e55d85f550e70d28b617c30a31fec`. The
+Fresh uninstrumented controls bracket the run; all four AA0 and scene-report
+files match their existing hashes. The older isolated adapter retains its
+separate contract. General value-0 behavior remains open.
 
 ### BRUSH-STROKE REA branch and call queries, 2026-10-12
 
@@ -121,12 +140,15 @@ analyst-generated PE; they establish no runtime branch or call target. Read
 the [REA notes](introspection/rea-payload-analysis.md) and
 [v4 evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
 
-Next find a fresh natural VALUE=0 multi stroke whose brush or CORE geometry
-differs from the first captured sample, using the existing census to choose a
-discriminating case. Capture complete maps and fresh uninstrumented controls.
-For any native breakpoint work, rediscover and byte-validate the address in
-the new run; these archived xrefs are static context only. Keep the older
-320x480 captures separate.
+The two retained natural censuses contain no rejected `IN-SUB-FRAME`
+predicates for VALUE=0. The next probe will select a bounded MULTI path at
+`ALL-BRUSHES` index 4, width 13, with the 97-offset CORE. The historical census
+candidate is only a selector guide; the new capture must select by live brush,
+width, and path properties. This broadens CORE coverage but cannot test a
+VALUE=0 rejection case absent from the retained censuses. Require complete
+maps and fresh uninstrumented controls. For native breakpoint work, rediscover
+and byte-validate the live address before attaching a debugger; archived REA
+xrefs are static context only. Keep older 320x480 captures separate.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 
@@ -326,7 +348,8 @@ Natural BRUSH-STROKE's long value-3 boundary branch now matches all 70 markers,
 cells. It chooses PERIM for length > 3×WIDTH, clips inclusively to SUB-FRAME,
 writes 3, skips the screen and returns the original path by EQ. The short
 CORE branch has native support but is not naturally exercised here. All
-3,881 stroke return identities are observed; value-0 painting remains open.
+3,881 stroke return identities are observed; general value-0 behavior remains
+open beyond the bounded map captures above.
 All 70 clears use their naturally returned CFRAME and match another 10,752,000
 full output cells. Both drawings/scenes equal fresh controls. Read
 [the boundary findings](introspection/brush-stroke-boundary.md) and

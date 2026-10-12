@@ -239,6 +239,15 @@ does not trace individual stores or establish general behavior. See
 The unsuffixed, v2, and v3 JSONs are earlier derived views of this same capture;
 v4 is the canonical report with the candidate final-map comparison.
 
+[`brush-stroke-value0-20261012-index5-v5.json`](brush-stroke-value0-20261012-index5-v5.json)
+is a separate follow-up: its first natural MULTI VALUE=0 path uses
+`ALL-BRUSHES` index 5 and brush width 17. It binds 12 complete maps, three
+fresh controls, the v5 observer and the JavaScript candidate. The candidate
+matches all three captured fill-map returns while receiving the measured
+SCREEN-RETURN map through its injected callback; this is not screen or
+scene-level parity. Two portable derivations match byte-for-byte. See
+[the findings](../brush-stroke-value0.md).
+
 ## Natural BRUSH-STROKE value-3 marking and clears, 2026-10-05
 
 [`brush-stroke-boundary-parity-20261005.json`](brush-stroke-boundary-parity-20261005.json)

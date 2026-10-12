@@ -59,11 +59,13 @@ dependency-isolated adapter.
 [`applyObservedNaturalBrushStrokeValue0`](../../engine/src/aaron-brush-stroke.js)
 is a separate, explicitly bounded candidate. It calls the supplied screen
 callback first, applies zero at accepted CORE coordinates, and returns the
-original JS path object. The portable deriver confirms that its underlying
+original JS path object. The v4 portable deriver confirms that its underlying
 predicate-coordinate state-transition rule matches the three captured final
-maps. The new JS function itself has only been syntax-checked; it has not been
-run against the raw maps or a scene. No general `BRUSH-STROKE` parity is
-claimed.
+maps. The separate v5 follow-up below now runs the actual JavaScript function
+against three new captured maps, including a wide-brush multi path. That check
+injects the observed screen output into the callback; it does not implement
+the screen routine or establish scene-level parity. No general
+`BRUSH-STROKE` parity is claimed.
 
 ## Controls, provenance, and limits
 
@@ -111,3 +113,72 @@ The two nearby REA xref queries are documented in the
 [payload analysis](rea-payload-analysis.md). They provide static branch
 destinations only and do not resolve the natural caller or these observed
 effects.
+
+## Index-5, width-17 follow-up, 2026-10-12
+
+The v5 observer preserves the first natural VALUE=0 EMPTY and SINGLETON
+samples, then selects the first MULTI sample whose current brush is at
+zero-based `ALL-BRUSHES` index 5 and has brush `WIDTH=17`. Its source hash is
+`0253d6f67f8b0c472f5e390975025b46e54162c6b03f1f031a6c6c0f090e1771`. The
+capture root is `brush-stroke-value0-index5-capture-20261012-a`; it contains
+2,096 natural strokes and accepted `READY`, version-5 `COMPLETE`, and `END`
+records, with zero observer errors or aborts. It records 12 complete 768x1080
+UBYTE4 maps, 12,960 rows, 9,953,280 cells and 24,910 maximal RLE runs. See the
+canonical [v5 portable evidence](evidence/brush-stroke-value0-20261012-index5-v5.json)
+and its [independent deriver](../tools/derive-brush-stroke-value0-index5-evidence.mjs).
+
+| Selected sample | Stroke | Brush index / width | Path points | True predicates | Screen calls |
+|---|---:|---:|---:|---:|---:|
+| EMPTY | 4 | 1 / 3 | 0 | 0 | 1 |
+| SINGLETON | 836 | 1 / 3 | 1 | 9 | 1 |
+| MULTI | 1336 | 5 / 17 | 83 | 4,648 | 1 |
+
+For the 83-point MULTI path, the complete fill map changes in 1,575 cells
+between screen return and stroke return: 857 cells change 1 to 0, and 718
+change 3 to 0, within x=302..398 and y=299..360. The map is unchanged during
+the screen call. The nine singleton predicates all return true but leave the
+map unchanged; the empty path makes no predicate calls. The observer captures
+predicate results and map states, not individual store instructions.
+
+The v5 deriver imports and executes
+`applyObservedNaturalBrushStrokeValue0` for each selected sample. Its profile
+CORE matches the captured ordered CORE list; it calls the screen callback
+once, returns the same JS path object, and reproduces each captured stroke
+return map. For this comparison, the callback is supplied the already captured
+SCREEN-RETURN fill map. This isolates the adapter's path/map transition and
+does not validate SCREEN-AND-STORE's implementation or any drawing output.
+
+Fresh uninstrumented controls `brush-stroke-value0-index5-control-before-20261012-a`,
+`...-before-20261012-b`, and `...-control-after-20261012-a` bracket the
+capture. All four runs have AA0 SHA-256
+`405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a` and
+scene-report SHA-256
+`153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3`. The
+raw observer tape SHA-256 is
+`ffb7574d216cdb1735391660246627b1581e55d85f550e70d28b617c30a31fec`.
+A read-only audit independently decoded all 12 maps and verified complete row
+coverage, RLE run counts, cell histograms, map hashes, selected brush profile,
+and the candidate's bounded map result.
+The portable report binds eight code/configuration inputs, including the map
+writer and engine module metadata. Two independent derivations are
+byte-identical; the JSON is 2,567,587 bytes with SHA-256
+`5dac2e2213be2178849c8fda7c845699cc13654287a0b9bec196983fae89c95d`.
+To derive another copy, use a fresh JSON output path because the helper refuses
+to overwrite:
+
+```powershell
+node research/tools/derive-brush-stroke-value0-index5-evidence.mjs `
+  research/extracted/local-oracle/brush-stroke-value0-index5-capture-20261012-a `
+  research/extracted/local-oracle/brush-stroke-value0-index5-control-before-20261012-a `
+  research/extracted/local-oracle/brush-stroke-value0-index5-control-before-20261012-b `
+  research/extracted/local-oracle/brush-stroke-value0-index5-control-after-20261012-a `
+  research/artifacts/temp/brush-stroke-value0-index5-repeat.json
+```
+
+This remains one seed and one scene. The two retained natural censuses contain
+no rejected `IN-SUB-FRAME` predicates for VALUE=0, so an existing natural
+rejection case is not available. The next useful sample is a dynamically
+selected MULTI path with `ALL-BRUSHES` index 4, width 13, and the distinct
+97-offset CORE. That broadens profile coverage but does not establish edge or
+rejection behavior. The direct caller and separate 320x480 captures remain
+out of scope.
