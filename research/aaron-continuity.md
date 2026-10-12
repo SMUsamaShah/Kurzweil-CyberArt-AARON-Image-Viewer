@@ -123,10 +123,31 @@ identical at 2,567,587 bytes. The report SHA-256 is
 v5 observer SHA-256 is
 `0253d6f67f8b0c472f5e390975025b46e54162c6b03f1f031a6c6c0f090e1771`; its
 raw tape SHA-256 is
-`ffb7574d216cdb1735391660246627b1581e55d85f550e70d28b617c30a31fec`. The
+`ffb7574d216cdb1735391660246627b1581e55d85f550e70d28b617c30a31fec`.
 Fresh uninstrumented controls bracket the run; all four AA0 and scene-report
 files match their existing hashes. The older isolated adapter retains its
 separate contract. General value-0 behavior remains open.
+
+The v6 capture broadens the natural MULTI sample to `ALL-BRUSHES` index 4,
+width 13, CORE length 97. It dynamically selected stroke 47 (29 path points)
+with 2,813 true predicates and one SCREEN-AND-STORE call. The screen entry
+retains the same path identity; SCREEN-AND-STORE returns NIL, while
+BRUSH-STROKE returns the original path by EQ. The map stays unchanged during
+the screen call and then changes 38 cells from 1 to 0 (x=587..597,
+y=176..187). The JS candidate reproduces the selected stroke-return map while
+using the captured predicate decisions and captured SCREEN-RETURN map; this
+does not validate screen rendering or scene parity. Read the updated
+[findings](introspection/brush-stroke-value0.md) and
+[v6 evidence](introspection/evidence/brush-stroke-value0-20261012-index4-v6.json).
+
+The v6 observer SHA-256 is
+`4e3818e78627048e5126b107a26c66949406918c41207014382fb9dcb2c996d6`; its raw
+tape SHA-256 is
+`64df9e9bdff47c06fe12eb0d5e3562ed5bb5d9e0e0157f965139c37c88100821`. Three
+fresh uninstrumented controls bracket the complete capture and share the
+existing AA0 and scene-report hashes. Two independent portable derivations
+match byte-for-byte: 1,098,095 bytes, SHA-256
+`ac37cc749eea4afaacbfb2b9984168a0b0c50ecceaf4b94b8efc672e74f92580`.
 
 ### BRUSH-STROKE REA branch and call queries, 2026-10-12
 
@@ -140,15 +161,15 @@ analyst-generated PE; they establish no runtime branch or call target. Read
 the [REA notes](introspection/rea-payload-analysis.md) and
 [v4 evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
 
-The two retained natural censuses contain no rejected `IN-SUB-FRAME`
-predicates for VALUE=0. The next probe will select a bounded MULTI path at
-`ALL-BRUSHES` index 4, width 13, with the 97-offset CORE. The historical census
-candidate is only a selector guide; the new capture must select by live brush,
-width, and path properties. This broadens CORE coverage but cannot test a
-VALUE=0 rejection case absent from the retained censuses. Require complete
-maps and fresh uninstrumented controls. For native breakpoint work, rediscover
-and byte-validate the live address before attaching a debugger; archived REA
-xrefs are static context only. Keep older 320x480 captures separate.
+Neither retained natural census nor the v6 index-4 sample produced a rejected
+`IN-SUB-FRAME` result for VALUE=0. The next investigation will use REA to look
+for a concrete BRUSH-STROKE dependency or caller mapping that does not repeat
+the prior empty computed-call queries. Follow the native workflow, rediscover
+the relevant address from the current payload, and validate its bytes before
+debugger attachment. If static analysis cannot resolve the caller, capture a
+stack-aware runtime trace. General value-0 behavior, natural ZERO-EDGE context,
+intermediate helper traces, and scene-level JS parity remain open. Keep older
+320x480 captures separate.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 

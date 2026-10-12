@@ -182,3 +182,42 @@ selected MULTI path with `ALL-BRUSHES` index 4, width 13, and the distinct
 97-offset CORE. That broadens profile coverage but does not establish edge or
 rejection behavior. The direct caller and separate 320x480 captures remain
 out of scope.
+
+## Index-4, width-13 follow-up, 2026-10-12
+
+The v6 observer dynamically selects the first natural VALUE=0 MULTI path with
+zero-based `ALL-BRUSHES` index 4, brush width 13, and path length 2 through 39.
+Its source SHA-256 is
+`4e3818e78627048e5126b107a26c66949406918c41207014382fb9dcb2c996d6`. The
+complete capture selected stroke 47 with 29 path points, a 97-offset CORE,
+2,813 predicate calls, one SCREEN-AND-STORE call, and no errors, aborts, or
+rejected predicates. `SCREEN-BEGIN` received the same path object; its
+SCREEN-RETURN values are NIL, while BRUSH-STROKE returns the original path by
+EQ. Four complete 768x1080 UBYTE4 maps cover 4,320 rows, 3,317,760 cells, and
+9,232 maximal RLE runs.
+
+The fill map is unchanged from stroke entry through screen return. It then
+changes 38 cells from 1 to 0, within x=587..597 and y=176..187. The captured
+CORE exactly matches the JavaScript profile at width 13. The candidate matches
+the stroke-return map with the captured predicate decisions and SCREEN-RETURN
+map supplied to its callbacks. The screen routine is not implemented or
+validated by this comparison, and matching output files across the controls
+does not establish scene-level parity.
+
+Fresh uninstrumented controls `brush-stroke-value0-index4-control-before-20261012-a`,
+`...-before-20261012-b`, and `...-control-after-20261012-a` bracket the run.
+All four runs share AA0 SHA-256
+`405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a` and
+scene-report SHA-256
+`153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3`. The raw
+tape SHA-256 is
+`64df9e9bdff47c06fe12eb0d5e3562ed5bb5d9e0e0157f965139c37c88100821`. The
+portable report binds nine source files and independent derivations match at
+1,098,095 bytes, SHA-256
+`ac37cc749eea4afaacbfb2b9984168a0b0c50ecceaf4b94b8efc672e74f92580`. Read
+the [v6 portable evidence](evidence/brush-stroke-value0-20261012-index4-v6.json)
+and [deriver](../tools/derive-brush-stroke-value0-index4-evidence.mjs).
+
+This remains one seed, one scene, and one natural path. It adds a distinct
+CORE profile but does not characterize edge clipping or rejected predicates;
+the direct caller and whole-scene JavaScript parity remain open.

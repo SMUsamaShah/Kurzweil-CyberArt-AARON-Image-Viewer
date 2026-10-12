@@ -248,6 +248,15 @@ SCREEN-RETURN map through its injected callback; this is not screen or
 scene-level parity. Two portable derivations match byte-for-byte. See
 [the findings](../brush-stroke-value0.md).
 
+[`brush-stroke-value0-20261012-index4-v6.json`](brush-stroke-value0-20261012-index4-v6.json)
+adds one natural MULTI VALUE=0 path using `ALL-BRUSHES` index 4, width 13, and
+the 97-offset CORE. Four complete maps and three fresh controls are bound to
+the v6 observer and candidate. All 2,813 captured predicates are true; the
+candidate matches the 38-cell stroke-return change while using captured
+predicate decisions and the captured SCREEN-RETURN map. SCREEN-AND-STORE
+returns NIL; this does not test its implementation or establish scene parity.
+Two independent derivations are byte-identical. See [the findings](../brush-stroke-value0.md).
+
 ## Natural BRUSH-STROKE value-3 marking and clears, 2026-10-05
 
 [`brush-stroke-boundary-parity-20261005.json`](brush-stroke-boundary-parity-20261005.json)

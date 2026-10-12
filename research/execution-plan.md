@@ -90,14 +90,22 @@ REA 6.4.0 still reports all three BRUSH-STROKE computed calls unresolved with
 no targets; these are static observations on the analyst-generated PE. See
 [REA analysis](introspection/rea-payload-analysis.md) and
 [portable evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
-The retained seed-1234 and seed-5678 natural censuses contain no rejected
-`IN-SUB-FRAME` predicates for VALUE=0. Next capture a dynamically selected
-MULTI path at `ALL-BRUSHES` index 4, width 13, with its distinct 97-offset
-CORE; use complete maps and fresh controls. This broadens profile coverage but
-does not test an observed VALUE=0 rejection. Rediscover and byte-validate any
-native address before debugger attachment. General value-0 behavior, natural
-ZERO-EDGE context, intermediate helper traces, and scene-level JS parity remain
-open.
+The v6 capture now covers a natural MULTI VALUE=0 sample at `ALL-BRUSHES`
+index 4, width 13, and the distinct 97-offset CORE: 29 path points, 2,813 true
+predicates, and 38 changed map cells. The JS adapter reproduces the captured
+stroke-return map using captured predicate decisions and SCREEN-RETURN map;
+SCREEN-AND-STORE returns NIL, and no screen or scene parity is claimed. See
+[the findings](introspection/brush-stroke-value0.md) and
+[v6 evidence](introspection/evidence/brush-stroke-value0-20261012-index4-v6.json).
+
+The two retained natural censuses and this v6 sample contain no rejected
+`IN-SUB-FRAME` results for VALUE=0. Next use REA to identify a concrete
+BRUSH-STROKE dependency or caller mapping, avoiding the already-empty computed
+call queries. Follow the native workflow and rediscover and byte-validate the
+current address before debugger attachment; if static analysis stays
+unresolved, capture a stack-aware runtime trace. General VALUE=0 behavior,
+natural ZERO-EDGE context, intermediate helper traces, and scene-level JS
+parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
