@@ -49,6 +49,54 @@ This establishes a static branch/reference observation and a precise unresolved
 indirect-call boundary. It does not establish the Lisp meaning of ECX or the
 callee's runtime identity.
 
+### BRUSH-STROKE targeting, 2026-10-12
+
+REA 6.4.0 also completed a function query for the exact 564-byte mapped
+`BRUSH-STROKE` payload at archived static entry `0x1fe435c4`. Its inferred
+function body is 555 bytes, with 201 decoded instructions and 47 basic blocks.
+All 201 instruction addresses and mnemonics match the earlier raw-payload
+Ghidra report after normalizing whitespace after commas; instruction bytes
+are checked against the uniquely matched PLL payload. The body has 24
+conditional-jump references and 35 `CALL` instructions. Its high-p-code report
+contains 272 operations and 248 def-use edges with no reported truncation or
+omitted operations, inputs, or edges.
+
+Two targeted REA queries add useful navigation points for the natural VALUE=0
+capture:
+
+| Query | Static result |
+|---|---|
+| `xrefs 0x1fe436bd` | One source, conditional branch at `0x1fe43609` |
+| `resolve-native-call-targets 0x1fe4369e` | `CALL dword ptr [EDI + 0x57]`; unresolved computed call, no target references |
+
+These observations identify a branch and an unresolved indirect-call site in
+the mapped native body. They do not establish register or Lisp argument
+meanings, runtime branch outcomes, the call's runtime callee, a direct Lisp
+caller, or any drawing behavior. The generated PE wrapper was not executed;
+the entry address is archived static context, not a current live address.
+See the separate [BRUSH-STROKE portable evidence](evidence/rea-brush-stroke-targets-20261012.json)
+and its [offline derivation helper](../tools/derive-rea-brush-stroke-target-evidence.mjs).
+
+To repeat the static queries, keep the generated PE and seed in their existing
+ignored folder, then write each CLI result into a new output folder. Do not run
+the generated PE:
+
+```powershell
+$reaTools = Get-Content research/artifacts/rea-tools/toolchain-current.json | ConvertFrom-Json
+$reaRoot = (Resolve-Path research/artifacts/rea-tools/brush-stroke-value0-20261012).Path
+$env:GHIDRA_INSTALL_DIR = $reaTools.ghidra
+$env:JAVA_HOME = $reaTools.javaHome
+$env:REA_ANALYSIS_PROVIDER = 'ghidra'
+$env:GHIDRA_HEADLESS_MAXMEM = '512M'
+$env:REA_GHIDRA_LANGUAGE_ID = 'x86:LE:32:default'
+$env:REA_GHIDRA_COMPILER_SPEC_ID = 'windows'
+$env:REA_GHIDRA_SEED_FILE = Join-Path $reaRoot 'brush-stroke.seeds.tsv'
+$exe = Join-Path $reaRoot 'brush-stroke.synthetic.exe'
+& $reaTools.node $reaTools.reaCli function $exe 0x1fe435c4 --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436bd --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe4369e --provider ghidra --format json
+```
+
 ## Retained inputs and reproduction
 
 All complete reports, synthetic containers, seeds and command logs are ignored
