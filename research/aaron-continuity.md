@@ -6,7 +6,7 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-11
+## Latest checkpoint: 2026-10-12
 
 REA main has been fetched and the published 6.4.0 release installed beside
 3.2.1. The Ghidra doctor and real x86 launcher inspection pass; raw named PLL
@@ -30,6 +30,28 @@ with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
 
+### ZERO-EDGE direction and one-cell inputs, 2026-10-12
+
+Two separate PERIM 3 calls now measure a second START direction and one
+changed scratch cell. START (3,3,1) on the zero 7x7 UBYTE4 map returns a
+proper five-point list: (3,3,3), (4,2,5), (5,3,7), (4,4,1), (3,3,1),
+with the final point EQ START and its final slots unchanged. START (3,3,0)
+with only array[3,2]=1 instead returns NIL and leaves START.Z=1. All 49
+scratch cells retain input values in both cases. Full original map/binding
+checks and current before/after drawing/scene controls k/o pass. Read
+[the input findings](introspection/zero-edge-inputs.md).
+
+A reusable bounded validator consumes a source-bound immutable JSON spec;
+both independent derived outputs match, with all 199 sources and the native
+56-source baseline revalidated. See
+[portable evidence](introspection/evidence/zero-edge-inputs-20261012.json).
+These observations fit a provisional direction/map/budget model but do not
+recover its intermediates or general behavior. Next capture the proposed
+136-case matrix across directions, budgets, picture edges and simple map
+shapes, with fresh objects/maps and full state checks. Use a separate
+required-END harness for its post-MAIN observer; retain the old runner and
+all published closures unchanged. No matrix outcome has been captured yet.
+
 ### ZERO-EDGE positive PERIM samples, 2026-10-11
 
 Three separate calls at START (3,3,0), on the same zero 7x7 UBYTE4 scratch
@@ -45,9 +67,8 @@ agent/root outputs and revalidates all 230 source bindings, including the
 frozen native 56-source closure. See
 [portable evidence](introspection/evidence/zero-edge-positive-20261011.json).
 This is a three-input observation, not general traversal or a recovered PERIM
-meaning. Next change only START.Z to 1 at PERIM 3; then consider a separately
-gated one-cell scratch-map change at (3,2) to exercise a candidate map branch.
-That cell's relevance remains a hypothesis until the call is observed.
+meaning. The two-input milestone above completes its next direction/cell
+samples. The target's intermediate reads and general map rule remain open.
 
 ### ZERO-EDGE first explicit call, 2026-10-11
 

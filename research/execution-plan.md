@@ -1,6 +1,6 @@
 # Next AARON execution plan
 
-Prepared 2026-09-27; updated 2026-10-11. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-12. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
@@ -10,6 +10,23 @@ The old toolchain remains pinned for historical evidence. See
 now derives identical portable evidence independently, with all 140 source
 bindings revalidated. The subsequent explicit-call milestones follow below.
 
+The two-input milestone now completes: PERIM 3 at START (3,3,1) on the
+zero 7x7 map returns five points (3,3,3), (4,2,5), (5,3,7), (4,4,1),
+(3,3,1), with the last EQ supplied START and its final slots unchanged.
+The separate START (3,3,0) sample changes only array[3,2] to 1 and returns
+NIL with START.Z=1. Both retain all 49 input cells and pass complete
+original-state/controls k/o checks. The immutable-specification portable
+evidence rebuilds identically with 199 sources. See
+[the input findings](introspection/zero-edge-inputs.md).
+
+Next: the proposed 136-case matrix (40 direction/budget zero-map cases,
+64 picture-edge cases and 32 simple-shape cases). Fresh START/scratch per
+case, full original baseline checks, complete returned points/identities,
+copied previews and own COMPLETE/END are required. Prepare a separate
+required-footer harness because the old runner can stop post-MAIN probes
+before they finish. The candidate algorithm remains a hypothesis; no matrix
+outcome or general JS parity has been established.
+
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
 five points in exact order (3,3,2), (3,2,4), (4,2,6), (4,3,0), (3,3,0),
@@ -17,8 +34,7 @@ with the last point EQ original START and its final slots unchanged. All
 scratch cells stay zero; original full maps/bindings and both fresh controls
 pass. The portable aggregate has independent byte-identical derivations and
 230 source bindings. See [the positive samples](introspection/zero-edge-positive.md).
-Next change only START.Z to 1 with PERIM 3 and the zero scratch map. Then
-consider changing only scratch cell (3,2) to 1, with an explicit exact-map gate.
+The two-input capture above completes its direction/cell follow-up.
 The native map-value branch and that cell selection are hypotheses; these
 calls do not recover general traversal or a PERIM interpretation.
 

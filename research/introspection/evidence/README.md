@@ -1,5 +1,22 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE direction and one-cell inputs, 2026-10-12
+
+[`zero-edge-inputs-20261012.json`](zero-edge-inputs-20261012.json) binds two
+separate calls, the immutable full-input specification and current controls
+k/o. It is 246,176 bytes, SHA-256
+`bfeeb9c518562621f2d89da7b07fcf4c5552df9201419af85b12b88af083c5dc`.
+Independent agent/root derivations match; all 199 sources revalidate,
+including the native 56-source closure.
+
+PERIM 3 with START (3,3,1) and 49 zero cells returns a proper five-point
+list ending in the original START, whose final slots are unchanged. The
+separate START (3,3,0) sample with only array[3,2]=1 returns NIL and leaves
+START.Z=1. Complete return coordinates/identities, input/output cells,
+original-state restoration, copied RNG previews and control bytes are
+retained. No general algorithm or intermediate-read claim follows. See
+[the findings](../zero-edge-inputs.md).
+
 ## ZERO-EDGE positive PERIM samples, 2026-10-11
 
 [`zero-edge-positive-20261011.json`](zero-edge-positive-20261011.json) binds

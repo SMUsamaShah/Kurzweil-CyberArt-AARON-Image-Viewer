@@ -1,0 +1,375 @@
+{
+  "schemaVersion": 1,
+  "specId": "zero-edge-input-cases-20261012",
+  "mode": "writer-stream-seed-1234",
+  "loadedSceneSource": "scene-state-snapshot-writer-stream-seeded-1234.cl",
+  "outputRoot": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n",
+  "nativeEvidence": {
+    "path": "research/introspection/evidence/brush-buffer-predicate-native-20261006.json",
+    "sha256": "d6ffe3fa63958b79ea14199c098f121f3d4d3ce94d68cc3aa010ac750f28f0f4"
+  },
+  "controls": [
+    {
+      "runId": "zero-edge-input-control-seed1234-20261012-k",
+      "root": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k"
+    },
+    {
+      "runId": "zero-edge-input-control-after-seed1234-20261012-o",
+      "root": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o"
+    }
+  ],
+  "cases": [
+    {
+      "caseId": "direction1",
+      "runId": "zero-edge-direction1-seed1234-20261012-l",
+      "root": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l",
+      "probePath": "research/introspection/zero-edge-direction1.cl",
+      "probeSha256": "7fca207e616164e6cc5bdea6041ffd84460cedb252f1195ce50e77d6b36f84d8",
+      "outputName": "aaron-zero-edge-direction1.txt",
+      "reportMarker": "zero-edge-direction1",
+      "reportSha256": "a1b1c5e758244568bd493c40de82e0c9a381a214c625c00af26b60a307796441",
+      "start": [
+        3,
+        3,
+        1
+      ],
+      "perim": 3,
+      "scratchDimensions": [
+        7,
+        7
+      ],
+      "scratchElementType": [
+        "UNSIGNED-BYTE",
+        4
+      ],
+      "scratchBeforeXMajorYMinor": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scopeRecord": "SCOPE one-post-main-zero-edge-call gated-by-metadata-runtime-constructor zero-edge-wrapped=nil candidate-start=(3,3,1) candidate-perim=3 hypothesis-only scratch=7x7-ubyte4-zero main-values=preserved main-errors=propagated rng-reset=none state-reset=none",
+      "readinessKeys": {
+        "callGate": [
+          "ready",
+          "metadata-ready",
+          "runtime-ready",
+          "constructor-ready",
+          "zero-edge-fixed-start-perim-arglist",
+          "scratch-zero-49-cells",
+          "pre-call-rng-preview-valid"
+        ],
+        "dynamicPreflight": [
+          "ready",
+          "temporary-bindings-recorded",
+          "fill-symbol-eq-post-main",
+          "pic-wide-symbol-eq-post-main",
+          "pic-high-symbol-eq-post-main",
+          "fill-map-eq-scratch"
+        ],
+        "caseObservationsReady": [
+          "ready",
+          "return-or-condition",
+          "start-before-after",
+          "scratch-before-after",
+          "state-sets-captured",
+          "original-maps-capturable",
+          "rng-preview-valid"
+        ]
+      },
+      "expectedOutcome": {
+        "outcome": "returned",
+        "targetConditionType": null,
+        "returnArity": 1,
+        "conditionDetails": null,
+        "values": [
+          {
+            "type": "CONS",
+            "value": {
+              "items": [
+                {
+                  "objectType": "TRIPT"
+                },
+                {
+                  "objectType": "TRIPT"
+                },
+                {
+                  "objectType": "TRIPT"
+                },
+                {
+                  "objectType": "TRIPT"
+                },
+                {
+                  "objectType": "TRIPT"
+                }
+              ],
+              "count": 5,
+              "proper": true,
+              "truncated": false,
+              "tail": "NONE"
+            }
+          }
+        ],
+        "returnedPath": {
+          "proper": true,
+          "circular": false,
+          "improper": false,
+          "truncated": false,
+          "count": 5,
+          "tail": "NONE",
+          "resultEqStart": false,
+          "tailEqStart": false,
+          "points": [
+            {
+              "index": 0,
+              "consEqStart": false,
+              "consCdrEqStart": false,
+              "consEqPreviousCdr": false,
+              "pointType": "TRIPT",
+              "pointIsTript": true,
+              "pointEqStart": false,
+              "firstEqualPointIndex": 0,
+              "xyz": [
+                3,
+                3,
+                3
+              ]
+            },
+            {
+              "index": 1,
+              "consEqStart": false,
+              "consCdrEqStart": false,
+              "consEqPreviousCdr": true,
+              "pointType": "TRIPT",
+              "pointIsTript": true,
+              "pointEqStart": false,
+              "firstEqualPointIndex": 1,
+              "xyz": [
+                4,
+                2,
+                5
+              ]
+            },
+            {
+              "index": 2,
+              "consEqStart": false,
+              "consCdrEqStart": false,
+              "consEqPreviousCdr": true,
+              "pointType": "TRIPT",
+              "pointIsTript": true,
+              "pointEqStart": false,
+              "firstEqualPointIndex": 2,
+              "xyz": [
+                5,
+                3,
+                7
+              ]
+            },
+            {
+              "index": 3,
+              "consEqStart": false,
+              "consCdrEqStart": false,
+              "consEqPreviousCdr": true,
+              "pointType": "TRIPT",
+              "pointIsTript": true,
+              "pointEqStart": false,
+              "firstEqualPointIndex": 3,
+              "xyz": [
+                4,
+                4,
+                1
+              ]
+            },
+            {
+              "index": 4,
+              "consEqStart": false,
+              "consCdrEqStart": false,
+              "consEqPreviousCdr": true,
+              "pointType": "TRIPT",
+              "pointIsTript": true,
+              "pointEqStart": true,
+              "firstEqualPointIndex": 4,
+              "xyz": [
+                3,
+                3,
+                1
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "caseId": "mapcell1",
+      "runId": "zero-edge-mapcell1-seed1234-20261012-n",
+      "root": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n",
+      "probePath": "research/introspection/zero-edge-mapcell1.cl",
+      "probeSha256": "c62401a46b2f08fbafe9f66c8f4e66c0bc20f123c9fdd806535032ded3fa01d4",
+      "outputName": "aaron-zero-edge-mapcell1.txt",
+      "reportMarker": "zero-edge-mapcell1",
+      "reportSha256": "d4817358fe742b27c5623e87febc5845b04a0507f20cce0bdcf48f0bbfcfc855",
+      "start": [
+        3,
+        3,
+        0
+      ],
+      "perim": 3,
+      "scratchDimensions": [
+        7,
+        7
+      ],
+      "scratchElementType": [
+        "UNSIGNED-BYTE",
+        4
+      ],
+      "scratchBeforeXMajorYMinor": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "scopeRecord": "SCOPE one-post-main-zero-edge-call gated-by-metadata-runtime-constructor zero-edge-wrapped=nil candidate-perim=3 hypothesis-only scratch=7x7-ubyte4 scratch-cell-hypothesis=array-index[x=3,y=2]-zero-to-one main-values=preserved main-errors=propagated rng-reset=none state-reset=none",
+      "readinessKeys": {
+        "callGate": [
+          "ready",
+          "metadata-ready",
+          "runtime-ready",
+          "constructor-ready",
+          "zero-edge-fixed-start-perim-arglist",
+          "scratch-mapcell1-exact-49-cells",
+          "pre-call-rng-preview-valid"
+        ],
+        "dynamicPreflight": [
+          "ready",
+          "temporary-bindings-recorded",
+          "fill-symbol-eq-post-main",
+          "pic-wide-symbol-eq-post-main",
+          "pic-high-symbol-eq-post-main",
+          "fill-map-eq-scratch"
+        ],
+        "caseObservationsReady": [
+          "ready",
+          "return-or-condition",
+          "start-before-after",
+          "scratch-before-after",
+          "state-sets-captured",
+          "original-maps-capturable",
+          "rng-preview-valid"
+        ]
+      },
+      "expectedOutcome": {
+        "outcome": "returned",
+        "targetConditionType": null,
+        "returnArity": 1,
+        "conditionDetails": null,
+        "values": [
+          {
+            "type": "NULL",
+            "value": null
+          }
+        ],
+        "returnedPath": {
+          "proper": true,
+          "circular": false,
+          "improper": false,
+          "truncated": false,
+          "count": 0,
+          "tail": "NONE",
+          "resultEqStart": false,
+          "tailEqStart": false,
+          "points": []
+        }
+      }
+    }
+  ]
+}
