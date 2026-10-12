@@ -50,9 +50,12 @@ positions in ALL-BRUSHES, not the brush's ID slot.
 
 Every one of the 3,881 natural strokes returns its original PATH by EQ,
 including NIL paths. The value-0 strokes are retained for chronology and
-return identity; their map/screen behavior is not implemented by this branch.
-The earlier [complete census](brush-stroke-census.md) establishes the natural
-empty/singleton observations that differ from older isolated adapter cases.
+return identity; their map/screen behavior is not implemented by this value-3
+branch. The [later bounded natural VALUE=0 capture](brush-stroke-value0.md)
+records three map/screen samples but does not establish the general value-0
+rule. The earlier [complete census](brush-stroke-census.md) establishes the
+natural empty/singleton observations that differ from older isolated adapter
+cases.
 
 ## Clear boundaries and limits of provenance
 

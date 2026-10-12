@@ -90,11 +90,31 @@ raw tapes rechecked the scan links and controls without finding discrepancies.
 Row and iris conditions, map-cell effects, and unwrapped direct callers remain
 open.
 
-Next: investigate value-0 painting, then use any first divergence to choose
-whether the BRUSH-FILL row schedule needs another targeted input. Do not infer
-branch logic from the five jumps or six unmatched scan points. Older 320x480
-captures remain separate; never reuse archived static addresses for a live
-attach.
+### Natural BRUSH-STROKE VALUE=0 capture, 2026-10-12
+
+The first bounded natural map capture completes in
+`brush-stroke-value0-capture-20261012-b`, with fresh same-mode controls before
+and after it. It records the first MULTI, EMPTY and SINGLETON VALUE=0 strokes,
+90 predicate returns, and 12 complete 768x1080 map snapshots. Drawing and
+scene-report bytes match all three controls. Read the
+[findings](introspection/brush-stroke-value0.md) and
+[portable evidence](introspection/evidence/brush-stroke-value0-20261012-v4.json).
+
+The nine-point multi path has 81 true predicate returns and 33 changed map
+cells (20 1-to-0, 13 3-to-0). The empty path still calls SCREEN-AND-STORE and
+has no predicates; the singleton makes that screen call and nine true
+predicates, with no net map change. A predicate-coordinate zeroing candidate
+reproduces all three final maps, but no individual array stores were traced.
+`applyObservedNaturalBrushStrokeValue0` is a new JS candidate, syntax-checked
+only; it has not been compared against raw maps or a scene. The older isolated
+adapter retains its separate contract. No general value-0 behavior is claimed.
+
+Next use REA 6.4.0 to inspect the BRUSH-STROKE branch/call cluster around
+static xrefs `0x1fe436e5` and `0x1fe436d3`, then choose an alternate natural
+sample that can distinguish the current candidate from other explanations.
+Keep the older 320x480 captures separate. Rediscover and byte-validate any
+live address before attaching a debugger; the current xrefs are archived
+static context only.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 

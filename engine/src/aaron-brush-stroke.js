@@ -23,9 +23,10 @@ function requireProfile(profile) {
  * Apply the measured core-mask behavior observed for a nonempty path.
  *
  * This is deliberately a small clean-room layer, not a claim that the whole
- * BRUSH-STROKE routine has been recovered.  The original NIL and singleton
- * probes wrote no cells; the two-point horizontal and vertical probes wrote
- * the union of the translated CORE masks.  This helper preserves that
+ * BRUSH-STROKE routine has been recovered. The original NIL and singleton
+ * probes showed no map changes; snapshots cannot distinguish zero-value
+ * stores from no stores. The two-point horizontal and vertical probes changed
+ * the union of the translated CORE masks. This helper preserves that
  * observed boundary and uses the measured map index convention. Out-of-map
  * offsets are currently skipped as a provisional clean-room policy. The
  * private edge experiment (run 34074489559) forced IN-SUB-FRAME true and
@@ -65,15 +66,16 @@ export function applyMeasuredBrushVertices(maps, profile, path, value, {
 }
 
 /**
- * Apply the measured dependency-isolated BRUSH-STROKE boundary.
+ * Apply the older dependency-isolated BRUSH-STROKE boundary.
  *
- * For the captured nonempty paths, the original calls SCREEN-AND-STORE once
- * with the complete path and CDEX/SDEX, regardless of whether the
- * IN-SUB-FRAME predicate accepts the core-mask cells. Accepted cells are
- * written to FILL-MAP using the measured helper above. Empty and singleton
- * paths produce neither a screen call nor map writes in the retained cases.
- * This adapter deliberately does not model the unresolved downstream screen,
- * fill, colour, or brush-state routines.
+ * The dependency-isolated nonempty probes call SCREEN-AND-STORE once with the
+ * complete path and CDEX/SDEX, regardless of whether IN-SUB-FRAME accepts the
+ * CORE cells. Accepted cells are written with the measured helper above. The
+ * old isolated empty/singleton samples produced no screen call. The later
+ * natural VALUE=0 capture differs; use the separate explicitly bounded
+ * applyObservedNaturalBrushStrokeValue0 candidate for those observations.
+ * This adapter does not model the downstream screen, fill, colour, or brush
+ * state routines.
  */
 export function applyMeasuredBrushStroke(
   maps,
@@ -106,4 +108,55 @@ export function applyMeasuredBrushStroke(
     touched,
     screenCalls: screenAndStore ? 1 : 0,
   });
+}
+
+/**
+ * Apply a bounded candidate for the three captured natural VALUE=0 samples.
+ *
+ * The 2026-10-12 capture places SCREEN-AND-STORE before the selected
+ * IN-SUB-FRAME calls for its empty, singleton and nine-point paths. The
+ * candidate applies zero to accepted CORE coordinates and returns the same
+ * path object. The capture does not distinguish a zero store from no store
+ * where the entry cell was already zero, and it does not validate other
+ * brushes, path shapes, map layouts, or frame-boundary cases. This function
+ * remains separate from applyMeasuredBrushStroke, whose older isolated-probe
+ * contract has different empty/singleton screen behavior.
+ */
+export function applyObservedNaturalBrushStrokeValue0(
+  maps,
+  profile,
+  path,
+  {
+    insideFrame = null,
+    screenAndStore = null,
+    cdex = 0,
+    sdex = 0,
+  } = {},
+) {
+  requireProfile(profile);
+  requirePath(path);
+  if (!maps || !maps.fillMap) throw new TypeError('maps must include fillMap');
+  if (!Number.isSafeInteger(cdex) || !Number.isSafeInteger(sdex)) {
+    throw new TypeError('CDEX and SDEX must be safe integers');
+  }
+  if (screenAndStore !== null && typeof screenAndStore !== 'function') {
+    throw new TypeError('screenAndStore must be a function or null');
+  }
+
+  if (screenAndStore) screenAndStore(path, cdex, sdex);
+
+  for (const [first, second] of path) {
+    for (const [deltaFirst, deltaSecond] of profile.core) {
+      const targetFirst = first + deltaFirst;
+      const targetSecond = second + deltaSecond;
+      if (insideFrame && !insideFrame(targetFirst, targetSecond)) continue;
+      if (targetFirst < 0 || targetFirst >= maps.width
+          || targetSecond < 0 || targetSecond >= maps.height) {
+        continue;
+      }
+      writeAaronFillCell(maps, targetFirst, targetSecond, 0);
+    }
+  }
+
+  return path;
 }

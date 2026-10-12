@@ -1,0 +1,3190 @@
+{
+  "schemaVersion": 2,
+  "kind": "Bounded natural BRUSH-STROKE VALUE=0 map capture with fresh drawing/scene controls",
+  "sources": [
+    {
+      "path": "research/introspection/brush-stroke-value0-capture-v4.cl",
+      "sha256": "012b3dc8fa3bad02b82fa4dd4dc9614845a587e05924cc5dd5bc135d47e95865"
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-value0-evidence.mjs",
+      "sha256": "c4ea0501c6841347c7f9f1b5dbca09ca82ae8275952d91893058fcdb2e815021"
+    },
+    {
+      "path": "research/tools/parse-natural-free-path-report.mjs",
+      "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee"
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee"
+    }
+  ],
+  "observed": {
+    "root": "brush-stroke-value0-capture-20261012-b",
+    "runId": "brush-stroke-value0-capture-20261012-b",
+    "startedAt": "2026-10-12T21:20:30.8849523+00:00",
+    "finishedAt": "2026-10-12T21:23:18.5157810+00:00",
+    "summarySha256": "8ba103e1bbe62dadbdbed673c4ec5ffd4d100e19f0499429b5a23d9c1bd9cc27",
+    "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+    "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+    "sceneStateSha256": "0029ceb4b2a2607b09ae19a096a43f650522f0add3f35a88671b0f39c1bc8097",
+    "runtime": {
+      "AARON.exe": {
+        "bytes": 36864,
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+      },
+      "AARON.dxl": {
+        "bytes": 5373952,
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+      },
+      "AARON.pll": {
+        "bytes": 4573464,
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+      }
+    },
+    "observerSha256": "012b3dc8fa3bad02b82fa4dd4dc9614845a587e05924cc5dd5bc135d47e95865",
+    "requestSha256": "97a16a1fc495f4e42ec0a9c5d420e3ed812393d3545f4dbf06cb1411f22bd74c",
+    "rawReportSha256": "13fb031310849d6a4ee2a8fab5678b67c9001362259b2a69b425cfdf63a9a906",
+    "rawReportBytes": 1938659,
+    "lineCount": 20726,
+    "capture": {
+      "bytes": 1938659,
+      "sha256": "13fb031310849d6a4ee2a8fab5678b67c9001362259b2a69b425cfdf63a9a906",
+      "lineCount": 20726,
+      "caps": {
+        "strokes": 10000,
+        "sampled": 3,
+        "events": 5000000,
+        "sampled-predicates": 4000000,
+        "sample-screens": 20000,
+        "points": 120000,
+        "offsets": 120000,
+        "map-cells": 829440,
+        "snapshots": 18,
+        "total-cells": 14929920,
+        "runs": 14929920,
+        "objects": 30000,
+        "values": 16,
+        "path": 20000,
+        "offsets-per-list": 10000,
+        "report-bytes": 268435456,
+        "report-char-cap": 67108864,
+        "terminal-reserve-chars": 8192,
+        "screen-calls-per-sample": 2
+      },
+      "completion": {
+        "main": "NORMAL",
+        "accepted": true,
+        "bindingsSafe": true,
+        "counters": {
+          "strokes": 2096,
+          "sampled": 3,
+          "empty-sample": 2,
+          "singleton-sample": 3,
+          "multi-sample": 1,
+          "events": 2189,
+          "sampled-predicates": 90,
+          "sample-screens": 3,
+          "points": 20,
+          "offsets": 102,
+          "snapshots": 12,
+          "cells": 9953280,
+          "runs": 17340,
+          "objects": 1351,
+          "checks": 2078,
+          "errors": 0,
+          "aborts": 0
+        },
+        "rejected": null,
+        "captureDisabled": null,
+        "samplesComplete": true,
+        "currentStroke": null
+      },
+      "restores": [
+        {
+          "name": "BRUSH-STROKE",
+          "status": "RESTORED"
+        },
+        {
+          "name": "SCREEN-AND-STORE",
+          "status": "OUTER-WRAPPER-PRESERVED"
+        },
+        {
+          "name": "IN-SUB-FRAME",
+          "status": "RESTORED"
+        },
+        {
+          "name": "MAIN",
+          "status": "OUTER-WRAPPER-PRESERVED"
+        }
+      ],
+      "sampleSelections": 3,
+      "counters": {
+        "maps": 12,
+        "mapRows": 12960,
+        "mapRuns": 17340,
+        "mapCells": 9953280,
+        "rngPreviews": 2078,
+        "completeFieldCount": 24
+      },
+      "samples": [
+        {
+          "sampleId": 1,
+          "strokeId": 2,
+          "eventId": 2,
+          "class": "MULTI",
+          "eligibility": "NATURAL-MULTI-PATH",
+          "mask": null,
+          "path": {
+            "id": 2,
+            "type": "CONS",
+            "length": 9,
+            "points": [
+              {
+                "id": 4,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 306
+              },
+              {
+                "id": 5,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 307
+              },
+              {
+                "id": 6,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 308
+              },
+              {
+                "id": 7,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 309
+              },
+              {
+                "id": 8,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 310
+              },
+              {
+                "id": 9,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 311
+              },
+              {
+                "id": 10,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 312
+              },
+              {
+                "id": 11,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 313
+              },
+              {
+                "id": 12,
+                "type": "TRIPT",
+                "x": 100,
+                "y": 314
+              }
+            ]
+          },
+          "arguments": [
+            {
+              "kind": "object",
+              "id": 2,
+              "type": "CONS"
+            },
+            {
+              "kind": "integer",
+              "value": 0
+            },
+            {
+              "kind": "integer",
+              "value": 1
+            },
+            {
+              "kind": "integer",
+              "value": 0
+            }
+          ],
+          "argumentValue": {
+            "kind": "integer",
+            "value": 0
+          },
+          "brush": {
+            "id": 13,
+            "type": "PAINT-BRUSH",
+            "index": 1,
+            "width": 3,
+            "perim": [
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          "configuration": {
+            "subFrame": {
+              "id": 14,
+              "type": "MAPFRAME",
+              "lx": 94,
+              "rx": 102,
+              "ly": 296,
+              "ty": 336
+            },
+            "width": 3,
+            "boundaryValue": {
+              "kind": "integer",
+              "value": 3
+            }
+          },
+          "inputMap": {
+            "id": 3,
+            "type": "(ARRAY (UNSIGNED-BYTE 4) (768 1080))",
+            "width": 768,
+            "height": 1080,
+            "cells": 829440,
+            "covered": 829440,
+            "complete": true
+          },
+          "screen": {
+            "eventId": 3,
+            "pathId": 2,
+            "pathEq": true,
+            "samplePathEq": true,
+            "cdex": [
+              ":INTEGER",
+              1
+            ],
+            "sdex": [
+              ":INTEGER",
+              0
+            ],
+            "args": [
+              [
+                ":OBJECT",
+                2,
+                "CONS"
+              ],
+              [
+                ":INTEGER",
+                1
+              ],
+              [
+                ":INTEGER",
+                0
+              ]
+            ],
+            "returnValues": [
+              [
+                ":NIL"
+              ]
+            ],
+            "returnPathEq": false
+          },
+          "predicateCalls": [
+            {
+              "eventId": 4,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3281
+            },
+            {
+              "eventId": 5,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3282
+            },
+            {
+              "eventId": 6,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3283
+            },
+            {
+              "eventId": 7,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3284
+            },
+            {
+              "eventId": 8,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3285
+            },
+            {
+              "eventId": 9,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 305
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3286
+            },
+            {
+              "eventId": 10,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 305
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3287
+            },
+            {
+              "eventId": 11,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 305
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3288
+            },
+            {
+              "eventId": 12,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3289
+            },
+            {
+              "eventId": 13,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3290
+            },
+            {
+              "eventId": 14,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3291
+            },
+            {
+              "eventId": 15,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3292
+            },
+            {
+              "eventId": 16,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3293
+            },
+            {
+              "eventId": 17,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3294
+            },
+            {
+              "eventId": 18,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3295
+            },
+            {
+              "eventId": 19,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3296
+            },
+            {
+              "eventId": 20,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 306
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3297
+            },
+            {
+              "eventId": 21,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3298
+            },
+            {
+              "eventId": 22,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3299
+            },
+            {
+              "eventId": 23,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3300
+            },
+            {
+              "eventId": 24,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3301
+            },
+            {
+              "eventId": 25,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3302
+            },
+            {
+              "eventId": 26,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3303
+            },
+            {
+              "eventId": 27,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3304
+            },
+            {
+              "eventId": 28,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3305
+            },
+            {
+              "eventId": 29,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 307
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3306
+            },
+            {
+              "eventId": 30,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3307
+            },
+            {
+              "eventId": 31,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3308
+            },
+            {
+              "eventId": 32,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3309
+            },
+            {
+              "eventId": 33,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3310
+            },
+            {
+              "eventId": 34,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3311
+            },
+            {
+              "eventId": 35,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3312
+            },
+            {
+              "eventId": 36,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3313
+            },
+            {
+              "eventId": 37,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3314
+            },
+            {
+              "eventId": 38,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 308
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3315
+            },
+            {
+              "eventId": 39,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3316
+            },
+            {
+              "eventId": 40,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3317
+            },
+            {
+              "eventId": 41,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3318
+            },
+            {
+              "eventId": 42,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3319
+            },
+            {
+              "eventId": 43,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3320
+            },
+            {
+              "eventId": 44,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3321
+            },
+            {
+              "eventId": 45,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3322
+            },
+            {
+              "eventId": 46,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3323
+            },
+            {
+              "eventId": 47,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 309
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3324
+            },
+            {
+              "eventId": 48,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3325
+            },
+            {
+              "eventId": 49,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3326
+            },
+            {
+              "eventId": 50,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3327
+            },
+            {
+              "eventId": 51,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3328
+            },
+            {
+              "eventId": 52,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3329
+            },
+            {
+              "eventId": 53,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3330
+            },
+            {
+              "eventId": 54,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3331
+            },
+            {
+              "eventId": 55,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3332
+            },
+            {
+              "eventId": 56,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 310
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3333
+            },
+            {
+              "eventId": 57,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3334
+            },
+            {
+              "eventId": 58,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3335
+            },
+            {
+              "eventId": 59,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3336
+            },
+            {
+              "eventId": 60,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3337
+            },
+            {
+              "eventId": 61,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3338
+            },
+            {
+              "eventId": 62,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3339
+            },
+            {
+              "eventId": 63,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3340
+            },
+            {
+              "eventId": 64,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3341
+            },
+            {
+              "eventId": 65,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 311
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3342
+            },
+            {
+              "eventId": 66,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3343
+            },
+            {
+              "eventId": 67,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3344
+            },
+            {
+              "eventId": 68,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3345
+            },
+            {
+              "eventId": 69,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3346
+            },
+            {
+              "eventId": 70,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3347
+            },
+            {
+              "eventId": 71,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3348
+            },
+            {
+              "eventId": 72,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3349
+            },
+            {
+              "eventId": 73,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3350
+            },
+            {
+              "eventId": 74,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 312
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3351
+            },
+            {
+              "eventId": 75,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3352
+            },
+            {
+              "eventId": 76,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3353
+            },
+            {
+              "eventId": 77,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 315
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3354
+            },
+            {
+              "eventId": 78,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 315
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3355
+            },
+            {
+              "eventId": 79,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 315
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3356
+            },
+            {
+              "eventId": 80,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3357
+            },
+            {
+              "eventId": 81,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 101
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3358
+            },
+            {
+              "eventId": 82,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 100
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3359
+            },
+            {
+              "eventId": 83,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 313
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3360
+            },
+            {
+              "eventId": 84,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 99
+                },
+                {
+                  "kind": "integer",
+                  "value": 314
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 3361
+            }
+          ],
+          "observedRecordOrder": {
+            "screenBegin": 1111,
+            "screenReturn": 2196,
+            "firstPredicate": 3281,
+            "lastPredicate": 3361,
+            "strokeReturn": 4445
+          },
+          "predicateCoordinateWriteCandidate": {
+            "rule": "set each true IN-SUB-FRAME argument coordinate to the captured BRUSH-STROKE value",
+            "acceptedPredicateCalls": 81,
+            "uniqueCandidateCoordinates": 33,
+            "candidateEntryValues": {
+              "0": 48,
+              "1": 20,
+              "3": 13
+            },
+            "resultingMapSha256": "e3b5a2c52e85f2a379315425c4e4686ba6428a989eb456d12c8d940680475879",
+            "matchesCapturedStrokeReturn": true
+          },
+          "result": {
+            "predicates": 81,
+            "screenCalls": 1,
+            "values": [
+              [
+                ":OBJECT",
+                2,
+                "CONS"
+              ]
+            ],
+            "returnPathEq": true
+          },
+          "maps": [
+            {
+              "phase": "STROKE-ENTRY",
+              "sha256": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "runCount": 1397,
+              "valueCounts": {
+                "0": 828201,
+                "1": 38,
+                "2": 975,
+                "3": 226,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-ENTRY",
+              "sha256": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "runCount": 1397,
+              "valueCounts": {
+                "0": 828201,
+                "1": 38,
+                "2": 975,
+                "3": 226,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-RETURN",
+              "sha256": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "runCount": 1397,
+              "valueCounts": {
+                "0": 828201,
+                "1": 38,
+                "2": 975,
+                "3": 226,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "STROKE-RETURN",
+              "sha256": "e3b5a2c52e85f2a379315425c4e4686ba6428a989eb456d12c8d940680475879",
+              "runCount": 1405,
+              "valueCounts": {
+                "0": 828234,
+                "1": 18,
+                "2": 975,
+                "3": 213,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            }
+          ],
+          "mapTransitions": [
+            {
+              "from": "STROKE-ENTRY",
+              "to": "SCREEN-ENTRY",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "mapSha256To": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a"
+            },
+            {
+              "from": "SCREEN-ENTRY",
+              "to": "SCREEN-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "mapSha256To": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a"
+            },
+            {
+              "from": "SCREEN-RETURN",
+              "to": "STROKE-RETURN",
+              "changedCells": 33,
+              "transitions": {
+                "1->0": 20,
+                "3->0": 13
+              },
+              "boundsXY": {
+                "left": 99,
+                "right": 101,
+                "top": 305,
+                "bottom": 315
+              },
+              "mapSha256From": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "mapSha256To": "e3b5a2c52e85f2a379315425c4e4686ba6428a989eb456d12c8d940680475879"
+            },
+            {
+              "from": "STROKE-ENTRY",
+              "to": "STROKE-RETURN",
+              "changedCells": 33,
+              "transitions": {
+                "1->0": 20,
+                "3->0": 13
+              },
+              "boundsXY": {
+                "left": 99,
+                "right": 101,
+                "top": 305,
+                "bottom": 315
+              },
+              "mapSha256From": "bdbd89048902b4d2dee683b71f95f28a07710a389a7bfd5958252f20a02f0c2a",
+              "mapSha256To": "e3b5a2c52e85f2a379315425c4e4686ba6428a989eb456d12c8d940680475879"
+            }
+          ]
+        },
+        {
+          "sampleId": 2,
+          "strokeId": 4,
+          "eventId": 86,
+          "class": "EMPTY",
+          "eligibility": "NATURAL-NIL-PATH",
+          "mask": null,
+          "path": {
+            "id": 0,
+            "type": "NULL",
+            "length": 0,
+            "points": []
+          },
+          "arguments": [
+            {
+              "kind": "nil"
+            },
+            {
+              "kind": "integer",
+              "value": 0
+            },
+            {
+              "kind": "integer",
+              "value": 1
+            },
+            {
+              "kind": "integer",
+              "value": 0
+            }
+          ],
+          "argumentValue": {
+            "kind": "integer",
+            "value": 0
+          },
+          "brush": {
+            "id": 13,
+            "type": "PAINT-BRUSH",
+            "index": 1,
+            "width": 3,
+            "perim": [
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          "configuration": {
+            "subFrame": {
+              "id": 14,
+              "type": "MAPFRAME",
+              "lx": 94,
+              "rx": 102,
+              "ly": 296,
+              "ty": 336
+            },
+            "width": 3,
+            "boundaryValue": {
+              "kind": "integer",
+              "value": 3
+            }
+          },
+          "inputMap": {
+            "id": 3,
+            "type": "(ARRAY (UNSIGNED-BYTE 4) (768 1080))",
+            "width": 768,
+            "height": 1080,
+            "cells": 829440,
+            "covered": 829440,
+            "complete": true
+          },
+          "screen": {
+            "eventId": 87,
+            "pathId": 0,
+            "pathEq": true,
+            "samplePathEq": true,
+            "cdex": [
+              ":INTEGER",
+              1
+            ],
+            "sdex": [
+              ":INTEGER",
+              0
+            ],
+            "args": [
+              [
+                ":NIL"
+              ],
+              [
+                ":INTEGER",
+                1
+              ],
+              [
+                ":INTEGER",
+                0
+              ]
+            ],
+            "returnValues": [
+              [
+                ":NIL"
+              ]
+            ],
+            "returnPathEq": true
+          },
+          "predicateCalls": [],
+          "observedRecordOrder": {
+            "screenBegin": 5537,
+            "screenReturn": 6622,
+            "firstPredicate": null,
+            "lastPredicate": null,
+            "strokeReturn": 8790
+          },
+          "predicateCoordinateWriteCandidate": {
+            "rule": "set each true IN-SUB-FRAME argument coordinate to the captured BRUSH-STROKE value",
+            "acceptedPredicateCalls": 0,
+            "uniqueCandidateCoordinates": 0,
+            "candidateEntryValues": {},
+            "resultingMapSha256": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+            "matchesCapturedStrokeReturn": true
+          },
+          "result": {
+            "predicates": 0,
+            "screenCalls": 1,
+            "values": [
+              [
+                ":NIL"
+              ]
+            ],
+            "returnPathEq": true
+          },
+          "maps": [
+            {
+              "phase": "STROKE-ENTRY",
+              "sha256": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "runCount": 1401,
+              "valueCounts": {
+                "0": 828269,
+                "1": 0,
+                "2": 975,
+                "3": 196,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-ENTRY",
+              "sha256": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "runCount": 1401,
+              "valueCounts": {
+                "0": 828269,
+                "1": 0,
+                "2": 975,
+                "3": 196,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-RETURN",
+              "sha256": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "runCount": 1401,
+              "valueCounts": {
+                "0": 828269,
+                "1": 0,
+                "2": 975,
+                "3": 196,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "STROKE-RETURN",
+              "sha256": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "runCount": 1401,
+              "valueCounts": {
+                "0": 828269,
+                "1": 0,
+                "2": 975,
+                "3": 196,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            }
+          ],
+          "mapTransitions": [
+            {
+              "from": "STROKE-ENTRY",
+              "to": "SCREEN-ENTRY",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "mapSha256To": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76"
+            },
+            {
+              "from": "SCREEN-ENTRY",
+              "to": "SCREEN-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "mapSha256To": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76"
+            },
+            {
+              "from": "SCREEN-RETURN",
+              "to": "STROKE-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "mapSha256To": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76"
+            },
+            {
+              "from": "STROKE-ENTRY",
+              "to": "STROKE-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76",
+              "mapSha256To": "51a4147d4cddf1f2bc34dac429cbb018bc6b41f2cf1e530a0bd1c696f79ccb76"
+            }
+          ]
+        },
+        {
+          "sampleId": 3,
+          "strokeId": 836,
+          "eventId": 919,
+          "class": "SINGLETON",
+          "eligibility": "NATURAL-SINGLETON-PATH",
+          "mask": null,
+          "path": {
+            "id": 490,
+            "type": "CONS",
+            "length": 1,
+            "points": [
+              {
+                "id": 491,
+                "type": "TRIPT",
+                "x": 518,
+                "y": 1023
+              }
+            ]
+          },
+          "arguments": [
+            {
+              "kind": "object",
+              "id": 490,
+              "type": "CONS"
+            },
+            {
+              "kind": "integer",
+              "value": 0
+            },
+            {
+              "kind": "integer",
+              "value": 13
+            },
+            {
+              "kind": "integer",
+              "value": 1
+            }
+          ],
+          "argumentValue": {
+            "kind": "integer",
+            "value": 0
+          },
+          "brush": {
+            "id": 13,
+            "type": "PAINT-BRUSH",
+            "index": 1,
+            "width": 3,
+            "perim": [
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "core": [
+              [
+                0,
+                0
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                -1
+              ],
+              [
+                0,
+                -1
+              ],
+              [
+                -1,
+                -1
+              ],
+              [
+                -1,
+                0
+              ]
+            ]
+          },
+          "configuration": {
+            "subFrame": {
+              "id": 492,
+              "type": "MAPFRAME",
+              "lx": 513,
+              "rx": 699,
+              "ly": 1015,
+              "ty": 1078
+            },
+            "width": 3,
+            "boundaryValue": {
+              "kind": "integer",
+              "value": 3
+            }
+          },
+          "inputMap": {
+            "id": 3,
+            "type": "(ARRAY (UNSIGNED-BYTE 4) (768 1080))",
+            "width": 768,
+            "height": 1080,
+            "cells": 829440,
+            "covered": 829440,
+            "complete": true
+          },
+          "screen": {
+            "eventId": 920,
+            "pathId": 490,
+            "pathEq": true,
+            "samplePathEq": true,
+            "cdex": [
+              ":INTEGER",
+              13
+            ],
+            "sdex": [
+              ":INTEGER",
+              1
+            ],
+            "args": [
+              [
+                ":OBJECT",
+                490,
+                "CONS"
+              ],
+              [
+                ":INTEGER",
+                13
+              ],
+              [
+                ":INTEGER",
+                1
+              ]
+            ],
+            "returnValues": [
+              [
+                ":NIL"
+              ]
+            ],
+            "returnPathEq": false
+          },
+          "predicateCalls": [
+            {
+              "eventId": 921,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 518
+                },
+                {
+                  "kind": "integer",
+                  "value": 1023
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15005
+            },
+            {
+              "eventId": 922,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 517
+                },
+                {
+                  "kind": "integer",
+                  "value": 1024
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15006
+            },
+            {
+              "eventId": 923,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 518
+                },
+                {
+                  "kind": "integer",
+                  "value": 1024
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15007
+            },
+            {
+              "eventId": 924,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 519
+                },
+                {
+                  "kind": "integer",
+                  "value": 1024
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15008
+            },
+            {
+              "eventId": 925,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 519
+                },
+                {
+                  "kind": "integer",
+                  "value": 1023
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15009
+            },
+            {
+              "eventId": 926,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 519
+                },
+                {
+                  "kind": "integer",
+                  "value": 1022
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15010
+            },
+            {
+              "eventId": 927,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 518
+                },
+                {
+                  "kind": "integer",
+                  "value": 1022
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15011
+            },
+            {
+              "eventId": 928,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 517
+                },
+                {
+                  "kind": "integer",
+                  "value": 1022
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15012
+            },
+            {
+              "eventId": 929,
+              "arguments": [
+                {
+                  "kind": "integer",
+                  "value": 517
+                },
+                {
+                  "kind": "integer",
+                  "value": 1023
+                }
+              ],
+              "values": [
+                {
+                  "kind": "symbol",
+                  "package": "COMMON-LISP",
+                  "name": "T"
+                }
+              ],
+              "lineOrder": 15013
+            }
+          ],
+          "observedRecordOrder": {
+            "screenBegin": 12835,
+            "screenReturn": 13920,
+            "firstPredicate": 15005,
+            "lastPredicate": 15013,
+            "strokeReturn": 16097
+          },
+          "predicateCoordinateWriteCandidate": {
+            "rule": "set each true IN-SUB-FRAME argument coordinate to the captured BRUSH-STROKE value",
+            "acceptedPredicateCalls": 9,
+            "uniqueCandidateCoordinates": 9,
+            "candidateEntryValues": {
+              "0": 9
+            },
+            "resultingMapSha256": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+            "matchesCapturedStrokeReturn": true
+          },
+          "result": {
+            "predicates": 9,
+            "screenCalls": 1,
+            "values": [
+              [
+                ":OBJECT",
+                490,
+                "CONS"
+              ]
+            ],
+            "returnPathEq": true
+          },
+          "maps": [
+            {
+              "phase": "STROKE-ENTRY",
+              "sha256": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "runCount": 1535,
+              "valueCounts": {
+                "0": 827896,
+                "1": 74,
+                "2": 212,
+                "3": 1258,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-ENTRY",
+              "sha256": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "runCount": 1535,
+              "valueCounts": {
+                "0": 827896,
+                "1": 74,
+                "2": 212,
+                "3": 1258,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "SCREEN-RETURN",
+              "sha256": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "runCount": 1535,
+              "valueCounts": {
+                "0": 827896,
+                "1": 74,
+                "2": 212,
+                "3": 1258,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            },
+            {
+              "phase": "STROKE-RETURN",
+              "sha256": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "runCount": 1535,
+              "valueCounts": {
+                "0": 827896,
+                "1": 74,
+                "2": 212,
+                "3": 1258,
+                "4": 0,
+                "5": 0,
+                "6": 0,
+                "7": 0,
+                "8": 0,
+                "9": 0,
+                "10": 0,
+                "11": 0,
+                "12": 0,
+                "13": 0,
+                "14": 0,
+                "15": 0
+              }
+            }
+          ],
+          "mapTransitions": [
+            {
+              "from": "STROKE-ENTRY",
+              "to": "SCREEN-ENTRY",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "mapSha256To": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8"
+            },
+            {
+              "from": "SCREEN-ENTRY",
+              "to": "SCREEN-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "mapSha256To": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8"
+            },
+            {
+              "from": "SCREEN-RETURN",
+              "to": "STROKE-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "mapSha256To": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8"
+            },
+            {
+              "from": "STROKE-ENTRY",
+              "to": "STROKE-RETURN",
+              "changedCells": 0,
+              "transitions": {},
+              "boundsXY": null,
+              "mapSha256From": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8",
+              "mapSha256To": "512880b7d6a4d500a74e1d62ce9bf88125986659d269ef5b7f13d190204cb9b8"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "controls": [
+    {
+      "root": "brush-stroke-value0-control-before-20261012-a",
+      "runId": "brush-stroke-value0-control-before-20261012-a",
+      "startedAt": "2026-10-12T21:06:40.8379369+00:00",
+      "finishedAt": "2026-10-12T21:07:19.8605600+00:00",
+      "summarySha256": "b92051cbd574f65ed8646d91678cd7d755028ce193cdb7ddaadd1457af55e9ee",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+      "sceneStateSha256": "f30bc4a64fc21668977214eb6db0283a362c351f53af6a171212867c216e299b",
+      "runtime": {
+        "AARON.exe": {
+          "bytes": 36864,
+          "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+        },
+        "AARON.dxl": {
+          "bytes": 5373952,
+          "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+        },
+        "AARON.pll": {
+          "bytes": 4573464,
+          "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+        }
+      }
+    },
+    {
+      "root": "brush-stroke-value0-control-before-20261012-b",
+      "runId": "brush-stroke-value0-control-before-20261012-b",
+      "startedAt": "2026-10-12T21:14:40.9413889+00:00",
+      "finishedAt": "2026-10-12T21:15:17.7090905+00:00",
+      "summarySha256": "9ec7c1728a31fba5699211d65e656cd1e959581922a4fb4bab8ca0d3a4202244",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+      "sceneStateSha256": "712911c412d9799efff12c6b167a77f3019892aa6dbea7775647693b244b7a43",
+      "runtime": {
+        "AARON.exe": {
+          "bytes": 36864,
+          "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+        },
+        "AARON.dxl": {
+          "bytes": 5373952,
+          "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+        },
+        "AARON.pll": {
+          "bytes": 4573464,
+          "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+        }
+      }
+    },
+    {
+      "root": "brush-stroke-value0-control-after-20261012-a",
+      "runId": "brush-stroke-value0-control-after-20261012-a",
+      "startedAt": "2026-10-12T21:24:18.5351771+00:00",
+      "finishedAt": "2026-10-12T21:25:07.9708496+00:00",
+      "summarySha256": "8672c114aef0536a89ebf6e3a6f7e79a7bb19be5ae6e86a54aaf65d35268c28f",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+      "sceneStateSha256": "0bdaa36462e37337d5d15fbf201b2b1e572af12e4b5072eb8ed8a5ff7c66462d",
+      "runtime": {
+        "AARON.exe": {
+          "bytes": 36864,
+          "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+        },
+        "AARON.dxl": {
+          "bytes": 5373952,
+          "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+        },
+        "AARON.pll": {
+          "bytes": 4573464,
+          "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+        }
+      }
+    }
+  ],
+  "allAA0ByteIdentical": true,
+  "allSceneReportByteIdentical": true,
+  "controlsUninstrumented": true,
+  "limitations": [
+    "This is one completed seed-1234 writer-stream run with the first naturally encountered MULTI, EMPTY, and SINGLETON path samples selected by the observer. It is not an exhaustive BRUSH-STROKE domain.",
+    "The captured samples all use integer VALUE=0, brush index 1 at width 3, the reported 768x1080 unsigned-byte-4 map, and their recorded natural inputs/configuration. Other values, brushes, map layouts, boundaries, and malformed inputs remain uncharacterized.",
+    "Complete RLE snapshots support exact comparisons only at the four captured phases for these three strokes. The observer bypasses non-selected calls to their saved functions and preserves the exact observed outer MAIN and SCREEN-AND-STORE wrappers; matching uninstrumented AA0 and scene bytes do not establish that every unobserved internal effect is untouched.",
+    "This report records original runtime behavior and map transitions. It does not establish a JavaScript implementation match, recover path construction or the direct caller, or map the native branch registers to Lisp arguments.",
+    "The full capture tape and scene files remain in the local oracle run roots. The portable report binds them by hashes and summarizes sampled input and complete map coverage."
+  ]
+}

@@ -62,10 +62,27 @@ measurements do not recover branch conditions or unwrapped callers. Read the
 [row/iris findings](introspection/brush-fill-row-iris.md) and
 [portable evidence](introspection/evidence/brush-fill-row-iris-20261012.json).
 
-Next: characterize value-0 painting, then choose the row/iris follow-up from
-its first concrete divergence. Keep older 320x480 observations separate and
-use fresh controls. Natural ZERO-EDGE context, intermediate helper traces and
-general JS parity remain open.
+The first bounded natural VALUE=0 map capture now completes in
+`brush-stroke-value0-capture-20261012-b`, bracketed by two fresh before
+controls and one fresh after control.
+It records the first MULTI, EMPTY, and SINGLETON strokes, 90 predicate returns,
+and 12 complete 768x1080 map snapshots; every drawing and scene report matches
+the three controls. See the [VALUE=0 findings](introspection/brush-stroke-value0.md)
+and [portable evidence](introspection/evidence/brush-stroke-value0-20261012-v4.json).
+The multi path records 81 true predicates and 33 changed cells (20 1-to-0,
+13 3-to-0); the singleton has nine true predicates but no net map change, and
+the empty path has none. A predicate-coordinate zeroing candidate reproduces
+all three captured final maps, but the observer did not trace individual stores.
+
+The existing isolated `applyMeasuredBrushStroke` adapter does not match this
+natural call order or the empty/singleton screen call. A separate
+`applyObservedNaturalBrushStrokeValue0` candidate is present but has only been
+syntax-checked; no JS/map or scene parity is claimed. Next use REA 6.4.0 to
+inspect the remaining BRUSH-STROKE branch/call cluster around the newly mapped
+static xrefs, then choose a fresh capture that distinguishes the candidate
+from alternatives. Keep older 320x480 observations separate and use fresh
+controls. Natural ZERO-EDGE context, intermediate helper traces, and general
+JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

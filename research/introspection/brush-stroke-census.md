@@ -25,7 +25,10 @@ singleton and multi-point paths returned `CONS`. These are observations in
 these two scenes, not general rules about empty or nonempty paths. In
 particular, the natural `VALUE=0` empty/singleton observations differ from the
 older dependency-isolated adapter cases. This census does not capture the map,
-so it cannot resolve the corresponding write behavior.
+so it cannot resolve the corresponding write behavior. A later bounded map
+capture follows up the first natural MULTI, EMPTY, and SINGLETON samples; see
+[the VALUE=0 findings](brush-stroke-value0.md). It does not extend the census
+to all VALUE=0 calls.
 
 ### Path and return observations by value
 

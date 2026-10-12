@@ -74,7 +74,37 @@ the mapped native body. They do not establish register or Lisp argument
 meanings, runtime branch outcomes, the call's runtime callee, a direct Lisp
 caller, or any drawing behavior. The generated PE wrapper was not executed;
 the entry address is archived static context, not a current live address.
-See the separate [BRUSH-STROKE portable evidence](evidence/rea-brush-stroke-targets-20261012.json)
+Follow-up intra-function xref queries resolve `0x1fe436c8: JZ 0x1fe43613`,
+`0x1fe43611: JZ 0x1fe43639`, and `0x1fe436ce: JMP 0x1fe43639`. The nearby
+`MOV EBX,EAX; OR EBX,EDX; TEST BL,0x3; JNZ 0x1fe436bd` sequence takes that
+machine branch when `(EAX | EDX) & 3` is nonzero. Register meanings and the
+runtime outcomes remain unknown. REA's `xrefs` result gives source addresses;
+the function assembly supplies the instruction kind. These additional static
+references still do not identify a caller or VALUE=0 behavior. The source-bound
+derivation also pins the two raw REA reports and verifies their bytes against
+the retained Ghidra listing and exact PLL payload.
+
+Two additional REA 6.4.0 queries resolve the next branch destinations:
+
+| Query | Static result |
+|---|---|
+| `xrefs 0x1fe436e5` | One source, `0x1fe4367c: JLE 0x1fe436e5` |
+| `xrefs 0x1fe436d3` | One source, `0x1fe43675: JNZ 0x1fe436d3` |
+
+These results extend navigation through the same inferred body. They remain
+xref evidence only; the conditions do not identify Lisp argument meanings or
+runtime outcomes. Raw reports are retained under
+`research/artifacts/rea-tools/brush-stroke-value0-xrefs-436e5-436d3-20261012-95c3f4d553/`.
+
+The first Java-backed REA queries were blocked under the default sandbox:
+`spawnSync(java.exe, ...)` returned `EPERM`, which REA surfaced as
+`runtime_missing` with no Java version. The configured Java and Ghidra paths
+were valid. On this host, rerun only the required REA CLI command with scoped
+permission to launch Java; do not reinstall the toolchain or weaken provider
+checks. This is a child-process permission boundary, not a missing runtime.
+
+See the separate [BRUSH-STROKE portable evidence](evidence/rea-brush-stroke-control-flow-20261012-v3.json),
+which supersedes the earlier derived view of the same investigation,
 and its [offline derivation helper](../tools/derive-rea-brush-stroke-target-evidence.mjs).
 
 To repeat the static queries, keep the generated PE and seed in their existing
@@ -95,6 +125,8 @@ $exe = Join-Path $reaRoot 'brush-stroke.synthetic.exe'
 & $reaTools.node $reaTools.reaCli function $exe 0x1fe435c4 --provider ghidra --format json
 & $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436bd --provider ghidra --format json
 & $reaTools.node $reaTools.reaCli resolve-native-call-targets $exe 0x1fe4369e --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436e5 --provider ghidra --format json
+& $reaTools.node $reaTools.reaCli xrefs $exe 0x1fe436d3 --provider ghidra --format json
 ```
 
 ## Retained inputs and reproduction

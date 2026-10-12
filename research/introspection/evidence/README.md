@@ -209,6 +209,18 @@ The bounded BUFFER-HEAD constant list is a prefix, not a four-feature census.
 No REA Windows native-provider session or immediate-caller capture is claimed.
 See [the native findings](../brush-painting-native.md).
 
+## Natural BRUSH-STROKE VALUE=0 map capture, 2026-10-12
+
+[`brush-stroke-value0-20261012-v4.json`](brush-stroke-value0-20261012-v4.json)
+binds the first natural MULTI, EMPTY, and SINGLETON VALUE=0 samples to three
+fresh drawing/scene controls. It retains all 90 predicate calls and 12 complete
+map snapshots, including the screen-before-predicate order. A bounded
+predicate-coordinate zeroing candidate reproduces these three final maps, but
+does not trace individual stores or establish general behavior. See
+[the findings](../brush-stroke-value0.md).
+The unsuffixed, v2, and v3 JSONs are earlier derived views of this same capture;
+v4 is the canonical report with the candidate final-map comparison.
+
 ## Natural BRUSH-STROKE value-3 marking and clears, 2026-10-05
 
 [`brush-stroke-boundary-parity-20261005.json`](brush-stroke-boundary-parity-20261005.json)

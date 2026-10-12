@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 2,
+  "investigation": "rea-6.4-brush-stroke-static-control-flow-20261012",
+  "scope": {
+    "oracleRun": false,
+    "debuggerAttached": false,
+    "generatedExecutableRun": false,
+    "runtimeBehaviorEstablished": false,
+    "originalLispSourceRecovered": false,
+    "nativeLispAbiEstablished": false,
+    "directCallerEstablished": false,
+    "liveAddressEstablished": false
+  },
+  "sourceBinding": {
+    "functionName": "BRUSH-STROKE",
+    "mapPath": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+    "mapSha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786",
+    "pllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+    "payloadSha256": "606194172353e20194922a1f13ed853e48455f523d635cf07a43cd01d1a9bc0e",
+    "payloadBytes": 564,
+    "pllObjectOffset": 2766272,
+    "pllPayloadOffset": 2766276,
+    "pllEndExclusive": 2766840,
+    "objectSha256": "0a7b4eee047c44db689dcc460789d982c14b85f01348839b4b6e05862fbefcf2",
+    "uniqueCompleteObjectMatch": true,
+    "generatedPeSha256": "39e28d5b7ce2ad23da01f48077f0640730556c57af4adbd108a39d24a1dae554",
+    "generatedPeBytes": 2560,
+    "generatedWrapper": {
+      "headerAndLayout": "analyst assertions",
+      "imageBase": "0x1fe40000",
+      "sectionRva": 12288,
+      "entry": "0x1fe435c4",
+      "copiedPayloadFileOffset": 1988,
+      "copiedPayloadBytes": 564,
+      "generatedExecutableWasNotRun": true
+    }
+  },
+  "toolchain": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.4",
+    "java": "Temurin 21.0.12.1+1-LTS",
+    "nativeAddonSha256": "c4fd9f377e567bcf15ba3fec3e0b0ed965d82b765a2adcdac49e46f14524b6d5",
+    "packageIntegrity": "sha512-Vj1zWfSlna5bphGoaoI/TcVBuYvze9u+OyPC3Shz8YkBqaCTqB4COnnRoX7XDwMpwI24ZlFEel2yEj0k8LTWEQ==",
+    "language": "x86:LE:32:default",
+    "compilerSpec": "windows"
+  },
+  "function": {
+    "evidenceId": "ev_d836aa5a191a8aaa71c2f8156bf3edc9fff1ade9e3b40876c14170fd729d3f4b",
+    "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
+    "procedure": "BRUSH_STROKE",
+    "entry": "0x1fe435c4",
+    "inferredBody": [
+      {
+        "start": "0x1fe435c4",
+        "end": "0x1fe437ee"
+      }
+    ],
+    "bodyBytes": 555,
+    "payloadTailExcludedBytes": 9,
+    "instructions": 201,
+    "rawGhidraInstructionParity": true,
+    "basicBlocks": 47,
+    "cfgProjection": {
+      "sha256": "a74dabb208b9d5211220f955dd1d766fbc685d2ea13b33ca2c1de45f8fa60aaa",
+      "bytes": 3591
+    },
+    "conditionalJumpReferences": 24,
+    "outgoingReferences": 79,
+    "outgoingReferenceProjection": {
+      "sha256": "0bad8fd21e7c44a3cee3df2b3246b221e76fa7b9bfe71cc516161a84a6b92034",
+      "bytes": 70704
+    },
+    "callInstructions": 35,
+    "staticallyReferencedCallEdges": 0,
+    "pcodeOperations": 272,
+    "defUseEdges": 248,
+    "pcodeTruncated": false,
+    "omittedOperationsLowerBound": 0,
+    "knownOmittedInputs": 0,
+    "knownOmittedEdges": 0,
+    "pcodeProjection": {
+      "sha256": "c313b8fed05711ffdb08a7908eb817f0d9fba76990a4d9e2e4c975bab768dc16",
+      "bytes": 125490
+    }
+  },
+  "queries": {
+    "branchXrefs": {
+      "evidenceId": "ev_ce7d20052183d2133a6791dcd92a401adde1782ece16ddec3cb994cb165464be",
+      "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
+      "address": "0x1fe436bd",
+      "sources": [
+        "0x1fe43609"
+      ],
+      "relation": "conditional jump reference within the inferred function body"
+    },
+    "branchNeighbors": [
+      {
+        "evidenceId": "ev_2f38ad406cf2b9de0c4f91bac62e075e5efc423ef456d791ccbd92cb94b72727",
+        "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
+        "address": "0x1fe43613",
+        "sources": [
+          "0x1fe436c8"
+        ],
+        "instruction": "0x1fe436c8: JZ 0x1fe43613"
+      },
+      {
+        "evidenceId": "ev_a09713a9da2a23b47a0bf8c9aa674e2f7c719ed843530085cab405e457d42f12",
+        "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
+        "address": "0x1fe43639",
+        "sources": [
+          "0x1fe43611",
+          "0x1fe436ce"
+        ],
+        "instructions": [
+          "0x1fe43611: JZ 0x1fe43639",
+          "0x1fe436ce: JMP 0x1fe43639"
+        ]
+      }
+    ],
+    "lowBitTest": {
+      "instructions": [
+        "0x1fe43602: MOV EBX, EAX",
+        "0x1fe43604: OR EBX, EDX",
+        "0x1fe43606: TEST BL, 0x3",
+        "0x1fe43609: JNZ 0x1fe436bd"
+      ],
+      "machineCondition": "JNZ when (EAX | EDX) & 3 is nonzero; register meanings are unresolved"
+    },
+    "indirectCall": {
+      "evidenceId": "ev_1c4140a6b95854e5fb282e9fd1c172c7f76a5be223aaabd35b19ae59c117f831",
+      "profileDigest": "964cd59a0448f72d7e815299f2352a149cae07865313cf519d616edd0b822823",
+      "callSite": "0x1fe4369e",
+      "instruction": "CALL dword ptr [EDI + 0x57]",
+      "status": "unresolved",
+      "mechanism": "computed",
+      "targets": []
+    }
+  },
+  "limitations": [
+    "The archived entry address is static context, not a current live address.",
+    "The PE headers, layout and seeded function name are analyst assertions; only the copied payload bytes are original.",
+    "REA instruction, CFG and p-code outputs are Ghidra static-analysis results, not original Lisp source or a verified Lisp ABI.",
+    "The xrefs queries are intra-container reference evidence. They do not identify register meanings, runtime branch outcomes, or a Lisp caller. The unresolved call query does not identify its runtime target.",
+    "No runtime branch outcome, drawing behavior, map effect, RNG effect or VALUE=0 behavior is established by this static dossier."
+  ],
+  "sourceHashes": [
+    {
+      "path": ".gitignore",
+      "sha256": "dd03fa88b390c6d0db3baa4de1ecf2ec18d3dc3ba9321fdbf320331626702659",
+      "bytes": 98
+    },
+    {
+      "path": "local-node-runtime/node.exe",
+      "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+      "bytes": 92825416
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/brush-stroke.binding.json",
+      "sha256": "76ca3df69f281f48f24bc51746950c5d9bb87cd2b7a09ebdd01f7e8872163f04",
+      "bytes": 2109
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/brush-stroke.seeds.tsv",
+      "sha256": "0f11c721dd4a82265bb598f9f851b708cb8bfb5c17da5c384e55e5c2039c56d7",
+      "bytes": 33
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/brush-stroke.synthetic.exe",
+      "sha256": "39e28d5b7ce2ad23da01f48077f0640730556c57af4adbd108a39d24a1dae554",
+      "bytes": 2560
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-a/function.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-a/function.stdout.json",
+      "sha256": "91ff1611397ad2eec38cba4aab6ed9bfacbe71b76a971f5b3af5e33b5f083160",
+      "bytes": 447237
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-b/resolve-call-4369e.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-b/resolve-call-4369e.stdout.json",
+      "sha256": "f47154107415875c7fab7553c9513b99d2fe0b4af9234b19e7d48fc07719ad07",
+      "bytes": 5145
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-b/xrefs-loop-target.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-20261012/rea-run-b/xrefs-loop-target.stdout.json",
+      "sha256": "b394322e825f570d65a2fb2f03f4c198c79f56643513588cb2b9fae0845f57c5",
+      "bytes": 4589
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-xref-43613-20261012-f/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-xref-43613-20261012-f/stdout.json",
+      "sha256": "48cbee7cefe85d692e855fe7955572e9fe7ef160a4f9a0275764db9bb3f7a0a8",
+      "bytes": 4589
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-xref-43639-20261012-e/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/brush-stroke-value0-xref-43639-20261012-e/stdout.json",
+      "sha256": "d7fe2389efed704c3fbf169b133a17cf684d4f8515b5d277ab4bc67ad12a2163",
+      "bytes": 4615
+    },
+    {
+      "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/Ghidra/application.properties",
+      "sha256": "e84c26b08545eee63d24a1a8a4dd7905e4209538e2e7192093877c435c64eb67",
+      "bytes": 659
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/bin/java.exe",
+      "sha256": "82051fdab26319d77d20cc0065045d05ec00b3e3d05f44935d7c06b96b621d55",
+      "bytes": 50304
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/release",
+      "sha256": "07117c72ce033949c14878e07fbf2fe23f59a1f8c90a6d1351b5c89099847ce7",
+      "bytes": 1664
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/bridge/ghidra/ReaGhidraBridge.java",
+      "sha256": "d6ff211cfb0cb6f062b434a060e631d9d10b8fb0a393d9a6dd0bdc982f670ae7",
+      "bytes": 184378
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/cli.js",
+      "sha256": "45b396850126152825ddc38472f65819db9fa515da4a7c3cd3d08e58efbf418b",
+      "bytes": 5259
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/analysisProfile.js",
+      "sha256": "9c813393b35bb53dbf4fabdcbbfc4add7980dd5db9f5eca5f0c84a7f02bdad08",
+      "bytes": 2056
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/canonicalDigest.js",
+      "sha256": "f46d6bd4dd94835504d71b396cd9e1b995e5eff7da17a618d374c48765be81d9",
+      "bytes": 3160
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/canonicalJsonDigestSteps.js",
+      "sha256": "2d09327e55445a7c0d991b8e29c8a0bf8aa9a4955b5e4ec383b3d46ba6e0ddb6",
+      "bytes": 5754
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/evidence.js",
+      "sha256": "690dc0355ce8dd64417b8ebb1ebd4a06c6b5ece648eeb7caf6978638b880de39",
+      "bytes": 10418
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/ghidra/GhidraProviderClient.js",
+      "sha256": "68d0d0d1de1bb7142d84a6b80fbb6c1d54d983c32dc687e59b24a747ada7fde5",
+      "bytes": 26536
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/native/windows/build/manifest.json",
+      "sha256": "fdebfabc6f594d17a532a81eda923b810bfc46560a4da0317d75a1378b5c7aee",
+      "bytes": 248
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/native/windows/build/rea-windows-x64.node",
+      "sha256": "c4fd9f377e567bcf15ba3fec3e0b0ed965d82b765a2adcdac49e46f14524b6d5",
+      "bytes": 848252
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/package.json",
+      "sha256": "1c6244e5689db5354fffc0e92f4ee0e0237c3a6d645de564ade2d8375fa570f9",
+      "bytes": 19538
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/scripts/rea.mjs",
+      "sha256": "3554288a08c455fa419dad662d73710fb17debe94b9e71dd1282761117c5981e",
+      "bytes": 3786
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/package-lock.json",
+      "sha256": "7890598bbb6eabfe07b14d8db923ffd00cccb16d9d6b16883d5f5219200dc6bc",
+      "bytes": 65457
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04",
+      "bytes": 739
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/brush-stroke.native-payload.bin",
+      "sha256": "606194172353e20194922a1f13ed853e48455f523d635cf07a43cd01d1a9bc0e",
+      "bytes": 564
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/ghidra/brush-stroke.ghidra.json",
+      "sha256": "19fc42f84fd4b2a8e4787a21034f01f35345578bd8d6914b55b1157b55910659",
+      "bytes": 49579
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+      "sha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786",
+      "bytes": 3120
+    },
+    {
+      "path": "research/introspection/rea-payload-analysis.md",
+      "sha256": "7d3b3327ae1c0e700694dfe9b7195417934c08832e6a63f5b75e013556fc9205",
+      "bytes": 13363
+    },
+    {
+      "path": "research/tools/derive-rea-brush-stroke-target-evidence.mjs",
+      "sha256": "9c559bcacadf37e84f61d0084d28ac73c9df4bde10a9beac677a1e727f1bb71c",
+      "bytes": 24068
+    },
+    {
+      "path": "research/tools/prepare-rea-payload-pe.mjs",
+      "sha256": "5d4bdeb8a2fb70c3f54e925f0969910ce0b5ce06b7259a45aab91748185b8624",
+      "bytes": 8168
+    }
+  ]
+}
