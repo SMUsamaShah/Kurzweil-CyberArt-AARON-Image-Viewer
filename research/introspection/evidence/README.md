@@ -1,5 +1,21 @@
 # Original-engine report excerpts
 
+## REA native payload analysis, 2026-10-12
+
+[`rea-payload-analysis-20261012.json`](rea-payload-analysis-20261012.json)
+binds three successful REA 6.4 dossiers and two actual ZERO-EDGE reference
+queries to 70 sources. Independent derivations match: 28,003 bytes, SHA-256
+`3aefd4789d51950b6fc51a35d5adac346f0873ce0d23c92b1dcb718cb483e1ff`.
+The reusable builder reproduces all retained generated PE and seed bytes.
+All original payloads and decoded instruction bytes match the PLL; assembly
+agrees with prior raw Ghidra decoding after only comma-whitespace normalization.
+
+The metadata artifact retains CFG/p-code counts and projection hashes.
+Machine code, full graphs and pseudocode remain ignored. Generated PE headers,
+layout and seeds are analyst assertions, and the containers were never executed.
+Lisp dispatch remains unresolved; no new runtime behavior, original Lisp
+source or verified ABI is claimed. Read [the guide](../rea-payload-analysis.md).
+
 ## ZERO-EDGE holdout and JavaScript model, 2026-10-12
 
 [`zero-edge-holdout-20261012.json`](zero-edge-holdout-20261012.json) binds

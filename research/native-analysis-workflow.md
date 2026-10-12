@@ -11,6 +11,31 @@ preserve the historical `toolchain.json` and 3.2.1 installation for the evidence
 derivations below. See [the update record](rea-update-20261011.md) for exact
 versions, checks, package/main differences and reproduction commands.
 
+## Exact payloads through REA, 2026-10-12
+
+REA 6.4 now also completes native function dossiers for ZERO-EDGE, BRUSH-FILL
+and FILL-IRIS through generated x86 PE containers. The stock Windows provider
+still rejects headerless raw bytes. This route copies each exact, uniquely
+mapped PLL payload into a minimal static container and supplies an explicit
+x86 language, Windows compiler specification and function seed. All three
+decoded instruction sequences match the earlier standalone Ghidra reports;
+REA adds CFG, reference and untruncated p-code def-use data.
+
+Use [the payload guide](introspection/rea-payload-analysis.md) and
+`research/tools/prepare-rea-payload-pe.mjs` for new containers. The builder
+requires an exact archived map/function/PLL and a fresh ignored directory,
+validates all original bytes and writes exclusively. Never execute its PE.
+Generated headers, layout, names and static address context are analyst
+assertions. They are not original executable metadata or current live
+addresses. The isolated containers do not resolve the Lisp dispatch graph,
+and inferred C signatures do not establish the Lisp ABI or recover source.
+
+The strict [portable evidence](introspection/evidence/rea-payload-analysis-20261012.json)
+binds all three successful dossiers and two actual ZERO-EDGE reference queries
+to 70 sources. Independent offline derivations are byte-identical. This static
+route does not replace the live rediscovery and byte checks required before
+debugger attachment below. Preserve the historical toolchain and raw reports.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

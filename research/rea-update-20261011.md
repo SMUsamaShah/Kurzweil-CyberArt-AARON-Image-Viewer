@@ -68,10 +68,20 @@ Windows Ghidra raw imports unsupported. The source and published package both
 say 6.4.0, but the fetched commit is later than the published release; do not
 infer package capability from main's version string or README alone.
 
-Continue decoding exact named PLL payloads through the established
-[standalone Ghidra workflow](native-analysis-workflow.md#2-decode-the-matched-payloads).
-That route preserves the measured runtime entry and uses the `windows`
-compiler specification. No provider guard was removed.
+The established [standalone Ghidra workflow](native-analysis-workflow.md#2-decode-the-matched-payloads)
+continues to accept raw named payloads. A deeper pass on 2026-10-12 also made
+the unchanged REA 6.4 provider useful for those exact bytes through generated
+static x86 PE containers. ZERO-EDGE, BRUSH-FILL and FILL-IRIS now have successful
+function dossiers with CFG, reference and untruncated p-code data; their
+instructions match the older raw reports. Two actual ZERO-EDGE queries
+resolve a local branch and retain an unresolved indirect dispatch boundary.
+Read [the payload guide](introspection/rea-payload-analysis.md) for the reusable
+builder, commands and independently reproduced 70-source portable evidence.
+
+This does not add raw-input support to REA. Generated headers, layout, static
+address context and seeds are analyst assertions. The containers were never
+executed, and Lisp ABI/source and cross-object caller recovery remain open.
+No provider guard was removed.
 
 ## Reuse
 

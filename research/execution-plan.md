@@ -4,7 +4,10 @@ Prepared 2026-09-27; updated 2026-10-12. This is the active work order; the olde
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
-still rejects raw named PLL payloads; keep standalone Ghidra for that route.
+still rejects raw named PLL payloads; exact mapped bytes can now be analyzed
+through explicitly generated static PE containers. All three ZERO-EDGE,
+BRUSH-FILL and FILL-IRIS dossiers match prior raw instruction decoding and
+add CFG/reference/p-code data. See [the payload guide](introspection/rea-payload-analysis.md).
 The old toolchain remains pinned for historical evidence. See
 [the update record](rea-update-20261011.md). The ZERO-EDGE constructor helper
 now derives identical portable evidence independently, with all 140 source
@@ -43,13 +46,19 @@ JS model now matches all 199 captured cases, including 511 returned points
 and 61 supplied-START mutations. See
 [the holdout findings](introspection/zero-edge-holdout.md).
 
-Next: follow the user's request for deeper REA use. Attempt function
-dossiers, cross references and decompilation on exact recovered PLL payloads
-in explicitly derived static PE containers with byte bindings and intact
-provider guards. Do not execute a synthetic input or claim analyst-assigned
-headers/addresses as original structure. Then continue the BRUSH-FILL
-row/iris schedule and value-0 painter. Natural caller context, intermediate
-helper traces and general ZERO-EDGE/JS parity remain open.
+The deeper REA investigation completes with three native dossiers and two
+actual ZERO-EDGE reference queries. Independent portable derivations match
+across 70 sources, and the reusable builder reproduces all retained PE/seed
+bytes. No synthetic input was executed; generated headers/addresses remain
+analyst assertions. The isolated dossiers do not resolve Lisp dispatch or
+establish original source/ABI.
+
+Next: use the BRUSH-FILL/FILL-IRIS CFG and p-code to target a complete natural
+row/iris observer. Resolve the four later LY-2 jumps and positive scans without
+PATCH-EDGE, then continue value-0 painting. Current natural map dimensions
+are 768x1080; keep older 320x480 observations separate and use fresh controls.
+Natural ZERO-EDGE context, intermediate helper traces and general JS parity
+remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

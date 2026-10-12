@@ -1,0 +1,691 @@
+{
+  "schemaVersion": 1,
+  "investigation": "rea-6.4-exact-pll-payload-static-analysis-20261012",
+  "scope": {
+    "functions": 3,
+    "oracleRun": false,
+    "debuggerAttached": false,
+    "generatedExecutableRun": false,
+    "runtimeBehaviorEstablished": false,
+    "originalLispSourceRecovered": false,
+    "nativeLispAbiEstablished": false,
+    "liveAddressesEstablished": false,
+    "crossObjectCallerGraphRecovered": false
+  },
+  "toolchain": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.4",
+    "java": "Temurin 21.0.12.1+1-LTS",
+    "nodeBinaryIdentityBound": true,
+    "nativeAddonSha256": "c4fd9f377e567bcf15ba3fec3e0b0ed965d82b765a2adcdac49e46f14524b6d5",
+    "packageIntegrity": "sha512-Vj1zWfSlna5bphGoaoI/TcVBuYvze9u+OyPC3Shz8YkBqaCTqB4COnnRoX7XDwMpwI24ZlFEel2yEj0k8LTWEQ==",
+    "language": "x86:LE:32:default",
+    "compilerSpec": "windows"
+  },
+  "functions": [
+    {
+      "name": "ZERO-EDGE",
+      "capturedEntryContext": "archived measured address reused solely for static analysis; not a current live address",
+      "entry": "0x1fe03934",
+      "originalPayload": {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/zero-edge.native-payload.bin",
+        "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+        "bytes": 982,
+        "pllOffset": 2505012,
+        "pllEndExclusive": 2505994
+      },
+      "wrapper": {
+        "headerAuthority": "analyst-assertion",
+        "imageBase": "0x1fe00000",
+        "sectionRva": 12288,
+        "entry": "0x1fe03934",
+        "copiedPayloadFileOffset": 2868,
+        "copiedPayloadBytes": 982,
+        "generatedPrefixBytes": 2356,
+        "generatedSuffixBytes": 246,
+        "executableWasNotRun": true
+      },
+      "reusableBuilder": {
+        "independentStaticContainerReproduced": true,
+        "exactPeBytesAndSeedMatchRetainedAnalysisInput": true,
+        "bindingPath": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-zero-edge-a/zero-edge.binding.json"
+      },
+      "rea": {
+        "evidenceId": "ev_79c60ab3c9cdd3bc17fdb3b85fe5663c6251e0c69f5e88995810cdbf3227d75a",
+        "evidenceFileSha256": "7ec05f9f2892f120c674ee1f4c0b0be2398a20792e6f379ac6a2d8c08644829f",
+        "profileDigest": "4831326cffc32a48aaf67b895f92866536a0565e53e08ffc5dcd8ae3efa0b9d4",
+        "nativeProviderSessionCompleted": true,
+        "rawAuthority": "shipped-artifact",
+        "qualifiedAuthority": "exact original payload bytes inside analyst-generated PE layout"
+      },
+      "analysis": {
+        "body": {
+          "ranges": [
+            {
+              "start": "0x1fe03934",
+              "end": "0x1fe03d00"
+            }
+          ],
+          "bytes": 973,
+          "copiedPayloadBytes": 982,
+          "excludedPayloadBytes": 9
+        },
+        "instructions": 338,
+        "originalInstructionBytesVerified": true,
+        "commaWhitespaceOnlyAssemblyParity": true,
+        "cfg": {
+          "basicBlocks": 79,
+          "conditionalJumpReferences": 45,
+          "projection": {
+            "sha256": "c2981ebc0ae5ecdc3e3c4691869f14c7b50359e891af593c693acb8bf989a73f",
+            "bytes": 6104
+          }
+        },
+        "references": {
+          "outgoing": 146,
+          "incoming": 1,
+          "resolvedCallers": 0,
+          "resolvedCallees": 0,
+          "projection": {
+            "sha256": "7ff853186afcb70b4fd66f4770083c6d0cc3bab2d44726dc30a31fa1c3400042",
+            "bytes": 132440
+          }
+        },
+        "calls": {
+          "instructions": 41,
+          "instructionProjection": {
+            "sha256": "121ae2bbb027f350d3441d40090515937a524c9a81c4036ec07431519ac2bf3c",
+            "bytes": 1675
+          }
+        },
+        "pcode": {
+          "operations": 387,
+          "defUseEdges": 379,
+          "effects": 143,
+          "truncated": false,
+          "omittedOperationsLowerBound": 0,
+          "knownOmittedInputs": 0,
+          "knownOmittedEdges": 0,
+          "projection": {
+            "sha256": "f41154ce2c9d4ead6f8e25d5ef51a253d35fd906b815fd9ebfaa3da4ac04c12b",
+            "bytes": 180650
+          }
+        },
+        "pseudocode": {
+          "sha256": "607188cd402de2017c0fcbbd58cfeba36942a68abe26c0b928ca1fe4d533843d",
+          "bytes": 5992,
+          "originalSource": false,
+          "nativeLispAbiEstablished": false
+        }
+      }
+    },
+    {
+      "name": "BRUSH-FILL",
+      "capturedEntryContext": "archived measured address reused solely for static analysis; not a current live address",
+      "entry": "0x1fe1924c",
+      "originalPayload": {
+        "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/brush-fill.native-payload.bin",
+        "sha256": "016b613a592e6f5cc18a7b6fc0d04264a9038c485fdb05b91c458464a59f0957",
+        "bytes": 1986,
+        "pllOffset": 2593356,
+        "pllEndExclusive": 2595342
+      },
+      "wrapper": {
+        "headerAuthority": "analyst-assertion",
+        "imageBase": "0x1fe10000",
+        "sectionRva": 36864,
+        "entry": "0x1fe1924c",
+        "copiedPayloadFileOffset": 1100,
+        "copiedPayloadBytes": 1986,
+        "generatedPrefixBytes": 588,
+        "generatedSuffixBytes": 498,
+        "executableWasNotRun": true
+      },
+      "reusableBuilder": {
+        "independentStaticContainerReproduced": true,
+        "exactPeBytesAndSeedMatchRetainedAnalysisInput": true,
+        "bindingPath": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-brush-fill-a/brush-fill.binding.json"
+      },
+      "rea": {
+        "evidenceId": "ev_57aa9d836d50b5fc4578efe5fbc6db6c710e85665f440b7666409bf52ebdf78d",
+        "evidenceFileSha256": "105e722aa165d546003b474da42d4efdef8712a5f1335914cba5690e9d2676aa",
+        "profileDigest": "5e9a247de814cd58443a2a38750222ca2de95f0843ab72625da6bb4c97b5f9e1",
+        "nativeProviderSessionCompleted": true,
+        "rawAuthority": "shipped-artifact",
+        "qualifiedAuthority": "exact original payload bytes inside analyst-generated PE layout"
+      },
+      "analysis": {
+        "body": {
+          "ranges": [
+            {
+              "start": "0x1fe1924c",
+              "end": "0x1fe19a05"
+            }
+          ],
+          "bytes": 1978,
+          "copiedPayloadBytes": 1986,
+          "excludedPayloadBytes": 8
+        },
+        "instructions": 651,
+        "originalInstructionBytesVerified": true,
+        "commaWhitespaceOnlyAssemblyParity": true,
+        "cfg": {
+          "basicBlocks": 121,
+          "conditionalJumpReferences": 63,
+          "projection": {
+            "sha256": "73d05af2919ce9e7c3911dfc90ace146a5497a03940aae914ed34f76a4a5efc9",
+            "bytes": 9278
+          }
+        },
+        "references": {
+          "outgoing": 201,
+          "incoming": 1,
+          "resolvedCallers": 0,
+          "resolvedCallees": 0,
+          "projection": {
+            "sha256": "79d01c3782fd02223804c7552543525f7d79c6863bd43b1c449ab531ee7189de",
+            "bytes": 181986
+          }
+        },
+        "calls": {
+          "instructions": 137,
+          "instructionProjection": {
+            "sha256": "68c0aeaa48b11fe9996b981a74e84643e7538fe3f5d0c2be39cec40eddbcd460",
+            "bytes": 5197
+          }
+        },
+        "pcode": {
+          "operations": 952,
+          "defUseEdges": 885,
+          "effects": 386,
+          "truncated": false,
+          "omittedOperationsLowerBound": 0,
+          "knownOmittedInputs": 0,
+          "knownOmittedEdges": 0,
+          "projection": {
+            "sha256": "741dcc06cc46823dd256bef3c55a46953be6487788f079a3c0204b2128620157",
+            "bytes": 440901
+          }
+        },
+        "pseudocode": {
+          "sha256": "9c0664a6775b680105dc84961d2b8bc51152ba70d013f61c1d5f9a7fdf3634a8",
+          "bytes": 11640,
+          "originalSource": false,
+          "nativeLispAbiEstablished": false
+        }
+      }
+    },
+    {
+      "name": "FILL-IRIS",
+      "capturedEntryContext": "archived measured address reused solely for static analysis; not a current live address",
+      "entry": "0x1fe23b9c",
+      "originalPayload": {
+        "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/fill-iris.native-payload.bin",
+        "sha256": "405dcbec1b81b7ba2d1f44c7da4a89961eed17634ecd5b441071249743bcf00e",
+        "bytes": 1384,
+        "pllOffset": 2636700,
+        "pllEndExclusive": 2638084
+      },
+      "wrapper": {
+        "headerAuthority": "analyst-assertion",
+        "imageBase": "0x1fe20000",
+        "sectionRva": 12288,
+        "entry": "0x1fe23b9c",
+        "copiedPayloadFileOffset": 3484,
+        "copiedPayloadBytes": 1384,
+        "generatedPrefixBytes": 2972,
+        "generatedSuffixBytes": 252,
+        "executableWasNotRun": true
+      },
+      "reusableBuilder": {
+        "independentStaticContainerReproduced": true,
+        "exactPeBytesAndSeedMatchRetainedAnalysisInput": true,
+        "bindingPath": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-fill-iris-a/fill-iris.binding.json"
+      },
+      "rea": {
+        "evidenceId": "ev_76b556e9c257de36720196a278c8e6d95912af849269eef174196eca90d67938",
+        "evidenceFileSha256": "1a73a233019d60b9e7b5624812a00d7d18f6b6aa86db1a656bc6944905cdbd83",
+        "profileDigest": "0f8b5e35c9bc789c8021f8652b5a55cb31e81e2ebead423d4a32e56b9308e808",
+        "nativeProviderSessionCompleted": true,
+        "rawAuthority": "shipped-artifact",
+        "qualifiedAuthority": "exact original payload bytes inside analyst-generated PE layout"
+      },
+      "analysis": {
+        "body": {
+          "ranges": [
+            {
+              "start": "0x1fe23b9c",
+              "end": "0x1fe240fa"
+            }
+          ],
+          "bytes": 1375,
+          "copiedPayloadBytes": 1384,
+          "excludedPayloadBytes": 9
+        },
+        "instructions": 459,
+        "originalInstructionBytesVerified": true,
+        "commaWhitespaceOnlyAssemblyParity": true,
+        "cfg": {
+          "basicBlocks": 92,
+          "conditionalJumpReferences": 54,
+          "projection": {
+            "sha256": "b08a02704dba8a3a53fe096c65d57b4d3057a9bf048116c3349f5f4ca08b54b4",
+            "bytes": 7131
+          }
+        },
+        "references": {
+          "outgoing": 188,
+          "incoming": 1,
+          "resolvedCallers": 0,
+          "resolvedCallees": 0,
+          "projection": {
+            "sha256": "a3027de33bb93c05aae8f014ad0a50c4d1302a7809486a0e31e18e0e40558fb2",
+            "bytes": 169731
+          }
+        },
+        "calls": {
+          "instructions": 61,
+          "instructionProjection": {
+            "sha256": "25df7c686fe3a8df01ccf0628029b3daf4603c9f25d6ea2db22eaceb811dd5f5",
+            "bytes": 2384
+          }
+        },
+        "pcode": {
+          "operations": 671,
+          "defUseEdges": 744,
+          "effects": 194,
+          "truncated": false,
+          "omittedOperationsLowerBound": 0,
+          "knownOmittedInputs": 0,
+          "knownOmittedEdges": 0,
+          "projection": {
+            "sha256": "85c0f6689194fe5a075f35696bde8fac314e75f92038861e9a2a8d0a9523e140",
+            "bytes": 323341
+          }
+        },
+        "pseudocode": {
+          "sha256": "935113df74ac1289822b86f6b183a65b30c01e81334f5dd1c0ab53ad43b64bd6",
+          "bytes": 6843,
+          "originalSource": false,
+          "nativeLispAbiEstablished": false
+        }
+      }
+    }
+  ],
+  "queries": {
+    "branchXrefs": {
+      "evidenceId": "ev_18ddee0e8a944a0d5d7446e90db4a16cf294845442d4ebf9f29bae2334905e4c",
+      "address": "0x1fe03949",
+      "sources": [
+        "0x1fe03944"
+      ]
+    },
+    "indirectCall": {
+      "evidenceId": "ev_7e135d74ffd4a447a746a7e38553dfaf49471a6c64ce4a248f75d0ea12d76468",
+      "callSite": "0x1fe03946",
+      "status": "unresolved",
+      "mechanism": "computed",
+      "targets": []
+    }
+  },
+  "limitations": [
+    "PE headers, layout and seeded names are analyst assertions, not discovered original executable metadata.",
+    "REA raw shipped-artifact authority is qualified: the actual analysis subjects are generated static PE wrappers containing verified original payloads.",
+    "Ghidra function bodies exclude trailing payload bytes; counts and CFG describe inferred bodies only.",
+    "P-code and types are decompiler observations, not original Lisp or a verified Lisp ABI.",
+    "Isolated containers omit the runtime object graph; unresolved indirect calls and zero callers do not establish absence of application calls.",
+    "Retained CLI evidence is authenticated by REA canonical digests and exact file hashes; this offline derivation does not rerun native sessions."
+  ],
+  "sourceHashes": [
+    {
+      "path": "local-node-runtime/node.exe",
+      "sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
+      "bytes": 92825416
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.function.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.function.stdout.json",
+      "sha256": "105e722aa165d546003b474da42d4efdef8712a5f1335914cba5690e9d2676aa",
+      "bytes": 1369340
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.pseudocode.c",
+      "sha256": "1dd664b2f78b947c5504cb7a8e68b61c55a07394528fda731e87f4b1c23de4a9",
+      "bytes": 11064
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.query-result.json",
+      "sha256": "242cc317bae687cce7f2a0f46d7d49c779ce744fd1c50a15d6d8ef2221bc15b7",
+      "bytes": 375
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.seeds.tsv",
+      "sha256": "59520f5ecdac25a4158b98c2aa713789bc5c0c01382d90b54f8dbe2ca294f740",
+      "bytes": 31
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/brush-fill.synthetic.exe",
+      "sha256": "0e1ee11753b2b02839c93c2141bbdd0f6e947f60ec7515c8042700d3cf95ba0b",
+      "bytes": 3584
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/build-and-query.mjs",
+      "sha256": "8f06b5cd5d9df03b82d0ac429c10d46e6e9f69f39f626700358a4fa477682d2d",
+      "bytes": 4327
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.function.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.function.stdout.json",
+      "sha256": "1a73a233019d60b9e7b5624812a00d7d18f6b6aa86db1a656bc6944905cdbd83",
+      "bytes": 1077495
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.pseudocode.c",
+      "sha256": "749ebd0a580846f93a195f9260f7882c3f633c910514b8bacda870d2e0ecc3b4",
+      "bytes": 6449
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.query-result.json",
+      "sha256": "3f5e590f473d160a43dbed9e16065b9c753209c79b5eaccdad938ace08d0a365",
+      "bytes": 374
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.seeds.tsv",
+      "sha256": "6ddf0c42acc0841431dae9d5af96ae67a02513a175c5f3aae97958bb81cf5d96",
+      "bytes": 30
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/fill-iris.synthetic.exe",
+      "sha256": "6f23a51868ecdf8873b797d8d7a90030c65d6dafd64c367f50e84e9d3aa57aba",
+      "bytes": 5120
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-brush-fill-a/brush-fill.binding.json",
+      "sha256": "a4b1df52f54951f6570316676e4eeef3ad94674c6e1b4df3f5f99369552aa6dc",
+      "bytes": 2110
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-brush-fill-a/brush-fill.seeds.tsv",
+      "sha256": "59520f5ecdac25a4158b98c2aa713789bc5c0c01382d90b54f8dbe2ca294f740",
+      "bytes": 31
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-brush-fill-a/brush-fill.synthetic.exe",
+      "sha256": "0e1ee11753b2b02839c93c2141bbdd0f6e947f60ec7515c8042700d3cf95ba0b",
+      "bytes": 3584
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-fill-iris-a/fill-iris.binding.json",
+      "sha256": "79671be5ee5bdef47ba015a00e4754ba992bb8d830848816ae0cd746980d67fd",
+      "bytes": 2107
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-fill-iris-a/fill-iris.seeds.tsv",
+      "sha256": "6ddf0c42acc0841431dae9d5af96ae67a02513a175c5f3aae97958bb81cf5d96",
+      "bytes": 30
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-fill-iris-a/fill-iris.synthetic.exe",
+      "sha256": "6f23a51868ecdf8873b797d8d7a90030c65d6dafd64c367f50e84e9d3aa57aba",
+      "bytes": 5120
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-zero-edge-a/zero-edge.binding.json",
+      "sha256": "9629ef367e747a04736f65502dc0e46c8a3cc212e1211926beea19af806e0f4a",
+      "bytes": 2119
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-zero-edge-a/zero-edge.seeds.tsv",
+      "sha256": "f9c2206c3a843d2a6f572b3113d0095a3f95b25f406660bda3ea5a726a45c1df",
+      "bytes": 30
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/prepared-zero-edge-a/zero-edge.synthetic.exe",
+      "sha256": "813d84f65240edc8654f19913c869be72c506f87d897840396994dff226312af",
+      "bytes": 4096
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/summarize-and-followup.mjs",
+      "sha256": "43eeb28f48a4148c79a76b10c5390c1f03a3a83fb01035de5b126a1b5fbe73a8",
+      "bytes": 3647
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/synthetic-bindings.json",
+      "sha256": "4c2655a53cb0b2094d0e8d9f518e2491a98ccaaab0f41b664f31d4cd11e644f5",
+      "bytes": 3913
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.branch-xrefs.query-result.json",
+      "sha256": "3634e388abd6192413adcd633d9ec6906be71036d90a4551dae2e63b392eb008",
+      "bytes": 353
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.branch-xrefs.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.branch-xrefs.stdout.json",
+      "sha256": "6ca4650e6aeb125605acafc4fb0069726d4a4d0df7db03c321fbe61e49d742f7",
+      "bytes": 4529
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.first-call-targets.query-result.json",
+      "sha256": "061ccb699908a96811486a9abc6f3873191c135a74e798873e2ceaf55c3c6519",
+      "bytes": 375
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.first-call-targets.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.first-call-targets.stdout.json",
+      "sha256": "9bca848a79ce6a749cf3253de8ac1f8b2b2b39570a71746587908a21a8871925",
+      "bytes": 5085
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.function.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.function.stdout.json",
+      "sha256": "7ec05f9f2892f120c674ee1f4c0b0be2398a20792e6f379ac6a2d8c08644829f",
+      "bytes": 701665
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.pseudocode.c",
+      "sha256": "ff0adfc1211e5da0ac556cdd600f51f271d0d280401a26c140765c7efd872ed2",
+      "bytes": 5652
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.query-result.json",
+      "sha256": "386ba53376a415be81d4e5050ee5277e64a863487f1ce00b479fc0ac92039dcc",
+      "bytes": 374
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.seeds.tsv",
+      "sha256": "f9c2206c3a843d2a6f572b3113d0095a3f95b25f406660bda3ea5a726a45c1df",
+      "bytes": 30
+    },
+    {
+      "path": "research/artifacts/rea-tools/deeper-rea-20261012/zero-edge.synthetic.exe",
+      "sha256": "813d84f65240edc8654f19913c869be72c506f87d897840396994dff226312af",
+      "bytes": 4096
+    },
+    {
+      "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/Ghidra/application.properties",
+      "sha256": "e84c26b08545eee63d24a1a8a4dd7905e4209538e2e7192093877c435c64eb67",
+      "bytes": 659
+    },
+    {
+      "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/support/analyzeHeadless.bat",
+      "sha256": "dd7b9d17d32ed70a71df82a43a21cdaed6c4ce67064e30f8642c149f81c2ae07",
+      "bytes": 2930
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/bin/java.exe",
+      "sha256": "82051fdab26319d77d20cc0065045d05ec00b3e3d05f44935d7c06b96b621d55",
+      "bytes": 50304
+    },
+    {
+      "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/release",
+      "sha256": "07117c72ce033949c14878e07fbf2fe23f59a1f8c90a6d1351b5c89099847ce7",
+      "bytes": 1664
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/bridge/ghidra/ReaGhidraApplySeeds.java",
+      "sha256": "27892a70bf0fbc72d1edc9bf070ddb21268f8d0e4edea074164488e68f45d51a",
+      "bytes": 7109
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/bridge/ghidra/ReaGhidraBridge.java",
+      "sha256": "d6ff211cfb0cb6f062b434a060e631d9d10b8fb0a393d9a6dd0bdc982f670ae7",
+      "bytes": 184378
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/cli.js",
+      "sha256": "45b396850126152825ddc38472f65819db9fa515da4a7c3cd3d08e58efbf418b",
+      "bytes": 5259
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/cli/coreBinaryCommands.js",
+      "sha256": "f90f306a42743a5cd9379ce3e453dca6954293d3909b0ae83b97be05492696a5",
+      "bytes": 12685
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/cli/coreNativeCommands.js",
+      "sha256": "dabbeff7f52488b06db2be4cb4d45577d0f5127d2461c54ebb389ee9ebd3d6fa",
+      "bytes": 12987
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/analysisProfile.js",
+      "sha256": "9c813393b35bb53dbf4fabdcbbfc4add7980dd5db9f5eca5f0c84a7f02bdad08",
+      "bytes": 2056
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/canonicalDigest.js",
+      "sha256": "f46d6bd4dd94835504d71b396cd9e1b995e5eff7da17a618d374c48765be81d9",
+      "bytes": 3160
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/canonicalJsonDigestSteps.js",
+      "sha256": "2d09327e55445a7c0d991b8e29c8a0bf8aa9a4955b5e4ec383b3d46ba6e0ddb6",
+      "bytes": 5754
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/domain/evidence.js",
+      "sha256": "690dc0355ce8dd64417b8ebb1ebd4a06c6b5ece648eeb7caf6978638b880de39",
+      "bytes": 10418
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/ghidra/GhidraClientStartup.js",
+      "sha256": "4daf416f8febbd0d945b6c491d43552d7e2c974a8fe04c42e85903abd6a72565",
+      "bytes": 1130
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/dist/ghidra/GhidraProviderClient.js",
+      "sha256": "68d0d0d1de1bb7142d84a6b80fbb6c1d54d983c32dc687e59b24a747ada7fde5",
+      "bytes": 26536
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/native/windows/build/manifest.json",
+      "sha256": "fdebfabc6f594d17a532a81eda923b810bfc46560a4da0317d75a1378b5c7aee",
+      "bytes": 248
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/native/windows/build/rea-windows-x64.node",
+      "sha256": "c4fd9f377e567bcf15ba3fec3e0b0ed965d82b765a2adcdac49e46f14524b6d5",
+      "bytes": 848252
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/package.json",
+      "sha256": "1c6244e5689db5354fffc0e92f4ee0e0237c3a6d645de564ade2d8375fa570f9",
+      "bytes": 19538
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/scripts/rea.mjs",
+      "sha256": "3554288a08c455fa419dad662d73710fb17debe94b9e71dd1282761117c5981e",
+      "bytes": 3786
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/package-lock.json",
+      "sha256": "7890598bbb6eabfe07b14d8db923ffd00cccb16d9d6b16883d5f5219200dc6bc",
+      "bytes": 65457
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04",
+      "bytes": 739
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.ghidra.json",
+      "sha256": "fb52dbcd4d5a313f708131cdda527e6036ed515af399d6ff506abfa3d6bd75c3",
+      "bytes": 81628
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/native-code-map.json",
+      "sha256": "a39d2c19697df7ed7af8d7a09a9ed3e219ead3ec89f23779e2c25f753973a8dd",
+      "bytes": 3087
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/zero-edge.native-payload.bin",
+      "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+      "bytes": 982
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/brush-fill.native-payload.bin",
+      "sha256": "016b613a592e6f5cc18a7b6fc0d04264a9038c485fdb05b91c458464a59f0957",
+      "bytes": 1986
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/fill-iris.native-payload.bin",
+      "sha256": "405dcbec1b81b7ba2d1f44c7da4a89961eed17634ecd5b441071249743bcf00e",
+      "bytes": 1384
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/ghidra/brush-fill.ghidra.json",
+      "sha256": "9f8b5e32bf25ce9f817ed38b50d50915b72b3fc6c180bf579ff3f8ecec540a9d",
+      "bytes": 157021
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/ghidra/fill-iris.ghidra.json",
+      "sha256": "6ba1ae87282b65fbacc0e7c33e2c9b85ec5a630a15d0e682491b8083c98976c6",
+      "bytes": 109442
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-fill-native-code-seed1234-20261004-a/native-code/mapped/native-code-map.json",
+      "sha256": "9943211dbec574c5ad372cf52d9c218044ae12d6c0d54364ad9e1c8fcf302d53",
+      "bytes": 8544
+    },
+    {
+      "path": "research/introspection/rea-payload-analysis.md",
+      "sha256": "4d7de07bffd656b630d591cb299c23b1c33c0ce81af106670c6e38e8a3d2b29a",
+      "bytes": 9629
+    },
+    {
+      "path": "research/tools/derive-rea-payload-analysis-evidence.mjs",
+      "sha256": "437604f662db792e5b21b81bec30c4447f2fddd0638a9c9d28c2e336a6e3b459",
+      "bytes": 24167
+    },
+    {
+      "path": "research/tools/prepare-rea-payload-pe.mjs",
+      "sha256": "5d4bdeb8a2fb70c3f54e925f0969910ce0b5ce06b7259a45aab91748185b8624",
+      "bytes": 8168
+    }
+  ]
+}

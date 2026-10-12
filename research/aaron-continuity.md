@@ -9,8 +9,11 @@ conversation boundary.
 ## Latest checkpoint: 2026-10-12
 
 REA main has been fetched and the published 6.4.0 release installed beside
-3.2.1. The Ghidra doctor and real x86 launcher inspection pass; raw named PLL
-payloads still need standalone Ghidra. See [the update record](rea-update-20261011.md).
+3.2.1. The Ghidra doctor and real x86 launcher inspection pass. Headerless raw
+inputs remain unsupported, but exact ZERO-EDGE, BRUSH-FILL and FILL-IRIS PLL
+payloads now have successful REA dossiers through generated static x86 PE
+containers. See [the payload guide](introspection/rea-payload-analysis.md) and
+[the update record](rea-update-20261011.md).
 Use ignored `toolchain-current.json` for new REA work and retain the frozen
 historical `toolchain.json` for existing evidence. The hourly automation is
 confirmed absent; continuation is manual.
@@ -57,12 +60,20 @@ for a direct repeat. Guard bounds are adapter policy; wider maps/budgets,
 natural caller context, native cons representation and complete RNG purity
 remain open. The generator does not yet invoke this helper.
 
-Next: the user requested a deeper REA pass beyond launcher inspection.
-Investigate function dossiers/xrefs/decompilation for exact PLL payloads
-through explicitly derived static PE containers, preserving byte mappings
-and provider guards. Never execute a synthetic container or reuse its
-addresses for a live attach. Then return to BRUSH-FILL's row/iris schedule
-and value-0 painting boundary.
+The deeper REA pass completes: all three instruction sequences match the
+older raw Ghidra reports. The dossiers add 79/121/92 CFG blocks and
+387/952/671 untruncated p-code operations for ZERO-EDGE/BRUSH-FILL/FILL-IRIS.
+An actual ZERO-EDGE branch query resolves its local jump; the adjacent Lisp
+dispatch query remains unresolved. Independent portable derivations match
+across 70 source bindings. Generated headers, seeds and layout are analyst
+assertions; these inputs were never executed. No original-source, Lisp ABI
+or cross-object caller recovery is claimed.
+
+Next: use these dossiers to investigate BRUSH-FILL's row/iris schedule,
+including the four later LY-2 jumps and positive scans without PATCH-EDGE,
+then the value-0 painting boundary. Natural observers still require complete
+source-bound captures and fresh current-configuration controls. Never reuse
+archived static addresses for a live attach.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 
