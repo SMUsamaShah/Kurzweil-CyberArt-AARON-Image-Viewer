@@ -1,5 +1,9 @@
 # Next AARON execution plan
 
+Before local REA, oracle, or Git operations, use the central
+[tooling quick fixes](tooling-workarounds.md). The reusable REA wrapper sets
+the configured Ghidra/Java environment and retains query diagnostics.
+
 Prepared 2026-09-27; updated 2026-10-12. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 

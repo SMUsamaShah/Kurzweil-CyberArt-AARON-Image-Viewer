@@ -154,6 +154,13 @@ $exe = Join-Path $reaRoot 'brush-stroke.synthetic.exe'
 
 ## Retained inputs and reproduction
 
+For current Windows REA queries, prefer the repository wrapper
+[`invoke-rea-ghidra-query.ps1`](../tools/invoke-rea-ghidra-query.ps1). It loads
+`toolchain-current.json`, configures process-local Java/Ghidra variables,
+requires a fresh ignored output folder, and verifies the report's subject hash.
+See the [local tooling quick fixes](../tooling-workarounds.md) for the exact
+recovery path when the provider or user-profile permissions block a run.
+
 All complete reports, synthetic containers, seeds and command logs are ignored
 under `research/artifacts/rea-tools/deeper-rea-20261012/`.
 `synthetic-bindings.json` binds maps, PLL offsets, payloads and generated PE

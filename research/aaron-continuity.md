@@ -8,6 +8,11 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-12
 
+For local REA/Java, oracle, and Git permission recovery, start with the
+[tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and
+scoped elevation recipes there; do not rediscover these setup issues each
+session.
+
 REA main has been fetched and the published 6.4.0 release installed beside
 3.2.1. The Ghidra doctor and real x86 launcher inspection pass. Headerless raw
 inputs remain unsupported, but exact ZERO-EDGE, BRUSH-FILL and FILL-IRIS PLL
