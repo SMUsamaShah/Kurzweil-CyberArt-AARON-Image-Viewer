@@ -1,5 +1,35 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE holdout and JavaScript model, 2026-10-12
+
+[`zero-edge-holdout-20261012.json`](zero-edge-holdout-20261012.json) binds
+39 explicit calls across six map dimensions and larger ring budgets, with
+fresh controls s/v. It is 923,843 bytes, SHA-256
+`666ac6bee2b88b72b3db2a85eb89a5b360c2d8fc2eb78be4858f15bbddb701ce`.
+Independent derivations match; all 403 sources, the preceding 285-source
+matrix and native 56-source closure revalidate. Actual drawing/scene and
+all 12 runtime bytes match across s/t/u/v; no raw binaries are embedded.
+
+The holdout returns 27 proper lists and 12 NILs, with 167 returned points
+and nine START mutations; all scratch cells retain their input values.
+The post-call observer gate accepts complete metadata/output captures
+without requiring unchanged cells. Direction0's 9x11 ring at PERIM19/20
+returns 21-point lists, while direction2 returns NIL at 18/19/20. Full
+original maps/bindings and copied preview checks pass.
+
+The independent JS implementation matches all 199 matrix/holdout inputs:
+511 points, 95 lists, 104 NILs and 61 START mutations. Its Arrays retain
+the supplied START point identity. Native cons representation, intermediate
+call order, natural caller context and wider behavior remain open. See
+[the findings](../zero-edge-holdout.md).
+
+[`zero-edge-js-comparison-20261012.json`](zero-edge-js-comparison-20261012.json)
+is the independently reproduced implementation comparison: 101,076 bytes,
+SHA-256 `4e93422174d4c92e27c9316ac12fb9dc585b3a300f5ba586d933f6d6530c6b28`.
+It binds the module, comparator, helpers and published inputs, revalidates
+the 403-source closure, reproduces both published inputs byte-for-byte and
+computes both comparisons from observed inputs.
+
 ## ZERO-EDGE 160-input matrix, 2026-10-12
 
 [`zero-edge-input-matrix-20261012.json`](zero-edge-input-matrix-20261012.json)

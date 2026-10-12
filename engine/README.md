@@ -227,6 +227,26 @@ preserved while scanning. Original map history, scan schedule, MAX and form
 counts remain inputs. See
 [`../research/introspection/scan-row.md`](../research/introspection/scan-row.md).
 
+`aaron-zero-edge.js` exposes `traceAaronZeroEdge`, a bounded model for
+`ZERO-EDGE`, validated only against captured inputs and outputs. The
+portable-evidence comparison matches all 199 cases in the
+prior q-matrix and new holdout set: 511 returned points across 95 arrays, 104
+`null` results, and 61 `START.Z` mutations. The 39 holdouts contribute 27
+arrays, 12 `null` results, 167 points, and 9 mutations; all scratch maps remain
+unchanged. This confirms the model against those captured inputs and outputs.
+The adapter reads
+`fillMap[x * height + y]` from a `Uint8Array` representing four-bit cells and
+currently accepts at most 128 cells, `START.Z` from 0 through 7, and `PERIM`
+from 0 through 20. It returns `null` or a newest-first path of fresh points
+whose tail is the exact supplied `start` object; it mutates only `start.z` and
+does not expose RNG hooks. The 39 explicit native holdouts are recorded in
+[`../research/introspection/zero-edge-holdout.md`](../research/introspection/zero-edge-holdout.md),
+which also records the strict derivation and reproducible comparison commands.
+The JavaScript arrays do not establish native cons representation. Closure,
+helper call order, `PERIM` ordering, retry behavior, natural callers, full RNG
+purity, wider inputs, and general traversal or generator parity remain
+unresolved.
+
 `aaron-brush-fill-preparation.js` supplies `selectAaronBrushFillForm` and
 `prepareAaronBrushFillScan`. They project the original SCRIPT/CFLIST lists,
 preserve selected form identity and derive initial Y=TY, LX/RX/patch inputs

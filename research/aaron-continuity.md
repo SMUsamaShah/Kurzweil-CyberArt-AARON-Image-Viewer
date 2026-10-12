@@ -30,6 +30,40 @@ with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
 
+### ZERO-EDGE holdout and JavaScript model, 2026-10-12
+
+The 39-case follow-up completes in base t/ring u with fresh controls s/v.
+All four drawing/scene output files and all 12 runtime files match among
+the four runs. Original map/binding checks pass and copied previews remain
+(59,29,74). The strict portable evidence derives byte-identically in two
+independent executions with all 403 sources and the prior 285/native56
+closures revalidated. Read [the holdout findings](introspection/zero-edge-holdout.md)
+and [portable evidence](introspection/evidence/zero-edge-holdout-20261012.json).
+
+The holdout measures six map dimensions, relocated starts, a first-neighbor
+value change, and PERIM 18/19/20 on a 9x11 zero rectangle ring. At direction
+0, PERIM 18 returns NIL and 19/20 return proper 21-point lists; START.Z
+becomes 4 in all three. Direction 2 returns NIL and changes START.Z to 0
+at all three budgets. These are recorded outcomes, not intermediate traces.
+No scratch cell changes in the 39 cases.
+
+`engine/src/aaron-zero-edge.js` now computes the observed outputs from the
+supplied map, START and PERIM. All 199 matrix/holdout cases match in JS:
+511 returned points, 95 lists, 104 NILs and 61 START mutations. Successful
+JS Arrays retain the supplied START object at their tail; new points have
+distinct identities. The map remains unchanged. Use
+`research/tools/compare-zero-edge-evidence.mjs` on the two portable files
+for a direct repeat. Guard bounds are adapter policy; wider maps/budgets,
+natural caller context, native cons representation and complete RNG purity
+remain open. The generator does not yet invoke this helper.
+
+Next: the user requested a deeper REA pass beyond launcher inspection.
+Investigate function dossiers/xrefs/decompilation for exact PLL payloads
+through explicitly derived static PE containers, preserving byte mappings
+and provider guards. Never execute a synthetic container or reuse its
+addresses for a live attach. Then return to BRUSH-FILL's row/iris schedule
+and value-0 painting boundary.
+
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 
 The expanded matrix now completes all 160 explicit post-MAIN target calls:
@@ -47,8 +81,8 @@ The revised hypothesis returns NIL immediately on an out-of-bounds
 candidate, consistent with the frozen native branch. It now matches all
 160 recorded return/START/map/path/identity results in independent root and
 reviewer comparisons; the reviewer also compared six earlier samples.
-The intermediate steps remain inferred. Continue with a discriminating
-holdout over other dimensions, positions and longer path budgets.
+The intermediate steps remain inferred. The subsequent holdout above
+completes other dimensions, positions and longer path budgets.
 
 The strict portable evidence derives identically in two independent runs,
 with all 285 sources and the native 56-source closure revalidated. Read

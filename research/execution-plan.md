@@ -34,10 +34,22 @@ captured return/START/map/path/identity results; the intermediate steps
 remain inferred. The portable matrix derives byte-identically with 285
 source bindings and the native 56-source closure revalidated.
 
-Next: capture the discriminating holdout with other positions, budgets and
-dimensions, then implement the supported traversal in JavaScript. Promote
-only behavior that passes complete source-bound captures and fresh controls.
-Natural calls and general ZERO-EDGE/JS parity remain open.
+The subsequent 39-case holdout now completes with fresh controls s/v and
+independent byte-identical evidence derivations across 403 source bindings.
+It measures tiny/rectangular maps, relocated starts, first-neighbor values
+and larger PERIM. The 9x11 ring returns 21-point lists at direction0,
+PERIM19/20; direction2 returns NIL at all 18/19/20 budgets. The independent
+JS model now matches all 199 captured cases, including 511 returned points
+and 61 supplied-START mutations. See
+[the holdout findings](introspection/zero-edge-holdout.md).
+
+Next: follow the user's request for deeper REA use. Attempt function
+dossiers, cross references and decompilation on exact recovered PLL payloads
+in explicitly derived static PE containers with byte bindings and intact
+provider guards. Do not execute a synthetic input or claim analyst-assigned
+headers/addresses as original structure. Then continue the BRUSH-FILL
+row/iris schedule and value-0 painter. Natural caller context, intermediate
+helper traces and general ZERO-EDGE/JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

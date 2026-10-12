@@ -1,0 +1,2127 @@
+{
+  "schemaVersion": 1,
+  "kind": "zero-edge-js-source-bound-comparison-evidence",
+  "subjects": [
+    {
+      "role": "generator",
+      "path": "research/tools/derive-zero-edge-js-evidence.mjs",
+      "sha256": "a18e2350c23ac97ea39d87d32c2fc6905e614ec776c1b87720459c36a8fa79f8",
+      "bytes": 10177
+    },
+    {
+      "role": "engine module",
+      "path": "engine/src/aaron-zero-edge.js",
+      "sha256": "2c22491a57cdb5e2ba6f3f397ce400cfe7782550f7e9baecbd1d6d04ad51bf55",
+      "bytes": 6271
+    },
+    {
+      "role": "comparator",
+      "path": "research/tools/compare-zero-edge-evidence.mjs",
+      "sha256": "663c8b65266201c68b04ee2364ee749675bbbecb4af5141f93bb236c5f35bc90",
+      "bytes": 8535
+    },
+    {
+      "role": "holdout evidence deriver",
+      "path": "research/tools/derive-zero-edge-holdout-evidence.mjs",
+      "sha256": "cd6139513bad204aba646c7302c103697c3146f057bb9171e41feead25b4d508",
+      "bytes": 126698
+    },
+    {
+      "role": "matrix evidence deriver",
+      "path": "research/tools/derive-zero-edge-input-matrix-evidence.mjs",
+      "sha256": "1a54ef8397cf4847de2c969f088a76b543ce281d2c2c57f9431d0401d57b913f",
+      "bytes": 107242
+    },
+    {
+      "role": "published matrix evidence",
+      "path": "research/introspection/evidence/zero-edge-input-matrix-20261012.json",
+      "sha256": "1aaf0cf554a6d4e83bdbb21375eed66b88a0ff0499f6e13b43850598b7b903b8",
+      "bytes": 2936099
+    },
+    {
+      "role": "published holdout evidence",
+      "path": "research/introspection/evidence/zero-edge-holdout-20261012.json",
+      "sha256": "666ac6bee2b88b72b3db2a85eb89a5b360c2d8fc2eb78be4858f15bbddb701ce",
+      "bytes": 923843
+    }
+  ],
+  "sourceClosure": {
+    "matrixDeclarations": 285,
+    "holdoutDeclarations": 403,
+    "duplicateDeclarations": 285,
+    "uniqueSources": 403,
+    "currentBytesRevalidated": true,
+    "sourceHashes": [
+      {
+        "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/Ghidra/application.properties",
+        "sha256": "e84c26b08545eee63d24a1a8a4dd7905e4209538e2e7192093877c435c64eb67",
+        "bytes": 659
+      },
+      {
+        "path": "research/artifacts/rea-tools/ghidra_12.1.4_PUBLIC/support/analyzeHeadless.bat",
+        "sha256": "dd7b9d17d32ed70a71df82a43a21cdaed6c4ce67064e30f8642c149f81c2ae07",
+        "bytes": 2930
+      },
+      {
+        "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/bin/java.exe",
+        "sha256": "82051fdab26319d77d20cc0065045d05ec00b3e3d05f44935d7c06b96b621d55",
+        "bytes": 50304
+      },
+      {
+        "path": "research/artifacts/rea-tools/jdk-21.0.12.1+1/release",
+        "sha256": "07117c72ce033949c14878e07fbf2fe23f59a1f8c90a6d1351b5c89099847ce7",
+        "bytes": 1664
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleCommands.js",
+        "sha256": "e8c7f31cc64d589256f8903324e3088a8e395f6ec5487c415ca42e1e5db3c3d9",
+        "bytes": 2149
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceBundleFiles.js",
+        "sha256": "3171e7a656f43710c2ee0a38391751df87f21b3329c825ff4fa3d0a9928fda5e",
+        "bytes": 1430
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/application/EvidenceLedger.js",
+        "sha256": "2a63701c3cc5de15269e7e504ce3b33d6108b64dc1a50cc7d5fe94ee3a457a1e",
+        "bytes": 11902
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/cliEvidenceCommands.js",
+        "sha256": "4c6f9cd33303d53a5c5692343702ecec75633460a9130ff13e0bc538c77ec094",
+        "bytes": 2419
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/analysisProfile.js",
+        "sha256": "76d1b0c2a2f472ae201b77ef93db29c0901e3964538c864a8fe133ab407b65f8",
+        "bytes": 2059
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidence.js",
+        "sha256": "b277c68d4b619d38a2e9d7d1faed08b0200ee7b678044cf666367034ccfb3b89",
+        "bytes": 8050
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/dist/domain/evidenceBundle.js",
+        "sha256": "7bd7b066f0ed8c6a403d2c12feca0fa18eb1f3f9e1cef39f94224897f31a85ca",
+        "bytes": 12582
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/package.json",
+        "sha256": "b6b02de1d8740c73c622991b13fd8740185ff38f54b309f04a610921d3c8f411",
+        "bytes": 10943
+      },
+      {
+        "path": "research/artifacts/rea-tools/rea-3.2.1/node_modules/rea-agents/scripts/rea.mjs",
+        "sha256": "293fa0e5a2f55194964eb89f50296685ab14827c42cbdf5b72f82f4b867ffeef",
+        "bytes": 2549
+      },
+      {
+        "path": "research/artifacts/rea-tools/toolchain.json",
+        "sha256": "90efe732cbd6662bddeebd1170f99ea60a623fe193dcb8fe8470e18b6cb4e431",
+        "bytes": 460
+      },
+      {
+        "path": "research/extracted/aaron/application/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/aaron/application/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/aaron/application/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/aaron/application/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/aaron/application/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/aaron/application/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/aaron/application/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/aaron/application/license.dll",
+        "sha256": "5cefbbe4df65e5cf7544aa0a10cec62d2568e40868c6f4e7b8373020ddfcc54d",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/aaron/application/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/aaron/application/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/aaron/application/registry.dll",
+        "sha256": "6b69d623a3ba2da286d9f92bf90d0deda78593610308c90d4af61367a6169595",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/aaron/application/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/aaron/installer/AARON.msi",
+        "sha256": "b6e2e71743dc35eec790c82f3f3171f870af0014e6cdad10dd04096cf60850f5",
+        "bytes": 6411776
+      },
+      {
+        "path": "research/extracted/aaron/manifest.json",
+        "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+        "bytes": 2817
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/capture/aa0",
+        "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "bytes": 126956
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "bytes": 25951
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-control-seed1234-20261006-b/summary.json",
+        "sha256": "a3986fbe11a15a092ad78dcbfd0097df94829a047655213e3511c92c5b97bb82",
+        "bytes": 815
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aa0",
+        "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "bytes": 126956
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-brush-buffer-predicate-native-links.txt",
+        "sha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+        "bytes": 2216
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-native-code-release.txt",
+        "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d",
+        "bytes": 36
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-pre-scene-probe.cl",
+        "sha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+        "bytes": 8710
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-probe-loader.cl",
+        "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da",
+        "bytes": 162
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "bytes": 25951
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/foob.native-window.bin",
+        "sha256": "a9ec2634e9f9c07a816cb2152467c79324c9b88efe494f057b096fb23fbca8bf",
+        "bytes": 16384
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/function-object-metadata.txt",
+        "sha256": "7cbd1223581f45311c82b090c861040a8027318e8cc498b39d56221f31109d93",
+        "bytes": 2216
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/manifest.json",
+        "sha256": "bf4b41e9e2de8b94206bdbf87168749a0ebcb51d48b59d61d7258f5276f0619d",
+        "bytes": 1920
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/foob.native-payload.bin",
+        "sha256": "3576067de5650cf355e452e2a279b8ae4d8177b959d450bc3bcdd37d850c0d91",
+        "bytes": 298
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.ghidra.json",
+        "sha256": "33d220a02b488629ac38afed8841d6cadddff37a28878bb2234f6a96fc94f160",
+        "bytes": 27328
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.headless.log",
+        "sha256": "b33315a4a90edc2923ca6e051ac01b13a8557794fb5b67464f7555cca28f75a4",
+        "bytes": 8084
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-bundle.json",
+        "sha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+        "bytes": 36441
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-export.json",
+        "sha256": "919a9c9bc5456e4a82fc19c6fc1b15b795bd4a61fce552f1a745de9ed4797801",
+        "bytes": 36441
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/foob.rea-import.json",
+        "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+        "bytes": 57
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.ghidra.json",
+        "sha256": "fb52dbcd4d5a313f708131cdda527e6036ed515af399d6ff506abfa3d6bd75c3",
+        "bytes": 81628
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.headless.log",
+        "sha256": "cec30553e88123ce484490ede4ec0c20f2da38fe527622924876577ffd73d374",
+        "bytes": 8143
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-bundle.json",
+        "sha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+        "bytes": 99078
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-export.json",
+        "sha256": "5ed1d67dbb93717a40ae9e1ffa0d70cace89428d000985151fc031511cd5ebb9",
+        "bytes": 99078
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/ghidra/zero-edge.rea-import.json",
+        "sha256": "cc6f68ad3f0c07725cdb36da1eb66f7b0bba9d776ec29248f1bacaebadf92364",
+        "bytes": 57
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/native-code-map.json",
+        "sha256": "a39d2c19697df7ed7af8d7a09a9ed3e219ead3ec89f23779e2c25f753973a8dd",
+        "bytes": 3087
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/mapped/zero-edge.native-payload.bin",
+        "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+        "bytes": 982
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/native-code/zero-edge.native-window.bin",
+        "sha256": "562f56e6a50b09dfadfc18cd2dc25ee9d89c97478b0b0d2826e7f84ab31a84c6",
+        "bytes": 16384
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/pre-scene-probe-request.json",
+        "sha256": "1c18d0795fe752800448c43a98da52a887ca9093c3b23b42c2645d9d85544bb0",
+        "bytes": 503
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/brush-buffer-predicate-native-seed1234-20261006-a/summary.json",
+        "sha256": "6a82297fa1c2916c593860dfc58b16b9a142aeb76642f2ebc7ada539f4b95a00",
+        "bytes": 927
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/aaron-pre-scene-probe.cl",
+        "sha256": "7fca207e616164e6cc5bdea6041ffd84460cedb252f1195ce50e77d6b36f84d8",
+        "bytes": 76061
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/aaron-zero-edge-direction1.txt",
+        "sha256": "a1b1c5e758244568bd493c40de82e0c9a381a214c625c00af26b60a307796441",
+        "bytes": 21734
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/pre-scene-probe-request.json",
+        "sha256": "c684f6018abebdd820dabeb72ad29489e85805776656bde9d1b9fda8ff680939",
+        "bytes": 538
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/.clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/scene-state.json",
+        "sha256": "886047a9d1b3c095c551c16f48901203461c2f4f482ba50ada9bff31daf7c6d6",
+        "bytes": 90152
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-direction1-seed1234-20261012-l/summary.json",
+        "sha256": "98756f8438c0d0a3e1d6b9e86f6fdf7be6ce90500322c34407e5072e843a18cb",
+        "bytes": 995
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/aaron-pre-scene-probe.cl",
+        "sha256": "32418d4629c678a0248efb4168838175f4049890c7e46ce033396544db61ea8b",
+        "bytes": 87918
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/aaron-zero-edge-holdout-base-v1.txt",
+        "sha256": "970792f97a7525239870fce1cea12f135872b54ace619b330c92eb912466b426",
+        "bytes": 618609
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/pre-scene-probe-request.json",
+        "sha256": "0d3a1900db6bfd2a03b34914b48f255eba95a6a391218d8217fd6deae5a2a89f",
+        "bytes": 774
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/.clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/scene-state.json",
+        "sha256": "8612228349e4e27ba63a34f54d5c190b5f6066306c5608c7e2e43b52b66b8e7a",
+        "bytes": 90156
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-base-seed1234-20261012-t/summary.json",
+        "sha256": "c8a6dd67ce7557cabc45750c68e2004ced5cd69293fb493f73f854ac311e0f1a",
+        "bytes": 1269
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/scene-state.json",
+        "sha256": "87b36543f28ab3c4f2d9878e14e31ef78af7717fe3a5633fb04576f294ae88f6",
+        "bytes": 90174
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-after-seed1234-20261012-v/summary.json",
+        "sha256": "a8ab4c776cd8fd4c8761c3a972f2d119445bbc5a8b7a8924a65afcfb9702e034",
+        "bytes": 1086
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/scene-state.json",
+        "sha256": "5442c56917daa04b74654c032a24a46480b88a725acf0db71b41e940f81c0829",
+        "bytes": 90162
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-control-seed1234-20261012-s/summary.json",
+        "sha256": "a2d5cb985839647d66cafb3b7b6ca3ba4f797d26272770eb55e3530f102259a4",
+        "bytes": 1080
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/aaron-pre-scene-probe.cl",
+        "sha256": "070d7881ba88657ee70db5ea77e11e72eed003f1610f4be3610fc8e687bdf577",
+        "bytes": 86547
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/aaron-zero-edge-holdout-ring-v1.txt",
+        "sha256": "c188a9710bd573c905c5797014a9a47603a95dc501eb5cbdddfe8d2c925532b7",
+        "bytes": 147467
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/pre-scene-probe-request.json",
+        "sha256": "5e473f03c1c9c09d7b0a43ae7e6fef4323983e7ebbe98ecafde1079e70e513b3",
+        "bytes": 774
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/.clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/scene-state.json",
+        "sha256": "f7aed13ef0040047dfb47e465df07611dc9afa4e0e296d972b47a2d7395745e2",
+        "bytes": 90156
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-holdout-ring-seed1234-20261012-u/summary.json",
+        "sha256": "dd35f15f35d71e4b32ec79e1c3ad528c6d75c6bb0ddb457ab37f6f3ae82765e6",
+        "bytes": 1269
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/scene-state.json",
+        "sha256": "0b4d088e36a55e47869f49941b96bed9f911173dfcd96b81a23c2314deba7e34",
+        "bytes": 90170
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-after-seed1234-20261012-o/summary.json",
+        "sha256": "46452d585eee1b7dc78c204f4943ff203202d33bc937ebecfa9419e1efa9e8d8",
+        "bytes": 881
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/scene-state.json",
+        "sha256": "9bd0094956e564b25df31c20abe951e4f6eabc42ad7b6505e5bb9e8283bb2ddd",
+        "bytes": 90158
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-input-control-seed1234-20261012-k/summary.json",
+        "sha256": "2ed25fd8f71124b12309f0d9e0994e61bb3902c00d6c00c8de34b1b1d2e1143d",
+        "bytes": 875
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/aaron-pre-scene-probe.cl",
+        "sha256": "c62401a46b2f08fbafe9f66c8f4e66c0bc20f123c9fdd806535032ded3fa01d4",
+        "bytes": 76524
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/aaron-zero-edge-mapcell1.txt",
+        "sha256": "d4817358fe742b27c5623e87febc5845b04a0507f20cce0bdcf48f0bbfcfc855",
+        "bytes": 20205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/pre-scene-probe-request.json",
+        "sha256": "8e14a974d3287ec6b0055e889037e2a817f18aac0dbfdeaf4ca58ea069736182",
+        "bytes": 532
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/.clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/scene-state.json",
+        "sha256": "ad3ae50c3ef27d5d927e16712665a9571978c12397ee5ef71ad0df815037e1e3",
+        "bytes": 90148
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-mapcell1-seed1234-20261012-n/summary.json",
+        "sha256": "c281c25542f17965d4194528e6180bff7dba49d4c054ba3e9e6216ac14d23662",
+        "bytes": 991
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/scene-state.json",
+        "sha256": "842464478729603c2e62b933fa7677fe8182e22e5220070ee28f9e0993b29df1",
+        "bytes": 90172
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-after-seed1234-20261012-r/summary.json",
+        "sha256": "cdffa554c02fe1a7ded98fd51bc9f6dd66a41fe37fc49652f9e6e85a16ab679a",
+        "bytes": 1085
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/.clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/clinit.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/scene-state.json",
+        "sha256": "38763ec0b677ed09b98cf4ed25e9048592632135c30407f7cd5a5165857ae1af",
+        "bytes": 90160
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-control-seed1234-20261012-p/summary.json",
+        "sha256": "4a45a9ee81a9bb9bea3076eb7a7a8ffaad247361df533ab2edde169f08ed80f2",
+        "bytes": 1079
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/aaron-pre-scene-probe.cl",
+        "sha256": "70ece663045eb5d852aef397d348f63ede577f95ba0d9d7f2d0ade0520772612",
+        "bytes": 81556
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/aaron-scene-state-snapshot.txt",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/aaron-zero-edge-input-matrix-v2.txt",
+        "sha256": "4e06a2f1c030efeb5cbd0001a60467c22a43cc44ad44c5736e8f1dfca7b8bbba",
+        "bytes": 2831887
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/capture/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/pre-scene-probe-request.json",
+        "sha256": "308d362704ddba3435049fbabfc538c8a394c75d38cf1ec6e5bbb51712958a1e",
+        "bytes": 762
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/.clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/AARON.dxl",
+        "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74",
+        "bytes": 5373952
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/AARON.exe",
+        "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "bytes": 36864
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/AARON_ScreenSaver.scr",
+        "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c",
+        "bytes": 245760
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/UserDocumentation.html",
+        "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562",
+        "bytes": 17232
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/aaron-probe-loader.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/acl5016.dll",
+        "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292",
+        "bytes": 344064
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/clinit.cl",
+        "sha256": "e42294d3c75722476943714292663ef738fb33ca7ddb405d99bc4977c441d94f",
+        "bytes": 161
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/ktiCompress.dll",
+        "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce",
+        "bytes": 131072
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/license.dll",
+        "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "bytes": 196608
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/mfc42.dll",
+        "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9",
+        "bytes": 995383
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/msvcirt.dll",
+        "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255",
+        "bytes": 77878
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/registry.dll",
+        "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "bytes": 290816
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/runtime/upload.dll",
+        "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c",
+        "bytes": 405504
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/scene-state.json",
+        "sha256": "608fb8a2df7baa4e24e4ef13ffb89628080cbc1c30823c96b2fc758e846c6159",
+        "bytes": 90144
+      },
+      {
+        "path": "research/extracted/local-oracle/zero-edge-matrix-seed1234-20261012-q/summary.json",
+        "sha256": "ec78405854a51f89adee3698cf075afd10ae1100b7b149840b52a3fc46f9f6c8",
+        "bytes": 1263
+      },
+      {
+        "path": "research/introspection/brush-buffer-predicate-native-links.cl",
+        "sha256": "2818c50d2028dbea16d5d8100c9c45c4707662124a084ec668b28653bf4d6ae6",
+        "bytes": 8710
+      },
+      {
+        "path": "research/introspection/evidence/brush-buffer-predicate-native-20261006.json",
+        "sha256": "d6ffe3fa63958b79ea14199c098f121f3d4d3ce94d68cc3aa010ac750f28f0f4",
+        "bytes": 31372
+      },
+      {
+        "path": "research/introspection/planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "path": "research/introspection/scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "path": "research/introspection/scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "path": "research/introspection/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "path": "research/introspection/scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      },
+      {
+        "path": "research/introspection/zero-edge-direction1.cl",
+        "sha256": "7fca207e616164e6cc5bdea6041ffd84460cedb252f1195ce50e77d6b36f84d8",
+        "bytes": 76061
+      },
+      {
+        "path": "research/introspection/zero-edge-holdout-base-v1.cl",
+        "sha256": "32418d4629c678a0248efb4168838175f4049890c7e46ce033396544db61ea8b",
+        "bytes": 87918
+      },
+      {
+        "path": "research/introspection/zero-edge-holdout-cases-20261012.json",
+        "sha256": "25d70f8ea33dd87ba9e92e14120114c40f542bcaba8225452424a0f6a1b95c72",
+        "bytes": 49758
+      },
+      {
+        "path": "research/introspection/zero-edge-holdout-ring-v1.cl",
+        "sha256": "070d7881ba88657ee70db5ea77e11e72eed003f1610f4be3610fc8e687bdf577",
+        "bytes": 86547
+      },
+      {
+        "path": "research/introspection/zero-edge-input-cases-20261012.json",
+        "sha256": "a17031aea65d47fba3d847c5049a5b293c842c3ccdc13a2fe880a452cbe9a92f",
+        "bytes": 9496
+      },
+      {
+        "path": "research/introspection/zero-edge-input-matrix-v2.cl",
+        "sha256": "70ece663045eb5d852aef397d348f63ede577f95ba0d9d7f2d0ade0520772612",
+        "bytes": 81556
+      },
+      {
+        "path": "research/introspection/zero-edge-mapcell1.cl",
+        "sha256": "c62401a46b2f08fbafe9f66c8f4e66c0bc20f123c9fdd806535032ded3fa01d4",
+        "bytes": 76524
+      },
+      {
+        "path": "research/oracle/planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "sha256": "1fe4546ea847bd31b28b2bcbab6228356b7f44ea8d61bde006ccbad58c788ec9",
+        "bytes": 27295
+      },
+      {
+        "path": "research/oracle/run-local-scene-state.ps1",
+        "sha256": "6a99f345d92568584bc3d2fe48b85aa7c0c3c6fb6045308fba64bfbdfef7711b",
+        "bytes": 25088
+      },
+      {
+        "path": "research/tools/capture-aaron-native-code.ps1",
+        "sha256": "3407b9a60b6b5c66397197ac6026b0c4013b3cbd42f7b5f08400c7b6595d641a",
+        "bytes": 8189
+      },
+      {
+        "path": "research/tools/derive-brush-buffer-predicate-native-evidence.mjs",
+        "sha256": "75c581a731b19042c650f8fe6ae852af5745e129277cda9ade16c009c0792836",
+        "bytes": 49900
+      },
+      {
+        "path": "research/tools/derive-brush-stroke-native-evidence.mjs",
+        "sha256": "745e1fc1db2c3f7abd2a229cfd63c6567b0708a8eb255fc6019b2452e184b97d",
+        "bytes": 26930
+      },
+      {
+        "path": "research/tools/derive-zero-edge-holdout-evidence.mjs",
+        "sha256": "cd6139513bad204aba646c7302c103697c3146f057bb9171e41feead25b4d508",
+        "bytes": 126698
+      },
+      {
+        "path": "research/tools/derive-zero-edge-input-evidence.mjs",
+        "sha256": "94d08a4774a4ebe5ecfdc76442114d98ef8c348e17e5238057c5e1b27f31ca82",
+        "bytes": 124487
+      },
+      {
+        "path": "research/tools/derive-zero-edge-input-matrix-evidence.mjs",
+        "sha256": "1a54ef8397cf4847de2c969f088a76b543ce281d2c2c57f9431d0401d57b913f",
+        "bytes": 107242
+      },
+      {
+        "path": "research/tools/ghidra/AaronNativeReport.java",
+        "sha256": "63e268a025e1ff3225f10baa8d2acc0a2f3669b58206c27a6c67be22d55e2fbc",
+        "bytes": 5753
+      },
+      {
+        "path": "research/tools/index-allegro-image.mjs",
+        "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee",
+        "bytes": 41726
+      },
+      {
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+        "bytes": 5906
+      },
+      {
+        "path": "research/tools/parse-natural-free-path-report.mjs",
+        "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee",
+        "bytes": 20265
+      },
+      {
+        "path": "research/tools/parse-scene-state-report.mjs",
+        "sha256": "7147c45594768e1d71b0a4d043f3267c51e485c18f2bbb69257d5e0f145be366",
+        "bytes": 19546
+      },
+      {
+        "path": "research/tools/patch-license-user-registry.ps1",
+        "sha256": "4e646208f3e3e86c53becee20ca8ec6fd2c422760c0e2cd874c0e4b49dd41698",
+        "bytes": 2319
+      },
+      {
+        "path": "research/tools/patch-registry-running.ps1",
+        "sha256": "427fbf93dd8031b407ebd5a63693327f980f54beb053a198a11019a194a49ea8",
+        "bytes": 5781
+      },
+      {
+        "path": "research/tools/rea-evidence-bundle.mjs",
+        "sha256": "81bd072f7959655bf80ef3ecf240ec08f30ecbe85344a8f8941d9ea33752e601",
+        "bytes": 14465
+      },
+      {
+        "path": "research/tools/run-aaron-ghidra.ps1",
+        "sha256": "0a9fed5e071a59d5818ca6ade10f4d3b0164d9cccb83f63173a6602310f0767d",
+        "bytes": 3269
+      }
+    ]
+  },
+  "matrixReproduction": {
+    "deriver": "research/tools/derive-zero-edge-input-matrix-evidence.mjs",
+    "exactPublishedBytesMatch": true,
+    "derivedSourceCount": 285
+  },
+  "holdoutReproduction": {
+    "deriver": "research/tools/derive-zero-edge-holdout-evidence.mjs",
+    "exactPublishedBytesMatch": true,
+    "derivedSourceCount": 403
+  },
+  "comparisons": [
+    {
+      "name": "matrix",
+      "evidence": {
+        "path": "research/introspection/evidence/zero-edge-input-matrix-20261012.json",
+        "sha256": "1aaf0cf554a6d4e83bdbb21375eed66b88a0ff0499f6e13b43850598b7b903b8",
+        "bytes": 2936099
+      },
+      "comparedCases": 160,
+      "returnedPoints": 344,
+      "nilReturns": 92,
+      "listReturns": 68,
+      "mutatedStarts": 52,
+      "dimensions": [
+        "7x7"
+      ],
+      "mismatches": 0
+    },
+    {
+      "name": "holdout",
+      "evidence": {
+        "path": "research/introspection/evidence/zero-edge-holdout-20261012.json",
+        "sha256": "666ac6bee2b88b72b3db2a85eb89a5b360c2d8fc2eb78be4858f15bbddb701ce",
+        "bytes": 923843
+      },
+      "comparedCases": 39,
+      "returnedPoints": 167,
+      "nilReturns": 12,
+      "listReturns": 27,
+      "mutatedStarts": 9,
+      "dimensions": [
+        "1x1",
+        "2x3",
+        "5x7",
+        "7x5",
+        "7x7",
+        "9x11"
+      ],
+      "mismatches": 0
+    }
+  ],
+  "scope": {
+    "representation": "Observed NIL maps to null; observed point lists are represented by JS Arrays retaining the supplied START object at the tail.",
+    "limits": "Finite captured inputs/results only. Native cons-cell representation, intermediate helper order, RNG purity, natural callers and general traversal behavior are not established."
+  }
+}
