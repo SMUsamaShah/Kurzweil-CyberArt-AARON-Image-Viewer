@@ -1,5 +1,24 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE 160-input matrix, 2026-10-12
+
+[`zero-edge-input-matrix-20261012.json`](zero-edge-input-matrix-20261012.json)
+binds all 160 explicit post-MAIN calls in q, fresh controls p/r and the
+required-END runner. It is 2,936,099 bytes, SHA-256
+`1aaf0cf554a6d4e83bdbb21375eed66b88a0ff0499f6e13b43850598b7b903b8`.
+Independent derivations match; all 285 sources and the frozen native
+56-source closure revalidate. Actual drawing/scene and all 12 runtime
+files match across p/q/r; the artifact retains hashes and lengths rather
+than binary bytes.
+
+The matrix returns 68 proper lists and 92 NILs, with full point/cons
+identities, START mutations and all 49 input/output scratch cells retained.
+Scratch cells do not change; 52 START vectors do. Original full-map and
+binding checks pass, and copied previews stay (59,29,74). A revised
+hypothesis with immediate NIL on out-of-bounds candidates matches all 160
+recorded results; intermediate order and wider domains remain inferred.
+See [the findings](../zero-edge-input-matrix.md).
+
 ## ZERO-EDGE direction and one-cell inputs, 2026-10-12
 
 [`zero-edge-inputs-20261012.json`](zero-edge-inputs-20261012.json) binds two

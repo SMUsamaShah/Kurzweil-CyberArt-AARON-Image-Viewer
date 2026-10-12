@@ -296,6 +296,20 @@ the exact installation error is not captured. That tape is diagnostic only.
 The replacement observes complete natural function boundaries without that
 primitive hook. An archived partial report is not a staging-permission failure.
 
+For new long post-MAIN captures, use the separate
+[`run-local-scene-state-required-probe.ps1`](oracle/run-local-scene-state-required-probe.ps1)
+runner. It retains the historical runner's staging, registry/environment
+restoration and cleanup. Every optional probe must declare both
+`-RequiredProbeOutputName` (also in `-ProbeOutputNames`) and
+`-RequiredProbeEndMarker`. It waits for the drawing, scene and case-sensitive
+terminal probe END line, then rechecks the archived terminal line. Requests
+and summaries bind the runner hash and required marker. Uninstrumented
+controls use the same new runner with no optional probe. Use a fresh root and
+the supported 600-second watchdog when needed. The END check does not validate
+the observer's counters, state, errors or truncation; its strict offline
+parser must still reject incomplete cases. Keep the historical runner frozen
+for existing published source closures.
+
 The ZERO-EDGE contract investigation has three excluded attempts: v1's
 serializer scope errors, v2's changed painting despite zero errors, and v3's
 incomplete MAIN installer despite matching painting/scene bytes. Frozen v4

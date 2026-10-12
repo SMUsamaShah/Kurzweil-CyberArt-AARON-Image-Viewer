@@ -19,13 +19,25 @@ original-state/controls k/o checks. The immutable-specification portable
 evidence rebuilds identically with 199 sources. See
 [the input findings](introspection/zero-edge-inputs.md).
 
-Next: the proposed 136-case matrix (40 direction/budget zero-map cases,
-64 picture-edge cases and 32 simple-shape cases). Fresh START/scratch per
-case, full original baseline checks, complete returned points/identities,
-copied previews and own COMPLETE/END are required. Prepare a separate
-required-footer harness because the old runner can stop post-MAIN probes
-before they finish. The candidate algorithm remains a hypothesis; no matrix
-outcome or general JS parity has been established.
+The expanded 160-case matrix now completes in q: 40 direction/budget
+zero-map cases, 64 picture-edge cases and 56 shape/value cases. Fresh
+START/scratch objects, complete returned points/identities, all original
+map/binding checks, copied previews and own COMPLETE/END pass. Fresh
+controls p/r match all four actual output files. The separate required-END
+runner prevents stopping a post-MAIN observer before its terminal marker.
+See [the matrix findings](introspection/zero-edge-input-matrix.md).
+
+The 40 final START-direction differences are resolved in a revised
+hypothesis: FOOB outside returns NIL immediately. Its frozen native branch
+supports that early exit. Independent comparisons now match all 160
+captured return/START/map/path/identity results; the intermediate steps
+remain inferred. The portable matrix derives byte-identically with 285
+source bindings and the native 56-source closure revalidated.
+
+Next: capture the discriminating holdout with other positions, budgets and
+dimensions, then implement the supported traversal in JavaScript. Promote
+only behavior that passes complete source-bound captures and fresh controls.
+Natural calls and general ZERO-EDGE/JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

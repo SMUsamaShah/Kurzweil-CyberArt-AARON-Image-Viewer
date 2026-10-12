@@ -30,6 +30,39 @@ with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
 the BRUSH-FILL row/iris schedule and value-0 painter.
 
+### ZERO-EDGE 160-input matrix, 2026-10-12
+
+The expanded matrix now completes all 160 explicit post-MAIN target calls:
+40 center direction/budget inputs, 64 boundary inputs and 56 shape/value
+inputs. There are 68 proper-list returns and 92 NIL returns. Every scratch
+map retains all 49 input cells; original bindings and both full original
+maps pass all boundary checks. Copied previews stay at (59,29,74). Fresh
+uninstrumented controls p/r bracket q and all four drawing/scene output
+files are byte-identical. Read [the matrix findings](introspection/zero-edge-input-matrix.md).
+
+The first candidate agrees with return paths/identities/maps but has 40
+incorrect final START directions in boundary NIL cases. Ordinal 42 returns
+NIL with START (0,0,1) changed to (0,0,5), versus the candidate's (0,0,6).
+The revised hypothesis returns NIL immediately on an out-of-bounds
+candidate, consistent with the frozen native branch. It now matches all
+160 recorded return/START/map/path/identity results in independent root and
+reviewer comparisons; the reviewer also compared six earlier samples.
+The intermediate steps remain inferred. Continue with a discriminating
+holdout over other dimensions, positions and longer path budgets.
+
+The strict portable evidence derives identically in two independent runs,
+with all 285 sources and the native 56-source closure revalidated. Read
+[the portable matrix](introspection/evidence/zero-edge-input-matrix-20261012.json).
+The artifact is 2,936,099 bytes, SHA-256
+`1aaf0cf554a6d4e83bdbb21375eed66b88a0ff0499f6e13b43850598b7b903b8`.
+It contains observed cases and artifact hashes/lengths, with no raw binaries.
+
+The separate required-END runner binds its hash and terminal marker and
+waits for the observer's own END as well as drawing/scene completion.
+Matrix v1 was never run because its acceptance lacked baseline-stable RNG
+gates; captured v2 fixes them. Retain both sources and the historical runner.
+The earlier proposed 136 inputs were expanded before execution.
+
 ### ZERO-EDGE direction and one-cell inputs, 2026-10-12
 
 Two separate PERIM 3 calls now measure a second START direction and one
@@ -46,11 +79,11 @@ both independent derived outputs match, with all 199 sources and the native
 56-source baseline revalidated. See
 [portable evidence](introspection/evidence/zero-edge-inputs-20261012.json).
 These observations fit a provisional direction/map/budget model but do not
-recover its intermediates or general behavior. Next capture the proposed
-136-case matrix across directions, budgets, picture edges and simple map
-shapes, with fresh objects/maps and full state checks. Use a separate
-required-END harness for its post-MAIN observer; retain the old runner and
-all published closures unchanged. No matrix outcome has been captured yet.
+recover its intermediates or general behavior. The subsequent 160-case
+matrix above completes the direction/budget/boundary/shape follow-up and
+exposes and resolves a final supplied-point mutation difference in the first
+candidate for these observed inputs.
+All earlier published source closures remain unchanged.
 
 ### ZERO-EDGE positive PERIM samples, 2026-10-11
 
