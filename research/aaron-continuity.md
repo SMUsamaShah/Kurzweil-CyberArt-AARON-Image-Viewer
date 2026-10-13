@@ -13,21 +13,25 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-14
 
-The first natural FREE-PATH caller is now captured in a complete source-bound
+The first natural FREE-PATH caller is captured in a complete source-bound
 320×480 triplet: it returns to `DRAW-CFORM+0x167`, immediately after computed
 `CALL EDI` at `+0x165`. The dynamic target and broader call graph remain
-unresolved. The v8 controlled stop-boundary triplet then measured a vertical
-0.2 single-float edge at seed 150415: the original consumed 12 of 14 steps,
-while current JavaScript consumed 13. Local step-sum/source-to-emitted
-predictions were 13; step-times-wiggle predicted 12. This is one bounded
-discriminator, not a recovered general stop rule. Across eight isolated
-one-edge cases JS matches four and differs by one step in four. The 40-case
-matrix remains 26/30 matches, 4 mismatches, 10 unclassified. No contract count
-or whole-painting result changes. See
-[`v8 evidence`](introspection/evidence/free-path-stop-boundary-20261014-v8.json),
+unresolved. Controlled v8 and v9 triplets then measured the same vertical
+0.2 single-float edge at seeds 150415 and 46380. Both original runs selected
+14 steps and consumed 12; JS consumed 13 in each. The local step-sum candidate
+predicts 13/13, source-to-emitted predicts 13/12, and step-times-wiggle
+predicts 12/12. Only the last matches both observed counts, but these are
+finite local replays, not a recovered general rule. The captures used 320×480
+and 768×1080 scenes respectively. Across nine isolated one-edge cases, JS
+matches four and differs by one step in five. The canonical matrix remains
+26/30 matches, 4 mismatches, 10 unclassified. Counts remain 30 routine names /
+31 bounded contracts, 1/5 milestones (20% by count), and zero whole-painting
+parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-20261014-v8.json),
+[v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json),
 [FREE-PATH findings](introspection/free-path-native.md), and the active
-[execution plan](execution-plan.md). The next offline discriminator is seed
-46380 on the same typed vertical 0.2 edge; its original result is unknown.
+[execution plan](execution-plan.md). The next target is one natural
+`SCREEN-AND-STORE`/`PREP-LINE` drawing unit, capturing caller path, color/brush,
+RNG, map state, and its complete writer subtrace.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

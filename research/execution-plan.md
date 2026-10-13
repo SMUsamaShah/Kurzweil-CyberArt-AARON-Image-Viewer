@@ -426,17 +426,14 @@ but the JS replay computes its own random values. An explicit per-edge type
 decision resolves mixed single/double inputs. A new retained regression case
 checks all three paths independently of the ignored raw capture.
 
-**Current gate:** the FREE-PATH distance-stop boundary is still unresolved.
+**Current gate:** the FREE-PATH distance-stop boundary remains unresolved.
 JavaScript matches the three natural seed-1234 calls and one seed-5678 holdout.
-Across eight controlled one-edge cases, it matches four and differs by one
-iteration in four. The latest v8 seed-150415 vertical single-float case
-selected 14 steps and consumed 12 in the original versus 13 in JavaScript.
-Step-sum and source-to-emitted-point predict 13; step-times-wiggle predicts
-12. This separates those local candidates for this input only and does not
-establish a general rule. The next offline candidate is seed 46380 on the same
-edge: step-sum predicts 13, source-to-emitted-point and step-times-wiggle
-predict 12. Do not widen the implementation before the next source-bound
-capture and comparison.
+Across nine controlled one-edge cases, it matches four and differs by one
+iteration in five. The v8/v9 vertical single-float cases selected 14 steps and
+consumed 12 in the original versus 13 in JavaScript. Step-sum predicts 13/13,
+source-to-emitted predicts 13/12, and step-times-wiggle predicts 12/12. Only
+the last matches both observed counts, but this finite local replay does not
+establish a general rule. Do not widen the implementation from these samples.
 
 The first boundary matrix now contains 40 complete direct calls over 20 input
 shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
@@ -653,22 +650,23 @@ leave the computed call target unresolved. The writer-replay milestone remains
 achieved; do not restart it unless a specific new mismatch makes that evidence
 relevant.
 
-The next target is the unresolved FREE-PATH distance-stop boundary. The v8
-source-bound 320×480 triplet uses seed 150415 on one vertical length-0.2
-single-float edge. The original consumes 12 of 14 selected steps and current
-JavaScript consumes 13; local step-sum/source-to-emitted predictions are 13,
-and step-times-wiggle predicts 12. The observer and all five drawing/scene
-outputs and six sources pass the fresh triplet checks, including matching
-runner/installer/registry/license patch hashes. This adds no general rule and
-keeps the total at eight isolated cases, four JS matches and four one-step
-mismatches.
+The v9 seed-46380 FREE-PATH discriminator is complete. Its 768×1080 source-
+bound triplet and all controls passed; the original selected 14 steps and
+consumed 12, while JS consumed 13. Across v8 and v9, three local candidate
+signatures are 13/13 (step-sum), 13/12 (source-to-emitted), and 12/12
+(step-times-wiggle), leaving only the last consistent with the two captured
+counts. This is not an observed internal variable or general stop rule. Across
+nine isolated cases, JS matches four and differs by one step in five. See the
+[v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
+and [FREE-PATH findings](introspection/free-path-native.md).
 
-The next offline candidate is seed 46380 on the same typed edge. Local replay
-predicts selected=14, step-sum=13, source-to-emitted-point=12, and
-step-times-wiggle=12, all uncapped. Paired with v8, these three models have
-distinct two-case signatures; the original result remains unknown. Capture
-this one case in a fresh source-bound before/observer/after triplet. Preserve
-the exact Lisp numeric types, require complete report lifecycle and matching
-runtime patch hashes, and compare random-call sequence, returned points, input
-values, and next-random checkpoint. The existing 40-case matrix has already
-been compared offline; do not repeat it or widen JavaScript to fit one case.
+The next target advances the incomplete scene-decision milestone: one natural
+`SCREEN-AND-STORE`/`PREP-LINE` drawing unit. Use a source-bound before/observer/
+after triplet with a fresh scene control. Capture the actual caller path and
+call/parent IDs, path inputs, brush/color/visibility and map context, RNG
+boundary, and full writer subtrace. Compare the complete writer byte range and
+relevant state changes in JavaScript; validate a second natural call or an
+independent holdout. Existing fixtures cover point-to-writer emission for the
+first eight units at two seeds, but not upstream color decisions, screen-unit
+RNG use, or map effects. If the path remains supplied because FREE-PATH is
+unresolved, label that dependency and do not claim milestone completion.

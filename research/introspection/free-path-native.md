@@ -341,12 +341,45 @@ serial capture helper is
 and the strict evidence deriver is
 [`derive-free-path-stop-boundary-v8-evidence.mjs`](../tools/derive-free-path-stop-boundary-v8-evidence.mjs).
 
-The next offline candidate keeps the same edge types and geometry at seed
-46380. Local replay selects 14 and predicts step-sum=13,
-source-to-emitted-point=12, and step-times-wiggle=12, all uncapped. Paired with
-v8, these three models have distinct two-case prediction signatures. The
-seed's original consumption is still unknown; treat it as a candidate for a
-fresh complete triplet, not as measured behavior.
+The next seed-46380 case is now measured in v9 below.
+
+## Seed-46380 discriminator, v9
+
+The next fresh `writer-stream-seed-1234` before/observer/after triplet ran at
+768×1080. All summaries are complete and serial, with matching runner,
+installer, registry-patch, license-patch, and `smallImage=false` settings.
+The archived probe matches the checked-in source and has ordered install,
+ready, hook, complete, and end records. Five drawing/scene outputs and six
+ordinary staged Lisp sources match. As in v8, only the observer planning
+trace differs, because it includes diagnostic targets.
+
+At the first traced `STORE-IN-FILE` exit (depth 7), the probe ran one controlled
+edge `((0 0 0) (0 0.2f0 1))` at seed 46380 with point types
+`((FIXNUM FIXNUM FIXNUM) (FIXNUM SINGLE-FLOAT FIXNUM))` and a `SINGLE-FLOAT`
+`XYDIST` result. The original selected 14 steps and consumed 12, returned 15
+points, made 37 `RAN` calls, and left next random value 74663. Local Float32
+replay predicts 13 for step-sum, 12 for source-to-emitted-point, and 12 for
+step-times-wiggle. This case rejects step-sum among those candidates but
+cannot distinguish the other two.
+
+JavaScript consumes 13 steps, returns 16 points, makes 40 calls, and leaves
+next random value 46118, so bounded parity fails. The probe checks input values
+at single-precision comparison only; point identity and list structure remain
+unobserved. Paired with v8, the original consumed 12 of 14 selected steps in
+both cases. The three local candidate signatures are step-sum 13/13,
+source-to-emitted 13/12, and step-times-wiggle 12/12. Thus only the last is
+consistent with both observations. These local formulas do not expose the
+original internal variables, and the two samples—captured at different scene
+sizes—do not establish a general stop rule.
+
+Across nine isolated one-edge cases, JS matches four and differs by one step
+in five. The separate 40-case canonical subset remains 26/30 matches, four
+mismatches, and ten unclassified. No new behavior contract or milestone is
+claimed. Portable evidence SHA-256 is
+`41d2906cb7bd955b20a4f40617b5a3a78abf460cff87d1b2c51481c6aa5c7886`.
+See [`free-path-stop-boundary-20261014-v9.json`](evidence/free-path-stop-boundary-20261014-v9.json),
+the [probe](free-path-stop-boundary-v9.cl), [serial capture helper](../tools/capture-free-path-stop-boundary-v9.ps1),
+and [strict evidence deriver](../tools/derive-free-path-stop-boundary-v9-evidence.mjs).
 
 ## Reproduction
 

@@ -12,7 +12,7 @@ recovered behavior.
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |
 | Routines with documented, bounded JS/original comparisons | 30 routine names; 31 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, plus the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters. These are limited contracts, not 30 general-purpose source reconstructions. |
 | FREE-PATH boundary-matrix comparison | 26 of 30 directly comparable cases match; 4 mismatch; 10 unclassified | Finite source-bound calls only. Eight noncanonical index cases and two signed-zero cases are unclassified; this is not a project completion percentage. |
-| FREE-PATH isolated one-edge stop cases | 8 captured cases; JS matches 4 and differs by one step in 4 | Controlled inputs only. The latest case separates local candidates but does not recover a general rule. |
+| FREE-PATH isolated one-edge stop cases | 9 captured cases; JS matches 4 and differs by one step in 5 | Controlled inputs only. Of the three local candidates, only step-times-wiggle matches both v8/v9 counts; this does not establish a general rule. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
 | REA 6.4 static native payload dossiers | 6 named payloads | Structured native-code analysis; not six recovered Lisp functions, verified ABIs, or application-wide call graphs. |
@@ -41,7 +41,7 @@ stream from original-supplied decisions; it does not generate those decisions.
 Four milestones remain incomplete or not yet achieved. This does not mean 80%
 of the work or elapsed time remains.
 
-## Latest function investigation
+## IN-SUB-FRAME bounded predicate investigation
 
 The bounded integer `IN-SUB-FRAME` predicate now has JS/original comparisons
 through two natural call families: 296,912 ordered checks in 70 value-3 brush
@@ -292,6 +292,44 @@ remain 30 routine names / 31 bounded contracts, milestone progress remains
 [native findings](introspection/free-path-native.md), the
 [capture helper](tools/capture-free-path-stop-boundary-v8.ps1), and the
 [evidence deriver](tools/derive-free-path-stop-boundary-v8-evidence.mjs).
+
+## 2026-10-14 FREE-PATH stop-boundary discriminator v9
+
+A second fresh source-bound `writer-stream-seed-1234` triplet captured the
+seed-46380 case. All three runs are complete and serial at 768×1080; runner,
+installer, registry-patch, license-patch, and `smallImage=false` settings
+match. The checked-in observer source hash matches the archived source, its
+required report ends with the complete lifecycle markers, and all five
+drawing/scene outputs plus six ordinary staged sources match across the
+triplet. The planning trace differs only in the observer because its two trace
+targets are diagnostic.
+
+Inside the first traced `STORE-IN-FILE` exit at depth 7, the controlled input
+was the same vertical single-float edge `((0 0 0) (0 0.2f0 1))`. The original
+selected 14 steps, consumed 12, returned 15 points, made 37 `RAN` calls, and
+left next random value 74663. Local step-sum/source-to-emitted/step-times-wiggle
+predictions were 13/12/12. JavaScript consumed 13, returned 16 points, made 40
+calls, and left 46118; bounded parity fails. Input values remain equal at
+single precision, but identity and list shape were not observed.
+
+Together with v8, the observed counts are 12 and 12. The three local candidate
+signatures are 13/13, 13/12, and 12/12, respectively, so only step-times-wiggle
+matches both samples. These are local replays of the captured seeded stream,
+not observations of the original internal variables. The two triplets also
+used different scene sizes (v8 320×480; v9 768×1080), and two matching samples
+do not establish a general stop rule. Across nine isolated cases, JavaScript
+matches four and differs by one step in five. Counts remain 30 routine names /
+31 bounded contracts, 1/5 milestones (20% by count), and zero whole-painting
+parity results; the canonical 40-case matrix remains 26/30 matches, four
+mismatches, and ten unclassified. See the [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json),
+[findings](introspection/free-path-native.md), [capture helper](tools/capture-free-path-stop-boundary-v9.ps1),
+and [evidence deriver](tools/derive-free-path-stop-boundary-v9-evidence.mjs).
+
+The next investigation is a natural `SCREEN-AND-STORE`/`PREP-LINE` drawing
+unit to advance the incomplete scene-decision milestone. Capture its caller
+path, color and brush context, RNG boundary, map state, and complete writer
+subtrace. The existing screen-unit fixtures establish point-to-writer bytes
+only; they do not establish those upstream decisions.
 
 ## What remains before a general AARON-equivalent generator
 

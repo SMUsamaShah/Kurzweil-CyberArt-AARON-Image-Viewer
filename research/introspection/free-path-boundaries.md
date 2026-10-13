@@ -149,10 +149,21 @@ triplet and controls pass; see the [v8 portable evidence](evidence/free-path-sto
 and [native findings](free-path-native.md). The result separates those local
 predictions for this input only and does not recover a general stop rule.
 
-The next candidate keeps the same typed vertical edge and uses seed 46380.
-Local replay predicts 13 for step-sum and 12 for both source-to-emitted-point
-and step-times-wiggle, all before the selected-step cap. Across v8 and this
-candidate, the three models have distinct predicted signatures. The original
-result for seed 46380 remains unknown; only use it after a fresh source-bound
-before/observer/after triplet and complete random/result comparison. Do not
-widen the JS implementation from these finite cases alone.
+The seed-46380 candidate is now measured in a fresh source-bound triplet at
+768×1080. Its exact typed input and seed match the planned discriminator. The
+original selected 14 steps and consumed 12; JS consumed 13. Local replay
+predicts step-sum=13, source-to-emitted-point=12, and step-times-wiggle=12.
+Together with v8 at seed 150415, the observed counts are 12/12 and the local
+candidate signatures are 13/13, 13/12, and 12/12. Only step-times-wiggle
+matches both observed counts. Because these are local candidate replays, not
+observations of the compiled function's internal variables, this two-sample
+result does not establish a general stop rule. The v8 and v9 triplets also
+used 320×480 and 768×1080 scenes respectively.
+
+Across nine controlled one-edge cases, current JS matches four and differs by
+one step in five. The v9 source-bound evidence confirms the captured RNG calls,
+returned points, next-random checkpoint, input-value comparison, complete
+observer lifecycle, matching runtime hashes, and fresh drawing/scene controls.
+It adds no recovered routine or general contract. See the [v9 evidence](evidence/free-path-stop-boundary-20261014-v9.json)
+and [detailed findings](free-path-native.md); do not widen the JS implementation
+from these finite cases alone.
