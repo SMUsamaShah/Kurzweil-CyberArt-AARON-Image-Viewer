@@ -65,6 +65,29 @@ files. The runner also saves and restores the per-user AARON registry values;
 if that write is denied, retry the same invocation through scoped elevation.
 It preserves the prior values and cleans only its named staging files.
 
+### WOW64 caller-breakpoint cleanup
+
+The first caller helper stopped its debug-event pump after the breakpoint and
+then attempted to detach immediately. Windows returned
+`DebugActiveProcessStop` error 5 in one run; the caller report was not saved.
+A 15-second wait retry and a separate 60-second wait retry also produced no
+accepted evidence, so those runs remain diagnostics only.
+
+[`AaronCallerBreakpoint.cs`](oracle/AaronCallerBreakpoint.cs) now handles the
+one-shot hit while all debuggee threads are stopped: it restores every armed
+thread's saved debug registers, closes the helper's thread handles, then keeps
+servicing debug events without rearming the breakpoint until the owned,
+disposable AARON process exits. This avoids resuming the oracle with the
+breakpoint armed and avoids treating a failed immediate detach as a successful
+capture. If a later detach still fails, the helper accepts the record only
+after a bounded process-exit wait; otherwise it terminates only that owned
+disposable oracle and reports failure. The successful run reports
+`detached=false` because the debug session ended with target exit; it is not a
+claim that a live oracle was left attached. See the
+[caller capture helper](tools/capture-in-sub-frame-caller.ps1),
+[native workflow](native-analysis-workflow.md), and
+[portable capture evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json).
+
 The original-runtime workflow launches `AARON.exe`; Java is not involved.
 Use one oracle at a time, a fresh `-OutputRoot`, source-bound completion
 records, and fresh uninstrumented controls. Never change the system clock.

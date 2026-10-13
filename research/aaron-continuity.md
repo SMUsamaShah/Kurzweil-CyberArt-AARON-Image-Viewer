@@ -198,9 +198,15 @@ and [call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2
 
 The separate false-row census has no per-call frame identity. Cross-run joins
 to different captured frames remain hypotheses and do not extend the contract.
-The next useful follow-up, if caller identity is needed, is a stack-aware
-natural caller/frame trace with fresh controls. Natural ZERO-EDGE context,
-intermediate helper traces, and scene-level JS parity remain open.
+The first natural native entry has now been traced in a separate 768×1080
+writer-stream run: its return address is inside the exact live-matched
+`BRUSH-STROKE` payload at offset `0x1cf`. Six saved output artifacts match
+fresh source-hashed no-probe controls before and after. This does not label
+subsequent calls or bind any row of the 768×1080 false-result census. See the
+[caller findings](introspection/in-sub-frame.md) and
+[portable evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json).
+Natural ZERO-EDGE context, per-call frames for census rows, intermediate
+helper traces, and scene-level JS parity remain open.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 

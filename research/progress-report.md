@@ -42,7 +42,10 @@ The bounded integer `IN-SUB-FRAME` predicate now has JS/original comparisons
 through two natural call families: 296,912 ordered checks in 70 value-3 brush
 strokes and 81,110 checks in 24 feature-buffer calls, including accepted
 equality edges. The explicit-frame JS helper matches their captured predicate
-results; non-integer/error behavior and the immediate Lisp caller remain open.
+results; non-integer/error behavior remain open. A separate native caller trace
+proves that the first natural predicate call in one controlled 768×1080
+writer-stream run returns to `BRUSH-STROKE+0x1cf`; it does not identify later
+calls or the 1,400-call census rows.
 A separate 1,400-call scene census records 1,176 truthy and 224 NIL results,
 retaining 128 false rows. Its source/runtime-bound report has fresh no-wrapper
 controls before and after; AA0, image, image ID, scene snapshot, planning trace,
@@ -52,6 +55,8 @@ identity, so its cross-run frame comparisons remain hypotheses. See the
 [boundary predicate evidence](introspection/evidence/brush-stroke-boundary-parity-20261005.json),
 [feature-buffer predicate evidence](introspection/evidence/brush-feature-buffer-parity-20261006.json), and
 [portable call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
+The separate [first-caller evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json)
+records only the first native entry in its own controlled run.
 
 ## What remains before a general AARON-equivalent generator
 

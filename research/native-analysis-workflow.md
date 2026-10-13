@@ -343,6 +343,58 @@ raw caller/control captures, bounded instruction bytes, metadata constants and
 REA record identity to write the portable summary. Running it without
 arguments prints its usage; supply a fresh output filename.
 
+For the first natural `IN-SUB-FRAME` call, use
+[`capture-in-sub-frame-caller.ps1`](tools/capture-in-sub-frame-caller.ps1)
+with the runner-owned pre-scene metadata pause and a fresh native map. It
+revalidates the current live `BRUSH-STROKE` and `IN-SUB-FRAME` bytes before
+arming a one-shot WOW64 execute breakpoint. The saved return address resolves
+to `BRUSH-STROKE+0x1cf` in the first completed seed-1234 writer-stream run.
+Run terminal A with a fresh ID and output root:
+
+```powershell
+$runId = "in-sub-frame-caller-$([Guid]::NewGuid().ToString('N'))"
+& .\research\oracle\run-local-scene-state-required-probe.ps1 `
+  -ExtractedRoot research\extracted\aaron `
+  -OutputRoot "research\extracted\local-oracle\$runId" `
+  -RunId $runId -Mode writer-stream-seed-1234 `
+  -PreSceneProbePath research\introspection\brush-stroke-native-links.cl `
+  -PreSceneProbePauseSeconds 90 `
+  -ProbeOutputNames @("aaron-brush-stroke-native-links.txt") `
+  -RequiredProbeOutputName aaron-brush-stroke-native-links.txt `
+  -RequiredProbeEndMarker "END brush-stroke-native-links"
+```
+
+While that run is paused, use terminal B:
+
+```powershell
+$runId = 'paste-the-exact-run-id-printed-by-terminal-A-here'
+& .\research\tools\capture-in-sub-frame-caller.ps1 `
+  -OracleOutputRoot "research\extracted\local-oracle\$runId" `
+  -MapPath research\extracted\local-oracle\brush-stroke-native-seed1234-20261005-e\native-code\mapped\native-code-map.json
+```
+
+Run fresh same-mode controls before and after, with no probe parameters, and
+wait for each oracle to finish before starting the next. After all three runs
+complete, derive evidence with explicit paths so the report records which
+bracketed runs were compared:
+
+```powershell
+node research\tools\derive-in-sub-frame-caller-evidence.mjs `
+  research\introspection\evidence\in-sub-frame-native-caller-new.json `
+  research\extracted\local-oracle\caller-control-before `
+  "research\extracted\local-oracle\$runId" `
+  research\extracted\local-oracle\caller-control-after `
+  research\extracted\local-oracle\brush-stroke-native-seed1234-20261005-e\native-code\mapped\native-code-map.json
+```
+
+The offline
+[`derive-in-sub-frame-caller-evidence.mjs`](tools/derive-in-sub-frame-caller-evidence.mjs)
+checks that report against the map, staged source probe, complete runner
+summaries and fresh before/after controls. The result applies to the first
+entry in that 768×1080 run; it does not identify the caller of every census
+row or prove the same call path in other scenes. See the
+[portable caller evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json).
+
 Keep original images, memory windows, payloads, complete decompiler reports,
 tool installations and REA bundles ignored. Publish probe/helper code,
 normalized compact evidence and behavioral conclusions. The historical

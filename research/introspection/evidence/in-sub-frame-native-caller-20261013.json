@@ -1,0 +1,523 @@
+{
+  "schemaVersion": 1,
+  "status": "measured",
+  "investigation": "in-sub-frame-first-natural-native-caller-20261013",
+  "claim": {
+    "firstNaturalEntry": "IN-SUB-FRAME",
+    "immediateCaller": "BRUSH-STROKE",
+    "returnOffsetDecimal": 463,
+    "returnOffsetHex": "0x1cf",
+    "scope": "The first native entry in one complete seed-1234 writer-stream run, with current live code revalidated against exact PLL payloads."
+  },
+  "nativeMap": {
+    "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+    "sha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786",
+    "archivedPllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+    "functions": [
+      {
+        "name": "BRUSH-STROKE",
+        "liveEntry": "0x1fe435c4",
+        "payloadBytes": 564,
+        "payloadSha256": "606194172353e20194922a1f13ed853e48455f523d635cf07a43cd01d1a9bc0e",
+        "pllPayloadOffset": 2766276,
+        "uniqueCompleteObjectByteMatch": true,
+        "exactLivePayloadMatch": true,
+        "payload": {
+          "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/brush-stroke.native-payload.bin",
+          "bytes": 564,
+          "sha256": "606194172353e20194922a1f13ed853e48455f523d635cf07a43cd01d1a9bc0e"
+        }
+      },
+      {
+        "name": "IN-SUB-FRAME",
+        "liveEntry": "0x1fe0ea2c",
+        "payloadBytes": 278,
+        "payloadSha256": "e2eac4f8f846d8d4ef5e46502af4ac8fe7b409a6ef1e80a49d19b135ee372dc4",
+        "pllPayloadOffset": 2550316,
+        "uniqueCompleteObjectByteMatch": true,
+        "exactLivePayloadMatch": true,
+        "payload": {
+          "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/in-sub-frame.native-payload.bin",
+          "bytes": 278,
+          "sha256": "e2eac4f8f846d8d4ef5e46502af4ac8fe7b409a6ef1e80a49d19b135ee372dc4"
+        }
+      }
+    ]
+  },
+  "capture": {
+    "callerReport": {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/in-sub-frame-native-caller.json",
+      "bytes": 8647,
+      "sha256": "ae0204f13910438e0a08588fc85bad151e81d77f3a716d2565d2ff1a13335878"
+    },
+    "metadata": {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aaron-brush-stroke-native-links.txt",
+      "bytes": 2584,
+      "sha256": "fbe1169f7ff720d2d6c5f551fd3358748eee6296cf60d8e81e408608748f287a",
+      "complete": true
+    },
+    "probeRequest": {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/pre-scene-probe-request.json",
+      "bytes": 769,
+      "sha256": "90003b63da430def2d5203ec47771770e9c979657b70753b047e36d2127b09ac"
+    },
+    "stagedProbe": {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aaron-pre-scene-probe.cl",
+      "bytes": 8644,
+      "sha256": "34864e38e05a237f2a12676285025ae665bfb54cf09a9576c6bc5aef3de246ff"
+    },
+    "hit": {
+      "processId": 2616,
+      "threadId": 21400,
+      "entry": "0x1fe0ea2c",
+      "exceptionCode": "0x4000001e",
+      "firstChance": 1,
+      "returnAddress": "0x1fe43793",
+      "immediateCaller": {
+        "address": "0x1fe43793",
+        "function": "BRUSH-STROKE",
+        "offset": 463
+      },
+      "armedThreads": 4,
+      "debugRegistersRestored": true,
+      "detached": false,
+      "debugSessionEndedByTargetExit": true
+    }
+  },
+  "controlComparison": {
+    "runs": [
+      {
+        "runId": "in-sub-frame-caller-20261013-control-before-c",
+        "role": "fresh uninstrumented control before",
+        "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "probeCompletionSatisfied": true,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "summarySha256": "ebfa287fa9fbced4a761694007b2e0329c6b7eb7eb2bd06356fbaff17bb116d8",
+        "aa0Dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/aa0",
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/image",
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/image-id",
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/aaron-scene-state-snapshot.txt",
+            "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+            "bytes": 25959
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/aaron-planning-call-trace.txt",
+            "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+            "bytes": 21295296
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/aaron-random-seed-loaded.txt",
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/planning-call-trace.cl",
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+            "bytes": 18496
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/planning-random-seed-common.cl",
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+            "bytes": 20476
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/scene-state-snapshot-seeded-1234.cl",
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+            "bytes": 847
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+            "bytes": 579
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+            "bytes": 401
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-before-c/capture/scene-state-snapshot.cl",
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+            "bytes": 41791
+          }
+        }
+      },
+      {
+        "runId": "in-sub-frame-caller-20261013-observer-e",
+        "role": "native caller observer",
+        "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": "34864e38e05a237f2a12676285025ae665bfb54cf09a9576c6bc5aef3de246ff",
+        "probeOutputNames": [
+          "aaron-brush-stroke-native-links.txt"
+        ],
+        "preSceneProbePauseSeconds": 90,
+        "probeCompletionSatisfied": true,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "summarySha256": "f0b299095c89117c13059450c21157c4d884e7e1fd6927aafbc42b6da4241e7f",
+        "aa0Dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aa0",
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/image",
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/image-id",
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aaron-scene-state-snapshot.txt",
+            "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+            "bytes": 25959
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aaron-planning-call-trace.txt",
+            "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+            "bytes": 21295296
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/aaron-random-seed-loaded.txt",
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/planning-call-trace.cl",
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+            "bytes": 18496
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/planning-random-seed-common.cl",
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+            "bytes": 20476
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-seeded-1234.cl",
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+            "bytes": 847
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+            "bytes": 579
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+            "bytes": 401
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot.cl",
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+            "bytes": 41791
+          }
+        }
+      },
+      {
+        "runId": "in-sub-frame-caller-20261013-control-after-e",
+        "role": "fresh uninstrumented control after",
+        "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "preSceneProbeSha256": null,
+        "probeOutputNames": [],
+        "preSceneProbePauseSeconds": 0,
+        "probeCompletionSatisfied": true,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "summarySha256": "67656a5b00b827f659f249a58dc29e6cbad8e70a3d2c6b98bf09a8b4e46faaee",
+        "aa0Dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/aa0",
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/image",
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/image-id",
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/aaron-scene-state-snapshot.txt",
+            "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+            "bytes": 25959
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/aaron-planning-call-trace.txt",
+            "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+            "bytes": 21295296
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/aaron-random-seed-loaded.txt",
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/planning-call-trace.cl",
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+            "bytes": 18496
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/planning-random-seed-common.cl",
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+            "bytes": 20476
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/scene-state-snapshot-seeded-1234.cl",
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+            "bytes": 847
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+            "bytes": 579
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+            "bytes": 401
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-control-after-e/capture/scene-state-snapshot.cl",
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+            "bytes": 41791
+          }
+        }
+      }
+    ],
+    "equalArtifacts": [
+      {
+        "name": "aa0",
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "bytes": 426587
+      },
+      {
+        "name": "image",
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+        "bytes": 424205
+      },
+      {
+        "name": "imageId",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "name": "sceneSnapshot",
+        "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+        "bytes": 25959
+      },
+      {
+        "name": "planningTrace",
+        "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+        "bytes": 21295296
+      },
+      {
+        "name": "loadedSeed",
+        "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+        "bytes": 476
+      }
+    ],
+    "equalSceneSources": [
+      {
+        "name": "planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "name": "planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "name": "scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "name": "scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "name": "scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "name": "scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      }
+    ],
+    "canvas": {
+      "width": 768,
+      "height": 1080,
+      "headerValue": 148
+    },
+    "interpretation": "The observer run is bracketed by fresh same-mode runs without the probe or debugger; the six listed AA0, image, scene, planning and loaded-seed artifacts are byte-identical across all three."
+  },
+  "sourceBindings": [
+    {
+      "path": "research/tools/capture-in-sub-frame-caller.ps1",
+      "bytes": 7804,
+      "sha256": "97bc14f7fc352a77b8e5a7fff370176082880408de4714820ade9791ab73259d"
+    },
+    {
+      "path": "research/oracle/AaronCallerBreakpoint.cs",
+      "bytes": 17973,
+      "sha256": "65cf16df6fc08b4654facafc63f72d6a39614ecc884b759fa5504e65dedf9bd5"
+    },
+    {
+      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "bytes": 27289,
+      "sha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9"
+    },
+    {
+      "path": "research/introspection/brush-stroke-native-links.cl",
+      "bytes": 8644,
+      "sha256": "34864e38e05a237f2a12676285025ae665bfb54cf09a9576c6bc5aef3de246ff"
+    },
+    {
+      "path": "research/tools/derive-in-sub-frame-caller-evidence.mjs",
+      "bytes": 18744,
+      "sha256": "df33061a57e8eeea5db62a53b9e93f7bb32774b26cff8e54652de675508f07fe"
+    },
+    {
+      "path": "research/extracted/aaron/manifest.json",
+      "bytes": 2817,
+      "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+      "bytes": 3120,
+      "sha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/in-sub-frame-caller-20261013-observer-e/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/brush-stroke.native-payload.bin",
+      "bytes": 564,
+      "sha256": "606194172353e20194922a1f13ed853e48455f523d635cf07a43cd01d1a9bc0e"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/in-sub-frame.native-payload.bin",
+      "bytes": 278,
+      "sha256": "e2eac4f8f846d8d4ef5e46502af4ac8fe7b409a6ef1e80a49d19b135ee372dc4"
+    }
+  ],
+  "limitations": [
+    "Only the first natural IN-SUB-FRAME entry in this one controlled run is captured; later entries may have different callers.",
+    "The caller is established from the immediate return address inside the validated BRUSH-STROKE payload. The outer Lisp call chain is not symbolized here.",
+    "This result does not bind the separate 1,400-call false-result census rows to frames or callers.",
+    "The finding does not expand the bounded integer predicate contract to fractional, malformed, error or other runtime inputs.",
+    "Matching scene artifacts support this bounded debugger capture; they do not establish general observer transparency or whole-painting JavaScript parity."
+  ]
+}

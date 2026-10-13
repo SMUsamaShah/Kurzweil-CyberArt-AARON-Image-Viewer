@@ -8,7 +8,7 @@ using System.Threading;
 
 // One execute hardware breakpoint in an explicitly selected WOW64 oracle.
 // No code patch, injection, or process-memory write. Debug registers are
-// restored before detaching; unrelated exceptions are passed to AARON.
+// restored at the one-shot hit; unrelated exceptions are passed to AARON.
 public static class AaronCallerBreakpoint
 {
     [StructLayout(LayoutKind.Explicit, Size = 716)]
@@ -46,6 +46,7 @@ public static class AaronCallerBreakpoint
     [DllImport("kernel32.dll", SetLastError = true)] static extern bool ReadProcessMemory(IntPtr process,
         IntPtr address, [Out] byte[] bytes, UIntPtr size, out UIntPtr read);
     [DllImport("kernel32.dll", SetLastError = true)] static extern bool TerminateProcess(IntPtr process, uint code);
+    [DllImport("kernel32.dll", SetLastError = true)] static extern uint WaitForSingleObject(IntPtr handle, uint milliseconds);
     [DllImport("kernel32.dll")] static extern bool CloseHandle(IntPtr handle);
 
     static void Check(bool value) { if (!value) throw new Win32Exception(Marshal.GetLastWin32Error()); }
@@ -111,6 +112,9 @@ public static class AaronCallerBreakpoint
         var exceptions = new List<string>();
         Dictionary<string, object> result = null;
         bool attached = false, pending = false, exited = false, released = false;
+        bool breakpointRegistersRestored = false;
+        bool exitConfirmedAfterDetachFailure = false;
+        int detachError = 0;
         uint pendingTid = 0, pendingStatus = 0x10002;
         var cleanupErrors = new List<string>();
         Exception captureError = null;
@@ -129,7 +133,7 @@ public static class AaronCallerBreakpoint
                 pendingTid = tid;
                 pendingStatus = 0x10002;
                 if (eventPid != pid) throw new InvalidOperationException("Unexpected debug-event process");
-                if (kind == 3 || kind == 2) {
+                if ((kind == 3 || kind == 2) && result == null) {
                     Arm(tid, entry, threads);
                 }
                 if (kind == 3 || kind == 6) {
@@ -190,7 +194,19 @@ public static class AaronCallerBreakpoint
                                 { "framesBeforeEntryPrologue", frames }, { "exceptions", exceptions },
                                 { "armedThreads", threads.Count }, { "elapsedSeconds", timer.Elapsed.TotalSeconds }
                             };
-                            break; // Restore registers while the debug event holds all threads stopped.
+                            // Restore every armed DR0 while this debug event
+                            // holds the process stopped. Keep servicing debug
+                            // events after the one-shot hit, but never arm a
+                            // second breakpoint. This lets the disposable
+                            // oracle finish naturally without risking a
+                            // detach call racing its remaining debug events.
+                            foreach (var item in threads) {
+                                var saved = item.Value.Saved;
+                                Check(Wow64SetThreadContext(item.Value.Handle, ref saved));
+                            }
+                            foreach (var state in threads.Values) CloseHandle(state.Handle);
+                            threads.Clear();
+                            breakpointRegistersRestored = true;
                         }
                     }
                 }
@@ -230,7 +246,31 @@ public static class AaronCallerBreakpoint
                     }
                 } else {
                     if (pending && !ContinueDebugEvent(pid, pendingTid, pendingStatus)) cleanupErrors.Add("Continue failed");
-                    if (!DebugActiveProcessStop(pid)) cleanupErrors.Add("Detach failed: " + Marshal.GetLastWin32Error());
+                    if (!DebugActiveProcessStop(pid)) {
+                        detachError = Marshal.GetLastWin32Error();
+                        if (detachError == 5 && result != null && cleanupErrors.Count == 0) {
+                            // A late natural hit can be followed by normal
+                            // oracle shutdown before Windows completes the
+                            // detach request. Preserve the already-captured
+                            // entry record only when this owned disposable
+                            // process exits on its own within a bounded wait.
+                            uint wait = WaitForSingleObject(process, 60000);
+                            if (wait == 0) exitConfirmedAfterDetachFailure = true;
+                            else {
+                                cleanupErrors.Add("Detach failed: 5; target did not exit within 60 seconds");
+                                if (TerminateProcess(process, 0xdead)) {
+                                    WaitForSingleObject(process, 5000);
+                                    cleanupErrors.Add("Disposable oracle terminated after detach failure");
+                                } else cleanupErrors.Add("Disposable oracle termination failed: " + Marshal.GetLastWin32Error());
+                            }
+                        } else {
+                            cleanupErrors.Add("Detach failed: " + detachError);
+                            if (TerminateProcess(process, 0xdead)) {
+                                WaitForSingleObject(process, 5000);
+                                cleanupErrors.Add("Disposable oracle terminated after detach failure");
+                            } else cleanupErrors.Add("Disposable oracle termination failed: " + Marshal.GetLastWin32Error());
+                        }
+                    }
                 }
             }
             foreach (var state in threads.Values) CloseHandle(state.Handle);
@@ -241,8 +281,13 @@ public static class AaronCallerBreakpoint
             if (cleanupErrors.Count != 0) failure += "; " + String.Join("; ", cleanupErrors);
             throw new InvalidOperationException(failure, captureError);
         }
-        result.Add("debugRegistersRestored", true);
-        result.Add("detached", true);
+        result.Add("debugRegistersRestored", breakpointRegistersRestored);
+        result.Add("detached", !exited && !exitConfirmedAfterDetachFailure);
+        if (exited) result.Add("debugSessionEndedByTargetExit", true);
+        if (exitConfirmedAfterDetachFailure) {
+            result.Add("detachErrorCode", detachError);
+            result.Add("debugSessionEndedByTargetExit", true);
+        }
         return result;
     }
 }

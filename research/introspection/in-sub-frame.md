@@ -1,10 +1,12 @@
 # IN-SUB-FRAME: static dossier and natural capture anchor
 
 Updated 2026-10-13. This note combines the REA/Ghidra static dossier for the
-mapped `IN-SUB-FRAME` payload, a natural VALUE=0 anchor, and a bounded
-seed-1234 false-result census. Static and dynamic evidence are linked in the
-[REA/VALUE=0 evidence](evidence/rea-in-sub-frame-20261012.json) and the
-[call-window evidence](evidence/in-sub-frame-initial-window-v2-20261013.json).
+mapped `IN-SUB-FRAME` payload, a natural VALUE=0 anchor, a bounded seed-1234
+false-result census, and a first-entry native caller capture. Static and
+dynamic evidence are linked in the
+[REA/VALUE=0 evidence](evidence/rea-in-sub-frame-20261012.json), the
+[call-window evidence](evidence/in-sub-frame-initial-window-v2-20261013.json),
+and the [native caller evidence](evidence/in-sub-frame-native-caller-20261013.json).
 
 ## Static result
 
@@ -53,10 +55,12 @@ Thus the measured integer contract for those captured MAPFRAME inputs is an
 inclusive rectangle test: `lx <= x <= rx` and `ly <= y <= ty`. This does not
 establish behavior for non-integer or boxed-number arguments, malformed or
 inverted frames, missing frame state, original errors/multiple values, or
-other execution contexts. The parent captures place the calls inside a
-`BRUSH-STROKE` or `BUFFER-FEATURE` interval, but do not prove the immediate
-Lisp caller. REA still reports 11 unresolved indirect calls and no resolved
-caller/callee references.
+other execution contexts. The predicate evidence above places calls inside a
+`BRUSH-STROKE` or `BUFFER-FEATURE` interval. A separate native breakpoint
+capture below proves that the first natural call in one controlled
+writer-stream run returns into `BRUSH-STROKE`; that result does not identify
+every call in either parent capture. REA still reports 11 unresolved indirect
+calls and no resolved caller/callee references.
 
 ## Natural VALUE=0 anchor
 
@@ -112,12 +116,35 @@ permanent rule. The ordered, frame-bound comparisons above provide the
 bounded behavior evidence; the v2 census does not identify which frame applied
 to any one of its false rows.
 
+## First natural native caller
+
+The separate [caller capture](evidence/in-sub-frame-native-caller-20261013.json)
+records the first `IN-SUB-FRAME` entry in a complete seed-1234
+`writer-stream-seed-1234` run at 768×1080. The live entry bytes for both
+`IN-SUB-FRAME` and `BRUSH-STROKE` exactly match their unique mapped PLL
+payloads. The return address is `0x1fe43793`, inside the validated
+`BRUSH-STROKE` range at offset `0x1cf` (463 bytes), establishing
+`IN-SUB-FRAME → BRUSH-STROKE+0x1cf` for that first call.
+
+Fresh no-probe, no-debugger controls bracket the caller run. The runner hashes
+match across all three summaries, and AA0, image, image ID, scene snapshot,
+planning trace, loaded-seed record, and six Lisp source files match byte-for-
+byte. The derivation also binds the extracted manifest, AARON executable and
+PLL, mapped payloads, staged metadata probe, caller helper and debugger source.
+The helper restored its hardware breakpoint registers at the hit and serviced
+the owned oracle through process exit. Independent evidence derivations are
+byte-identical (25,220 bytes; SHA-256
+`40f83dda9439d81716d68a685a44b91355ed1ce67e870221ab7d9291036fe69c`).
+
+This is one first-entry result in the 768×1080 writer-stream setup. It does not
+identify the callers or frames for the separate 1,400-call, 768×1080 census,
+and it does not show that later calls use the same caller.
+
 ## Next measurement
 
-If resolving the immediate call path remains useful, capture a source-bound
-natural caller/frame trace that records the current `SUB-FRAME` slots and a
-validated call stack for each sampled predicate call. Read the native-analysis
-workflow and oracle protocol first, and use fresh controls. Do not use
-cross-run false-pair joins as per-call evidence. The JS helper's measured
-integer rectangle contract is bounded to the two natural call families above;
-scene-level JS parity remains open.
+To map callers for the census false rows, capture per-call `SUB-FRAME` slots
+and stack data in a matched 768×1080 run; do not use cross-run false-pair joins
+as per-call evidence. Read the native-analysis workflow and oracle protocol
+first and bracket the capture with fresh controls. The JS helper's measured
+integer rectangle contract remains bounded to the two natural call families
+above; scene-level JS parity remains open.

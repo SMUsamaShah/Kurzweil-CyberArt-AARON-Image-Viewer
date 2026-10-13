@@ -115,11 +115,16 @@ hypotheses. See the [IN-SUB-FRAME dossier](introspection/in-sub-frame.md),
 [boundary evidence](introspection/evidence/brush-stroke-boundary-parity-20261005.json),
 [feature-buffer evidence](introspection/evidence/brush-feature-buffer-parity-20261006.json), and
 [call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
-The immediate caller and non-integer/error behavior remain unresolved. If
-needed, capture a stack-aware natural caller/frame trace only after reading the
-native-analysis workflow and oracle protocol, with live address rediscovery,
-byte validation, and fresh controls. Natural ZERO-EDGE context, intermediate
-helper traces, and scene-level JS parity also remain open.
+Non-integer/error behavior remains unresolved. A separate complete 768×1080
+writer-stream run now proves that its first natural `IN-SUB-FRAME` return lands
+at `BRUSH-STROKE+0x1cf`; both live code ranges match unique PLL payloads, and
+fresh source-hashed before/after controls match six saved output artifacts.
+This establishes only that first call, not later calls or the 768×1080
+false-row census. See the
+[caller evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json)
+and [updated findings](introspection/in-sub-frame.md). Natural ZERO-EDGE
+context, per-call frames for census rows, intermediate helper traces, and
+scene-level JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
