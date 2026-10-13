@@ -620,7 +620,13 @@ try {
     }
     throw
 } finally {
-    if ($ownedPauseRelease -and -not (Test-Path -LiteralPath $release)) {
+    # The oracle runner archives and removes the release file after its AARON
+    # process exits. Do not recreate that reserved file after the owned
+    # process has already exited and the runner has completed cleanup.
+    $stillOwned = Get-Process -Id $aaronProcessId -ErrorAction SilentlyContinue | Where-Object {
+        $_.Path -in $expectedRuntimeAliases
+    }
+    if ($ownedPauseRelease -and $stillOwned -and -not (Test-Path -LiteralPath $release)) {
         [IO.File]::WriteAllText($release, 'FREE-PATH caller capture finished or failed')
     }
 }

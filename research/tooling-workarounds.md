@@ -166,6 +166,20 @@ pass. Both defects are fixed in
 [`capture-free-path-caller.ps1`](tools/capture-free-path-caller.ps1) and
 [`capture-free-path-caller-triplet.ps1`](tools/capture-free-path-caller-triplet.ps1).
 
+The completed triplet exposed a third cleanup bug: the caller helper's
+`finally` block recreated `aaron-native-code-release.txt` if the runner had
+already archived and removed it. On 2026-10-14 the exact 43-byte fallback
+marker (`fdb683daadf7c39335caafc7c6762c6eba586882dd0a631b6b0f1e0cb5951ec1`)
+was copied and hash-verified at
+`research/extracted/local-oracle/caller-triplet-logs/free-path-caller-20261013-231321-ef4d1afe/orphaned-release-marker.txt`,
+then removed from `C:\temp` after confirming no AARON process was active. The
+caller helper now writes a fallback release only while the original PID still
+belongs to that run's AARON executable; the triplet orchestrator handles
+failure release, and the runner archives/removes the marker. If preflight
+finds this reserved name again, inspect its content and active process before
+acting. Preserve unfamiliar markers; do not overwrite them or clear the other
+reserved files in `C:\temp`.
+
 ### Keep probe cleanup and the terminal marker in lexical scope
 
 The first `free-path-boundaries.cl` attempt wrote all 40 `CASE`/`ENDCASE`

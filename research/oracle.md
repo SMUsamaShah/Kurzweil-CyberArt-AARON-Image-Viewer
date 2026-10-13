@@ -248,7 +248,13 @@ owned `pre-scene-probe-request.json`. The release marker
 `aaron-native-code-release.txt` is reserved; capture helpers require a positive
 pause request for the selected runtime and release it after capture or setup
 failure. The marker and declared outputs are archived and cleaned alongside
-the runner's other files. The complete native workflow is in
+the runner's other files. A FREE-PATH caller-helper cleanup race was fixed on
+2026-10-14: its fallback release now checks that the original owned AARON PID
+is still running, so it cannot recreate the marker after runner cleanup. If
+the reserved marker is present at preflight, inspect it and the process first;
+preserve unfamiliar files. See the
+[documented workaround](tooling-workarounds.md#free-path-caller-metadata-with-lowercase-hex-and-split-helper-scope).
+The complete native workflow is in
 [native-analysis-workflow.md](native-analysis-workflow.md).
 
 One Allegro-specific path detail was also found while loading the call-trace
