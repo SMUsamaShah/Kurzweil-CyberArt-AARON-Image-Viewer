@@ -105,10 +105,23 @@ drawing/scene outputs and six ordinary staged Lisp sources match controls; the
 observer's planning trace differs because its extra targets are diagnostic.
 Read [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json),
 [findings](introspection/free-path-native.md), and the serial
-[capture helper](tools/capture-free-path-stop-boundary-v4.ps1). Next choose a
-fresh seed that separates the remaining models. Counts remain 30 routine
+[capture helper](tools/capture-free-path-stop-boundary-v4.ps1). Counts remain 30 routine
 names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 full-painting
 parity results.
+
+The v5 seed-332156 triplet is complete and byte-checked against fresh controls.
+Original and JS both consume all 9 selected steps, return 12 points, and leave
+next RNG value 43251; all 28 random calls and returned points match. Bare-wiggle
+and step-times-wiggle locally predict 8, while step-sum and source-to-emitted
+point reach only the selected cap. This does not confirm v4's local candidate.
+Across five isolated one-edge cases JS matches two and differs by one step in
+three. A two-million-seed search at length 10 found no uncapped case that
+separates the two terminal-distance variants, so vary the controlled edge
+length next. See [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json),
+[findings](introspection/free-path-native.md), and the serial
+[capture helper](tools/capture-free-path-stop-boundary-v5.ps1). Counts stay
+30 routine names / 31 bounded contracts, 1 of 5 milestones (20%), and 0
+whole-painting parity.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in

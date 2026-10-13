@@ -165,8 +165,23 @@ the observer's planning trace is retained separately because the two extra
 trace targets intentionally change that diagnostic. The counts remain 30
 routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
 whole-painting parity. See the [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json)
-and [FREE-PATH findings](introspection/free-path-native.md); the next gate is
-another seed chosen to discriminate the remaining stop candidates.
+and [FREE-PATH findings](introspection/free-path-native.md).
+
+A v5 controlled seed-332156 edge completed inside another source-bound
+320×480 triplet. The original selected and consumed all 9 steps, returned 12
+points, and left next RNG value 43251; JavaScript matches all 28 random calls,
+returned points, and the next RNG checkpoint. The local bare-wiggle and
+step-times-wiggle candidates predict 8, while step-sum and source-to-emitted
+distance reach the 9-step cap. The sample therefore does not confirm v4's
+bare-wiggle candidate. Fresh controls match five drawing/scene outputs and six
+ordinary staged sources; the observer-only planning trace is diagnostic. The
+five isolated one-edge cases now contain two JS matches and three one-step
+mismatches, but this is not a generator coverage percentage. A scan of two
+million length-10 seeds found no uncapped case separating bare-wiggle from
+step-times-wiggle, so the next experiment varies edge length. The report still
+stands at 30 routine names / 31 bounded contract units, 1 of 5 milestones
+(20% by count), and 0 whole-painting parity. See [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json)
+and [FREE-PATH findings](introspection/free-path-native.md).
 
 ## What remains before a general AARON-equivalent generator
 

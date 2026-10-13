@@ -426,13 +426,15 @@ but the JS replay computes its own random values. An explicit per-edge type
 decision resolves mixed single/double inputs. A new retained regression case
 checks all three paths independently of the ignored raw capture.
 
-**Current gate:** the distance-stop boundary is still unresolved. The
-JavaScript path matches the three natural seed-1234 calls and one seed-5678
-holdout. In the three v2 isolated edges it matches one; v4 adds seed 521814,
-where original FREE-PATH consumes 12 steps and JavaScript consumes 13. The
-bare-wiggle candidate predicts 12 for this seed while the step-sum and
-source-to-emitted-point candidates predict 13. This is one discriminating
-sample, not a general rule; do not widen the implementation yet.
+**Current gate:** the FREE-PATH distance-stop boundary is still unresolved.
+The JavaScript path matches the three natural seed-1234 calls and one seed-5678
+holdout. Across five isolated one-edge cases, it matches two and differs by
+one iteration in three. V4 seed 521814 consumed 12 of 14 steps in the original
+versus 13 in JavaScript; the local bare-wiggle prediction was 12. V5 seed
+332156 consumed all 9 selected steps in both original and JavaScript. Its
+bare-wiggle and step-times-wiggle predictions were 8, while step-sum and
+source-to-emitted-point reached the 9-step cap. Thus v5 does not confirm the
+v4 candidate. Do not widen the implementation.
 
 The first boundary matrix now contains 40 complete direct calls over 20 input
 shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
@@ -462,6 +464,18 @@ does not capture a natural FREE-PATH caller or establish the stop condition.
 See [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json),
 [findings](introspection/free-path-native.md), and the serial
 [triplet helper](tools/capture-free-path-stop-boundary-v4.ps1).
+
+The v5 source-bound 320×480 triplet uses the same controlled trigger. For seed
+332156, the original selected and consumed 9 steps, returned 12 points, and
+left next random value 43251. JavaScript matches all 28 random calls, all
+returned points, and the following random value. The complete observer and
+fresh controls match on five drawing/scene outputs and six ordinary sources;
+the observer-only planning trace remains diagnostic. This is a capped sample,
+not a stop-rule recovery. In this length-10 setup, a two-million-seed search
+found no uncapped case that separates bare-wiggle from step-times-wiggle, so
+the next experiment should vary edge length. See [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json),
+[findings](introspection/free-path-native.md), and the serial
+[triplet helper](tools/capture-free-path-stop-boundary-v5.ps1).
 
 ## 3. Produce one complete drawing unit from higher-level inputs — point emission measured
 
@@ -595,8 +609,8 @@ dependencies or independently check a risky result.
 Continue from the active FREE-PATH stop-boundary investigation described in
 the [progress report](progress-report.md) and continuity handoff. Keep the
 writer-replay milestone marked achieved; do not restart it unless a specific
-new mismatch makes part of that evidence relevant. Across four isolated
-one-edge cases, JavaScript matches one and differs by one iteration in three.
-The v4 bare-wiggle match is limited to seed 521814. Select a fresh seed where
-the bare-wiggle prediction differs from the other candidates, then retain the
-same source-bound triplet and scene-control checks.
+new mismatch makes part of that evidence relevant. Across five isolated
+one-edge cases, JavaScript matches two and differs by one iteration in three.
+V4's bare-wiggle prediction is not repeated by v5. Vary the edge length to
+separate the remaining local models, then retain the same source-bound triplet
+and scene-control checks.

@@ -1,0 +1,452 @@
+{
+  "schema": "aaron-free-path-stop-boundary-evidence-v5",
+  "question": "Does one visibility-isolated edge distinguish a terminal bare-wiggle candidate from the current stop models when invoked at a traced STORE-IN-FILE return?",
+  "controls": {
+    "before": {
+      "runId": "freepath-v5-seed332156-before-44f4716d",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:41:26.4940077+00:00",
+      "finishedAt": "2026-10-13T04:41:51.3960923+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observer": {
+      "runId": "freepath-v5-seed332156-observer-71993d87",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:41:52.4540260+00:00",
+      "finishedAt": "2026-10-13T04:42:13.4445997+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "after": {
+      "runId": "freepath-v5-seed332156-after-826d3240",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:42:13.8661220+00:00",
+      "finishedAt": "2026-10-13T04:42:34.9979443+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observerProbeSha256": "309dae1ffb0cf7d192f67a7efaa1774dca64063829b5958751d591b07d2345d4",
+    "checkedInProbePath": "research/introspection/free-path-stop-boundary-v5.cl",
+    "checkedInProbeSha256": "309dae1ffb0cf7d192f67a7efaa1774dca64063829b5958751d591b07d2345d4",
+    "observerReportSha256": "ca9855b21865e27a91bcff1dd67d7a3de48131a2c797aead9868076840968e03",
+    "observerReportPath": "research/extracted/local-oracle/external-runs/freepath-v5-seed332156-observer-71993d87/capture/aaron-free-path-stop-boundary-v5.txt",
+    "requiredEndMarker": "END free-path-stop-boundary-v5",
+    "drawingAndSceneOutputHashes": {
+      "aa0": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "image": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "bracketingPlanningTraceSha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+    "observerPlanningTraceSha256": "4fcf05d879b07d6e3d0da0aa7a5e2dcb5866637364a4796172fb1f8fd1a84150",
+    "observerPlanningTraceIsDiagnosticOnly": true,
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "958f3f20ae64cce601d1807682d7c0b93b7b83989c2b72e363b493c61a2b7fa5",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    "allDrawingAndSceneOutputsAndOrdinarySourcesMatch": true,
+    "aa0Header": {
+      "width": 320,
+      "height": 480,
+      "headerBytes": 148
+    }
+  },
+  "captureChecks": {
+    "caseCount": 1,
+    "errorCount": 0,
+    "bracketingPlanningTracesMatch": true,
+    "observerPlanningTraceDiffers": true,
+    "ranAndXydistBindingsRestored": true,
+    "traceHook": {
+      "event": ":exit",
+      "name": "STORE-IN-FILE",
+      "depth": 7
+    },
+    "callbackStatus": "OK",
+    "allPrivateInputListsUnchanged": true,
+    "oneForwardVisibleEdgeOnly": true,
+    "exactSeedPrefix": true
+  },
+  "case": {
+    "seed": 332156,
+    "name": "bare-wiggle-versus-distance",
+    "points": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        10,
+        0,
+        1
+      ]
+    ],
+    "fdex": 0,
+    "tdex": 1,
+    "from": 0,
+    "to": 1,
+    "distanceCall": {
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "result": 10
+    },
+    "randomCalls": [
+      {
+        "args": [
+          8,
+          14
+        ],
+        "value": 9
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1332909
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.016000984
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.4817483
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0908251
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.019242892
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.6528765
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0935292
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.024760293
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 2.8871024
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2663898
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.01649324
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.7717113
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2150729
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.015266878
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.2876806
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2946998
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.019948538
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.20240079
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0274415
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.023575073
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 5.0712767
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 0.8540902
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.028113775
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.043453734
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 0.79425997
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.024386806
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.224552
+      }
+    ],
+    "result": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1.2402179,
+        -0.0067222663,
+        1
+      ],
+      [
+        2.469328,
+        0.0232444,
+        1
+      ],
+      [
+        3.657157,
+        0.007573853,
+        1
+      ],
+      [
+        5.0947485,
+        -0.023166813,
+        1
+      ],
+      [
+        6.4230614,
+        -0.0030003965,
+        1
+      ],
+      [
+        7.91012,
+        0.005768735,
+        1
+      ],
+      [
+        9.033063,
+        -0.025198642,
+        1
+      ],
+      [
+        9.999253,
+        0.0011589663,
+        1
+      ],
+      [
+        10,
+        0,
+        1
+      ],
+      [
+        10,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "nextRandom": {
+      "value": 43251,
+      "status": "OK"
+    },
+    "stopModelComparison": {
+      "selectedSteps": 9,
+      "originalConsumedSteps": 9,
+      "localRngPrefixMatchesCapture": true,
+      "predictions": {
+        "stepSumThreshold": 9,
+        "emittedPointDistanceThreshold": 9,
+        "terminalDistanceAtMostBareWiggle": 8,
+        "terminalDistanceAtMostStepTimesWiggle": 8
+      },
+      "reconstructedFinalSteps": [
+        {
+          "step": 8,
+          "scale": 0.8540902137756348,
+          "wiggle": 0.028113774955272675,
+          "angle": 0.04345373436808586,
+          "progressed": 9.972599029541016,
+          "point": [
+            9.999253273010254,
+            0.001158966333605349
+          ],
+          "fromStart": 9.999253273010254,
+          "fromTarget": 0.00137869652826339,
+          "offsetLength": 0.026679666712880135
+        },
+        {
+          "step": 9,
+          "scale": 0.7942599654197693,
+          "wiggle": 0.024386806413531303,
+          "angle": 1.224552035331726,
+          "progressed": 10.855110168457031,
+          "point": [
+            10.862414360046387,
+            0.020244402810931206
+          ],
+          "fromStart": 10.862433433532715,
+          "fromTarget": 0.8626519441604614,
+          "offsetLength": 0.02152162790298462
+        }
+      ],
+      "traceBasis": "Local single-float replay checked against every captured RAN call; original internal variables are not observed."
+    },
+    "javascriptComparison": {
+      "randomCallsMatch": true,
+      "returnedPointsMatch": true,
+      "followingRandomMatches": true,
+      "followingRandom": {
+        "original": 43251,
+        "javascript": 43251
+      },
+      "originalRandomCallCount": 28,
+      "javascriptRandomCallCount": 28,
+      "originalResultPointCount": 12,
+      "javascriptResultPointCount": 12,
+      "boundedParity": true
+    }
+  },
+  "interpretation": [
+    "The one-XYDIST capture isolates the visible forward edge; the zero-visibility start suppresses the closing edge in this case.",
+    "Stop predictions replay captured seeded random values with single-float arithmetic; they do not observe the original function internal variables.",
+    "One seed can discriminate local candidates but cannot establish a general stop rule.",
+    "JavaScript parity is reported separately for captured random calls, returned points and the next random checkpoint."
+  ],
+  "limitations": [
+    "This is one integer-coordinate, length-10 edge and one seed.",
+    "The controlled FREE-PATH case runs inside the first successful traced STORE-IN-FILE exit callback; it is not a natural FREE-PATH caller observation.",
+    "The post-event callback and one-shot flag remain installed until this disposable oracle process exits.",
+    "This does not establish the FREE-PATH domain, native Lisp ABI, or whole-painting parity."
+  ]
+}

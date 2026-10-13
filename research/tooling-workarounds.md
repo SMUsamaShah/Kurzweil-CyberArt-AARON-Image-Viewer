@@ -174,11 +174,11 @@ target was entered or returned. Preserve both exact sources:
 [`free-path-stop-boundary-v3-main-return-timeout.cl`](introspection/free-path-stop-boundary-v3-main-return-timeout.cl)
 and
 [`free-path-stop-boundary-v3-screen-return-timeout.cl`](introspection/free-path-stop-boundary-v3-screen-return-timeout.cl).
-The successful v4 probe instead registers a post-event callback and triggers
+The successful v4/v5 probes instead register a post-event callback and trigger
 once at the first successful traced `STORE-IN-FILE` exit. This is a controlled
-case location, not proof of a natural `FREE-PATH` caller. Its serial triplet,
-terminal report, drawing/scene controls and staged-source checks are required;
-see the dedicated [capture helper](tools/capture-free-path-stop-boundary-v4.ps1)
+case location, not proof of a natural `FREE-PATH` caller. Their serial
+triplets, terminal reports, drawing/scene controls and staged-source checks
+are required; see the current [v5 capture helper](tools/capture-free-path-stop-boundary-v5.ps1)
 and [findings](introspection/free-path-native.md). Do not infer that screen
 size caused the earlier no-case results.
 
@@ -273,7 +273,7 @@ before-control, observer, after-control order; it starts no second original
 process until the prior one exits and removes no unrelated files:
 
 ```powershell
-.\research\tools\capture-free-path-stop-boundary-v4.ps1
+.\research\tools\capture-free-path-stop-boundary-v5.ps1 -RunPrefix freepath-v5-seed332156
 ```
 
 The wrapper requires the probe's terminal END marker for the observer and

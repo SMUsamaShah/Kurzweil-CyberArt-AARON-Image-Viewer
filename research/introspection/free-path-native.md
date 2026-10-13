@@ -133,13 +133,39 @@ missing trigger, incomplete case, error status, or nonterminal END marker. The
 serial capture helper is
 [`capture-free-path-stop-boundary-v4.ps1`](../tools/capture-free-path-stop-boundary-v4.ps1).
 
-## Next discriminating capture
+## Seed 332156 holdout
 
-Use a fresh seed selected so the bare-wiggle prediction differs from both
-step-sum and source-to-emitted-point predictions. A second matched case can
-falsify or strengthen the local candidate; it still cannot establish the full
-FREE-PATH rule by itself. Keep the same controlled trigger and preserve fresh
-same-mode controls.
+The v5 source-bound 320×480 triplet used the same controlled
+`STORE-IN-FILE` exit trigger and the one visible edge `((0 0 0) (10 0 1))`.
+The observer and both fresh controls match on the five drawing/scene outputs
+and six ordinary staged Lisp sources. The observer's planning trace is kept
+separate because it includes the additional trace targets; the two bracketing
+planning traces match.
+
+For seed 332156, the original selected and consumed all 9 steps, returned 12
+points, and left next random value 43251. JavaScript matches all 28 random
+calls, returned points, and the next random checkpoint. The local replay
+predicts 8 steps for both terminal-distance candidates (bare wiggle and step
+× wiggle), while step-sum and source-to-emitted-point reach 9 only at the
+selected-step cap. This case is therefore cap-censored for the latter two
+models and rejects the two early terminal predictions for this input; it does
+not recover the general stop rule.
+
+Across the five isolated one-edge cases, JavaScript matches two and differs
+by one iteration in three. The v4 seed 521814 sample favors the bare-wiggle
+count locally, but v5 does not repeat that prediction. A scan of two million
+seeds at length 10 found no uncapped case where bare-wiggle and step × wiggle
+predict different stopping points. Further work should vary the controlled
+edge length, then retain a fresh source-bound before/observer/after triplet.
+
+Portable evidence is
+[`free-path-stop-boundary-20261013-v5.json`](evidence/free-path-stop-boundary-20261013-v5.json)
+(SHA-256
+`a44343a418b7825089a07f1588e4a33fcc9b98d7525b3f5beec74e93ec0ce5eb`). The
+source is
+[`free-path-stop-boundary-v5.cl`](free-path-stop-boundary-v5.cl), and the
+serial capture helper is
+[`capture-free-path-stop-boundary-v5.ps1`](../tools/capture-free-path-stop-boundary-v5.ps1).
 
 ## Reproduction
 
