@@ -12,6 +12,20 @@ All six drawing/scene outputs and six staged scene sources match across the
 three 320x480 writer-stream runs. Two independent derivations are byte-identical.
 Read the [scope and findings](../zero-edge-native-links.md).
 
+## ZERO-EDGE bounded natural-caller attempt, 2026-10-13
+
+[`zero-edge-native-caller-20261013.json`](zero-edge-native-caller-20261013.json)
+binds a source-hashed observer to fresh same-mode controls. The helper
+revalidated the exact live `BUFFER-HOLE` and `ZERO-EDGE` payloads against the
+PLL, then saw no ZERO-EDGE entry before the process ended in the measured
+320x480 scene. The runner session lasted 32.837 seconds; 150 seconds was the
+helper's maximum, not the observed wait. All six drawing/scene outputs and six staged sources match across the
+before/observer/after runs. There is no caller result; the static
+`BUFFER-HOLE` reference remains only a candidate. Independent derivations
+match byte-for-byte; SHA-256 is
+`a24bf6c48a59d4a95d82f8c3088064e7f33e4b32e28ae7cc6b4dacbaebaffd90`.
+See the [bounded caller findings](../zero-edge-native-caller.md).
+
 ## REA native payload analysis, 2026-10-12
 
 [`rea-payload-analysis-20261012.json`](rea-payload-analysis-20261012.json)

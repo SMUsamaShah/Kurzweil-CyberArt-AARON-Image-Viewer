@@ -76,6 +76,33 @@ for the next caller investigation. The complete source-bound record is
 320x480 even though `smallImage=false`; read dimensions from the AA0 header
 and keep this run separate from 768x1080 controls.
 
+## ZERO-EDGE bounded caller attempt, 2026-10-13
+
+The live caller helper reads fresh 64-byte headers for `BUFFER-HOLE` and
+`ZERO-EDGE`, checks each entire function body against the mapped PLL payload,
+then places one execute breakpoint at the live ZERO-EDGE entry. Use
+[`capture-zero-edge-caller.ps1`](tools/capture-zero-edge-caller.ps1) only
+during the matching runner-owned pause, with the combined map produced by
+[`merge-zero-edge-caller-native-maps.mjs`](tools/merge-zero-edge-caller-native-maps.mjs).
+For low D: disk, prepare the run root with
+[`prepare-local-aaron-oracle-run.ps1`](tools/prepare-local-aaron-oracle-run.ps1);
+the ignored D: path is backed by `C:\AaronOracleRuns`.
+
+The 2026-10-13 source-bound capture saw no entry before its process ended in
+the 320x480 writer-stream scene. The runner completed 32.837 seconds after
+start; 150 seconds was the helper's maximum, not the observed wait. Both live
+payloads matched; fresh before/after controls matched all six outputs and six
+scene sources. This is a bounded no-hit, not a negative call-graph proof. The `BUFFER-HOLE` constant reference
+remains a static candidate, and the result does not cover the separate
+768x1080 regime. See [caller findings](introspection/zero-edge-native-caller.md)
+and [portable evidence](introspection/evidence/zero-edge-native-caller-20261013.json).
+
+The first metadata draft failed because `FINISH-REPORT` was nested in
+`INSPECT-TARGET`; verify helper definitions are peers in `LABELS`, not merely
+that parentheses balance. The helper also normalizes CRLF before checking the
+terminal marker. Lisp hex bytes may be lowercase, so evidence parsers must
+accept both hex cases.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

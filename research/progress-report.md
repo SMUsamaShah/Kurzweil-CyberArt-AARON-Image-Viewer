@@ -70,6 +70,18 @@ names / 31 bounded contract units, milestone progress remains 1 of 5 (20%),
 and whole-painting parity remains 0. See the [ZERO-EDGE census findings](introspection/zero-edge-native-links.md)
 and [portable evidence](introspection/evidence/zero-edge-native-links-20261013.json).
 
+A follow-up source-bound caller attempt read the fresh `BUFFER-HOLE` and
+`ZERO-EDGE` headers and matched both complete live payloads to the PLL. It saw
+no ZERO-EDGE entry before the process ended; the runner session lasted 32.837
+seconds, below the helper's configured 150-second maximum. The six
+drawing/scene outputs and six scene sources match across fresh
+before/observer/after runs. This is a bounded no-hit, not proof that the
+function is never called; `BUFFER-HOLE` remains an unconfirmed static
+candidate. It adds no JavaScript behavior contract, so the 30/31, 1-of-5
+(20%), and 0 whole-painting-parity counts are unchanged. See the
+[caller findings](introspection/zero-edge-native-caller.md) and
+[portable evidence](introspection/evidence/zero-edge-native-caller-20261013.json).
+
 ## What remains before a general AARON-equivalent generator
 
 The generative core and its integration remain the main work: recover normal

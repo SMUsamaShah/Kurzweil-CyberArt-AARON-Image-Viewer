@@ -27,15 +27,19 @@ Use ignored `toolchain-current.json` for new REA work and retain the frozen
 historical `toolchain.json` for existing evidence. The hourly automation is
 confirmed absent; continuation is manual.
 
-Latest ZERO-EDGE step: a complete source-bound constant census scanned 1,347
-own-package bindings / 1,380 unique compiled objects and found one static
-symbol reference in `BUFFER-HOLE` (constant 1). This does not prove execution
-or a direct caller. Fresh controls bracket the observer and match six outputs
-and six scene sources at 320x480. The next target is a natural ZERO-EDGE
-entry/caller trace; rediscover live addresses first. See the
-[census dossier](introspection/zero-edge-native-links.md) and update the
-[progress report](progress-report.md). The 30/31 bounded behavior count and
-20% milestone count are unchanged.
+Latest ZERO-EDGE step: the source-bound constant census found one static
+symbol reference in `BUFFER-HOLE` (constant 1). A follow-up hardware
+breakpoint attempt validated both live payloads against the PLL but saw no
+ZERO-EDGE entry before the process ended in the measured 320x480 writer-stream
+scene. The runner session lasted 32.837 seconds; 150 seconds was the helper's
+maximum, not the observed wait. Fresh uninstrumented controls match six outputs
+and six scene sources.
+The candidate caller remains unconfirmed; the no-hit does not generalize to
+other canvases. See the [census dossier](introspection/zero-edge-native-links.md),
+[caller findings](introspection/zero-edge-native-caller.md), and
+[portable evidence](introspection/evidence/zero-edge-native-caller-20261013.json).
+No JS contract count changed: 30 routine names / 31 bounded contract units,
+1 of 5 milestones (20%), and 0 whole-painting parity results.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
@@ -49,8 +53,9 @@ BRUSH/SUB-FRAME identities and three-value copied RNG previews are unchanged;
 this is not a full RNG-state proof or a direct-caller capture.
 Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
 with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
-Next: characterize ZERO-EDGE with a bounded explicit capture, then complete
-the BRUSH-FILL row/iris schedule and value-0 painter.
+At that earlier checkpoint the next item was an explicit ZERO-EDGE capture;
+the current frontier is now the larger-canvas caller question, followed by
+the remaining BRUSH-FILL row/iris schedule and value-0 painter.
 
 ### ZERO-EDGE holdout and JavaScript model, 2026-10-12
 

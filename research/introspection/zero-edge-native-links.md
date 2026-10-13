@@ -59,8 +59,9 @@ Two independent offline derivations produced identical bytes. The frozen
 probe is [`zero-edge-native-links.cl`](zero-edge-native-links.cl); its SHA-256
 is `febc636051f44aa3fc2da2edc38cc65b3536ed183c6621d7f9cc2a768fc219e3`.
 
-The next investigation is a natural ZERO-EDGE entry/caller capture. Treat
-`BUFFER-HOLE` as a candidate to investigate, not a recovered caller. Rediscover
-and validate live addresses before attaching a debugger. This static census
-adds no ZERO-EDGE JavaScript contract and does not change the function-coverage
-counts in the [progress report](../progress-report.md).
+The first source-bound natural-caller attempt is now recorded in the separate
+[caller findings](zero-edge-native-caller.md). It validated both live payloads
+but observed no ZERO-EDGE entry during the 150-second 320x480 scene window.
+`BUFFER-HOLE` therefore remains a static candidate, not a recovered caller.
+This census and bounded no-hit add no ZERO-EDGE JavaScript contract and do not
+change the function-coverage counts in the [progress report](../progress-report.md).

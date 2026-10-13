@@ -229,6 +229,18 @@ the owned output root. The first FOOB run finished and archived a complete
 tape after its tool call was interrupted. Preserve that root and validate its
 summary, observer footer and control bytes; use a new root for any retry.
 
+The required-probe runner also stages a 21,287,184-byte planning trace for the
+common `writer-stream-seed-1234` mode. A D:-based output root duplicates that
+trace during final archival. If the staging target has little free space, use
+[`prepare-local-aaron-oracle-run.ps1`](tools/prepare-local-aaron-oracle-run.ps1)
+to create an ignored run path under `research/extracted/local-oracle/` backed
+by `C:\AaronOracleRuns`, and confirm its free-space preflight before launching.
+For a run that stopped during archival, use
+[`recover-aborted-local-aaron-run.ps1`](tools/recover-aborted-local-aaron-run.ps1)
+only after AARON exits; it archives and verifies files created by that run and
+does not remove older staging files. Details and commands are in
+[`tooling-workarounds.md`](tooling-workarounds.md#low-disk-space-and-interrupted-staging).
+
 Optional native probes use `-PreSceneProbePath`, declared
 `-ProbeOutputNames`, and a bounded `-PreSceneProbePauseSeconds` shorter than
 `RunSeconds`. The runner hashes the staged probe before launch and writes an

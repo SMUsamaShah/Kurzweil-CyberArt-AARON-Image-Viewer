@@ -94,6 +94,54 @@ records, and fresh uninstrumented controls. Never change the system clock.
 Before retrying after an interruption, inspect the process, staging directory
 and owned output root.
 
+### Low disk space and interrupted staging
+
+The common `writer-stream-seed-1234` run produces a 21,287,184-byte planning
+trace in `C:\temp`. When the output root is also on D:, `Copy-Item` temporarily
+needs a second copy before the runner removes the staged file. If free space is
+low, the original run can finish painting and then fail while archiving, with
+no `summary.json`. For a normal mode, prepare a fresh output path on C: through
+the ignored junction and check both drives before launching:
+
+```powershell
+$runId = 'my-probe-' + [Guid]::NewGuid().ToString('N')
+$outputRoot = & .\research\tools\prepare-local-aaron-oracle-run.ps1 `
+  -RunId $runId -Mode writer-stream-seed-1234
+& .\research\oracle\run-local-scene-state-required-probe.ps1 `
+  -ExtractedRoot research\extracted\aaron `
+  -OutputRoot $outputRoot -RunId $runId `
+  -Mode writer-stream-seed-1234 -RunSeconds 150
+```
+
+The helper keeps the logical run path beneath ignored
+`research/extracted/local-oracle/external-runs/`, backed by
+`C:\AaronOracleRuns`. It requires at least 32 MiB on the `C:\temp` target
+volume and 128 MiB on the output volume (larger modes have higher thresholds).
+The runner's own reserved-name and write checks still apply. Do not delete
+staging files to satisfy the preflight.
+
+If a run stopped after creating its output root, first confirm the named AARON
+process has exited. Then archive only staging files whose creation times match
+that run; the helper copies and hash-verifies them on C: before removing those
+exact files from `C:\temp`:
+
+```powershell
+& .\research\tools\recover-aborted-local-aaron-run.ps1 `
+  -OutputRoot research\extracted\local-oracle\my-failed-run
+```
+
+The recovery script leaves older files and unrelated REA JSON records alone.
+It refuses to act while any AARON process is active. Keep the run root and the
+recovery archive for diagnosis; do not treat an archived `END` marker as a
+successful probe unless its error/truncation counts and runner summary also
+pass.
+
+Windows Allegro's `~%` reports use CRLF. Normalize line endings before an
+exact `END` suffix check. Header bytes can be emitted in lowercase hex; parse
+both cases. Also check Common Lisp `LABELS` scope: a helper can be accidentally
+nested while the file remains delimiter-balanced, preventing any report from
+being written.
+
 For a pre-scene probe with multiple `-ProbeOutputNames`, invoke the runner
 through `-Command` so PowerShell evaluates the array literal. Passing
 `@("final.txt", "stage.txt")` through `powershell -File` can split its values
@@ -137,6 +185,15 @@ and branch `git push` in one scoped elevated command. Keep the existing branch
 and review `git status` before staging; do not stop at the first denied call.
 The failed staging attempt in this session created no lock; the verified v6
 milestone then pushed successfully as `2233ff3`.
+
+When a Node evidence helper needs to verify an ignored output path, do not
+assume it can spawn Git: in this workspace, `spawnSync('git', ...)` returned
+`EPERM` even though direct Git commands in PowerShell work. For an output
+under the repository's known ignored `research/extracted/` or
+`research/artifacts/` roots, read the checked-in `.gitignore` rule in the
+helper, then confirm the final repository status. Reserve Git mutations for
+the documented scoped-elevation PowerShell path; do not change ACLs to make a
+Node child process work.
 
 ## Discoverability
 
