@@ -83,7 +83,13 @@ async function stagedSources(run) {
   return names;
 }
 
-export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPath) {
+export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPath, options = {}) {
+  const observerOnlyOutputNames = new Set(options.observerOnlyOutputNames ?? []);
+  for (const name of observerOnlyOutputNames) {
+    requireSafeName(name, 'observer-only output');
+    requireValue(outputNames.includes(name),
+      `observer-only comparison is unsupported for ${name}`);
+  }
   const runs = await Promise.all([
     loadRun('before', path.resolve(beforePath)),
     loadRun('observer', path.resolve(observerPath)),
@@ -128,8 +134,16 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
   }
 
   const artifactHashes = [];
+  const observerOnlyOutputHashes = {};
   for (const name of outputNames) {
-    artifactHashes.push([name, await compareNamedFile(runs, name, 'scene output')]);
+    if (observerOnlyOutputNames.has(name)) {
+      const controlHash = await compareNamedFile([before, after], name, 'bracketing control output');
+      const observerHash = await fileHash(path.join(observer.capturePath, name));
+      artifactHashes.push([name, controlHash]);
+      observerOnlyOutputHashes[name] = observerHash;
+    } else {
+      artifactHashes.push([name, await compareNamedFile(runs, name, 'scene output')]);
+    }
   }
   for (const run of runs) {
     requireValue(run.summary.aa0Sha256 === artifactHashes.find(([name]) => name === 'aa0')[1],
@@ -150,6 +164,7 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     endMarker,
     reportHash: await fileHash(path.join(observer.capturePath, requiredReport)),
     artifactHashes: Object.fromEntries(artifactHashes),
+    observerOnlyOutputHashes,
     sourceHashes: Object.fromEntries(sourceHashes),
   };
 }

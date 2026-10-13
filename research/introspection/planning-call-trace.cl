@@ -56,7 +56,11 @@
           ;; trace remains unchanged when this is NIL.  A companion can use
           ;; the already-validated wrappers without redefining their function
           ;; cells a second time.
-          (scene-hook nil))
+          (scene-hook nil)
+          ;; Optional post-event callback for focused probes.  A companion
+          ;; may bind the callback before this trace is loaded; the default
+          ;; remains NIL and leaves ordinary captures unchanged.
+          (post-event-hook nil))
       ;; Keep the potentially implementation-specific initializers in the
       ;; body, after the stream checkpoint, so a loader failure is observable.
       (setf owner (find-package "COMMON-GRAPHICS-USER")
@@ -118,6 +122,9 @@
       (setf scene-hook
             (and (boundp 'aaron-scene-state-hook)
                  (symbol-value 'aaron-scene-state-hook)))
+      (setf post-event-hook
+            (and (boundp 'aaron-planning-post-event-hook)
+                 (symbol-value 'aaron-planning-post-event-hook)))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
       (set 'aaron-trace-current-stack nil)
@@ -239,6 +246,13 @@
              (when (functionp scene-hook)
                (handler-case
                    (funcall scene-hook event name args entry-depth)
+                 (condition () nil)))
+             ;; Keep the focused callback independent of the saved scene
+             ;; observer, and never let diagnostic conditions escape into the
+             ;; original call path.
+             (when (functionp post-event-hook)
+               (handler-case
+                   (funcall post-event-hook event name args entry-depth)
                  (condition () nil))))
            (trace-enter (name args entry-depth)
              (setf trace-stack (cons name trace-stack))

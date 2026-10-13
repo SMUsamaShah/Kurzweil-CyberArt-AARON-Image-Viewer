@@ -132,6 +132,32 @@ limitations are in the
 [canvas findings](introspection/canvas-dimensions.md) and
 [portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
 
+## FREE-PATH stop-boundary mapping, 2026-10-13
+
+The minimal read-only metadata probe
+[`free-path-native-links.cl`](introspection/free-path-native-links.cl)
+captures only the 64-byte compiled-function header. The successful
+source-bound `writer-stream-seed-1234` triplet records its complete report and
+fresh uninstrumented controls in the
+[native findings](introspection/free-path-native.md). `FREE-PATH` matched one
+complete 1,334-byte PLL object; the exact 1,330-byte payload was then analyzed
+with REA 6.4.0 / Ghidra 12.1.4. Its decoded body has 456 instructions, 91
+blocks and 622 high-p-code operations. REA's targeted call-resolution query at
+`0x1fdfda1e` is `unresolved` with no targets. Use the native findings for the
+static loop interpretation and bounded seed-521814 follow-up; do not infer a
+Lisp helper from a computed call or treat decompiler locals as recovered
+source.
+
+One earlier metadata attempt reached BEGIN/INSTALL but did not write READY;
+the capture helper timed out, and the exact Lisp operation responsible was
+not established. The successful retry used a header-only probe with explicit
+flushes and no `ARGLIST` or constant traversal. That is a recovery pattern,
+not proof those particular operations caused the first timeout. A separate
+REA call initially returned `runtime_missing` even though Java ran in the
+interactive shell; the documented scoped-elevation wrapper retry succeeded.
+Preserve both failed output roots for diagnosis and require the successful
+subject-hash and source-bound checks for usable results.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

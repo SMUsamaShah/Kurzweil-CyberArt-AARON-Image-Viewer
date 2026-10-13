@@ -91,6 +91,18 @@ Use this only when the caller confirms the exact same scene mode and the
 preflight still passes. It changes no files in `C:\temp`, removes no unrelated
 data, and does not change permissions.
 
+If D: has between 26 and 30 MiB free, the narrower
+`-AllowMeasuredWriterStreamAt26MiB` option permits only the same
+`writer-stream-seed-1234` mode. It is based on the same measured 21,660,528-byte
+peak and preserves more than 5 MiB at its minimum; it does not apply to any
+larger-capture mode. Use it only after the normal and 30 MiB gates fail, the
+staging directory has been checked for collisions, and the exact mode is
+confirmed. The 2026-10-13 FREE-PATH follow-up hit this case with 28.7 MiB free;
+later preflights measured 28.2 and 27.7 MiB. The cause of the change was not
+identified. Three unrelated REA JSON files observed in `C:\temp` were
+preserved. The original refusal was a space threshold, not a permission
+failure. No existing staging data should be deleted to make the gate pass.
+
 ### Paused native metadata probes
 
 The required-probe runner checks that END is the last line of the archived
@@ -154,6 +166,21 @@ require the observer-specific `INSTALL`, complete case records, `RESTORED T`,
 and terminal `END` in the offline parser, plus complete runner summaries and
 fresh uninstrumented controls. The current reproducible example is
 [`free-path-stop-boundary-v2.cl`](introspection/free-path-stop-boundary-v2.cl).
+
+Two early seed-521814 observers, one waiting for `MAIN` return and one for
+`SCREEN-AND-STORE` return, produced no case before the runner limit. Neither
+report had a wrapper-entry marker, so these runs do not show whether either
+target was entered or returned. Preserve both exact sources:
+[`free-path-stop-boundary-v3-main-return-timeout.cl`](introspection/free-path-stop-boundary-v3-main-return-timeout.cl)
+and
+[`free-path-stop-boundary-v3-screen-return-timeout.cl`](introspection/free-path-stop-boundary-v3-screen-return-timeout.cl).
+The successful v4 probe instead registers a post-event callback and triggers
+once at the first successful traced `STORE-IN-FILE` exit. This is a controlled
+case location, not proof of a natural `FREE-PATH` caller. Its serial triplet,
+terminal report, drawing/scene controls and staged-source checks are required;
+see the dedicated [capture helper](tools/capture-free-path-stop-boundary-v4.ps1)
+and [findings](introspection/free-path-native.md). Do not infer that screen
+size caused the earlier no-case results.
 
 The repaired pre-scene matrix then exposed a separate rule: a complete report
 does not prove that an observer left scene generation alone. That observer
@@ -239,6 +266,36 @@ The helper keeps the logical run path beneath ignored
 volume and 128 MiB on the output volume (larger modes have higher thresholds).
 The runner's own reserved-name and write checks still apply. Do not delete
 staging files to satisfy the preflight.
+
+For the FREE-PATH stop-boundary experiment, use the dedicated serial triplet
+wrapper. It prepares three fresh roots and runs the same writer-stream mode in
+before-control, observer, after-control order; it starts no second original
+process until the prior one exits and removes no unrelated files:
+
+```powershell
+.\research\tools\capture-free-path-stop-boundary-v4.ps1
+```
+
+The wrapper requires the probe's terminal END marker for the observer and
+preserves every created root if a run fails. It does not force a canvas size;
+read the AA0 header from each capture. Use
+`-AllowMeasuredWriterStreamAt30MiB` or, only when the 30 MiB preflight fails,
+`-AllowMeasuredWriterStreamAt26MiB` for the exact measured writer-stream mode.
+Those switches lower the staging reserve; they do not repair permissions or
+remove files. The runner still checks reserved names and write access in
+`C:\temp`.
+
+Keep its named-parameter hashtable splatting when changing the wrapper. An
+array containing the strings `'-RunId', $runId` was bound positionally and
+failed the RunId pattern check before the runner started. The v4 evidence
+builder allows only the observer's `aaron-planning-call-trace.txt` to differ;
+it still compares that trace between the bracketing controls and requires the
+other drawing/scene outputs and ordinary sources to match.
+
+For a read-only disk-space check in this shell, use
+`Get-PSDrive -Name C,D | Select-Object Name,Free,Used`; the WMI
+`Get-CimInstance Win32_LogicalDisk` query may return Access Denied here. The
+runner's own staging preflight remains authoritative.
 
 If a run stopped after creating its output root, first confirm the named AARON
 process has exited. Then archive only staging files whose creation times match

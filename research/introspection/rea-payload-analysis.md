@@ -67,6 +67,20 @@ inputs were analyzed statically and never executed. See the
 [canvas findings](canvas-dimensions.md) and
 [portable evidence](evidence/canvas-size-native-links-20261013.json).
 
+## FREE-PATH loop and stop-boundary investigation, 2026-10-13
+
+REA 6.4.0 / Ghidra 12.1.4 analyzed the exact 1,330-byte `FREE-PATH` payload
+after a new live header and bounded window matched one complete PLL object.
+The 1,322-byte decoded body contains 456 instruction records, 91 basic blocks
+and 622 high-p-code operations. A second REA query at `0x1fdfda1e` reports the
+computed call target as unresolved. The static body shows two tag-aware exit
+gates, a tagged counter increment, an accumulated value and a loop back-edge;
+it does not identify their Lisp values or units. It cannot choose the
+FREE-PATH stop rule or establish a caller. See the
+[native findings](free-path-native.md) for source/control hashes, exact PLL
+offsets, the unresolved-target report, and the seed-521814 discriminator.
+The generated PE was analyzed statically and never executed.
+
 ## Concrete queries
 
 ZERO-EDGE has `CMP ECX,0x2` at archived static address `0x1fe03941`, followed by

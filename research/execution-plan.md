@@ -428,9 +428,11 @@ checks all three paths independently of the ignored raw capture.
 
 **Current gate:** the distance-stop boundary is still unresolved. The
 JavaScript path matches the three natural seed-1234 calls and one seed-5678
-holdout, but a new isolated edge capture found only one of three additional
-near-boundary cases matching the current implementation. Do not generalize the
-candidate stop calculations or widen the implementation yet.
+holdout. In the three v2 isolated edges it matches one; v4 adds seed 521814,
+where original FREE-PATH consumes 12 steps and JavaScript consumes 13. The
+bare-wiggle candidate predicts 12 for this seed while the step-sum and
+source-to-emitted-point candidates predict 13. This is one discriminating
+sample, not a general rule; do not widen the implementation yet.
 
 The first boundary matrix now contains 40 complete direct calls over 20 input
 shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
@@ -448,6 +450,18 @@ progress variable remains unavailable. See the [matrix findings](introspection/f
 [seed candidate finder](tools/find-free-path-emitted-point-boundary-seeds.mjs),
 [portable evidence](introspection/evidence/free-path-boundaries-20261013.json),
 and the reusable [triplet verifier](tools/verify-local-aaron-triplet.mjs).
+
+The v4 source-bound 320×480 triplet fires its controlled case at the first
+successful traced `STORE-IN-FILE` exit (depth 7). The original consumes 12 of
+14 selected steps, returns 15 points, and leaves next RNG value 82821; JavaScript
+consumes 13, returns 16 points, and leaves 92793. Five drawing/scene outputs
+and six ordinary staged sources match both fresh controls. The observer's
+planning trace differs only as an observer diagnostic because the probe adds
+PREP-LINE and STORE-IN-FILE trace targets; the bracketing traces match. This
+does not capture a natural FREE-PATH caller or establish the stop condition.
+See [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json),
+[findings](introspection/free-path-native.md), and the serial
+[triplet helper](tools/capture-free-path-stop-boundary-v4.ps1).
 
 ## 3. Produce one complete drawing unit from higher-level inputs — point emission measured
 
@@ -581,6 +595,8 @@ dependencies or independently check a risky result.
 Continue from the active FREE-PATH stop-boundary investigation described in
 the [progress report](progress-report.md) and continuity handoff. Keep the
 writer-replay milestone marked achieved; do not restart it unless a specific
-new mismatch makes part of that evidence relevant. The current stop rule is
-unresolved, with one exact JS match and two one-iteration mismatches in the
-latest isolated cases.
+new mismatch makes part of that evidence relevant. Across four isolated
+one-edge cases, JavaScript matches one and differs by one iteration in three.
+The v4 bare-wiggle match is limited to seed 521814. Select a fresh seed where
+the bare-wiggle prediction differs from the other candidates, then retain the
+same source-bound triplet and scene-control checks.

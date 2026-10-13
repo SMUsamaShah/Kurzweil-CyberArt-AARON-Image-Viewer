@@ -95,6 +95,21 @@ whole-painting parity results. See the [updated findings](introspection/free-pat
 [portable v2 evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
 and the [reusable Lisp scope check](tools/check-lisp-probe-scope.mjs).
 
+The v4 seed-521814 discriminator now completes in a source-bound 320x480
+before/observer/after triplet. The first successful traced STORE-IN-FILE exit
+at depth 7 triggers one controlled edge case: original consumes 12 of 14
+selected steps; JS consumes 13, so JS remains mismatched. The bare-wiggle
+candidate predicts 12 here; step-sum and source-to-emitted-point predict 13.
+This does not establish a general stop rule or natural caller. The five
+drawing/scene outputs and six ordinary staged Lisp sources match controls; the
+observer's planning trace differs because its extra targets are diagnostic.
+Read [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json),
+[findings](introspection/free-path-native.md), and the serial
+[capture helper](tools/capture-free-path-stop-boundary-v4.ps1). Next choose a
+fresh seed that separates the remaining models. Counts remain 30 routine
+names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 full-painting
+parity results.
+
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
 total. T means outside `0 <= X <= *PIC-WIDE*-1` and

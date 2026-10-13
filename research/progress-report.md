@@ -12,7 +12,7 @@ counts separate from recovered behavior.
 | Routines with documented, bounded JS/original comparisons | 30 routine names; 31 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, plus the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters. These are limited contracts, not 30 general-purpose source reconstructions. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
-| REA 6.4 static native payload dossiers | 5 named payloads | Structured native-code analysis; not five recovered Lisp functions, verified ABIs, or application-wide call graphs. |
+| REA 6.4 static native payload dossiers | 6 named payloads | Structured native-code analysis; not six recovered Lisp functions, verified ABIs, or application-wide call graphs. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
@@ -138,6 +138,35 @@ FREE-PATH contract, not a new recovered routine. The function count remains
 (20% by count), and whole-painting parity remains 0. See the
 [boundary findings](introspection/free-path-boundaries.md) and
 [portable v2 evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json).
+
+The exact `FREE-PATH` native payload is now also mapped and analyzed with REA
+6.4.0 / Ghidra 12.1.4. Its 1,322-byte decoded body has 456 instruction
+records, 91 blocks and 622 high-p-code operations. A targeted call-resolution
+query leaves the loop's computed dispatch unresolved, so REA does not choose
+the stop rule. The local seed-521814 replay predicts 12 steps for a terminal
+bare-wiggle candidate and 13 for both the current step-sum and source-to-point
+candidates. The one-case capture is now complete; its bounded result is
+summarized below. This is the sixth named native payload dossier, but it adds no JavaScript contract: the behavior
+count remains 30 routine names / 31 bounded contracts, milestone progress is
+still 1 of 5 (20%), and whole-painting parity remains 0. See the
+[FREE-PATH native findings](introspection/free-path-native.md) and
+[REA payload notes](introspection/rea-payload-analysis.md).
+
+A new source-bound 320×480 triplet ran one controlled FREE-PATH edge at seed
+521814 from the first successful traced `STORE-IN-FILE` exit (depth 7). The
+original selected 14 steps but consumed 12; JS consumed 13. The original
+returned 15 points and next RNG value 82821, while JS returned 16 points and
+92793. This sample matches the local terminal-distance-at-most-bare-wiggle
+prediction and disagrees with step-sum and source-to-emitted-point predictions.
+It does not establish the general stop rule or a natural caller, and JS parity
+remains false for the sample. The AA0, image, image ID, scene snapshot, random
+seed record, and six ordinary staged Lisp sources match the fresh controls;
+the observer's planning trace is retained separately because the two extra
+trace targets intentionally change that diagnostic. The counts remain 30
+routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
+whole-painting parity. See the [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json)
+and [FREE-PATH findings](introspection/free-path-native.md); the next gate is
+another seed chosen to discriminate the remaining stop candidates.
 
 ## What remains before a general AARON-equivalent generator
 

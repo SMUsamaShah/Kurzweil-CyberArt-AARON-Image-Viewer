@@ -16,7 +16,9 @@ param(
 
     [string]$BaseRoot = 'C:\AaronOracleRuns',
 
-    [switch]$AllowMeasuredWriterStreamAt30MiB
+    [switch]$AllowMeasuredWriterStreamAt30MiB,
+
+    [switch]$AllowMeasuredWriterStreamAt26MiB
 )
 
 Set-StrictMode -Version Latest
@@ -50,14 +52,21 @@ $largeMode = $Mode -in @('writer-sequence-seed-1234', 'writer-windows-seed-1234'
 if ($AllowMeasuredWriterStreamAt30MiB -and $Mode -ne 'writer-stream-seed-1234') {
     throw 'The 30 MiB staging allowance is only valid for writer-stream-seed-1234'
 }
+if ($AllowMeasuredWriterStreamAt26MiB -and $Mode -ne 'writer-stream-seed-1234') {
+    throw 'The 26 MiB staging allowance is only valid for writer-stream-seed-1234'
+}
+if ($AllowMeasuredWriterStreamAt30MiB -and $AllowMeasuredWriterStreamAt26MiB) {
+    throw 'Choose only one measured writer-stream staging allowance'
+}
 # The exact 2026-10-13 writer-stream capture peaked at 21,660,528 staged bytes.
-# The opt-in threshold preserves more than 9 MiB of headroom at the minimum.
-$minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
+# The 30 MiB threshold leaves more than 9 MiB; the 26 MiB fallback leaves more
+# than 5 MiB. Both reduced thresholds are limited to that same measured mode.
+$minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt26MiB) { 26MB } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
 $minOutput = if ($stagingDriveName -eq $outputDriveName) { 192MB } else { 128MB }
 if ($stagingDrive.Free -lt $minStaging) {
     throw ("C:\temp resolves to {0}: with {1:N1} MiB free; this mode needs at least {2:N0} MiB before launch. " -f `
         $stagingPath, ($stagingDrive.Free / 1MB), ($minStaging / 1MB)) +
-        'Archive only the interrupted run''s staging files, then retry this preflight.'
+        'Free only known interrupted-run staging files or use the documented exact-mode measured allowance; do not delete unrelated files.'
 }
 if ($outputDrive.Free -lt $minOutput) {
     throw ("Output drive {0}: has {1:N1} MiB free; this mode needs at least {2:N0} MiB. " -f `
