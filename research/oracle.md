@@ -332,6 +332,19 @@ the observer's counters, state, errors or truncation; its strict offline
 parser must still reject incomplete cases. Keep the historical runner frozen
 for existing published source closures.
 
+### Paused metadata capture uses READY and END separately
+
+When a native-code helper must read the owned process during a pre-scene pause,
+the probe report needs two distinct markers. Write READY after the metadata is
+complete but before pausing; call capture-aaron-native-code.ps1 with
+MetadataEndMarker set to that READY line. The helper reads the selected native
+windows and writes the release file. After release, the probe writes its
+capture-wait result and then the required terminal END line. The runner's
+RequiredProbeEndMarker remains END, and END must be the final report line.
+Never append a footer after END. The ready marker proves the helper may start;
+only the runner's terminal END check proves the probe finished its handshake.
+See the reproducible recipe in tooling-workarounds.md.
+
 Read the first AA0 header to determine the captured canvas; do not infer it
 from `summary.smallImage`. On 2026-10-13, three complete
 `writer-stream-seed-1234` runs from the required-probe runner reported
@@ -345,6 +358,16 @@ uninstrumented check again produced 320x480 with the prior 320x480 AA0 and
 scene-report hashes. The cause remains unknown; do not infer the canvas from
 `smallImage` or force a different display mode to match old evidence. See the
 [ZERO-EDGE reference census](introspection/zero-edge-native-links.md).
+
+The later canvas-size follow-up on 2026-10-13 produced a fresh complete
+768x1080 writer-stream triplet with matching no-probe controls. This is a
+separate regime from the earlier 320x480 triplet above; both report
+smallImage=false and use the same runner, mode, installer, and patch hashes.
+The new boundary capture finds the first state difference after
+SET-UP-SCREEN-SIZE, while its entered screen globals match. It does not
+identify the internal query or its cause. Keep both sets separated and see
+[canvas-size findings](introspection/canvas-dimensions.md) and
+[portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
 
 The ZERO-EDGE contract investigation has three excluded attempts: v1's
 serializer scope errors, v2's changed painting despite zero errors, and v3's

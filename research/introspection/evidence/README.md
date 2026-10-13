@@ -57,6 +57,24 @@ Two independent offline derivations are byte-identical. See the
 [REA analysis](../rea-payload-analysis.md) and
 [caller findings](../zero-edge-native-caller.md).
 
+## Canvas-size context, 2026-10-13
+
+canvas-size-native-links-20261013.json binds a complete 768x1080
+SET-UP-SCREEN-SIZE / SELECT-CANVAS observer to fresh before/after controls and
+revalidates the earlier complete 320x480 evidence closure. Both regimes
+enter SET-UP-SCREEN-SIZE with the same 640x480 globals; its exit state and the
+later selected canvas differ. The cause remains unknown. Both live payloads
+match unique complete PLL objects, and REA 6.4.0 decodes their exact bodies
+while leaving indirect dispatch targets unresolved.
+
+The portable report contains 254 verified source paths, is 76,213 bytes, and
+has SHA-256
+1732b495a569b5af5d696777e8b17b572c5cdce6e7cf946f2e9c89a9adfd952d.
+Two independent derivations matched byte-for-byte. This adds no JavaScript
+contract and claims no whole-painting parity. See the
+[canvas findings](../canvas-dimensions.md) and
+[offline derivation helper](../../tools/derive-canvas-size-evidence.mjs).
+
 ## BRUSH-STROKE REA call-site cluster, 2026-10-12
 
 [`rea-brush-stroke-control-flow-20261012-v4.json`](rea-brush-stroke-control-flow-20261012-v4.json)

@@ -138,10 +138,16 @@ computed-call boundary. A separate hardware breakpoint at the live
 `BUFFER-HOLE` entry also saw no entry in one fresh 320x480 scene; six outputs
 and six scene sources match fresh controls, and both target payloads match the
 PLL. The combined evidence binds 75 sources and derives byte-identically
-twice. The earlier 768x1080 run shares the mode and runner hashes, but a fresh
-control reproduced 320x480; the cause remains unknown. Next, inspect the
-startup dimension-selection context and reproduce the larger canvas before
-another ZERO-EDGE caller attempt. See the [REA analysis](introspection/rea-payload-analysis.md),
+twice. The completed canvas-size probe now brackets a fresh 768x1080 observer
+with no-probe controls; all six drawing/scene outputs and six scene sources
+match. The previously measured 320x480 triplet remains separate. Both regimes
+enter SET-UP-SCREEN-SIZE with 640x480 globals, but its exit state differs.
+The cause remains unknown, and REA 6.4 leaves the relevant native dispatch
+calls unresolved. Next, repeat the ZERO-EDGE caller observation only in the
+reproduced 768x1080 regime. See the
+[canvas findings](introspection/canvas-dimensions.md),
+[portable canvas evidence](introspection/evidence/canvas-size-native-links-20261013.json),
+[REA analysis](introspection/rea-payload-analysis.md),
 [reference findings](introspection/zero-edge-native-links.md),
 [caller findings](introspection/zero-edge-native-caller.md),
 [ZERO-EDGE evidence](introspection/evidence/zero-edge-native-caller-20261013.json),

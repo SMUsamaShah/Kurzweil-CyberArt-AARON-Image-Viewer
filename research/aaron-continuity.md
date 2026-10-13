@@ -51,6 +51,17 @@ The older 768x1080 scene remains unexplained despite matching mode and runner
 hashes. See [BUFFER-HOLE findings](introspection/zero-edge-native-caller.md)
 and [combined evidence](introspection/evidence/buffer-hole-native-investigation-20261013.json).
 
+Canvas-size continuation: a complete current 768x1080 observer is bracketed
+by fresh same-mode controls; six drawing/scene outputs and six staged scene
+sources match across all three. The earlier complete 320x480 triplet has been
+revalidated against its 75-source closure. Both regimes enter
+SET-UP-SCREEN-SIZE with 640x480 globals; the first wrapped boundary difference
+appears at its exit, and SELECT-CANVAS receives ACLWIN::SQUARE in both. The
+reason is still unknown. Current REA 6.4 results decode the exact 1,140-byte
+and 462-byte bodies but leave indirect dispatch targets unresolved. No JS
+contract count changed. See [canvas findings](introspection/canvas-dimensions.md)
+and [portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
+
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
 total. T means outside `0 <= X <= *PIC-WIDE*-1` and
@@ -63,11 +74,11 @@ BRUSH/SUB-FRAME identities and three-value copied RNG previews are unchanged;
 this is not a full RNG-state proof or a direct-caller capture.
 Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
 with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
-At that earlier checkpoint the next item was an explicit ZERO-EDGE capture;
-the current frontier is to explain the 320x480/768x1080 canvas difference,
-then repeat the ZERO-EDGE caller observation only in the reproduced larger
-canvas regime. Full scene generation and general VALUE=0 painter behavior
-remain open.
+At that earlier checkpoint the next item was an explicit ZERO-EDGE capture.
+The canvas difference is now bounded at the SET-UP-SCREEN-SIZE and
+SELECT-CANVAS boundaries but remains unexplained. The next target is a
+ZERO-EDGE caller observation in the freshly reproduced 768x1080 regime. Full
+scene generation and general VALUE=0 painter behavior remain open.
 
 ### ZERO-EDGE holdout and JavaScript model, 2026-10-12
 

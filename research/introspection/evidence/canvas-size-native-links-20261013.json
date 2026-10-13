@@ -1,0 +1,1672 @@
+{
+  "schemaVersion": 1,
+  "status": "measured",
+  "investigation": "canvas-size-screen-context-20261013",
+  "claimScope": "Two source-bound writer-stream-seed-1234 regimes, with a complete native metadata observer and fresh no-probe controls for the current 768x1080 regime.",
+  "result": {
+    "regimes": {
+      "320x480": {
+        "sourceEvidence": "research/introspection/evidence/buffer-hole-native-investigation-20261013.json",
+        "observerRunId": "buffer-hole-native-caller-observer-20261013",
+        "trace": {
+          "state": {
+            "setupEntry": {
+              "*SCREEN-WIDTH*": 640,
+              "*SCREEN-HEIGHT*": 480,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": null,
+              "A-WIDTH": null,
+              "B-WIDTH": null,
+              "C-WIDTH": null,
+              "D-WIDTH": null,
+              "E-WIDTH": null
+            },
+            "setupExit": {
+              "*SCREEN-WIDTH*": 640,
+              "*SCREEN-HEIGHT*": 480,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": 1080,
+              "A-WIDTH": 320,
+              "B-WIDTH": 320,
+              "C-WIDTH": 320,
+              "D-WIDTH": 320,
+              "E-WIDTH": 320
+            },
+            "selectEntry": {
+              "*SCREEN-WIDTH*": 640,
+              "*SCREEN-HEIGHT*": 480,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": 1080,
+              "A-WIDTH": 320,
+              "B-WIDTH": 320,
+              "C-WIDTH": 320,
+              "D-WIDTH": 320,
+              "E-WIDTH": 320
+            },
+            "selectExit": {
+              "*SCREEN-WIDTH*": 640,
+              "*SCREEN-HEIGHT*": 480,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": 320,
+              "*PIC-HIGH*": 480,
+              "A-WIDTH": 320,
+              "B-WIDTH": 320,
+              "C-WIDTH": 320,
+              "D-WIDTH": 320,
+              "E-WIDTH": 320
+            }
+          },
+          "selectCanvasInput": "ACLWIN::SQUARE"
+        },
+        "outputsAndSceneSourcesMatchControls": true
+      },
+      "768x1080": {
+        "observerRunId": "canvas-dimensions-observer-20261013-b",
+        "trace": {
+          "state": {
+            "setupEntry": {
+              "*SCREEN-WIDTH*": 640,
+              "*SCREEN-HEIGHT*": 480,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": null,
+              "A-WIDTH": null,
+              "B-WIDTH": null,
+              "C-WIDTH": null,
+              "D-WIDTH": null,
+              "E-WIDTH": null
+            },
+            "setupExit": {
+              "*SCREEN-WIDTH*": 1920,
+              "*SCREEN-HEIGHT*": 1080,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": 1080,
+              "A-WIDTH": 487,
+              "B-WIDTH": 650,
+              "C-WIDTH": 768,
+              "D-WIDTH": 866,
+              "E-WIDTH": 900
+            },
+            "selectEntry": {
+              "*SCREEN-WIDTH*": 1920,
+              "*SCREEN-HEIGHT*": 1080,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": null,
+              "*PIC-HIGH*": 1080,
+              "A-WIDTH": 487,
+              "B-WIDTH": 650,
+              "C-WIDTH": 768,
+              "D-WIDTH": 866,
+              "E-WIDTH": 900
+            },
+            "selectExit": {
+              "*SCREEN-WIDTH*": 1920,
+              "*SCREEN-HEIGHT*": 1080,
+              "SMALL-IMAGE-SCREEN-WIDTH": 640,
+              "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+              "*PIC-WIDE*": 768,
+              "*PIC-HIGH*": 1080,
+              "A-WIDTH": 487,
+              "B-WIDTH": 650,
+              "C-WIDTH": 768,
+              "D-WIDTH": 866,
+              "E-WIDTH": 900
+            }
+          },
+          "selectCanvasInput": "ACLWIN::SQUARE"
+        },
+        "outputsAndSceneSourcesMatchControls": true
+      }
+    },
+    "firstObservedBoundaryDifference": {
+      "function": "SET-UP-SCREEN-SIZE",
+      "entryStateIdentical": true,
+      "entryState": {
+        "*SCREEN-WIDTH*": 640,
+        "*SCREEN-HEIGHT*": 480,
+        "SMALL-IMAGE-SCREEN-WIDTH": 640,
+        "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+        "*PIC-WIDE*": null,
+        "*PIC-HIGH*": null,
+        "A-WIDTH": null,
+        "B-WIDTH": null,
+        "C-WIDTH": null,
+        "D-WIDTH": null,
+        "E-WIDTH": null
+      },
+      "after320": {
+        "*SCREEN-WIDTH*": 640,
+        "*SCREEN-HEIGHT*": 480,
+        "SMALL-IMAGE-SCREEN-WIDTH": 640,
+        "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+        "*PIC-WIDE*": null,
+        "*PIC-HIGH*": 1080,
+        "A-WIDTH": 320,
+        "B-WIDTH": 320,
+        "C-WIDTH": 320,
+        "D-WIDTH": 320,
+        "E-WIDTH": 320
+      },
+      "after768": {
+        "*SCREEN-WIDTH*": 1920,
+        "*SCREEN-HEIGHT*": 1080,
+        "SMALL-IMAGE-SCREEN-WIDTH": 640,
+        "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+        "*PIC-WIDE*": null,
+        "*PIC-HIGH*": 1080,
+        "A-WIDTH": 487,
+        "B-WIDTH": 650,
+        "C-WIDTH": 768,
+        "D-WIDTH": 866,
+        "E-WIDTH": 900
+      },
+      "scope": "The probe samples function boundaries only; it does not identify which internal instruction or external API produced the change."
+    },
+    "selectCanvas": {
+      "input": "ACLWIN::SQUARE",
+      "after320": {
+        "*SCREEN-WIDTH*": 640,
+        "*SCREEN-HEIGHT*": 480,
+        "SMALL-IMAGE-SCREEN-WIDTH": 640,
+        "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+        "*PIC-WIDE*": 320,
+        "*PIC-HIGH*": 480,
+        "A-WIDTH": 320,
+        "B-WIDTH": 320,
+        "C-WIDTH": 320,
+        "D-WIDTH": 320,
+        "E-WIDTH": 320
+      },
+      "after768": {
+        "*SCREEN-WIDTH*": 1920,
+        "*SCREEN-HEIGHT*": 1080,
+        "SMALL-IMAGE-SCREEN-WIDTH": 640,
+        "SMALL-IMAGE-SCREEN-HEIGHT": 480,
+        "*PIC-WIDE*": 768,
+        "*PIC-HIGH*": 1080,
+        "A-WIDTH": 487,
+        "B-WIDTH": 650,
+        "C-WIDTH": 768,
+        "D-WIDTH": 866,
+        "E-WIDTH": 900
+      },
+      "scope": "The same observed ACLWIN::SQUARE argument leads to different recorded canvas widths in the two regimes; this is a bounded observation, not a general selection rule."
+    },
+    "currentControls": {
+      "runIds": [
+        "canvas-dimensions-control-20261013-a",
+        "canvas-dimensions-observer-20261013-b",
+        "canvas-dimensions-control-20261013-c"
+      ],
+      "outputsByteIdenticalAcrossAllThree": true,
+      "sceneSourcesByteIdenticalAcrossAllThree": true,
+      "equalOutputs": {
+        "aa0": {
+          "bytes": 426587,
+          "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+        },
+        "image": {
+          "bytes": 424205,
+          "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+        },
+        "image-id": {
+          "bytes": 3,
+          "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+        },
+        "aaron-scene-state-snapshot.txt": {
+          "bytes": 25959,
+          "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+        },
+        "aaron-planning-call-trace.txt": {
+          "bytes": 21295296,
+          "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+        },
+        "aaron-random-seed-loaded.txt": {
+          "bytes": 476,
+          "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+        }
+      },
+      "equalSceneSources": {
+        "planning-call-trace.cl": {
+          "bytes": 18496,
+          "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+        },
+        "planning-random-seed-common.cl": {
+          "bytes": 20476,
+          "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+        },
+        "scene-state-snapshot-seeded-1234.cl": {
+          "bytes": 847,
+          "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+        },
+        "scene-state-snapshot-writer-seeded-1234.cl": {
+          "bytes": 579,
+          "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+        },
+        "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+          "bytes": 401,
+          "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+        },
+        "scene-state-snapshot.cl": {
+          "bytes": 41791,
+          "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+        }
+      },
+      "runtimeInputs": {
+        "unchangedRuntimeFiles": [
+          "AARON.dxl",
+          "AARON.exe",
+          "AARON.pll",
+          "AARON_ScreenSaver.scr",
+          "UserDocumentation.html",
+          "acl5016.dll",
+          "ktiCompress.dll",
+          "license.dll",
+          "mfc42.dll",
+          "msvcirt.dll",
+          "registry.dll",
+          "upload.dll"
+        ],
+        "intentionalProbeLoaderDifferences": [
+          ".clinit.cl",
+          "aaron-probe-loader.cl",
+          "clinit.cl"
+        ],
+        "noProbeControlsUseSceneLoader": true,
+        "observerLoaderCopiesMatchCapturedLoader": true
+      },
+      "probe": {
+        "functions": [
+          "SET-UP-SCREEN-SIZE",
+          "SELECT-CANVAS"
+        ],
+        "constantCounts": {
+          "SET-UP-SCREEN-SIZE": 20,
+          "SELECT-CANVAS": 21
+        },
+        "errors": 0,
+        "truncated": 0
+      }
+    },
+    "prior320Controls": {
+      "outputsByteIdenticalAcrossAllThree": true,
+      "sceneSourcesByteIdenticalAcrossAllThree": true,
+      "outputFiles": [
+        "aa0",
+        "image",
+        "image-id",
+        "aaron-scene-state-snapshot.txt",
+        "aaron-planning-call-trace.txt",
+        "aaron-random-seed-loaded.txt"
+      ],
+      "sourceFiles": [
+        "planning-call-trace.cl",
+        "planning-random-seed-common.cl",
+        "scene-state-snapshot-seeded-1234.cl",
+        "scene-state-snapshot-writer-seeded-1234.cl",
+        "scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "scene-state-snapshot.cl"
+      ],
+      "revalidatedOriginalSources": 75
+    },
+    "sameHarnessAcrossRegimes": {
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    "nativeStaticAnalysis": {
+      "mapPath": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/native-code/mapped/native-code-map.json",
+      "pllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "functions": {
+        "SET-UP-SCREEN-SIZE": {
+          "liveEntry": "0x1fdc0df4",
+          "livePayloadBytes": 1140,
+          "livePayloadSha256": "0dfceed21e987c82f2030af66bc2e0879493f9bc28ab7af01d466b5a449768ea",
+          "completeUniquePllObjectMatch": true,
+          "ghidraInstructionCount": 366,
+          "ghidraDecompilationCompleted": true,
+          "reaVersion": "6.4.0",
+          "reaInputWasExecuted": false,
+          "reaInstructionCount": 366,
+          "reaBasicBlockCount": 121,
+          "reaIndirectCallSiteCount": 62,
+          "reaIndirectCallSiteExamples": [
+            "0x1fdc0dfd: CALL dword ptr [EDI + -0x45]",
+            "0x1fdc0e06: CALL dword ptr [EDI + -0x35]",
+            "0x1fdc0e14: CALL dword ptr [EDI + -0x71]",
+            "0x1fdc0e1c: CALL EDI",
+            "0x1fdc0e23: CALL EDI"
+          ],
+          "limitations": [
+            "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+            "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+            "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+            "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+          ]
+        },
+        "SELECT-CANVAS": {
+          "liveEntry": "0x1fdfba04",
+          "livePayloadBytes": 462,
+          "livePayloadSha256": "2b2bd8b47cfeabbb3594770dc66c862a71eb7c904057a1cba073c8a0f475c0a4",
+          "completeUniquePllObjectMatch": true,
+          "ghidraInstructionCount": 155,
+          "ghidraDecompilationCompleted": true,
+          "reaVersion": "6.4.0",
+          "reaInputWasExecuted": false,
+          "reaInstructionCount": 155,
+          "reaBasicBlockCount": 48,
+          "reaIndirectCallSiteCount": 27,
+          "reaIndirectCallSiteExamples": [
+            "0x1fdfba10: CALL dword ptr [EDI + -0x45]",
+            "0x1fdfba1c: CALL dword ptr [EDI + -0x35]",
+            "0x1fdfba2a: CALL dword ptr [EDI + -0x71]",
+            "0x1fdfba30: CALL dword ptr [EDI + 0x7b]",
+            "0x1fdfba4a: CALL dword ptr [EDI + -0x71]"
+          ],
+          "limitations": [
+            "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+            "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+            "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+            "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+          ]
+        }
+      },
+      "generatedPeWasExecuted": false,
+      "conclusion": "REA 6.4 decoded exact bodies and CFGs, but the screen/context calls remain indirect runtime dispatch; this does not name the OS API, identify an original caller, or recover Lisp source/ABI."
+    },
+    "JavaScriptContractsAdded": 0,
+    "wholePaintingParityClaimed": false
+  },
+  "limitations": [
+    "The difference between 320x480 and 768x1080 remains unexplained, including the earlier 320x480 result on a reported 1920x1080 desktop.",
+    "SET-UP-SCREEN-SIZE and SELECT-CANVAS were observed at wrapped boundaries; a direct caller is not established.",
+    "REA and Ghidra output is static disassembly/decompilation of exact mapped payloads, not original Lisp source or ABI recovery.",
+    "The current evidence adds no JavaScript contract and does not claim painting parity."
+  ],
+  "sources": [
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-invocation.json",
+      "bytes": 1113,
+      "sha256": "dfba24fde5e351bacd3d6fdda047d5bae20ac297b339e430a345d3e842c09a1a"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-result.json",
+      "bytes": 5135,
+      "sha256": "2282ef4fe96a97dd1563cb754949c7c8f0e38780f6c8b4b8d4c2ba46abe51404"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-invocation.json",
+      "bytes": 1096,
+      "sha256": "f720f2c6158d4412542906d519c1a36f702318c8cc56e4ad6ba8f15e862028a4"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-result.json",
+      "bytes": 386677,
+      "sha256": "946b5d204ab262f4db8d9f86bd85ff95a6b31b66f3165243c7fa9dc7795dae41"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.binding.json",
+      "bytes": 2106,
+      "sha256": "ae61d852f7353487274a4674fc629ef399435d346cc388f5ee0a77cee32c6633"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.seeds.tsv",
+      "bytes": 32,
+      "sha256": "8edb286c290ae200fd4e4160382e431e5aa107790e5c312c2ad06bcf3e09de8e"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.synthetic.exe",
+      "bytes": 4608,
+      "sha256": "ff0f19cd9213e90cdbc587385f277cf0c2b9ff2086138329c51dcd6ee768149a"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-20261013/select-canvas.binding.json",
+      "bytes": 2140,
+      "sha256": "89e5bd779e7ad8780411f32d501278bc3cfb63729a9d7cab1d0e3ddd22130e40"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-20261013/select-canvas.seeds.tsv",
+      "bytes": 34,
+      "sha256": "714053c40b369f1e6ce2a33eeb9d2350959d8ea7140198c791712eb401f792a9"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-20261013/select-canvas.synthetic.exe",
+      "bytes": 3584,
+      "sha256": "75125c971243ccbf64fd48abc2bc824c4e3076539a712fe2c0952474b5455fed"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-rea-function-20261013/rea-invocation.json",
+      "bytes": 1100,
+      "sha256": "cfe23fab0c4bc1a68f098267237174eaba3925c5ad8a0037861ab053d8e14279"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-rea-function-20261013/rea-result.json",
+      "bytes": 395681,
+      "sha256": "6e620057ddd90ba499609dee18a40a00fe184fc819f245f06c061ae389ceec65"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-select-rea-function-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-20261013/set-up-screen-size.binding.json",
+      "bytes": 2163,
+      "sha256": "9a4a96b056331d7fecd84038278fa6063d6abee8d102b4658ffe4b1539fe5bc7"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-20261013/set-up-screen-size.seeds.tsv",
+      "bytes": 39,
+      "sha256": "2995eda3651c681255bf40bbd9dba3d12f85587fc30e7ab07745ef144ffcea82"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-20261013/set-up-screen-size.synthetic.exe",
+      "bytes": 5632,
+      "sha256": "ac6e43e542592a9423cd4ada60563209cac96208671bcc836d23a24a9154ec41"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-rea-function-20261013/rea-invocation.json",
+      "bytes": 1108,
+      "sha256": "0c9022ddb8a165d827127717840724241f42a31f7a9cc0a2a59adefbfc9c95fe"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-rea-function-20261013/rea-result.json",
+      "bytes": 846955,
+      "sha256": "7a5cfcb727ec257843d12da144c8e5fe45488a3a241224292a9d94da871b46d7"
+    },
+    {
+      "path": "research/artifacts/rea-tools/canvas-size-setup-rea-function-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "bytes": 739,
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04"
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/aaron/manifest.json",
+      "bytes": 2817,
+      "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.ghidra.json",
+      "bytes": 42134,
+      "sha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/native-code-map.json",
+      "bytes": 3122,
+      "sha256": "99e3db2f55e41b99f6d92d62f840645fee02350b431f044c2089c12e3eec84fd"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-random-samples.txt",
+      "bytes": 4563,
+      "sha256": "4b87d0139cf9501b6d7d26fd20529df7dabdee37f5e74919a82d23425079fbda"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/rseed",
+      "bytes": 3024,
+      "sha256": "b11f91048c2e462ed22d52e9eaefab5b8c4fa540b19ac662ce5050dbcadda4ae"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/.clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/scene-state.json",
+      "bytes": 43690,
+      "sha256": "702d464238140faef0d944489d2db61c4efbbd3d927ae67369dfe0ed667d3b98"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/stdout.txt",
+      "bytes": 1482,
+      "sha256": "81cc5c7c93f9c10226f6874db7e2e3c69ef387ee639772f8e671695438a323b5"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/summary.json",
+      "bytes": 984,
+      "sha256": "a9499a5b77f9c44711916d6f163fb2acfc72888dc0d5d462fa1cb15dd834c2ee"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-random-samples.txt",
+      "bytes": 4563,
+      "sha256": "764aa1addf7442a0db983d6239e367898d8c3cdeb5b862407b0dbd49981caa50"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/rseed",
+      "bytes": 3054,
+      "sha256": "53ffac2692fa49372d92f37f8b42309e767835f4dbf66ff4cd1bf2ada4d548cb"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/.clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/scene-state.json",
+      "bytes": 43703,
+      "sha256": "6c05e01069ff3b023d074c2453e5ffac2a5ffd040940c97c8bd1c5437b837afe"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/stdout.txt",
+      "bytes": 1482,
+      "sha256": "522ed6ce32fa5442cb420759f41865cc2e9bbec328a09b8d7f549e776e7f6971"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/summary.json",
+      "bytes": 997,
+      "sha256": "ca736e747d68c17f3b81e47e61a94a13bf503d56ab91bae781c27815452e7c7e"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/buffer-hole-native-caller.json",
+      "bytes": 1532,
+      "sha256": "460a304ec8b6106e9bb8daa17e66b2d47c889803669033948ddb890441c1c645"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-native-code-release.txt",
+      "bytes": 48,
+      "sha256": "a16eb0f8f88478c979711ab7c50c884f2bf6c5a64061cd5529386d6c71f01cda"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-pre-scene-probe.cl",
+      "bytes": 4354,
+      "sha256": "baced2b791f55adf0731160e4d088db0f7e04e597d7899db2d1d8911d09fc83f"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-probe-loader.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-random-samples.txt",
+      "bytes": 4561,
+      "sha256": "236baf61cb224d493fa32cffb0f3621f3011d4846f4fade6d01c084ad4b1908a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-zero-edge-native-caller-links.txt",
+      "bytes": 648,
+      "sha256": "8811ba2fb158434a5199cdb306c2f8fe9786c8f08dbae664c73082774f07a438"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/rseed",
+      "bytes": 3020,
+      "sha256": "73d7b60d9b724f5d3300d71493660e74b21bbac4daf45a3f9afc169ae0beefe3"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/.clinit.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/aaron-probe-loader.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/clinit.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/scene-state.json",
+      "bytes": 43698,
+      "sha256": "53692fd200efb97d03b98c29a0b67be9b2e915d3083a5a0e225d6d2354174d15"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/stdout.txt",
+      "bytes": 1482,
+      "sha256": "d4f7036333f3f25605e60854998d082bde36339b05942440e1be8747d9388923"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/summary.json",
+      "bytes": 1178,
+      "sha256": "0d0965f5636958a21464416ebee4020ecbf05bd5310dcbd08f45e939e11ccba6"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/aa0",
+      "bytes": 426587,
+      "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/aaron-planning-call-trace.txt",
+      "bytes": 21295296,
+      "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/aaron-random-samples.txt",
+      "bytes": 4561,
+      "sha256": "af139e5b6e93bb278102344dcba4e9fe8dd04ea4d798471f1aa39bba32283100"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25959,
+      "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/image",
+      "bytes": 424205,
+      "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/rseed",
+      "bytes": 3024,
+      "sha256": "1fa09ef56752fa9b3d3c5ef2b89da75bed83fb62e660fd5422d74296353a819f"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/.clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/scene-state.json",
+      "bytes": 90144,
+      "sha256": "aefb1f3227117112f20b30adb71e22bbb57f1b568fa4b8c20d82037808168af9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/stdout.txt",
+      "bytes": 1482,
+      "sha256": "75aff2f908391f68ffc0d5d50a100b8a19444aace5e6a351649acaca4095059b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-a/summary.json",
+      "bytes": 1071,
+      "sha256": "91fd8802a093a01cb50c3357781416bff339e2134ca00cb1829fbdf7ff581103"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/aa0",
+      "bytes": 426587,
+      "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/aaron-planning-call-trace.txt",
+      "bytes": 21295296,
+      "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/aaron-random-samples.txt",
+      "bytes": 4562,
+      "sha256": "05dffc056d4df4b32950a217292a59c3538417a1abd48a7974a0c65e07a7b70c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25959,
+      "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/image",
+      "bytes": 424205,
+      "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/rseed",
+      "bytes": 3022,
+      "sha256": "1f1d786c085d42f6e2e05a9e6b56205dfa9189ba6fda42633ac6737a2579a66f"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/.clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/clinit.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/scene-state.json",
+      "bytes": 90144,
+      "sha256": "b58cb3766904b694e812d396d9bcf182b4e630157d91e55f20fb6863eb83e3f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/stdout.txt",
+      "bytes": 1482,
+      "sha256": "e0f7cc61d21bf0449efb16a89fcb19c113639a16fdc9052577668b33d99f0095"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-control-20261013-c/summary.json",
+      "bytes": 1071,
+      "sha256": "b24aa7920dd006e2cd92dafaaa3f17985a5e8123f11279ed1c261eedc5547610"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aa0",
+      "bytes": 426587,
+      "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-canvas-size-native-links.txt",
+      "bytes": 4411,
+      "sha256": "934c38375259b9c2b8717afa93fad1f714661e1287662832271da6baa8965494"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-native-code-release.txt",
+      "bytes": 36,
+      "sha256": "f5365d18593ed4cf51eeb967d3bb34ad3dff99fb5a62d472743eb01cf094fd5d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-planning-call-trace.txt",
+      "bytes": 21295296,
+      "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-pre-scene-probe.cl",
+      "bytes": 6822,
+      "sha256": "86d9cc531a675a623e4b83e7a6e3772d91b4fc7490941b42983064bb8ec1d8ea"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-probe-loader.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-random-samples.txt",
+      "bytes": 4562,
+      "sha256": "3d6cbadc1293a2f9472ce90dd2f886aa08bb2a19dc572c4eb0ae4ec56349976c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25959,
+      "sha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/image",
+      "bytes": 424205,
+      "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/rseed",
+      "bytes": 3058,
+      "sha256": "569e452a209522a7145edbcab308445aa8ef994120e3e14244979a24ff22c5f4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/native-code/mapped/native-code-map.json",
+      "bytes": 3143,
+      "sha256": "b2fab740a2400e259ea340598952e48ca2ebf4182612b85c9b0c3cbc53c2d89a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/native-code/mapped/select-canvas.native-payload.bin",
+      "bytes": 462,
+      "sha256": "2b2bd8b47cfeabbb3594770dc66c862a71eb7c904057a1cba073c8a0f475c0a4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/native-code/mapped/set-up-screen-size.native-payload.bin",
+      "bytes": 1140,
+      "sha256": "0dfceed21e987c82f2030af66bc2e0879493f9bc28ab7af01d466b5a449768ea"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/.clinit.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/AARON_ScreenSaver.scr",
+      "bytes": 245760,
+      "sha256": "e45a69e038b378213a6db9c252568dfdb816848460d08de279af89c2bae9208c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/aaron-probe-loader.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/AARON.dxl",
+      "bytes": 5373952,
+      "sha256": "4a6ad5379d84e0ea4e475064211cca6fa9d4d44b9e84bba89f102a069206bc74"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/acl5016.dll",
+      "bytes": 344064,
+      "sha256": "904eeef1ff97eaf9ff7b1dbacd2dc730589f0e5de92641f1c4740366abe10292"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/clinit.cl",
+      "bytes": 162,
+      "sha256": "044666a923c95d543d637fcc4c6ac453ad82523fedbdbe76a7ae1466a1d5f9da"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/ktiCompress.dll",
+      "bytes": 131072,
+      "sha256": "3c8aaf597e2973bcd7d5fc8352be80be79cf50b1b2fe10324bc9cc179e6ff3ce"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/mfc42.dll",
+      "bytes": 995383,
+      "sha256": "ec63a85030c60716acdcf060abfaa95a6a3528631622fa60e7d17fbea2f751f9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/msvcirt.dll",
+      "bytes": 77878,
+      "sha256": "647f7534aaaedffa93534e4cb9b24bfcf91524828ff0364d88973be58139e255"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/upload.dll",
+      "bytes": 405504,
+      "sha256": "0c650eb484a4d2f1ba82669f8122818d9b4a05d76db1727c293b57df6d725a1c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/runtime/UserDocumentation.html",
+      "bytes": 17232,
+      "sha256": "819f49d416d33172045c5de23f9d6154c86e02c588100e0420dec03f21812562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/scene-state.json",
+      "bytes": 90146,
+      "sha256": "b740a99e459bb3b217ce2d54b940f238a43ada12ade510d785dd63566923aba5"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/stdout.txt",
+      "bytes": 1482,
+      "sha256": "1ac8d80c41244ddc715366df6a7d3af9e3df155fbf7e975805ac2659288c45a2"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-dimensions-observer-20261013-b/summary.json",
+      "bytes": 1262,
+      "sha256": "9031abd091660d9dd0e46d3149210c4afe6f69ad1a04fab0355060d6a0f88998"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/ghidra/select-canvas.ghidra.json",
+      "bytes": 38868,
+      "sha256": "6047c29a2f886a6ea234b4684ad0b5f7c5e0e2cfaccc87a6d5f4397a78569fc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/ghidra/select-canvas.headless.log",
+      "bytes": 8212,
+      "sha256": "957e22d752cee3917cca24236b2c0e42c38b07ddd81b84532eb34e82b5e53562"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/ghidra/set-up-screen-size.ghidra.json",
+      "bytes": 89719,
+      "sha256": "92fe7e77b30eba366504d87f7e3500275211444c11a9dab92192f1d2f8a88dc7"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/ghidra/set-up-screen-size.headless.log",
+      "bytes": 8468,
+      "sha256": "2752c1fb6690266e7b24e3aec6cfb2965c70265d5389973e467193d61d5c1e3d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/native-code-map.json",
+      "bytes": 3143,
+      "sha256": "cfdf006681bfa521f2cd3f97dad7f6adf6d533d5b57ee8092f76b606c3a678b1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/select-canvas.native-payload.bin",
+      "bytes": 462,
+      "sha256": "2b2bd8b47cfeabbb3594770dc66c862a71eb7c904057a1cba073c8a0f475c0a4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/canvas-size-native-observer-20261013-a/native-code/mapped/set-up-screen-size.native-payload.bin",
+      "bytes": 1140,
+      "sha256": "0dfceed21e987c82f2030af66bc2e0879493f9bc28ab7af01d466b5a449768ea"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/buffer-hole.native-payload.bin",
+      "bytes": 474,
+      "sha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/native-code-map.json",
+      "bytes": 4059,
+      "sha256": "b557aee559b8649e14b36e2023bc138f65f480259154eb384297614992a3f126"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/zero-edge.native-payload.bin",
+      "bytes": 982,
+      "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736"
+    },
+    {
+      "path": "research/introspection/canvas-size-native-links.cl",
+      "bytes": 6822,
+      "sha256": "86d9cc531a675a623e4b83e7a6e3772d91b4fc7490941b42983064bb8ec1d8ea"
+    },
+    {
+      "path": "research/introspection/evidence/buffer-hole-native-investigation-20261013.json",
+      "bytes": 38960,
+      "sha256": "e44761e8508c63ece41978d3741bb6b3702b70be3aa6890e6a601971aad59178"
+    },
+    {
+      "path": "research/introspection/zero-edge-native-caller-links.cl",
+      "bytes": 4354,
+      "sha256": "baced2b791f55adf0731160e4d088db0f7e04e597d7899db2d1d8911d09fc83f"
+    },
+    {
+      "path": "research/oracle/AaronCallerBreakpoint.cs",
+      "bytes": 17973,
+      "sha256": "65cf16df6fc08b4654facafc63f72d6a39614ecc884b759fa5504e65dedf9bd5"
+    },
+    {
+      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "bytes": 27289,
+      "sha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9"
+    },
+    {
+      "path": "research/tools/capture-aaron-native-code.ps1",
+      "bytes": 8189,
+      "sha256": "3407b9a60b6b5c66397197ac6026b0c4013b3cbd42f7b5f08400c7b6595d641a"
+    },
+    {
+      "path": "research/tools/capture-buffer-hole-caller.ps1",
+      "bytes": 10961,
+      "sha256": "913a2cb20a88dbf6d183978b50c732c81da824be99ad3d1d90cbcd63b504afbd"
+    },
+    {
+      "path": "research/tools/derive-buffer-hole-native-caller-evidence.mjs",
+      "bytes": 22399,
+      "sha256": "0a41c12bb2e731fb7063e749121f38211ad92163761c3807056d3f9f6f557bba"
+    },
+    {
+      "path": "research/tools/derive-canvas-size-evidence.mjs",
+      "bytes": 26722,
+      "sha256": "1392ed0e454dd052dff41ccb07162e36f4aedd747671aeaedd94064c3fae5041"
+    },
+    {
+      "path": "research/tools/invoke-rea-ghidra-query.ps1",
+      "bytes": 7539,
+      "sha256": "bc55b2546f6892eeb5c93bdafb73a2c9109f7c2f1c47860fb5e4581fb779090a"
+    },
+    {
+      "path": "research/tools/map-native-code-to-pll.mjs",
+      "bytes": 5906,
+      "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+    },
+    {
+      "path": "research/tools/prepare-rea-payload-pe.mjs",
+      "bytes": 8681,
+      "sha256": "278c13425fbdcdc58f060ea05fc1f7bde8a83982c695edfdb0382d9e0d3e5d0e"
+    }
+  ]
+}

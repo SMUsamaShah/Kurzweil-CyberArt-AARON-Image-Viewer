@@ -103,6 +103,35 @@ that parentheses balance. The helper also normalizes CRLF before checking the
 terminal marker. Lisp hex bytes may be lowercase, so evidence parsers must
 accept both hex cases.
 
+## Canvas-size function boundaries, 2026-10-13
+
+The read-only observer
+[canvas-size-native-links.cl](introspection/canvas-size-native-links.cl)
+captured SET-UP-SCREEN-SIZE and SELECT-CANVAS at their Lisp boundaries and
+read their live compiled-function windows during the required pre-scene pause.
+Its READY marker is for the native capture helper; the final END marker is
+written only after the helper releases the probe. The complete 768x1080 run is
+bracketed by fresh same-mode, no-probe controls. The six drawing/scene outputs
+and six staged sources match. The separate completed
+[BUFFER-HOLE investigation](introspection/evidence/buffer-hole-native-investigation-20261013.json)
+contains the 320x480 control triplet.
+
+Both regimes enter SET-UP-SCREEN-SIZE with screen globals 640x480. After it,
+the 320 regime retains 640x480 screen globals and gives all five width
+profiles 320, while the 768 regime has 1920x1080 globals and width profiles
+487/650/768/866/900. SELECT-CANVAS receives ACLWIN::SQUARE in both and ends at
+320x480 or 768x1080. This is the first wrapped-boundary difference, not an
+identified internal call or OS API. The cause remains unknown.
+
+The new live mapping matches both payloads as unique complete PLL objects.
+REA 6.4.0 and Ghidra 12.1.4 decode 366 instructions / 121 blocks for
+SET-UP-SCREEN-SIZE and 155 / 48 for SELECT-CANVAS. Indirect runtime-dispatch
+calls remain unresolved. The dossiers do not establish an original caller,
+Win32 display API, Lisp source, or Lisp ABI. The full source closure and
+limitations are in the
+[canvas findings](introspection/canvas-dimensions.md) and
+[portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

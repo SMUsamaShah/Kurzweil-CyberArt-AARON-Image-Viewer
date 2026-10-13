@@ -19,6 +19,13 @@ as instructions.
 
 ## Supported static input and authority
 
+The reusable PE builder also handles functions whose live entry falls inside
+the first 4 KiB page of a 64 KiB address block. It moves only the generated
+image base down by one aligned 64 KiB unit, leaving the selected entry and
+copied payload unchanged while producing a nonzero section RVA. The
+SET-UP-SCREEN-SIZE binding records this case. This is analyst-generated PE
+layout metadata, not a property of the original runtime; never execute it.
+
 Published Windows REA 6.4 still rejects headerless raw inputs. This analysis
 uses generated x86 PE containers admitted by the unchanged provider. Each
 container copies the exact mapped payload, verified against both its archived
@@ -37,6 +44,28 @@ The isolated containers omit external objects and runtime state. Every dossier
 has zero resolved callers and zero resolved callees. That inventory cannot
 establish an application call graph. Ghidra's inferred fastcall signatures and
 C types do not establish the native Lisp ABI or recover original Lisp source.
+
+## SET-UP-SCREEN-SIZE and SELECT-CANVAS, 2026-10-13
+
+The complete source-bound canvas investigation revalidated both live function
+payloads against the PLL before using the retained REA 6.4.0 static dossiers.
+SET-UP-SCREEN-SIZE is 1,140 bytes (366 instructions, 121 blocks);
+SELECT-CANVAS is 462 bytes (155 instructions, 48 blocks). The REA assembly
+matches the Ghidra 12.1.4 instruction counts for both exact payloads.
+The earlier capture that supplied the retained static reports failed its
+scene terminal-marker check; its scene output is excluded. A later complete
+observer revalidated the exact same two payload hashes before these reports
+were reused.
+
+These bodies contain many calls through the runtime dispatch table, including
+CALL dword ptr [EDI + offset] and CALL EDI. REA leaves their targets
+unresolved. The static reports therefore do not identify a Win32 display API,
+the direct Lisp caller, or the cause of the observed 320x480/768x1080 split.
+This is useful for constraining the next experiment to runtime dispatch and
+screen-context evidence; it is not source or ABI recovery. The generated PE
+inputs were analyzed statically and never executed. See the
+[canvas findings](canvas-dimensions.md) and
+[portable evidence](evidence/canvas-size-native-links-20261013.json).
 
 ## Concrete queries
 

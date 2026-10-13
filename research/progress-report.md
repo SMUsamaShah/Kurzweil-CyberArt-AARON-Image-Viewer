@@ -16,6 +16,7 @@ counts separate from recovered behavior.
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
+| Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
 
 The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -95,6 +96,17 @@ contracts, milestone progress remains 1 of 5 (20%), and whole-painting parity
 remains 0. See the [REA notes](introspection/rea-payload-analysis.md),
 [caller findings](introspection/zero-edge-native-caller.md), and
 [combined evidence](introspection/evidence/buffer-hole-native-investigation-20261013.json).
+
+The latest canvas-size investigation compared two source-bound screen contexts
+with fresh uninstrumented controls. In both, SET-UP-SCREEN-SIZE enters with
+640×480 screen globals; its exit differs, and SELECT-CANVAS later returns
+320×480 or 768×1080 for the same observed selector. The cause remains unknown.
+The exact native objects map to 1,140-byte and 462-byte PLL payloads. REA 6.4
+decodes both bodies but leaves their runtime dispatch calls unresolved. This
+does not change the 30 routine names / 31 JS contract units or 1-of-5
+execution milestones. See the
+[canvas-size findings](introspection/canvas-dimensions.md) and
+[portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
 
 ## What remains before a general AARON-equivalent generator
 

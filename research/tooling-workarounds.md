@@ -52,6 +52,13 @@ read-only wrapper call with scoped elevated permission and a fresh output
 folder. This is a user-profile write boundary; do not reinstall Java/Ghidra or
 change global settings. See the detailed [REA payload guide](introspection/rea-payload-analysis.md).
 
+The PE payload builder has a safe layout workaround for an entry that lands
+in the first 4 KiB page: it moves only the analyst-generated, 64 KiB-aligned
+image base down one 64 KiB unit, keeping the selected entry address and exact
+payload bytes unchanged. This gives Ghidra a nonzero section RVA. It does not
+modify the original PLL, and the generated PE must never be executed. The
+builder validates this layout in its binding JSON.
+
 ## Original AARON oracle
 
 Read [`oracle.md`](oracle.md#ctemp-staging-and-permissions) before a run.
@@ -83,6 +90,24 @@ $outputRoot = & .\research\tools\prepare-local-aaron-oracle-run.ps1 `
 Use this only when the caller confirms the exact same scene mode and the
 preflight still passes. It changes no files in `C:\temp`, removes no unrelated
 data, and does not change permissions.
+
+### Paused native metadata probes
+
+The required-probe runner checks that END is the last line of the archived
+probe report. A paused native capture therefore uses a two-step handshake:
+the probe writes READY, the capture helper snapshots native code and writes
+the release file, and only then does the probe append its final END line.
+Use READY for the capture helper's MetadataEndMarker and END for the runner's
+RequiredProbeEndMarker. Do not put a pause footer after END; the runner will
+reject that capture even when scene output finished successfully.
+
+For the reusable pattern, inspect
+[canvas-size-native-links.cl](introspection/canvas-size-native-links.cl),
+[capture-aaron-native-code.ps1](tools/capture-aaron-native-code.ps1), and
+[the canvas evidence derivation](tools/derive-canvas-size-evidence.mjs).
+The observer's staged loader files are expected to differ from no-probe
+controls. Compare drawing outputs and scene sources, then compare remaining
+runtime files after accounting for that loader change.
 
 ### WOW64 caller-breakpoint cleanup
 
@@ -185,6 +210,17 @@ Both declared output names must be unique and unused in `C:\temp`; the runner
 checks them before launch and archives only those named files. After an
 argument-binding or policy error, confirm the runner did not start AARON or
 create its output root before retrying.
+
+### Node writes through the C-backed external-runs junction
+
+The logical path under research/extracted/local-oracle/external-runs is a
+junction to C:\AaronOracleRuns. A Node mapper that creates its output under
+that junction may fail with EPERM in the default command context even when
+the oracle run succeeded. Use the same mapper command again with scoped
+elevated permission and a fresh output directory. Do not change ACLs,
+retarget the junction, or delete a partial output unless it is the named
+output created by that failed attempt. See the linked
+[native-analysis workflow](native-analysis-workflow.md).
 
 ## Git writes in this workspace
 

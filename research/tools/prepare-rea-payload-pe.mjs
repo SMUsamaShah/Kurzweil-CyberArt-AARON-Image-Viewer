@@ -33,9 +33,19 @@ export function prepareReaPayloadPe({ mapPath, functionName, pllPath, outputDire
   const object = pll.subarray(f.pll.objectOffset, f.pll.rawEnd);
   assert(sha(object) === f.objectSha256 && pll.indexOf(object) === f.pll.objectOffset && pll.indexOf(object, f.pll.objectOffset + 1) === -1,
     'Selected complete object is not uniquely byte matched in PLL');
-  const imageBase = Math.floor(entry / 65536) * 65536, sectionRva = Math.floor((entry - imageBase) / 4096) * 4096;
+  let imageBase = Math.floor(entry / 65536) * 65536;
+  let sectionRva = Math.floor((entry - imageBase) / 4096) * 4096;
+  // A valid payload can begin in the first page of a 64 KiB address block.
+  // Move only the analyst-generated image base down by one 64 KiB unit so
+  // the copied section has a nonzero RVA while the original entry stays exact.
+  if (sectionRva === 0) {
+    assert(imageBase >= 65536, 'Selected payload has no lower aligned PE image base');
+    imageBase -= 65536;
+    sectionRva = Math.floor((entry - imageBase) / 4096) * 4096;
+  }
   const prefix = entry - imageBase - sectionRva, virtualSize = prefix + payload.length, rawSize = Math.ceil(virtualSize / 512) * 512;
-  assert(payload.length > 0 && payload.length <= 16 * 1024 * 1024 && sectionRva >= 4096
+  assert(imageBase % 65536 === 0 && sectionRva >= 4096 && sectionRva % 4096 === 0
+    && prefix >= 0 && payload.length > 0 && payload.length <= 16 * 1024 * 1024
     && imageBase + sectionRva + virtualSize <= 0x100000000, 'Selected payload cannot use the bounded PE layout');
   const pe = Buffer.alloc(512 + rawSize); pe.write('MZ'); pe.writeUInt32LE(128, 60); pe.write('PE\0\0', 128);
   const c = 132, o = 152, s = 376;
