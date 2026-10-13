@@ -427,16 +427,16 @@ decision resolves mixed single/double inputs. A new retained regression case
 checks all three paths independently of the ignored raw capture.
 
 **Current gate:** the FREE-PATH distance-stop boundary is still unresolved.
-The JavaScript path matches the three natural seed-1234 calls and one seed-5678
-holdout. Across six isolated one-edge cases, it matches three and differs by
-one iteration in three. V4 seed 521814 consumed 12 of 14 steps in the original
-versus 13 in JavaScript; the local bare-wiggle prediction was 12. V5 seed
-332156 consumed all 9 selected steps in both original and JavaScript, while
-the bare-wiggle and step-times-wiggle candidates predicted 8. V6 seed 79481
-selected 13 and consumed 11; JavaScript matches all 34 random calls, returned
-points, and the next RNG value. Step-sum and both terminal-distance candidates
-predict 11, while source-to-emitted-point predicts 12. This rejects only that
-last candidate for this input. Do not widen the implementation.
+JavaScript matches the three natural seed-1234 calls and one seed-5678 holdout.
+Across eight controlled one-edge cases, it matches four and differs by one
+iteration in four. The latest v8 seed-150415 vertical single-float case
+selected 14 steps and consumed 12 in the original versus 13 in JavaScript.
+Step-sum and source-to-emitted-point predict 13; step-times-wiggle predicts
+12. This separates those local candidates for this input only and does not
+establish a general rule. The next offline candidate is seed 46380 on the same
+edge: step-sum predicts 13, source-to-emitted-point and step-times-wiggle
+predict 12. Do not widen the implementation before the next source-bound
+capture and comparison.
 
 The first boundary matrix now contains 40 complete direct calls over 20 input
 shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
@@ -653,12 +653,22 @@ leave the computed call target unresolved. The writer-replay milestone remains
 achieved; do not restart it unless a specific new mismatch makes that evidence
 relevant.
 
-The next target is the unresolved FREE-PATH distance-stop boundary. Across
-seven isolated one-edge cases, JavaScript matches four and differs by one
-iteration in three. V7 rejects bare-wiggle for that input but leaves step-sum,
-source-to-emitted-point, and step-times-wiggle tied. The existing 40-case
-matrix has already been compared offline; preserve Lisp numeric types and only
-classify rows supported by the JavaScript input interface. Use the mapped
-FREE-PATH CFG to choose a narrow next discriminator, then keep its oracle
-capture source-bound with fresh controls. Do not repeat the matrix or widen
-JavaScript to fit one captured case.
+The next target is the unresolved FREE-PATH distance-stop boundary. The v8
+source-bound 320×480 triplet uses seed 150415 on one vertical length-0.2
+single-float edge. The original consumes 12 of 14 selected steps and current
+JavaScript consumes 13; local step-sum/source-to-emitted predictions are 13,
+and step-times-wiggle predicts 12. The observer and all five drawing/scene
+outputs and six sources pass the fresh triplet checks, including matching
+runner/installer/registry/license patch hashes. This adds no general rule and
+keeps the total at eight isolated cases, four JS matches and four one-step
+mismatches.
+
+The next offline candidate is seed 46380 on the same typed edge. Local replay
+predicts selected=14, step-sum=13, source-to-emitted-point=12, and
+step-times-wiggle=12, all uncapped. Paired with v8, these three models have
+distinct two-case signatures; the original result remains unknown. Capture
+this one case in a fresh source-bound before/observer/after triplet. Preserve
+the exact Lisp numeric types, require complete report lifecycle and matching
+runtime patch hashes, and compare random-call sequence, returned points, input
+values, and next-random checkpoint. The existing 40-case matrix has already
+been compared offline; do not repeat it or widen JavaScript to fit one case.

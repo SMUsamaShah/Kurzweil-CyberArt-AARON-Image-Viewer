@@ -302,6 +302,52 @@ focus the next controlled observation, not as evidence for a stop formula.
 The byte-checked FREE-PATH Ghidra report SHA-256 is
 `1a6d055f7a56971852ff5309eac932656d7f0232233e5f5a2c94ed2d1b6b62da`.
 
+## Vertical single-float discriminator, v8
+
+The v8 source-bound `writer-stream-seed-1234` triplet measured 320×480.
+Before, observer, and after summaries are complete; their runner, installer,
+registry-patch, and license-patch hashes agree. The archived observer source
+matches the checked-in probe. Its report has the required ordered `INSTALL`,
+`READY`, successful hook, `COMPLETE`, and terminal `END` records. All five
+drawing/scene outputs and six ordinary staged Lisp sources match across the
+triplet. The observer planning trace is intentionally diagnostic because its
+two extra targets differ from the uninstrumented controls.
+
+At the first traced `STORE-IN-FILE` exit (depth 7), the probe invoked one
+controlled forward edge `((0 0 0) (0 0.2f0 1))` with seed 150415. The point
+types are `((FIXNUM FIXNUM FIXNUM) (FIXNUM SINGLE-FLOAT FIXNUM))`, and the
+captured `XYDIST` result is a `SINGLE-FLOAT`. The original selected 14 steps
+and consumed 12, returned 15 points, made 37 `RAN` calls, and left next random
+value 88798. A local Float32 replay predicts 13 steps for step-sum, 13 for
+source-to-emitted-point, and 12 for step-times-wiggle. The original result
+agrees with the last candidate and disagrees with the first two on this input
+only.
+
+The current single-precision JS implementation consumes 13 steps, returns 16
+points, makes 40 `RAN` calls, and leaves next random value 46177. It fails
+bounded parity for this sample. The probe confirms only that the input point
+values remain equal at single-precision comparison; it does not check Lisp
+object identity or list shape. Across eight isolated one-edge cases, JS matches
+four and differs by one step in four. These finite results do not recover a
+general stop rule or add a new function contract.
+
+Portable evidence is
+[`free-path-stop-boundary-20261014-v8.json`](evidence/free-path-stop-boundary-20261014-v8.json),
+SHA-256 `abac512f24af2ebfcf1d03f67f1c2fb41566da84b19868115deaa46b49d4e67b`.
+The checked-in probe SHA-256 is
+`ef6e076cfc0b5a0b6490e61a104fae63c00c804790f4964f120be71f57acbe3f`; the
+serial capture helper is
+[`capture-free-path-stop-boundary-v8.ps1`](../tools/capture-free-path-stop-boundary-v8.ps1),
+and the strict evidence deriver is
+[`derive-free-path-stop-boundary-v8-evidence.mjs`](../tools/derive-free-path-stop-boundary-v8-evidence.mjs).
+
+The next offline candidate keeps the same edge types and geometry at seed
+46380. Local replay selects 14 and predicts step-sum=13,
+source-to-emitted-point=12, and step-times-wiggle=12, all uncapped. Paired with
+v8, these three models have distinct two-case prediction signatures. The
+seed's original consumption is still unknown; treat it as a candidate for a
+fresh complete triplet, not as measured behavior.
+
 ## Reproduction
 
 Read [`oracle.md`](../oracle.md#ctemp-staging-and-permissions) first. The

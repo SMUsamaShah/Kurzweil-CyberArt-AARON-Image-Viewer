@@ -141,7 +141,18 @@ The natural caller question was completed in the 2026-10-14
 [source-bound triplet](evidence/free-path-native-caller-20261014.json): the
 first observed entry returned to DRAW-CFORM after an indirect native call.
 That bounded call-path result does not resolve the distance-stop rule. The
-remaining FREE-PATH task is to choose a fresh one-edge case that separates the
-still-live stop candidates, then compare the complete random-call sequence,
-returned points and next-random checkpoint. Do not widen the JS implementation
-from these finite polygon cases alone.
+v8 controlled single-float case then measured seed 150415 on the vertical
+length-0.2 edge. The original consumed 12 of 14 selected steps; local
+step-sum/source-to-emitted predictions were 13 and step-times-wiggle predicted
+12. JS consumed 13, so this is another one-step mismatch. The source-bound
+triplet and controls pass; see the [v8 portable evidence](evidence/free-path-stop-boundary-20261014-v8.json)
+and [native findings](free-path-native.md). The result separates those local
+predictions for this input only and does not recover a general stop rule.
+
+The next candidate keeps the same typed vertical edge and uses seed 46380.
+Local replay predicts 13 for step-sum and 12 for both source-to-emitted-point
+and step-times-wiggle, all before the selected-step cap. Across v8 and this
+candidate, the three models have distinct predicted signatures. The original
+result for seed 46380 remains unknown; only use it after a fresh source-bound
+before/observer/after triplet and complete random/result comparison. Do not
+widen the JS implementation from these finite cases alone.

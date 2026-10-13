@@ -13,15 +13,21 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-14
 
-The natural FREE-PATH caller is now captured in a complete source-bound
-320×480 before/observer/after triplet. Its first entry returned to
-`DRAW-CFORM+0x167`, immediately after computed `CALL EDI` at `+0x165`; current
-live payloads match their complete PLL objects and all control/source checks
-pass. The dynamic target is not statically named, and this one first entry is
-not a general call graph. Portable evidence is
-[`free-path-native-caller-20261014.json`](introspection/evidence/free-path-native-caller-20261014.json).
-The next target is the FREE-PATH stop-boundary discriminator; see the active
-[execution plan](execution-plan.md).
+The first natural FREE-PATH caller is now captured in a complete source-bound
+320×480 triplet: it returns to `DRAW-CFORM+0x167`, immediately after computed
+`CALL EDI` at `+0x165`. The dynamic target and broader call graph remain
+unresolved. The v8 controlled stop-boundary triplet then measured a vertical
+0.2 single-float edge at seed 150415: the original consumed 12 of 14 steps,
+while current JavaScript consumed 13. Local step-sum/source-to-emitted
+predictions were 13; step-times-wiggle predicted 12. This is one bounded
+discriminator, not a recovered general stop rule. Across eight isolated
+one-edge cases JS matches four and differs by one step in four. The 40-case
+matrix remains 26/30 matches, 4 mismatches, 10 unclassified. No contract count
+or whole-painting result changes. See
+[`v8 evidence`](introspection/evidence/free-path-stop-boundary-20261014-v8.json),
+[FREE-PATH findings](introspection/free-path-native.md), and the active
+[execution plan](execution-plan.md). The next offline discriminator is seed
+46380 on the same typed vertical 0.2 edge; its original result is unknown.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

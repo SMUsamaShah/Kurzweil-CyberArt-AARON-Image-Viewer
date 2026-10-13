@@ -27,12 +27,19 @@ generation, and verify complete paintings against fresh original runs.
 
 FREE-PATH now has a complete source-bound natural-caller triplet at 320×480.
 The first observed entry returned into `DRAW-CFORM` after its computed
-`CALL EDI` at offset `0x165`; the dynamic target is not named by static
-analysis. The before/observer/after drawing outputs and scene sources passed
-their exact checks. This adds no JavaScript behavior contract: the 40-case
-matrix remains 26/30 matching, four mismatches and ten unclassified. The next
-work is a discriminating FREE-PATH stop-boundary case; preserve the observed
-numeric types and avoid treating one native call path as a general call graph.
+`CALL EDI` at offset `0x165`; the dynamic target remains unresolved. A second
+complete triplet tested one vertical 0.2 single-float edge at seed 150415
+inside a traced `STORE-IN-FILE` exit. The original consumed 12 of 14 selected
+steps; current JavaScript consumed 13. Local step-sum and source-to-emitted
+predictions were 13, while step-times-wiggle predicted 12. This discriminates
+those candidates for one controlled input only; the general stop rule remains
+open. Across eight isolated one-edge cases, JavaScript matches four and
+mismatches by one step in four. This adds no behavior contract: the 40-case
+matrix remains 26/30 matching, four mismatches and ten unclassified. See the
+[v8 evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v8.json)
+and [FREE-PATH findings](research/introspection/free-path-native.md). The next
+offline candidate is seed 46380 on the same typed edge; its original result is
+not yet measured.
 
 ## Follow the evidence
 
@@ -42,6 +49,7 @@ numeric types and avoid treating one native call path as a general call graph.
 - [FREE-PATH findings](research/introspection/free-path-boundaries.md)
 - [FREE-PATH native analysis](research/introspection/free-path-native.md)
 - [FREE-PATH caller evidence](research/introspection/evidence/free-path-native-caller-20261014.json)
+- [FREE-PATH v8 stop-boundary evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v8.json)
 - [FREE-PATH caller triplet tooling](research/tools/capture-free-path-caller-triplet.ps1)
 - [40-case JS comparison evidence](research/introspection/evidence/free-path-boundary-js-comparison-20261013.json)
 - [Tooling workarounds](research/tooling-workarounds.md)
