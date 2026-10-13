@@ -114,16 +114,30 @@ controls. Original and JS both consume 11 of 13 selected steps, return 14
 points, and leave next RNG value 53424; all 34 random calls and returned points
 match. Step-sum, bare-wiggle, and step-times-wiggle predict 11, while
 source-to-emitted-point predicts 12. This rejects one candidate for this input
-only and leaves the general stop rule unresolved. Across six isolated one-edge
-cases JS matches three and differs by one step in three. The reproducible
-candidate scan over 200,000 seeds at lengths 2, 5, 10, 20, and 40 found no case
-with four distinct uncapped predictions. Next, choose a case that separates the
-remaining candidates or capture a natural caller boundary; keep the same fresh
-controls and source-bound evidence checks. See [v6 evidence](introspection/evidence/free-path-stop-boundary-20261013-v6.json),
+only and leaves the general stop rule unresolved. Before v7, across six
+isolated one-edge cases JS matched three and differed by one step in three.
+The reproducible candidate scan over 200,000 seeds at lengths 2, 5, 10, 20,
+and 40 found no case with four distinct uncapped predictions. See [v6
+evidence](introspection/evidence/free-path-stop-boundary-20261013-v6.json),
 [findings](introspection/free-path-native.md), [seed finder](tools/find-free-path-stop-model-seeds.mjs),
 and the serial [capture helper](tools/capture-free-path-stop-boundary-v6.ps1).
-Counts stay 30 routine names / 31 bounded contracts, 1 of 5 milestones (20%),
-and 0 whole-painting parity.
+
+The v7 seed-388 length-0.2 single-float triplet completes in 768×1080 and
+matches single-precision JS exactly: 8 of 9 selected steps, 11 returned
+points, 25 random calls, and next RNG value 15573. Step-sum,
+source-to-emitted-point, and step-times-wiggle predict 8; bare-wiggle predicts
+7. This rejects bare-wiggle for this input only and leaves three candidates
+tied. Seven isolated one-edge cases now contain four JS matches and three
+one-step mismatches. See [v7 evidence](introspection/evidence/free-path-stop-boundary-20261013-v7.json)
+and [findings](introspection/free-path-native.md). Counts remain 30 routine
+names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 whole-painting
+parity.
+
+Next, compare the existing 40-case FREE-PATH boundary matrix offline against
+JS. Preserve the Lisp numeric types and account for `FDEX`/`TDEX`/`FROM`/`TO`;
+only classify rows supported by the JS interface. If this does not explain the
+remaining mismatch, capture the stack at a natural FREE-PATH entry before
+inferring its caller.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in

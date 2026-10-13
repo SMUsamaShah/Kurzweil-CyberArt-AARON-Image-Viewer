@@ -207,6 +207,39 @@ capture helper is
 and the strict derivation tool is
 [`derive-free-path-stop-boundary-v6-evidence.mjs`](../tools/derive-free-path-stop-boundary-v6-evidence.mjs).
 
+## Seed 388 single-float length-0.2 candidate
+
+The v7 source-bound triplet used the same first successful traced
+`STORE-IN-FILE` exit and a single visible edge `((0 0 0) (0.2f0 0 1))`.
+The observer and fresh controls match on all five drawing/scene outputs and
+six ordinary staged Lisp sources. The AA0 header measures 768×1080. The
+bracketing planning traces match; the observer-only planning trace differs
+because its extra trace targets are diagnostic. The required report has a
+terminal `END`, zero errors, one case at the traced exit (depth 7), and
+confirms that `RAN` and `XYDIST` were restored. The input points have types
+`((FIXNUM FIXNUM FIXNUM) (SINGLE-FLOAT FIXNUM FIXNUM))`, and the edge distance
+is `SINGLE-FLOAT`. Portable evidence SHA-256 is
+`6e24501b60fc0d4014a12bf71c2878c32ce658f6aa9ef07e60bb90edb3d101b1`; the
+checked probe SHA-256 is
+`1ff3f9f57df69fd1c7a9a7aa505436f3c5a7ec7c71847ca6298b80149e217c4b`.
+
+For seed 388, the original selected 9 steps and consumed 8, returned 11
+points, and left next random value 15573. The single-precision JavaScript
+replay matches all 25 random calls, every returned point, and that next RNG
+checkpoint. Step-sum, source-to-emitted-point, and step-times-wiggle models
+predict 8; bare-wiggle predicts 7. This sample rejects bare-wiggle for this
+input only and does not choose among the other three models or establish a
+general stop rule. It remains a controlled call, not a natural caller
+observation.
+
+The portable record is
+[`free-path-stop-boundary-20261013-v7.json`](evidence/free-path-stop-boundary-20261013-v7.json).
+Its source is [`free-path-stop-boundary-v7.cl`](free-path-stop-boundary-v7.cl),
+the serial capture helper is
+[`capture-free-path-stop-boundary-v7.ps1`](../tools/capture-free-path-stop-boundary-v7.ps1),
+and the strict derivation tool is
+[`derive-free-path-stop-boundary-v7-evidence.mjs`](../tools/derive-free-path-stop-boundary-v7-evidence.mjs).
+
 ## Reproduction
 
 Read [`oracle.md`](../oracle.md#ctemp-staging-and-permissions) first. The

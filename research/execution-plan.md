@@ -491,6 +491,18 @@ evidence](introspection/evidence/free-path-stop-boundary-20261013-v6.json),
 [findings](introspection/free-path-native.md), [seed finder](tools/find-free-path-stop-model-seeds.mjs),
 and the serial [triplet helper](tools/capture-free-path-stop-boundary-v6.ps1).
 
+The v7 source-bound 768×1080 triplet uses seed 388 and the single-float edge
+`((0 0 0) (0.2f0 0 1))`. The original selected 9 steps and consumed 8,
+returned 11 points, and left next RNG value 15573. Single-precision JavaScript
+matches all 25 random calls, returned points, and the next checkpoint. The
+input coordinate and `XYDIST` result are confirmed single-float. Step-sum,
+source-to-emitted-point, and step-times-wiggle predict 8; bare-wiggle predicts
+7. It rejects bare-wiggle only for this sample. Five drawing/scene outputs and
+six ordinary sources match fresh controls. The strict evidence derivation is
+byte-identical on repeat. See [v7 evidence](introspection/evidence/free-path-stop-boundary-20261013-v7.json),
+[findings](introspection/free-path-native.md), and the serial [triplet
+helper](tools/capture-free-path-stop-boundary-v7.ps1).
+
 ## 3. Produce one complete drawing unit from higher-level inputs — point emission measured
 
 The first eight natural `SCREEN-AND-STORE` inputs for each of two independent
@@ -623,9 +635,11 @@ dependencies or independently check a risky result.
 Continue from the active FREE-PATH stop-boundary investigation described in
 the [progress report](progress-report.md) and continuity handoff. Keep the
 writer-replay milestone marked achieved; do not restart it unless a specific
-new mismatch makes part of that evidence relevant. Across six isolated
-one-edge cases, JavaScript matches three and differs by one iteration in three.
-The v6 length-2 case separates source-to-emitted-point from three predictions,
-but leaves those three tied. Select the next case from a documented model
-discriminator or move to a natural caller boundary; retain the source-bound
-triplet and scene-control checks.
+new mismatch makes part of that evidence relevant. Across seven isolated
+one-edge cases, JavaScript matches four and differs by one iteration in three.
+The v7 case rejects bare-wiggle for this input but leaves step-sum,
+source-to-emitted-point, and step-times-wiggle tied. Next, compare the existing
+40-case boundary matrix offline, preserve Lisp numeric types, and only classify
+rows supported by the JavaScript input interface. If needed afterward, capture
+the stack at a natural FREE-PATH entry. Keep fresh controls and source-bound
+evidence checks for any new oracle run.

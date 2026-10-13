@@ -1574,3 +1574,18 @@ rule or a natural caller. The evidence SHA-256 is
 `2f71e5befcfd3d6de87de8164c048f9e20f71d224845f709e765664eed12e6b1`. See the
 [FREE-PATH findings](../free-path-native.md) for the probe and reproduction
 tool links.
+
+## FREE-PATH isolated single-float length-0.2 candidate (2026-10-13)
+
+[`free-path-stop-boundary-20261013-v7.json`](free-path-stop-boundary-20261013-v7.json)
+binds the seed-388 observer to fresh before/after controls, the checked-in
+probe and required report hashes, five matching drawing/scene outputs, and six
+matching ordinary staged sources. The AA0 header measures 768×1080. The
+original selected 9 steps and consumed 8 on
+`((0 0 0) (0.2f0 0 1))`; the point coordinate and distance were confirmed as
+single-float. Single-precision JavaScript matches all 25 random calls, all 11
+returned points, and next RNG value 15573. Three local candidates predict 8
+steps and bare-wiggle predicts 7. This rejects one candidate for this input
+only; it does not identify the general stop rule or a natural caller. Evidence
+SHA-256 is
+`6e24501b60fc0d4014a12bf71c2878c32ce658f6aa9ef07e60bb90edb3d101b1`.

@@ -1,0 +1,443 @@
+{
+  "schema": "aaron-free-path-stop-boundary-evidence-v7",
+  "question": "Does one visibility-isolated 0.2 single-float edge distinguish local FREE-PATH stop candidates when invoked at a traced STORE-IN-FILE return?",
+  "controls": {
+    "before": {
+      "runId": "freepath-v7-before-108e2055",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T05:08:14.6516741+00:00",
+      "finishedAt": "2026-10-13T05:09:02.0650526+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "observer": {
+      "runId": "freepath-v7-observer-815c4e93",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T05:09:03.2932950+00:00",
+      "finishedAt": "2026-10-13T05:09:50.3850403+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "after": {
+      "runId": "freepath-v7-after-761d3c09",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T05:09:51.1144256+00:00",
+      "finishedAt": "2026-10-13T05:10:32.1694478+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "observerProbeSha256": "1ff3f9f57df69fd1c7a9a7aa505436f3c5a7ec7c71847ca6298b80149e217c4b",
+    "checkedInProbePath": "research/introspection/free-path-stop-boundary-v7.cl",
+    "checkedInProbeSha256": "1ff3f9f57df69fd1c7a9a7aa505436f3c5a7ec7c71847ca6298b80149e217c4b",
+    "observerReportSha256": "9cee3cf45308af4d9e481d7495744908dac5ff1a1a8346a6aa9cdaaf8d249295",
+    "observerReportPath": "research/extracted/local-oracle/external-runs/freepath-v7-observer-815c4e93/capture/aaron-free-path-stop-boundary-v7.txt",
+    "requiredEndMarker": "END free-path-stop-boundary-v7",
+    "drawingAndSceneOutputHashes": {
+      "aa0": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "image": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "bracketingPlanningTraceSha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+    "observerPlanningTraceSha256": "36f00ffd0e232f2dab1fcb33cb21bd69b6998d07a59624132b4a5a534c4cf372",
+    "observerPlanningTraceIsDiagnosticOnly": true,
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "958f3f20ae64cce601d1807682d7c0b93b7b83989c2b72e363b493c61a2b7fa5",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    "allDrawingAndSceneOutputsAndOrdinarySourcesMatch": true,
+    "aa0Header": {
+      "width": 768,
+      "height": 1080,
+      "headerBytes": 148
+    }
+  },
+  "captureChecks": {
+    "caseCount": 1,
+    "errorCount": 0,
+    "bracketingPlanningTracesMatch": true,
+    "observerPlanningTraceDiffers": true,
+    "ranAndXydistBindingsRestored": true,
+    "traceHook": {
+      "event": ":exit",
+      "name": "STORE-IN-FILE",
+      "depth": 7
+    },
+    "callbackStatus": "OK",
+    "allPrivateInputListsUnchanged": true,
+    "oneForwardVisibleEdgeOnly": true,
+    "exactSeedPrefix": true
+  },
+  "case": {
+    "seed": 388,
+    "name": "fractional-length-0-2-single-edge",
+    "points": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.2,
+        0,
+        1
+      ]
+    ],
+    "pointTypes": "((FIXNUMFIXNUMFIXNUM)(SINGLE-FLOATFIXNUMFIXNUM))",
+    "precision": "single",
+    "fdex": 0,
+    "tdex": 1,
+    "from": 0,
+    "to": 1,
+    "distanceCall": {
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0.2,
+          0,
+          1
+        ]
+      ],
+      "result": 0.2,
+      "resultType": "SINGLE-FLOAT"
+    },
+    "randomCalls": [
+      {
+        "args": [
+          8,
+          14
+        ],
+        "value": 9
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 0.7826232
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.025445998
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.691802
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2678607
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.02971793
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.9103723
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1155661
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.024180178
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.27283755
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0718634
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.028366622
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 6.144218
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2348015
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.026131257
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.4792446
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2468603
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.022605468
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.6630616
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1926309
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.026478149
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.672318
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1372422
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.029126894
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 2.9269986
+      }
+    ],
+    "result": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.017014392,
+        -0.00023139278,
+        1
+      ],
+      [
+        0.045730993,
+        -0.00082093687,
+        1
+      ],
+      [
+        0.07093393,
+        0.0001615269,
+        1
+      ],
+      [
+        0.09484501,
+        -0.00009359411,
+        1
+      ],
+      [
+        0.121681444,
+        0.00071403966,
+        1
+      ],
+      [
+        0.149293,
+        -0.00062559056,
+        1
+      ],
+      [
+        0.17579868,
+        -0.0007011846,
+        1
+      ],
+      [
+        0.2,
+        0,
+        1
+      ],
+      [
+        0.2,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "nextRandom": {
+      "value": 15573,
+      "status": "OK"
+    },
+    "stopModelComparison": {
+      "selectedSteps": 9,
+      "originalConsumedSteps": 8,
+      "localRngPrefixMatchesCapture": true,
+      "predictions": {
+        "stepSumThreshold": 8,
+        "emittedPointDistanceThreshold": 8,
+        "terminalDistanceAtMostBareWiggle": 7,
+        "terminalDistanceAtMostStepTimesWiggle": 8
+      },
+      "reconstructedFinalSteps": [
+        {
+          "step": 7,
+          "scale": 1.1926308870315552,
+          "wiggle": 0.026478148996829987,
+          "angle": 4.672317981719971,
+          "progressed": 0.1758268028497696,
+          "point": [
+            0.1757986843585968,
+            -0.0007011846173554659
+          ],
+          "fromStart": 0.17580008506774902,
+          "fromTarget": 0.024211473762989044,
+          "offsetLength": 0.0007017479510977864
+        },
+        {
+          "step": 8,
+          "scale": 1.1372421979904175,
+          "wiggle": 0.02912689372897148,
+          "angle": 2.9269986152648926,
+          "progressed": 0.20109885931015015,
+          "point": [
+            0.2003796398639679,
+            0.00015675228496547788
+          ],
+          "fromStart": 0.20037969946861267,
+          "fromTarget": 0.0004107255081180483,
+          "offsetLength": 0.0007360962918028235
+        },
+        {
+          "step": 9,
+          "scale": 0.7538818120956421,
+          "wiggle": 0.020329592749476433,
+          "angle": 1.2149313688278198,
+          "progressed": 0.21785178780555725,
+          "point": [
+            0.21797044575214386,
+            0.00031924137147143483
+          ],
+          "fromStart": 0.21797068417072296,
+          "fromTarget": 0.01797327771782875,
+          "offsetLength": 0.00034058024175465107
+        }
+      ],
+      "traceBasis": "Local single-float replay checked against every captured RAN call; original internal variables are not observed."
+    },
+    "javascriptComparison": {
+      "randomCallsMatch": true,
+      "returnedPointsMatch": true,
+      "followingRandomMatches": true,
+      "followingRandom": {
+        "original": 15573,
+        "javascript": 15573
+      },
+      "originalRandomCallCount": 25,
+      "javascriptRandomCallCount": 25,
+      "originalResultPointCount": 11,
+      "javascriptResultPointCount": 11,
+      "boundedParity": true
+    }
+  },
+  "interpretation": [
+    "The one-XYDIST capture isolates the visible forward edge; the zero-visibility start suppresses the closing edge in this case.",
+    "Stop predictions replay captured seeded random values with single-float arithmetic; they do not observe the original function internal variables.",
+    "One seed can discriminate local candidates but cannot establish a general stop rule.",
+    "JavaScript parity is reported separately for captured random calls, returned points and the next random checkpoint."
+  ],
+  "limitations": [
+    "This is one fractional single-float, length-0.2 edge and one seed.",
+    "The controlled FREE-PATH case runs inside the first successful traced STORE-IN-FILE exit callback; it is not a natural FREE-PATH caller observation.",
+    "The post-event callback and one-shot flag remain installed until this disposable oracle process exits.",
+    "This does not establish the FREE-PATH domain, native Lisp ABI, or whole-painting parity."
+  ]
+}

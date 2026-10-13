@@ -176,8 +176,8 @@ that last local candidate for this input only; the general stop rule remains
 unresolved. Fresh controls match five drawing/scene outputs and six ordinary
 staged sources, with the observer-only planning trace kept diagnostic.
 
-The six isolated one-edge cases now contain three JavaScript matches and three
-one-step mismatches. A reproducible local search across seeds 1–200,000 at
+Before v7, six isolated one-edge cases contained three JavaScript matches and
+three one-step mismatches. A reproducible local search across seeds 1–200,000 at
 lengths 2, 5, 10, 20, and 40 found no case where all four local predictions
 were distinct and uncapped; this search is candidate selection, not original
 behavior evidence. The totals remain 30 routine names / 31 bounded contract
@@ -187,6 +187,17 @@ units, 1 of 5 milestones (20% by count), and 0 whole-painting parity. See
 [FREE-PATH findings](introspection/free-path-native.md). The earlier
 [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json)
 remains documented there.
+
+The v7 FREE-PATH discriminator adds one controlled single-float edge at seed
+388, bracketed by fresh uninstrumented 768×1080 controls. Original and
+single-precision JS both consume 8 of 9 selected steps, return 11 points, and
+leave next RNG value 15573; all 25 random calls match. Three local candidates
+predict 8 steps and bare-wiggle predicts 7, so this case rejects bare-wiggle
+for this input without establishing the general rule. Counts remain 30
+routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
+whole-painting parity. Across seven isolated one-edge cases, JS now matches
+four and differs by one step in three. See [v7 evidence](introspection/evidence/free-path-stop-boundary-20261013-v7.json)
+and [FREE-PATH findings](introspection/free-path-native.md).
 
 ## What remains before a general AARON-equivalent generator
 
