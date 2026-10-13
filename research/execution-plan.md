@@ -132,11 +132,20 @@ sources in the measured 320x480 regime. A bounded live entry attempt then
 revalidated both full payloads against the PLL but saw no ZERO-EDGE entry
 before the process ended. The runner session lasted 32.837 seconds; 150
 seconds was the helper's maximum, not the observed wait. This does not confirm
-`BUFFER-HOLE` as a caller or generalize to other canvases. The next step is to use REA's existing `BUFFER-HOLE` dossier
-and the earlier 768x1080 capture context to choose a scene regime that tests
-the candidate. See the [reference findings](introspection/zero-edge-native-links.md),
-[caller findings](introspection/zero-edge-native-caller.md), and
-[portable evidence](introspection/evidence/zero-edge-native-caller-20261013.json).
+`BUFFER-HOLE` as a caller or generalize to other canvases. REA 6.4's
+`BUFFER-HOLE` dossier has now narrowed its native calls to an unresolved
+computed-call boundary. A separate hardware breakpoint at the live
+`BUFFER-HOLE` entry also saw no entry in one fresh 320x480 scene; six outputs
+and six scene sources match fresh controls, and both target payloads match the
+PLL. The combined evidence binds 75 sources and derives byte-identically
+twice. The earlier 768x1080 run shares the mode and runner hashes, but a fresh
+control reproduced 320x480; the cause remains unknown. Next, inspect the
+startup dimension-selection context and reproduce the larger canvas before
+another ZERO-EDGE caller attempt. See the [REA analysis](introspection/rea-payload-analysis.md),
+[reference findings](introspection/zero-edge-native-links.md),
+[caller findings](introspection/zero-edge-native-caller.md),
+[ZERO-EDGE evidence](introspection/evidence/zero-edge-native-caller-20261013.json),
+and [combined BUFFER-HOLE evidence](introspection/evidence/buffer-hole-native-investigation-20261013.json).
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

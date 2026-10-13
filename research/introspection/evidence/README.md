@@ -42,6 +42,21 @@ layout and seeds are analyst assertions, and the containers were never executed.
 Lisp dispatch remains unresolved; no new runtime behavior, original Lisp
 source or verified ABI is claimed. Read [the guide](../rea-payload-analysis.md).
 
+## BUFFER-HOLE static and live entry investigation, 2026-10-13
+
+[`buffer-hole-native-investigation-20261013.json`](buffer-hole-native-investigation-20261013.json)
+binds the REA 6.4.0 static dossier, one unresolved computed-call query, and a
+bounded live `BUFFER-HOLE` entry observation to fresh 320x480 controls. It
+revalidates both live payloads against the PLL and checks six drawing/scene
+outputs plus six scene sources across before/observer/after runs. The
+`BUFFER-HOLE` entry was not reached; the report does not identify a caller or
+show whether its `ZERO-EDGE` reference executes. It contains 75 source
+bindings, is 38,960 bytes, and has SHA-256
+`e44761e8508c63ece41978d3741bb6b3702b70be3aa6890e6a601971aad59178`.
+Two independent offline derivations are byte-identical. See the
+[REA analysis](../rea-payload-analysis.md) and
+[caller findings](../zero-edge-native-caller.md).
+
 ## BRUSH-STROKE REA call-site cluster, 2026-10-12
 
 [`rea-brush-stroke-control-flow-20261012-v4.json`](rea-brush-stroke-control-flow-20261012-v4.json)

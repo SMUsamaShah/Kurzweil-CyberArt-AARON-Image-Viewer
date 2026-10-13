@@ -65,6 +65,25 @@ files. The runner also saves and restores the per-user AARON registry values;
 if that write is denied, retry the same invocation through scoped elevation.
 It preserves the prior values and cleans only its named staging files.
 
+The default staging-space gate is 32 MiB. If that gate alone rejects a
+`writer-stream-seed-1234` run near the threshold, the opt-in
+`-AllowMeasuredWriterStreamAt30MiB` switch is available on
+`prepare-local-aaron-oracle-run.ps1`. It is restricted to that exact mode; the
+larger-capture threshold remains 128 MiB. The measured 2026-10-13 capture
+staged 21,660,528 bytes at peak, leaving more than 9 MiB at the 30 MiB minimum.
+For example:
+
+```powershell
+$runId = 'my-writer-stream-' + [Guid]::NewGuid().ToString('N')
+$outputRoot = & .\research\tools\prepare-local-aaron-oracle-run.ps1 `
+  -RunId $runId -Mode writer-stream-seed-1234 `
+  -AllowMeasuredWriterStreamAt30MiB
+```
+
+Use this only when the caller confirms the exact same scene mode and the
+preflight still passes. It changes no files in `C:\temp`, removes no unrelated
+data, and does not change permissions.
+
 ### WOW64 caller-breakpoint cleanup
 
 The first caller helper stopped its debug-event pump after the breakpoint and

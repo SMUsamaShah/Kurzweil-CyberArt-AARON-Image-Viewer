@@ -1,0 +1,819 @@
+{
+  "schemaVersion": 1,
+  "status": "complete",
+  "claimScope": "One source-bound 320x480 writer-stream scene; exact live code was checked before one entry breakpoint.",
+  "result": {
+    "targetFunction": "BUFFER-HOLE",
+    "outcome": "no-entry-before-process-exit",
+    "preSceneProbePauseSeconds": 90,
+    "observerRunnerSessionSeconds": 40.8,
+    "functions": [
+      {
+        "name": "BUFFER-HOLE",
+        "entry": "0x1fe12c3c",
+        "payloadBytes": 474,
+        "payloadSha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98",
+        "pllPayloadOffset": 2567228
+      },
+      {
+        "name": "ZERO-EDGE",
+        "entry": "0x1fe03934",
+        "payloadBytes": 982,
+        "payloadSha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+        "pllPayloadOffset": 2505012
+      }
+    ],
+    "livePayloadChecks": [
+      {
+        "name": "BUFFER-HOLE",
+        "entry": "0x1fe12c3c",
+        "payloadBytes": 474,
+        "payloadSha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98",
+        "pllPayloadOffset": 2567228,
+        "exactLivePayloadMatch": true
+      },
+      {
+        "name": "ZERO-EDGE",
+        "entry": "0x1fe03934",
+        "payloadBytes": 982,
+        "payloadSha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736",
+        "pllPayloadOffset": 2505012,
+        "exactLivePayloadMatch": true
+      }
+    ],
+    "returnAddress": null,
+    "observedCanvas": {
+      "width": 320,
+      "height": 480,
+      "headerValue": 148
+    }
+  },
+  "reaStaticAnalysis": {
+    "version": "6.4.0",
+    "ghidraVersion": "12.1.4",
+    "staticOnly": true,
+    "generatedExecutableRun": false,
+    "generatedPe": {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.synthetic.exe",
+      "bytes": 4608,
+      "sha256": "ff0f19cd9213e90cdbc587385f277cf0c2b9ff2086138329c51dcd6ee768149a"
+    },
+    "functionReport": {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-result.json",
+      "sha256": "946b5d204ab262f4db8d9f86bd85ff95a6b31b66f3165243c7fa9dc7795dae41",
+      "bytes": 386677,
+      "bodyBytes": 465,
+      "payloadBytes": 474,
+      "instructions": 170,
+      "basicBlocks": 39,
+      "outgoingReferences": 63,
+      "callInstructions": 32,
+      "callersInIsolatedPe": 0,
+      "calleesInIsolatedPe": 0,
+      "highPcodeOperations": 246,
+      "defUseEdges": 228,
+      "highPcodeTruncated": false,
+      "knownOmittedInputs": 0,
+      "knownOmittedEdges": 0,
+      "instructionSequenceMatchesStandaloneGhidra": true
+    },
+    "representativeComputedCall": {
+      "address": "0x1fe12d17",
+      "instruction": "CALL dword ptr [EDI + 0x27]",
+      "status": "unresolved",
+      "mechanism": "computed",
+      "targets": [],
+      "reportPath": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-result.json",
+      "reportSha256": "2282ef4fe96a97dd1563cb754949c7c8f0e38780f6c8b4b8d4c2ba46abe51404"
+    },
+    "limitations": [
+      "Synthetic PE headers, layout, function name and address context are analyst assertions; original payload bytes remain exact.",
+      "The isolated static image contains no cross-object call graph; computed Lisp dispatch targets remain unresolved.",
+      "The C signature and pseudocode do not recover the Lisp ABI or original source."
+    ]
+  },
+  "controls": {
+    "mode": "writer-stream-seed-1234",
+    "smallImage": false,
+    "before": "buffer-hole-canvas-control-20261013",
+    "observer": "buffer-hole-native-caller-observer-20261013",
+    "after": "buffer-hole-native-caller-control-after-20261013",
+    "outputsByteIdenticalAcrossAllThree": true,
+    "sceneSourcesByteIdenticalAcrossAllThree": true,
+    "equalOutputs": [
+      {
+        "name": "aa0",
+        "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "bytes": 126956
+      },
+      {
+        "name": "image",
+        "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+        "bytes": 124575
+      },
+      {
+        "name": "image-id",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "name": "aaron-scene-state-snapshot.txt",
+        "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "bytes": 25951
+      },
+      {
+        "name": "aaron-planning-call-trace.txt",
+        "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+        "bytes": 21287184
+      },
+      {
+        "name": "aaron-random-seed-loaded.txt",
+        "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+        "bytes": 476
+      }
+    ],
+    "equalSceneSources": [
+      {
+        "name": "planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "name": "planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "name": "scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "name": "scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "name": "scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "name": "scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      }
+    ]
+  },
+  "runs": [
+    {
+      "runId": "buffer-hole-canvas-control-20261013",
+      "role": "fresh uninstrumented control before",
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013",
+      "complete": true,
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "aa0Dimensions": {
+        "width": 320,
+        "height": 480,
+        "headerValue": 148
+      },
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "startedAt": "2026-10-13T01:28:11.0557504+00:00",
+      "finishedAt": "2026-10-13T01:28:27.6384112+00:00",
+      "runnerSessionSeconds": 16.6,
+      "files": {
+        "aa0": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aa0",
+          "bytes": 126956,
+          "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+        },
+        "image": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image",
+          "bytes": 124575,
+          "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+        },
+        "imageId": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image-id",
+          "bytes": 3,
+          "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+        },
+        "sceneSnapshot": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-scene-state-snapshot.txt",
+          "bytes": 25951,
+          "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+        },
+        "planningTrace": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-planning-call-trace.txt",
+          "bytes": 21287184,
+          "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+        },
+        "loadedSeed": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-random-seed-loaded.txt",
+          "bytes": 476,
+          "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+        }
+      },
+      "sceneSources": {
+        "planning-call-trace.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-call-trace.cl",
+          "bytes": 18496,
+          "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+        },
+        "planning-random-seed-common.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-random-seed-common.cl",
+          "bytes": 20476,
+          "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+        },
+        "scene-state-snapshot-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+          "bytes": 847,
+          "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+        },
+        "scene-state-snapshot-writer-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+          "bytes": 579,
+          "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+        },
+        "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+          "bytes": 401,
+          "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+        },
+        "scene-state-snapshot.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot.cl",
+          "bytes": 41791,
+          "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+        }
+      }
+    },
+    {
+      "runId": "buffer-hole-native-caller-observer-20261013",
+      "role": "BUFFER-HOLE entry observer",
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013",
+      "complete": true,
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "aa0Dimensions": {
+        "width": 320,
+        "height": 480,
+        "headerValue": 148
+      },
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "startedAt": "2026-10-13T01:31:32.8050037+00:00",
+      "finishedAt": "2026-10-13T01:32:13.6424156+00:00",
+      "runnerSessionSeconds": 40.8,
+      "files": {
+        "aa0": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aa0",
+          "bytes": 126956,
+          "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+        },
+        "image": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image",
+          "bytes": 124575,
+          "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+        },
+        "imageId": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image-id",
+          "bytes": 3,
+          "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+        },
+        "sceneSnapshot": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-scene-state-snapshot.txt",
+          "bytes": 25951,
+          "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+        },
+        "planningTrace": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-planning-call-trace.txt",
+          "bytes": 21287184,
+          "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+        },
+        "loadedSeed": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-random-seed-loaded.txt",
+          "bytes": 476,
+          "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+        }
+      },
+      "sceneSources": {
+        "planning-call-trace.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-call-trace.cl",
+          "bytes": 18496,
+          "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+        },
+        "planning-random-seed-common.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-random-seed-common.cl",
+          "bytes": 20476,
+          "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+        },
+        "scene-state-snapshot-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+          "bytes": 847,
+          "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+        },
+        "scene-state-snapshot-writer-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+          "bytes": 579,
+          "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+        },
+        "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+          "bytes": 401,
+          "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+        },
+        "scene-state-snapshot.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot.cl",
+          "bytes": 41791,
+          "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+        }
+      },
+      "preSceneProbeSha256": "baced2b791f55adf0731160e4d088db0f7e04e597d7899db2d1d8911d09fc83f",
+      "preSceneProbePauseSeconds": 90
+    },
+    {
+      "runId": "buffer-hole-native-caller-control-after-20261013",
+      "role": "fresh uninstrumented control after",
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013",
+      "complete": true,
+      "mode": "writer-stream-seed-1234",
+      "smallImage": false,
+      "aa0Dimensions": {
+        "width": 320,
+        "height": 480,
+        "headerValue": 148
+      },
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "startedAt": "2026-10-13T01:35:18.9371485+00:00",
+      "finishedAt": "2026-10-13T01:35:35.5450817+00:00",
+      "runnerSessionSeconds": 16.6,
+      "files": {
+        "aa0": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aa0",
+          "bytes": 126956,
+          "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+        },
+        "image": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image",
+          "bytes": 124575,
+          "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+        },
+        "imageId": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image-id",
+          "bytes": 3,
+          "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+        },
+        "sceneSnapshot": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-scene-state-snapshot.txt",
+          "bytes": 25951,
+          "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+        },
+        "planningTrace": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-planning-call-trace.txt",
+          "bytes": 21287184,
+          "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+        },
+        "loadedSeed": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-random-seed-loaded.txt",
+          "bytes": 476,
+          "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+        }
+      },
+      "sceneSources": {
+        "planning-call-trace.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-call-trace.cl",
+          "bytes": 18496,
+          "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+        },
+        "planning-random-seed-common.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-random-seed-common.cl",
+          "bytes": 20476,
+          "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+        },
+        "scene-state-snapshot-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+          "bytes": 847,
+          "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+        },
+        "scene-state-snapshot-writer-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+          "bytes": 579,
+          "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+        },
+        "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+          "bytes": 401,
+          "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+        },
+        "scene-state-snapshot.cl": {
+          "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot.cl",
+          "bytes": 41791,
+          "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+        }
+      }
+    }
+  ],
+  "captureReport": {
+    "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/buffer-hole-native-caller.json",
+    "sha256": "460a304ec8b6106e9bb8daa17e66b2d47c889803669033948ddb890441c1c645",
+    "bytes": 1532
+  },
+  "preSceneMetadata": {
+    "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-zero-edge-native-caller-links.txt",
+    "sha256": "8811ba2fb158434a5199cdb306c2f8fe9786c8f08dbae664c73082774f07a438",
+    "bytes": 648,
+    "errors": 0,
+    "truncations": 0
+  },
+  "limitations": [
+    "BUFFER-HOLE was not entered in this process; no direct caller or return address was observed.",
+    "This result does not show whether ZERO-EDGE is called from BUFFER-HOLE or another function.",
+    "The no-hit applies only to this 320x480 writer-stream scene and process lifetime.",
+    "The separate 768x1080 run remains a different canvas regime with an unresolved setup cause."
+  ],
+  "sources": [
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-invocation.json",
+      "bytes": 1113,
+      "sha256": "dfba24fde5e351bacd3d6fdda047d5bae20ac297b339e430a345d3e842c09a1a"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-result.json",
+      "bytes": 5135,
+      "sha256": "2282ef4fe96a97dd1563cb754949c7c8f0e38780f6c8b4b8d4c2ba46abe51404"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-calltarget-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-invocation.json",
+      "bytes": 1096,
+      "sha256": "f720f2c6158d4412542906d519c1a36f702318c8cc56e4ad6ba8f15e862028a4"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-result.json",
+      "bytes": 386677,
+      "sha256": "946b5d204ab262f4db8d9f86bd85ff95a6b31b66f3165243c7fa9dc7795dae41"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-function-20261013/rea-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.binding.json",
+      "bytes": 2106,
+      "sha256": "ae61d852f7353487274a4674fc629ef399435d346cc388f5ee0a77cee32c6633"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.seeds.tsv",
+      "bytes": 32,
+      "sha256": "8edb286c290ae200fd4e4160382e431e5aa107790e5c312c2ad06bcf3e09de8e"
+    },
+    {
+      "path": "research/artifacts/rea-tools/buffer-hole-static-20261013/buffer-hole.synthetic.exe",
+      "bytes": 4608,
+      "sha256": "ff0f19cd9213e90cdbc587385f277cf0c2b9ff2086138329c51dcd6ee768149a"
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "bytes": 739,
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04"
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/aaron/manifest.json",
+      "bytes": 2817,
+      "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/ghidra/buffer-hole.ghidra.json",
+      "bytes": 42134,
+      "sha256": "2b6001d134c5c1883b5cd6a717a52e8d31bd34d2e695c7cfadc2c091e49d9649"
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-buffer-native-seed1234-20261005-c/native-code/mapped/native-code-map.json",
+      "bytes": 3122,
+      "sha256": "99e3db2f55e41b99f6d92d62f840645fee02350b431f044c2089c12e3eec84fd"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-canvas-control-20261013/summary.json",
+      "bytes": 984,
+      "sha256": "a9499a5b77f9c44711916d6f163fb2acfc72888dc0d5d462fa1cb15dd834c2ee"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-control-after-20261013/summary.json",
+      "bytes": 997,
+      "sha256": "ca736e747d68c17f3b81e47e61a94a13bf503d56ab91bae781c27815452e7c7e"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/buffer-hole-native-caller.json",
+      "bytes": 1532,
+      "sha256": "460a304ec8b6106e9bb8daa17e66b2d47c889803669033948ddb890441c1c645"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aa0",
+      "bytes": 126956,
+      "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-planning-call-trace.txt",
+      "bytes": 21287184,
+      "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-random-seed-loaded.txt",
+      "bytes": 476,
+      "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-scene-state-snapshot.txt",
+      "bytes": 25951,
+      "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/aaron-zero-edge-native-caller-links.txt",
+      "bytes": 648,
+      "sha256": "8811ba2fb158434a5199cdb306c2f8fe9786c8f08dbae664c73082774f07a438"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image",
+      "bytes": 124575,
+      "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/image-id",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-call-trace.cl",
+      "bytes": 18496,
+      "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/planning-random-seed-common.cl",
+      "bytes": 20476,
+      "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-seeded-1234.cl",
+      "bytes": 847,
+      "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-seeded-1234.cl",
+      "bytes": 579,
+      "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+      "bytes": 401,
+      "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/capture/scene-state-snapshot.cl",
+      "bytes": 41791,
+      "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON.exe",
+      "bytes": 36864,
+      "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/license.dll",
+      "bytes": 196608,
+      "sha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/runtime/registry.dll",
+      "bytes": 290816,
+      "sha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8"
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/buffer-hole-native-caller-observer-20261013/summary.json",
+      "bytes": 1178,
+      "sha256": "0d0965f5636958a21464416ebee4020ecbf05bd5310dcbd08f45e939e11ccba6"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/buffer-hole.native-payload.bin",
+      "bytes": 474,
+      "sha256": "bdc811f0e8914d4cf6e0678e381e477070d28864c6b011e0aae94a42ff62cc98"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/native-code-map.json",
+      "bytes": 4059,
+      "sha256": "b557aee559b8649e14b36e2023bc138f65f480259154eb384297614992a3f126"
+    },
+    {
+      "path": "research/extracted/local-oracle/zero-edge-native-caller-map-20261013-a/zero-edge.native-payload.bin",
+      "bytes": 982,
+      "sha256": "c08d6adc6b28253ef1ecce89233e69ca23c58f639015f6c95051970c5fbec736"
+    },
+    {
+      "path": "research/introspection/zero-edge-native-caller-links.cl",
+      "bytes": 4354,
+      "sha256": "baced2b791f55adf0731160e4d088db0f7e04e597d7899db2d1d8911d09fc83f"
+    },
+    {
+      "path": "research/oracle/AaronCallerBreakpoint.cs",
+      "bytes": 17973,
+      "sha256": "65cf16df6fc08b4654facafc63f72d6a39614ecc884b759fa5504e65dedf9bd5"
+    },
+    {
+      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "bytes": 27289,
+      "sha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9"
+    },
+    {
+      "path": "research/tools/capture-buffer-hole-caller.ps1",
+      "bytes": 10961,
+      "sha256": "913a2cb20a88dbf6d183978b50c732c81da824be99ad3d1d90cbcd63b504afbd"
+    },
+    {
+      "path": "research/tools/derive-buffer-hole-native-caller-evidence.mjs",
+      "bytes": 22399,
+      "sha256": "0a41c12bb2e731fb7063e749121f38211ad92163761c3807056d3f9f6f557bba"
+    }
+  ]
+}

@@ -264,3 +264,31 @@ The separate [IN-SUB-FRAME findings](in-sub-frame.md) document the exact
 mapped payload, the REA 6.4.0 dossier, and its relationship to the natural
 VALUE=0 capture. Its portable [evidence JSON](evidence/rea-in-sub-frame-20261012.json)
 now binds each ordered predicate row and the complete v6 source closure.
+
+## BUFFER-HOLE static dossier, 2026-10-13
+
+REA 6.4.0 analyzed the exact mapped 474-byte `BUFFER-HOLE` payload at
+`0x1fe12c3c` through the tracked static-PE builder. The generated PE has hash
+`ff0f19cd9213e90cdbc587385f277cf0c2b9ff2086138329c51dcd6ee768149a`; it was
+never executed. The inferred function body is 465 bytes, with 170 decoded
+instructions, 39 basic blocks, 63 outgoing references and 32 CALL
+instructions. Its high-p-code report has 246 operations and 228 def-use edges,
+with no reported truncation or omitted inputs/edges. All 170 addresses and
+instruction texts agree with the earlier standalone Ghidra payload report
+after normalizing only comma whitespace.
+
+There are no resolved callers or callees in this isolated synthetic PE. A
+targeted query at `0x1fe12d17`, `CALL dword ptr [EDI + 0x27]`, reports an
+unresolved computed call with no targets. This does not map the Lisp constant
+index 1 reference to a native call or identify a runtime caller/callee. The
+generated PE header, layout, name and address context remain analyst
+assertions; its C signature and pseudocode do not recover the Lisp ABI or
+source.
+
+The combined [portable evidence](evidence/buffer-hole-native-investigation-20261013.json)
+also binds the separate live BUFFER-HOLE entry observation and its fresh
+before/after controls. It contains 75 source bindings, is 38,960 bytes with
+SHA-256 `e44761e8508c63ece41978d3741bb6b3702b70be3aa6890e6a601971aad59178`,
+and two independent derivations are byte-identical. The live entry was not
+reached in that one 320x480 scene, so no caller was identified. The REA dossier
+adds static navigation only; it adds no JavaScript behavior contract.

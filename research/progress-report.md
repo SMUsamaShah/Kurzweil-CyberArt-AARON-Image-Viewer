@@ -12,6 +12,7 @@ counts separate from recovered behavior.
 | Routines with documented, bounded JS/original comparisons | 30 routine names; 31 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, plus the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters. These are limited contracts, not 30 general-purpose source reconstructions. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
+| REA 6.4 static native payload dossiers | 5 named payloads | Structured native-code analysis; not five recovered Lisp functions, verified ABIs, or application-wide call graphs. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
@@ -81,6 +82,19 @@ candidate. It adds no JavaScript behavior contract, so the 30/31, 1-of-5
 (20%), and 0 whole-painting-parity counts are unchanged. See the
 [caller findings](introspection/zero-edge-native-caller.md) and
 [portable evidence](introspection/evidence/zero-edge-native-caller-20261013.json).
+
+REA 6.4.0 now has a static `BUFFER-HOLE` dossier: 170 instructions in a
+465-byte inferred body, 39 blocks, and 246 high-p-code operations. Its
+representative computed call at `0x1fe12d17` remains unresolved. A separate
+live execute-breakpoint check at the `BUFFER-HOLE` entry saw no entry during
+one 320×480 writer-stream scene. Both live function payloads matched the PLL;
+fresh before/after controls matched all six outputs and six scene sources.
+The report binds 75 sources and derives byte-identically twice. This adds no
+JavaScript contract: the behavior count remains 30 routine names / 31 bounded
+contracts, milestone progress remains 1 of 5 (20%), and whole-painting parity
+remains 0. See the [REA notes](introspection/rea-payload-analysis.md),
+[caller findings](introspection/zero-edge-native-caller.md), and
+[combined evidence](introspection/evidence/buffer-hole-native-investigation-20261013.json).
 
 ## What remains before a general AARON-equivalent generator
 

@@ -14,7 +14,9 @@ param(
                  'screen-unit-seed-5678', 'transition-seed-1234', 'plan-seed-1234')]
     [string]$Mode,
 
-    [string]$BaseRoot = 'C:\AaronOracleRuns'
+    [string]$BaseRoot = 'C:\AaronOracleRuns',
+
+    [switch]$AllowMeasuredWriterStreamAt30MiB
 )
 
 Set-StrictMode -Version Latest
@@ -45,7 +47,12 @@ $outputDrive = Get-PSDrive -Name $outputDriveName -PSProvider FileSystem
 $largeMode = $Mode -in @('writer-sequence-seed-1234', 'writer-windows-seed-1234',
     'writer-full-seed-1234', 'writer-full-seed-5678',
     'screen-unit-seed-1234', 'screen-unit-seed-5678')
-$minStaging = if ($largeMode) { 128MB } else { 32MB }
+if ($AllowMeasuredWriterStreamAt30MiB -and $Mode -ne 'writer-stream-seed-1234') {
+    throw 'The 30 MiB staging allowance is only valid for writer-stream-seed-1234'
+}
+# The exact 2026-10-13 writer-stream capture peaked at 21,660,528 staged bytes.
+# The opt-in threshold preserves more than 9 MiB of headroom at the minimum.
+$minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
 $minOutput = if ($stagingDriveName -eq $outputDriveName) { 192MB } else { 128MB }
 if ($stagingDrive.Free -lt $minStaging) {
     throw ("C:\temp resolves to {0}: with {1:N1} MiB free; this mode needs at least {2:N0} MiB before launch. " -f `

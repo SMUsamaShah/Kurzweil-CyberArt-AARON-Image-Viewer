@@ -51,10 +51,40 @@ observer and its controls are under the ignored
 stored at `C:\AaronOracleRuns` to avoid duplicating the 21 MB planning trace
 on D:.
 
+## BUFFER-HOLE entry follow-up, 2026-10-13
+
+REA 6.4.0's exact `BUFFER-HOLE` dossier has 170 instructions, a 465-byte
+inferred body, 39 blocks, 32 calls, and 246 high-p-code operations. A targeted
+query for `CALL dword ptr [EDI + 0x27]` at `0x1fe12d17` remains an unresolved
+computed call with no targets. This static result does not connect the
+constant-index-1 symbol reference to that call.
+
+A separate live execute breakpoint targeted the freshly validated
+`BUFFER-HOLE` entry `0x1fe12c3c`. The probe read both `BUFFER-HOLE` and
+`ZERO-EDGE` headers with zero errors/truncations, and both complete live
+payloads matched their unique PLL payloads. No `BUFFER-HOLE` entry occurred
+before the process ended. The configured maximum was 90 seconds; the complete
+runner session lasted 40.8 seconds. This establishes no entry in this process,
+not a general absence of calls or a ZERO-EDGE caller. The source-bound
+[capture helper](../tools/capture-buffer-hole-caller.ps1) and
+[offline deriver](../tools/derive-buffer-hole-native-caller-evidence.mjs)
+retain the validation steps.
+
+The before control (`buffer-hole-canvas-control-20261013`), observer
+(`buffer-hole-native-caller-observer-20261013`), and after control
+(`buffer-hole-native-caller-control-after-20261013`) all measured
+`320 480 148`. All six drawing/scene outputs and all six staged scene sources
+match across the three runs. The source-bound combined [evidence](evidence/buffer-hole-native-investigation-20261013.json)
+binds the REA and live results to 75 sources; two independent derivations are
+byte-identical. Its SHA-256 is
+`e44761e8508c63ece41978d3741bb6b3702b70be3aa6890e6a601971aad59178`.
+
 ## Next step
 
-Use REA's existing `BUFFER-HOLE` dossier and the earlier 768x1080 evidence to
-choose a scene regime that can exercise the static candidate. Read the actual
-AA0 header for every run; `smallImage=false` alone does not identify canvas
-dimensions. A direct caller claim still requires a fresh live entry hit and a
-return address inside an exact live-validated payload.
+Resolve why the same writer-stream setup measured both 768x1080 and 320x480.
+The current and earlier runs share the mode, runner and patched library hashes;
+the actual AA0 header and first FILL-MAP type agree within each run. Inspect
+the dimension-selection context, then repeat the ZERO-EDGE caller observation
+only after the larger canvas is reproduced under fresh controls. A direct
+caller claim still requires a fresh live entry hit and a return address inside
+an exact live-validated payload.

@@ -338,8 +338,13 @@ from `summary.smallImage`. On 2026-10-13, three complete
 `smallImage=false` but each AA0 header was `320 480 148`. Their six output
 artifacts matched across the observer and fresh before/after controls. Keep
 those 320x480 artifacts separate from the 768x1080 composite-loader/native-
-caller captures. The cause of this run-specific resolution difference is
-uninvestigated. See the [ZERO-EDGE reference census](introspection/zero-edge-native-links.md).
+caller captures. The 768x1080 and 320x480 runs used the same mode, runner,
+installer, and patched library hashes; their first captured `FILL-MAP` types
+match their AA0 headers. The current desktop reports 1920x1080, and a fresh
+uninstrumented check again produced 320x480 with the prior 320x480 AA0 and
+scene-report hashes. The cause remains unknown; do not infer the canvas from
+`smallImage` or force a different display mode to match old evidence. See the
+[ZERO-EDGE reference census](introspection/zero-edge-native-links.md).
 
 The ZERO-EDGE contract investigation has three excluded attempts: v1's
 serializer scope errors, v2's changed painting despite zero errors, and v3's

@@ -19,9 +19,9 @@ session.
 
 REA main has been fetched and the published 6.4.0 release installed beside
 3.2.1. The Ghidra doctor and real x86 launcher inspection pass. Headerless raw
-inputs remain unsupported, but exact ZERO-EDGE, BRUSH-FILL and FILL-IRIS PLL
-payloads now have successful REA dossiers through generated static x86 PE
-containers. See [the payload guide](introspection/rea-payload-analysis.md) and
+inputs remain unsupported, but exact ZERO-EDGE, BRUSH-FILL, FILL-IRIS,
+BRUSH-STROKE and BUFFER-HOLE PLL payloads now have successful REA dossiers
+through generated static x86 PE containers. See [the payload guide](introspection/rea-payload-analysis.md) and
 [the update record](rea-update-20261011.md).
 Use ignored `toolchain-current.json` for new REA work and retain the frozen
 historical `toolchain.json` for existing evidence. The hourly automation is
@@ -41,6 +41,16 @@ other canvases. See the [census dossier](introspection/zero-edge-native-links.md
 No JS contract count changed: 30 routine names / 31 bounded contract units,
 1 of 5 milestones (20%), and 0 whole-painting parity results.
 
+REA's BUFFER-HOLE dossier records a 465-byte inferred body, 170 instructions,
+39 blocks, and an unresolved computed call at `0x1fe12d17`. A follow-up live
+entry breakpoint for BUFFER-HOLE also saw no entry in the current 320x480
+writer-stream process; both live payloads were revalidated against the PLL.
+Fresh before/after controls match all six outputs and six scene sources. The
+combined static/runtime evidence is byte-identical across two derivations.
+The older 768x1080 scene remains unexplained despite matching mode and runner
+hashes. See [BUFFER-HOLE findings](introspection/zero-edge-native-caller.md)
+and [combined evidence](introspection/evidence/buffer-hole-native-investigation-20261013.json).
+
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
 total. T means outside `0 <= X <= *PIC-WIDE*-1` and
@@ -54,8 +64,10 @@ this is not a full RNG-state proof or a direct-caller capture.
 Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
 with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 At that earlier checkpoint the next item was an explicit ZERO-EDGE capture;
-the current frontier is now the larger-canvas caller question, followed by
-the remaining BRUSH-FILL row/iris schedule and value-0 painter.
+the current frontier is to explain the 320x480/768x1080 canvas difference,
+then repeat the ZERO-EDGE caller observation only in the reproduced larger
+canvas regime. Full scene generation and general VALUE=0 painter behavior
+remain open.
 
 ### ZERO-EDGE holdout and JavaScript model, 2026-10-12
 
