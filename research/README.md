@@ -7,6 +7,10 @@ The consolidated roadmap, phase status, immediate queue, and model handoff
 policy are in [reverse-engineering-plan.md](reverse-engineering-plan.md).
 The short cross-conversation resumption record is
 [aaron-continuity.md](aaron-continuity.md).
+For the current function, milestone, and whole-painting status counts, see the
+[AARON progress report](progress-report.md). Its 20% figure is only the share
+of execution-plan milestones fully achieved by count; it is not an overall
+behavior-coverage estimate.
 
 The current [native analysis workflow](native-analysis-workflow.md) combines
 exact PLL byte matching, standalone Ghidra and runtime caller capture. Its first
@@ -44,6 +48,11 @@ additional value-3 clear-entry positions remain open. A new source-bound
 [BRUSH-FILL row/iris capture](introspection/brush-fill-row-iris.md) measures
 five `LY - 2` jumps and six positive scans without a same-fill patch start;
 the schedule and `FILL-IRIS` branch conditions remain unresolved.
+The [IN-SUB-FRAME dossier](introspection/in-sub-frame.md) binds the exact
+mapped payload to REA 6.4.0, a natural VALUE=0 capture, and a bounded
+seed-1234 census: its first 1,400 calls contain 224 NIL results. Matched
+no-wrapper controls support that result only for the measured 768×1080 setup;
+the general boundary and JS implementation remain open.
 
 ## Principles
 

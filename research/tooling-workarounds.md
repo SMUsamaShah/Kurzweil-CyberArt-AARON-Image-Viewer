@@ -14,12 +14,14 @@ installed. Run supported read-only queries through
 [`invoke-rea-ghidra-query.ps1`](tools/invoke-rea-ghidra-query.ps1):
 
 ```powershell
-.esearch\tools\invoke-rea-ghidra-query.ps1 `
+$payload = 'research/artifacts/rea-tools/rea-in-sub-frame-20261012-b'
+$runId = [Guid]::NewGuid().ToString('N')
+./research/tools/invoke-rea-ghidra-query.ps1 `
   -Operation function `
-  -InputPePath research\artifacts\rea-tools\rea-in-sub-frame-20261012-b\in-sub-frame.synthetic.exe `
+  -InputPePath "$payload/in-sub-frame.synthetic.exe" `
   -Address 0x1fe0ea2c `
-  -SeedFile research\artifacts\rea-tools\rea-in-sub-frame-20261012-b\in-sub-frame.seeds.tsv `
-  -OutputRoot research\artifacts\rea-tools\rea-in-sub-frame-wrapper-check
+  -SeedFile "$payload/in-sub-frame.seeds.tsv" `
+  -OutputRoot "research/artifacts/rea-tools/rea-in-sub-frame-wrapper-$runId"
 ```
 
 The wrapper reads the current toolchain file, sets the provider, Java, Ghidra,
@@ -30,12 +32,18 @@ a fresh output folder, saves the unmodified JSON and stderr, records hashes,
 and verifies that the report subject hash equals the input PE. Never execute a
 generated PE.
 
-Verified on 2026-10-12: the initial direct query failed because
-`GHIDRA_INSTALL_DIR` was absent from the child process, not because the Java
-installation was missing. The wrapper then completed the same query at
+An earlier direct query failed because `GHIDRA_INSTALL_DIR` was absent from
+the child process, not because the Java installation was missing. On
+2026-10-13, the wrapper completed the same query at
 `0x1fe0ea2c`; its report SHA-256 was
 `d3d0872def64b69df2f082fbb4d4fd6625552649cac051e292eb4eb6cd79b36d` for input
 SHA-256 `817fb2ae120d2a20e767a1a8ecee34ae576b2ade703b04ea87437ae796888920`.
+The run returned empty stderr and confirmed `staticOnly=true` and
+`inputWasExecuted=false`. The fresh output root was
+`research/artifacts/rea-tools/rea-in-sub-frame-wrapper-compat-20261013-01`.
+The wrapper's repository-relative path helper uses string-prefix handling for
+Windows PowerShell/.NET versions that do not provide
+`[IO.Path]::GetRelativePath`.
 
 If the provider reports `not_configured`, keep its diagnostics and use the
 wrapper. If Ghidra instead reports `Access is denied` for its user settings
@@ -46,21 +54,53 @@ change global settings. See the detailed [REA payload guide](introspection/rea-p
 
 ## Original AARON oracle
 
-Read [`oracle.md`](oracle.md#ctemp-staging-and-permissions) before an oracle
-run. `C:\temp` is a symbolic link to the ignored repository target
-`research\artifacts\temp`; the runner checks its write access and reserved
-filenames. The symlink redirects a path but does not grant ACL access. The
-local runner also updates and restores a per-user AARON registry key, so invoke
-the exact runner with scoped elevation when the sandbox denies that registry
-write. This runtime launches `AARON.exe`; Java is not involved. Use one oracle
-at a time, a fresh `-OutputRoot`, and source-bound completion plus fresh
-uninstrumented controls. Never change the system clock. Before retrying after
-an interruption, inspect the process, staging directory and owned output root.
+Read [`oracle.md`](oracle.md#ctemp-staging-and-permissions) before a run.
+`C:\temp` is a symbolic link to the ignored repository target
+`research\artifacts\temp`; the runner checks reserved filenames and makes a
+unique create/delete write preflight before creating the output root.
+
+If the `C:\temp` preflight is denied, rerun the same command through scoped
+elevation. Do not retarget the link, change ACLs, or remove unknown staged
+files. The runner also saves and restores the per-user AARON registry values;
+if that write is denied, retry the same invocation through scoped elevation.
+It preserves the prior values and cleans only its named staging files.
+
+The original-runtime workflow launches `AARON.exe`; Java is not involved.
+Use one oracle at a time, a fresh `-OutputRoot`, source-bound completion
+records, and fresh uninstrumented controls. Never change the system clock.
+Before retrying after an interruption, inspect the process, staging directory
+and owned output root.
+
+For a pre-scene probe with multiple `-ProbeOutputNames`, invoke the runner
+through `-Command` so PowerShell evaluates the array literal. Passing
+`@("final.txt", "stage.txt")` through `powershell -File` can split its values
+and bind the second name to the next parameter. Keep `-ExecutionPolicy Bypass`
+on the child PowerShell command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command '& {
+  $runId = [Guid]::NewGuid().ToString("N")
+  & .\research\oracle\run-local-scene-state-required-probe.ps1 `
+    -ExtractedRoot research\extracted\aaron `
+    -OutputRoot "research\extracted\local-oracle\probe-$runId" `
+    -RunId "probe-$runId" -Mode seed-1234 `
+    -PreSceneProbePath research\introspection\probe.cl `
+    -ProbeOutputNames @("probe.txt", "probe-stage.txt") `
+    -RequiredProbeOutputName probe.txt `
+    -RequiredProbeEndMarker "END probe"
+}'
+```
+
+Both declared output names must be unique and unused in `C:\temp`; the runner
+checks them before launch and archives only those named files. After an
+argument-binding or policy error, confirm the runner did not start AARON or
+create its output root before retrying.
 
 ## Git writes in this workspace
 
-The checkout is writable, but `.git` is read-only in the default sandbox. A
-Git mutation can fail at staging with:
+Workspace files can be writable while the current command context rejects Git
+metadata writes under `.git`. This is recoverable with scoped elevation.
+A Git mutation can fail at staging with:
 
 ```text
 fatal: Unable to create '.../.git/index.lock': Permission denied

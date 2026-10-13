@@ -1,10 +1,13 @@
 # Next AARON execution plan
 
+For current counts, completion scope, and remaining milestones, see the
+[progress report](progress-report.md).
+
 Before local REA, oracle, or Git operations, use the central
 [tooling quick fixes](tooling-workarounds.md). The reusable REA wrapper sets
 the configured Ghidra/Java environment and retains query diagnostics.
 
-Prepared 2026-09-27; updated 2026-10-12. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-13. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
@@ -102,14 +105,16 @@ SCREEN-AND-STORE returns NIL, and no screen or scene parity is claimed. See
 [the findings](introspection/brush-stroke-value0.md) and
 [v6 evidence](introspection/evidence/brush-stroke-value0-20261012-index4-v6.json).
 
-The two retained natural censuses and this v6 sample contain no rejected
-`IN-SUB-FRAME` results for VALUE=0. Next use REA to identify a concrete
-BRUSH-STROKE dependency or caller mapping, avoiding the already-empty computed
-call queries. Follow the native workflow and rediscover and byte-validate the
-current address before debugger attachment; if static analysis stays
-unresolved, capture a stack-aware runtime trace. General VALUE=0 behavior,
-natural ZERO-EDGE context, intermediate helper traces, and scene-level JS
-parity remain open.
+The retained natural censuses and v6 sample contain no rejected
+`IN-SUB-FRAME` results for the captured VALUE=0 stroke. The separate v2
+seed-1234 scene window records 224 NIL results in its first 1,400 calls under
+a matched composite-loader setup. See the [IN-SUB-FRAME dossier](introspection/in-sub-frame.md)
+and [bound capture evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
+Next compare retained false argument pairs with contemporaneous frame bounds,
+then capture a stack-aware natural caller trace if needed. Follow the native
+workflow and rediscover and byte-validate addresses before debugger
+attachment. General predicate behavior, its direct caller, natural ZERO-EDGE
+context, intermediate helper traces, and scene-level JS parity remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
@@ -512,6 +517,6 @@ dependencies or independently check a risky result.
   remaining mismatch. Test counts and sampled-call counts are not percentages
   of the generator recovered.
 
-The next working session should begin with milestone 1 and the two independent
-milestone-2 packets. Stop expanding the initial capture machinery once it
-supports continuous comparison and move to the first upstream unit.
+Continue from the active function and call-path investigation described in
+the [progress report](progress-report.md) and continuity handoff. Preserve
+exact milestone completion criteria; do not restart achieved milestone 1.

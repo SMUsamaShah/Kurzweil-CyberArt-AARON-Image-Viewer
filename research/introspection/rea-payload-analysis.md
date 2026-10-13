@@ -257,3 +257,10 @@ their presence does not identify resolved callees. Runtime dispatch identity,
 object mutation and painting behavior still require separate evidence through
 the established workflow. This result supports that investigation but adds no
 new runtime behavioral or original-source claim.
+
+## IN-SUB-FRAME
+
+The separate [IN-SUB-FRAME findings](in-sub-frame.md) document the exact
+mapped payload, the REA 6.4.0 dossier, and its relationship to the natural
+VALUE=0 capture. Its portable [evidence JSON](evidence/rea-in-sub-frame-20261012.json)
+now binds each ordered predicate row and the complete v6 source closure.

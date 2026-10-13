@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "investigation": "in-sub-frame-matched-initial-call-window-seed-1234-20261013",
+  "scope": {
+    "naturalCallWindowBounded": true,
+    "directCallerIdentified": false,
+    "generalObserverTransparencyEstablished": false,
+    "jsPredicateParityEstablished": false,
+    "systemClockChanged": false
+  },
+  "observation": {
+    "calls": 1400,
+    "completed": 1400,
+    "false": 224,
+    "truthy": 1176,
+    "retainedFalseRows": 128,
+    "falseRowsOmittedByDeclaredCap": 96,
+    "callWindow": 1400,
+    "completionStatus": "WINDOW-COMPLETE",
+    "errors": 0,
+    "aborts": 0,
+    "targetRestoreStatus": "RESTORED",
+    "mainRestoreStatus": "RESTORED",
+    "canvas": {
+      "width": 768,
+      "height": 1080,
+      "headerValue": 148
+    },
+    "report": {
+      "path": "research/introspection/evidence/in-sub-frame-initial-window-v2-20261013.txt",
+      "sha256": "035d6328e36bfccfce9b954a22bb2f61eb2dda2ead197f41aa38526d79bcb144",
+      "bytes": 12010
+    },
+    "binding": {
+      "reportSha256": "035d6328e36bfccfce9b954a22bb2f61eb2dda2ead197f41aa38526d79bcb144",
+      "summarySha256": "eb2da304a3aa9f942f289acd057098101feb6d5cce09395bf7b690dc16554ad3",
+      "probeSha256": "f0dbdac63ad963ad881fc3ce51ecc7108cec7075a173224b9add5919f8efe51b",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+      "manifestSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+      "bindingSha256": "f0836ce8b09f4c2aaf1ec3eec344d6360a2e9ab504d74ed0ded826124b6762b4"
+    }
+  },
+  "controls": {
+    "directMode": [
+      {
+        "runId": "in-sub-frame-initial-window-v2-before",
+        "role": "direct-mode control before",
+        "path": "research/extracted/local-oracle/in-sub-frame-initial-window-v2-20261013-before",
+        "complete": true,
+        "mode": "seed-1234",
+        "smallImage": false,
+        "probeSha256": null,
+        "probeOutputNames": [],
+        "probeCompletionSatisfied": true,
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b",
+        "summarySha256": "f0e5658f20b16828b0b41dfb9b6c6cda1daa5a64ca14c9ef2883e0d401c1c0ff",
+        "dimensions": {
+          "width": 320,
+          "height": 480,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+            "bytes": 126956
+          },
+          "image": {
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+            "bytes": 124575
+          },
+          "imageId": {
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "sha256": "ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b",
+            "bytes": 10716
+          },
+          "planningCallTrace": {
+            "sha256": "88cf39eb8081d2304f05ee2af3a7722aa660cd79d723bda1ddbe4665429eadc3",
+            "bytes": 22373504
+          },
+          "loadedSeedRecord": {
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        }
+      },
+      {
+        "runId": "in-sub-frame-initial-window-v2-after",
+        "role": "direct-mode control after",
+        "path": "research/extracted/local-oracle/in-sub-frame-initial-window-v2-20261013-after",
+        "complete": true,
+        "mode": "seed-1234",
+        "smallImage": false,
+        "probeSha256": null,
+        "probeOutputNames": [],
+        "probeCompletionSatisfied": true,
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "sceneReportSha256": "ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b",
+        "summarySha256": "38d11d6893af49b8b7b22bdc2d752ade1d90f0c316fbea2a48a86b6e2d167e7d",
+        "dimensions": {
+          "width": 320,
+          "height": 480,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+            "bytes": 126956
+          },
+          "image": {
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+            "bytes": 124575
+          },
+          "imageId": {
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "sha256": "ca0d9ecf0ca238e8c243676ceff4e42f028f533f11df36663bc83368a4549b5b",
+            "bytes": 10716
+          },
+          "planningCallTrace": {
+            "sha256": "88cf39eb8081d2304f05ee2af3a7722aa660cd79d723bda1ddbe4665429eadc3",
+            "bytes": 22373504
+          },
+          "loadedSeedRecord": {
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        }
+      }
+    ],
+    "matchedCompositeLoader": [
+      {
+        "runId": "in-sub-frame-loader-control-before-20261013",
+        "role": "no-wrapper composite-loader control before",
+        "path": "research/extracted/local-oracle/in-sub-frame-window-matched-20261013-before-loader-control",
+        "complete": true,
+        "mode": "seed-1234",
+        "smallImage": false,
+        "probeSha256": "4f9c6e80c1f88a831cab09ce7357cb3c2c0fba9aebf515d34edcc3a7ceddab7d",
+        "probeOutputNames": [
+          "aaron-in-sub-frame-loader-only.txt"
+        ],
+        "probeCompletionSatisfied": true,
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+        "summarySha256": "29f04856f24e9ee85644cd1546fb02487004e4796fb73cbd9c963413385931da",
+        "dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "sha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+            "bytes": 10720
+          },
+          "planningCallTrace": {
+            "sha256": "4e8bfde99b373eb2436fd1450900fe4f09ce1729600acfd464d74e630caa1bb6",
+            "bytes": 22363117
+          },
+          "loadedSeedRecord": {
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        }
+      },
+      {
+        "runId": "in-sub-frame-window-matched-observer-20261013",
+        "role": "IN-SUB-FRAME observer",
+        "path": "research/extracted/local-oracle/in-sub-frame-window-matched-20261013-observer",
+        "complete": true,
+        "mode": "seed-1234",
+        "smallImage": false,
+        "probeSha256": "f0dbdac63ad963ad881fc3ce51ecc7108cec7075a173224b9add5919f8efe51b",
+        "probeOutputNames": [
+          "aaron-in-sub-frame-initial-window-v2.txt",
+          "aaron-in-sub-frame-initial-window-v2-stage.txt"
+        ],
+        "probeCompletionSatisfied": true,
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+        "summarySha256": "eb2da304a3aa9f942f289acd057098101feb6d5cce09395bf7b690dc16554ad3",
+        "dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "sha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+            "bytes": 10720
+          },
+          "planningCallTrace": {
+            "sha256": "4e8bfde99b373eb2436fd1450900fe4f09ce1729600acfd464d74e630caa1bb6",
+            "bytes": 22363117
+          },
+          "loadedSeedRecord": {
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        }
+      },
+      {
+        "runId": "in-sub-frame-loader-control-after-20261013",
+        "role": "no-wrapper composite-loader control after",
+        "path": "research/extracted/local-oracle/in-sub-frame-window-matched-20261013-after-loader-control",
+        "complete": true,
+        "mode": "seed-1234",
+        "smallImage": false,
+        "probeSha256": "4f9c6e80c1f88a831cab09ce7357cb3c2c0fba9aebf515d34edcc3a7ceddab7d",
+        "probeOutputNames": [
+          "aaron-in-sub-frame-loader-only.txt"
+        ],
+        "probeCompletionSatisfied": true,
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+        "summarySha256": "07a1310ac8a32e8d9eeef9bb4ac93db48196d2790c9d4694ecc24fae05299140",
+        "dimensions": {
+          "width": 768,
+          "height": 1080,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+            "bytes": 426587
+          },
+          "image": {
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+            "bytes": 424205
+          },
+          "imageId": {
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "bytes": 3
+          },
+          "sceneSnapshot": {
+            "sha256": "39a549a760f43ce262e8796f9d980d06380d7a94b2ac38363abfd0ee28d39862",
+            "bytes": 10720
+          },
+          "planningCallTrace": {
+            "sha256": "4e8bfde99b373eb2436fd1450900fe4f09ce1729600acfd464d74e630caa1bb6",
+            "bytes": 22363117
+          },
+          "loadedSeedRecord": {
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+            "bytes": 476
+          }
+        }
+      }
+    ],
+    "equalFilesInMatchedBracket": [
+      "aa0",
+      "image",
+      "imageId",
+      "sceneSnapshot",
+      "planningCallTrace",
+      "loadedSeedRecord"
+    ],
+    "note": "The direct-mode controls use a 320x480 AA0. The no-wrapper composite-loader controls and observer use a 768x1080 AA0. Matched controls establish the observer result only for the latter setup."
+  },
+  "limitations": [
+    "Only the first 1,400 IN-SUB-FRAME calls after MAIN begins were observed.",
+    "The report retains 128 of 224 false rows; 96 false-call argument rows were omitted by the declared sample cap.",
+    "The observer performs synchronous reporting during the call window. Matching AA0, image, image-id, scene snapshot, planning trace, and loaded-seed record support this capture but do not prove general observer transparency.",
+    "Auxiliary random-sample logs contain runtime CURRENT-DAY-TIME values and are not claimed as byte-identical random-state evidence.",
+    "The result is not a JavaScript implementation or parity claim; the direct caller and general predicate boundary remain unresolved."
+  ]
+}

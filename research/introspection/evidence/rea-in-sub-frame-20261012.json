@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "investigation": "rea-6.4-in-sub-frame-static-dossier-with-v6-comparison-anchor-20261012",
+  "scope": {
+    "deriverLaunchedOriginalAaron": false,
+    "retainedOriginalAaronCaptureReferenced": true,
+    "generatedPeRun": false,
+    "debuggerAttached": false,
+    "directLispCallerIdentified": false,
+    "nativeLispAbiEstablished": false,
+    "inferredOperandsLabelledAsFrameCoordinates": false
+  },
+  "toolchain": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.4",
+    "language": "x86:LE:32:default",
+    "compilerSpec": "windows"
+  },
+  "function": {
+    "name": "IN-SUB-FRAME",
+    "entry": "0x1fe0ea2c",
+    "entryContext": "archived measured address reused only as static synthetic-PE context; not a live process address",
+    "mapping": {
+      "map": {
+        "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+        "sha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786",
+        "bytes": 3120
+      },
+      "pll": {
+        "path": "research/extracted/aaron/application/AARON.pll",
+        "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "bytes": 4573464
+      },
+      "payload": {
+        "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/in-sub-frame.native-payload.bin",
+        "sha256": "e2eac4f8f846d8d4ef5e46502af4ac8fe7b409a6ef1e80a49d19b135ee372dc4",
+        "bytes": 278
+      },
+      "payloadBytes": 278,
+      "pllObjectOffset": 2550312,
+      "pllPayloadOffset": 2550316,
+      "pllEndExclusive": 2550594,
+      "objectSha256": "34114966ee6c8878b618bd1444f84639a6c54e7da58dbea3cf42af239d827ac7",
+      "uniqueCompleteObjectMatch": true
+    },
+    "syntheticAnalysisInput": {
+      "binding": {
+        "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.binding.json",
+        "sha256": "1d88a54dec061912a95268c511b4bcc5008cbb6ade900a88535d4e8d485b72fb",
+        "bytes": 2111
+      },
+      "pe": {
+        "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.synthetic.exe",
+        "sha256": "817fb2ae120d2a20e767a1a8ecee34ae576b2ade703b04ea87437ae796888920",
+        "bytes": 3584
+      },
+      "seed": {
+        "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.seeds.tsv",
+        "sha256": "f0e4ad3b190d4cdb915370722fb3353f0f7b049ac0790692a8ab5a6ce9d8a3c5",
+        "bytes": 33
+      },
+      "headersAndLayout": "analyst-generated static analysis input",
+      "seededFunctionName": "analyst assertion from the archived unique payload map",
+      "generatedExecutableRun": false
+    },
+    "rea": {
+      "report": {
+        "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.rea-function.json",
+        "sha256": "d3d0872def64b69df2f082fbb4d4fd6625552649cac051e292eb4eb6cd79b36d",
+        "bytes": 197140
+      },
+      "evidenceId": "ev_1384551af253cd53326b664fe13929ac1cb16f865dc61fbc1245461d7bce7707",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.1.4"
+      },
+      "body": {
+        "ranges": [
+          {
+            "start": "0x1fe0ea2c",
+            "end": "0x1fe0eb39"
+          }
+        ],
+        "bytes": 270
+      },
+      "cfg": {
+        "basicBlocks": 24,
+        "successorEdges": 38
+      },
+      "instructions": 93,
+      "pcode": {
+        "operations": 109,
+        "defUseEdges": 95,
+        "effects": 39,
+        "truncated": false,
+        "omittedOperationsLowerBound": 0,
+        "knownOmittedInputs": 0,
+        "knownOmittedEdges": 0
+      },
+      "references": {
+        "resolvedCallers": 0,
+        "resolvedCallees": 0
+      },
+      "indirectCalls": [
+        {
+          "address": "0x1fe0ea38",
+          "instruction": "CALL dword ptr [EDI + -0x45]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0ea47",
+          "instruction": "CALL dword ptr [EDI + -0x35]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0ea55",
+          "instruction": "CALL dword ptr [EDI + -0x71]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0ea66",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0ea89",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0ea9c",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0eabc",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0eada",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0eaff",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0eb15",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        },
+        {
+          "address": "0x1fe0eb2d",
+          "instruction": "CALL dword ptr [EDI + 0x27]",
+          "targetKind": "indirect-memory"
+        }
+      ]
+    }
+  },
+  "dynamicReference": {
+    "evidence": {
+      "path": "research/introspection/evidence/brush-stroke-value0-20261012-index4-v6.json",
+      "sha256": "ac37cc749eea4afaacbfb2b9984168a0b0c50ecceaf4b94b8efc672e74f92580",
+      "bytes": 1098095
+    },
+    "tape": {
+      "path": "research/extracted/local-oracle/brush-stroke-value0-index4-capture-20261012-a/capture/aaron-brush-stroke-value0-v6-index4.txt",
+      "sha256": "64df9e9bdff47c06fe12eb0d5e3562ed5bb5d9e0e0157f965139c37c88100821",
+      "bytes": 1587571
+    },
+    "runSummary": {
+      "path": "research/extracted/local-oracle/brush-stroke-value0-index4-capture-20261012-a/summary.json",
+      "sha256": "da9bf8bc72f8ed2d902fe94181c91ba2e2db33612a365820f59686fd8322fb43",
+      "bytes": 1009
+    },
+    "observer": {
+      "path": "research/introspection/brush-stroke-value0-capture-v6-index4.cl",
+      "sha256": "4e3818e78627048e5126b107a26c66949406918c41207014382fb9dcb2c996d6",
+      "bytes": 45365
+    },
+    "sample": {
+      "captureVersion": 6,
+      "runId": "brush-stroke-value0-index4-capture-20261012-a",
+      "sampleId": 1,
+      "strokeId": 47,
+      "kind": "MULTI",
+      "pathLength": 29,
+      "brushIndex": 4,
+      "brushWidth": 13,
+      "brushStrokeArgumentValue": 0,
+      "inSubFrameInvocations": 2813,
+      "acceptedInvocations": 2813,
+      "distinctAcceptedArgumentPairs": 308
+    },
+    "relation": "A separate natural capture anchor for bounded comparison; it does not map these runtime records to static indirect-call sites or identify a direct Lisp caller."
+  },
+  "limitations": [
+    "The isolated synthetic PE contains the mapped function without the original surrounding Lisp object graph; its REA/Ghidra dossier cannot identify the direct Lisp caller.",
+    "Generated PE headers, layout, and seeded name are analyst assertions. The PE was not executed; the entry is archived static context, not a live address.",
+    "Assembly operands are retained as Ghidra text. No register or memory operand is assigned frame-coordinate meaning.",
+    "Ghidra signature, locals, CFG, and p-code are analysis observations, not recovered Lisp source or a verified native Lisp ABI.",
+    "The v6 tape records one natural sample. Its runtime records do not resolve which isolated-PE indirect call site, if any, corresponds to an observed Lisp call."
+  ],
+  "sourceHashes": [
+    {
+      "path": "engine/package.json",
+      "sha256": "80a41e611741ef6cafca65b2708d21c116c6eddafdfe2b01ec496bcbd6dad8c3",
+      "bytes": 223
+    },
+    {
+      "path": "engine/src/aaron-brush-stroke.js",
+      "sha256": "7b107fe1ce5a2c5b014250607ce46b99a0bd5d1b44ceca59c091a3d612a9fc75",
+      "bytes": 5955
+    },
+    {
+      "path": "engine/src/aaron-brushes.js",
+      "sha256": "93eaa5c091db89e33b82a660322e1835125f68bdeb26ba22dd4780c3c21f3cd6",
+      "bytes": 9312
+    },
+    {
+      "path": "engine/src/aaron-maps.js",
+      "sha256": "f245f1fa7cdd0dd8e6d0f85f6293c8d9675e11bc0ec27cb7d37114e5ecbeec1f",
+      "bytes": 2932
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-6.4.0/node_modules/rea-agents/package.json",
+      "sha256": "1c6244e5689db5354fffc0e92f4ee0e0237c3a6d645de564ade2d8375fa570f9",
+      "bytes": 19538
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.binding.json",
+      "sha256": "1d88a54dec061912a95268c511b4bcc5008cbb6ade900a88535d4e8d485b72fb",
+      "bytes": 2111
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.rea-function.json",
+      "sha256": "d3d0872def64b69df2f082fbb4d4fd6625552649cac051e292eb4eb6cd79b36d",
+      "bytes": 197140
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.seeds.tsv",
+      "sha256": "f0e4ad3b190d4cdb915370722fb3353f0f7b049ac0790692a8ab5a6ce9d8a3c5",
+      "bytes": 33
+    },
+    {
+      "path": "research/artifacts/rea-tools/rea-in-sub-frame-20261012-b/in-sub-frame.synthetic.exe",
+      "sha256": "817fb2ae120d2a20e767a1a8ecee34ae576b2ade703b04ea87437ae796888920",
+      "bytes": 3584
+    },
+    {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/in-sub-frame.native-payload.bin",
+      "sha256": "e2eac4f8f846d8d4ef5e46502af4ac8fe7b409a6ef1e80a49d19b135ee372dc4",
+      "bytes": 278
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-native-seed1234-20261005-e/native-code/mapped/native-code-map.json",
+      "sha256": "790523f2eea2f2e02afd674a596b7751f3155fc302bc4ac0b236ddd8d53dc786",
+      "bytes": 3120
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-value0-index4-capture-20261012-a/capture/aaron-brush-stroke-value0-v6-index4.txt",
+      "sha256": "64df9e9bdff47c06fe12eb0d5e3562ed5bb5d9e0e0157f965139c37c88100821",
+      "bytes": 1587571
+    },
+    {
+      "path": "research/extracted/local-oracle/brush-stroke-value0-index4-capture-20261012-a/summary.json",
+      "sha256": "da9bf8bc72f8ed2d902fe94181c91ba2e2db33612a365820f59686fd8322fb43",
+      "bytes": 1009
+    },
+    {
+      "path": "research/introspection/brush-stroke-value0-capture-v6-index4.cl",
+      "sha256": "4e3818e78627048e5126b107a26c66949406918c41207014382fb9dcb2c996d6",
+      "bytes": 45365
+    },
+    {
+      "path": "research/introspection/evidence/brush-stroke-value0-20261012-index4-v6.json",
+      "sha256": "ac37cc749eea4afaacbfb2b9984168a0b0c50ecceaf4b94b8efc672e74f92580",
+      "bytes": 1098095
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-value0-index4-evidence.mjs",
+      "sha256": "b2f9e5482270661657f89e81f40a56ef20cbc1e0e57daddf04b4483c33e0fc90",
+      "bytes": 47151
+    },
+    {
+      "path": "research/tools/derive-brush-stroke-value0-index5-evidence.mjs",
+      "sha256": "3d5c7e0d9483cbaded360f91dc9ce4baea46068a760b94a856620756028d9a95",
+      "bytes": 45480
+    },
+    {
+      "path": "research/tools/index-allegro-image.mjs",
+      "sha256": "5331b568b50cd9ded6b9e2b229ee83853c383df03bba474322cbb74c6d5f58ee",
+      "bytes": 41726
+    },
+    {
+      "path": "research/tools/parse-natural-free-path-report.mjs",
+      "sha256": "424d510f3da096465d79169ac02490d2895bbb5260dbbc7296e751feceb93cee",
+      "bytes": 20265
+    }
+  ]
+}

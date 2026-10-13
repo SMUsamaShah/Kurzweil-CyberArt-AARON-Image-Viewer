@@ -199,18 +199,18 @@ and no AARON process remained. Recheck the link and write preflight each session
 The `C:\temp` preflight is separate from the registry access the oracle needs.
 The runner creates or updates
 `HKCU:\Software\Kurzweil CyberArt Technologies\AARON`, saves its previous
-values, and restores them in `finally`. The default Codex sandbox denied that
-registry write even after the symlink made `C:\temp` writable. In Codex, run
-the local oracle with scoped elevated permission for this script; on a normal
-PowerShell session, use an account allowed to update that per-user key. The
-runner does not change the system clock.
+values, and restores them in `finally`.
+The first restricted command context denied that registry write even after the
+symlink made `C:\temp` writable. This is separate from staging: rerun the same
+local-oracle invocation through scoped elevation, or use a direct PowerShell
+account permitted to update that per-user key. The runner does not change the system clock.
 
 On 2026-10-12, scoped elevated invocation completed three fresh controls and
 one v5 observer run at full resolution; all four runs were complete, and the
 runner removed its staging files. The permission boundary is the runner's
 per-user registry setup, not Java: the local original-runtime workflow
 launches `AARON.exe` and does not require a Java process. If the `C:\temp`
-preflight passes but the default sandbox rejects the registry operation, use
+preflight passes but the registry write is denied in the current command context, use
 scoped elevation for this exact PowerShell runner instead of changing the
 symlink target or machine ACLs. The link target and empty staging directory
 were rechecked after the sequence.

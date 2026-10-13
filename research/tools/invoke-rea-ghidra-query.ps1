@@ -44,6 +44,12 @@ function Resolve-RepoPath([string]$Path, [string]$Label) {
     return $resolved
 }
 
+function Get-RepoRelativePath([string]$Path) {
+    # Keep compatibility with Windows PowerShell/.NET Framework, which lacks
+    # Path.GetRelativePath. Every call site has already passed Resolve-RepoPath.
+    return $Path.Substring($repoRoot.Length + 1).Replace('\', '/')
+}
+
 $inputFile = Resolve-RepoPath $InputPePath 'Input PE'
 if (-not $inputFile.StartsWith($toolchainRoot.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase) -or
     [IO.Path]::GetExtension($inputFile) -notin @('.exe', '.dll') -or
@@ -142,8 +148,8 @@ try {
         reaVersion = $toolchain.reaVersion
         ghidraVersion = '12.1.4'
         toolchain = [ordered]@{ path = 'research/artifacts/rea-tools/toolchain-current.json'; sha256 = $toolchainHash }
-        input = [ordered]@{ path = [IO.Path]::GetRelativePath($repoRoot, $inputFile).Replace('\', '/'); sha256 = $inputHash }
-        seed = if ($seed) { [ordered]@{ path = [IO.Path]::GetRelativePath($repoRoot, $seed).Replace('\', '/'); sha256 = $seedHash } } else { $null }
+        input = [ordered]@{ path = (Get-RepoRelativePath $inputFile); sha256 = $inputHash }
+        seed = if ($seed) { [ordered]@{ path = (Get-RepoRelativePath $seed); sha256 = $seedHash } } else { $null }
         report = [ordered]@{ path = $ReportName; sha256 = $reportHash; bytes = (Get-Item -LiteralPath $reportPath).Length }
         stderr = [ordered]@{ path = 'rea-stderr.txt'; sha256 = $stderrHash; bytes = (Get-Item -LiteralPath $stderrPath).Length }
         staticOnly = $true

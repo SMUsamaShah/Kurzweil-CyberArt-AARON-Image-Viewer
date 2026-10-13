@@ -1,12 +1,16 @@
 # AARON project continuity handoff
 
+For a short count-based status snapshot, see the
+[AARON progress report](progress-report.md). It distinguishes the 1,347-name
+symbol inventory from the smaller set of measured function contracts.
+
 This file is the short resumption record for future Aaron conversations and
 agents. The full technical roadmap remains in
 [`reverse-engineering-plan.md`](reverse-engineering-plan.md); this file keeps
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-12
+## Latest checkpoint: 2026-10-13
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and
@@ -166,15 +170,33 @@ analyst-generated PE; they establish no runtime branch or call target. Read
 the [REA notes](introspection/rea-payload-analysis.md) and
 [v4 evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
 
-Neither retained natural census nor the v6 index-4 sample produced a rejected
-`IN-SUB-FRAME` result for VALUE=0. The next investigation will use REA to look
-for a concrete BRUSH-STROKE dependency or caller mapping that does not repeat
-the prior empty computed-call queries. Follow the native workflow, rediscover
-the relevant address from the current payload, and validate its bytes before
-debugger attachment. If static analysis cannot resolve the caller, capture a
-stack-aware runtime trace. General value-0 behavior, natural ZERO-EDGE context,
-intermediate helper traces, and scene-level JS parity remain open. Keep older
-320x480 captures separate.
+### IN-SUB-FRAME REA pass and bounded false-result census, 2026-10-13
+
+REA 6.4.0 with Ghidra 12.1.4 now has a source-bound static dossier for the exact
+278-byte mapped `IN-SUB-FRAME` payload: 270-byte body, 24 CFG blocks/38 edges,
+93 instructions, 109 p-code operations/95 def-use edges, and 11 unresolved
+indirect calls. It resolves no callers or callees. The machine code is
+consistent with a two-coordinate rectangle gate, but argument meanings,
+bounds, caller, return convention, and Lisp ABI remain unknown. The report's
+portable derivation checks every ordered v6 predicate row and all 20 unique
+source bindings; independent outputs match byte-for-byte. See the
+[IN-SUB-FRAME findings](introspection/in-sub-frame.md) and
+[portable evidence](introspection/evidence/rea-in-sub-frame-20261012.json).
+
+The v6 natural VALUE=0 sample has 2,813 accepted predicate calls and no
+rejections. A separate v2 seed-1234 scene capture records 1,400 completed
+calls: 1,176 truthy and 224 NIL; 128 false-call rows are retained, while 96
+are omitted by the declared cap. Its source/runtime-bound report is validated
+against fresh no-wrapper composite-loader controls before and after; AA0,
+image, image ID, final scene snapshot, planning trace, and loaded-seed record
+match at 768×1080. Direct-mode controls match separately at 320×480, so keep
+the regimes distinct. See the [updated findings](introspection/in-sub-frame.md)
+and [call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
+
+Next compare the retained false integer pairs with contemporaneous frame
+bounds, then capture a stack-aware natural caller trace if the direct call path
+remains unclear. General predicate behavior, JavaScript parity, natural
+ZERO-EDGE context, and intermediate helper traces remain open.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 
@@ -785,9 +807,12 @@ are present, but the host cannot launch the 32-bit loader and the 64-bit
 launcher is blocked by the local `wineserver` socket policy; the known-good
 Windows Server 2022 GitHub runner remains the oracle for original-engine
 measurements. Local verification is 76 engine tests plus 39 research-tool
-tests. Overall completion remains approximately 35–40%: structural recovery
-has advanced, while composition, pose/anatomy, occlusion, colour, integrated
-brush/fill/emission, and normal startup-seed semantics remain open.
+tests. An earlier informal checkpoint used an approximately 35–40% project
+estimate; it had no weighting method and should not be treated as a current
+completion metric. See the [count-based progress report](progress-report.md)
+for the current milestone count and its limits. Composition, pose/anatomy,
+occlusion, colour, integrated brush/fill/emission, and normal startup-seed
+semantics remain open.
 
 The latest published change adds:
 
@@ -945,15 +970,18 @@ finalization state while preserving original conditions and nonlocal exits.
 The local Windows baseline and two seeded repeat controls have all passed
 those checks; their report details are linked in the current state above.
 
-## Honest progress estimate
+## Earlier heuristic estimate (superseded)
 
-Overall completion is approximately **35–40%**. The archaeology, AA protocol,
-fixtures, static-analysis tools, numeric primitives, several isolated
-stroke/map/writer boundaries, and the local composition/outline attribution
-seams are now strong. The high-level artistic decision system is still mostly
-unresolved, so this is not yet a parity-equivalent generator. The increase is
-measurable infrastructure and structural evidence, not a claim that half of
-the historical scene rules have been recovered.
+An earlier checkpoint used **35–40%** as an informal project estimate. It had
+no weights or consistent function-status denominator, so it is retained only
+as historical context and is not a defensible current completion percentage.
+The [count-based progress report](progress-report.md) now reports 1 of 5
+execution-plan milestones fully achieved (20% by milestone count), while
+explicitly noting that milestone sizes differ and no overall behavior-coverage
+percentage is available. The archaeology, AA protocol, fixtures, static
+analysis tools, numeric primitives, and several isolated stroke/map/writer
+boundaries are strong; the high-level artistic decision system remains mostly
+unresolved, so the generator is not parity-equivalent.
 
 | Area | Current state |
 |---|---|

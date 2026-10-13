@@ -1,5 +1,10 @@
 # Native analysis of the archived AARON runtime
 
+For Java/Ghidra, C:\temp, and Git permission recovery, start with the
+[local tooling quick fixes](tooling-workarounds.md). Retry a denied
+read-only analysis with scoped elevation and a fresh output directory;
+do not reinstall tools or change global permissions.
+
 ## REA update, 2026-10-11
 
 REA 6.4.0 is now installed beside the historical 3.2.1 toolchain. Its Ghidra

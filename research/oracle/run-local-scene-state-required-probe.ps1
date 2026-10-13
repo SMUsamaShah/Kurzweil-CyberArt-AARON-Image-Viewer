@@ -156,9 +156,9 @@ try {
 }
 catch {
     throw ('C:\temp exists but this PowerShell execution context cannot write there. ' +
-        'Run this script with an approved elevated sandbox permission, or from a ' +
-        'normal user PowerShell session that can write to C:\temp. No oracle ' +
-        'output directory was created. Original error: ' + $_.Exception.Message)
+        'Rerun this same invocation through the approved scoped-elevation path. ' +
+        'The C:\temp link and target ACL do not need changes. No oracle output ' +
+        'directory was created. Original error: ' + $_.Exception.Message)
 }
 finally {
     if (Test-Path -LiteralPath $writeProbe) {
