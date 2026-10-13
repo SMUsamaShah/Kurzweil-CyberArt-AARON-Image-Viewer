@@ -7,7 +7,7 @@ and the running investigation history are linked below.
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 30 names / 31 contracts | These are limited, measured behavior slices, not 30 complete function reconstructions. |
-| FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two lose the negative-zero sign in the captured header. |
+| FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
 
@@ -28,8 +28,12 @@ generation, and verify complete paintings against fresh original runs.
 FREE-PATH now has 40 source-bound direct cases. Its current JS API matches 26
 of 30 cases with canonical list indexes; four seed-1234 polygon cases still
 differ, while eight noncanonical-index cases and two signed-zero cases remain
-unclassified. The next investigation is a natural FREE-PATH entry-stack capture
-to establish the direct caller from the immediate frame, followed by a new
+unclassified. The exact native payloads are mapped, but the natural caller
+capture is not complete: one 320×480 before control finished, then its observer
+was stopped by the D: staging-space gate. No caller hit or after control was
+captured. The triplet driver now reserves disk for all three runs before it
+starts and rechecks before each launch. The next step is to rerun the bracket
+when the staging volume has the documented headroom, then pursue a new
 discriminator for the remaining stop-rule mismatches.
 
 ## Follow the evidence
@@ -38,5 +42,7 @@ discriminator for the remaining stop-rule mismatches.
 - [Active execution plan](research/execution-plan.md)
 - [Continuity handoff](research/aaron-continuity.md)
 - [FREE-PATH findings](research/introspection/free-path-boundaries.md)
+- [FREE-PATH native analysis](research/introspection/free-path-native.md)
+- [FREE-PATH caller triplet tooling](research/tools/capture-free-path-caller-triplet.ps1)
 - [40-case JS comparison evidence](research/introspection/evidence/free-path-boundary-js-comparison-20261013.json)
 - [Tooling workarounds](research/tooling-workarounds.md)

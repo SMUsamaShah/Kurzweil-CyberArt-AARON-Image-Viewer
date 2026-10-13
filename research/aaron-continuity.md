@@ -140,10 +140,16 @@ and [findings](introspection/free-path-native.md). Counts remain 30 routine
 names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 whole-painting
 parity.
 
-Next, capture the stack at a natural FREE-PATH entry and identify the direct
-caller from that entry's immediate frame. Keep the observed stop-rule
-mismatches unresolved until a new source-bound discriminator distinguishes the
-remaining behavior; do not infer callers from adjacent trace events.
+The exact `FREE-PATH` and `DRAW-CFORM` payloads are now mapped for a natural
+caller capture. The first 2026-10-13 before/observer/after attempt completed
+only its uninstrumented 320×480 before control; the observer never started
+because the D: staging reserve had fallen to 25.2 MiB. No call stack or caller
+was captured, and there is no after control. The driver now reserves space for
+the complete three-run bracket before launch and checks each remaining leg.
+Retry it only when the documented 35.7 MiB starting reserve for this exact
+26 MiB writer-stream mode is available. Keep the observed stop-rule mismatches
+unresolved until a new source-bound discriminator distinguishes the remaining
+behavior; do not infer callers from adjacent trace events.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
@@ -888,14 +894,12 @@ hashes. The retained fixture, method counts, and scope are documented in
 the composition and screen paths still need reconstruction.
 
 This checkpoint is superseded by the 2026-10-13 entries at the top of this
-handoff. Continue from the active FREE-PATH stop-boundary investigation in
-[execution-plan.md](execution-plan.md); the progress report records the
-current 30 routine names, 31 bounded contract units, 1-of-5 fully achieved
-milestones (20% by milestone count), and zero whole-painting parity results.
-Do not restart the completed writer-replay milestone. The current FREE-PATH
-boundary evidence has one exact JS match and two one-iteration mismatches, so
-keep its stop rule unresolved. Then choose the next target from the first
-remaining end-to-end divergence.
+handoff. Resume the natural FREE-PATH caller capture when the complete-triplet
+disk reserve passes. The progress report records 30 routine names, 31 bounded
+contract units, 1-of-5 fully achieved milestones (20% by milestone count), and
+zero whole-painting parity results. Do not restart the completed writer-replay
+milestone. The FREE-PATH stop rule remains unresolved; after the caller bracket,
+choose the next target from the first remaining end-to-end divergence.
 
 ## Earlier 2026-09-08 checkpoint
 

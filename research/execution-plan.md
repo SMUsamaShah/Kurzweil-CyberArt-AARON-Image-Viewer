@@ -453,9 +453,15 @@ and 12/14 selected iterations for seeds 522862, 256819, and 348048. JavaScript
 matches only seed 256819. Seed 522862 falsifies the current early step-sum
 break, while the two candidate progress measures agree with different cases;
 neither is established as the general original rule. The captured internal
-progress variable remains unavailable. Next, capture a natural FREE-PATH
-entry stack and establish the direct caller from the immediate frame, then
-choose a discriminator for the remaining stop-rule mismatches. See the [matrix findings](introspection/free-path-boundaries.md),
+progress variable remains unavailable. The 40-case matrix comparison is
+complete; do not repeat it. The exact native payloads are mapped, and the next
+item is a natural FREE-PATH entry capture followed by static decoding of its
+immediate return location. A 2026-10-13 attempt completed only the 320×480
+before control: the observer was rejected by the staging-space gate, so no
+caller was captured. The serial driver now reserves disk for all three legs;
+with the measured 26 MiB single-run setting it needs 35.7 MiB on D: and 384
+MiB on C: at start. Once the bracket completes, choose a discriminator for the
+remaining stop-rule mismatches. See the [matrix findings](introspection/free-path-boundaries.md),
 [matrix comparison evidence](introspection/evidence/free-path-boundary-js-comparison-20261013.json),
 [isolated edge evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
 [seed candidate finder](tools/find-free-path-emitted-point-boundary-seeds.mjs),
@@ -639,14 +645,15 @@ dependencies or independently check a risky result.
   remaining mismatch. Test counts and sampled-call counts are not percentages
   of the generator recovered.
 
-Continue from the active FREE-PATH stop-boundary investigation described in
-the [progress report](progress-report.md) and continuity handoff. Keep the
+Continue from the natural FREE-PATH caller capture described in the
+[progress report](progress-report.md) and continuity handoff. Keep the
 writer-replay milestone marked achieved; do not restart it unless a specific
 new mismatch makes part of that evidence relevant. Across seven isolated
 one-edge cases, JavaScript matches four and differs by one iteration in three.
 The v7 case rejects bare-wiggle for this input but leaves step-sum,
-source-to-emitted-point, and step-times-wiggle tied. Next, compare the existing
-40-case boundary matrix offline, preserve Lisp numeric types, and only classify
-rows supported by the JavaScript input interface. If needed afterward, capture
-the stack at a natural FREE-PATH entry. Keep fresh controls and source-bound
-evidence checks for any new oracle run.
+source-to-emitted-point, and step-times-wiggle tied. The existing 40-case
+matrix has already been compared offline; preserve Lisp numeric types and only
+classify rows supported by the JavaScript input interface. Retry the three-run
+caller bracket only when its upfront disk reserve passes, then decode the
+captured return offset against the mapped DRAW-CFORM payload. Keep fresh
+controls and source-bound evidence checks for any new oracle run.

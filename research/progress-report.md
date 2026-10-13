@@ -212,6 +212,27 @@ whole-painting parity. The 26/30 result applies only to this finite subset.
 See the [matrix comparison](introspection/evidence/free-path-boundary-js-comparison-20261013.json)
 and [findings](introspection/free-path-boundaries.md).
 
+## 2026-10-13 FREE-PATH caller capture attempt
+
+The mapped `FREE-PATH` and `DRAW-CFORM` payloads are ready for a natural
+caller capture, but the first before/observer/after bracket did not finish.
+Its uninstrumented 320×480 before control completed with AA0 SHA-256
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+The triplet began with 26,951,680 bytes free on D:, only 31,888 bytes above
+the exact 26,919,792-byte single-run staging floor. After that first run, D:
+had about 25.2 MiB free, so the observer was refused before it launched. There
+was no breakpoint hit, caller finding, or after control; the
+before capture is not a complete bracket. No AARON process remains active.
+
+The three unrelated REA JSON files and pre-existing
+`runner-failures-20261013` diagnostics in `C:\temp` were left untouched. The
+triplet tool now checks the full remaining staging and retained-output budget
+before it creates any run root and rechecks before each launch. At the 26 MiB
+single-run setting it requires 35.7 MiB on D: to start all three runs, declining
+as the remaining legs complete. These are tooling safeguards only; behavior
+counts remain 30 routine names / 31 bounded contracts, 1 of 5 milestones
+(20% by count), and 0 whole-painting parity results.
+
 ## What remains before a general AARON-equivalent generator
 
 The generative core and its integration remain the main work: recover normal

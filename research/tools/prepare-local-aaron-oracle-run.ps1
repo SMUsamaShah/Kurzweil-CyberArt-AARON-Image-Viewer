@@ -59,9 +59,15 @@ if ($AllowMeasuredWriterStreamAt30MiB -and $AllowMeasuredWriterStreamAt26MiB) {
     throw 'Choose only one measured writer-stream staging allowance'
 }
 # The exact 2026-10-13 writer-stream capture peaked at 21,660,528 staged bytes.
-# The 30 MiB threshold leaves more than 9 MiB; the 26 MiB fallback leaves more
-# than 5 MiB. Both reduced thresholds are limited to that same measured mode.
-$minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt26MiB) { 26MB } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
+# The 30 MiB threshold leaves more than 9 MiB. The narrow fallback reserves a
+# 5 MiB headroom plus 16 KiB for a small pre-scene metadata probe; both reduced
+# thresholds are limited to that same measured mode.
+$writerStreamPeakBytes = 21660528
+$writerStreamProbeAllowance = 16KB
+$writerStreamSafetyMargin = 5MB
+$measuredWriterStreamMinimum = $writerStreamPeakBytes +
+    $writerStreamProbeAllowance + $writerStreamSafetyMargin
+$minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt26MiB) { $measuredWriterStreamMinimum } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
 $minOutput = if ($stagingDriveName -eq $outputDriveName) { 192MB } else { 128MB }
 if ($stagingDrive.Free -lt $minStaging) {
     throw ("C:\temp resolves to {0}: with {1:N1} MiB free; this mode needs at least {2:N0} MiB before launch. " -f `

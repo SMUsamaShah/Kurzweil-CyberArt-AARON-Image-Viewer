@@ -50,6 +50,7 @@
           ;; closed lexical stream captured by the wrappers.
           (stream-open t)
           (targets nil)
+          (unwrapped-targets nil)
           (quiet-targets nil)
           (state-names nil)
           ;; Optional observer installed by a companion probe.  The normal
@@ -119,6 +120,20 @@
                        '("SCRIPT"))
           (error "Unsupported planning trace quiet targets"))
         (setf quiet-targets (symbol-value 'aaron-planning-quiet-targets)))
+      ;; A narrowly scoped native-entry probe can preserve one original
+      ;; compiled function binding while leaving every other trace target
+      ;; unchanged.  Reject arbitrary exclusions so this switch cannot silently
+      ;; weaken unrelated planning captures.
+      (when (and (boundp 'aaron-planning-unwrapped-targets)
+                 (symbol-value 'aaron-planning-unwrapped-targets))
+        (unless (equal (symbol-value 'aaron-planning-unwrapped-targets)
+                       '("FREE-PATH"))
+          (error "Unsupported planning trace unwrapped targets"))
+        (unless (member "FREE-PATH" targets :test #'string=)
+          (error "FREE-PATH is not present in the planning trace targets"))
+        (setf unwrapped-targets
+              (copy-list (symbol-value 'aaron-planning-unwrapped-targets)))
+        (setf targets (remove "FREE-PATH" targets :test #'string=)))
       (setf scene-hook
             (and (boundp 'aaron-scene-state-hook)
                  (symbol-value 'aaron-scene-state-hook)))
@@ -338,6 +353,8 @@
                             name (safe-type problem))))))
         (emit-line "BEGIN planning-call-trace")
         (emit-form "TRACE-LIMIT ~D" event-limit)
+        (when unwrapped-targets
+          (emit-form "UNWRAPPED-TARGETS ~S" unwrapped-targets))
         (emit-form "TARGETS ~S" targets)
         (emit-form "BINDINGS-BEFORE ~S" (binding-state))
         (let ((rest targets))

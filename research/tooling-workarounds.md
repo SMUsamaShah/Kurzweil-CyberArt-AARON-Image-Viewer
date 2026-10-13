@@ -91,17 +91,42 @@ Use this only when the caller confirms the exact same scene mode and the
 preflight still passes. It changes no files in `C:\temp`, removes no unrelated
 data, and does not change permissions.
 
-If D: has between 26 and 30 MiB free, the narrower
-`-AllowMeasuredWriterStreamAt26MiB` option permits only the same
-`writer-stream-seed-1234` mode. It is based on the same measured 21,660,528-byte
-peak and preserves more than 5 MiB at its minimum; it does not apply to any
+When D: is below 30 MiB, the narrower `-AllowMeasuredWriterStreamAt26MiB`
+option permits only the same `writer-stream-seed-1234` mode. Its byte-level
+gate is the measured 21,660,528-byte peak plus a 16 KiB allowance for a small
+pre-scene probe and a 5 MiB safety margin. It does not apply to any
 larger-capture mode. Use it only after the normal and 30 MiB gates fail, the
 staging directory has been checked for collisions, and the exact mode is
-confirmed. The 2026-10-13 FREE-PATH follow-up hit this case with 28.7 MiB free;
-later preflights measured 28.2 and 27.7 MiB. The cause of the change was not
-identified. Three unrelated REA JSON files observed in `C:\temp` were
-preserved. The original refusal was a space threshold, not a permission
-failure. No existing staging data should be deleted to make the gate pass.
+confirmed. The 2026-10-13 FREE-PATH follow-up first used this mode with 28.7 MiB
+free; later preflights measured 28.2, 27.7, and 25.8 MiB. The previous rounded
+26 MiB gate refused the last value even though the measured peak plus probe
+allowance and full 5 MiB margin still fit. The reusable preflight now checks
+that exact byte budget. Three unrelated REA JSON files observed in `C:\temp`
+were preserved. This was a space threshold, not a permission failure. Do not
+delete existing staging data to make the gate pass.
+
+### Serial caller-triplet disk reserve
+
+The FREE-PATH native-caller capture needs three serial writer-stream runs
+(before, observer, after). The 26 MiB single-run allowance is not enough to
+preflight that whole sequence. The 2026-10-13 attempt started with only 31 KiB
+above its exact single-run floor; the 320×480 before control completed, then
+the observer was refused after D: fell to 25.2 MiB. No observer or after run
+started, so this is not a caller result. The three REA JSON files and the
+existing `runner-failures-20261013` folder in `C:\temp` were preserved.
+
+`capture-free-path-caller-triplet.ps1` now checks capacity before creating a
+run root, again before each runner launch, and for all three legs before it
+starts. It keeps the single-run peak/probe/5 MiB floor, then adds one more
+5 MiB reserve for every later leg. With
+`-AllowMeasuredWriterStreamAt26MiB`, the required D: free space is 37,405,552
+bytes (35.7 MiB) for the first leg, 32,162,672 bytes (30.7 MiB) for the second,
+and 26,919,792 bytes (25.7 MiB) for the final leg. The three retained roots
+also require 384 MiB on C: at the existing 128 MiB per-run output minimum.
+The extra triplet reserve is conservative headroom, not a newly measured
+staging peak. If it fails, free space without deleting unrelated files or
+wait until the volume has the required headroom; the driver will stop before
+launching the next oracle.
 
 ### Paused native metadata probes
 
