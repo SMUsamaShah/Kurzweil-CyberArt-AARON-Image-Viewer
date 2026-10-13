@@ -167,6 +167,46 @@ source is
 serial capture helper is
 [`capture-free-path-stop-boundary-v5.ps1`](../tools/capture-free-path-stop-boundary-v5.ps1).
 
+## Seed 79481 length-2 candidate
+
+The v6 source-bound 320×480 triplet used the same first successful traced
+`STORE-IN-FILE` exit and a single visible forward edge `((0 0 0) (2 0 1))`.
+All five drawing/scene outputs and six ordinary staged Lisp sources match
+between the observer and fresh controls. The bracketing planning traces match;
+the observer-only trace has a separate diagnostic hash. The required report is
+complete, has no errors, records one call at depth 7, and confirms that the
+wrapped `RAN` and `XYDIST` functions were restored. The evidence builder
+rederived byte-identically; portable JSON SHA-256 is
+`2f71e5befcfd3d6de87de8164c048f9e20f71d224845f709e765664eed12e6b1`.
+
+For seed 79481, the original selected 13 steps, consumed 11, returned 14
+points, and left next random value 53424. JavaScript matches all 34 random
+calls, all returned points, and the next random checkpoint. The local replay
+predicts 11 steps for step-sum, bare-wiggle, and step-times-wiggle, and 12 for
+source-to-emitted-point distance. This sample agrees with the first three
+predictions and rejects the last for this input only; it does not establish a
+general stopping rule.
+
+The reusable local candidate search is
+[`find-free-path-stop-model-seeds.mjs`](../tools/find-free-path-stop-model-seeds.mjs).
+Its default scan covers seeds 1–200,000 at lengths 2, 5, 10, 20, and 40; it
+found no case with four distinct uncapped predictions. This is only a bounded
+search over local hypotheses. Reproduce it with:
+
+```powershell
+node research/tools/find-free-path-stop-model-seeds.mjs `
+  --seed-start 1 --seed-end 200000 --lengths 2,5,10,20,40
+```
+
+Portable evidence is
+[`free-path-stop-boundary-20261013-v6.json`](evidence/free-path-stop-boundary-20261013-v6.json).
+The source is
+[`free-path-stop-boundary-v6.cl`](free-path-stop-boundary-v6.cl), the serial
+capture helper is
+[`capture-free-path-stop-boundary-v6.ps1`](../tools/capture-free-path-stop-boundary-v6.ps1),
+and the strict derivation tool is
+[`derive-free-path-stop-boundary-v6-evidence.mjs`](../tools/derive-free-path-stop-boundary-v6-evidence.mjs).
+
 ## Reproduction
 
 Read [`oracle.md`](../oracle.md#ctemp-staging-and-permissions) first. The

@@ -1,0 +1,518 @@
+{
+  "schema": "aaron-free-path-stop-boundary-evidence-v6",
+  "question": "Does one length-2 visibility-isolated edge distinguish a terminal bare-wiggle candidate from the current stop models when invoked at a traced STORE-IN-FILE return?",
+  "controls": {
+    "before": {
+      "runId": "freepath-v6-before-acf242b1",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:53:20.6405595+00:00",
+      "finishedAt": "2026-10-13T04:53:43.6831532+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observer": {
+      "runId": "freepath-v6-observer-4485ffa7",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:53:44.1102057+00:00",
+      "finishedAt": "2026-10-13T04:54:10.9914572+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "after": {
+      "runId": "freepath-v6-after-4b861adc",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T04:54:11.5269520+00:00",
+      "finishedAt": "2026-10-13T04:54:40.4188124+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observerProbeSha256": "a02355e9d7bd24ddf2b43c4b2d20d6997df0376c01f2c0c36e4b362f2b4a00ce",
+    "checkedInProbePath": "research/introspection/free-path-stop-boundary-v6.cl",
+    "checkedInProbeSha256": "a02355e9d7bd24ddf2b43c4b2d20d6997df0376c01f2c0c36e4b362f2b4a00ce",
+    "observerReportSha256": "92045e0546d7f3e7dd6066ba6f348c7e1bbf47ebfb0712bdffb416c8ee6b1a5d",
+    "observerReportPath": "research/extracted/local-oracle/external-runs/freepath-v6-observer-4485ffa7/capture/aaron-free-path-stop-boundary-v6.txt",
+    "requiredEndMarker": "END free-path-stop-boundary-v6",
+    "drawingAndSceneOutputHashes": {
+      "aa0": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "image": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "bracketingPlanningTraceSha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+    "observerPlanningTraceSha256": "4fcf05d879b07d6e3d0da0aa7a5e2dcb5866637364a4796172fb1f8fd1a84150",
+    "observerPlanningTraceIsDiagnosticOnly": true,
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "958f3f20ae64cce601d1807682d7c0b93b7b83989c2b72e363b493c61a2b7fa5",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    "allDrawingAndSceneOutputsAndOrdinarySourcesMatch": true,
+    "aa0Header": {
+      "width": 320,
+      "height": 480,
+      "headerBytes": 148
+    }
+  },
+  "captureChecks": {
+    "caseCount": 1,
+    "errorCount": 0,
+    "bracketingPlanningTracesMatch": true,
+    "observerPlanningTraceDiffers": true,
+    "ranAndXydistBindingsRestored": true,
+    "traceHook": {
+      "event": ":exit",
+      "name": "STORE-IN-FILE",
+      "depth": 7
+    },
+    "callbackStatus": "OK",
+    "allPrivateInputListsUnchanged": true,
+    "oneForwardVisibleEdgeOnly": true,
+    "exactSeedPrefix": true
+  },
+  "case": {
+    "seed": 79481,
+    "name": "length-2-visible-edge",
+    "points": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        1
+      ]
+    ],
+    "fdex": 0,
+    "tdex": 1,
+    "from": 0,
+    "to": 1,
+    "distanceCall": {
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "result": 2
+    },
+    "randomCalls": [
+      {
+        "args": [
+          8,
+          14
+        ],
+        "value": 13
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2457285
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.021196734
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.570982
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0418044
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.015325806
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.1980777
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.110451
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.02856642
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.5258973
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2537053
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.023241518
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.7721453
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0753634
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.025275331
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.3109946
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1525948
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.0270725
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 6.1349173
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2883209
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.016115153
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.8105822
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2661086
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.015277101
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 5.441408
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2946551
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.021614032
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 2.9030995
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2413821
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.029289655
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.25946805
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0407182
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.020854605
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.6896846
+      }
+    ],
+    "result": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.191078,
+        -0.004021818,
+        1
+      ],
+      [
+        0.34947568,
+        -0.00013867512,
+        1
+      ],
+      [
+        0.5182425,
+        -0.0018296761,
+        1
+      ],
+      [
+        0.7159122,
+        -0.0044747703,
+        1
+      ],
+      [
+        0.88215923,
+        0.004041235,
+        1
+      ],
+      [
+        1.0631552,
+        -0.0007091643,
+        1
+      ],
+      [
+        1.254105,
+        -0.001980945,
+        1
+      ],
+      [
+        1.4533787,
+        -0.002219409,
+        1
+      ],
+      [
+        1.646391,
+        0.0010170153,
+        1
+      ],
+      [
+        1.8469626,
+        0.0014351795,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "nextRandom": {
+      "value": 53424,
+      "status": "OK"
+    },
+    "stopModelComparison": {
+      "selectedSteps": 13,
+      "originalConsumedSteps": 11,
+      "localRngPrefixMatchesCapture": true,
+      "predictions": {
+        "stepSumThreshold": 11,
+        "emittedPointDistanceThreshold": 12,
+        "terminalDistanceAtMostBareWiggle": 11,
+        "terminalDistanceAtMostStepTimesWiggle": 11
+      },
+      "reconstructedFinalSteps": [
+        {
+          "step": 10,
+          "scale": 1.241382122039795,
+          "wiggle": 0.02928965538740158,
+          "angle": 0.25946804881095886,
+          "progressed": 1.8415560722351074,
+          "point": [
+            1.846962571144104,
+            0.0014351794961839914
+          ],
+          "fromStart": 1.8469631671905518,
+          "fromTarget": 0.15304416418075562,
+          "offsetLength": 0.005593793001025915
+        },
+        {
+          "step": 11,
+          "scale": 1.0407181978225708,
+          "wiggle": 0.020854605361819267,
+          "angle": 3.6896846294403076,
+          "progressed": 2.00166654586792,
+          "point": [
+            1.9988166093826294,
+            -0.0017398395575582981
+          ],
+          "fromStart": 1.9988173246383667,
+          "fromTarget": 0.002104151761159301,
+          "offsetLength": 0.003339041257277131
+        },
+        {
+          "step": 12,
+          "scale": 1.162388801574707,
+          "wiggle": 0.016240684315562248,
+          "angle": 0.7738955616950989,
+          "progressed": 2.180495500564575,
+          "point": [
+            2.182572603225708,
+            0.002029897179454565
+          ],
+          "fromStart": 2.1825735569000244,
+          "fromTarget": 0.18258388340473175,
+          "offsetLength": 0.002904306398704648
+        }
+      ],
+      "traceBasis": "Local single-float replay checked against every captured RAN call; original internal variables are not observed."
+    },
+    "javascriptComparison": {
+      "randomCallsMatch": true,
+      "returnedPointsMatch": true,
+      "followingRandomMatches": true,
+      "followingRandom": {
+        "original": 53424,
+        "javascript": 53424
+      },
+      "originalRandomCallCount": 34,
+      "javascriptRandomCallCount": 34,
+      "originalResultPointCount": 14,
+      "javascriptResultPointCount": 14,
+      "boundedParity": true
+    }
+  },
+  "interpretation": [
+    "The one-XYDIST capture isolates the visible forward edge; the zero-visibility start suppresses the closing edge in this case.",
+    "Stop predictions replay captured seeded random values with single-float arithmetic; they do not observe the original function internal variables.",
+    "One seed can discriminate local candidates but cannot establish a general stop rule.",
+    "JavaScript parity is reported separately for captured random calls, returned points and the next random checkpoint."
+  ],
+  "limitations": [
+    "This is one integer-coordinate, length-2 edge and one seed.",
+    "The controlled FREE-PATH case runs inside the first successful traced STORE-IN-FILE exit callback; it is not a natural FREE-PATH caller observation.",
+    "The post-event callback and one-shot flag remain installed until this disposable oracle process exits.",
+    "This does not establish the FREE-PATH domain, native Lisp ABI, or whole-painting parity."
+  ]
+}

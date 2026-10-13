@@ -167,21 +167,26 @@ routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
 whole-painting parity. See the [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-A v5 controlled seed-332156 edge completed inside another source-bound
-320×480 triplet. The original selected and consumed all 9 steps, returned 12
-points, and left next RNG value 43251; JavaScript matches all 28 random calls,
-returned points, and the next RNG checkpoint. The local bare-wiggle and
-step-times-wiggle candidates predict 8, while step-sum and source-to-emitted
-distance reach the 9-step cap. The sample therefore does not confirm v4's
-bare-wiggle candidate. Fresh controls match five drawing/scene outputs and six
-ordinary staged sources; the observer-only planning trace is diagnostic. The
-five isolated one-edge cases now contain two JS matches and three one-step
-mismatches, but this is not a generator coverage percentage. A scan of two
-million length-10 seeds found no uncapped case separating bare-wiggle from
-step-times-wiggle, so the next experiment varies edge length. The report still
-stands at 30 routine names / 31 bounded contract units, 1 of 5 milestones
-(20% by count), and 0 whole-painting parity. See [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json)
-and [FREE-PATH findings](introspection/free-path-native.md).
+A v6 controlled length-2 edge completed in a source-bound 320×480 triplet.
+For seed 79481, the original selected 13 steps and consumed 11; JavaScript
+matches all 34 random calls, all 14 returned points, and next RNG value 53424.
+Step-sum, bare-wiggle, and step-times-wiggle each predict 11 steps, while the
+source-to-emitted-point candidate predicts 12. The capture therefore rejects
+that last local candidate for this input only; the general stop rule remains
+unresolved. Fresh controls match five drawing/scene outputs and six ordinary
+staged sources, with the observer-only planning trace kept diagnostic.
+
+The six isolated one-edge cases now contain three JavaScript matches and three
+one-step mismatches. A reproducible local search across seeds 1–200,000 at
+lengths 2, 5, 10, 20, and 40 found no case where all four local predictions
+were distinct and uncapped; this search is candidate selection, not original
+behavior evidence. The totals remain 30 routine names / 31 bounded contract
+units, 1 of 5 milestones (20% by count), and 0 whole-painting parity. See
+[v6 evidence](introspection/evidence/free-path-stop-boundary-20261013-v6.json),
+[the seed search tool](tools/find-free-path-stop-model-seeds.mjs), and
+[FREE-PATH findings](introspection/free-path-native.md). The earlier
+[v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json)
+remains documented there.
 
 ## What remains before a general AARON-equivalent generator
 

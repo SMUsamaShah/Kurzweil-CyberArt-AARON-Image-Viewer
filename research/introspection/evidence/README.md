@@ -1558,3 +1558,19 @@ The [seed-1234 screen-unit fixture](screen-units-seed-1234-b.json) and
 path points to 551 writer point calls plus 28 colour changes and validate
 2,014 exact original bytes. Colour decisions and screen-unit RNG behavior
 remain original-supplied dependencies.
+
+## FREE-PATH isolated length-2 stop-boundary candidate (2026-10-13)
+
+[`free-path-stop-boundary-20261013-v6.json`](free-path-stop-boundary-20261013-v6.json)
+binds a complete before/observer/after triplet, checked probe and required
+report hashes, five matching drawing/scene outputs, six matching ordinary
+staged sources, the observer-only planning trace, and the complete controlled
+FREE-PATH call. Seed 79481 selected 13 steps and consumed 11 on the edge
+`((0 0 0) (2 0 1))`; JavaScript matches all 34 random calls, returned points,
+and the next RNG value. The local source-to-emitted-point candidate predicts
+12 steps; three other candidates predict 11. This single result rejects only
+one local candidate for this input and does not establish the general stop
+rule or a natural caller. The evidence SHA-256 is
+`2f71e5befcfd3d6de87de8164c048f9e20f71d224845f709e765664eed12e6b1`. See the
+[FREE-PATH findings](../free-path-native.md) for the probe and reproduction
+tool links.

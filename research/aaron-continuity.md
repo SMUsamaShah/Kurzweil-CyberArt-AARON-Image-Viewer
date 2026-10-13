@@ -109,19 +109,21 @@ Read [v4 evidence](introspection/evidence/free-path-stop-boundary-20261013-v4.js
 names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 full-painting
 parity results.
 
-The v5 seed-332156 triplet is complete and byte-checked against fresh controls.
-Original and JS both consume all 9 selected steps, return 12 points, and leave
-next RNG value 43251; all 28 random calls and returned points match. Bare-wiggle
-and step-times-wiggle locally predict 8, while step-sum and source-to-emitted
-point reach only the selected cap. This does not confirm v4's local candidate.
-Across five isolated one-edge cases JS matches two and differs by one step in
-three. A two-million-seed search at length 10 found no uncapped case that
-separates the two terminal-distance variants, so vary the controlled edge
-length next. See [v5 evidence](introspection/evidence/free-path-stop-boundary-20261013-v5.json),
-[findings](introspection/free-path-native.md), and the serial
-[capture helper](tools/capture-free-path-stop-boundary-v5.ps1). Counts stay
-30 routine names / 31 bounded contracts, 1 of 5 milestones (20%), and 0
-whole-painting parity.
+The v6 seed-79481 length-2 triplet is complete and byte-checked against fresh
+controls. Original and JS both consume 11 of 13 selected steps, return 14
+points, and leave next RNG value 53424; all 34 random calls and returned points
+match. Step-sum, bare-wiggle, and step-times-wiggle predict 11, while
+source-to-emitted-point predicts 12. This rejects one candidate for this input
+only and leaves the general stop rule unresolved. Across six isolated one-edge
+cases JS matches three and differs by one step in three. The reproducible
+candidate scan over 200,000 seeds at lengths 2, 5, 10, 20, and 40 found no case
+with four distinct uncapped predictions. Next, choose a case that separates the
+remaining candidates or capture a natural caller boundary; keep the same fresh
+controls and source-bound evidence checks. See [v6 evidence](introspection/evidence/free-path-stop-boundary-20261013-v6.json),
+[findings](introspection/free-path-native.md), [seed finder](tools/find-free-path-stop-model-seeds.mjs),
+and the serial [capture helper](tools/capture-free-path-stop-boundary-v6.ps1).
+Counts stay 30 routine names / 31 bounded contracts, 1 of 5 milestones (20%),
+and 0 whole-painting parity.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
