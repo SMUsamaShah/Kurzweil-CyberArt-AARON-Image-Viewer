@@ -1,5 +1,17 @@
 # Original-engine report excerpts
 
+## ZERO-EDGE compiled-constant reference census, 2026-10-13
+
+[`zero-edge-native-links-20261013.json`](zero-edge-native-links-20261013.json)
+binds a complete pre-scene scan to fresh no-probe controls before and after.
+The scan inspected 1,347 own-package fbound bindings and 1,380 unique
+compiled functions; it found one static symbol reference in `BUFFER-HOLE`,
+constant index 1, with zero scan errors or truncations. The reference is only
+a candidate relationship and does not prove a call or natural execution.
+All six drawing/scene outputs and six staged scene sources match across the
+three 320x480 writer-stream runs. Two independent derivations are byte-identical.
+Read the [scope and findings](../zero-edge-native-links.md).
+
 ## REA native payload analysis, 2026-10-12
 
 [`rea-payload-analysis-20261012.json`](rea-payload-analysis-20261012.json)

@@ -27,6 +27,16 @@ Use ignored `toolchain-current.json` for new REA work and retain the frozen
 historical `toolchain.json` for existing evidence. The hourly automation is
 confirmed absent; continuation is manual.
 
+Latest ZERO-EDGE step: a complete source-bound constant census scanned 1,347
+own-package bindings / 1,380 unique compiled objects and found one static
+symbol reference in `BUFFER-HOLE` (constant 1). This does not prove execution
+or a direct caller. Fresh controls bracket the observer and match six outputs
+and six scene sources at 320x480. The next target is a natural ZERO-EDGE
+entry/caller trace; rediscover live addresses first. See the
+[census dossier](introspection/zero-edge-native-links.md) and update the
+[progress report](progress-report.md). The 30/31 bounded behavior count and
+20% milestone count are unchanged.
+
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
 total. T means outside `0 <= X <= *PIC-WIDE*-1` and

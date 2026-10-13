@@ -58,6 +58,18 @@ identity, so its cross-run frame comparisons remain hypotheses. See the
 The separate [first-caller evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json)
 records only the first native entry in its own controlled run.
 
+A source-bound pre-scene census of ZERO-EDGE's compiled constant references
+scanned 1,347 package bindings and 1,380 unique compiled objects. It found one
+static symbol reference in `BUFFER-HOLE` at constant index 1, with zero scan
+errors or truncations. The observer was bracketed by fresh no-probe controls;
+six output artifacts and six staged scene sources match. This is a candidate
+relationship, not proof of a direct caller or natural call. These 320x480
+captures are separate from the earlier 768x1080 caller trace. The census adds
+no JavaScript behavior contract, so the documented count remains 30 routine
+names / 31 bounded contract units, milestone progress remains 1 of 5 (20%),
+and whole-painting parity remains 0. See the [ZERO-EDGE census findings](introspection/zero-edge-native-links.md)
+and [portable evidence](introspection/evidence/zero-edge-native-links-20261013.json).
+
 ## What remains before a general AARON-equivalent generator
 
 The generative core and its integration remain the main work: recover normal

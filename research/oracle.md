@@ -320,6 +320,15 @@ the observer's counters, state, errors or truncation; its strict offline
 parser must still reject incomplete cases. Keep the historical runner frozen
 for existing published source closures.
 
+Read the first AA0 header to determine the captured canvas; do not infer it
+from `summary.smallImage`. On 2026-10-13, three complete
+`writer-stream-seed-1234` runs from the required-probe runner reported
+`smallImage=false` but each AA0 header was `320 480 148`. Their six output
+artifacts matched across the observer and fresh before/after controls. Keep
+those 320x480 artifacts separate from the 768x1080 composite-loader/native-
+caller captures. The cause of this run-specific resolution difference is
+uninvestigated. See the [ZERO-EDGE reference census](introspection/zero-edge-native-links.md).
+
 The ZERO-EDGE contract investigation has three excluded attempts: v1's
 serializer scope errors, v2's changed painting despite zero errors, and v3's
 incomplete MAIN installer despite matching painting/scene bytes. Frozen v4

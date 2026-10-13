@@ -41,6 +41,41 @@ to 70 sources. Independent offline derivations are byte-identical. This static
 route does not replace the live rediscovery and byte checks required before
 debugger attachment below. Preserve the historical toolchain and raw reports.
 
+## ZERO-EDGE compiled-constant reference census, 2026-10-13
+
+The read-only probe [`zero-edge-native-links.cl`](introspection/zero-edge-native-links.cl)
+scans own-package compiled bindings and nested compiled-function constants for
+references to ZERO-EDGE. A reference is only a candidate; it is not a call or
+dynamic caller. Run it with the required-probe runner between two fresh
+no-probe controls in the same mode, then derive the compact portable report:
+
+```powershell
+& .\research\oracle\run-local-scene-state-required-probe.ps1 `
+  -ExtractedRoot research\extracted\aaron `
+  -OutputRoot research\extracted\local-oracle\zero-edge-native-links-new-observer `
+  -RunId zero-edge-native-links-new-observer `
+  -Mode writer-stream-seed-1234 -RunSeconds 150 `
+  -PreSceneProbePath research\introspection\zero-edge-native-links.cl `
+  -ProbeOutputNames aaron-zero-edge-native-links.txt `
+  -RequiredProbeOutputName aaron-zero-edge-native-links.txt `
+  -RequiredProbeEndMarker 'END zero-edge-native-links'
+
+node research\tools\derive-zero-edge-native-links-evidence.mjs `
+  research\extracted\local-oracle\zero-edge-native-links-new.json `
+  research\extracted\local-oracle\zero-edge-native-links-new-control-before `
+  research\extracted\local-oracle\zero-edge-native-links-new-observer `
+  research\extracted\local-oracle\zero-edge-native-links-new-control-after
+```
+
+The before/after runs use the same runner, mode and fresh roots with no
+optional probe arguments. The 2026-10-13 census found one ZERO-EDGE symbol
+reference at `BUFFER-HOLE` constant index 1, among 1,380 scanned compiled
+objects, with no errors or truncations. This only prioritizes `BUFFER-HOLE`
+for the next caller investigation. The complete source-bound record is
+[here](introspection/zero-edge-native-links.md). Its controls measured
+320x480 even though `smallImage=false`; read dimensions from the AA0 header
+and keep this run separate from 768x1080 controls.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "status": "measured",
+  "question": "Which COMMON-GRAPHICS-USER compiled-function constant tables contain a ZERO-EDGE symbol or function reference?",
+  "interpretation": "Static constant references are candidate relationships only. They do not establish a direct call, dynamic execution, caller ordering, or ZERO-EDGE behavior.",
+  "result": {
+    "ownPackageFunctionBindings": 1347,
+    "uniqueCompiledFunctionsScanned": 1380,
+    "staticReferenceCount": 1,
+    "errors": 0,
+    "truncations": 0,
+    "staticReferenceCandidates": [
+      {
+        "root": "BUFFER-HOLE",
+        "path": "NIL",
+        "constantIndex": 1,
+        "kind": "symbol"
+      }
+    ],
+    "targetFunctionLine": "FUNCTION name=\"ZERO-EDGE\" type=COMPILED-FUNCTION",
+    "targetConstantCountLine": "CONSTANT-COUNT name=\"ZERO-EDGE\" count=12"
+  },
+  "controls": {
+    "mode": "writer-stream-seed-1234",
+    "smallImage": false,
+    "canvas": {
+      "width": 320,
+      "height": 480,
+      "headerValue": 148
+    },
+    "allSixOutputsByteIdenticalAcrossBeforeObserverAfter": true,
+    "allSixSceneSourcesByteIdenticalAcrossBeforeObserverAfter": true,
+    "equalOutputs": [
+      {
+        "name": "aa0",
+        "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+        "bytes": 126956
+      },
+      {
+        "name": "image",
+        "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+        "bytes": 124575
+      },
+      {
+        "name": "imageId",
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      {
+        "name": "sceneSnapshot",
+        "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+        "bytes": 25951
+      },
+      {
+        "name": "planningTrace",
+        "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+        "bytes": 21287184
+      },
+      {
+        "name": "loadedSeed",
+        "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+        "bytes": 476
+      }
+    ],
+    "equalSceneSources": [
+      {
+        "name": "planning-call-trace.cl",
+        "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+        "bytes": 18496
+      },
+      {
+        "name": "planning-random-seed-common.cl",
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+        "bytes": 20476
+      },
+      {
+        "name": "scene-state-snapshot-seeded-1234.cl",
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+        "bytes": 847
+      },
+      {
+        "name": "scene-state-snapshot-writer-seeded-1234.cl",
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+        "bytes": 579
+      },
+      {
+        "name": "scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+        "bytes": 401
+      },
+      {
+        "name": "scene-state-snapshot.cl",
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d",
+        "bytes": 41791
+      }
+    ],
+    "runs": [
+      {
+        "runId": "zero-edge-native-links-20261013-control-before-a",
+        "role": "fresh uninstrumented control before",
+        "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "summarySha256": "3b1a13a87451ab58022dd8d2e811dd86eb1946e905fc6cd74a7098244cf8c398",
+        "probeSha256": null,
+        "probeOutputNames": [],
+        "probePauseSeconds": 0,
+        "probeCompletionSatisfied": true,
+        "requiredProbeOutputName": "",
+        "requiredProbeEndMarker": "",
+        "aa0Dimensions": {
+          "width": 320,
+          "height": 480,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/planning-call-trace.cl",
+            "bytes": 18496,
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-before-a/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        }
+      },
+      {
+        "runId": "zero-edge-native-links-20261013-observer-b",
+        "role": "ZERO-EDGE static-reference observer",
+        "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "summarySha256": "66f22fc1bb5107884047ea3f35be7938c1c1dd87a39ef116d324b3aec35859e4",
+        "probeSha256": "febc636051f44aa3fc2da2edc38cc65b3536ed183c6621d7f9cc2a768fc219e3",
+        "probeOutputNames": [
+          "aaron-zero-edge-native-links.txt"
+        ],
+        "probePauseSeconds": 0,
+        "probeCompletionSatisfied": true,
+        "requiredProbeOutputName": "aaron-zero-edge-native-links.txt",
+        "requiredProbeEndMarker": "END zero-edge-native-links",
+        "aa0Dimensions": {
+          "width": 320,
+          "height": 480,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/planning-call-trace.cl",
+            "bytes": 18496,
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        }
+      },
+      {
+        "runId": "zero-edge-native-links-20261013-control-after-c",
+        "role": "fresh uninstrumented control after",
+        "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+        "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "summarySha256": "99b9da3bcd7e449435cd4ba4f2b9149d8f026c026fce927a22419e221f60ec47",
+        "probeSha256": null,
+        "probeOutputNames": [],
+        "probePauseSeconds": 0,
+        "probeCompletionSatisfied": true,
+        "requiredProbeOutputName": "",
+        "requiredProbeEndMarker": "",
+        "aa0Dimensions": {
+          "width": 320,
+          "height": 480,
+          "headerValue": 148
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/planning-call-trace.cl",
+            "bytes": 18496,
+            "sha256": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-control-after-c/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        }
+      }
+    ]
+  },
+  "capturedProbe": {
+    "source": {
+      "path": "research/introspection/zero-edge-native-links.cl",
+      "bytes": 5601,
+      "sha256": "febc636051f44aa3fc2da2edc38cc65b3536ed183c6621d7f9cc2a768fc219e3"
+    },
+    "stagedSource": {
+      "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aaron-pre-scene-probe.cl",
+      "bytes": 5601,
+      "sha256": "febc636051f44aa3fc2da2edc38cc65b3536ed183c6621d7f9cc2a768fc219e3"
+    },
+    "request": {
+      "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/pre-scene-probe-request.json",
+      "bytes": 687,
+      "sha256": "bdc6ed221042ce14f7b201b80ee79373aeaeaedb48652bd584cdcde17eeee23b"
+    },
+    "report": {
+      "path": "research/extracted/local-oracle/zero-edge-native-links-20261013-observer-b/capture/aaron-zero-edge-native-links.txt",
+      "bytes": 1453,
+      "sha256": "f3b9c74c3ed5469a4b492adf2f2be39c10aaf2b3e7d0a0490e8c21868aaf30b9"
+    },
+    "runner": {
+      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "bytes": 27289,
+      "sha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9"
+    },
+    "manifest": {
+      "path": "research/extracted/aaron/manifest.json",
+      "bytes": 2817,
+      "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+    },
+    "deriver": {
+      "path": "research/tools/derive-zero-edge-native-links-evidence.mjs",
+      "bytes": 13366,
+      "sha256": "55b561f6c40c4f92a726332e1d69b556509c851a8ef55a70b82482fce64d1a4a"
+    }
+  },
+  "limitations": [
+    "The scan is bounded by depth 8, 4096 constants per object, and 10000 unique compiled functions; zero truncations were required for this result.",
+    "A reference can be a data value or function object constant. It does not prove that a call occurs.",
+    "The shared output controls support observer transparency for this one measured canvas and seed-1234 writer-stream setup only.",
+    "No ZERO-EDGE JavaScript contract count changes as a result of this static census."
+  ]
+}

@@ -124,7 +124,16 @@ false-row census. See the
 [caller evidence](introspection/evidence/in-sub-frame-native-caller-20261013.json)
 and [updated findings](introspection/in-sub-frame.md). Natural ZERO-EDGE
 context, per-call frames for census rows, intermediate helper traces, and
-scene-level JS parity remain open.
+scene-level JS parity remain open. A new source-bound pre-scene scan inspected
+1,380 compiled objects and found one ZERO-EDGE symbol reference in
+`BUFFER-HOLE` at constant index 1, with no scan errors or truncations. Fresh
+controls before and after match all six output artifacts and six staged scene
+sources in the measured 320x480 regime. This is a static candidate, not proof
+of a direct call or natural execution. Next, capture a natural ZERO-EDGE entry
+and validate any live caller addresses; keep these 320x480 controls separate
+from the prior 768x1080 native trace. See the
+[ZERO-EDGE reference findings](introspection/zero-edge-native-links.md) and
+[portable evidence](introspection/evidence/zero-edge-native-links-20261013.json).
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns
