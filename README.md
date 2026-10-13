@@ -31,7 +31,8 @@ corpora are deliberately not committed.
 observed files; the JavaScript scene generator is a provisional implementation.
 The original planning, freehand drawing, color rules, and random-state semantics
 still need recovery and controlled comparison. Current progress is recorded in
-the [short progress report](research/progress-report.md), with the longer
+the [short progress report](progress-report.md), with the detailed
+[research progress log](research/progress-report.md) and longer
 [runtime-introspection notes](research/runtime-introspection.md) for detail.
 
 ## Links about AARON

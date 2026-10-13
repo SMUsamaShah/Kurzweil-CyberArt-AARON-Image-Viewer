@@ -20,9 +20,9 @@ private input lists remained unchanged, the `RAN` and `XYDIST` function cells
 were restored, and the report ended with `END free-path-boundaries`.
 
 These are measured outcomes for the recorded finite samples. The matrix does
-not cover all numeric types or ranges. A later three-case edge capture
-compares selected near-boundary inputs to JavaScript, described below; neither
-capture establishes a complete `FREE-PATH` contract or whole-painting parity.
+not cover all numeric types or ranges. Its bounded JavaScript comparison and a
+separate three-case edge comparison are described below; neither establishes
+a complete `FREE-PATH` contract or whole-painting parity.
 
 ## Source-bound scene controls
 
@@ -98,6 +98,46 @@ helper and outer MAIN wrapper remain at the expected Lisp nesting depth before
 the observer is run.
 
 This adds comparison rows within the existing bounded `FREE-PATH` unit; it
-does not add a recovered routine or a new behavior-coverage percentage. Next,
-the stop condition needs another controlled discriminator before the JS
-implementation is widened.
+does not add a recovered routine or a project-wide behavior-coverage score.
+
+## Offline comparison of the 40-case matrix
+
+The retained matrix was compared to the current JavaScript helper without
+starting AARON. The comparator validates the source-bound report's `MAIN`
+return, terminal marker, exact 40 seed/name pairs, absence of unknown records,
+and stored report/probe hashes. Each case starts a fresh original and JS random
+state from its own seed at offset zero; captured values are never replayed into
+JavaScript. Numeric source types come from the checked-in Lisp literals.
+
+Of 40 cases, 30 are directly represented by the closed-list JavaScript API:
+`FDEX=0`, `TDEX=point-count-1`, `FROM=0`, and `TO=1`, with source/report input
+agreement. **26 of those 30 rows match** the complete recorded `RAN` sequence,
+returned points, next-random checkpoint, and input immutability. Four seed-1234
+polygon rows differ:
+
+| Case | Original: RAN calls / points / next value | JavaScript: RAN calls / points / next value |
+|---|---:|---:|
+| `triangle-visible` | 99 / 35 / 1,522 | 102 / 36 / 90,465 |
+| `triangle-negative-vis` | 99 / 35 / 1,522 | 102 / 36 / 90,465 |
+| `square-visible` | 142 / 50 / 82,528 | 136 / 48 / 26,522 |
+| `pentagon-visible` | 170 / 60 / 55,068 | 164 / 58 / 87,688 |
+
+The other 10 rows remain unclassified: eight have noncanonical index settings
+the API cannot express, and two `negative-zero` cases have `+0.0d0` in the
+captured header even though the source literal is `-0.0d0`. No slice, rotation,
+or reversal was inferred for those index cases, and signed-zero behavior is
+not claimed.
+
+The portable evidence keeps `RAN` and `XYDIST` records in separate arrays, so
+the comparison does not establish their shared event ordering. It also does
+not establish a natural caller, general stop rule, scene-generation parity,
+or whole-painting parity. The result is 26/30 (86.7%) only for this finite,
+directly comparable subset; it is not a project completion percentage. The
+overall routine/contract counts and execution-milestone percentage do not
+change. See the [portable comparison evidence](evidence/free-path-boundary-js-comparison-20261013.json)
+and the [reproducible comparator](../tools/compare-free-path-boundary-matrix.mjs).
+
+Next, capture the entry stack for a natural `FREE-PATH` call and identify its
+direct caller only from the immediate caller frame. Continue to treat the
+stop condition as unresolved; do not widen the JS implementation from these
+finite polygon cases alone.

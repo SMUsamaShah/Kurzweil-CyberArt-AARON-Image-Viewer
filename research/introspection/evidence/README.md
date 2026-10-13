@@ -1589,3 +1589,20 @@ steps and bare-wiggle predicts 7. This rejects one candidate for this input
 only; it does not identify the general stop rule or a natural caller. Evidence
 SHA-256 is
 `6e24501b60fc0d4014a12bf71c2878c32ce658f6aa9ef07e60bb90edb3d101b1`.
+
+## FREE-PATH 40-case JavaScript comparison (2026-10-13)
+
+[`free-path-boundary-js-comparison-20261013.json`](free-path-boundary-js-comparison-20261013.json)
+records the offline replay of the complete source-bound 40-case matrix. The
+comparator validates all report markers and exact seed/name pairs, retains the
+source Lisp numeric types, starts each RNG at the recorded seed, and checks
+input immutability. Of 30 inputs represented by the current closed-list API,
+26 match the complete RAN trace, returned points and next-random checkpoint.
+Four seed-1234 polygon cases differ. Eight noncanonical index cases and two
+signed-zero cases remain unclassified. The artifact SHA-256 is
+`46e23788cde7380f9cb56c1c9083792fb7e034c87cdc0ffd54200330c00c21ce`.
+Recreate it with
+[`compare-free-path-boundary-matrix.mjs`](../../tools/compare-free-path-boundary-matrix.mjs)
+and the input report/probe documented in
+[`free-path-boundaries.md`](../free-path-boundaries.md). This is finite
+function evidence, not a general stop-rule or whole-painting parity result.

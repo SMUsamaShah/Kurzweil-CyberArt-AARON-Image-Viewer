@@ -1,8 +1,9 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-13. This is the short, count-based status page for readers who
-aren't following every probe. It reports measured scope and keeps function-name
-counts separate from recovered behavior.
+Updated 2026-10-13. This is the detailed count-based checkpoint log. The compact
+current snapshot is in the [root progress report](../progress-report.md).
+It reports measured scope and keeps function-name counts separate from
+recovered behavior.
 
 ## Where we are
 
@@ -10,6 +11,7 @@ counts separate from recovered behavior.
 |---|---:|---|
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |
 | Routines with documented, bounded JS/original comparisons | 30 routine names; 31 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, plus the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters. These are limited contracts, not 30 general-purpose source reconstructions. |
+| FREE-PATH boundary-matrix comparison | 26 of 30 directly comparable cases match; 4 mismatch; 10 unclassified | Finite source-bound calls only. Eight noncanonical index cases and two signed-zero cases are unclassified; this is not a project completion percentage. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
 | REA 6.4 static native payload dossiers | 6 named payloads | Structured native-code analysis; not six recovered Lisp functions, verified ABIs, or application-wide call graphs. |
@@ -198,6 +200,17 @@ routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
 whole-painting parity. Across seven isolated one-edge cases, JS now matches
 four and differs by one step in three. See [v7 evidence](introspection/evidence/free-path-stop-boundary-20261013-v7.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
+
+The offline comparison of the earlier 40-case FREE-PATH matrix now matches 26
+of 30 rows representable by the current JS API. Four seed-1234 polygon cases
+differ in random-call count, returned-point count, and the following random
+checkpoint. Eight cases with noncanonical index inputs and two cases whose
+captured header lost a negative-zero sign remain unclassified. This adds
+bounded comparisons but no general function contract: the totals remain 30
+routine names / 31 bounded contracts, 1 of 5 milestones (20% by count), and 0
+whole-painting parity. The 26/30 result applies only to this finite subset.
+See the [matrix comparison](introspection/evidence/free-path-boundary-js-comparison-20261013.json)
+and [findings](introspection/free-path-boundaries.md).
 
 ## What remains before a general AARON-equivalent generator
 

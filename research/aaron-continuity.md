@@ -1,8 +1,9 @@
 # AARON project continuity handoff
 
-For a short count-based status snapshot, see the
-[AARON progress report](progress-report.md). It distinguishes the 1,347-name
-symbol inventory from the smaller set of measured function contracts.
+For a short count-based status snapshot, see the repository's
+[AARON progress report](../progress-report.md). The
+[detailed progress log](progress-report.md) distinguishes the 1,347-name symbol
+inventory from the smaller set of measured function contracts.
 
 This file is the short resumption record for future Aaron conversations and
 agents. The full technical roadmap remains in
@@ -78,10 +79,16 @@ seeds 1 and 1234; the uninstrumented controls match all six drawing/scene
 outputs and six ordinary Lisp sources. This supersedes the prior statement
 that 320x480 is the latest observed regime, but does not invalidate that
 separate 320 capture. The current dimensions must be read from each AA0 header.
-The probe rows are not yet compared to JavaScript and do not change the
-30/31 contract count, 1-of-5 milestone count, or zero whole-painting parity.
-See [FREE-PATH boundary findings](introspection/free-path-boundaries.md) and
-[portable evidence](introspection/evidence/free-path-boundaries-20261013.json).
+The offline comparison validates the exact source-bound 40-case report and
+compares the 30 canonical, sign-preserving inputs supported by the current JS
+API. Twenty-six rows match across the full RAN trace, returned points, next
+random checkpoint, and input immutability; four seed-1234 polygon rows differ.
+Eight noncanonical index cases and two cases with a lost negative-zero sign
+remain unclassified. This adds no general function contract: the 30 routine
+names / 31 bounded contracts, 1-of-5 milestone count, and zero whole-painting
+parity are unchanged. See [FREE-PATH boundary findings](introspection/free-path-boundaries.md),
+[portable comparison](introspection/evidence/free-path-boundary-js-comparison-20261013.json), and
+[portable source evidence](introspection/evidence/free-path-boundaries-20261013.json).
 
 A newer source-bound post-MAIN triplet isolated three length-10 forward edges
 at 768x1080. Fresh controls match all six drawing/scene outputs and six staged
@@ -133,11 +140,10 @@ and [findings](introspection/free-path-native.md). Counts remain 30 routine
 names / 31 bounded contracts, 1 of 5 milestones (20%), and 0 whole-painting
 parity.
 
-Next, compare the existing 40-case FREE-PATH boundary matrix offline against
-JS. Preserve the Lisp numeric types and account for `FDEX`/`TDEX`/`FROM`/`TO`;
-only classify rows supported by the JS interface. If this does not explain the
-remaining mismatch, capture the stack at a natural FREE-PATH entry before
-inferring its caller.
+Next, capture the stack at a natural FREE-PATH entry and identify the direct
+caller from that entry's immediate frame. Keep the observed stop-rule
+mismatches unresolved until a new source-bound discriminator distinguishes the
+remaining behavior; do not infer callers from adjacent trace events.
 
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in

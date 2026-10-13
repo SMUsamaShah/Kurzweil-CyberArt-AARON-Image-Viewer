@@ -443,13 +443,20 @@ shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
 observer runs only after the original MAIN and writer-stream observer return;
 the complete triplet matches all six drawing/scene outputs and six staged
 sources. This validates the capture placement. The 40-case matrix itself is
-still not compared row-by-row with JavaScript. A second triplet isolates three
+compared offline against JavaScript for the 30 canonical closed-list inputs;
+26 match exactly across the RAN sequence, returned points, following random
+checkpoint, and input immutability. Four seed-1234 polygon rows differ. Eight
+noncanonical index rows and two signed-zero rows remain unclassified. This
+does not recover a general stop rule. A second triplet isolates three
 length-10 forward edges at 768x1080. Original consumption is 10/10, 11/13,
 and 12/14 selected iterations for seeds 522862, 256819, and 348048. JavaScript
 matches only seed 256819. Seed 522862 falsifies the current early step-sum
 break, while the two candidate progress measures agree with different cases;
 neither is established as the general original rule. The captured internal
-progress variable remains unavailable. See the [matrix findings](introspection/free-path-boundaries.md),
+progress variable remains unavailable. Next, capture a natural FREE-PATH
+entry stack and establish the direct caller from the immediate frame, then
+choose a discriminator for the remaining stop-rule mismatches. See the [matrix findings](introspection/free-path-boundaries.md),
+[matrix comparison evidence](introspection/evidence/free-path-boundary-js-comparison-20261013.json),
 [isolated edge evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
 [seed candidate finder](tools/find-free-path-emitted-point-boundary-seeds.mjs),
 [portable evidence](introspection/evidence/free-path-boundaries-20261013.json),
