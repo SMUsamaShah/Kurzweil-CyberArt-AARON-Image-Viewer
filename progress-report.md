@@ -1,6 +1,6 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-13. This is the compact project snapshot; technical evidence
+Updated 2026-10-14. This is the compact project snapshot; technical evidence
 and the running investigation history are linked below.
 
 | Measure | Current status | What it means |
@@ -25,16 +25,14 @@ generation, and verify complete paintings against fresh original runs.
 
 ## Current focus
 
-FREE-PATH now has 40 source-bound direct cases. Its current JS API matches 26
-of 30 cases with canonical list indexes; four seed-1234 polygon cases still
-differ, while eight noncanonical-index cases and two signed-zero cases remain
-unclassified. The exact native payloads are mapped, but the natural caller
-capture is not complete: one 320×480 before control finished, then its observer
-was stopped by the D: staging-space gate. No caller hit or after control was
-captured. The triplet driver now reserves disk for all three runs before it
-starts and rechecks before each launch. The next step is to rerun the bracket
-when the staging volume has the documented headroom, then pursue a new
-discriminator for the remaining stop-rule mismatches.
+FREE-PATH now has a complete source-bound natural-caller triplet at 320×480.
+The first observed entry returned into `DRAW-CFORM` after its computed
+`CALL EDI` at offset `0x165`; the dynamic target is not named by static
+analysis. The before/observer/after drawing outputs and scene sources passed
+their exact checks. This adds no JavaScript behavior contract: the 40-case
+matrix remains 26/30 matching, four mismatches and ten unclassified. The next
+work is a discriminating FREE-PATH stop-boundary case; preserve the observed
+numeric types and avoid treating one native call path as a general call graph.
 
 ## Follow the evidence
 
@@ -43,6 +41,7 @@ discriminator for the remaining stop-rule mismatches.
 - [Continuity handoff](research/aaron-continuity.md)
 - [FREE-PATH findings](research/introspection/free-path-boundaries.md)
 - [FREE-PATH native analysis](research/introspection/free-path-native.md)
+- [FREE-PATH caller evidence](research/introspection/evidence/free-path-native-caller-20261014.json)
 - [FREE-PATH caller triplet tooling](research/tools/capture-free-path-caller-triplet.ps1)
 - [40-case JS comparison evidence](research/introspection/evidence/free-path-boundary-js-comparison-20261013.json)
 - [Tooling workarounds](research/tooling-workarounds.md)

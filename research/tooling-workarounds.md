@@ -146,6 +146,26 @@ The observer's staged loader files are expected to differ from no-probe
 controls. Compare drawing outputs and scene sources, then compare remaining
 runtime files after accounting for that loader change.
 
+### FREE-PATH caller metadata with lowercase hex and split helper scope
+
+The 2026-10-14 caller attempt reached `READY` but the helper rejected valid
+64-byte Lisp function headers because its hex expression accepted only
+uppercase. The original printer emitted lowercase `a`–`f`; accept
+`[0-9A-Fa-f]`, then normalize the parsed hex before deriving addresses. The
+first attempt therefore has no caller result.
+
+The next attempt captured a valid hit, then the parent triplet failed during
+archival because `Assert-ExactPairMetadata` existed only in the separately
+launched capture-helper process. PowerShell function definitions do not cross
+that process boundary. Keep a parent-owned validator for the completed
+observer report: require the exact 10-line `READY` prefix, the three exact
+release/completion/footer records, and a hash of the archived prefix equal to
+`metadataSha256` in the helper report. A before/observer/after triplet is the
+accepted record only after this archival validation and all control checks
+pass. Both defects are fixed in
+[`capture-free-path-caller.ps1`](tools/capture-free-path-caller.ps1) and
+[`capture-free-path-caller-triplet.ps1`](tools/capture-free-path-caller-triplet.ps1).
+
 ### Keep probe cleanup and the terminal marker in lexical scope
 
 The first `free-path-boundaries.cl` attempt wrote all 40 `CASE`/`ENDCASE`

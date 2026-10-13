@@ -152,7 +152,10 @@ function Assert-ExactPairMetadata([string]$Text, [string]$Label) {
         $lines[9] -cne $readyMarker) {
         throw "$Label is not the complete, error-free two-function READY report"
     }
-    $headerPattern = '^HEADER name="(FREE-PATH|DRAW-CFORM)" bytes=([0-9A-F]{128})$'
+    # The original Lisp printer may emit either hex case for ~X output.
+    # Normalize only after accepting both forms so the parsed addresses and
+    # downstream source-bound report stay deterministic.
+    $headerPattern = '^HEADER name="(FREE-PATH|DRAW-CFORM)" bytes=([0-9A-Fa-f]{128})$'
     $headers = @{}
     foreach ($lineIndex in @(3, 5)) {
         $match = [regex]::Match($lines[$lineIndex], $headerPattern)

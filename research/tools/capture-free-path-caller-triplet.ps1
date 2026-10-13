@@ -526,6 +526,33 @@ function Get-FileRecord {
     }
 }
 
+function Assert-ReadyPairMetadataPrefix([string]$Text) {
+    $normalized = $Text.Replace("`r`n", "`n")
+    if ($normalized.Contains("`r") -or
+        -not $normalized.EndsWith("`n", [StringComparison]::Ordinal)) {
+        throw 'Archived observer READY metadata has mixed or incomplete line endings'
+    }
+    $lines = @($normalized.Substring(0, $normalized.Length - 1).Split([char]10))
+    if ($lines.Count -ne 10 -or
+        $lines[0] -cne 'BEGIN free-path-caller-native-links' -or
+        $lines[1] -cne 'INSTALL targets=2 mode=READ-ONLY-METADATA' -or
+        $lines[2] -cne 'FUNCTION name="FREE-PATH" type=COMPILED-FUNCTION' -or
+        $lines[4] -cne 'FUNCTION name="DRAW-CFORM" type=COMPILED-FUNCTION' -or
+        $lines[6] -cne 'TOTALS targets=2 functions=2 headers=2 errors=0 truncations=0' -or
+        $lines[7] -cne 'ERROR-COUNT 0' -or
+        $lines[8] -cne 'TRUNCATION-COUNT 0' -or
+        $lines[9] -cne $probeReady) {
+        throw 'Archived observer READY metadata is not the exact two-function report prefix'
+    }
+    $headerPattern = '^HEADER name="(FREE-PATH|DRAW-CFORM)" bytes=[0-9A-Fa-f]{128}$'
+    if ($lines[3] -cnotmatch $headerPattern -or
+        $Matches[1] -cne 'FREE-PATH' -or
+        $lines[5] -cnotmatch $headerPattern -or
+        $Matches[1] -cne 'DRAW-CFORM') {
+        throw 'Archived observer READY metadata has malformed or reordered function headers'
+    }
+}
+
 function Test-FilesByteEqual {
     param(
         [Parameter(Mandatory = $true)][string]$LeftPath,
@@ -661,23 +688,66 @@ function Read-CompletedRun {
             throw 'Observer planning trace does not explicitly identify FREE-PATH as unwrapped'
         }
         $metadataPath = Join-Path $captureRoot $probeOutputName
-        $metadata = [IO.File]::ReadAllText($metadataPath).Replace("`r`n", "`n")
-        $requiredMetadata = @(
+        $metadataBytes = [IO.File]::ReadAllBytes($metadataPath)
+        $metadata = [Text.UTF8Encoding]::new($false, $true).GetString($metadataBytes)
+        $waitMarker = 'NATIVE-CAPTURE-WAIT released=T'
+        $waitIndex = $metadata.IndexOf($waitMarker, [StringComparison]::Ordinal)
+        if ($waitIndex -lt 0) {
+            throw 'Observer metadata lacks the successful native-capture release record'
+        }
+        $readyPrefix = $metadata.Substring(0, $waitIndex)
+        Assert-ReadyPairMetadataPrefix $readyPrefix
+
+        $normalizedMetadata = $metadata.Replace("`r`n", "`n")
+        if ($normalizedMetadata.Contains("`r")) {
+            throw 'Observer metadata contains an unsupported mixed line ending'
+        }
+        if (-not $normalizedMetadata.EndsWith("`n", [StringComparison]::Ordinal)) {
+            throw 'Observer metadata has no complete terminal line'
+        }
+        $metadataLines = @($normalizedMetadata.Substring(0, $normalizedMetadata.Length - 1).Split([char]10))
+        if ($metadataLines.Count -ne 13) {
+            throw 'Observer metadata contains missing or extra records'
+        }
+        $expectedMetadataLines = @(
             'BEGIN free-path-caller-native-links',
             'INSTALL targets=2 mode=READ-ONLY-METADATA',
+            'FUNCTION name="FREE-PATH" type=COMPILED-FUNCTION',
+            $metadataLines[3],
+            'FUNCTION name="DRAW-CFORM" type=COMPILED-FUNCTION',
+            $metadataLines[5],
             'TOTALS targets=2 functions=2 headers=2 errors=0 truncations=0',
             'ERROR-COUNT 0',
             'TRUNCATION-COUNT 0',
             $probeReady,
+            $waitMarker,
             'COMPLETE free-path-caller-native-links',
             $probeEnd
         )
-        foreach ($line in $requiredMetadata) {
-            if (-not $metadata.Contains($line)) { throw "Observer metadata is incomplete: missing $line" }
+        for ($lineIndex = 0; $lineIndex -lt $expectedMetadataLines.Count; $lineIndex++) {
+            if ($metadataLines[$lineIndex] -cne $expectedMetadataLines[$lineIndex]) {
+                throw "Observer metadata record $lineIndex is not the expected complete report record"
+            }
         }
-        $terminalMetadataLine = $metadata.TrimEnd([char[]]@("`r", "`n")).Split("`n")[-1]
-        if ($terminalMetadataLine -cne $probeEnd) {
-            throw 'Observer native metadata does not end with its required END record'
+
+        $callerReportPath = Join-Path $OutputRoot 'free-path-native-caller.json'
+        if (-not (Test-Path -LiteralPath $callerReportPath -PathType Leaf)) {
+            throw 'Observer is missing the caller helper report required to bind its READY metadata'
+        }
+        $callerReport = Get-Content -LiteralPath $callerReportPath -Raw | ConvertFrom-Json
+        if ($callerReport.oracleRunId -cne $RunId -or
+            $callerReport.outcome -notin @('entry-hit', 'no-entry-within-deadline')) {
+            throw 'Observer caller report is not a completed source-bound capture for this run'
+        }
+        $sha256 = [Security.Cryptography.SHA256]::Create()
+        try {
+            $readyPrefixBytes = [Text.UTF8Encoding]::new($false).GetBytes($readyPrefix)
+            $readyPrefixSha256 = ([BitConverter]::ToString($sha256.ComputeHash($readyPrefixBytes))).Replace('-', '').ToLowerInvariant()
+        } finally {
+            $sha256.Dispose()
+        }
+        if ($callerReport.metadataSha256 -cne $readyPrefixSha256) {
+            throw 'Archived observer READY metadata differs from the exact hash validated by the caller helper'
         }
         $stagedProbePath = Join-Path $captureRoot 'aaron-pre-scene-probe.cl'
         $stagedProbe = Get-FileRecord $stagedProbePath

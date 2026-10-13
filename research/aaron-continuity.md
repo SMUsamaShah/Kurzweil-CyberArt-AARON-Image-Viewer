@@ -11,7 +11,17 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-13
+## Latest checkpoint: 2026-10-14
+
+The natural FREE-PATH caller is now captured in a complete source-bound
+320×480 before/observer/after triplet. Its first entry returned to
+`DRAW-CFORM+0x167`, immediately after computed `CALL EDI` at `+0x165`; current
+live payloads match their complete PLL objects and all control/source checks
+pass. The dynamic target is not statically named, and this one first entry is
+not a general call graph. Portable evidence is
+[`free-path-native-caller-20261014.json`](introspection/evidence/free-path-native-caller-20261014.json).
+The next target is the FREE-PATH stop-boundary discriminator; see the active
+[execution plan](execution-plan.md).
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and
@@ -893,13 +903,13 @@ hashes. The retained fixture, method counts, and scope are documented in
 [`stroke-findings.md`](stroke-findings.md). This is bounded file-writer parity;
 the composition and screen paths still need reconstruction.
 
-This checkpoint is superseded by the 2026-10-13 entries at the top of this
-handoff. Resume the natural FREE-PATH caller capture when the complete-triplet
-disk reserve passes. The progress report records 30 routine names, 31 bounded
-contract units, 1-of-5 fully achieved milestones (20% by milestone count), and
-zero whole-painting parity results. Do not restart the completed writer-replay
-milestone. The FREE-PATH stop rule remains unresolved; after the caller bracket,
-choose the next target from the first remaining end-to-end divergence.
+This checkpoint is superseded by the 2026-10-14 entries at the top of this
+handoff. The natural FREE-PATH caller bracket is complete. The progress report
+records 30 routine names, 31 bounded contract units, 1-of-5 fully achieved
+milestones (20% by milestone count), and zero whole-painting parity results.
+Do not restart the completed writer-replay milestone. The FREE-PATH stop rule
+remains unresolved; continue from the discriminating case named in the active
+execution plan.
 
 ## Earlier 2026-09-08 checkpoint
 

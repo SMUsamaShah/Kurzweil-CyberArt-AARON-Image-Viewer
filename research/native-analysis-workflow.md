@@ -158,6 +158,40 @@ interactive shell; the documented scoped-elevation wrapper retry succeeded.
 Preserve both failed output roots for diagnosis and require the successful
 subject-hash and source-bound checks for usable results.
 
+## FREE-PATH bounded natural caller, 2026-10-14
+
+The serial caller driver completed a fresh before/observer/after
+`writer-stream-seed-1234` triplet. The measured AA0 canvas is 320×480 despite
+`smallImage=false`; use the AA0 header as the dimension evidence. All three
+summaries are complete. AA0, image, image-id, scene-state snapshot and loaded
+seed match byte-for-byte, the two uninstrumented planning traces match, and
+all six staged scene-source hashes match. Only the observer trace differs; it
+explicitly records `FREE-PATH` as unwrapped.
+
+The first `FREE-PATH` entry produced a hardware-breakpoint hit with first-chance
+exception `0x4000001e`. The current 1,330-byte FREE-PATH body and 2,958-byte
+DRAW-CFORM body each matched their unique complete PLL object and live bytes.
+The return address `0x1fe28e4b` falls uniquely inside DRAW-CFORM, at relative
+offset `0x167` (359). Ghidra maps the preceding instruction to `CALL EDI`
+(`FF D7`) at DRAW-CFORM+`0x165`; it is an indirect/computed call. This proves
+DRAW-CFORM is the immediate caller for this first entry in this captured scene,
+but does not statically resolve EDI's target or characterize later calls.
+
+Portable record:
+[`free-path-native-caller-20261014.json`](introspection/evidence/free-path-native-caller-20261014.json).
+Its SHA-256 is
+`6cdad66881d1e1dda9c365dffe787ce2b3510b66ec4468a2d95426ac1fc41608`; the
+checked-in [offline deriver](tools/derive-free-path-native-caller-evidence.mjs)
+rebuilds it from the three archived run roots and map. The deriver also binds
+the exact READY-prefix hash
+`445dbf362761bc5252f2720f18e7a3cd56c286891830829f6075d0fe0cdfbeaa` to the
+capture helper report.
+The earlier failed attempts remain diagnostic only: the first helper rejected
+lowercase Lisp hex, and the next completed its hit but the parent triplet's
+archival checker referenced a helper-local function before an after control
+could run. Both defects are fixed in the current scripts; the completed third
+triplet is the accepted record.
+
 ## Working route, 2026-10-04
 
 The application is a 32-bit Windows program backed by Allegro Lisp DXL/PLL

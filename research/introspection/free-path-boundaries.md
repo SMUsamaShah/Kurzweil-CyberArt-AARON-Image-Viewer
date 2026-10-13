@@ -137,7 +137,11 @@ overall routine/contract counts and execution-milestone percentage do not
 change. See the [portable comparison evidence](evidence/free-path-boundary-js-comparison-20261013.json)
 and the [reproducible comparator](../tools/compare-free-path-boundary-matrix.mjs).
 
-Next, capture the entry stack for a natural `FREE-PATH` call and identify its
-direct caller only from the immediate caller frame. Continue to treat the
-stop condition as unresolved; do not widen the JS implementation from these
-finite polygon cases alone.
+The natural caller question was completed in the 2026-10-14
+[source-bound triplet](evidence/free-path-native-caller-20261014.json): the
+first observed entry returned to DRAW-CFORM after an indirect native call.
+That bounded call-path result does not resolve the distance-stop rule. The
+remaining FREE-PATH task is to choose a fresh one-edge case that separates the
+still-live stop candidates, then compare the complete random-call sequence,
+returned points and next-random checkpoint. Do not widen the JS implementation
+from these finite polygon cases alone.

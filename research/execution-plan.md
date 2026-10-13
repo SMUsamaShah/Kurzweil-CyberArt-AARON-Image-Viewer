@@ -454,14 +454,13 @@ matches only seed 256819. Seed 522862 falsifies the current early step-sum
 break, while the two candidate progress measures agree with different cases;
 neither is established as the general original rule. The captured internal
 progress variable remains unavailable. The 40-case matrix comparison is
-complete; do not repeat it. The exact native payloads are mapped, and the next
-item is a natural FREE-PATH entry capture followed by static decoding of its
-immediate return location. A 2026-10-13 attempt completed only the 320×480
-before control: the observer was rejected by the staging-space gate, so no
-caller was captured. The serial driver now reserves disk for all three legs;
-with the measured 26 MiB single-run setting it needs 35.7 MiB on D: and 384
-MiB on C: at start. Once the bracket completes, choose a discriminator for the
-remaining stop-rule mismatches. See the [matrix findings](introspection/free-path-boundaries.md),
+complete; do not repeat it. A source-bound 320×480 caller triplet now captures
+the first natural FREE-PATH entry. Its return offset identifies an indirect
+`CALL EDI` site in DRAW-CFORM; this does not resolve the dynamic target or
+generalize beyond the first call in that scene. The earlier 2026-10-13
+low-space attempt and two caller-helper defects are retained as diagnostics;
+the completed triplet passed its fresh control and source checks. Next choose
+a discriminator for the remaining stop-rule mismatches. See the [matrix findings](introspection/free-path-boundaries.md),
 [matrix comparison evidence](introspection/evidence/free-path-boundary-js-comparison-20261013.json),
 [isolated edge evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
 [seed candidate finder](tools/find-free-path-emitted-point-boundary-seeds.mjs),
@@ -645,15 +644,21 @@ dependencies or independently check a risky result.
   remaining mismatch. Test counts and sampled-call counts are not percentages
   of the generator recovered.
 
-Continue from the natural FREE-PATH caller capture described in the
-[progress report](progress-report.md) and continuity handoff. Keep the
-writer-replay milestone marked achieved; do not restart it unless a specific
-new mismatch makes part of that evidence relevant. Across seven isolated
-one-edge cases, JavaScript matches four and differs by one iteration in three.
-The v7 case rejects bare-wiggle for this input but leaves step-sum,
+Continue from the completed natural FREE-PATH caller capture in the
+[progress report](progress-report.md) and continuity handoff. In one
+320×480 `writer-stream-seed-1234` scene, the first FREE-PATH entry returned
+into DRAW-CFORM after its indirect `CALL EDI`; the caller bracket and source
+checks pass. Keep that relationship scoped to the captured first entry, and
+leave the computed call target unresolved. The writer-replay milestone remains
+achieved; do not restart it unless a specific new mismatch makes that evidence
+relevant.
+
+The next target is the unresolved FREE-PATH distance-stop boundary. Across
+seven isolated one-edge cases, JavaScript matches four and differs by one
+iteration in three. V7 rejects bare-wiggle for that input but leaves step-sum,
 source-to-emitted-point, and step-times-wiggle tied. The existing 40-case
 matrix has already been compared offline; preserve Lisp numeric types and only
-classify rows supported by the JavaScript input interface. Retry the three-run
-caller bracket only when its upfront disk reserve passes, then decode the
-captured return offset against the mapped DRAW-CFORM payload. Keep fresh
-controls and source-bound evidence checks for any new oracle run.
+classify rows supported by the JavaScript input interface. Use the mapped
+FREE-PATH CFG to choose a narrow next discriminator, then keep its oracle
+capture source-bound with fresh controls. Do not repeat the matrix or widen
+JavaScript to fit one captured case.

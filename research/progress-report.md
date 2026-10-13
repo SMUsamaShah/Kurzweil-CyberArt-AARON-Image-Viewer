@@ -233,6 +233,33 @@ as the remaining legs complete. These are tooling safeguards only; behavior
 counts remain 30 routine names / 31 bounded contracts, 1 of 5 milestones
 (20% by count), and 0 whole-painting parity results.
 
+## 2026-10-14 FREE-PATH natural caller captured
+
+A fresh source-bound `writer-stream-seed-1234` before/observer/after triplet
+completed at 320×480. The observer unwrapped only `FREE-PATH`; the helper hit
+its first native entry after 9.7 seconds. Both live code bodies matched their
+complete PLL objects. The return address uniquely landed at `DRAW-CFORM+0x167`,
+immediately after an indirect `CALL EDI` at `+0x165`. This establishes
+`DRAW-CFORM` as the immediate native caller for this first entry in this one
+scene. It does not name the computed target by static analysis or establish a
+general caller relationship.
+
+The bracketing uninstrumented controls match the observer on AA0, image,
+image-id, scene-state snapshot and loaded-seed artifacts; the before/after
+planning traces also match. The observer's trace differs as expected because
+it records `FREE-PATH` as unwrapped. All six staged scene-source hashes match.
+The strict evidence record binds the READY-prefix hash to the helper report and
+records the observed return location. See the
+[caller findings](introspection/free-path-native.md),
+[portable caller evidence](introspection/evidence/free-path-native-caller-20261014.json),
+and [native workflow](native-analysis-workflow.md).
+
+This resolves a bounded native caller question, not a JavaScript behavior
+contract. Counts remain 1,347 inventoried binding names, 30 routine names / 31
+bounded contracts, 1 of 5 milestones (20% by count), and zero whole-painting
+parity results. FREE-PATH's 26/30 canonical matrix match remains finite; four
+rows still differ and ten remain unclassified.
+
 ## What remains before a general AARON-equivalent generator
 
 The generative core and its integration remain the main work: recover normal

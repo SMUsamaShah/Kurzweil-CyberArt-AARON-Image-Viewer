@@ -1,6 +1,6 @@
 # FREE-PATH native payload and REA findings
 
-Updated 2026-10-13. REA 6.4.0 helped map the compiled `FREE-PATH` body and
+Updated 2026-10-14. REA 6.4.0 helped map the compiled `FREE-PATH` body and
 identify its loop and static exit gates. Its computed calls remain unresolved,
 so these findings do not recover Lisp source, a Lisp ABI, or the stop rule.
 
@@ -239,6 +239,68 @@ the serial capture helper is
 [`capture-free-path-stop-boundary-v7.ps1`](../tools/capture-free-path-stop-boundary-v7.ps1),
 and the strict derivation tool is
 [`derive-free-path-stop-boundary-v7-evidence.mjs`](../tools/derive-free-path-stop-boundary-v7-evidence.mjs).
+
+## Bounded natural caller, 2026-10-14
+
+A fresh 320×480 `writer-stream-seed-1234` before/observer/after capture
+observed the first `FREE-PATH` native entry. The observer-only trace explicitly
+left `FREE-PATH` unwrapped. The caller helper validated fresh live bytes for
+both `FREE-PATH` and `DRAW-CFORM` against their unique complete PLL objects;
+the two payloads were 1,330 and 2,958 bytes respectively. The hardware
+breakpoint fired at the FREE-PATH entry and captured return address
+`0x1fe28e4b`, uniquely within DRAW-CFORM at relative offset `0x167` (359).
+
+Ghidra maps the instruction immediately before that return address to
+`CALL EDI` (`FF D7`) at DRAW-CFORM+`0x165`. This is a computed call whose runtime
+target is not resolved by this static instruction. The stack observation
+establishes DRAW-CFORM as the immediate caller for this first FREE-PATH entry
+in this scene, while leaving later callers and the general call graph open.
+The call report does not recover Lisp source or ABI and says nothing about
+whole-painting parity.
+
+The five required output artifacts and six staged scene sources match across
+the bracketed runs. Before and after planning traces match; the observer trace
+is separate because it records the unwrapped target. See the
+[portable evidence](evidence/free-path-native-caller-20261014.json) and
+[capture workflow](../native-analysis-workflow.md#free-path-bounded-natural-caller-2026-10-14).
+The portable JSON SHA-256 is
+`6cdad66881d1e1dda9c365dffe787ce2b3510b66ec4468a2d95426ac1fc41608`; its
+reusable [evidence deriver](../tools/derive-free-path-native-caller-evidence.mjs)
+has SHA-256
+`541721aa08b5f7410ede707d506d5eda45dcda0a298784311e2e8a905d0c5ad1`.
+The record binds the exact archived READY-prefix hash
+`445dbf362761bc5252f2720f18e7a3cd56c286891830829f6075d0fe0cdfbeaa` to the
+capture helper report.
+
+## Current REA/Ghidra call-site map
+
+REA 6.4.0 / Ghidra 12.1.4 was rerun over the exact live-validated FREE-PATH
+and DRAW-CFORM payloads. The current FREE-PATH payload hash is
+`93b018cb03d3d8cec18eaaa4cd813d7c4cdfa32bb02b5f3a5b11a4b51feea787`; its
+456 decoded instruction rows match the mapped bytes. The current DRAW-CFORM
+payload hash is
+`d8e62d4d54d91ea4cac036e7e3a310815ff3a88f0b3c0d1037778dd21e35e558`; all
+963 decoded rows also match. The generated PE containers were used only for
+static analysis and were never executed.
+
+The live return address maps to `DRAW-CFORM+0x167`. At `+0x165`, the exact
+instruction is `CALL EDI` (`FF D7`) with fall-through at `+0x167`. Its REA
+call-target query remains `unresolved`, mechanism `computed`, with no targets;
+query JSON SHA-256 is
+`9b992108600bad7d08521b32f6414f681497f20f11c3243a411551e2ce1427f4`.
+The byte-checked Ghidra report SHA-256 for DRAW-CFORM is
+`3a514e7f1e8688553c5d0c56bd8680ad8cdfec7467502b48dab08ea529ae481c`.
+This correlates the one observed return with its native dispatch instruction;
+it does not identify EDI's Lisp target.
+
+For the unresolved FREE-PATH stop boundary, the current REA report places a
+computed call at `FREE-PATH+0x39a` (`CALL dword ptr [EDI + 0x27]`). Its result
+flows through a low-tag-bit test and a comparison branch at `+0x3ac`; a second
+computed call at `+0x3e4` is followed by the loop back-edge. The return value,
+counter and accumulator have no recovered Lisp meanings. Use these offsets to
+focus the next controlled observation, not as evidence for a stop formula.
+The byte-checked FREE-PATH Ghidra report SHA-256 is
+`1a6d055f7a56971852ff5309eac932656d7f0232233e5f5a2c94ed2d1b6b62da`.
 
 ## Reproduction
 
