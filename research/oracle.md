@@ -330,7 +330,13 @@ controls use the same new runner with no optional probe. Use a fresh root and
 the supported 600-second watchdog when needed. The END check does not validate
 the observer's counters, state, errors or truncation; its strict offline
 parser must still reject incomplete cases. Keep the historical runner frozen
-for existing published source closures.
+for existing published source closures. Before launch, also check Lisp lexical
+scope for deferred wrappers: balanced parentheses alone did not catch a
+`MAIN` wrapper accidentally nested inside its helper. The reusable
+[`check-lisp-probe-scope.mjs`](tools/check-lisp-probe-scope.mjs) checks chosen
+forms at their expected depth; the required report must still contain its
+observer-specific `INSTALL`, complete case rows, restoration result and
+terminal `END`.
 
 ### Paused metadata capture uses READY and END separately
 

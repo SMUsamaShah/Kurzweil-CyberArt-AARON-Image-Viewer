@@ -109,6 +109,82 @@ The observer's staged loader files are expected to differ from no-probe
 controls. Compare drawing outputs and scene sources, then compare remaining
 runtime files after accounting for that loader change.
 
+### Keep probe cleanup and the terminal marker in lexical scope
+
+The first `free-path-boundaries.cl` attempt wrote all 40 `CASE`/`ENDCASE`
+records with no case errors, but never wrote `RESTORED` or its required final
+`END`. Source inspection found two excess closing parentheses after the case
+loop: they closed the `UNWIND-PROTECT` and outer `LET*` before cleanup and the
+restoration check. The final check then referenced saved function bindings
+outside their lexical scope. The runner waited through its 150-second limit,
+archived partial scene files, and rejected the run. That run is retained only
+for diagnosis and is not behavior evidence.
+
+The probe was repaired so its `SETF` restoration remains the
+`UNWIND-PROTECT` cleanup, while `RESTORED` and the terminal `END` remain inside
+the same lexical scope. For similar probes, check form nesting and lexical
+scope in addition to balanced source delimiters; require the exact final
+`RESTORED T` and `END` lines, and compare fresh control outputs before using
+any captured rows. Always use a new output root after a rejected attempt.
+
+A later near-boundary probe failed for the same general reason in a different
+place: its `MAIN` wrapper was accidentally a body form inside the helper
+`DEFUN`, so it never installed. The file was delimiter-balanced, but the
+required report stopped after `BEGIN` and `DEFERRED`; it had no `INSTALL`, case
+rows, or `END`. The runner timed out before the observer completed. This was a
+probe-scope error, not a `C:\temp` permission failure; preserve the partial
+root as diagnostics and use a fresh root for the repair.
+
+[`check-lisp-probe-scope.mjs`](tools/check-lisp-probe-scope.mjs) now checks
+Lisp string/comment-aware delimiter balance and verifies that critical forms
+start at an expected lexical nesting depth. For a post-MAIN observer whose
+helper and wrapper are both inside one outer `UNLESS`, run it before the oracle
+with the required depth `1`:
+
+```powershell
+node research\tools\check-lisp-probe-scope.mjs `
+  research\introspection\free-path-stop-boundary-v2.cl 1 `
+  '\(\s*defun\s+aaron-free-path-run-stop-boundary-v2\b' `
+  '\(\s*let\*\s+\(\s*\(\s*owner\s+\(find-package'
+```
+
+This check catches the nested-wrapper mistake that a delimiter count misses;
+it does not validate Common Lisp argument forms or runtime behavior. Still
+require the observer-specific `INSTALL`, complete case records, `RESTORED T`,
+and terminal `END` in the offline parser, plus complete runner summaries and
+fresh uninstrumented controls. The current reproducible example is
+[`free-path-stop-boundary-v2.cl`](introspection/free-path-stop-boundary-v2.cl).
+
+The repaired pre-scene matrix then exposed a separate rule: a complete report
+does not prove that an observer left scene generation alone. That observer
+changed the first natural `STORE-IN-FILE` point from `(106.91827677510554,
+384.1616650397512)` to `(316.4897007193718, 181.03517809711636)`, while its
+seed preview still matched the controls. The exact changed runtime state was
+not identified, so those rows are retained only as a rejected diagnostic.
+
+For direct calls that might alter live state, preload the normal mode source,
+install the probe's `MAIN` wrapper outside the normal scene observer, and defer
+the matrix until that wrapped `MAIN` returns. The current pattern is
+[`free-path-boundaries.cl`](introspection/free-path-boundaries.cl). It produced
+40 complete cases with a 768×1080 AA0; fresh before/after controls matched all
+six drawing/scene outputs and six ordinary staged sources. Reuse the read-only
+[triplet verifier](tools/verify-local-aaron-triplet.mjs) after each capture:
+
+```powershell
+node research\tools\verify-local-aaron-triplet.mjs `
+  research\extracted\local-oracle\external-runs\<control-before> `
+  research\extracted\local-oracle\external-runs\<observer> `
+  research\extracted\local-oracle\external-runs\<control-after>
+```
+
+The verifier checks complete runner summaries, the observer source hash and
+terminal marker, summary-to-capture AA0/scene hashes, six drawing/scene
+outputs, and all ordinary staged `.cl` sources. The companion
+[`derive-free-path-boundary-evidence.mjs`](tools/derive-free-path-boundary-evidence.mjs)
+also parses each case and emits portable JSON. Dimension-specific probes must
+use the AA0 header from that same triplet; do not rely on the run ID or
+`smallImage` setting.
+
 ### WOW64 caller-breakpoint cleanup
 
 The first caller helper stopped its debug-event pump after the breakpoint and

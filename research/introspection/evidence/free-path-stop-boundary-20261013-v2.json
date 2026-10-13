@@ -1,0 +1,1527 @@
+{
+  "schema": "aaron-free-path-stop-boundary-evidence-v2",
+  "question": "Do visibility-isolated length-10 edges distinguish two candidate FREE-PATH stop models?",
+  "controls": {
+    "before": {
+      "runId": "freepath-v2-control-before-20261013-e",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T03:23:51.6579584+00:00",
+      "finishedAt": "2026-10-13T03:24:28.6129252+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "observer": {
+      "runId": "freepath-v2-observer-20261013-f",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T03:24:40.8075346+00:00",
+      "finishedAt": "2026-10-13T03:25:17.6485368+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "after": {
+      "runId": "freepath-v2-control-after-20261013-g",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "startedAt": "2026-10-13T03:25:31.4515717+00:00",
+      "finishedAt": "2026-10-13T03:26:12.4544876+00:00",
+      "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3"
+    },
+    "observerProbeSha256": "de78b03758f7a6dd97aeb2caee6b38d0f9bd5c4fbc1672d16a0b5841f9f508a2",
+    "checkedInProbePath": "research/introspection/free-path-stop-boundary-v2.cl",
+    "checkedInProbeSha256": "de78b03758f7a6dd97aeb2caee6b38d0f9bd5c4fbc1672d16a0b5841f9f508a2",
+    "observerReportSha256": "52f61f64807ed7845b3e70b5b970e24761e3f3b3c3a4e93886898f49d5c98bdd",
+    "observerReportPath": "research/extracted/local-oracle/external-runs/freepath-v2-observer-20261013-f/capture/aaron-free-path-stop-boundary-v2.txt",
+    "requiredEndMarker": "END free-path-stop-boundary-v2",
+    "drawingAndSceneOutputHashes": {
+      "aa0": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "image": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "153374c2b52a86ca31e33c7102385d2a7c5c88267b50bcfa4947a608eb984ed3",
+      "aaron-planning-call-trace.txt": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "e31a0be648710a81f9c484fdccd86f862adbddf4c27e73027aef655cf8ba4c6c",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    "allComparedOutputsAndSourcesMatch": true,
+    "aa0Header": {
+      "width": 768,
+      "height": 1080,
+      "headerBytes": 148
+    }
+  },
+  "captureChecks": {
+    "caseCount": 3,
+    "endCaseCount": 3,
+    "errorCount": 0,
+    "functionBindingsRestored": true,
+    "allPrivateInputListsUnchanged": true,
+    "onlyForwardEdgeExecuted": true,
+    "javascriptComparisonsPassed": false
+  },
+  "cases": [
+    {
+      "seed": 522862,
+      "name": "known-counterexample",
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "fdex": 0,
+      "tdex": 1,
+      "from": 0,
+      "to": 1,
+      "distanceCall": {
+        "points": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            1
+          ]
+        ],
+        "result": 10
+      },
+      "randomCalls": [
+        {
+          "args": [
+            8,
+            14
+          ],
+          "value": 10
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2466507
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.021363823
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.380133
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.9050886
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.017454624
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 1.8027464
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.9872092
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.029432256
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 5.8761287
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.84722924
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.025648564
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 2.0811555
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1609116
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.029922899
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.524635
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2842464
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.026414752
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.5985608
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2786787
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.015863076
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 2.3220434
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1720357
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.024887431
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 6.0181303
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1179552
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.024176676
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.0963404
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.7622822
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.020434186
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.940746
+        }
+      ],
+      "stopModelComparison": {
+        "selectedSteps": 10,
+        "originalConsumedSteps": 10,
+        "capturedRandomPrefixMatchesSeedModel": true,
+        "modeledStepSumStop": 9,
+        "modeledEmittedPointDistanceStop": 10,
+        "modelAgreementWithOriginal": {
+          "stepSum": false,
+          "emittedPointDistance": true
+        },
+        "reconstructedProgressTrace": [
+          {
+            "step": 1.2466506958007812,
+            "progressed": 1.2466506958007812,
+            "pointX": 1.2207716703414917,
+            "pointY": -0.006293017882853746,
+            "pointDistance": 1.2207878828048706
+          },
+          {
+            "step": 0.9050886034965515,
+            "progressed": 2.1517393589019775,
+            "pointX": 2.1481077671051025,
+            "pointY": 0.015374911949038506,
+            "pointDistance": 2.148162841796875
+          },
+          {
+            "step": 0.9872092008590698,
+            "progressed": 3.138948440551758,
+            "pointX": 3.1656301021575928,
+            "pointY": -0.011503426358103752,
+            "pointDistance": 3.1656510829925537
+          },
+          {
+            "step": 0.8472292423248291,
+            "progressed": 3.986177682876587,
+            "pointX": 3.975562572479248,
+            "pointY": 0.018961112946271896,
+            "pointDistance": 3.9756078720092773
+          },
+          {
+            "step": 1.1609115600585938,
+            "progressed": 5.147089004516602,
+            "pointX": 5.1406049728393555,
+            "pointY": -0.03412735462188721,
+            "pointDistance": 5.140718460083008
+          },
+          {
+            "step": 1.2842464447021484,
+            "progressed": 6.43133544921875,
+            "pointX": 6.400893211364746,
+            "pointY": -0.014967846684157848,
+            "pointDistance": 6.4009108543396
+          },
+          {
+            "step": 1.2786786556243896,
+            "progressed": 7.710014343261719,
+            "pointX": 7.696169853210449,
+            "pointY": 0.014824160374701023,
+            "pointDistance": 7.696184158325195
+          },
+          {
+            "step": 1.1720356941223145,
+            "progressed": 8.882049560546875,
+            "pointX": 8.910200119018555,
+            "pointY": -0.007641168776899576,
+            "pointDistance": 8.910202980041504
+          },
+          {
+            "step": 1.117955207824707,
+            "progressed": 10.000004768371582,
+            "pointX": 9.973004341125488,
+            "pointY": 0.0012226799735799432,
+            "pointDistance": 9.973004341125488
+          },
+          {
+            "step": 0.7622821927070618,
+            "progressed": 10.762287139892578,
+            "pointX": 10.765812873840332,
+            "pointY": -0.015172242186963558,
+            "pointDistance": 10.765823364257812
+          }
+        ],
+        "traceBasis": "single-float replay of the local seeded RNG; every captured RAN call is checked as an exact rounded prefix, but no original internal variable is observed"
+      },
+      "result": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1.2207717,
+          -0.006293018,
+          1
+        ],
+        [
+          2.1481078,
+          0.015374912,
+          1
+        ],
+        [
+          3.16563,
+          -0.011503426,
+          1
+        ],
+        [
+          3.9755626,
+          0.018961113,
+          1
+        ],
+        [
+          5.140605,
+          -0.034127355,
+          1
+        ],
+        [
+          6.400893,
+          -0.014967847,
+          1
+        ],
+        [
+          7.69617,
+          0.01482416,
+          1
+        ],
+        [
+          8.9102,
+          -0.007641169,
+          1
+        ],
+        [
+          9.973004,
+          0.00122268,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "edgeAfter": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "nextRandom": {
+        "value": 78164,
+        "status": "OK"
+      },
+      "javascriptComparison": {
+        "randomCallsMatch": false,
+        "returnedPointsMatch": false,
+        "followingRandomMatches": false,
+        "followingRandom": {
+          "original": 78164,
+          "javascript": 41537
+        },
+        "originalRandomCallCount": 31,
+        "javascriptRandomCallCount": 28,
+        "originalResultPointCount": 13,
+        "javascriptResultPointCount": 12,
+        "firstRandomMismatch": 28,
+        "firstPointMismatch": 9,
+        "boundedParity": false
+      }
+    },
+    {
+      "seed": 256819,
+      "name": "step-sum-early",
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "fdex": 0,
+      "tdex": 1,
+      "from": 0,
+      "to": 1,
+      "distanceCall": {
+        "points": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            1
+          ]
+        ],
+        "result": 10
+      },
+      "randomCalls": [
+        {
+          "args": [
+            8,
+            14
+          ],
+          "value": 13
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.88731974
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.025513787
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 5.7188
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2988871
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.027853422
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.6406376
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2806633
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.017781394
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.5581155
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.0989671
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.024362009
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 0.24797016
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.0903156
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.022909313
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 2.964283
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2809148
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.021041233
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 5.001683
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.0758246
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.023686077
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 6.275175
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2296996
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.029687252
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.9779744
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2885586
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.02497789
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.4711175
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2227523
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.02711748
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.7329721
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.253401
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.027553609
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.9132705
+        }
+      ],
+      "stopModelComparison": {
+        "selectedSteps": 13,
+        "originalConsumedSteps": 11,
+        "capturedRandomPrefixMatchesSeedModel": true,
+        "modeledStepSumStop": 11,
+        "modeledEmittedPointDistanceStop": 12,
+        "modelAgreementWithOriginal": {
+          "stepSum": true,
+          "emittedPointDistance": false
+        },
+        "reconstructedProgressTrace": [
+          {
+            "step": 0.6825536489486694,
+            "progressed": 0.6825536489486694,
+            "pointX": 0.697267472743988,
+            "pointY": -0.00931497011333704,
+            "pointDistance": 0.6973296999931335
+          },
+          {
+            "step": 0.9991439580917358,
+            "progressed": 1.6816976070404053,
+            "pointX": 1.6572620868682861,
+            "pointY": -0.013318880461156368,
+            "pointDistance": 1.6573156118392944
+          },
+          {
+            "step": 0.9851256012916565,
+            "progressed": 2.666823148727417,
+            "pointX": 2.6641314029693604,
+            "pointY": -0.01730886474251747,
+            "pointDistance": 2.6641876697540283
+          },
+          {
+            "step": 0.8453593254089355,
+            "progressed": 3.5121824741363525,
+            "pointX": 3.532147169113159,
+            "pointY": 0.0050546834245324135,
+            "pointDistance": 3.5321507453918457
+          },
+          {
+            "step": 0.8387042880058289,
+            "progressed": 4.350886821746826,
+            "pointX": 4.331974029541016,
+            "pointY": 0.0033890297636389732,
+            "pointDistance": 4.33197546005249
+          },
+          {
+            "step": 0.9853190779685974,
+            "progressed": 5.336205959320068,
+            "pointX": 5.342120170593262,
+            "pointY": -0.019870804622769356,
+            "pointDistance": 5.342157363891602
+          },
+          {
+            "step": 0.827557384967804,
+            "progressed": 6.163763523101807,
+            "pointX": 6.183364391326904,
+            "pointY": -0.00015701120719313622,
+            "pointDistance": 6.183364391326904
+          },
+          {
+            "step": 0.9459227919578552,
+            "progressed": 7.109686374664307,
+            "pointX": 7.1170573234558105,
+            "pointY": -0.027097269892692566,
+            "pointDistance": 7.1171088218688965
+          },
+          {
+            "step": 0.9911989569664001,
+            "progressed": 8.100885391235352,
+            "pointX": 8.094969749450684,
+            "pointY": -0.024040941148996353,
+            "pointDistance": 8.09500503540039
+          },
+          {
+            "step": 0.9405787587165833,
+            "progressed": 9.041463851928711,
+            "pointX": 9.020289421081543,
+            "pointY": -0.014219837263226509,
+            "pointDistance": 9.02030086517334
+          },
+          {
+            "step": 0.9641546607017517,
+            "progressed": 10.00561809539795,
+            "pointX": 9.986577033996582,
+            "pointY": -0.018525460734963417,
+            "pointDistance": 9.986594200134277
+          },
+          {
+            "step": 0.6320067644119263,
+            "progressed": 10.637624740600586,
+            "pointX": 10.624679565429688,
+            "pointY": -0.0017593156080693007,
+            "pointDistance": 10.624679565429688
+          },
+          {
+            "step": 0.6571188569068909,
+            "progressed": 11.294743537902832,
+            "pointX": 11.277483940124512,
+            "pointY": -0.008561253547668457,
+            "pointDistance": 11.277486801147461
+          }
+        ],
+        "traceBasis": "single-float replay of the local seeded RNG; every captured RAN call is checked as an exact rounded prefix, but no original internal variable is observed"
+      },
+      "result": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0.6972675,
+          -0.00931497,
+          1
+        ],
+        [
+          1.6572621,
+          -0.01331888,
+          1
+        ],
+        [
+          2.6641314,
+          -0.017308865,
+          1
+        ],
+        [
+          3.5321472,
+          0.0050546834,
+          1
+        ],
+        [
+          4.331974,
+          0.0033890298,
+          1
+        ],
+        [
+          5.34212,
+          -0.019870805,
+          1
+        ],
+        [
+          6.1833644,
+          -0.0001570112,
+          1
+        ],
+        [
+          7.1170573,
+          -0.02709727,
+          1
+        ],
+        [
+          8.09497,
+          -0.024040941,
+          1
+        ],
+        [
+          9.020289,
+          -0.014219837,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "edgeAfter": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "nextRandom": {
+        "value": 51116,
+        "status": "OK"
+      },
+      "javascriptComparison": {
+        "randomCallsMatch": true,
+        "returnedPointsMatch": true,
+        "followingRandomMatches": true,
+        "followingRandom": {
+          "original": 51116,
+          "javascript": 51116
+        },
+        "originalRandomCallCount": 34,
+        "javascriptRandomCallCount": 34,
+        "originalResultPointCount": 14,
+        "javascriptResultPointCount": 14,
+        "firstRandomMismatch": null,
+        "firstPointMismatch": null,
+        "boundedParity": true
+      }
+    },
+    {
+      "seed": 348048,
+      "name": "point-distance-early",
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "fdex": 0,
+      "tdex": 1,
+      "from": 0,
+      "to": 1,
+      "distanceCall": {
+        "points": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            1
+          ]
+        ],
+        "result": 10
+      },
+      "randomCalls": [
+        {
+          "args": [
+            8,
+            14
+          ],
+          "value": 14
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1962845
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.017804801
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 5.942429
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1343182
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.02879091
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 1.9633172
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.0012014
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.021426054
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 0.101282366
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2615616
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.017511167
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.566845
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 0.9517499
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.023155147
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 0.021006307
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2155843
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.020716969
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.29738
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2171609
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.027003735
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 1.5547923
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2477475
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.028383952
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.513117
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1890625
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.029171154
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 3.216691
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.2543645
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.023540724
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.350786
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.153727
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.025031017
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 4.9431286
+        },
+        {
+          "args": [
+            0.7,
+            1.3
+          ],
+          "value": 1.1770749
+        },
+        {
+          "args": [
+            0.015,
+            0.03
+          ],
+          "value": 0.017854083
+        },
+        {
+          "args": [
+            0,
+            6.28
+          ],
+          "value": 0.97168285
+        }
+      ],
+      "stopModelComparison": {
+        "selectedSteps": 14,
+        "originalConsumedSteps": 12,
+        "capturedRandomPrefixMatchesSeedModel": true,
+        "modeledStepSumStop": 13,
+        "modeledEmittedPointDistanceStop": 12,
+        "modelAgreementWithOriginal": {
+          "stepSum": false,
+          "emittedPointDistance": true
+        },
+        "reconstructedProgressTrace": [
+          {
+            "step": 0.8544889688491821,
+            "progressed": 0.8544889688491821,
+            "pointX": 0.8688281774520874,
+            "pointY": -0.005084519740194082,
+            "pointDistance": 0.8688430786132812
+          },
+          {
+            "step": 0.8102273344993591,
+            "progressed": 1.6647162437438965,
+            "pointX": 1.6557931900024414,
+            "pointY": 0.021553099155426025,
+            "pointDistance": 1.6559334993362427
+          },
+          {
+            "step": 0.7151438593864441,
+            "progressed": 2.3798601627349854,
+            "pointX": 2.39510440826416,
+            "pointY": 0.0015492684906348586,
+            "pointDistance": 2.3951048851013184
+          },
+          {
+            "step": 0.9011154770851135,
+            "progressed": 3.280975580215454,
+            "pointX": 3.266601324081421,
+            "pointY": -0.006509876344352961,
+            "pointDistance": 3.2666077613830566
+          },
+          {
+            "step": 0.6798213720321655,
+            "progressed": 3.96079683303833,
+            "pointX": 3.976534843444824,
+            "pointY": 0.0003306435828562826,
+            "pointDistance": 3.976534843444824
+          },
+          {
+            "step": 0.8682745099067688,
+            "progressed": 4.829071521759033,
+            "pointX": 4.811301231384277,
+            "pointY": -0.0027909833006560802,
+            "pointDistance": 4.811302185058594
+          },
+          {
+            "step": 0.869400680065155,
+            "progressed": 5.698472023010254,
+            "pointX": 5.698847770690918,
+            "pointY": 0.023474059998989105,
+            "pointDistance": 5.6988959312438965
+          },
+          {
+            "step": 0.8912482857704163,
+            "progressed": 6.589720249176025,
+            "pointX": 6.584712505340576,
+            "pointY": -0.024796539917588234,
+            "pointDistance": 6.58475923538208
+          },
+          {
+            "step": 0.8493303656578064,
+            "progressed": 7.439050674438477,
+            "pointX": 7.414344787597656,
+            "pointY": -0.0018588845850899816,
+            "pointDistance": 7.414344787597656
+          },
+          {
+            "step": 0.8959746360778809,
+            "progressed": 8.335025787353516,
+            "pointX": 8.327564239501953,
+            "pointY": -0.01972789876163006,
+            "pointDistance": 8.327588081359863
+          },
+          {
+            "step": 0.8240907788276672,
+            "progressed": 9.159116744995117,
+            "pointX": 9.163834571838379,
+            "pointY": -0.020081141963601112,
+            "pointDistance": 9.163856506347656
+          },
+          {
+            "step": 0.8407678008079529,
+            "progressed": 9.999884605407715,
+            "pointX": 10.008349418640137,
+            "pointY": 0.0123967370018363,
+            "pointDistance": 10.008357048034668
+          },
+          {
+            "step": 0.5909904837608337,
+            "progressed": 10.590874671936035,
+            "pointX": 10.599164962768555,
+            "pointY": 0.0052182418294250965,
+            "pointDistance": 10.599165916442871
+          },
+          {
+            "step": 0.8168943524360657,
+            "progressed": 11.407769203186035,
+            "pointX": 11.401527404785156,
+            "pointY": 0.020939530804753304,
+            "pointDistance": 11.401546478271484
+          }
+        ],
+        "traceBasis": "single-float replay of the local seeded RNG; every captured RAN call is checked as an exact rounded prefix, but no original internal variable is observed"
+      },
+      "result": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0.8688282,
+          -0.0050845197,
+          1
+        ],
+        [
+          1.6557932,
+          0.0215531,
+          1
+        ],
+        [
+          2.3951044,
+          0.0015492685,
+          1
+        ],
+        [
+          3.2666013,
+          -0.0065098763,
+          1
+        ],
+        [
+          3.9765348,
+          0.00033064358,
+          1
+        ],
+        [
+          4.811301,
+          -0.0027909833,
+          1
+        ],
+        [
+          5.698848,
+          0.02347406,
+          1
+        ],
+        [
+          6.5847125,
+          -0.02479654,
+          1
+        ],
+        [
+          7.414345,
+          -0.0018588846,
+          1
+        ],
+        [
+          8.327564,
+          -0.019727899,
+          1
+        ],
+        [
+          9.163835,
+          -0.020081142,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          10,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "edgeAfter": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          10,
+          0,
+          1
+        ]
+      ],
+      "nextRandom": {
+        "value": 1252,
+        "status": "OK"
+      },
+      "javascriptComparison": {
+        "randomCallsMatch": false,
+        "returnedPointsMatch": false,
+        "followingRandomMatches": false,
+        "followingRandom": {
+          "original": 1252,
+          "javascript": 66213
+        },
+        "originalRandomCallCount": 37,
+        "javascriptRandomCallCount": 40,
+        "originalResultPointCount": 15,
+        "javascriptResultPointCount": 16,
+        "firstRandomMismatch": 37,
+        "firstPointMismatch": 12,
+        "boundedParity": false
+      }
+    }
+  ],
+  "interpretation": [
+    "For this tested closed two-point input, only the edge ending at the visible second point produced XYDIST. This is consistent with a target-visibility gate and verifies one-edge isolation for this case, but does not establish a general per-edge visibility rule.",
+    "The step-sum and emitted-point-distance traces are candidate arithmetic models reconstructed from captured RAN values; neither trace directly reads an original internal variable.",
+    "Original consumed-step counts decide whether either candidate predicts these finite cases. Agreement does not prove that model generally.",
+    "JavaScript parity is reported independently for random calls, returned points, and the following random checkpoint."
+  ],
+  "limitations": [
+    "Three seeds and one single-float, integer-coordinate, length-10 forward edge do not define the full FREE-PATH domain.",
+    "The post-MAIN call does not establish a natural caller or expose the compiled function source or internal stop variable.",
+    "Bounded edge parity does not establish natural-caller or whole-painting generator parity."
+  ]
+}

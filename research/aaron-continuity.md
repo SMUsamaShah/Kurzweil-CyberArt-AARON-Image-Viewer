@@ -62,6 +62,39 @@ and 462-byte bodies but leave indirect dispatch targets unresolved. No JS
 contract count changed. See [canvas findings](introspection/canvas-dimensions.md)
 and [portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
 
+A fresh uninstrumented recheck for the planned 768x1080 ZERO-EDGE caller
+capture completed at 320x480 and matched the prior 320 control across all six
+outputs and six staged sources. The 768-specific breakpoint was not armed.
+The run ID contains `768` but is not a dimension measurement; see the current
+recheck details in the canvas findings. The larger regime remains a valid
+separate observation but was not reproducible in that run. At that historical
+checkpoint, the next probe was the FREE-PATH boundary question in the repeatable
+320x480 context. The later 768x1080 captures below supersede that next-step
+note. Retry the ZERO-EDGE caller only after a fresh control measures 768x1080.
+
+Later that day, the complete FREE-PATH boundary triplet again measured
+768x1080. Its source-bound post-MAIN matrix contains 40 direct cases over
+seeds 1 and 1234; the uninstrumented controls match all six drawing/scene
+outputs and six ordinary Lisp sources. This supersedes the prior statement
+that 320x480 is the latest observed regime, but does not invalidate that
+separate 320 capture. The current dimensions must be read from each AA0 header.
+The probe rows are not yet compared to JavaScript and do not change the
+30/31 contract count, 1-of-5 milestone count, or zero whole-painting parity.
+See [FREE-PATH boundary findings](introspection/free-path-boundaries.md) and
+[portable evidence](introspection/evidence/free-path-boundaries-20261013.json).
+
+A newer source-bound post-MAIN triplet isolated three length-10 forward edges
+at 768x1080. Fresh controls match all six drawing/scene outputs and six staged
+sources. JavaScript matches seed 256819 exactly, but stops one iteration early
+for seed 522862 and one iteration late for seed 348048. The step-sum and
+emitted-point-distance candidates match different cases; neither gives a
+general stop rule, and the function's internal progress variable was not
+observed. This does not add a new JS contract unit: totals remain 30 routine
+names / 31 bounded contract units, 1 of 5 milestones (20%), and 0
+whole-painting parity results. See the [updated findings](introspection/free-path-boundaries.md),
+[portable v2 evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
+and the [reusable Lisp scope check](tools/check-lisp-probe-scope.mjs).
+
 FOOB now matches every result in two complete captures: each repeats 188,081
 integer pairs and 324 single/double-float pairs, plus 166,072 natural calls in
 total. T means outside `0 <= X <= *PIC-WIDE*-1` and
@@ -76,9 +109,11 @@ Frozen roots are foob-capture-seed1234-20261006-a / seed5678-20261006-c,
 with controls foob-capture-control-seed1234-20261006-b / seed5678-20261006-d.
 At that earlier checkpoint the next item was an explicit ZERO-EDGE capture.
 The canvas difference is now bounded at the SET-UP-SCREEN-SIZE and
-SELECT-CANVAS boundaries but remains unexplained. The next target is a
-ZERO-EDGE caller observation in the freshly reproduced 768x1080 regime. Full
-scene generation and general VALUE=0 painter behavior remain open.
+SELECT-CANVAS boundaries but remains unexplained. A fresh control at that
+checkpoint reproduced 320x480; the later 768x1080 FREE-PATH triplet is recorded
+above. Retry the ZERO-EDGE caller only after a fresh control for that caller
+measures 768x1080. Full scene generation and general VALUE=0 painter behavior
+remain open.
 
 ### ZERO-EDGE holdout and JavaScript model, 2026-10-12
 
@@ -802,13 +837,15 @@ hashes. The retained fixture, method counts, and scope are documented in
 [`stroke-findings.md`](stroke-findings.md). This is bounded file-writer parity;
 the composition and screen paths still need reconstruction.
 
-The active next steps are in [execution-plan.md](execution-plan.md): complete
-continuous writer replay, with brush-selection and natural FREE-PATH work in
-parallel, then move to a complete drawing unit with higher-level inputs. PLAN
-metadata should be targeted when a selected caller needs it. The JS
-planner, colour pipeline, figures, and whole-painting generation
-remain far from exact parity. The local code changes and evidence have not
-been published by this checkpoint; inspect `git status` before continuing.
+This checkpoint is superseded by the 2026-10-13 entries at the top of this
+handoff. Continue from the active FREE-PATH stop-boundary investigation in
+[execution-plan.md](execution-plan.md); the progress report records the
+current 30 routine names, 31 bounded contract units, 1-of-5 fully achieved
+milestones (20% by milestone count), and zero whole-painting parity results.
+Do not restart the completed writer-replay milestone. The current FREE-PATH
+boundary evidence has one exact JS match and two one-iteration mismatches, so
+keep its stop rule unresolved. Then choose the next target from the first
+remaining end-to-end divergence.
 
 ## Earlier 2026-09-08 checkpoint
 
@@ -1127,10 +1164,10 @@ original call graph.
 
 1. Read this file, `research/execution-plan.md`, then relevant roadmap evidence.
 2. Check the branch and worktree; preserve any unrelated user changes.
-3. Run `node --test --test-isolation=none` in `engine/` and
-   `node --test --test-isolation=none research/tools/test/*.test.mjs` from the
-   repository root on this machine. The default parallel test-worker launch
-   is blocked by the current sandbox.
+3. Use focused checks required by the active task. Do not run the full test
+   suites unless the user asks for test coverage or the investigation requires
+   them; this project has previously encountered sandbox limits with the
+   default parallel test-worker launch.
 4. Inspect the newest evidence under `research/introspection/evidence/` and
    the referenced probe before making a claim.
 5. Report progress, remaining work, next action, and blockers in the next

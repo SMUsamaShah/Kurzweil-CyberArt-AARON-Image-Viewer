@@ -93,10 +93,40 @@ contracts. It does not change the 30 routine names / 31 contract units,
 the 1-of-5 execution-plan milestone count, or the zero whole-painting parity
 results in the [progress report](../progress-report.md).
 
-## Next investigation
+## Current-regime recheck, 2026-10-13
 
-The 320x480 ZERO-EDGE entry attempt was a bounded no-hit. The current
-768x1080 context has now been reproduced with fresh controls. Repeat the
-read-only ZERO-EDGE caller observation in that larger context, retaining its
-own fresh no-probe controls. Do not infer a direct caller from symbol
-references or the order in which wrapped functions appear.
+A fresh uninstrumented `writer-stream-seed-1234` run completed under the
+retained run ID `zeroedge768-before-20261013-a`. The ID was chosen for a
+planned 768x1080 caller attempt; the actual AA0 header measured `320 480 148`
+with `smallImage=false`. Its AA0 hash is
+`0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`, and its
+scene-report hash is
+`a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415`.
+The runner, installer, registry patch, and license patch hashes match the
+earlier 320x480 capture. All six drawing/scene outputs and all six staged
+scene sources are byte-identical to the source-bound
+`buffer-hole-canvas-control-20261013` run. The complete local capture is under
+`research/extracted/local-oracle/external-runs/zeroedge768-before-20261013-a/`.
+
+Because this fresh no-probe control returned 320x480, the 768-only
+ZERO-EDGE breakpoint was not armed. The earlier 768x1080 observer triplet
+remains valid, but it was not reproduced in this run and its cause remains
+unknown. Do not use the run ID or `smallImage` flag as a substitute for the
+AA0 dimensions.
+
+Resume the larger-canvas caller attempt only after a fresh no-probe control
+actually measures 768x1080. Until then, continue with runtime questions that
+are measurable in the repeatable 320x480 context. The 320x480 ZERO-EDGE
+attempt remains a bounded no-hit, not evidence of a general absence of calls.
+
+### Later regime recheck, 2026-10-13 02:51 UTC
+
+The subsequent `writer-stream-seed-1234` FREE-PATH triplet measured
+768×1080 in all three AA0 files (`smallImage=false`). The uninstrumented
+controls and post-MAIN observer match across six drawing/scene outputs and six
+ordinary staged Lisp sources. The earlier 320×480 captures remain separate;
+the display regime can change between runs, so read each AA0 header before
+arming a dimension-specific native breakpoint. The portable comparison and
+capture details are in
+[`free-path-boundaries.md`](free-path-boundaries.md) and its
+[evidence](evidence/free-path-boundaries-20261013.json).

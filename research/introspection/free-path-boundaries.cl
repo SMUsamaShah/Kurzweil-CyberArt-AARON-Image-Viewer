@@ -1,15 +1,27 @@
 ;;; Boundary matrix for FREE-PATH beyond the initial 16-shape validation set.
-;;; The probe keeps the original function and its dependencies intact except
-;;; for transparent RAN/XYDIST recorders.  Each case gets a fresh seeded state,
-;;; explicit FDEX/TDEX/FROM/TO bindings, and a post-call random checkpoint.
+;;; Install the normal writer-stream observer first, then wrap MAIN outside it.
+;;; Run the matrix only after the original scene and its capture have finished;
+;;; the earlier pre-scene version changed a natural STORE-IN-FILE argument.
 (in-package :cl-user)
 
 (unless (boundp 'aaron-free-path-boundaries-loaded)
   (set 'aaron-free-path-boundaries-loaded t)
+  ;; The runner loads this probe before its selected mode source.  Load the
+  ;; selected writer-stream source here so this wrapper can sit outside the
+  ;; scene observer.  The runner's following load is idempotent.
+  (load "C:\\temp\\scene-state-snapshot-writer-stream-seeded-1234.cl")
   (with-open-file (report "C:\\temp\\aaron-free-path-boundaries.txt"
                           :direction :output
                           :if-exists :supersede
                           :if-does-not-exist :create)
+    (format report "BEGIN free-path-boundaries~%")
+    (format report "DEFERRED UNTIL OUTER MAIN RETURN~%")
+    (finish-output report))
+  (defun aaron-free-path-run-boundaries ()
+    (with-open-file (report "C:\\temp\\aaron-free-path-boundaries.txt"
+                            :direction :output
+                            :if-exists :append
+                            :if-does-not-exist :create)
     (let* ((*print-length* nil)
            (*print-level* 16)
            (*print-circle* nil)
@@ -61,7 +73,7 @@
                                (type-error-datum problem)
                                (type-error-expected-type problem))
                      (error () nil)))))
-        (format report "BEGIN free-path-boundaries~%")
+        (format report "MAIN-RETURNED T~%")
         (format report "CASES ~D~%" (* 2 (length specs)))
         (finish-output report)
         (unwind-protect
@@ -105,7 +117,8 @@
                             (format report "NEXT-RANDOM ~S STATUS ERROR~%"
                                     (handler-case (random 100000) (error () :unavailable))))))))
                     (format report "ENDCASE~%")
-                    (finish-output report))))))
+                    (finish-output report))))
+          ;; Keep the saved functions in scope through the restoration check.
           (setf (symbol-function ran) original-ran
                 (symbol-function dist) original-dist))
         (format report "RESTORED ~S~%"
@@ -113,3 +126,31 @@
                      (eq (symbol-function dist) original-dist)))
         (format report "END free-path-boundaries~%")
         (finish-output report)))))
+  (let* ((owner (find-package "COMMON-GRAPHICS-USER"))
+         (main-symbol (and owner (find-symbol "MAIN" owner)))
+         (main-original (and main-symbol (fboundp main-symbol)
+                             (symbol-function main-symbol)))
+         (main-depth 0)
+         (matrix-ran nil))
+    (unless main-original
+      (error "Could not resolve MAIN for deferred FREE-PATH probe"))
+    (setf (symbol-function main-symbol)
+          (let ((saved-main main-original))
+            (lambda (&rest arguments)
+              (let ((depth (incf main-depth))
+                    (completed nil))
+                (unwind-protect
+                     (multiple-value-prog1
+                         (apply saved-main arguments)
+                       (setf completed t))
+                  (unwind-protect
+                       (when (and (= depth 1) completed (not matrix-ran))
+                         (setf matrix-ran t)
+                         (aaron-free-path-run-boundaries))
+                    (decf main-depth)))))))
+    (with-open-file (report "C:\\temp\\aaron-free-path-boundaries.txt"
+                            :direction :output
+                            :if-exists :append
+                            :if-does-not-exist :create)
+      (format report "INSTALL main-wrapper=OUTER-OF-WRITER-STREAM~%")
+      (finish-output report))))

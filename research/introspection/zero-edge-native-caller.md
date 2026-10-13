@@ -81,10 +81,16 @@ byte-identical. Its SHA-256 is
 
 ## Next step
 
-Resolve why the same writer-stream setup measured both 768x1080 and 320x480.
-The current and earlier runs share the mode, runner and patched library hashes;
-the actual AA0 header and first FILL-MAP type agree within each run. Inspect
-the dimension-selection context, then repeat the ZERO-EDGE caller observation
-only after the larger canvas is reproduced under fresh controls. A direct
-caller claim still requires a fresh live entry hit and a return address inside
-an exact live-validated payload.
+Before another 768x1080 caller attempt, run a fresh uninstrumented control and
+read its AA0 header. The 2026-10-13 recheck completed with `smallImage=false`
+but returned `320 480 148`; all six outputs and six staged sources exactly
+match the prior source-bound 320x480 control. The run ID
+`zeroedge768-before-20261013-a` is only a label and does not establish the
+canvas size. Its complete output is retained under the ignored
+`research/extracted/local-oracle/external-runs/` junction.
+
+Do not arm the 768-only breakpoint unless that fresh control actually measures
+768x1080. The earlier 768 triplet remains valid, and the reason it differs
+from the current 320 regime is still unknown. A direct caller claim still
+requires a fresh live entry hit and a return address inside an exact
+live-validated payload.

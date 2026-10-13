@@ -108,6 +108,37 @@ execution milestones. See the
 [canvas-size findings](introspection/canvas-dimensions.md) and
 [portable evidence](introspection/evidence/canvas-size-native-links-20261013.json).
 
+A new uninstrumented control for a planned 768×1080 ZERO-EDGE caller run
+instead measured 320×480. Its six drawing/scene outputs and six staged Lisp
+sources exactly match the prior source-bound 320×480 control. The AA0 header,
+not the run ID or `smallImage` flag, determines the regime; the 768-only
+breakpoint was not armed. This adds no JS contract, so the 30/31, 1-of-5
+(20%), and 0 whole-painting-parity figures remain unchanged.
+
+A later FREE-PATH boundary triplet measured 768×1080. Its post-MAIN observer
+records 40 direct calls across 20 shapes and seeds 1 and 1234; all reports are
+complete, have zero errors, preserve the input lists, and restore the wrapped
+RAN/XYDIST functions. Fresh uninstrumented controls match the observer on all
+six drawing/scene outputs and six staged Lisp sources. The result-point counts
+range from 13 to 60. These rows have not been compared to JavaScript, so they
+do not change the 30 routine names / 31 JS contract units, 1-of-5 milestone
+count, or 0 whole-painting parity results. The earlier 320×480 captures remain
+a separate valid regime; always read the AA0 header for each run.
+
+A follow-up post-MAIN triplet isolates three one-edge, length-10 FREE-PATH
+cases at 768×1080. The current JavaScript matches one case exactly and
+mismatches two: seed 522862 consumes 10 original steps vs. 9 in JS; seed
+256819 consumes 11 in both; seed 348048 consumes 12 original steps vs. 13 in
+JS. The step-sum and source-to-emitted-point models predict 9 vs. 10, 11 vs.
+12, and 13 vs. 12 steps for those seeds; the first point-distance prediction
+is only the selected-step cap. Neither model explains the results generally.
+This adds data to the existing bounded
+FREE-PATH contract, not a new recovered routine. The function count remains
+30 routine names / 31 bounded contract units; milestone progress stays 1 of 5
+(20% by count), and whole-painting parity remains 0. See the
+[boundary findings](introspection/free-path-boundaries.md) and
+[portable v2 evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json).
+
 ## What remains before a general AARON-equivalent generator
 
 The generative core and its integration remain the main work: recover normal

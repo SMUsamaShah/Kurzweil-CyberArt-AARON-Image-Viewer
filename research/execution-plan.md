@@ -143,8 +143,13 @@ with no-probe controls; all six drawing/scene outputs and six scene sources
 match. The previously measured 320x480 triplet remains separate. Both regimes
 enter SET-UP-SCREEN-SIZE with 640x480 globals, but its exit state differs.
 The cause remains unknown, and REA 6.4 leaves the relevant native dispatch
-calls unresolved. Next, repeat the ZERO-EDGE caller observation only in the
-reproduced 768x1080 regime. See the
+calls unresolved. A fresh uninstrumented recheck for the 768x1080 caller
+attempt instead returned a complete 320x480 AA0 that matches the earlier
+source-bound 320 control across all six outputs and six staged sources. The
+768-specific breakpoint was not armed. Retry only after a fresh no-probe run
+measures 768x1080. At that checkpoint, the next runtime-measurable question
+was the FREE-PATH distance boundary in the repeatable 320x480 regime; the later
+768x1080 FREE-PATH captures are recorded below. See the
 [canvas findings](introspection/canvas-dimensions.md),
 [portable canvas evidence](introspection/evidence/canvas-size-native-links-20261013.json),
 [REA analysis](introspection/rea-payload-analysis.md),
@@ -421,9 +426,28 @@ but the JS replay computes its own random values. An explicit per-edge type
 decision resolves mixed single/double inputs. A new retained regression case
 checks all three paths independently of the ignored raw capture.
 
-**Next gate:** check the inferred distance-stop condition near its numeric
-boundary and validate other scene configurations. Brush selection and the
-natural path calls in both controlled paintings are implemented.
+**Current gate:** the distance-stop boundary is still unresolved. The
+JavaScript path matches the three natural seed-1234 calls and one seed-5678
+holdout, but a new isolated edge capture found only one of three additional
+near-boundary cases matching the current implementation. Do not generalize the
+candidate stop calculations or widen the implementation yet.
+
+The first boundary matrix now contains 40 complete direct calls over 20 input
+shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
+observer runs only after the original MAIN and writer-stream observer return;
+the complete triplet matches all six drawing/scene outputs and six staged
+sources. This validates the capture placement. The 40-case matrix itself is
+still not compared row-by-row with JavaScript. A second triplet isolates three
+length-10 forward edges at 768x1080. Original consumption is 10/10, 11/13,
+and 12/14 selected iterations for seeds 522862, 256819, and 348048. JavaScript
+matches only seed 256819. Seed 522862 falsifies the current early step-sum
+break, while the two candidate progress measures agree with different cases;
+neither is established as the general original rule. The captured internal
+progress variable remains unavailable. See the [matrix findings](introspection/free-path-boundaries.md),
+[isolated edge evidence](introspection/evidence/free-path-stop-boundary-20261013-v2.json),
+[seed candidate finder](tools/find-free-path-emitted-point-boundary-seeds.mjs),
+[portable evidence](introspection/evidence/free-path-boundaries-20261013.json),
+and the reusable [triplet verifier](tools/verify-local-aaron-triplet.mjs).
 
 ## 3. Produce one complete drawing unit from higher-level inputs — point emission measured
 
@@ -554,6 +578,9 @@ dependencies or independently check a risky result.
   remaining mismatch. Test counts and sampled-call counts are not percentages
   of the generator recovered.
 
-Continue from the active function and call-path investigation described in
-the [progress report](progress-report.md) and continuity handoff. Preserve
-exact milestone completion criteria; do not restart achieved milestone 1.
+Continue from the active FREE-PATH stop-boundary investigation described in
+the [progress report](progress-report.md) and continuity handoff. Keep the
+writer-replay milestone marked achieved; do not restart it unless a specific
+new mismatch makes part of that evidence relevant. The current stop rule is
+unresolved, with one exact JS match and two one-iteration mismatches in the
+latest isolated cases.
