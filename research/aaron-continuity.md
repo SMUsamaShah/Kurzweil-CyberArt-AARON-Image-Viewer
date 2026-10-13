@@ -170,16 +170,19 @@ analyst-generated PE; they establish no runtime branch or call target. Read
 the [REA notes](introspection/rea-payload-analysis.md) and
 [v4 evidence](introspection/evidence/rea-brush-stroke-control-flow-20261012-v4.json).
 
-### IN-SUB-FRAME REA pass and bounded false-result census, 2026-10-13
+### IN-SUB-FRAME bounded predicate comparison and false-result census, 2026-10-13
 
 REA 6.4.0 with Ghidra 12.1.4 now has a source-bound static dossier for the exact
 278-byte mapped `IN-SUB-FRAME` payload: 270-byte body, 24 CFG blocks/38 edges,
 93 instructions, 109 p-code operations/95 def-use edges, and 11 unresolved
 indirect calls. It resolves no callers or callees. The machine code is
-consistent with a two-coordinate rectangle gate, but argument meanings,
-bounds, caller, return convention, and Lisp ABI remain unknown. The report's
-portable derivation checks every ordered v6 predicate row and all 20 unique
-source bindings; independent outputs match byte-for-byte. See the
+consistent with a two-coordinate rectangle gate. Existing natural parent
+captures now compare the JS helper against 296,912 value-3 BRUSH-STROKE
+predicate calls and 81,110 BUFFER-FEATURE calls, including accepted equality
+edges. The measured integer behavior is an inclusive frame rectangle; direct
+caller, other numeric domains, errors and Lisp ABI remain unresolved. The
+report's portable derivation checks every ordered v6 predicate row and all 20
+unique source bindings; independent outputs match byte-for-byte. See the
 [IN-SUB-FRAME findings](introspection/in-sub-frame.md) and
 [portable evidence](introspection/evidence/rea-in-sub-frame-20261012.json).
 
@@ -193,10 +196,11 @@ match at 768×1080. Direct-mode controls match separately at 320×480, so keep
 the regimes distinct. See the [updated findings](introspection/in-sub-frame.md)
 and [call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
 
-Next compare the retained false integer pairs with contemporaneous frame
-bounds, then capture a stack-aware natural caller trace if the direct call path
-remains unclear. General predicate behavior, JavaScript parity, natural
-ZERO-EDGE context, and intermediate helper traces remain open.
+The separate false-row census has no per-call frame identity. Cross-run joins
+to different captured frames remain hypotheses and do not extend the contract.
+The next useful follow-up, if caller identity is needed, is a stack-aware
+natural caller/frame trace with fresh controls. Natural ZERO-EDGE context,
+intermediate helper traces, and scene-level JS parity remain open.
 
 ### ZERO-EDGE 160-input matrix, 2026-10-12
 

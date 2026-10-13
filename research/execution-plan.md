@@ -105,16 +105,21 @@ SCREEN-AND-STORE returns NIL, and no screen or scene parity is claimed. See
 [the findings](introspection/brush-stroke-value0.md) and
 [v6 evidence](introspection/evidence/brush-stroke-value0-20261012-index4-v6.json).
 
-The retained natural censuses and v6 sample contain no rejected
-`IN-SUB-FRAME` results for the captured VALUE=0 stroke. The separate v2
-seed-1234 scene window records 224 NIL results in its first 1,400 calls under
-a matched composite-loader setup. See the [IN-SUB-FRAME dossier](introspection/in-sub-frame.md)
-and [bound capture evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
-Next compare retained false argument pairs with contemporaneous frame bounds,
-then capture a stack-aware natural caller trace if needed. Follow the native
-workflow and rediscover and byte-validate addresses before debugger
-attachment. General predicate behavior, its direct caller, natural ZERO-EDGE
-context, intermediate helper traces, and scene-level JS parity remain open.
+The bounded integer predicate is now compared in existing natural parent
+captures: 296,912 ordered checks in 70 value-3 brush strokes and 81,110 in 24
+feature-buffer calls, with all accepted/rejected results matching the
+inclusive JS rectangle helper. The separate v2 seed-1234 scene window records
+224 NIL results in its first 1,400 calls under a matched composite-loader
+setup, but has no per-call frame identity; its cross-run frame joins remain
+hypotheses. See the [IN-SUB-FRAME dossier](introspection/in-sub-frame.md),
+[boundary evidence](introspection/evidence/brush-stroke-boundary-parity-20261005.json),
+[feature-buffer evidence](introspection/evidence/brush-feature-buffer-parity-20261006.json), and
+[call-window evidence](introspection/evidence/in-sub-frame-initial-window-v2-20261013.json).
+The immediate caller and non-integer/error behavior remain unresolved. If
+needed, capture a stack-aware natural caller/frame trace only after reading the
+native-analysis workflow and oracle protocol, with live address rediscovery,
+byte validation, and fresh controls. Natural ZERO-EDGE context, intermediate
+helper traces, and scene-level JS parity also remain open.
 
 Three positive PERIM samples now complete at START (3,3,0) on a zero 7x7
 UBYTE4 map. PERIM 1/2 return NIL and leave START.Z at 4/2. PERIM 3 returns

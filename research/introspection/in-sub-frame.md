@@ -28,6 +28,36 @@ or order, the bound getters' identities, the result convention, a Lisp caller,
 or the native Lisp ABI. Ghidra's inferred signature is not a recovered
 interface.
 
+## Bounded integer behavior compared through natural callers
+
+The JavaScript helper `isPointInAaronSubFrame(x, y, frame)` in
+[`aaron-boundary-brush.js`](../../engine/src/aaron-boundary-brush.js) already
+has bounded original-result comparisons through two natural call families.
+These comparisons supply the current frame as an explicit JS input; the
+original routine reads its runtime state, so this is a measured adapter
+contract rather than a recovered source signature.
+
+The complete [boundary capture](evidence/brush-stroke-boundary-parity-20261005.json)
+compares all 296,912 ordered integer predicate calls across 70 VALUE=3
+`BRUSH-STROKE` samples in two seeded scenes: 267,020 true and 29,892 NIL.
+Each original argument pair and result is checked against the parent
+stroke's captured frame, including accepted equality-edge coordinates; the
+JS adapter also reproduces each complete map. The independent
+[feature-buffer capture](evidence/brush-feature-buffer-parity-20261006.json)
+compares 81,110 ordered predicate calls across 24 natural `BUFFER-FEATURE`
+calls: 80,330 accepted and 780 rejected. Its fractional EDGE inputs are
+rounded before the integer predicate calls. These are separate capture
+families; their counts are not added into one scene total.
+
+Thus the measured integer contract for those captured MAPFRAME inputs is an
+inclusive rectangle test: `lx <= x <= rx` and `ly <= y <= ty`. This does not
+establish behavior for non-integer or boxed-number arguments, malformed or
+inverted frames, missing frame state, original errors/multiple values, or
+other execution contexts. The parent captures place the calls inside a
+`BRUSH-STROKE` or `BUFFER-FEATURE` interval, but do not prove the immediate
+Lisp caller. REA still reports 11 unresolved indirect calls and no resolved
+caller/callee references.
+
 ## Natural VALUE=0 anchor
 
 The source-bound v6 capture records stroke 47: VALUE=0, `ALL-BRUSHES` index 4,
@@ -68,16 +98,26 @@ The observer does synchronous reporting during the call window. Matching
 scene/drawing artifacts support this capture's bounded result, but do not
 prove general observer transparency or complete RNG purity. Auxiliary random
 logs contain `CURRENT-DAY-TIME` strings and are not treated as deterministic
-parity evidence. This census does not implement the JavaScript predicate,
-identify the direct caller, establish the rectangle bounds, or recover general
-behavior. The REA payload still has 11 unresolved indirect calls and no
-resolved caller/callee references.
+parity evidence. The census does not bind each false row to its contemporaneous
+frame or immediate caller, and does not extend the bounded integer contract to
+general inputs.
+
+The 128 retained false pairs all fall inside the 768×1080 canvas (first
+argument 93–621, second 204–337), so picture-bound rejection alone is
+contradicted. Cross-run comparisons with captured stroke 2/4 and stroke 47
+frames can group these rows under candidate rectangles, but the v2 tape has
+no stroke or frame identity. Those joins are hypotheses only. A true pair
+from a different stroke also contradicts either fixed rectangle as a
+permanent rule. The ordered, frame-bound comparisons above provide the
+bounded behavior evidence; the v2 census does not identify which frame applied
+to any one of its false rows.
 
 ## Next measurement
 
-Use the retained false rows to compare the observed integer argument pairs
-with contemporaneous frame bounds, while keeping only hypotheses labeled as
-such. Then use the native-analysis workflow to capture a stack-aware natural
-caller trace if the argument meaning or call path remains unresolved. A
-JavaScript implementation needs a bounded contract comparison and fresh
-controls; the current observation alone is not parity.
+If resolving the immediate call path remains useful, capture a source-bound
+natural caller/frame trace that records the current `SUB-FRAME` slots and a
+validated call stack for each sampled predicate call. Read the native-analysis
+workflow and oracle protocol first, and use fresh controls. Do not use
+cross-run false-pair joins as per-call evidence. The JS helper's measured
+integer rectangle contract is bounded to the two natural call families above;
+scene-level JS parity remains open.
