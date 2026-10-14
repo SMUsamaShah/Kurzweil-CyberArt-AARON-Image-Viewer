@@ -555,6 +555,30 @@ capture.
 
 ## Probe and tooling recovery
 
+### Seed-5678 screen-unit optional targets reset by the writer overlay
+
+The v6 seed-5678 screen-unit probe configures `BRUSH-STROKE` and `PICK` in
+`aaron-planning-extra-targets`. The mode loader then loads
+`scene-state-snapshot-writer-full-seeded-5678.cl`; its old unconditional
+assignment replaced that list with only `PREP-LINE` and `STORE-IN-FILE`.
+The resulting trace therefore had no `TARGET PICK ...` install record. That
+absence did not show that `PICK` was unbound or that no PICK calls occurred.
+
+The writer overlay now preserves only the documented allowlisted lists and
+falls back to its original two writer targets for ordinary runs. The triplet
+driver checks for `TARGET-INSTALLED name=PICK` before its stricter report
+completion checks. If it is missing, the diagnostic prints any `TARGET PICK`
+trace result, or asks to inspect the staged target list and loader order; it
+explicitly draws no PICK-call conclusion. Use a fresh output root after such a
+failure. The corrected seed-5678 v6 triplet completed at the measured
+768×1080 profile and is recorded in
+[`screen-unit-context.md`](introspection/screen-unit-context.md).
+
+The separate v14 seed-1234 intervention correctly stopped when its fresh
+control measured 768×1080 instead of the required 320×480. No observer ran and
+no display setting was changed. Keep the AA0 header gate; do not alter the
+display mode to make an intervention fit.
+
 ### Pre-scene Lisp probe package resolution
 
 Some local probes are inserted before scene initialization, when the Lisp

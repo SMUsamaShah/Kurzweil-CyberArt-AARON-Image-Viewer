@@ -694,7 +694,7 @@ direct caller or general rule. See the [v11 evidence](introspection/evidence/pic
 [v13 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json),
 and [screen-unit findings](introspection/screen-unit-context.md).
 
-Next, use the terminal third PICK in the 320×480 seed-1234 unit-6 evidence:
+The previously planned terminal third PICK in the 320×480 seed-1234 unit-6 evidence:
 natural return 28 equals `PREVDEX=28`, and no HDEX write follows before unit
 end. Preserve its native RAN draw, substitute caller-visible 27, and check
 for `HDEX=27` before unit end. Require a fresh no-probe control whose AA0
@@ -702,6 +702,23 @@ header measures 320×480; do not force the display mode. This checks a second
 regime in the same seed, not an independent-seed holdout. Require a source-
 bound triplet, then collect an independent seed before promoting the
 candidate; do not alter the function or milestone counts from this evidence.
+
+The v15 source-bound treatment tested the shifted triple in seed-5678 unit 6
+at 768×1080. Its second natural `PICK(33,34,35)` returned 34 equal to
+`PREVDEX=34`, with nested `RAN(0,2)=1`. Substituting caller-visible 35 yielded
+one `HDEX=35` before the next PICK. The fresh controls match all six compared
+outputs and seven ordinary Lisp sources match. The selected interval covers
+90 writer calls and 291 bytes inside the 50,000-call prefix of a 100,821-call
+tape. This is one controlled candidate match for a shifted triple, not a
+general rule, direct caller proof, JS contract, or parity. See the
+[v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json).
+
+Current target: test the complementary equality-side result in the same
+seed-5678 natural unit. Its terminal third `PICK(33,34,35)` returns 33 with
+`PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute only caller-visible 34,
+and verify no HDEX write through unit end. Use a new fresh 768×1080
+before/observer/after triplet; stop before the observer if the fresh control
+measures another canvas. Never force display mode or reuse earlier roots.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate

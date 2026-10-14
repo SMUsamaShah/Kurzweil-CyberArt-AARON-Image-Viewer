@@ -499,6 +499,11 @@ $normalized = Join-Path $output 'scene-state.json'
     $report "local:$RunId" > $normalized
 if ($LASTEXITCODE -ne 0) { throw 'Scene-state report validation failed' }
 
+$requiredProbeOutputSha256 = $null
+if ($RequiredProbeOutputName) {
+    $requiredProbeOutputSha256 = (Get-FileHash -LiteralPath (Join-Path $capture $RequiredProbeOutputName) `
+        -Algorithm SHA256).Hash.ToLowerInvariant()
+}
 $finished = [DateTimeOffset]::UtcNow
 $summary = [ordered]@{
     runId = $RunId
@@ -508,6 +513,7 @@ $summary = [ordered]@{
     probeOutputNames = @($ProbeOutputNames)
     preSceneProbePauseSeconds = $PreSceneProbePauseSeconds
     requiredProbeOutputName = $RequiredProbeOutputName
+    requiredProbeOutputSha256 = $requiredProbeOutputSha256
     requiredProbeEndMarker = $RequiredProbeEndMarker
     probeCompletionSatisfied = [bool]$probeCompletionSatisfied
     runnerSha256 = $runnerSha256

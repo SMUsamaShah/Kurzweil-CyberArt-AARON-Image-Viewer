@@ -1,11 +1,11 @@
 # Natural screen-unit context observations
 
-Six complete source-bound before/observer/after triplets captured natural
-post-`RPARSE` `SCREEN-AND-STORE` units at 320×480: the first unit for seeds
-1234 and 5678, and the second, third, fifth, and sixth units for seed 1234.
-The observer records nearest traced ancestry, `RAN` calls, `PREP-LINE`, `AARGB` writer
-events, and entry/exit context. Each selected path and its color events
-reproduce the exact original writer byte slice, totaling 837 bytes.
+Seven complete source-bound before/observer/after triplets captured natural
+post-`RPARSE` `SCREEN-AND-STORE` units: six at 320×480 and seed-5678 unit 6 at
+768×1080. The observer records nearest traced ancestry, `RAN` calls,
+`PREP-LINE`, `AARGB` writer events, and entry/exit context. Each selected path
+and its color events reproduce the exact original writer byte slice, totaling
+1,121 bytes.
 
 | Seed | Unit / triplet | Nearest observed parent | Context | Path / output | Colors | RNG calls |
 |---|---|---|---|---:|---|---:|
@@ -15,11 +15,13 @@ reproduce the exact original writer byte slice, totaling 837 bytes.
 | 1234 | 3 / `pickprev1234u3-20261014-024804-9dbe464f` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=28→27` | 34 points, 36 writer calls, 132 bytes | `(before 0, HDEX 29)`, `(before 13, HDEX 27)` | 7 |
 | 1234 | 5 / `screen-context-v5-20261014-010625-d7df5d93` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→27` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 28)`, `(before 15, HDEX 27)` | 7 |
 | 1234 | 6 / `screen-context-v6c-20261014-013426-fe0e74a8` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→28` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 29)`, `(before 14, HDEX 28)` | 7 |
+| 5678 | 6 / `pickseed5678u6fix-20261014-043217-7e05b1b2` | `BRUSH-STROKE` | `RPLANE=158`, `SDEX=0`, `PREVDEX=35→33` | 87 points, 89 writer calls, 284 bytes | `HDEX 34` at writer 3035; `HDEX 33` at 3097 | 7 |
 
-All contexts report `PAINT-BRUSH`, boundary value 3, and 320×480 fill/patch
-maps. The reports capture map dimensions and selected bindings, not complete
-map contents or per-event map deltas. `PREP-LINE` occurs twice in each selected
-unit, once immediately after each recorded `AARGB`/`HDEX` write.
+All contexts report `PAINT-BRUSH` and boundary value 3. The first six use
+320×480 fill/patch maps; the new seed-5678 unit uses 768×1080 maps. The reports
+capture map dimensions and selected bindings, not complete map contents or
+per-event map deltas. `PREP-LINE` occurs twice in each selected unit, once
+immediately after each recorded `AARGB`/`HDEX` write.
 
 ## Unit-6 `PICK` observations
 
@@ -35,6 +37,29 @@ later `AARGB` HDEX write occurs before this unit returns. This one natural
 list and three draws do not establish `PICK`'s general contract or a general
 color-selection rule. The complete typed calls, returns, state summaries, and
 source/control hashes are retained in the [unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json).
+
+The independent seed-5678 unit-6 triplet captured three natural
+`PICK(33,34,35)` calls. Their returns were 34, 34, and 33; their nested
+`RAN(0,2)` results were 1, 1, and 0, with `PREVDEX` at those random-call
+entries equal to 35, 34, and 34. The first return differs from `PREVDEX` and is
+followed by `HDEX=34` at writer ordinal 3035. The middle return equals
+`PREVDEX` and has no HDEX event before the next PICK. The final return differs
+and is followed by `HDEX=33` at writer ordinal 3097. This follows the same
+observed relationship at a separate seed and shifted argument list; it does
+not validate the existing `(27,28,29)` candidate as an independent-seed
+holdout. The current 12-case analyzer is restricted to that argument list and
+seed 1234. Treat this as a shifted-triple extension hypothesis, not a general
+rule or proof of a direct caller.
+
+The 768×1080 triplet matched all six compared control outputs and seven
+ordinary staged Lisp sources. Its 87-point selected path replays 284 writer
+bytes with SHA-256
+`f800c61c19d6c48f33f6568c15ea58787a2d6f6cf7ab876e16ead8fc61c8c442`.
+The portable report binds the complete observer output and selected-unit
+reports to the probe source. The global writer tape captured only its first
+50,000 of 100,820 calls, but the selected unit's full writer interval is inside
+that prefix. See the [seed-5678 unit-6 evidence]
+(evidence/screen-unit-context-seed5678-unit6-20261014-v2.json).
 
 ## Natural `PICK`/`PREVDEX` candidate observations
 
@@ -185,10 +210,11 @@ See the [seed-1234 unit-1 evidence](evidence/screen-unit-context-seed1234-202610
 [capture observer v3](screen-unit-context-v3.cl),
 [capture observer v5](screen-unit-context-v5.cl),
 [capture observer v6](screen-unit-context-v6.cl),
+[capture observer v15](screen-unit-context-v15.cl),
 [triplet runner](../tools/capture-screen-unit-context-triplet.ps1), and
 [portable evidence derivation](../tools/derive-screen-unit-context-evidence.mjs).
 
-## Next experiment
+## Current experiment and limits
 
 The v4 probe's third unit at 768×1080 was a successful but empty screen call.
 It had no `PREP-LINE` or writer calls, so the observer correctly emitted
@@ -203,26 +229,42 @@ different from `PREVDEX`; each intervention preserved its nested `RAN(0,2)`
 draw and substituted caller-visible `PREVDEX`. Neither was followed by an
 HDEX write, matching the equality-side candidate prediction.
 
-V13 targeted the same unit's first `PICK(33,34,35)`. The natural return was
-34 with `PREVDEX=35`; nested `RAN(0,2)` selected index 1. Substituting only
-the caller-visible value to 33 was followed by `HDEX=33` at call 965 / writer
-ordinal 804, before the next PICK. This matches the candidate's opposite-side
-prediction for this case. Its complete observer report is source-hashed. A
-complete no-probe control captured just before the observer was reused; that
-control and the fresh after run match six outputs, and ten ordinary staged
-source hashes match. The observer's AA0 and image differ intentionally and
-are hash-bound; image ID is unchanged. Its writer tape is a 50,000-call
-prefix of 100,029 calls, but covers the selected unit's 12 writer calls.
-Together, v11–v13 are one-seed, one-regime evidence. They do not prove a
-direct Lisp caller, establish a general color rule, add a JS contract, or
-count as parity. See [v11](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+V13 changed the first natural return 34 to caller-visible 33 while
+`PREVDEX=35`; nested `RAN(0,2)` selected index 1 and `HDEX=33` followed before
+the next `PICK`. Together, v11–v13 are one-seed, one-regime evidence. They do
+not prove a direct Lisp caller, establish a general color rule, add a JS
+contract, or count as parity. See [v11](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
 [v12](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json), and
 [v13](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json).
 
-Next, use the terminal third `PICK` in the 320×480 seed-1234 unit-6 evidence:
-its natural return 28 equals `PREVDEX=28`, and no HDEX write follows before
-unit end. Preserve its nested random draw, substitute caller-visible 27, and
-check whether `HDEX=27` appears before unit end. Require a fresh uninstrumented
-control whose AA0 header measures 320×480; never force the display mode. This
-tests a second regime in the same seed, not an independent-seed holdout. Then
-capture an independent seed before promoting the candidate.
+The v14 seed-1234 unit-6 treatment was stopped before the observer because its
+fresh control measured 768×1080 instead of the required 320×480. No setting
+changed. The v15 treatment used a different measured 768×1080 sample:
+seed-5678 unit 6's second `PICK(33,34,35)` naturally returned 34 equal to
+`PREVDEX=34`; its nested `RAN(0,2)` index was 1, and no HDEX write followed
+before the next `PICK`. V15 preserved that natural draw, substituted only the
+caller-visible result to 35, and checked for `HDEX=35` before an observed next
+`PICK`. It completed a fresh before/observer/after triplet at 768×1080. Both
+fresh uninstrumented controls match all six compared outputs, and seven
+ordinary staged Lisp sources match. The complete required report is bound to
+probe SHA-256
+`a74a558f9cb9b1c4f27c01fe461ee7d90c4919c9023b420419586d88ce4d1c04` and report
+SHA-256
+`a24b5fa00a5531d44e8536a111284f193946edec6b7f84a8cbb08f42b0706d82`.
+The substitution preserved natural `RAN(0,2)=1`; caller-visible 35 was
+followed by exactly one `HDEX=35` write at call 3269 / writer ordinal 3064,
+before the next PICK. Its selected 87-point interval has 90 writer calls and
+replays 291 bytes (SHA-256
+`748c0f52d912a25166afa2e084f9030a638b0428c2bce69ea96e3a92d3e5f996`). The
+global tape is a 50,000-call prefix of 100,821; it covers the selected
+writer interval. See the [v15 evidence](evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json).
+This is one controlled match for the shifted triple, not a general rule, direct
+Lisp caller proof, JS behavior contract, or parity result.
+
+Next, test the complementary equality-side outcome in the same natural
+seed-5678 unit: target its terminal third `PICK(33,34,35)`, whose natural
+return 33 differs from `PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute
+only caller-visible 34, and check that no HDEX write follows before unit end.
+Use a new fresh 768×1080 before/observer/after triplet. If the new uninstrumented
+control measures another canvas, retain it and stop before the observer; do
+not force display mode or reuse earlier roots.

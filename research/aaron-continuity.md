@@ -31,60 +31,62 @@ parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-2026101
 [FREE-PATH findings](introspection/free-path-native.md), and the active
 [execution plan](execution-plan.md).
 
-Six complete source-bound screen-unit context triplets now cover seed 1234
-units 1, 2, 3, 5, and 6 plus seed 5678 unit 1 at 320×480. Their selected paths
-and color events replay 837 original writer bytes exactly. Typed snapshots in
-units 2 and 5 show paired local `PREVDEX` transitions and unpaired RAN returns.
-Units 2, 3, 5, and 6 contain 12 natural `PICK(27,28,29)` calls; an offline
-candidate check fits all 12: eight returns differ from `PREVDEX` at nested RAN
-entry and are followed by matching HDEX writes, while four equal returns
-have no later write. These four units are from the same seed-1234 painting, so
-this is not an independent-seed or controlled downstream test. It does not
-establish a direct source-level call edge, exact native state slot, general
-color rule, or JS contract. A separate controlled triplet tested
-`PICK(27,28,29)` at 16 seeds: all three positions occur, each return matches
-one `RAN(0,2)` draw, the next random value matches one-draw state, and the
-existing JS adapter matches 16/16. This is limited to that three-integer list
-and does not explain the screen color decision. The PICK return target adds
-one complete `FIRST-PICK-RETURN` block to the observer scene report; the
-strict verifier checks that block as the only observer scene-report delta.
-Counts remain 31 routine names / 32 bounded contracts; milestone progress
-and whole-painting parity remain unchanged. See
+Seven complete source-bound screen-unit context triplets now cover seed-1234
+units 1, 2, 3, 5, and 6 plus seed-5678 units 1 and 6. The first six are
+320×480; seed-5678 unit 6 is 768×1080. Their selected paths and color events
+replay 1,121 original writer bytes. Units 2, 3, 5, and 6 for seed 1234 contain
+12 natural `PICK(27,28,29)` calls; the offline candidate fits all 12, but all
+four units are from the same painting. The separate seed-5678 unit-6 sample
+uses `(33,34,35)` and follows the same three-call relationship with
+`PREVDEX`/HDEX. Because the existing analyzer is restricted to `(27,28,29)`,
+this is evidence for a shifted-triple extension, not an independent-seed
+holdout of the existing candidate. Neither set establishes a direct source
+call, exact native state slot, general color rule, or JS contract. A separate
+controlled triplet tested `PICK(27,28,29)` at 16 seeds; all three positions
+occur, each return matches one `RAN(0,2)` draw, the next random value matches
+one-draw state, and the JS adapter matches 16/16. This does not explain the
+screen color decision. Counts remain 31 routine names / 32 bounded contracts;
+milestone progress and whole-painting parity remain unchanged. See the
 [screen-unit findings](introspection/screen-unit-context.md),
-[seed-1234 unit-1 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
-[seed-5678 unit-1 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
-[seed-1234 unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed-1234 unit-3 evidence](introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
-[seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
-[seed-1234 unit-6 evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
-[12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
+[seed-5678 unit-6 evidence](introspection/evidence/screen-unit-context-seed5678-unit6-20261014-v2.json),
+[12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json), and
 [controlled PICK evidence](introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
 
 Two source-bound seed-1234 unit-2 interventions at measured 768×1080 changed
 the first and second selected PICK results to `PREVDEX`, preserving each
 nested `RAN(0,2)` draw. Neither was followed by an HDEX write. A third
-source-bound intervention kept the first natural return 34 and `PREVDEX=35`,
-but substituted caller-visible 33. Its nested random draw selected index 1;
-the following color event was `HDEX=33` at call 965 / writer ordinal 804,
-before the next PICK. This matches the opposite-side candidate prediction
-for that bounded case. The before control was a just-prior complete no-probe
-run retained by the v13 preflight; it and the new after control match six
-outputs, and all ten ordinary staged sources match. Observer AA0/image
-differences are hash-bound; image ID is unchanged. The writer tape is a
-50,000-call prefix of 100,029 calls but covers the selected unit slice. The
-result adds no JS contract, direct Lisp caller proof, general rule, independent
-seed, or parity. See the [v11 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
-[v12 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
-[v13 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json), and
-[screen-unit findings](introspection/screen-unit-context.md).
+intervention changed the first natural return 34 to caller-visible 33 while
+`PREVDEX=35`; the random index 1 was preserved and `HDEX=33` followed before
+the next PICK. These bounded cases still do not establish a general rule.
 
-Next, test the terminal third PICK in seed-1234 unit 6, whose captured
-320×480 natural return 28 equals `PREVDEX=28` and has no following HDEX write
-before unit end. Preserve its nested random draw, substitute caller-visible
-27, and check for `HDEX=27` before unit end. Require a fresh no-probe control
-whose AA0 header measures 320×480; do not force the display mode. This checks
-a second regime in the same seed, then add an independent-seed capture before
-promoting the candidate. Keep FREE-PATH's unresolved path generation explicit.
+The v14 seed-1234 unit-6 intervention was stopped at its required canvas gate:
+the fresh control measured 768×1080 rather than 320×480. No observer ran and
+no display setting changed. The fixed seed-5678 writer overlay now preserves
+allowlisted focused targets; the capture helper distinguishes a missing PICK
+installation record from a runtime unbound-function result. The corrected v6
+triplet completed with six matching outputs and seven ordinary Lisp sources.
+See [tooling workarounds](tooling-workarounds.md).
+
+The v15 source-bound treatment tested the shifted triple in seed-5678 unit 6 at
+768×1080. It targeted the second natural `PICK(33,34,35)`, returned 34 with
+`PREVDEX=34`, and nested `RAN(0,2)=1`. Replacing only the caller-visible value
+with 35 produced one `HDEX=35` before the next PICK. Fresh controls match all
+six compared outputs and seven ordinary Lisp sources match. The selected
+87-point path covers 90 writer calls and 291 output bytes. The 50,000-call tape
+is only a prefix of 100,821 total calls, but covers the selected interval. This
+is one controlled match for the shifted triple; it does not prove a direct
+caller, general rule, JS behavior contract, or parity. See the
+[v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json),
+[screen-unit findings](introspection/screen-unit-context.md), and
+[tooling workarounds](tooling-workarounds.md).
+
+Current target: test the complementary equality-side result in the same
+seed-5678 natural unit. Its terminal third `PICK(33,34,35)` returns 33 with
+`PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute only caller-visible 34,
+and verify no HDEX write through unit end. Use a new fresh 768×1080
+before/observer/after triplet; stop before the observer if the fresh control
+measures another canvas. Never force display mode or reuse earlier roots.
+Keep FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

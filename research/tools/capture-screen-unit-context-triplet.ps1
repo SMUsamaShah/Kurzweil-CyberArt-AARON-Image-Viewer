@@ -3,7 +3,7 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13')]
+    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13', 'v14', 'v15')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
@@ -24,8 +24,11 @@ $ErrorActionPreference = 'Stop'
 if (-not $PSBoundParameters.ContainsKey('RunPrefix')) {
     $RunPrefix = "screen-context-$ProbeVersion"
 }
-if ($ProbeVersion -eq 'v13' -and $Seed -ne '1234') {
-    throw 'Probe v13 is restricted to the seed-1234 unit-2 PICK evidence.'
+if ($ProbeVersion -in @('v13', 'v14') -and $Seed -ne '1234') {
+    throw "Probe $ProbeVersion is restricted to its seed-1234 PICK intervention evidence."
+}
+if ($ProbeVersion -eq 'v15' -and $Seed -ne '5678') {
+    throw 'Probe v15 is restricted to its seed-5678 shifted-triple intervention evidence.'
 }
 if ($RunPrefix -notmatch '^[a-z0-9][a-z0-9-]{0,24}$') {
     throw 'RunPrefix must contain 1 to 25 lowercase letters, digits, or hyphens.'
@@ -43,7 +46,7 @@ $externalRoot = Join-Path $repoRoot 'research\extracted\local-oracle\external-ru
 
 if ($ExistingBeforeRoot) {
     if ($ProbeVersion -ne 'v13' -or $Seed -ne '1234') {
-        throw 'ExistingBeforeRoot is restricted to the v13 seed-1234 PICK intervention.'
+        throw 'ExistingBeforeRoot is restricted to the v13 seed-1234 PICK intervention; v15 requires three fresh roots.'
     }
     $allowedBeforeParent = [IO.Path]::GetFullPath($externalRoot).TrimEnd('\') + '\'
     $resolvedBeforeRoot = [IO.Path]::GetFullPath($ExistingBeforeRoot)
@@ -241,38 +244,46 @@ if ($ProbeVersion -eq 'v13') {
     if ($beforeHeader -notmatch '^768\s+1080(?:\s|$)') {
         throw "Probe v13 requires a fresh 768x1080 control; measured '$beforeHeader'. The before root was retained and no observer was launched."
     }
+} elseif ($ProbeVersion -eq 'v14') {
+    # This treatment targets the terminal third PICK in the measured
+    # seed-1234 unit-6 320x480 case. Never change the live display mode.
+    $beforeAa0Path = Join-Path $runRoots.before 'capture\aa0'
+    $beforeHeader = (Get-Content -LiteralPath $beforeAa0Path -TotalCount 1).Trim()
+    if ($beforeHeader -notmatch '^320\s+480(?:\s|$)') {
+        throw "Probe v14 requires a fresh 320x480 control; measured '$beforeHeader'. The before root was retained and no observer was launched."
+    }
+} elseif ($ProbeVersion -eq 'v15') {
+    # This treatment targets the second PICK in the measured seed-5678
+    # unit-6 768x1080 case. Keep all three roots fresh; never force display mode.
+    $beforeAa0Path = Join-Path $runRoots.before 'capture\aa0'
+    $beforeHeader = (Get-Content -LiteralPath $beforeAa0Path -TotalCount 1).Trim()
+    if ($beforeHeader -notmatch '^768\s+1080(?:\s|$)') {
+        throw "Probe v15 requires a fresh 768x1080 control; measured '$beforeHeader'. The before root was retained and no observer was launched."
+    }
 }
 Invoke-TripletLeg -Role observer
 Invoke-TripletLeg -Role after
-
-$node = (Get-Command node -ErrorAction Stop).Source
-$observerOnlyOutputs = @('aaron-planning-call-trace.txt')
-if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13')) {
-    # PICK's requested return target causes the scene observer to append its
-    # bounded PICK-return snapshot. The verifier compares the controls and
-    # requires that exact snapshot to be the only observer scene-report delta.
-    $observerOnlyOutputs += 'aaron-scene-state-snapshot.txt'
-}
-$verifyArguments = @($runRoots.before, $runRoots.observer, $runRoots.after)
-if ($ProbeVersion -in @('v11', 'v12', 'v13')) {
-    # The intervention is allowed to change the generated AA0 and rendered
-    # preview outputs. The
-    # verifier still requires byte-identical uninstrumented controls and
-    # source-bound observer records; it does not call the treatment parity.
-    $verifyArguments += @('--allow-observer-difference=aa0',
-                          '--allow-observer-difference=image',
-                          '--allow-observer-difference=image-id')
-}
-$verifyArguments += $observerOnlyOutputs
-& $node (Join-Path $repoRoot 'research\tools\verify-local-aaron-triplet.mjs') @verifyArguments
-if ($LASTEXITCODE -ne 0) {
-    throw 'Source-bound triplet verification failed; all three roots were retained for inspection.'
-}
 
 $observerReportPath = Join-Path $runRoots.observer "capture\$probeOutput"
 $observerReport = (Get-Content -LiteralPath $observerReportPath -Raw).
     Replace("`r`n", "`n").Replace("`r", "`n")
 $terminalLine = (Get-Content -LiteralPath $observerReportPath -Tail 1)
+$pickReturnVersions = @('v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13', 'v14', 'v15')
+if ($ProbeVersion -in $pickReturnVersions -and
+    $observerReport -notmatch '(?m)^TARGET-INSTALLED name=PICK$') {
+    $tracePath = Join-Path $runRoots.observer 'capture\aaron-planning-call-trace.txt'
+    $targetStatus = @()
+    if (Test-Path -LiteralPath $tracePath -PathType Leaf) {
+        $targetStatus = @(Select-String -LiteralPath $tracePath -Pattern '^TARGET PICK (.*)$' |
+            ForEach-Object { $_.Matches[0].Groups[1].Value })
+    }
+    $detail = if ($targetStatus.Count -gt 0) {
+        'planning-call-trace reports: ' + ($targetStatus -join '; ')
+    } else {
+        'planning-call-trace has no PICK installation result; inspect its staged target list and loader order'
+    }
+    throw "Observer lacks TARGET-INSTALLED name=PICK; no PICK-call conclusion is supported. $detail. All roots were retained."
+}
 $requiredMarkers = @(
     "^BEGIN $probeTag$",
     '^INSTALL extra-targets=.* quiet-targets=.* ran=T hook=post-event$',
@@ -282,8 +293,8 @@ $requiredMarkers = @(
     '^UNIT-EXIT id=\d+ status=SUCCESS ',
     '^COMPLETE unit-id=\d+ prep-count=\d+ store-count=\d+ writer-first=\d+ writer-last=\d+ ran-count=\d+$'
 )
-if ($ProbeVersion -in @('v11', 'v12', 'v13')) {
-    $interventionOrdinal = @{ v11 = 1; v12 = 2; v13 = 1 }[$ProbeVersion]
+if ($ProbeVersion -in @('v11', 'v12', 'v13', 'v14', 'v15')) {
+    $interventionOrdinal = @{ v11 = 1; v12 = 2; v13 = 1; v14 = 3; v15 = 2 }[$ProbeVersion]
     $requiredMarkers += '^PICK-INTERVENTION-COMPLETE target-ordinal=' + $interventionOrdinal +
         ' selected-pick-count=\d+ substitution-count=1 target-call-id=\d+ native=-?\d+ caller=-?\d+ prevdex=-?\d+$'
 }
@@ -297,6 +308,27 @@ if ($terminalLine -cne $probeEnd) {
 }
 if ($observerReport -match '(?m)^(INCOMPLETE|OVERFLOW|OBSERVER-ERROR)\b') {
     throw 'Observer report contains an incomplete, overflow, or error record; all roots were retained.'
+}
+
+$node = (Get-Command node -ErrorAction Stop).Source
+$observerOnlyOutputs = @('aaron-planning-call-trace.txt')
+if ($ProbeVersion -in $pickReturnVersions) {
+    # PICK's requested return target causes the scene observer to append its
+    # bounded first-PICK snapshot; it is not the selected unit's PICK ordinal.
+    $observerOnlyOutputs += 'aaron-scene-state-snapshot.txt'
+}
+$verifyArguments = @($runRoots.before, $runRoots.observer, $runRoots.after)
+if ($ProbeVersion -in @('v11', 'v12', 'v13', 'v14', 'v15')) {
+    # The intervention is allowed to change the generated AA0 and rendered
+    # preview outputs; the controls and source-bound records remain strict.
+    $verifyArguments += @('--allow-observer-difference=aa0',
+                          '--allow-observer-difference=image',
+                          '--allow-observer-difference=image-id')
+}
+$verifyArguments += $observerOnlyOutputs
+& $node (Join-Path $repoRoot 'research\tools\verify-local-aaron-triplet.mjs') @verifyArguments
+if ($LASTEXITCODE -ne 0) {
+    throw 'Source-bound triplet verification failed; all three roots were retained for inspection.'
 }
 
 Write-Output "TRIPLET $tripletId complete"

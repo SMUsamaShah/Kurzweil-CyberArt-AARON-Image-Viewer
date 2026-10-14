@@ -10,7 +10,7 @@ and the running investigation history are linked below.
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
-| Natural screen-unit context samples | 6 units across seeds 1234 and 5678 | Their selected paths replay 837 writer bytes. Units 2, 3, 5, and 6 provide 12 natural `PICK`/`PREVDEX` observations from one seed-1234 painting. |
+| Natural screen-unit context samples | 7 units across seeds 1234 and 5678 | Their selected paths replay 1,121 writer bytes. Units 2, 3, 5, and 6 provide 12 same-painting `PICK`/`PREVDEX` observations for `(27,28,29)`; seed-5678 unit 6 adds three observations for `(33,34,35)`. |
 | Controlled PICK comparison | 16/16 three-integer cases match the JS adapter | Across 16 seeds, each return and next random value match selection by one `RAN(0,2)` draw. Other arities, types, and argument values remain uncharacterized. |
 
 **There is no defensible overall completion percentage yet.** Function names
@@ -27,62 +27,54 @@ generation, and verify complete paintings against fresh original runs.
 
 ## Current focus
 
-The latest screen-boundary work captured six complete source-bound natural
-`SCREEN-AND-STORE` units at 320×480. Their selected paths and color events
-reproduce 837 original writer bytes, but the JS routine still receives those
-events as inputs. A controlled probe tested `PICK(27,28,29)` across 16 seeds:
-all returns equal the argument at one `RAN(0,2)` index and the next random
-value matches the one-draw control; the JS adapter matches all 16 rows.
-Separately, 12 natural calls across units 2, 3, 5, and 6 fit one
-`PICK-return-differs-from-PREVDEX` candidate: eight differing returns are
-followed by matching HDEX writes and four equal returns have no following
-write. Those units are from the same seed-1234 painting. Two source-bound
-768×1080 interventions then changed the first and second selected unit-2 PICK
-results to equal `PREVDEX`, leaving each natural random draw intact. Neither
-was followed by an HDEX write, as the candidate predicts.
+Seven complete source-bound natural `SCREEN-AND-STORE` units now cover seeds
+1234 and 5678. The six 320×480 samples and one 768×1080 sample reproduce
+1,121 original writer bytes in their selected slices; the JS routine still
+receives path and color events as inputs. Seed-5678 unit 6 contributes three
+natural `PICK(33,34,35)` calls: returns `34, 34, 33`, nested `RAN(0,2)` indices
+`1, 1, 0`, and entry `PREVDEX` values `35, 34, 34`. The first and third
+different returns are followed by matching HDEX writes; the equal middle
+return has no HDEX write before the next PICK. This is a separate-seed,
+different-argument observation of the same candidate shape, but it is not a
+holdout for the existing `(27,28,29)` contract: the current 12-case analyzer
+is explicitly restricted to that list and seed 1234. The new sample suggests
+a shifted-triple extension to test; it remains one natural unit, not a general
+color rule or JS contract.
 
-A third controlled intervention at the same measured 768×1080 unit changed
-the first PICK's caller-visible value from natural 34 to 33 while
-`PREVDEX=35`; its nested `RAN(0,2)` returned index 1 and was preserved. The
-next captured color write was `HDEX=33` at call 965 / writer ordinal 804,
-before the next PICK. This matches the candidate's opposite-side prediction
-in this one seed and unit. The complete source-bound observer has six matching
-control outputs and ten matching ordinary staged sources. Its reused fresh
-no-probe before root was captured shortly before the observer and was checked
-against the fresh after root; AA0 and image differ intentionally, while image
-ID is unchanged. The writer tape is a 50,000-call prefix of 100,029 calls, but
-covers the selected 12-call unit slice. This does not establish an independent
-seed rule, direct caller, general color rule, JS contract, or parity. See the
-[screen-unit findings](research/introspection/screen-unit-context.md) and
-[portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
-[seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
-[seed 1234 unit 2](research/introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed 1234 unit 3](research/introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
-[seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
-[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
-[12-case natural candidate](research/introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
+The 12-case same-painting seed-1234 candidate and three seed-1234 unit-2
+interventions remain bounded evidence. The v11/v12 interventions changed two
+PICK results to equal `PREVDEX` with no following HDEX write. V13 changed a
+natural result 34 to 33 while `PREVDEX=35`; the preserved random index was 1
+and `HDEX=33` followed. None identifies the direct Lisp caller or establishes
+a general color rule. See the [screen-unit findings](research/introspection/screen-unit-context.md),
+[seed-5678 unit-6 evidence](research/introspection/evidence/screen-unit-context-seed5678-unit6-20261014-v2.json),
+[12-case candidate](research/introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 [controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json),
-[first return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json), and
-[second return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
-[opposite-side return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json).
+and [intervention evidence v11–v13](research/introspection/evidence/README.md).
 
-The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
-correctly failed the observer's nonempty completion gate. The separate 320×480
-v5 inventory shows ordinal 3 populated, and a separate v10 triplet now captures
-that unit with matching fresh controls, so the v4 result is run- and
-resolution-specific diagnostic evidence, not an ordinal rule. The v5 observer
-was configured for unit 5 and matched fresh controls. Unit 6 is also accepted
-with a complete typed observer and fresh controls; its extra `PICK` return
-target adds exactly one validated `FIRST-PICK-RETURN` snapshot to the observer
-scene report. Counts are now 31 routine names / 32 bounded contracts, 1/5
-milestones (20% by count), and zero whole-painting parity. There is still no
-defensible overall percentage. The next target is the terminal third `PICK`
-in the 320×480 seed-1234 unit-6 evidence: natural return 28 equals
-`PREVDEX=28`. Preserve its nested random draw, substitute caller-visible 27,
-and check for `HDEX=27` before unit end. Require a fresh control whose AA0
-header actually measures 320×480; never force the display mode. This is a
-second regime check in the same seed, not an independent-seed holdout; follow
-it with an independent seed and fresh controls.
+The v14 seed-1234 unit-6 intervention was correctly stopped after its fresh
+control measured 768×1080 rather than the required 320×480; no observer ran,
+and no display setting was changed. A seed-5678 v6 retry exposed a separate
+loader bug: the writer overlay reset the probe's optional target list, hiding
+PICK and BRUSH-STROKE installation. The overlay now preserves only explicit
+allowlisted lists, and the capture driver reports a missing PICK installation
+without inferring that the function was unbound or unused. The corrected fresh
+triplet passes with six matching outputs and seven matching ordinary scene
+sources. Tooling details are in the [workarounds](research/tooling-workarounds.md).
+
+There is still no defensible overall completion percentage. The seed-5678
+v15 treatment tested that shifted-triple extension in a fresh 768×1080 triplet.
+Its second `PICK(33,34,35)` naturally returned `34=PREVDEX`; the preserved
+nested `RAN(0,2)` index was 1. Substituting only the caller-visible result to
+35 was followed by one `HDEX=35` write before the next PICK. All six compared
+outputs match across fresh uninstrumented controls, and seven ordinary scene
+sources match. This supports one controlled candidate match, not a general
+rule or JavaScript contract. The next test targets the terminal third PICK in
+that natural unit: substitute caller-visible 34 for its natural 33 while
+`PREVDEX=34`, preserve nested random index 0, and check that no HDEX write
+follows before unit end. Require another fresh 768×1080 triplet; never force
+the display mode or reuse prior roots. See the [intervention evidence](research/introspection/evidence/README.md)
+and [screen-unit findings](research/introspection/screen-unit-context.md).
 
 ## Follow the evidence
 

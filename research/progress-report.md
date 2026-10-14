@@ -20,7 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 6 units across seeds 1234 and 5678 | Their selected paths reproduce 837 writer bytes. Units 2, 3, 5, and 6 supply 12 same-painting PICK/PREVDEX observations; the separate controlled PICK contract is counted below. |
+| Natural screen-unit context samples | 7 units across seeds 1234 and 5678 | Their selected paths reproduce 1,121 writer bytes. Units 2, 3, 5, and 6 supply 12 same-painting PICK/PREVDEX observations for `(27,28,29)`; seed-5678 unit 6 adds three calls for `(33,34,35)`. |
 | Controlled PICK comparison | 16 of 16 three-integer cases match the JS adapter | The original return and next random value match a single `RAN(0,2)` draw for these inputs and seeds. Other arities, types, and values remain uncharacterized. |
 
 The 31 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
@@ -473,7 +473,7 @@ An offline check across seed-1234 units 2, 3, 5, and 6 fits the candidate
 four equal returns have no following write. These are four units from one
 painting and one fixed argument list. The observation is not an independent
 seed, controlled downstream test, direct caller proof, recovered color rule,
-or JS contract. The natural-unit total is now six units and 837 writer bytes;
+or JS contract. At this historical checkpoint, the natural-unit total was six units and 837 writer bytes;
 routine/contract counts remain 31/32, milestone progress 1/5 (20% by count),
 and whole-painting parity 0.
 
@@ -543,13 +543,36 @@ remain 1/5 (20% by count), and whole-painting parity remains zero. See the
 [screen-unit findings](introspection/screen-unit-context.md), and
 [evidence index](introspection/evidence/README.md).
 
-Next, test the terminal third `PICK` in seed-1234 unit 6 at 320×480: its
-natural result 28 equals `PREVDEX=28` with no following HDEX write before
-unit end. Preserve the random draw, substitute caller-visible 27, and check
-for `HDEX=27`. Require a fresh no-probe control whose AA0 header actually
-measures 320×480; do not force the display mode. This adds a second regime in
-the same seed, not an independent-seed holdout. Add an independent seed before
-promoting the candidate.
+## 2026-10-14 independent-seed shifted-triple observation
+
+A fresh seed-5678 v6 triplet selected post-`RPARSE` unit 6 at measured
+768×1080. It passed with six matching control outputs, seven matching
+ordinary staged sources, and complete source-bound `INSTALL`, `READY`,
+`COMPLETE`, and `END` evidence. The selected 87-point path replays 284 bytes;
+all prior accepted samples plus this one total 1,121 bytes across seven units.
+
+The unit contains three natural `PICK(33,34,35)` calls: returns 34, 34, 33;
+nested `RAN(0,2)` indices 1, 1, 0; and `PREVDEX` at those random entries
+35, 34, 34. `HDEX=34` follows the first differing result at writer ordinal
+3035; the equal second result has no HDEX before the next PICK; `HDEX=33`
+follows the third differing result at ordinal 3097. The exact selected writer
+interval lies within the observer tape's first 50,000 of 100,820 calls. This
+supports the same observational relationship at a different seed and shifted
+argument list, but it is not a holdout for the existing analyzer, which is
+restricted to `(27,28,29)` and seed 1234. Treat it as an extension hypothesis.
+The evidence file is
+[`screen-unit-context-seed5678-unit6-20261014-v2.json`](introspection/evidence/screen-unit-context-seed5678-unit6-20261014-v2.json).
+
+The seed-1234 v14 treatment was stopped before the observer because its fresh
+control measured 768×1080 instead of the required 320×480. No setting changed.
+The v15 seed-5678 unit-6 treatment then preserved the natural second-PICK
+random draw and substituted caller-visible 35 for 34=`PREVDEX`. Exactly one
+`HDEX=35` write followed before the next PICK in a complete source-bound fresh
+triplet. This is a single controlled candidate match, not a general rule or
+parity. Next, target the terminal third PICK in the same natural unit and
+substitute 34=`PREVDEX` for natural return 33; check that no HDEX write follows
+before unit end. Require another fresh 768×1080 triplet and do not force the
+display mode or reuse old roots. See the [v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json).
 
 The current generator is therefore a useful partial implementation and
 research harness, **not yet ready as a general reproduction of AARON**. A

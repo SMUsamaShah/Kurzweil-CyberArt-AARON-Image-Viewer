@@ -134,6 +134,25 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
   ]);
   const [before, observer, after] = runs;
 
+  requireValue(runs.every((run) => typeof run.summary.runId === 'string' &&
+    run.summary.runId.length > 0), 'a run summary has no run ID');
+  requireValue(new Set(runs.map((run) => run.summary.runId)).size === 3,
+    'before, observer, and after must have distinct run IDs');
+  requireValue(new Set(runs.map((run) => run.runPath)).size === 3,
+    'before, observer, and after must use distinct output roots');
+  requireValue(runs.every((run) => run.summary.mode === before.summary.mode),
+    'before, observer, and after modes differ');
+  const runTimes = runs.map((run) => ({
+    start: Date.parse(run.summary.startedAt),
+    finish: Date.parse(run.summary.finishedAt),
+  }));
+  requireValue(runTimes.every(({ start, finish }) => Number.isFinite(start) &&
+    Number.isFinite(finish) && start <= finish),
+  'a run summary has invalid start/finish timestamps');
+  requireValue(runTimes[0].finish <= runTimes[1].start &&
+    runTimes[1].finish <= runTimes[2].start,
+  'before, observer, and after are not in serialized chronological order');
+
   requireValue(before.summary.preSceneProbeSha256 == null &&
     after.summary.preSceneProbeSha256 == null,
   'bracketing controls must be uninstrumented');
@@ -157,13 +176,21 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     requireSafeName(name, 'probe output');
     await access(path.join(observer.capturePath, name));
   }
-  const report = (await readFile(path.join(observer.capturePath, requiredReport), 'utf8'))
+  const requiredReportPath = path.join(observer.capturePath, requiredReport);
+  const reportHash = await fileHash(requiredReportPath);
+  if (observer.summary.requiredProbeOutputSha256 != null) {
+    requireValue(/^[a-f0-9]{64}$/.test(observer.summary.requiredProbeOutputSha256),
+      'observer required-report hash is malformed');
+    requireValue(reportHash === observer.summary.requiredProbeOutputSha256,
+      'required probe report hash does not match the runner summary');
+  }
+  const report = (await readFile(requiredReportPath, 'utf8'))
     .replace(/\r\n?/g, '\n')
     .trimEnd();
   requireValue(report.endsWith(endMarker),
     `required report does not end with ${JSON.stringify(endMarker)}`);
   if (intentionalDifferenceNames.size > 0) {
-    requireValue(/^aaron-screen-unit-context-v(?:11|12|13)\.txt$/.test(requiredReport),
+    requireValue(/^aaron-screen-unit-context-v(?:11|12|13|14|15)\.txt$/.test(requiredReport),
       'intentional image divergence is reserved for the source-bound PICK intervention probes');
     for (const marker of ['PICK-SUBSTITUTION ', 'PICK-CALLER-RETURN ',
       'PICK-INTERVENTION-COMPLETE ']) {
@@ -228,7 +255,7 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     probeSourceHash,
     requiredReport,
     endMarker,
-    reportHash: await fileHash(path.join(observer.capturePath, requiredReport)),
+    reportHash,
     artifactHashes: Object.fromEntries(artifactHashes),
     observerOnlyOutputHashes,
     intentionalDifferenceOutputHashes,
