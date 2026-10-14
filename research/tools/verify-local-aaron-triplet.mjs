@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 // Read-only gate for a fresh uninstrumented / observer / uninstrumented
-// writer-stream-seed-1234 triplet. The observer's own probe report and loader
-// are intentionally excluded; scene outputs and ordinary staged Lisp sources
-// must be byte-identical across all three runs.
+// writer-stream-seed-1234 triplet. Explicit observer-only outputs are compared
+// between the fresh controls and retained from the observer. The optional
+// PICK-return scene report is accepted only when its sole delta is the one
+// expected FIRST-PICK-RETURN snapshot block.
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { access, readdir, readFile } from 'node:fs/promises';
@@ -73,6 +74,30 @@ async function compareNamedFile(runs, name, category) {
   return expected;
 }
 
+async function requireOnlyPickReturnSnapshot(beforePath, observerPath) {
+  const normalizeLines = (text) => text.replace(/\r\n?/g, '\n').trimEnd().split('\n');
+  const beforeLines = normalizeLines(await readFile(beforePath, 'utf8'));
+  const observerLines = normalizeLines(await readFile(observerPath, 'utf8'));
+  const boundary = 'BOUNDARY label=FIRST-PICK-RETURN';
+  const begin = 'SNAPSHOT-BEGIN label=FIRST-PICK-RETURN';
+  const boundaryIndexes = observerLines.flatMap((line, index) => line === boundary ? [index] : []);
+  const beginIndexes = observerLines.flatMap((line, index) => line === begin ? [index] : []);
+  requireValue(boundaryIndexes.length === 1 && beginIndexes.length === 1,
+    'observer-only scene report must contain one complete FIRST-PICK-RETURN snapshot');
+  const boundaryIndex = boundaryIndexes[0];
+  const beginIndex = beginIndexes[0];
+  const endIndex = observerLines.findIndex((line, index) => index > beginIndex &&
+    /^SNAPSHOT-END label=FIRST-PICK-RETURN rows=\d+$/.test(line));
+  requireValue(boundaryIndex + 1 === beginIndex && endIndex > beginIndex,
+    'FIRST-PICK-RETURN scene snapshot is malformed or truncated');
+  const observerWithoutPickSnapshot = [
+    ...observerLines.slice(0, boundaryIndex),
+    ...observerLines.slice(endIndex + 1),
+  ];
+  requireValue(JSON.stringify(observerWithoutPickSnapshot) === JSON.stringify(beforeLines),
+    'observer scene report differs beyond its single FIRST-PICK-RETURN snapshot block');
+}
+
 async function stagedSources(run) {
   const names = (await readdir(run.capturePath, { withFileTypes: true }))
     .filter((entry) => entry.isFile() && entry.name.endsWith('.cl') &&
@@ -139,6 +164,12 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     if (observerOnlyOutputNames.has(name)) {
       const controlHash = await compareNamedFile([before, after], name, 'bracketing control output');
       const observerHash = await fileHash(path.join(observer.capturePath, name));
+      if (name === 'aaron-scene-state-snapshot.txt') {
+        await requireOnlyPickReturnSnapshot(
+          path.join(before.capturePath, name),
+          path.join(observer.capturePath, name),
+        );
+      }
       artifactHashes.push([name, controlHash]);
       observerOnlyOutputHashes[name] = observerHash;
     } else {
@@ -148,8 +179,11 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
   for (const run of runs) {
     requireValue(run.summary.aa0Sha256 === artifactHashes.find(([name]) => name === 'aa0')[1],
       `${run.label} AA0 summary hash does not match its captured bytes`);
-    requireValue(run.summary.sceneReportSha256 === artifactHashes.find(([name]) =>
-      name === 'aaron-scene-state-snapshot.txt')[1],
+    const sceneReportHash = run.label === 'observer' &&
+      observerOnlyOutputHashes['aaron-scene-state-snapshot.txt']
+      ? observerOnlyOutputHashes['aaron-scene-state-snapshot.txt']
+      : artifactHashes.find(([name]) => name === 'aaron-scene-state-snapshot.txt')[1];
+    requireValue(run.summary.sceneReportSha256 === sceneReportHash,
     `${run.label} scene summary hash does not match its captured report`);
   }
   const sourceHashes = [];
@@ -188,7 +222,13 @@ async function main() {
   console.log(`PASS: three complete ${before.summary.mode} runs`);
   console.log(`PASS: observer source-bound by ${verified.probeSourceHash}`);
   console.log(`PASS: required report ends with ${JSON.stringify(verified.endMarker)}`);
-  console.log(`PASS: ${Object.keys(verified.artifactHashes).length} drawing/scene outputs match`);
+  console.log(`PASS: ${Object.keys(verified.artifactHashes).length} outputs agree across fresh bracketing controls`);
+  if (Object.keys(verified.observerOnlyOutputHashes).length) {
+    console.log(`PASS: ${Object.keys(verified.observerOnlyOutputHashes).length} observer-only outputs archived and hash-bound`);
+    for (const [name, hash] of Object.entries(verified.observerOnlyOutputHashes)) {
+      console.log(`  observer-only output ${name} ${hash}`);
+    }
+  }
   console.log(`PASS: ${Object.keys(verified.sourceHashes).length} ordinary staged Lisp sources match`);
   for (const [name, hash] of Object.entries(verified.artifactHashes)) console.log(`  output ${name} ${hash}`);
   for (const [name, hash] of Object.entries(verified.sourceHashes)) console.log(`  source ${name} ${hash}`);

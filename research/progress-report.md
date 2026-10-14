@@ -20,7 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 4 units across seeds 1234 and 5678 | Their selected paths reproduce 566 writer bytes total. Typed snapshots repeat two local `PREVDEX` neighbor transitions in seed-1234 units 2 and 5, while unpaired `RAN(0,2)` returns leave the branch condition unresolved; no JS contract is added. The next candidate is a populated sixth unit, with a new `PICK` boundary capture planned. |
+| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths reproduce 705 writer bytes. Unit 6 records three `PICK(27,28,29)` results (29, 28, 28) alongside observed `RAN(0,2)` values (2, 1, 1); this is one bounded sample, not a general contract. |
 
 The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -387,11 +387,45 @@ observer was configured for unit 5 and reproduced the same local neighbor
 transitions as unit 2, but each unit also contains an unpaired random result.
 This remains a bounded observation; it does not identify the branch condition.
 
-The next investigation is seed-1234 unit 6 at 320×480, with a `PICK` trace
-added to the typed `RAN`, `AARGB`, and `PREP-LINE` observer. The retained v5
-inventory identifies two color changes in that unit, but fresh controls and a
-completed observer are still required. The existing screen-unit fixtures
-establish point-to-writer bytes only; they do not establish upstream decisions.
+The unit-6 investigation is now complete in a source-bound triplet. Its 39
+points and 41 writer calls reproduce 139 bytes; three `PICK(27,28,29)` calls
+return 29, 28, and 28 while their nested observed `RAN(0,2)` calls return 2,
+1, and 1. The first two values match the unit's HDEX writes; the third has no
+following color write. The scene observer adds one expected
+`FIRST-PICK-RETURN` snapshot; the gate checks fresh controls and requires this
+to be the only scene-report delta. The JS screen writer still receives the
+captured path and color inputs, so this adds no JS contract. See the new
+[unit-6 findings](introspection/screen-unit-context.md) and
+[portable evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
+
+The next target is a bounded `PICK` probe across argument lengths and values,
+with random-state and return-shape capture. Keep its current three natural
+calls as one observation until the independent cases are measured.
+
+## 2026-10-14 sixth natural SCREEN-AND-STORE unit
+
+The fifth accepted context triplet selected post-`RPARSE` unit 6 in the
+seed-1234 320×480 scene. Fresh uninstrumented controls bracket the observer.
+All six drawing/scene outputs match across controls; the ten ordinary staged
+Lisp sources match; AA0 is `0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1`.
+The observer source hash is
+`e132b660227c2a400db5e4d75e4ed98d80eacf16410cea0dcd8f9d8e494d9f96`. The
+PICK return target adds a single complete `FIRST-PICK-RETURN` block to its
+scene snapshot; the verifier removes exactly that block and requires the
+remaining observer report to equal the control report. The observer-specific
+scene and trace hashes remain recorded separately.
+
+The selected path contains 39 points, 41 writer calls, and a 139-byte slice
+with SHA-256
+`577de280b5e8c94de4d617cc71ede92ab3b9a99ae59f6ff21987c12739336466`.
+`PICK(27,28,29)` returns 29, 28, and 28. Each observed `RAN(0,2)` child of
+the nearest traced PICK frame returns 2, 1, and 1. The first two PICK returns
+match HDEX writes before points 0 and 14; the third is not followed by a
+color write. This does not prove a direct source-level call edge through
+unwrapped helpers, a general PICK mapping, or a color-selection rule. The
+bounded evidence adds no JS contract. See the [findings](introspection/screen-unit-context.md),
+[portable evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
+and [observer](introspection/screen-unit-context-v6.cl).
 
 ## What remains before a general AARON-equivalent generator
 

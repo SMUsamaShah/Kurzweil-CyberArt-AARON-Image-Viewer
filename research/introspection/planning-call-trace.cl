@@ -93,8 +93,9 @@
               "RIGHTMAX" "TOPMAX"))
       ;; A focused companion may request the writer boundaries, or those
       ;; boundaries plus five colour/brush candidates, or the writer
-      ;; boundaries with BRUSH-STROKE for one screen-unit parent chain. The
-      ;; default trace remains unchanged for existing fixtures.
+      ;; boundaries with BRUSH-STROKE for one screen-unit parent chain. A
+      ;; focused colour probe may also add PICK to that target set. The default
+      ;; trace remains unchanged for existing fixtures.
       (when (and (boundp 'aaron-planning-extra-targets)
                  (symbol-value 'aaron-planning-extra-targets))
         (unless (or
@@ -102,6 +103,8 @@
                         '("PREP-LINE" "STORE-IN-FILE"))
                  (equal (symbol-value 'aaron-planning-extra-targets)
                         '("PREP-LINE" "STORE-IN-FILE" "BRUSH-STROKE"))
+                 (equal (symbol-value 'aaron-planning-extra-targets)
+                        '("PREP-LINE" "STORE-IN-FILE" "BRUSH-STROKE" "PICK"))
                  (equal (symbol-value 'aaron-planning-extra-targets)
                         '("PREP-LINE" "STORE-IN-FILE" "MAKE-DYETAB"
                           "COLORING" "ASSIGN-COLORS" "SELECT-BRUSH"
@@ -115,14 +118,18 @@
                  (not (or (equal (symbol-value 'aaron-planning-return-targets)
                                  '("SCRIPT"))
                           (equal (symbol-value 'aaron-planning-return-targets)
-                                 '("SELECT-BRUSH")))))
+                                 '("SELECT-BRUSH"))
+                         (equal (symbol-value 'aaron-planning-return-targets)
+                                 '("PICK")))))
         (error "Unsupported planning trace return targets"))
       (when (and (boundp 'aaron-planning-quiet-targets)
                  (symbol-value 'aaron-planning-quiet-targets))
         (unless (or (equal (symbol-value 'aaron-planning-quiet-targets)
                            '("SCRIPT"))
                     (equal (symbol-value 'aaron-planning-quiet-targets)
-                           '("BRUSH-STROKE")))
+                           '("BRUSH-STROKE"))
+                    (equal (symbol-value 'aaron-planning-quiet-targets)
+                           '("BRUSH-STROKE" "PICK")))
           (error "Unsupported planning trace quiet targets"))
         (setf quiet-targets (symbol-value 'aaron-planning-quiet-targets)))
       ;; A narrowly scoped native-entry probe can preserve one original

@@ -31,30 +31,29 @@ parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-2026101
 [FREE-PATH findings](introspection/free-path-native.md), and the active
 [execution plan](execution-plan.md).
 
-Four complete source-bound screen-unit context triplets now cover seed 1234
-units 1, 2, and 5 plus seed 5678 unit 1 at 320×480. Their selected paths and
-color events replay 566 original writer bytes exactly. Typed snapshots in
-seed-1234 units 2 and 5 repeat paired local transitions: `RAN(0,2)→0` with
-`PREVDEX=28` precedes `HDEX=27`, and `RAN(0,2)→1` with `PREVDEX=27` precedes
-`HDEX=28`. Unit 2 also has an unpaired return of 1 and unit 5 an unpaired
-return of 0, so the random result alone does not determine a color transition.
-The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
-remains diagnostic; the observer correctly rejected it. In a separate 320×480
-v5 run, ordinal 3 is populated, so the v4 outcome is run- and
-resolution-specific, not an ordinal rule. Nearest observed ancestry is limited
-to installed trace targets and proves no direct caller. No new JS contract or
-milestone completion is claimed. See
+Five complete source-bound screen-unit context triplets now cover seed 1234
+units 1, 2, 5, and 6 plus seed 5678 unit 1 at 320×480. Their selected paths
+and color events replay 705 original writer bytes exactly. Typed snapshots in
+units 2 and 5 repeat paired local `PREVDEX` neighbor transitions, but unpaired
+RAN returns leave the color branch unresolved. Unit 6 captures three natural
+`PICK(27,28,29)` calls returning 29, 28, and 28, each with a nearest-traced
+`RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns match HDEX
+writes; the third has no later color write. Unwrapped helpers could intervene,
+so this is not proof of direct source-level call edges or a general PICK/color
+contract. The PICK return target adds one complete `FIRST-PICK-RETURN` block
+to the observer scene report; the strict verifier checks that the block is the
+only delta against matching fresh controls. No JS contract or milestone
+completion is claimed. See
 [screen-unit findings](introspection/screen-unit-context.md),
 [seed-1234 unit-1 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit-1 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json).
+[seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json), and
+[seed-1234 unit-6 evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
 
-The next target is a fresh seed-1234 triplet for populated screen unit 6, with
-`PICK` added to the traced target set because the `SCREEN-AND-STORE` constant
-inventory lists it. The retained v5 inventory shows 39 points and two color
-writes before points 0 and 14, but this is only candidate evidence; require the
-unit-6 observer to complete and match fresh controls before accepting it. Keep
+The next target is a controlled `PICK` contract probe across argument lengths
+and values, recording random-state consumption and return shape with fresh
+controls. Do not generalize from the three natural unit-6 calls. Keep
 FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the

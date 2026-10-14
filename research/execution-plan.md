@@ -7,7 +7,7 @@ Before local REA, oracle, or Git operations, use the central
 [tooling quick fixes](tooling-workarounds.md). The reusable REA wrapper sets
 the configured Ghidra/Java environment and retains query diagnostics.
 
-Prepared 2026-09-27; updated 2026-10-13. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-14. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
@@ -660,24 +660,25 @@ nine isolated cases, JS matches four and differs by one step in five. See the
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-Four complete natural screen-unit context triplets now cover seed-1234 units
-1, 2, and 5, plus seed-5678 unit 1 at 320×480. Their captured points and
-`AARGB` decisions replay 566 original writer bytes. Typed snapshots in
-seed-1234 units 2 and 5 repeat paired local transitions: `RAN(0,2)→0` with
-`PREVDEX=28` precedes `HDEX=27`, and `RAN(0,2)→1` with `PREVDEX=27` precedes
-`HDEX=28`. Unit 2 has an unpaired return of 1 and unit 5 an unpaired return of
-0. The random value alone is not a sufficient condition; no upstream color
-contract or milestone completion is claimed. The [screen-unit findings]
-(introspection/screen-unit-context.md) retain the source-bound triplets and
-limits.
+Five complete natural screen-unit context triplets now cover seed-1234 units
+1, 2, 5, and 6, plus seed-5678 unit 1 at 320×480. Their captured points and
+`AARGB` decisions replay 705 original writer bytes. Units 2 and 5 retain paired
+local `PREVDEX` transitions and unpaired random returns. Unit 6 captures three
+natural `PICK(27,28,29)` calls returning 29, 28, and 28; each has a nearest-
+traced `RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns
+match HDEX writes and the third has no later color write. The verifier requires
+the scene report's sole observer delta to be its complete `FIRST-PICK-RETURN`
+snapshot and still checks fresh controls and source hashes. Unwrapped helpers
+could intervene; no direct source-level call edge, general PICK/color contract,
+JS contract, or milestone completion is claimed. See the [screen-unit
+findings](introspection/screen-unit-context.md) and [portable unit-6 evidence]
+(introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
+The next target is a controlled PICK probe across argument lengths/values,
+random state, and return shape.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate
 320×480 v5 run, ordinal 3 is populated, so the v4 result is diagnostic rather
 than an ordinal rule. The v5 observer was configured for unit 5 and matched
-fresh controls. Its retained inventory identifies unit 6 as populated (39
-points, with color writes before points 0 and 14). The next capture will select
-unit 6 and observe `PICK`, a listed `SCREEN-AND-STORE` dependency, while
-retaining typed event snapshots and fresh source-bound controls. This candidate
-still requires its own triplet. Keep FREE-PATH and point-generation inputs
-explicit until independently established.
+fresh controls; the completed v6 triplet now measures unit 6. Keep FREE-PATH
+and point-generation inputs explicit until independently established.

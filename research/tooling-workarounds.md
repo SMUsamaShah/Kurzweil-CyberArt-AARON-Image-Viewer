@@ -468,6 +468,52 @@ position, then still checks each unit's writer ordinals, points, and output
 bytes. Other writer consumers remain strict by default. This permits evidence
 for covered early units while leaving the later truncated portion unknown.
 
+### Adding a screen-unit trace target
+
+`planning-call-trace.cl` intentionally allowlists exact extra-target and quiet-
+target combinations. When a probe adds a function, update both lists in the
+trace loader and validate that setup before launching the three-run capture.
+Otherwise the loader raises `Unsupported planning trace extra targets` or
+`Unsupported planning trace quiet targets` before installing `MAIN` or writing
+`TRACE-READY`. The Lisp stdout trace can stop at its `STAGE-1` checkpoint; the
+screen observer then has only `BEGIN`/`CAPS`/`INSTALL`, no `READY`, `COMPLETE`,
+or `END`, and the run must be rejected. This is a probe-configuration failure,
+not a `C:\temp` permission failure.
+
+The first unit-6 `PICK` attempt was preserved at
+`research/extracted/local-oracle/external-runs/screen-context-v6-20261014-012254-aad34f18-observer`.
+It requested `("PREP-LINE" "STORE-IN-FILE" "BRUSH-STROKE" "PICK")` and
+quieted `("BRUSH-STROKE" "PICK")`; both combinations were missing from the
+loader allowlist. They are now explicit supported combinations in
+`introspection/planning-call-trace.cl`. Keep the failed root for diagnosis,
+then use a fresh run prefix after changing the probe or loader.
+
+The next v6b triplet completed and its before/after drawings, scenes, ordinary
+Lisp sources, and observer source hash all matched the required controls, but
+its observer had only enabled `PICK` entry tracing. The trace loader emits
+`CALL-RETURN` only for the separate `aaron-planning-return-targets` list, so
+the portable evidence parser correctly rejected that tape instead of
+substituting `CALL-END` for a return value. V6 now requests exactly
+`("PICK")` in that return-target list, the loader explicitly allowlists it,
+and observer `READY` requires and prints the configuration. Keep the v6b
+root diagnostic-only and use a fresh triplet to obtain paired PICK entries
+and returns.
+
+The first return-enabled v6c capture was otherwise complete and its six image,
+AA0, ID, trace, random-seed, and scene artifacts had matching before/after
+controls. Its scene observer report correctly added a single
+`FIRST-PICK-RETURN` state snapshot, so the old triplet gate rejected the
+observer report as if it were drawing output. Keep this report difference
+narrow: the v6 helper now treats the planning trace and scene report as
+observer-only outputs, still compares both between fresh uninstrumented
+controls, checks each run's own summary hashes, and accepts the observer scene
+report only when removing exactly the one complete `FIRST-PICK-RETURN` block
+restores byte-for-byte equality with the control report. Do not blanket-ignore
+scene reports or weaken AA0/image/ID/random/source comparisons. The retained
+v6c root can be revalidated offline with this stricter gate; a new original run
+is unnecessary if it passes and the typed evidence parser accepts the paired
+PICK calls.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

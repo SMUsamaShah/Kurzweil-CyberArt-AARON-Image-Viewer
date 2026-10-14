@@ -10,6 +10,7 @@ and the running investigation history are linked below.
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
+| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths replay 705 writer bytes. Unit 6 records three `PICK(27,28,29)` results (29, 28, 28) alongside observed `RAN(0,2)` values (2, 1, 1); this is one bounded sample, not a general contract. |
 
 **There is no defensible overall completion percentage yet.** Function names
 are not an implementation denominator, and the project has no weighted
@@ -25,32 +26,35 @@ generation, and verify complete paintings against fresh original runs.
 
 ## Current focus
 
-The latest screen-boundary work captured four complete source-bound natural
+The latest screen-boundary work captured five complete source-bound natural
 `SCREEN-AND-STORE` units at 320×480. Their selected paths and color events
-reproduce 566 original writer bytes, but the JS routine still receives those
-events as inputs. Typed snapshots for seed-1234 units 2 and 5 repeat two local
-neighbor transitions: `RAN(0,2)→0` with `PREVDEX=28` before `HDEX=27`, then
-`RAN(0,2)→1` with `PREVDEX=27` before `HDEX=28`. Unit 2 also has an unpaired
-return of 1 and unit 5 an unpaired return of 0, so this remains a bounded
-correlation, not a general rule. The observed parent labels include
-`BRUSH-STROKE` and `PAINT-FILL`; they do not prove direct callers. See the
+reproduce 705 original writer bytes, but the JS routine still receives those
+events as inputs. The seed-1234 sixth unit captures three `PICK(27,28,29)`
+returns (29, 28, 28) alongside nested observed `RAN(0,2)` values (2, 1, 1);
+the first two returns match HDEX writes and the third has no following color
+write. This does not establish a general `PICK` or color rule. Typed snapshots
+for units 2 and 5 retain paired `PREVDEX` neighbor transitions and unpaired
+random returns, so the branch condition remains unresolved. Observed parent
+labels include `BRUSH-STROKE` and `PAINT-FILL`; they do not prove direct callers. See the
 [screen-unit findings](research/introspection/screen-unit-context.md) and
 [portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed 1234 unit 2](research/introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json).
+[seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json), and
+[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
 
 The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
 correctly failed the observer's nonempty completion gate. The separate 320×480
 v5 inventory shows ordinal 3 populated, so the v4 result is run- and
 resolution-specific diagnostic evidence, not an ordinal rule. The v5 observer
-was configured for unit 5 and matched fresh controls. Metrics remain 30 routine names / 31 bounded contracts, 1/5
+was configured for unit 5 and matched fresh controls. Unit 6 is now accepted
+with a complete typed observer and fresh controls; its extra `PICK` return
+target adds exactly one validated `FIRST-PICK-RETURN` snapshot to the observer
+scene report. Metrics remain 30 routine names / 31 bounded contracts, 1/5
 milestones (20% by count), and zero whole-painting parity. There is still no
-defensible overall percentage. The complete v5 inventory also contains a
-populated sixth unit (39 points, with color writes before points 0 and 14).
-The next controlled capture will select that unit and trace `PICK`, which is a
-listed `SCREEN-AND-STORE` dependency; this candidate is not yet an accepted
-typed-context sample.
+defensible overall percentage. The next target is a controlled `PICK` contract
+probe across argument lengths and values, without generalizing from its three
+natural calls.
 
 ## Follow the evidence
 

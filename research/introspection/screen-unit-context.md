@@ -1,11 +1,11 @@
 # Natural screen-unit context observations
 
-Four complete source-bound before/observer/after triplets captured natural
+Five complete source-bound before/observer/after triplets captured natural
 post-`RPARSE` `SCREEN-AND-STORE` units at 320×480: the first unit for seeds
-1234 and 5678, and the second and fifth units for seed 1234. The observer
+1234 and 5678, and the second, fifth, and sixth units for seed 1234. The observer
 records nearest traced ancestry, `RAN` calls, `PREP-LINE`, `AARGB` writer
 events, and entry/exit context. Each selected path and its color events
-reproduce the exact original writer byte slice.
+reproduce the exact original writer byte slice, totaling 705 bytes.
 
 | Seed | Unit / triplet | Nearest observed parent | Context | Path / output | Colors | RNG calls |
 |---|---|---|---|---:|---|---:|
@@ -13,11 +13,27 @@ reproduce the exact original writer byte slice.
 | 5678 | 1 / `screen-ctx2-5678-20261014-002603-6d9f5e65` | `PAINT-FILL` | `RPLANE=132`, `SDEX=0`, `PREVDEX=-1→34` | 19 points, 21 writer calls, 80 bytes | `(before 0, HDEX 35)`, `(before 6, HDEX 34)` | 7 |
 | 1234 | 2 / `screen-ctx3-unit2-20261014-004007-0ba991eb` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=28→28` | 27 points, 29 writer calls, 103 bytes | `(before 10, HDEX 27)`, `(before 15, HDEX 28)` | 7 |
 | 1234 | 5 / `screen-context-v5-20261014-010625-d7df5d93` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→27` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 28)`, `(before 15, HDEX 27)` | 7 |
+| 1234 | 6 / `screen-context-v6c-20261014-013426-fe0e74a8` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→28` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 29)`, `(before 14, HDEX 28)` | 7 |
 
 All contexts report `PAINT-BRUSH`, boundary value 3, and 320×480 fill/patch
 maps. The reports capture map dimensions and selected bindings, not complete
 map contents or per-event map deltas. `PREP-LINE` occurs twice in each selected
 unit, once immediately after each recorded `AARGB`/`HDEX` write.
+
+## Unit-6 `PICK` observations
+
+The typed v6 observer captured three natural calls to `PICK` with arguments
+`(27 28 29)`. Their returns were 29, 28, and 28. Each call contains an
+observed `RAN(0,2)` call returning 2, 1, and 1; the RAN records' parent IDs
+match the corresponding traced `PICK` IDs. These are nearest traced-target
+relationships, so unwrapped helpers could still intervene.
+
+The first two returned values match the ensuing color writes: 29 is written
+before point 0, then 28 before point 14. The third return is also 28, but no
+later `AARGB` HDEX write occurs before this unit returns. This one natural
+list and three draws do not establish `PICK`'s general contract or a general
+color-selection rule. The complete typed calls, returns, state summaries, and
+source/control hashes are retained in the [unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json).
 
 ## Observed event order
 
@@ -77,6 +93,12 @@ identify the branch condition or establish a general formula.
 - Seed 1234 unit 5 matched all six drawing/scene outputs and ten ordinary
   staged scene sources. Its 39-point writer slice has SHA-256
   `1761eebe7fed3dc082f3e36c395473d2d88eef80c416ecbc2a6bae5c903a7b4f`.
+- Seed 1234 unit 6 matched all six outputs across fresh uninstrumented
+  controls and ten ordinary staged Lisp sources. The `PICK` return target
+  adds one `FIRST-PICK-RETURN` snapshot to the observer's scene report; the
+  validator separately hashes it and requires that removing exactly this
+  block restores control-report equality. The selected writer slice has SHA-256
+  `577de280b5e8c94de4d617cc71ede92ab3b9a99ae59f6ff21987c12739336466`.
 - The ancestry reports are limited to installed trace targets. `BRUSH-STROKE`
   was observed for seed 1234; the v2 seed-5678 probe records it as optional and
   did not install it. The observed parent labels do not prove direct Lisp
@@ -84,7 +106,8 @@ identify the branch condition or establish a general formula.
 - The v1/v2 reports did not encode each `RAN` argument's Lisp numeric type or
   snapshot context at each event. The v3 seed-1234 unit-2 and v5 unit-5 probes
   add typed arguments/results and snapshots `COLORDEX`, `PREVDEX`, `HDEX`,
-  `CDEX`, `SDEX`, and `RPLANE`; the color-selection rule remains unresolved.
+  `CDEX`, `SDEX`, and `RPLANE`; v6 additionally captures `PICK` arguments and
+  return values. The color-selection rule remains unresolved.
 - REA 6.4.0/Ghidra 12.1.4 confirms the static payload's central dispatch at
   `0x1fe24d12` is a computed `CALL EDI` with no resolved targets. This does not
   identify its runtime callee or a Lisp caller; see the
@@ -97,10 +120,12 @@ See the [seed-1234 unit-1 evidence](evidence/screen-unit-context-seed1234-202610
 [seed-5678 unit-1 evidence](evidence/screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit-2 evidence](evidence/screen-unit-context-seed1234-unit2-20261014.json),
 [seed-1234 unit-5 evidence](evidence/screen-unit-context-seed1234-unit5-20261014.json),
+[seed-1234 unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json),
 [capture observer v1](screen-unit-context-v1.cl),
 [capture observer v2](screen-unit-context-v2.cl),
 [capture observer v3](screen-unit-context-v3.cl),
 [capture observer v5](screen-unit-context-v5.cl),
+[capture observer v6](screen-unit-context-v6.cl),
 [triplet runner](../tools/capture-screen-unit-context-triplet.ps1), and
 [portable evidence derivation](../tools/derive-screen-unit-context-evidence.mjs).
 
@@ -110,10 +135,9 @@ The v4 probe's third unit at 768×1080 was a successful but empty screen call.
 It had no `PREP-LINE` or writer calls, so the observer correctly emitted
 `INCOMPLETE`; keep that attempt as diagnostics only. In a separate 320×480 v5
 run, ordinal 3 is populated. This is run- and resolution-specific evidence,
-not an ordinal rule. The v5 complete screen inventory shows ordinal 6 is also
-populated (39 points and two color writes, before points 0 and 14). This is a
-candidate from the retained v5 tape, not a separate typed-context sample. The
-next probe selects ordinal 6 and adds `PICK` to the traced target set because
-it is a listed `SCREEN-AND-STORE` dependency. Require the normal nonempty gate,
-source-bound completion markers, and fresh uninstrumented controls; do not
-implement a color formula from these four accepted units.
+not an ordinal rule. The sixth unit is now a complete typed sample, including
+three `PICK` returns. The next target is a controlled `PICK` contract probe:
+vary argument count and values while recording random-state consumption and
+return shape, with fresh uninstrumented controls. Keep the natural
+`PICK(27,28,29)` sample as one observation only, and do not implement a general
+color formula from these screen units.

@@ -1609,16 +1609,19 @@ function evidence, not a general stop-rule or whole-painting parity result.
 
 ## Natural screen-unit context samples, 2026-10-14
 
-Four source-bound before/observer/after triplets cover seed-1234 units 1, 2,
-and 5 plus seed-5678 unit 1. Their exact path/color slices total 566 writer
+Five source-bound before/observer/after triplets cover seed-1234 units 1, 2,
+5, and 6 plus seed-5678 unit 1. Their exact path/color slices total 705 writer
 bytes. Typed event snapshots in seed-1234 units 2 and 5 repeat two local
 `PREVDEX` neighbor transitions, while unpaired random returns show that
-`RAN(0,2)` alone does not determine whether a color write occurs. The v4
-768×1080 attempt selected an empty third unit and is excluded from the accepted
-set; a separate 320×480 v5 trace has a populated third unit. Treat that as a
+`RAN(0,2)` alone does not determine whether a color write occurs. Unit 6 adds
+three natural `PICK(27,28,29)` calls with observed nested random results 2, 1,
+1 and returns 29, 28, 28; this is one finite sample, not a general contract.
+The v4 768×1080 attempt selected an empty third unit and is excluded from the
+accepted set; a separate 320×480 v5 trace has a populated third unit. Treat that as a
 run- and resolution-specific difference, not an ordinal rule. See the
 [findings and limits](../screen-unit-context.md) and the portable captures:
 [seed-1234 unit 1](screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit 1](screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit 2](screen-unit-context-seed1234-unit2-20261014.json), and
-[seed-1234 unit 5](screen-unit-context-seed1234-unit5-20261014.json).
+[seed-1234 unit 5](screen-unit-context-seed1234-unit5-20261014.json), and
+[seed-1234 unit 6](screen-unit-context-seed1234-unit6-20261014.json).
