@@ -13,6 +13,31 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-14
 
+The controlled `PICK` contract now has an explicit two-/four-argument
+extension: 16 seeds per arity, 32 positive-distinct-fixnum cases total.
+Original returns and following random values match one `RAN(0,n-1)` draw,
+and the JS adapter matches 32/32. The three-argument evidence remains 16/16.
+This expands the measured input envelope only; counts stay at 31 routine names
+and 32 bounded contracts, milestone count remains 1/5, and whole-painting
+parity remains zero. See the [new probe](introspection/pick-contract-arities-v1.cl),
+[evidence](introspection/evidence/pick-contract-arities-seed1234-20261014.json),
+and [detailed progress](progress-report.md#2026-10-14-controlled-pick-arity-extension).
+
+A fresh natural observer in the 320×480 regime recorded no
+`SELECT-SUBJECT` entries; its six drawing/scene outputs and six ordinary
+staged sources match the fresh controls. The observer-only planning trace is
+excluded from control equality because wrapping `MAIN` changes its diagnostic
+type. This is a bounded no-hit, not evidence about the FREE/PREMIUM methods or
+other canvas regimes. REA's first static method dossiers leave their computed
+call targets unresolved. See the [active execution plan](execution-plan.md)
+for the next target and evidence gates.
+
+The earlier caller, screen-unit, and FREE-PATH checkpoints below remain useful
+historical evidence; their former “next” recommendations are superseded by
+the current execution-plan checkpoint.
+
+### Earlier checkpoints (historical)
+
 The first natural FREE-PATH caller is captured in a complete source-bound
 320×480 triplet: it returns to `DRAW-CFORM+0x167`, immediately after computed
 `CALL EDI` at `+0x165`. The dynamic target and broader call graph remain

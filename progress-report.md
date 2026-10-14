@@ -12,7 +12,7 @@ and the running investigation history are linked below.
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
 | Natural screen-unit context samples | 7 units across seeds 1234 and 5678 | Their selected paths replay 1,121 writer bytes. Units 2, 3, 5, and 6 provide 12 same-painting `PICK`/`PREVDEX` observations for `(27,28,29)`; seed-5678 unit 6 adds three observations for `(33,34,35)`. |
-| Controlled PICK comparison | 16/16 three-integer cases match the JS adapter | Across 16 seeds, each return and next random value match selection by one `RAN(0,2)` draw. Other arities, types, and argument values remain uncharacterized. |
+| Controlled PICK comparison | 16/16 three-integer and 32/32 two-/four-integer cases match the JS adapter | Across 16 seeds per case set, each return and next random value match one `RAN(0,n-1)` draw. Inputs are bounded positive distinct fixnums; other arities, types, and values remain uncharacterized. |
 
 **There is no defensible overall completion percentage yet.** Function names
 are not an implementation denominator, and the project has no weighted
@@ -33,8 +33,23 @@ whole-painting parity. There is no defensible overall completion percentage.
 See the [caller findings](research/introspection/pick-native-caller.md),
 [method identity](research/introspection/select-subject-methods.md), and
 [portable evidence](research/introspection/evidence/select-subject-method-identity-20261014-v2.json).
-Next, the native investigation will characterize the captured FREE and PREMIUM
-method bodies and design a bounded probe for their results and state effects.
+The captured `SELECT-SUBJECT` FREE/PREMIUM methods have now had a first static
+REA review: each dossier is straight-line, but its computed call target is
+unresolved. A separate natural observer in a fresh 320×480 regime recorded
+zero `SELECT-SUBJECT` calls. That is a bounded no-hit, not evidence about
+either method's behavior or other canvas regimes.
+
+A controlled source-bound extension then tested explicit two- and four-argument
+`PICK` calls: 16 seeds per arity, 32 total rows. For these positive distinct
+fixnums, every return and next random value matches selecting an argument with
+one `RAN(0,n-1)` draw, and the JS adapter matches all 32 rows. This broadens
+only the measured explicit-call envelope; it does not add a new routine name
+or contract unit, identify a natural caller for those arities, or characterize
+other types and values. See the [detailed PICK checkpoint](research/progress-report.md#2026-10-14-controlled-pick-arity-extension),
+[probe](research/introspection/pick-contract-arities-v1.cl), and
+[evidence](research/introspection/evidence/pick-contract-arities-seed1234-20261014.json).
+Counts remain 31 routine names / 32 bounded contracts, 1/5 milestones, and
+zero whole-painting parity.
 
 The JavaScript engine is a useful partial implementation and research harness,
 but it is not yet a general reproduction of AARON. The main remaining work is
@@ -85,14 +100,17 @@ unit 6, v15 changed the second PICK's caller-visible return from 34 to 35
 while preserving `RAN(0,2)=1`; one `HDEX=35` followed before the next PICK.
 V16 changed the terminal third PICK's return from 33 to 34 while preserving
 `RAN(0,2)=0`; no HDEX followed before unit end. Both fresh 768×1080 triplets
-match all six control outputs and seven ordinary Lisp sources. These results
-do not change the measured 31 routine names / 32 bounded contracts, 1/5
-milestones, or zero whole-painting parity. The next target is the unresolved
-direct `PICK` caller/control-flow path using the native workflow and REA; do
-not infer it from nearest-observed trace labels. See the
-[intervention evidence](research/introspection/evidence/README.md),
-[screen-unit findings](research/introspection/screen-unit-context.md), and
-[native analysis workflow](research/native-analysis-workflow.md).
+match all six control outputs and seven ordinary Lisp sources. The new
+two-/four-argument explicit-call sample broadens PICK's bounded input envelope
+without changing counts: 31 routine names / 32 contracts, 1/5 milestones, and
+zero whole-painting parity. The next target is one independent FREE-PATH
+single-edge holdout selected locally to make the surviving stop-boundary
+candidates predict different uncapped counts. It will use the established
+source-bound triplet gates; do not promote one measured case to a general
+rule. See the [FREE-PATH evidence](research/introspection/free-path-native.md),
+[candidate search](research/tools/find-free-path-stop-boundary-v9-candidate.mjs),
+[controlled PICK arity checkpoint](research/progress-report.md#2026-10-14-controlled-pick-arity-extension),
+and [native analysis workflow](research/native-analysis-workflow.md).
 
 ## Follow the evidence
 

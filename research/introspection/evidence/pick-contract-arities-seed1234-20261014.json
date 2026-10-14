@@ -1,0 +1,878 @@
+{
+  "schemaVersion": 1,
+  "function": "PICK",
+  "evidenceLevel": "bounded original-runtime arity evidence",
+  "scope": {
+    "positionalArgumentCounts": [
+      2,
+      4
+    ],
+    "candidateLists": {
+      "2": [
+        41,
+        47
+      ],
+      "4": [
+        61,
+        67,
+        73,
+        79
+      ]
+    },
+    "randomSeeds": [
+      1234,
+      5678,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      42,
+      77,
+      2026,
+      65535
+    ],
+    "cases": 32,
+    "invocation": "explicit bounded pre-scene experiment"
+  },
+  "observedBehavior": {
+    "selectionMatchesDirectRAN": true,
+    "directRANBoundsByArity": {
+      "2": [
+        0,
+        1
+      ],
+      "4": [
+        0,
+        3
+      ]
+    },
+    "postCallStateMatchesOneDirectRANDraw": true,
+    "directIndexCoverageByArity": [
+      {
+        "argumentCount": 2,
+        "observedDirectIndices": [
+          0,
+          1
+        ],
+        "allCandidatePositions": [
+          0,
+          1
+        ],
+        "allPositionsAttainableWithFixedSeeds": true,
+        "allCandidatePositionsCovered": true,
+        "cases": 16
+      },
+      {
+        "argumentCount": 4,
+        "observedDirectIndices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "allCandidatePositions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "allPositionsAttainableWithFixedSeeds": true,
+        "allCandidatePositionsCovered": true,
+        "cases": 16
+      }
+    ],
+    "javascriptAdapter": "Allegro501Random.pick(array)",
+    "javascriptMatches": "32/32"
+  },
+  "provenance": {
+    "observerRunId": "pick-contract-arities-v1-observer-20261014-a",
+    "controlBeforeRunId": "select-subject-natural-control-regime-20261014-a",
+    "controlAfterRunId": "pick-contract-arities-v1-after-20261014-a",
+    "mode": "writer-stream-seed-1234",
+    "requiredReport": "aaron-pick-contract-arities.txt",
+    "requiredEndMarker": "END pick-contract-arities-v1",
+    "probeSourcePath": "research/introspection/pick-contract-arities-v1.cl",
+    "probeSourceSha256": "aa6e499c17749d4903113f32cf740dbec592bb279db2b5b225caa69b75366343",
+    "reportSha256": "c4f999ee446d8972c3dab2928311733e6e34cee2a43e20f4d6a3c546ffa0b27f",
+    "runnerSha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076",
+    "currentRunnerSha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076",
+    "runtimeIdentity": {
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "files": {
+        "AARON.exe": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+        "AARON.pll": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+        "registry.dll": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "license.dll": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+      }
+    },
+    "controlOutputHashes": {
+      "aa0": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "image": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "aaron-planning-call-trace.txt": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    }
+  },
+  "cases": [
+    {
+      "seed": 1234,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 505923,
+        "nextRANAfterDirectDraw": 505923,
+        "nextRANWithoutPick": 808789,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 505923,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5678,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 326921,
+        "nextRANAfterDirectDraw": 326921,
+        "nextRANWithoutPick": 723658,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 326921,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 1,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 262802,
+        "nextRANAfterDirectDraw": 262802,
+        "nextRANWithoutPick": 85593,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 262802,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 393550,
+        "nextRANAfterDirectDraw": 393550,
+        "nextRANWithoutPick": 922437,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 393550,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 3,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 232483,
+        "nextRANAfterDirectDraw": 232483,
+        "nextRANWithoutPick": 288384,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 232483,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 4,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 603858,
+        "nextRANAfterDirectDraw": 603858,
+        "nextRANWithoutPick": 64447,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 603858,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 448873,
+        "nextRANAfterDirectDraw": 448873,
+        "nextRANWithoutPick": 425678,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 448873,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 6,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 728506,
+        "nextRANAfterDirectDraw": 728506,
+        "nextRANWithoutPick": 428421,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 728506,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 7,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 717462,
+        "nextRANAfterDirectDraw": 717462,
+        "nextRANWithoutPick": 260119,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 717462,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 8,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 129163,
+        "nextRANAfterDirectDraw": 129163,
+        "nextRANWithoutPick": 502660,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 129163,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 9,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 504665,
+        "nextRANAfterDirectDraw": 504665,
+        "nextRANWithoutPick": 554081,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 504665,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 10,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 349649,
+        "nextRANAfterDirectDraw": 349649,
+        "nextRANWithoutPick": 634056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 349649,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 42,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 82659,
+        "nextRANAfterDirectDraw": 82659,
+        "nextRANWithoutPick": 502296,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 82659,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 77,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 956682,
+        "nextRANAfterDirectDraw": 956682,
+        "nextRANWithoutPick": 551821,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 956682,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2026,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 41,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 854610,
+        "nextRANAfterDirectDraw": 854610,
+        "nextRANWithoutPick": 174919,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 41,
+        "nextRANAfterPick": 854610,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 65535,
+      "argumentCount": 2,
+      "arguments": [
+        41,
+        47
+      ],
+      "original": {
+        "returnValue": 47,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 708308,
+        "nextRANAfterDirectDraw": 708308,
+        "nextRANWithoutPick": 457056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 47,
+        "nextRANAfterPick": 708308,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 1234,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 67,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 505923,
+        "nextRANAfterDirectDraw": 505923,
+        "nextRANWithoutPick": 808789,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 67,
+        "nextRANAfterPick": 505923,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5678,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 326921,
+        "nextRANAfterDirectDraw": 326921,
+        "nextRANWithoutPick": 723658,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 326921,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 1,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 262802,
+        "nextRANAfterDirectDraw": 262802,
+        "nextRANWithoutPick": 85593,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 262802,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 393550,
+        "nextRANAfterDirectDraw": 393550,
+        "nextRANWithoutPick": 922437,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 393550,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 3,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 67,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 232483,
+        "nextRANAfterDirectDraw": 232483,
+        "nextRANWithoutPick": 288384,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 67,
+        "nextRANAfterPick": 232483,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 4,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 73,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 603858,
+        "nextRANAfterDirectDraw": 603858,
+        "nextRANWithoutPick": 64447,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 73,
+        "nextRANAfterPick": 603858,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 448873,
+        "nextRANAfterDirectDraw": 448873,
+        "nextRANWithoutPick": 425678,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 448873,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 6,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 61,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 728506,
+        "nextRANAfterDirectDraw": 728506,
+        "nextRANWithoutPick": 428421,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 61,
+        "nextRANAfterPick": 728506,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 7,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 717462,
+        "nextRANAfterDirectDraw": 717462,
+        "nextRANWithoutPick": 260119,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 717462,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 8,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 67,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 129163,
+        "nextRANAfterDirectDraw": 129163,
+        "nextRANWithoutPick": 502660,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 67,
+        "nextRANAfterPick": 129163,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 9,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 73,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 504665,
+        "nextRANAfterDirectDraw": 504665,
+        "nextRANWithoutPick": 554081,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 73,
+        "nextRANAfterPick": 504665,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 10,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 61,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 349649,
+        "nextRANAfterDirectDraw": 349649,
+        "nextRANWithoutPick": 634056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 61,
+        "nextRANAfterPick": 349649,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 42,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 73,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 82659,
+        "nextRANAfterDirectDraw": 82659,
+        "nextRANWithoutPick": 502296,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 73,
+        "nextRANAfterPick": 82659,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 77,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 79,
+        "directRANIndex": 3,
+        "nextRANAfterPick": 956682,
+        "nextRANAfterDirectDraw": 956682,
+        "nextRANWithoutPick": 551821,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 79,
+        "nextRANAfterPick": 956682,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2026,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 73,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 854610,
+        "nextRANAfterDirectDraw": 854610,
+        "nextRANWithoutPick": 174919,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 73,
+        "nextRANAfterPick": 854610,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 65535,
+      "argumentCount": 4,
+      "arguments": [
+        61,
+        67,
+        73,
+        79
+      ],
+      "original": {
+        "returnValue": 67,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 708308,
+        "nextRANAfterDirectDraw": 708308,
+        "nextRANWithoutPick": 457056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 67,
+        "nextRANAfterPick": 708308,
+        "matchesOriginal": true
+      }
+    }
+  ],
+  "limitations": [
+    "This is a bounded explicit pre-scene experiment; it does not establish a natural scene-call arity or caller census.",
+    "Only two and four positional arguments from the listed distinct positive fixnum candidate lists and 16 fixed seeds are covered.",
+    "The existing three-argument PICK contract remains separate evidence and is not re-derived by this extension.",
+    "Other arities, general Lisp value types, other argument values, and non-seeded startup states are uncharacterized.",
+    "This does not establish drawing, color-write, image, or whole-painting parity."
+  ]
+}

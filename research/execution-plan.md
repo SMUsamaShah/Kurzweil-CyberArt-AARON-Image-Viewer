@@ -750,9 +750,36 @@ was read-only and did not invoke either method. See [PICK caller findings](intro
 [PICK evidence](introspection/evidence/pick-native-caller-live-site-20261014-v4.json),
 and [method identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
 
-Next inspect the two captured native method bodies, then design a bounded
-read-only probe for their outputs and observable state effects. Keep FREE and
-PREMIUM cases separate and require fresh same-runner controls. This adds no
-JavaScript behavior contract and proves no painting parity. Coverage remains
-31 routine names / 32 bounded contracts, 1/5 milestones (20% by count), and
-zero whole-painting parity; there is no defensible overall percentage.
+At this checkpoint the next proposed action was to inspect both native
+methods. That recommendation is superseded by the later 2026-10-14 checkpoint
+below; no method behavior was established here.
+
+## Current checkpoint: PICK arities and FREE-PATH holdout, 2026-10-14
+
+A source-bound explicit-call extension exercised `PICK` with two and four
+positive distinct fixnums, 16 seeds per arity. The 32 original returns and
+following random values match one `RAN(0,n-1)` draw; the JS adapter matches
+32/32. The three-argument sample remains 16/16. This adds no name or contract
+unit: counts remain 31 routine names / 32 bounded contracts, 1/5 milestones
+(20% by count), and zero whole-painting parity. See the [probe]
+(introspection/pick-contract-arities-v1.cl), [portable evidence]
+(introspection/evidence/pick-contract-arities-seed1234-20261014.json), and
+[deriver](tools/derive-pick-contract-arities-evidence.mjs).
+
+A separate natural observer recorded no `SELECT-SUBJECT` call in its measured
+320×480 scene. Six drawing/scene outputs and six ordinary staged sources
+match the fresh controls. The wrapped planning trace is observer-only because
+wrapping `MAIN` changes its diagnostic type. This bounded no-hit does not
+describe method behavior or generalize to 768×1080. Initial REA dossiers for
+the FREE and PREMIUM methods remain straight-line bodies with computed call
+targets unresolved.
+
+The next target is an independent single-edge `FREE-PATH` holdout. Existing
+v8/v9 cases both match `step-times-wiggle`; v9 also fits `source-to-emitted`,
+so choose a fresh seed locally where the candidate model predicts distinct,
+uncapped consumed-step counts with a wide Float32 margin. Then capture only
+that case with complete source-bound before/observer/after runs, the required
+`INSTALL`, `READY`, `COMPLETE`, and `END` records, and fresh uninstrumented
+controls. Read [oracle safeguards](oracle.md) before running it. A match may
+support the selected stop-boundary slice, not a general `FREE-PATH` rule or
+painting parity. Keep the PICK counts and milestone status unchanged.

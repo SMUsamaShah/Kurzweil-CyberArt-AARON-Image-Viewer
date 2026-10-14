@@ -1790,3 +1790,21 @@ unresolved. The method census has its own fresh matched-runner 320×480 triplet;
 all six outputs and six ordinary scene sources match. This adds no JavaScript
 behavior contract or whole-painting parity result. Re-derive with
 [`derive-select-subject-method-identity-evidence.mjs`](../../tools/derive-select-subject-method-identity-evidence.mjs).
+
+## Controlled PICK arity extension, 2026-10-14
+
+[`pick-contract-arities-seed1234-20261014.json`](pick-contract-arities-seed1234-20261014.json)
+records a fresh source-bound before/observer/after triplet for 32 explicit
+`PICK` calls: 16 seeds each for arities 2 and 4. Inputs are positive distinct
+fixnums. Every original return and following random value matches selection by
+one `RAN(0,n-1)` draw, and the JS adapter matches 32/32 rows. Both positions in
+the two-argument case and all four positions in the four-argument case were
+observed. All six compared drawing/scene outputs and six ordinary staged
+sources match across the controls. The derivation binds probe/report hashes,
+runner/runtime identity, random-state restoration, and exact JS results.
+
+This is a bounded extension to the explicit-call envelope, not a new routine
+name or contract unit, a natural caller observation, general type/range
+coverage, or drawing parity. Re-derive from the three ignored run roots in the
+JSON with
+[`derive-pick-contract-arities-evidence.mjs`](../../tools/derive-pick-contract-arities-evidence.mjs).

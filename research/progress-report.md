@@ -10,7 +10,7 @@ recovered behavior.
 | Measure | Current result | How to read it |
 |---|---:|---|
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |
-| Routines with documented, bounded JS/original comparisons | 31 routine names; 32 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters, and the three-integer `PICK` contract. These are limited contracts, not 31 general-purpose source reconstructions. |
+| Routines with documented, bounded JS/original comparisons | 31 routine names; 32 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters, and the `PICK` contract (three-integer cases plus bounded two-/four-argument extensions). These are limited contracts, not 31 general-purpose source reconstructions. |
 | FREE-PATH boundary-matrix comparison | 26 of 30 directly comparable cases match; 4 mismatch; 10 unclassified | Finite source-bound calls only. Eight noncanonical index cases and two signed-zero cases are unclassified; this is not a project completion percentage. |
 | FREE-PATH isolated one-edge stop cases | 9 captured cases; JS matches 4 and differs by one step in 5 | Controlled inputs only. Of the three local candidates, only step-times-wiggle matches both v8/v9 counts; this does not establish a general rule. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
@@ -21,7 +21,7 @@ recovered behavior.
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
 | Natural screen-unit context samples | 7 units across seeds 1234 and 5678 | Their selected paths reproduce 1,121 writer bytes. Units 2, 3, 5, and 6 supply 12 same-painting PICK/PREVDEX observations for `(27,28,29)`; seed-5678 unit 6 adds three calls for `(33,34,35)`. |
-| Controlled PICK comparison | 16 of 16 three-integer cases match the JS adapter | The original return and next random value match a single `RAN(0,2)` draw for these inputs and seeds. Other arities, types, and values remain uncharacterized. |
+| Controlled PICK comparison | 16/16 three-integer and 32/32 two-/four-integer cases match the JS adapter | Across 16 seeds per case set, the original return and next random value match one `RAN(0,n-1)` draw. The added cases use positive distinct fixnums; other arities, types, and values remain uncharacterized. |
 
 The 31 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -658,6 +658,34 @@ no-probe controls used the legacy runner, while the observer used the
 required-probe runner. Fresh controls and a second observer were then captured
 with the same required-probe runner hash; only that matched triplet is used in
 the portable result.
+
+## 2026-10-14 controlled PICK arity extension
+
+A fresh source-bound `PICK` probe exercised explicit two- and four-argument
+calls, with 16 seeds per arity (32 rows total). Every argument was a positive,
+distinct fixnum. For each row, the original return and following random value
+match selection by one `RAN(0,n-1)` draw; the JavaScript adapter matches all
+32 original rows. The two-argument set observed both selectable indices, and
+the four-argument set observed all four.
+
+The result expands the bounded explicit-call envelope of the existing `PICK`
+contract. It does not add a function name or contract unit, establish natural
+caller arities, characterize other types or argument ranges, or prove drawing
+parity. The matched before/observer/after controls agree on all six compared
+drawing/scene outputs; the evidence derivation also checks the staged source
+hashes, runner/runtime identity, probe/report hashes, random-state behavior,
+and exact JS results. Re-derive with
+[`derive-pick-contract-arities-evidence.mjs`](tools/derive-pick-contract-arities-evidence.mjs)
+from the three retained run roots recorded in the evidence JSON. See the
+[probe](introspection/pick-contract-arities-v1.cl) and
+[portable evidence](introspection/evidence/pick-contract-arities-seed1234-20261014.json).
+
+A separate natural `SELECT-SUBJECT` observer in the 320×480 regime recorded
+zero calls. Its six drawing/scene outputs and six ordinary staged source files
+match the fresh controls. The wrapped planning trace differs in the observer
+because wrapping `MAIN` changes its diagnostic type, so that trace is treated
+as observer-only. This is a bounded no-hit and does not characterize either
+method, identify the direct caller in this regime, or generalize to 768×1080.
 
 ## Links
 
