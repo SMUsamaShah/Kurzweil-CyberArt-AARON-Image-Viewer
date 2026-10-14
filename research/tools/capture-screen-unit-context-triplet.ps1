@@ -3,7 +3,7 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6')]
+    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
@@ -186,7 +186,7 @@ Invoke-TripletLeg -Role after
 
 $node = (Get-Command node -ErrorAction Stop).Source
 $observerOnlyOutputs = @('aaron-planning-call-trace.txt')
-if ($ProbeVersion -eq 'v6') {
+if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10')) {
     # PICK's requested return target causes the scene observer to append one
     # FIRST-PICK-RETURN snapshot. The verifier compares the controls and
     # requires that exact snapshot to be the only observer scene-report delta.

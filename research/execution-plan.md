@@ -660,27 +660,27 @@ nine isolated cases, JS matches four and differs by one step in five. See the
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-Five complete natural screen-unit context triplets now cover seed-1234 units
-1, 2, 5, and 6, plus seed-5678 unit 1 at 320×480. Their captured points and
-`AARGB` decisions replay 705 original writer bytes. Units 2 and 5 retain paired
-local `PREVDEX` transitions and unpaired random returns. Unit 6 captures three
-natural `PICK(27,28,29)` calls returning 29, 28, and 28; each has a nearest-
-traced `RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns
-match HDEX writes and the third has no later color write. The verifier requires
-the scene report's sole observer delta to be its complete `FIRST-PICK-RETURN`
-snapshot and still checks fresh controls and source hashes. Unwrapped helpers
-could intervene; those natural observations do not prove a direct source-level
-call edge or a color rule. A separate source-bound controlled triplet now
-supports the fixed three-integer `PICK(27,28,29)` contract across 16 seeds:
-the return and next random value match one `RAN(0,2)` draw, and the JS adapter
-matches all 16 rows. Other arities and types remain open. See the
-[screen-unit findings](introspection/screen-unit-context.md), [unit-6
-evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
+Six complete natural screen-unit context triplets now cover seed-1234 units
+1, 2, 3, 5, and 6, plus seed-5678 unit 1 at 320×480. Their captured points
+and `AARGB` decisions replay 837 original writer bytes. Units 2, 3, 5, and 6
+provide 12 natural `PICK(27,28,29)`/`PREVDEX` comparisons that fit the
+“write when the return differs from PREVDEX at nested RAN entry” candidate in
+12/12 calls. All four units are from the same seed-1234 painting, so this is
+not an independent-seed or controlled downstream test. Unwrapped helpers could
+intervene; no direct source-level caller, exact native state slot, or JS color
+contract is established. A separate source-bound controlled triplet supports
+the fixed three-integer `PICK(27,28,29)` contract across 16 seeds: the return
+and next random value match one `RAN(0,2)` draw, and the JS adapter matches all
+16 rows. Other arities and types remain open. See the [screen-unit findings]
+(introspection/screen-unit-context.md), [unit-3 evidence]
+(introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json), [12-case
+candidate](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 and [controlled PICK evidence]
 (introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
-The next target is the screen color-write branch: identify a state/control-flow
-boundary separating paired `PREVDEX` neighbor writes from unpaired
-`PICK`/`RAN` results, then test that boundary with fresh controls.
+The next target is a paired return-substitution intervention at unit 2's first
+and second PICK calls, holding natural RNG consumption fixed and observing the
+HDEX result. Preserve fresh controls and label changed output as intentional
+intervention, not parity.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate

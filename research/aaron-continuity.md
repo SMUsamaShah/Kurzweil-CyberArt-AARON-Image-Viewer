@@ -31,36 +31,42 @@ parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-2026101
 [FREE-PATH findings](introspection/free-path-native.md), and the active
 [execution plan](execution-plan.md).
 
-Five complete source-bound screen-unit context triplets now cover seed 1234
-units 1, 2, 5, and 6 plus seed 5678 unit 1 at 320×480. Their selected paths
-and color events replay 705 original writer bytes exactly. Typed snapshots in
-units 2 and 5 repeat paired local `PREVDEX` neighbor transitions, but unpaired
-RAN returns leave the color branch unresolved. Unit 6 captures three natural
-`PICK(27,28,29)` calls returning 29, 28, and 28, each with a nearest-traced
-`RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns match HDEX
-writes; the third has no later color write. Unwrapped helpers could intervene,
-so this is not proof of direct source-level call edges or a general color
-contract. A separate controlled triplet tested `PICK(27,28,29)` at 16 seeds:
-all three positions occur, each return matches one `RAN(0,2)` draw, and the
-next random value matches one-draw state. The existing JS adapter matches
-16/16. This is limited to that three-integer list and does not prove a direct
-`PICK`-to-`RAN` call edge or the screen color decision. The PICK return target
-adds one complete `FIRST-PICK-RETURN` block to the observer scene report; the
-strict verifier checks that the block is the only delta against matching
-fresh controls. Counts are 31 routine names / 32 bounded contracts; milestone
-progress and whole-painting parity remain unchanged. See
+Six complete source-bound screen-unit context triplets now cover seed 1234
+units 1, 2, 3, 5, and 6 plus seed 5678 unit 1 at 320×480. Their selected paths
+and color events replay 837 original writer bytes exactly. Typed snapshots in
+units 2 and 5 show paired local `PREVDEX` transitions and unpaired RAN returns.
+Units 2, 3, 5, and 6 contain 12 natural `PICK(27,28,29)` calls; an offline
+candidate check fits all 12: eight returns differ from `PREVDEX` at nested RAN
+entry and are followed by matching HDEX writes, while four equal returns
+have no later write. These four units are from the same seed-1234 painting, so
+this is not an independent-seed or controlled downstream test. It does not
+establish a direct source-level call edge, exact native state slot, general
+color rule, or JS contract. A separate controlled triplet tested
+`PICK(27,28,29)` at 16 seeds: all three positions occur, each return matches
+one `RAN(0,2)` draw, the next random value matches one-draw state, and the
+existing JS adapter matches 16/16. This is limited to that three-integer list
+and does not explain the screen color decision. The PICK return target adds
+one complete `FIRST-PICK-RETURN` block to the observer scene report; the
+strict verifier checks that block as the only observer scene-report delta.
+Counts remain 31 routine names / 32 bounded contracts; milestone progress
+and whole-painting parity remain unchanged. See
 [screen-unit findings](introspection/screen-unit-context.md),
 [seed-1234 unit-1 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit-1 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
+[seed-1234 unit-3 evidence](introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
 [seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
 [seed-1234 unit-6 evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
+[12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 [controlled PICK evidence](introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
 
-The next target is the unresolved screen color-write branch. Identify a
-state/control-flow boundary that separates paired `PREVDEX` neighbor writes
-from unpaired `PICK`/`RAN` results, then design a falsifiable probe with fresh
-controls. Keep FREE-PATH's unresolved path generation explicit.
+The next target is a paired return-substitution intervention at seed-1234
+unit-2 PICK calls: after natural RAN consumption, force the first caller-visible
+return to 29 (natural 28, PREVDEX 28), then force the second to 28 (natural 27,
+PREVDEX 28). Observe whether an HDEX write follows. Treat changed output as an
+intentional intervention, bracket each treatment with fresh controls, and do
+not report parity or a general color rule from the natural 12/12 candidate.
+Keep FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

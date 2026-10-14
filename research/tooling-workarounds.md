@@ -514,6 +514,24 @@ v6c root can be revalidated offline with this stricter gate; a new original run
 is unnecessary if it passes and the typed evidence parser accepts the paired
 PICK calls.
 
+PICK-enabled context probes also require the selected unit itself to contain a
+PICK call. Two seed-5678 diagnostics targeted units 6 and 1 but observed no
+PICK in the selected unit, so the observer could not produce the required
+`FIRST-PICK-RETURN` snapshot and the strict triplet gate rejected the result.
+Those are valid no-PICK diagnostics, not C:\temp, Java, or registry failures;
+preserve their roots and choose a populated unit rather than weakening the
+PICK acceptance gate.
+
+When adding a numbered screen-unit probe, update every version registry:
+the capture script's `ValidateSet` and observer-only output list, the evidence
+deriver's PICK-return set, selected-ordinal map, accepted output-name regexes,
+and any focused analyzer's version map. The v10 triplet passed its controls,
+but its first offline derivation still matched only v6-v9 output names and
+misclassified the observer-only scene report. The regexes were fixed and the
+same retained roots then derived successfully; no oracle rerun was needed.
+Run syntax checks and derive from the retained triplet before starting another
+capture.
+
 ## Probe and tooling recovery
 
 ### Pre-scene Lisp probe package resolution

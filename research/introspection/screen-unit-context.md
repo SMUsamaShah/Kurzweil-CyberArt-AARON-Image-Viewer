@@ -1,17 +1,18 @@
 # Natural screen-unit context observations
 
-Five complete source-bound before/observer/after triplets captured natural
+Six complete source-bound before/observer/after triplets captured natural
 post-`RPARSE` `SCREEN-AND-STORE` units at 320×480: the first unit for seeds
-1234 and 5678, and the second, fifth, and sixth units for seed 1234. The observer
-records nearest traced ancestry, `RAN` calls, `PREP-LINE`, `AARGB` writer
+1234 and 5678, and the second, third, fifth, and sixth units for seed 1234.
+The observer records nearest traced ancestry, `RAN` calls, `PREP-LINE`, `AARGB` writer
 events, and entry/exit context. Each selected path and its color events
-reproduce the exact original writer byte slice, totaling 705 bytes.
+reproduce the exact original writer byte slice, totaling 837 bytes.
 
 | Seed | Unit / triplet | Nearest observed parent | Context | Path / output | Colors | RNG calls |
 |---|---|---|---|---:|---|---:|
 | 1234 | 1 / `screen-context-v1-20261014-001427-b937318e` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=-1→28` | 74 points, 76 writer calls, 244 bytes | `(before 0, HDEX 29)`, `(before 23, HDEX 28)` | 6 |
 | 5678 | 1 / `screen-ctx2-5678-20261014-002603-6d9f5e65` | `PAINT-FILL` | `RPLANE=132`, `SDEX=0`, `PREVDEX=-1→34` | 19 points, 21 writer calls, 80 bytes | `(before 0, HDEX 35)`, `(before 6, HDEX 34)` | 7 |
 | 1234 | 2 / `screen-ctx3-unit2-20261014-004007-0ba991eb` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=28→28` | 27 points, 29 writer calls, 103 bytes | `(before 10, HDEX 27)`, `(before 15, HDEX 28)` | 7 |
+| 1234 | 3 / `pickprev1234u3-20261014-024804-9dbe464f` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=28→27` | 34 points, 36 writer calls, 132 bytes | `(before 0, HDEX 29)`, `(before 13, HDEX 27)` | 7 |
 | 1234 | 5 / `screen-context-v5-20261014-010625-d7df5d93` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→27` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 28)`, `(before 15, HDEX 27)` | 7 |
 | 1234 | 6 / `screen-context-v6c-20261014-013426-fe0e74a8` | `BRUSH-STROKE` | `RPLANE=79`, `SDEX=1`, `PREVDEX=27→28` | 39 points, 41 writer calls, 139 bytes | `(before 0, HDEX 29)`, `(before 14, HDEX 28)` | 7 |
 
@@ -34,6 +35,32 @@ later `AARGB` HDEX write occurs before this unit returns. This one natural
 list and three draws do not establish `PICK`'s general contract or a general
 color-selection rule. The complete typed calls, returns, state summaries, and
 source/control hashes are retained in the [unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json).
+
+## Natural `PICK`/`PREVDEX` candidate observations
+
+The seed-1234 unit-3 observer records three more natural `PICK(27,28,29)`
+calls. Returns 29, 27, and 27 have nested `RAN(0,2)` indices 2, 0, and 0.
+`PREVDEX` at those RAN entries is 28, 29, and 27. The first two returns are
+followed by matching `HDEX` writes before path points 0 and 13; the final
+return has no following HDEX write before the next PICK.
+
+Across units 2, 3, 5, and 6, the offline candidate check matches all 12
+natural calls: eight returns differ from `PREVDEX` at the nested RAN entry and
+are followed by an HDEX write of that return; four equal returns have no
+following HDEX write before the next PICK or unit end. All four units come
+from the same seed-1234 painting and use the same argument list. This is a
+single-painting observational candidate, not an independent-seed or
+controlled downstream test. The entry snapshot does not establish the Lisp
+caller or exact native state slot. It adds no JS color contract and must not
+be implemented as a recovered general rule.
+
+The portable candidate report binds each input evidence hash and verifies
+distinct unit ordinals, a shared AA0 hash, six matched control outputs, ten
+ordinary staged scene sources, two observer-only report hashes, typed FIXNUM
+RAN bounds/results, and a unique typed PREVDEX value. See the [12-case
+analysis](evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
+[unit-3 evidence](evidence/pick-prevdex-seed1234-unit3-20261014.json), and
+[offline analyzer](../tools/analyze-pick-prevdex-observations.mjs).
 
 ## Controlled three-integer `PICK` contract
 
@@ -117,6 +144,9 @@ identify the branch condition or establish a general formula.
 - Seed 1234 unit 2 matched all six drawing/scene outputs and ten ordinary
   staged scene sources. Its 27-point writer slice has SHA-256
   `48f9f1b3b2d6fa51907db8395b700408ef77c02c3d6408d259266006a579b0aa`.
+- Seed 1234 unit 3 matched all six drawing/scene outputs and ten ordinary
+  staged scene sources. Its 34-point writer slice has SHA-256
+  `f46634b0a1f962bf0f8fc27d8fbdd7e97b5d63e93e1870bec7b394b000bfe0ec`.
 - Seed 1234 unit 5 matched all six drawing/scene outputs and ten ordinary
   staged scene sources. Its 39-point writer slice has SHA-256
   `1761eebe7fed3dc082f3e36c395473d2d88eef80c416ecbc2a6bae5c903a7b4f`.
@@ -146,6 +176,7 @@ identify the branch condition or establish a general formula.
 See the [seed-1234 unit-1 evidence](evidence/screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit-1 evidence](evidence/screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit-2 evidence](evidence/screen-unit-context-seed1234-unit2-20261014.json),
+[seed-1234 unit-3 evidence](evidence/pick-prevdex-seed1234-unit3-20261014.json),
 [seed-1234 unit-5 evidence](evidence/screen-unit-context-seed1234-unit5-20261014.json),
 [seed-1234 unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json),
 [controlled PICK evidence](evidence/pick-contract-three-args-seed1234-20261014.json),
@@ -165,8 +196,12 @@ It had no `PREP-LINE` or writer calls, so the observer correctly emitted
 run, ordinal 3 is populated. This is run- and resolution-specific evidence,
 not an ordinal rule. The controlled probe now supports the fixed three-integer
 `PICK(27,28,29)` contract across 16 seeds and matches the JS adapter 16/16.
-The next target is the downstream color-write branch: use the paired and
-unpaired screen-unit events to identify a discriminating runtime state or
-control-flow boundary, then test it with fresh uninstrumented controls. Do not
-infer a general color rule from the five natural units or extend the PICK
-contract to untested arities.
+The next target is a controlled downstream discriminator. In fresh runs from
+the same seed-1234 state, let PICK consume its natural RAN draw, then substitute
+only the caller-visible return for the first or second unit-2 PICK: force 29
+where the natural return is 28 and `PREVDEX` is 28, then force 28 where the
+natural return is 27 and `PREVDEX` is 28. Record whether the following HDEX
+write matches the prediction. Treat output changes as the intended
+intervention, retain fresh uninstrumented controls, and do not call it parity.
+Do not promote the 12/12 same-painting candidate or extend the PICK contract
+to other inputs without a falsifying holdout.

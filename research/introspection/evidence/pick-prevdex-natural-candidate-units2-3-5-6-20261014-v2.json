@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "question": "Does an HDEX write follow a natural PICK exactly when its return differs from PREVDEX observed at the nested RAN(0,2) entry?",
+  "result": {
+    "observedCases": 12,
+    "candidateMatches": 12,
+    "candidateMismatches": 0,
+    "differingReturnWrites": 8,
+    "equalReturnWithoutWrites": 4,
+    "candidateFitsTheseObservations": true
+  },
+  "observations": [
+    {
+      "evidencePath": "research/introspection/evidence/pick-prevdex-seed1234-unit2-20261014.json",
+      "evidenceSha256": "e8243b3795994b40189f883500efe0da44e3109374cc07414e6d3a131ebfc518",
+      "probeVersion": "screen-unit-context-v9",
+      "probeSourceSha256": "55dbb14b41bba0f1cec502b270f75442375e52f2133dba3e576ffaf0367c189e",
+      "screenUnitOrdinal": 2,
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "matchedControlOutputCount": 6,
+      "matchedOrdinarySceneSourceCount": 10,
+      "cases": [
+        {
+          "screenUnitOrdinal": 2,
+          "pickCallId": 898,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 899,
+          "randomIndex": 1,
+          "returnValue": 28,
+          "prevdexAtNestedRandomEntry": 28,
+          "followingHdexWrite": null,
+          "candidatePredictsWrite": false,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": false
+        },
+        {
+          "screenUnitOrdinal": 2,
+          "pickCallId": 910,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 911,
+          "randomIndex": 0,
+          "returnValue": 27,
+          "prevdexAtNestedRandomEntry": 28,
+          "followingHdexWrite": {
+            "callId": 912,
+            "writerOrdinal": 744,
+            "index": 27
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 2,
+          "pickCallId": 919,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 920,
+          "randomIndex": 1,
+          "returnValue": 28,
+          "prevdexAtNestedRandomEntry": 27,
+          "followingHdexWrite": {
+            "callId": 921,
+            "writerOrdinal": 750,
+            "index": 28
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        }
+      ]
+    },
+    {
+      "evidencePath": "research/introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json",
+      "evidenceSha256": "f146d403bb067b202f4a25ae9a3c6cd731247ccca7b50b03c4d8156f1260a1e6",
+      "probeVersion": "screen-unit-context-v10",
+      "probeSourceSha256": "58b542b82a8be608a01ea6e305ca65d3158702cf83f93101e5ca3f1fe8120b6a",
+      "screenUnitOrdinal": 3,
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "matchedControlOutputCount": 6,
+      "matchedOrdinarySceneSourceCount": 10,
+      "cases": [
+        {
+          "screenUnitOrdinal": 3,
+          "pickCallId": 934,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 935,
+          "randomIndex": 2,
+          "returnValue": 29,
+          "prevdexAtNestedRandomEntry": 28,
+          "followingHdexWrite": {
+            "callId": 936,
+            "writerOrdinal": 763,
+            "index": 29
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 3,
+          "pickCallId": 951,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 952,
+          "randomIndex": 0,
+          "returnValue": 27,
+          "prevdexAtNestedRandomEntry": 29,
+          "followingHdexWrite": {
+            "callId": 953,
+            "writerOrdinal": 777,
+            "index": 27
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 3,
+          "pickCallId": 965,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 966,
+          "randomIndex": 0,
+          "returnValue": 27,
+          "prevdexAtNestedRandomEntry": 27,
+          "followingHdexWrite": null,
+          "candidatePredictsWrite": false,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": false
+        }
+      ]
+    },
+    {
+      "evidencePath": "research/introspection/evidence/pick-prevdex-seed1234-unit5-20261014.json",
+      "evidenceSha256": "0bd1ccac6142caa6f7d4e22d0bd7d66299a9f7321d82aae65980776d4ee3bdf9",
+      "probeVersion": "screen-unit-context-v8",
+      "probeSourceSha256": "7d3d13f0a530bf569cd0925080566d820f287113b941ceacd1293451fd70d39f",
+      "screenUnitOrdinal": 5,
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "matchedControlOutputCount": 6,
+      "matchedOrdinarySceneSourceCount": 10,
+      "cases": [
+        {
+          "screenUnitOrdinal": 5,
+          "pickCallId": 1012,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1013,
+          "randomIndex": 1,
+          "returnValue": 28,
+          "prevdexAtNestedRandomEntry": 27,
+          "followingHdexWrite": {
+            "callId": 1014,
+            "writerOrdinal": 831,
+            "index": 28
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 5,
+          "pickCallId": 1031,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1032,
+          "randomIndex": 0,
+          "returnValue": 27,
+          "prevdexAtNestedRandomEntry": 28,
+          "followingHdexWrite": {
+            "callId": 1033,
+            "writerOrdinal": 847,
+            "index": 27
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 5,
+          "pickCallId": 1046,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1047,
+          "randomIndex": 0,
+          "returnValue": 27,
+          "prevdexAtNestedRandomEntry": 27,
+          "followingHdexWrite": null,
+          "candidatePredictsWrite": false,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": false
+        }
+      ]
+    },
+    {
+      "evidencePath": "research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json",
+      "evidenceSha256": "d188b43054b6a976c21bcaba2db7e04d1a1cc1de791ad21042d2a0ac2b7cbd58",
+      "probeVersion": "screen-unit-context-v6",
+      "probeSourceSha256": "e132b660227c2a400db5e4d75e4ed98d80eacf16410cea0dcd8f9d8e494d9f96",
+      "screenUnitOrdinal": 6,
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "matchedControlOutputCount": 6,
+      "matchedOrdinarySceneSourceCount": 10,
+      "cases": [
+        {
+          "screenUnitOrdinal": 6,
+          "pickCallId": 1060,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1061,
+          "randomIndex": 2,
+          "returnValue": 29,
+          "prevdexAtNestedRandomEntry": 27,
+          "followingHdexWrite": {
+            "callId": 1062,
+            "writerOrdinal": 872,
+            "index": 29
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 6,
+          "pickCallId": 1078,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1079,
+          "randomIndex": 1,
+          "returnValue": 28,
+          "prevdexAtNestedRandomEntry": 29,
+          "followingHdexWrite": {
+            "callId": 1080,
+            "writerOrdinal": 887,
+            "index": 28
+          },
+          "candidatePredictsWrite": true,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": true
+        },
+        {
+          "screenUnitOrdinal": 6,
+          "pickCallId": 1096,
+          "arguments": [
+            27,
+            28,
+            29
+          ],
+          "randomCallId": 1097,
+          "randomIndex": 1,
+          "returnValue": 28,
+          "prevdexAtNestedRandomEntry": 28,
+          "followingHdexWrite": null,
+          "candidatePredictsWrite": false,
+          "candidateMatchesObservation": true,
+          "returnDiffersFromPrevDex": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "These are 12 natural calls from 4 screen units of one seed-1234 painting, not independent seeds or controlled downstream inputs.",
+    "PREVDEX is sampled at the captured nested RAN entry; this does not prove the Lisp-level caller or exact native state slot.",
+    "The candidate is not a general color rule and must not be implemented as recovered behavior without an independent falsifying test.",
+    "No JavaScript color-selection contract or whole-painting parity is established."
+  ]
+}

@@ -20,7 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths reproduce 705 writer bytes. Unit 6 records three natural `PICK(27,28,29)` results; the separate controlled probe now has its own bounded result below. |
+| Natural screen-unit context samples | 6 units across seeds 1234 and 5678 | Their selected paths reproduce 837 writer bytes. Units 2, 3, 5, and 6 supply 12 same-painting PICK/PREVDEX observations; the separate controlled PICK contract is counted below. |
 | Controlled PICK comparison | 16 of 16 three-integer cases match the JS adapter | The original return and next random value match a single `RAN(0,2)` draw for these inputs and seeds. Other arities, types, and values remain uncharacterized. |
 
 The 31 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
@@ -448,12 +448,43 @@ painting parity remains 0. No overall completion percentage is defensible.
 See the [finding](introspection/screen-unit-context.md), [probe]
 (introspection/pick-contract-v1.cl), [portable evidence]
 (introspection/evidence/pick-contract-three-args-seed1234-20261014.json), and
-[evidence derivation helper](../tools/derive-pick-contract-evidence.mjs).
+[evidence derivation helper](tools/derive-pick-contract-evidence.mjs).
 
-The next target is to identify the control-flow boundary for paired
-`PREVDEX` neighbor writes versus unpaired `PICK`/`RAN` results, then design a
-probe that can falsify candidate state conditions without inferring a general
-color rule from the five natural units.
+At this checkpoint, the next target was to identify the control-flow boundary
+for paired `PREVDEX` neighbor writes versus unpaired `PICK`/`RAN` results. The
+later unit-3 and 12-case candidate section below supersedes that next step with
+a controlled return-substitution experiment.
+
+## 2026-10-14 third natural screen-unit PICK sample
+
+A sixth source-bound before/observer/after triplet captured seed-1234 unit 3
+at 320×480. All six drawing/scene outputs and ten ordinary staged Lisp
+sources match the fresh controls. Its 34 points and 36 writer calls reproduce
+132 bytes (SHA-256
+`f46634b0a1f962bf0f8fc27d8fbdd7e97b5d63e93e1870bec7b394b000bfe0ec`). The
+observer records three natural `PICK(27,28,29)` returns: 29, 27, and 27. Their
+nested `RAN(0,2)` indices are 2, 0, and 0; `PREVDEX` at those entries is 28,
+29, and 27. The first two returns are followed by matching HDEX writes before
+points 0 and 13; the final return has no following HDEX write.
+
+An offline check across seed-1234 units 2, 3, 5, and 6 fits the candidate
+“write after PICK when the return differs from PREVDEX at nested RAN entry” in
+12/12 calls: eight differing returns are followed by matching HDEX writes and
+four equal returns have no following write. These are four units from one
+painting and one fixed argument list. The observation is not an independent
+seed, controlled downstream test, direct caller proof, recovered color rule,
+or JS contract. The natural-unit total is now six units and 837 writer bytes;
+routine/contract counts remain 31/32, milestone progress 1/5 (20% by count),
+and whole-painting parity 0.
+
+The next experiment is a paired return-substitution intervention on unit 2:
+after natural PICK consumes its RAN draw, force its caller-visible result to
+29 at the first PICK (natural 28, PREVDEX 28), then to 28 at the second PICK
+(natural 27, PREVDEX 28). Record the HDEX effect for each arm, label the
+intentional output change, and compare each run with fresh uninstrumented
+controls. See the [unit-3 evidence](introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
+[12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
+and [screen-unit findings](introspection/screen-unit-context.md).
 
 ## What remains before a general AARON-equivalent generator
 

@@ -1609,22 +1609,51 @@ function evidence, not a general stop-rule or whole-painting parity result.
 
 ## Natural screen-unit context samples, 2026-10-14
 
-Five source-bound before/observer/after triplets cover seed-1234 units 1, 2,
-5, and 6 plus seed-5678 unit 1. Their exact path/color slices total 705 writer
-bytes. Typed event snapshots in seed-1234 units 2 and 5 repeat two local
+Six source-bound before/observer/after triplets cover seed-1234 units 1, 2,
+3, 5, and 6 plus seed-5678 unit 1. Their exact path/color slices total 837
+writer bytes. Typed event snapshots in seed-1234 units 2 and 5 repeat local
 `PREVDEX` neighbor transitions, while unpaired random returns show that
-`RAN(0,2)` alone does not determine whether a color write occurs. Unit 6 adds
-three natural `PICK(27,28,29)` calls with observed nested random results 2, 1,
-1 and returns 29, 28, 28; this is one finite sample, not a general contract.
+`RAN(0,2)` alone does not determine whether a color write occurs. Units 2, 3,
+5, and 6 now provide 12 natural `PICK(27,28,29)`/`PREVDEX` comparisons that fit
+one observational candidate, all from the same seed-1234 painting. This is
+not an independent-seed or controlled downstream contract.
 The v4 768×1080 attempt selected an empty third unit and is excluded from the
 accepted set; a separate 320×480 v5 trace has a populated third unit. Treat that as a
 run- and resolution-specific difference, not an ordinal rule. See the
 [findings and limits](../screen-unit-context.md) and the portable captures:
 [seed-1234 unit 1](screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit 1](screen-unit-context-seed5678-20261014.json),
-[seed-1234 unit 2](screen-unit-context-seed1234-unit2-20261014.json), and
+[seed-1234 unit 2](screen-unit-context-seed1234-unit2-20261014.json),
+[seed-1234 unit 3](pick-prevdex-seed1234-unit3-20261014.json),
 [seed-1234 unit 5](screen-unit-context-seed1234-unit5-20261014.json), and
 [seed-1234 unit 6](screen-unit-context-seed1234-unit6-20261014.json).
+
+## Natural PICK/PREVDEX candidate, units 2/3/5/6, 2026-10-14
+
+[`pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json`](pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json)
+binds four source-bound unit evidence files to one AA0 hash and checks 12
+natural calls. Eight PICK returns that differ from PREVDEX at the nested
+`RAN(0,2)` entry are followed by an HDEX write of that return; four equal
+returns have no HDEX write before the next PICK or unit end. The candidate
+matches 12/12 observations; this is not recovered behavior.
+All calls use one seed-1234 painting and one argument list, so they are not
+independent-seed or controlled downstream cases. It proves neither a direct
+Lisp caller nor a JS color contract. The analyzer additionally requires
+distinct screen-unit ordinals, six matching fresh-control outputs, ten
+ordinary scene-source hashes, both observer-only report hashes, typed FIXNUM
+RAN bounds/results, and one typed PREVDEX snapshot per selected RAN entry.
+Rebuild it with
+[`analyze-pick-prevdex-observations.mjs`](../../tools/analyze-pick-prevdex-observations.mjs)
+from the four evidence files listed in the report.
+
+The unit-3 source-bound capture is
+[`pick-prevdex-seed1234-unit3-20261014.json`](pick-prevdex-seed1234-unit3-20261014.json).
+Its fresh controls match all six drawing/scene outputs and ten ordinary
+staged sources; the 34-point path replays 132 writer bytes with SHA-256
+`f46634b0a1f962bf0f8fc27d8fbdd7e97b5d63e93e1870bec7b394b000bfe0ec`.
+The observer uses probe v10 and records three natural PICK calls. Rebuild the
+unit report from its retained ignored before/observer/after roots with
+[`derive-screen-unit-context-evidence.mjs`](../../tools/derive-screen-unit-context-evidence.mjs).
 
 ## Controlled three-integer PICK contract, 2026-10-14
 

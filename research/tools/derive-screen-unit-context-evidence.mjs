@@ -45,6 +45,7 @@ function contextMapShape(context, name) {
 }
 
 function parseContextReport(text, probeTag) {
+  const capturesPickReturns = ['screen-unit-context-v6', 'screen-unit-context-v7', 'screen-unit-context-v8', 'screen-unit-context-v9', 'screen-unit-context-v10'].includes(probeTag);
   const normalized = text.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').trimEnd();
   const lines = normalized.split('\n');
   assert.equal(lines[0], `BEGIN ${probeTag}`);
@@ -57,10 +58,10 @@ function parseContextReport(text, probeTag) {
   assert.match(ready, /"SCREEN-AND-STORE"/);
   assert.match(ready, /"PREP-LINE"/);
   assert.match(ready, /"STORE-IN-FILE"/);
-  if (probeTag === 'screen-unit-context-v6') assert.match(ready, /"PICK"/);
-  if (probeTag === 'screen-unit-context-v6') {
+  if (capturesPickReturns) assert.match(ready, /"PICK"/);
+  if (capturesPickReturns) {
     assert.match(ready, /return-targets=\("PICK"\)/,
-      'v6 READY does not confirm the PICK return-capture configuration');
+      'READY does not confirm the PICK return-capture configuration');
   }
   const optionalTargetsInstalled = lines
     .filter((line) => line.startsWith('OPTIONAL-TARGET-INSTALLED '))
@@ -89,6 +90,10 @@ function parseContextReport(text, probeTag) {
     'screen-unit-context-v4': 3,
     'screen-unit-context-v5': 5,
     'screen-unit-context-v6': 6,
+    'screen-unit-context-v7': 1,
+    'screen-unit-context-v8': 5,
+    'screen-unit-context-v9': 2,
+    'screen-unit-context-v10': 3,
   }[probeTag];
   assert.ok(expectedOrdinal, `unexpected screen-unit context probe version: ${probeTag}`);
   assert.equal(selectedOrdinal, expectedOrdinal,
@@ -219,7 +224,9 @@ function parseContextReport(text, probeTag) {
     }];
   });
   if (['screen-unit-context-v3', 'screen-unit-context-v4',
-    'screen-unit-context-v5', 'screen-unit-context-v6'].includes(probeTag)) {
+    'screen-unit-context-v5', 'screen-unit-context-v6',
+    'screen-unit-context-v7', 'screen-unit-context-v8',
+    'screen-unit-context-v9', 'screen-unit-context-v10'].includes(probeTag)) {
     assert.equal(colorStates.size, colors.length,
       'typed context probes must snapshot every AARGB HDEX writer call');
     assert.equal(prepStates.size, prepCalls.length,
@@ -283,7 +290,7 @@ function parseContextReport(text, probeTag) {
       valuesSummary: returned.valuesSummary,
     };
   });
-  if (probeTag === 'screen-unit-context-v6') {
+  if (capturesPickReturns) {
     assert.ok(pickCalls.length > 0, 'selected unit contains no observed PICK calls');
   }
   const decisionTimeline = [
@@ -331,7 +338,7 @@ function parseContextReport(text, probeTag) {
       writerCalls: writerCalls.length,
       writerOrdinals: [Number(firstText), Number(lastText)],
       colorSelections: colors,
-      ...(probeTag === 'screen-unit-context-v6' ? { pickCalls } : {}),
+      ...(capturesPickReturns ? { pickCalls } : {}),
       decisionTimeline,
       randomCalls,
     },
@@ -342,16 +349,16 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   const summaryText = readFileSync(path.join(observerPath, 'summary.json'), 'utf8')
     .replace(/^\uFEFF/, '');
   const observerSummary = JSON.parse(summaryText);
-  const isV6 = /^aaron-screen-unit-context-v6\.txt$/
+  const capturesPickReturns = /^aaron-screen-unit-context-v(?:[6-9]|10)\.txt$/
     .test(observerSummary.requiredProbeOutputName ?? '');
   const observerOnlyOutputNames = ['aaron-planning-call-trace.txt'];
-  if (isV6) observerOnlyOutputNames.push('aaron-scene-state-snapshot.txt');
+  if (capturesPickReturns) observerOnlyOutputNames.push('aaron-scene-state-snapshot.txt');
   const verified = await verifyLocalAaronTriplet(beforePath, observerPath, afterPath, {
     observerOnlyOutputNames,
   });
   const [before, observer, after] = verified.runs;
   assert.ok(['screen-unit-seed-1234', 'screen-unit-seed-5678'].includes(observer.summary.mode));
-  const probeMatch = /^aaron-(screen-unit-context-v[123456])\.txt$/.exec(observer.summary.requiredProbeOutputName);
+  const probeMatch = /^aaron-(screen-unit-context-v(?:[1-9]|10))\.txt$/.exec(observer.summary.requiredProbeOutputName);
   assert.ok(probeMatch, 'unexpected screen-unit context probe output name');
   const probeTag = probeMatch[1];
   assert.equal(observer.summary.requiredProbeEndMarker, `END ${probeTag}`);
@@ -396,7 +403,7 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
       imageSha256: sha256(imageBytes),
       colorMapReportSha256: colorBytes ? sha256(colorBytes) : null,
       matchedControlOutputs: verified.artifactHashes,
-      ...(probeTag === 'screen-unit-context-v6'
+      ...(capturesPickReturns
         ? {
           observerOnlyOutputHashes: verified.observerOnlyOutputHashes,
           ordinarySceneSourceHashes: verified.sourceHashes,
@@ -419,7 +426,7 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
       'The observer records current map dimensions and selected bindings, not full map contents or deltas.',
       'A capped global writer tape is used only when the selected screen-unit byte interval is fully inside the recorded prefix; no behavior after that prefix is inferred.',
       'The JS screen writer still receives path points and color events as captured inputs; this evidence does not add an upstream JS contract.',
-      ...(probeTag === 'screen-unit-context-v6'
+      ...(capturesPickReturns
         ? ['The observer-only scene report adds exactly one FIRST-PICK-RETURN snapshot block; it is hash-bound separately from the matching uninstrumented control reports.']
         : []),
     ],
