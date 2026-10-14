@@ -160,6 +160,9 @@ try {
         $installer = Start-Process -FilePath 'msiexec.exe' -ArgumentList $arguments `
             -Wait -PassThru
         $installExitCode = $installer.ExitCode
+        if ($null -eq $installExitCode) {
+            throw 'Installer completed, but Windows PowerShell did not expose its exit code.'
+        }
     }
 
     $expectedExeHash = ($manifest.files |
@@ -307,6 +310,9 @@ try {
             $process = Start-Process -FilePath $aaronExe -ArgumentList $applicationArguments @startArguments
         }
     }
+    # Materialize the redirected child process handle before status polling;
+    # Windows PowerShell 5.1 can otherwise leave ExitCode null after exit.
+    $null = $process.Handle
 
     if ($CaptureApplicationMenu -and $Mode -eq 'application') {
         Add-Type @"
