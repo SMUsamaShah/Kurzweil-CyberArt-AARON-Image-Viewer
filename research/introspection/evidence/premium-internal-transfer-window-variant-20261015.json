@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "status": "incomplete-window-rejected-static-analysis-only",
+  "triplet": {
+    "id": "prem-internal-1015c-20261014-234038-b80a2004",
+    "mode": "writer-stream-seed-1234",
+    "before": {
+      "complete": true,
+      "runId": "prem-internal-1015c-20261014-234038-b80a2004-before",
+      "root": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-before",
+      "summarySha256": "0ee4302617950cbaca5d582f40b236bdd1ad7de95998a8624292e3b5475f3c80",
+      "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "sceneReportSha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+    },
+    "observer": {
+      "complete": false,
+      "summaryExists": false,
+      "runId": "prem-internal-1015c-20261014-234038-b80a2004-observer",
+      "root": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-observer",
+      "sceneReportPath": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-observer\\capture\\aaron-scene-state-snapshot.txt",
+      "sceneReportSha256": "ca2b1df573e509ad5950cdb4b3da628c4a3e30aaba422421d0eb8842123b3194",
+      "probeReady": true,
+      "sceneEnd": false,
+      "aa0Exists": false
+    },
+    "after": {
+      "started": false,
+      "root": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-after"
+    },
+    "acceptedComparisonExists": false,
+    "controlsMatch": null
+  },
+  "runtime": {
+    "manifestPath": "research/extracted/aaron/manifest.json",
+    "manifestSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+    "executablePath": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-observer\\runtime\\AARON.exe",
+    "executableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+    "pllPath": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-observer\\runtime\\AARON.pll",
+    "pllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+    "expectedManifestPllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+  },
+  "debugger": {
+    "schema": "aaron-premium-internal-transfer-breakpoint-v1",
+    "processId": 16948,
+    "callSiteAddress": "0x1fe4c07c",
+    "outerCallHit": true,
+    "dispatchTarget": "0x20000983",
+    "sourceHitSite": "PREMIUM-CALL-EDI+27",
+    "sourceHitEip": "0x1fe4c07c",
+    "targetDestinationHit": false,
+    "candidateEventCount": 0,
+    "captureCompleted": false,
+    "terminalReason": "capture-error",
+    "captureError": "InvalidOperationException: The live 256-byte window failed the exact source-address/hash, EIP-offset, or REA signature gate",
+    "attached": true,
+    "detached": true,
+    "readyPauseReleased": true,
+    "debugRegistersRestored": true,
+    "trapFlagUntouched": true,
+    "cleanupErrors": []
+  },
+  "sourceDiagnostic": {
+    "path": "research\\extracted\\local-oracle\\external-runs\\prem-internal-1015c-20261014-234038-b80a2004-observer\\native-code\\debugger-capture-diagnostic.json",
+    "sha256": "48c0380f47ba5a5ca8da41b77ee29b44914421426b3c1aeb606dd0931f792216",
+    "acceptanceFailure": "No-TF capture did not complete with READY release, exact debug-state restoration, detach, and clean cleanup"
+  },
+  "window": {
+    "start": "0x0000000020000903",
+    "eip": "0x20000983",
+    "endExclusive": "0x0000000020000a03",
+    "length": 256,
+    "eipOffset": 128,
+    "expectedReferenceSha256": "6e153e579fad4244bda19b591788d06a4a94b50b2c1addbbbad6892b9afa5693",
+    "actualSha256": "ec07d684ef3f708b0fe04b48f5eb13052e4bce6ea549ecfb2da00250fba4e281",
+    "sourceWindowMatches": false,
+    "validationPassed": false,
+    "bytesHex": "06000000008509002060b3ab06490e8763f2ba88630000ff975f03000040af2b06c7c04e2000000000afc04e2097c04e208509002085090020f1aa0000dcba8863290d002052015d200897ab06fdba886302180020c8000000c0010000da17002019e04e20026001547fc04e2067c04e204fc04e2037c04e201fc04e20909090b10283e17f8b7315894df039679b7209eb85090020850900208944240489542408ff6612908b0900208309002049b48863318a8763b3b68863746c88637f8d87633bac8863099a886334b78863678b87634c3388633aa188636bb4886389b48863548a8763838a8763f8428863e9b388638fb7886348ad8763a7b48863c9b488",
+    "acceptedCompleteSample": {
+      "tripletId": "prem-v2-20261014e-20261014-170512-b228b66c",
+      "sha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+      "evidencePath": "research/introspection/evidence/premium-callsite-wide-window-20261014-v3.json",
+      "evidenceSha256": "ea98b1f39094a11bd45313e930dc1341cfee7e22872185754678fa2e5b03104c"
+    },
+    "priorRejectedSample": {
+      "tripletId": "prem-internal-transfer-v1-20261014-193320-2749f96a",
+      "sha256": "6e153e579fad4244bda19b591788d06a4a94b50b2c1addbbbad6892b9afa5693",
+      "diagnosticPath": "research\\extracted\\local-oracle\\external-runs\\prem-internal-transfer-v1-20261014-193320-2749f96a-observer\\native-code\\debugger-capture-diagnostic.json",
+      "diagnosticSha256": "8556189857d9a50b142a963106a6842b1da16507f108ddf26dfbb993bb9d39bb"
+    },
+    "changedOffsetsFromAccepted": [
+      [
+        {
+          "offset": "0x0b",
+          "left": "a2",
+          "right": "ab"
+        },
+        {
+          "offset": "0x1f",
+          "left": "22",
+          "right": "2b"
+        },
+        {
+          "offset": "0x39",
+          "left": "ee",
+          "right": "f1"
+        },
+        {
+          "offset": "0x45",
+          "left": "f2",
+          "right": "52"
+        },
+        {
+          "offset": "0x46",
+          "left": "8b",
+          "right": "01"
+        },
+        {
+          "offset": "0x4b",
+          "left": "a2",
+          "right": "ab"
+        }
+      ]
+    ],
+    "changedOffsetsFromPriorRejected": [
+      [
+        {
+          "offset": "0x00",
+          "left": "07",
+          "right": "06"
+        },
+        {
+          "offset": "0x0b",
+          "left": "9d",
+          "right": "ab"
+        },
+        {
+          "offset": "0x0c",
+          "left": "07",
+          "right": "06"
+        },
+        {
+          "offset": "0x1f",
+          "left": "1d",
+          "right": "2b"
+        },
+        {
+          "offset": "0x20",
+          "left": "07",
+          "right": "06"
+        },
+        {
+          "offset": "0x39",
+          "left": "ee",
+          "right": "f1"
+        },
+        {
+          "offset": "0x4b",
+          "left": "9d",
+          "right": "ab"
+        },
+        {
+          "offset": "0x4c",
+          "left": "07",
+          "right": "06"
+        }
+      ]
+    ],
+    "criticalInstructionSpans": [
+      {
+        "bytes": "ff975f030000",
+        "startOffset": "0x17",
+        "endExclusiveOffset": "0x1d",
+        "meaning": "REA static CALL dword ptr [EDI+0x35f]"
+      },
+      {
+        "bytes": "b102",
+        "startOffset": "0x80",
+        "endExclusiveOffset": "0x82",
+        "meaning": "REA static MOV CL,0x2"
+      },
+      {
+        "bytes": "ff6612",
+        "startOffset": "0xa1",
+        "endExclusiveOffset": "0xa4",
+        "meaning": "REA static JMP dword ptr [ESI+0x12]"
+      }
+    ],
+    "changedOffsetsOverlapCriticalSpans": false
+  },
+  "rea": {
+    "version": "6.4.0",
+    "provider": "Ghidra 12.1.4",
+    "toolchainPath": "research/artifacts/rea-tools/toolchain-current.json",
+    "toolchainSha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04",
+    "preparerPath": "research/tools/prepare-premium-internal-transfer-diagnostic-pe.mjs",
+    "preparerSha256": "1e52558fa5aee88a5ddffeb0b6154a037c9fedf02cabd0e539208b1d5aceb75b",
+    "syntheticPePath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\premium-internal-transfer-window.synthetic.exe",
+    "syntheticPeSha256": "e9cf0d70f4d8dc7e2e1cca20cde8813fc3784e360af1dbaa02efee88568c41ac",
+    "bindingPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\premium-internal-transfer-window.binding.json",
+    "bindingSha256": "acf0bbc5ced539d632773bc47146ed6d37bf1c30ff73f5aeb4ebca51dbb84439",
+    "syntheticPeExecuted": false,
+    "queries": [
+      {
+        "name": "eip-inspect",
+        "operation": "inspect-native-instruction",
+        "address": "0x10001080",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-eip-elevated\\eip.json",
+        "reportSha256": "6e40943a23e36cc604802e8ab6a750c46ae82c67917414180ea12d1552b9d962",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-eip-elevated\\rea-invocation.json",
+        "invocationSha256": "d83bc3f06fad4349b8782a4dcd40f5f8c2fcc9ab11459a931088969495913913",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": "decoded",
+          "bytes": "b102",
+          "mnemonic": "MOV",
+          "disassembly": "MOV CL,0x2",
+          "flowKind": "fallthrough",
+          "directDestinations": []
+        }
+      },
+      {
+        "name": "candidate-call-inspect",
+        "operation": "inspect-native-instruction",
+        "address": "0x10001017",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-call-elevated\\call.json",
+        "reportSha256": "2b7739d1352d3b46aee6d6c174639b098ac825e9f475d3f0aa4c0233e901bf6b",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-call-elevated\\rea-invocation.json",
+        "invocationSha256": "1e3a6b60e88b2f4098c68bc67c0e00be1669d1e3a33b9e4d244d0dd3a7754c3b",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": "decoded",
+          "bytes": "ff975f030000",
+          "mnemonic": "CALL",
+          "disassembly": "CALL dword ptr [EDI + 0x35f]",
+          "flowKind": "call",
+          "directDestinations": []
+        }
+      },
+      {
+        "name": "short-jump-inspect",
+        "operation": "inspect-native-instruction",
+        "address": "0x10001090",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-short-jump-elevated\\short-jump.json",
+        "reportSha256": "97c0c7b9daf640efccef95f64231e869ab418302c6d9fea6b61c0ad34f99a268",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-short-jump-elevated\\rea-invocation.json",
+        "invocationSha256": "a48f1823ea15c1e312d7a8b6d0298c37038210497e4743b93a063b52aedc25d4",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": "decoded",
+          "bytes": "eb85",
+          "mnemonic": "JMP",
+          "disassembly": "JMP 0x10001017",
+          "flowKind": "call",
+          "directDestinations": [
+            "0x10001017"
+          ]
+        }
+      },
+      {
+        "name": "tail-jump-inspect",
+        "operation": "inspect-native-instruction",
+        "address": "0x100010a1",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-tail-jump-elevated\\tail-jump.json",
+        "reportSha256": "274aec73df18f6435962e17e35c1ed9b79f3fcf883323d9e40d26f8756853f4d",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-tail-jump-elevated\\rea-invocation.json",
+        "invocationSha256": "ed32bce30f70624f6f62f5007ed7efc99026647503e96360bea6967dfbe9a855",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": "decoded",
+          "bytes": "ff6612",
+          "mnemonic": "JMP",
+          "disassembly": "JMP dword ptr [ESI + 0x12]",
+          "flowKind": "jump",
+          "directDestinations": []
+        }
+      },
+      {
+        "name": "eip-function",
+        "operation": "function",
+        "address": "0x10001080",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-function-eip-elevated\\function.json",
+        "reportSha256": "cee04c59dd4431f71543df1563c1dc1dd05d5870ad8de2054b8ffdad9e71750e",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-function-eip-elevated\\rea-invocation.json",
+        "invocationSha256": "c9833fca5e0ad5692c506e112ced761b04bb7ed0ab59f71386179897dbcd936b",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": null,
+          "bytes": null,
+          "mnemonic": null,
+          "disassembly": null,
+          "flowKind": null,
+          "directDestinations": [
+            null
+          ]
+        }
+      },
+      {
+        "name": "candidate-call-function",
+        "operation": "function",
+        "address": "0x10001017",
+        "reportPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-function-call-elevated\\function.json",
+        "reportSha256": "c2ee44bc38e23ce8f5f0d29b4327095cfa1e2d8c46531e2f45476780ca4e6f64",
+        "invocationPath": "research\\artifacts\\rea-tools\\premium-internal-transfer-diagnostic-1015c-20261015-a\\rea-function-call-elevated\\rea-invocation.json",
+        "invocationSha256": "663b056d6d1e35dbd70d44191251f2f01e88bced18f02aeeb9fc9fe174bfbd47",
+        "staticOnly": true,
+        "inputWasExecuted": false,
+        "result": {
+          "status": null,
+          "bytes": null,
+          "mnemonic": null,
+          "disassembly": null,
+          "flowKind": null,
+          "directDestinations": [
+            null
+          ]
+        }
+      }
+    ]
+  },
+  "interpretation": "REA decoded the exact 1015c window in a synthetic PE. The EIP, CALL, short JMP, and tail JMP decode at the stated synthetic addresses. These are static observations of a rejected sample; the incomplete observer did not hit the internal candidates, and the triplet has no after control.",
+  "limitations": [
+    "No complete before/observer/after comparison exists.",
+    "The observer failed the pinned exact 256-byte window hash and armed no internal candidate breakpoints.",
+    "No internal transfer execution, direct caller, original function boundary, ABI, or JavaScript behavior was recovered.",
+    "The reason the captured window bytes vary between these same-runtime process samples is unresolved; do not label changed bytes as relocations or benign data.",
+    "Frida Stalker has only been validated on the 32-bit fixture and has not been attached to AARON."
+  ]
+}

@@ -1,6 +1,6 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-14. This is the detailed count-based checkpoint log. The compact
+Updated 2026-10-15. This is the detailed count-based checkpoint log. The compact
 current snapshot is in the [root progress report](../progress-report.md).
 It reports measured scope and keeps function-name counts separate from
 recovered behavior.
@@ -825,15 +825,47 @@ SHA-256 on consecutive runs; no AARON rerun was needed. The plain-string fix
 and offline recovery command are documented in
 [tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
 
-Next, use a wider source-bound live read to supply bytes beyond the current
-32-byte window. REA queried every byte start at offsets +18 through +24 and
-the xref for +25; no alternate start reported a CALL, and the xref source was
-the conditional branch at +14. The alternate decodes do not establish
-instruction boundaries. If the wider static window still cannot recover the
-transfer, trace executed EIPs in one bounded same-thread observer. Do not
-infer a direct edge, ABI, or Lisp function name. The counts remain 31 routine
-names / 32 bounded contracts, 1/5 milestones, and zero whole-painting parity.
-See the [REA follow-up evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
+The wider source-bound live read is complete. Triplet
+`premium-v2-20261014e-20261014-170512-b228b66c` rediscovered the destination
+and captured 256 bytes at `0x20000903–0x20000a02`, with matching controls.
+REA decoded `CALL [EDI+0x35f]` at `0x2000091a` and `JMP [ESI+0x12]` at
+`0x200009a4`; the bytes at `0x20000993` are `EB 85`, a relative branch to the
+callsite, despite conflicting provider flow metadata. These remain static
+candidates, not observed edges. The constant-slot scan found a `PICK` symbol
+reference but no function-valued constant.
+
+Two orthogonal methods were assessed. The Lisp PICK-witness v3 observer failed
+its completion gates: the before-control passed, but the observer image was
+empty, no after-control ran, and its witness had no entry/call/footer rows. The
+scene report wrote END and later MAIN-ERROR, but the planning trace cap prevents
+pairing those events to one invocation; runtime callback status was not logged.
+This establishes neither a PICK hit nor a no-hit. WPR's GPU profile enables
+system-call and graphics providers, but its listed stack events omit syscall
+entry/exit stackwalks and it cannot show the internal Lisp operand or caller.
+No WPR recording was made for this question. The next experiment is therefore
+a distinct no-TF hardware execute-breakpoint capture at fresh, byte-validated
+REA candidates, with same-thread operand/stack checks and original debug-state
+restoration. Keep the 31-name / 32-contract counts, 1/5 milestone count, and
+zero full-painting parity unchanged. See the [REA window evidence](introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
+[tooling diagnosis](tooling-workarounds.md#premium-pick-witness-v3-had-no-footer-2026-10-14),
+and [active execution plan](execution-plan.md).
+
+## 2026-10-15 PREMIUM internal-transfer window rejection
+
+The fresh `prem-internal-1015c-20261014-234038-b80a2004` attempt completed its
+before control and reached the expected outer callsite, but its observer
+rejected the 256-byte window hash before arming internal breakpoints. No
+completed observer AA0/scene `END` or after control exists, so this is not an
+accepted triplet. The captured bytes differ from both the accepted sample and
+an earlier rejected sample; the changes avoid the three instruction spans
+decoded by REA, but their cause is unknown. Do not label them relocations or
+benign data. REA/Ghidra decoded the exact rejected bytes in an unexecuted
+synthetic PE; this yielded static instruction decodes only. Frida's successful
+32-bit fixture is separate and Frida has not attached to AARON. The 31-name /
+32-contract counts, 1/5 milestone count, and zero whole-painting parity remain
+unchanged. See the [portable evidence](introspection/evidence/premium-internal-transfer-window-variant-20261015.json),
+[finding](introspection/premium-internal-transfer-window-variant-20261015.md),
+and [Frida fixture result](tooling/frida-stalker-x86-smoke-20261015.md).
 
 ## Links
 

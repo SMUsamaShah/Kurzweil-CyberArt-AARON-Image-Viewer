@@ -69,6 +69,9 @@
                               (symbol-value 'aaron-planning-return-targets)))
          (return-seen nil)
          (script-nonnil-return-seen nil)
+         (main-lifecycle-sequence 0)
+         (main-lifecycle-limit 256)
+         (main-lifecycle-overflow nil)
          (finalized nil)
          (required-installed-count 0)
          (main-installed nil))
@@ -495,6 +498,23 @@
                              (symbol-value 'aaron-trace-current-stack))))
              (and (listp stack)
                   (member "DISPLAY-COLOR-PATCHES" stack :test #'string=))))
+         (record-main-lifecycle (event entry-depth &optional problem)
+           (if (< main-lifecycle-sequence main-lifecycle-limit)
+               (progn
+                 (incf main-lifecycle-sequence)
+                 (if problem
+                     (emit-form "MAIN-LIFECYCLE seq=~D event=~A depth=~D type=~A"
+                                main-lifecycle-sequence event entry-depth
+                                (safe-type-token problem))
+                   (emit-form "MAIN-LIFECYCLE seq=~D event=~A depth=~D"
+                              main-lifecycle-sequence event entry-depth))
+                 main-lifecycle-sequence)
+             (progn
+               (unless main-lifecycle-overflow
+                 (setf main-lifecycle-overflow t)
+                 (emit-form "MAIN-LIFECYCLE-OVERFLOW cap=~D first-unrecorded=~D"
+                            main-lifecycle-limit (1+ main-lifecycle-limit)))
+               nil)))
          (finish-probe (reason)
            (unless finalized
              (setf finalized t)
@@ -589,6 +609,47 @@
                 ((member name transition-targets :test #'string=)
                  (emit-form "TARGET-INSTALLED name=~A actual-package=~A actual-name=~A kind=~A"
                             name (safe-package-name owner) name name))))
+             ((and (eq event :enter) (string= name "MAIN"))
+              (record-main-lifecycle "ENTER" entry-depth))
+             ((and (eq event :error) (string= name "MAIN"))
+              (record-main-lifecycle "ERROR" entry-depth args)
+              (emit-form "MAIN-ERROR type=~A"
+                         (if args (safe-type-token args) "NO-CONDITION")))
+             ((and (eq event :exit) (string= name "MAIN"))
+              ;; A missing callback is normal for controls and unrelated
+              ;; observers. Versioned probes opt in by setting this symbol
+              ;; before the scene trace loads; never guess a stale callback.
+              (let* ((main-sequence
+                       (record-main-lifecycle "EXIT" entry-depth))
+                     (configured-callback
+                       (and (boundp 'aaron-scene-main-exit-callback-symbol)
+                            (symbol-value 'aaron-scene-main-exit-callback-symbol)))
+                     (callback
+                       (and (symbolp configured-callback)
+                            configured-callback))
+                     (callback-bound
+                       (and callback (fboundp callback))))
+                (emit-form "MAIN-CALLBACK main-seq=~D fboundp=~A symbol=~A"
+                           main-sequence
+                           (if callback-bound "T" "NIL")
+                           (if callback
+                               (safe-symbol-token callback)
+                             "NONE"))
+                (when callback-bound
+                  (emit-form "MAIN-CALLBACK-ENTRY main-seq=~D" main-sequence)
+                  (handler-case
+                      (progn
+                        (funcall callback)
+                        (emit-form "MAIN-CALLBACK-RETURN main-seq=~D status=RETURN"
+                                   main-sequence))
+                    (condition (problem)
+                      (emit-form "MAIN-CALLBACK-RETURN main-seq=~D status=ERROR type=~A"
+                                 main-sequence (safe-type-token problem))
+                      (emit-form "MAIN-EXIT-CALLBACK-ERROR type=~A"
+                                 (safe-type-token problem)))))
+                (unless callback-bound
+                  (emit-line "MAIN-EXIT-CALLBACK-MISSING"))
+                (finish-probe "MAIN-RETURNED")))
              ((and (eq event :enter) (string= name "RPARSE"))
               (incf rparse-depth))
              ((and (or (eq event :exit) (eq event :error))
@@ -724,9 +785,7 @@
                   (push name transition-exits)
                   (emit-form "BOUNDARY label=FIRST-~A-EXIT" name)
                   (snapshot (format nil "FIRST-~A-EXIT" name)))))
-             ((and (or (eq event :exit) (eq event :error))
-                   (string= name "MAIN"))
-              (finish-probe (if (eq event :exit) "MAIN-RETURNED" "MAIN-EXIT"))))))
+              )))
       ;; Install the observer before loading the validated trace.  The trace
       ;; captures this function once, then invokes it for its own successful
       ;; target installations and runtime events.
@@ -745,4 +804,4 @@
             (emit-form "READY required-targets=3 installed-targets=~D" required-installed-count)
             (emit-line "PROBE-READY"))
         (emit-form "NOT-READY required-targets=3 installed-targets=~D main-installed=~A"
-                   required-installed-count (if main-installed "T" "NIL"))))))
+                    required-installed-count (if main-installed "T" "NIL"))))))

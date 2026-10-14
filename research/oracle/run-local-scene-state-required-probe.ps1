@@ -349,6 +349,46 @@ if ($Mode -eq 'screen-unit-seed-5678') {
 if ($Mode -eq 'plan-seed-1234') {
     $stagedNames += 'scene-state-snapshot-plan-seeded-1234.cl'
 }
+$delimiterChecker = Join-Path $repoRoot 'research\tools\check-lisp-delimiters.mjs'
+if (-not (Test-Path -LiteralPath $delimiterChecker -PathType Leaf)) {
+    throw "Lisp source delimiter checker is missing: $delimiterChecker"
+}
+$stagedLispSources = @($stagedNames | Where-Object {
+    [IO.Path]::GetExtension($_) -eq '.cl'
+} | Select-Object -Unique | ForEach-Object {
+    if (-not $sources.ContainsKey($_) -or -not (Test-Path -LiteralPath $sources[$_] -PathType Leaf)) {
+        throw "Staged Lisp source is missing from the source map: $_"
+    }
+    $sources[$_]
+})
+if ($stagedLispSources.Count -eq 0) { throw 'No staged Lisp source was selected for delimiter validation' }
+$delimiterOutput = & node $delimiterChecker @stagedLispSources 2>&1
+if ($LASTEXITCODE -ne 0) {
+    throw "Staged Lisp source delimiter validation failed before oracle launch: $($delimiterOutput -join [Environment]::NewLine)"
+}
+if ($stagedNames -contains 'scene-state-snapshot.cl') {
+    $scopeChecker = Join-Path $repoRoot 'research\tools\check-lisp-probe-scope.mjs'
+    if (-not (Test-Path -LiteralPath $scopeChecker -PathType Leaf)) {
+        throw "Lisp probe scope checker is missing: $scopeChecker"
+    }
+    $sceneSource = $sources['scene-state-snapshot.cl']
+    $definitionArgs = @($sceneSource, '4',
+        '^\s*\(record-main-lifecycle',
+        '^\s*\(finish-probe',
+        '^\s*\(scene-observer')
+    $definitionOutput = & node $scopeChecker @definitionArgs 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "Scene observer definition scope validation failed before oracle launch: $($definitionOutput -join [Environment]::NewLine)"
+    }
+    $bodyArgs = @($sceneSource, '3',
+        "^\s*\(set 'aaron-scene-state-hook",
+        '^\s*\(load\s',
+        '^\s*\(if \(and \(= required-installed-count')
+    $bodyOutput = & node $scopeChecker @bodyArgs 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "Scene observer body scope validation failed before oracle launch: $($bodyOutput -join [Environment]::NewLine)"
+    }
+}
 $registryPath = 'HKCU:\Software\Kurzweil CyberArt Technologies\AARON'
 $registryParent = Split-Path -Path $registryPath -Parent
 $registryParentExisted = Test-Path -Path $registryParent
@@ -423,10 +463,24 @@ try {
         -RedirectStandardOutput (Join-Path $output 'stdout.txt') `
         -RedirectStandardError (Join-Path $output 'stderr.txt')
     $deadline = [DateTime]::UtcNow.AddSeconds($RunSeconds)
+    $firstCompletedAa0At = $null
     while ([DateTime]::UtcNow -lt $deadline) {
         Start-Sleep -Seconds 2
         $aaPath = 'C:\temp\aa0'
         $reportPath = 'C:\temp\aaron-scene-state-snapshot.txt'
+        if (Test-Path -LiteralPath $aaPath -PathType Leaf) {
+            $lastLine = Get-Content -LiteralPath $aaPath -Tail 1 -ErrorAction SilentlyContinue
+            if ($lastLine -eq 'end') {
+                $sceneReady = (Test-Path -LiteralPath $reportPath -PathType Leaf) -and
+                    (Select-String -LiteralPath $reportPath -SimpleMatch 'PROBE-READY' -Quiet -ErrorAction SilentlyContinue)
+                if (-not $sceneReady) {
+                    throw 'The first AA0 completed without a PROBE-READY scene observer report; probe initialization or report writing failed, so the runner is stopping instead of waiting through repeated paintings'
+                }
+                if ($null -eq $firstCompletedAa0At) {
+                    $firstCompletedAa0At = [DateTime]::UtcNow
+                }
+            }
+        }
         if ((Test-Path -LiteralPath $aaPath -PathType Leaf) -and
             (Test-Path -LiteralPath $reportPath -PathType Leaf)) {
             $lastLine = Get-Content -LiteralPath $aaPath -Tail 1 -ErrorAction SilentlyContinue
@@ -441,6 +495,11 @@ try {
             if ($lastLine -eq 'end' -and $reportEnded -and $probeCompletionSatisfied) {
                 $complete = $true
                 break
+            }
+            if ($lastLine -eq 'end' -and $null -ne $firstCompletedAa0At -and
+                -not $reportEnded -and
+                ([DateTime]::UtcNow - $firstCompletedAa0At).TotalSeconds -ge 10) {
+                throw 'The first AA0 completed, but the scene observer did not finalize within 10 seconds; stopping before another painting and preserving the incomplete report'
             }
         }
         if ($process.HasExited) { break }

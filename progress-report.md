@@ -1,7 +1,30 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-14. This is the compact project snapshot; technical evidence
+Updated 2026-10-15. This is the compact project snapshot; technical evidence
 and the running investigation history are linked below.
+
+Latest AARON investigation: the 2026-10-15 PREMIUM internal-transfer observer
+was rejected at its exact source-window gate. Its before-control completed, and
+the observer reached the expected outer callsite, but the 256-byte window hash
+was `ec07d684…fba4e281` rather than the pinned `6e153e57…afa5693`. No internal
+breakpoint was armed; the observer produced no completed AA0/scene END, and the
+after-control did not run. There is no accepted triplet or new behavior claim.
+The changed bytes avoid the three decoded instruction spans, but their cause is
+unresolved. REA decoded those exact bytes in a synthetic PE for static review;
+this does not validate runtime execution or a caller. See the [portable
+evidence](research/introspection/evidence/premium-internal-transfer-window-variant-20261015.json),
+[finding](research/introspection/premium-internal-transfer-window-variant-20261015.md),
+and [execution plan](research/execution-plan.md).
+
+Tooling update: REA/Ghidra was used on the exact rejected AARON window and
+decoded its call, branch, and indirect jump instructions from a synthetic PE.
+This is static-only analysis. Frida Stalker separately passed a 32-bit
+generated-code fixture with 10,000 ordered internal call/return pairs across
+31 batches; it has not been attached to AARON. REA remains the static targeting
+tool, while Frida is a potential live-tracing option still awaiting an AARON
+fixture/attachment. Behavior counts and whole-painting parity are unchanged.
+See the [REA finding](research/introspection/premium-internal-transfer-window-variant-20261015.md)
+and [Frida fixture findings](research/tooling/frida-stalker-x86-smoke-20261015.md).
 
 | Measure | Current status | What it means |
 |---|---:|---|
@@ -141,13 +164,17 @@ by four and `[ESP]` matched the method continuation `callsite+3`. The five
 drawing/scene artifacts, six staged sources, planning traces, and runner/runtime
 identities match; debug registers were restored and there were no cleanup
 errors. The target is not the mapped PICK entry, and REA's bounded static
-review created no function or boundary. Next, arm PICK's current entry on that
-same thread after the target hit and determine whether the anonymous target
-routes there with the original stack. This adds no JavaScript contract or
-painting parity. See [destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
-[bounded REA evidence](research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json),
+review created no function or boundary. A completed same-thread follow-up saw
+the current PICK entry before the continuation guard, with matching ESP, EBP,
+and saved continuation, but did not capture the intervening instructions or
+prove a direct edge. The wider REA window now identifies two unconfirmed
+indirect-transfer candidates. The next internal-flow attempt uses no-TF
+hardware execute breakpoints at freshly validated REA sites; see the
+[destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
+[REA window](research/introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
 [PICK findings](research/introspection/select-subject-methods.md), and the
-[tooling workarounds](research/tooling-workarounds.md).
+[execution plan](research/execution-plan.md). These captures add no JavaScript
+contract or painting parity.
 
 ## Follow the evidence
 
