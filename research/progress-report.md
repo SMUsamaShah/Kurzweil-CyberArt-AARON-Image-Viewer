@@ -20,6 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
+| Natural screen-unit context samples | 2 first-unit captures, seeds 1234 and 5678 | Both reproduce their full path/color writer slices (324 bytes total). Event chronology narrows one color transition but does not establish a rule or add a JS contract. |
 
 The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -260,6 +261,33 @@ contract. Counts remain 1,347 inventoried binding names, 30 routine names / 31
 bounded contracts, 1 of 5 milestones (20% by count), and zero whole-painting
 parity results. FREE-PATH's 26/30 canonical matrix match remains finite; four
 rows still differ and ten remain unclassified.
+
+## 2026-10-14 natural SCREEN-AND-STORE context captured
+
+Two complete before/observer/after triplets captured the first
+post-`RPARSE` `SCREEN-AND-STORE` unit at 320×480, under seeds 1234 and 5678.
+Each source-bound report completed, and fresh controls matched all six
+drawing/scene outputs plus ten and seven ordinary staged sources, respectively.
+JavaScript replays each selected path and its `AARGB` changes byte-for-byte:
+74 points / 244 bytes for seed 1234 and 19 points / 80 bytes for seed 5678.
+
+The samples share the first five `RAN` argument pairs but return different
+seeded values. In both, the second color event follows `RAN(0,2)→1` and lowers
+`HDEX` by one. A later identical random return in the seed-5678 unit has no
+following color event, so that value alone is not sufficient. The observed
+parent label is `BRUSH-STROKE` for seed 1234 and `PAINT-FILL` for seed 5678;
+the latter probe did not install the optional `BRUSH-STROKE` trace, so neither
+label proves a direct Lisp caller. The current JS still takes color events as
+input and has no new contract from this evidence.
+
+See the [screen-unit findings](introspection/screen-unit-context.md),
+[seed-1234 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
+[seed-5678 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
+and [triplet runner](tools/capture-screen-unit-context-triplet.ps1). The next
+probe will preserve RAN numeric types and capture `COLORDEX`, `PREVDEX`, and
+related state at each random/color event. Counts remain 30 routine names / 31
+bounded contracts, 1 of 5 milestones (20% by count), and zero whole-painting
+parity.
 
 ## 2026-10-14 FREE-PATH stop-boundary discriminator v8
 

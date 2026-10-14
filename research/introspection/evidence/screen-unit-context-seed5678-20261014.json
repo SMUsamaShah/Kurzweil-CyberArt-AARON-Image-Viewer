@@ -1,0 +1,341 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "mode": "screen-unit-seed-5678",
+    "probeVersion": "screen-unit-context-v2",
+    "controlRunIds": [
+      "screen-ctx2-5678-20261014-002603-6d9f5e65-before",
+      "screen-ctx2-5678-20261014-002603-6d9f5e65-after"
+    ],
+    "observerRunId": "screen-ctx2-5678-20261014-002603-6d9f5e65-observer",
+    "aa0Sha256": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+    "probeSourceSha256": "8138f1a624ba8173a215a7714cb722a73f084313f335a5511e46290083b52502",
+    "contextReportSha256": "236e1fdf0615b9b718f413940be137a1d62d061f663dd6791dc448914f59626d",
+    "screenUnitReportSha256": "33950540e8a534ab3006199a23190775e09880d799b72d1706bde60149043a5d",
+    "writerTapeSha256": "f0b207c778a123890d8e789d1e2b0a071025c7d01da88d52a597a9c7bc776db1",
+    "imageSha256": "9c6af3a38bedc932f8d4ea223dda58d9090b460eebf9373557b6ee4b242ea234",
+    "colorMapReportSha256": null,
+    "matchedControlOutputs": {
+      "aa0": "0ab08c23b241edd0f877c836e4f42fb0497108b8def8c32541ce165157563086",
+      "image": "9c6af3a38bedc932f8d4ea223dda58d9090b460eebf9373557b6ee4b242ea234",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "e3cc50bef1636328f94e6b002271a663668740f16f3c5b2677a7aa5813008053",
+      "aaron-planning-call-trace.txt": "826bc4da94befe3be7d990475ffa719c3532f723f0253044448cfe7714657272",
+      "aaron-random-seed-loaded.txt": "c991a95f4a8284ead1a60c591456bb7d66acd483d41ea33f34b9c82613a77b47"
+    },
+    "matchedOrdinarySceneSources": 7
+  },
+  "verifiedUnitByteReplay": {
+    "screenUnitOrdinal": 1,
+    "pointCount": 19,
+    "colorEvents": [
+      {
+        "beforePoint": 0,
+        "index": 35
+      },
+      {
+        "beforePoint": 6,
+        "index": 34
+      }
+    ],
+    "writerCalls": 21,
+    "writerOrdinals": [
+      2214,
+      2234
+    ],
+    "byteLength": 80,
+    "byteSha256": "f0d0103217f8e869cb931e06306ba8a8320f12656ec0735e30146f066e99ee17"
+  },
+  "selectedUnit": {
+    "ordinal": 1,
+    "id": 2321,
+    "nearestObservedParentId": 2320,
+    "nearestObservedParentName": "PAINT-FILL",
+    "optionalTargetsInstalled": [],
+    "traceDepth": 5,
+    "argsSummary": "(:CONS ((:CONS ((:OBJECT-TYPE TRIPT) (:OBJECT-TYPE TRIPT) (:OBJECT-TYPE TWOPT) (:OBJECT-TYPE TRIPT) (:OBJECT-TYPE TWOPT) (:OBJECT-TYPE TRIPT) (:OBJECT-TYPE TRIPT) (:OBJECT-TYPE TWOPT)) :TAIL :MORE) (:NUMBER FIXNUM 1) (:NUMBER FIXNUM 0)) :TAIL :NIL)",
+    "nearestObservedAncestry": [
+      {
+        "id": 2,
+        "parentId": null,
+        "name": "RUN-AARON",
+        "traceDepth": 0,
+        "argsSummary": "(:SYMBOL \"COMMON-LISP\" \"NIL\")"
+      },
+      {
+        "id": 3,
+        "parentId": 2,
+        "name": "DOIT",
+        "traceDepth": 1,
+        "argsSummary": "(:CONS ((:SYMBOL #1=\"COMMON-LISP\" \"NIL\") (:SYMBOL #1# \"T\")) :TAIL :NIL)"
+      },
+      {
+        "id": 5,
+        "parentId": 3,
+        "name": "MAIN",
+        "traceDepth": 2,
+        "argsSummary": "(:SYMBOL \"COMMON-LISP\" \"NIL\")"
+      },
+      {
+        "id": 2316,
+        "parentId": 5,
+        "name": "DISPLAY-COLOR-PATCHES",
+        "traceDepth": 3,
+        "argsSummary": "(:SYMBOL \"COMMON-LISP\" \"NIL\")"
+      },
+      {
+        "id": 2320,
+        "parentId": 2316,
+        "name": "PAINT-FILL",
+        "traceDepth": 4,
+        "argsSummary": "(:CONS ((:NUMBER FIXNUM 1) (:NUMBER FIXNUM 0) (:NUMBER FIXNUM 308)) :TAIL :NIL)"
+      }
+    ],
+    "entryContext": {
+      "rplane": 132,
+      "sdex": 0,
+      "boundaryValue": 3,
+      "prevdex": -1,
+      "brushType": "PAINT-BRUSH",
+      "fillMap": {
+        "rank": 2,
+        "dimensions": [
+          320,
+          480
+        ]
+      },
+      "patchMap": {
+        "rank": 2,
+        "dimensions": [
+          320,
+          480
+        ]
+      }
+    },
+    "exitContext": {
+      "rplane": 132,
+      "sdex": 0,
+      "boundaryValue": 3,
+      "prevdex": 34,
+      "brushType": "PAINT-BRUSH",
+      "fillMap": {
+        "rank": 2,
+        "dimensions": [
+          320,
+          480
+        ]
+      },
+      "patchMap": {
+        "rank": 2,
+        "dimensions": [
+          320,
+          480
+        ]
+      }
+    },
+    "prepLineCalls": 2,
+    "writerCalls": 21,
+    "writerOrdinals": [
+      2214,
+      2234
+    ],
+    "colorSelections": [
+      {
+        "id": 2327,
+        "writerOrdinal": 2214,
+        "index": 35
+      },
+      {
+        "id": 2336,
+        "writerOrdinal": 2221,
+        "index": 34
+      }
+    ],
+    "decisionTimeline": [
+      {
+        "id": 2322,
+        "event": "RAN",
+        "args": [
+          "0.25",
+          "0.4"
+        ],
+        "values": [
+          "0.33999515"
+        ]
+      },
+      {
+        "id": 2323,
+        "event": "RAN",
+        "args": [
+          "0",
+          "100"
+        ],
+        "values": [
+          "13"
+        ]
+      },
+      {
+        "id": 2324,
+        "event": "RAN",
+        "args": [
+          "0.55",
+          "0.75"
+        ],
+        "values": [
+          "0.5595023"
+        ]
+      },
+      {
+        "id": 2325,
+        "event": "RAN",
+        "args": [
+          "0",
+          "100"
+        ],
+        "values": [
+          "34"
+        ]
+      },
+      {
+        "id": 2326,
+        "event": "RAN",
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "2"
+        ]
+      },
+      {
+        "id": 2327,
+        "event": "AARGB-HDEX",
+        "writerOrdinal": 2214,
+        "index": 35
+      },
+      {
+        "id": 2328,
+        "event": "PREP-LINE",
+        "colorIndex": 35
+      },
+      {
+        "id": 2335,
+        "event": "RAN",
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "1"
+        ]
+      },
+      {
+        "id": 2336,
+        "event": "AARGB-HDEX",
+        "writerOrdinal": 2221,
+        "index": 34
+      },
+      {
+        "id": 2337,
+        "event": "PREP-LINE",
+        "colorIndex": 34
+      },
+      {
+        "id": 2343,
+        "event": "RAN",
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "1"
+        ]
+      }
+    ],
+    "randomCalls": [
+      {
+        "id": 2322,
+        "parentId": 2321,
+        "args": [
+          "0.25",
+          "0.4"
+        ],
+        "values": [
+          "0.33999515"
+        ]
+      },
+      {
+        "id": 2323,
+        "parentId": 2321,
+        "args": [
+          "0",
+          "100"
+        ],
+        "values": [
+          "13"
+        ]
+      },
+      {
+        "id": 2324,
+        "parentId": 2321,
+        "args": [
+          "0.55",
+          "0.75"
+        ],
+        "values": [
+          "0.5595023"
+        ]
+      },
+      {
+        "id": 2325,
+        "parentId": 2321,
+        "args": [
+          "0",
+          "100"
+        ],
+        "values": [
+          "34"
+        ]
+      },
+      {
+        "id": 2326,
+        "parentId": 2321,
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "2"
+        ]
+      },
+      {
+        "id": 2335,
+        "parentId": 2321,
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "1"
+        ]
+      },
+      {
+        "id": 2343,
+        "parentId": 2321,
+        "args": [
+          "0",
+          "2"
+        ],
+        "values": [
+          "1"
+        ]
+      }
+    ]
+  },
+  "interpretation": [
+    "Nearest observed target ancestry is not proof of a direct Lisp caller; unwrapped functions may intervene.",
+    "This is one first-screen unit from one controlled seed and the DISPLAY-COLOR-PATCHES path, not a general color-selection rule.",
+    "The observer records current map dimensions and selected bindings, not full map contents or deltas.",
+    "The JS screen writer still receives path points and color events as captured inputs; this evidence does not add an upstream JS contract."
+  ]
+}

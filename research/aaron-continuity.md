@@ -29,9 +29,23 @@ matches four and differs by one step in five. The canonical matrix remains
 parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-20261014-v8.json),
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json),
 [FREE-PATH findings](introspection/free-path-native.md), and the active
-[execution plan](execution-plan.md). The next target is one natural
-`SCREEN-AND-STORE`/`PREP-LINE` drawing unit, capturing caller path, color/brush,
-RNG, map state, and its complete writer subtrace.
+[execution plan](execution-plan.md).
+
+Two complete source-bound first-unit context triplets now cover seeds 1234
+and 5678 at 320×480. Their captured screen paths and color changes replay
+exactly 324 original writer bytes. The trace orders `RAN`, `AARGB(HDEX=...)`,
+and `PREP-LINE` events; in both captures a `RAN(0,2)→1` precedes the second
+color index decrement, but another such return without a color change means
+the value alone is not the rule. Nearest observed ancestry differs and is not
+proof of a direct caller. No new JS contract or milestone completion is
+claimed. See [screen-unit findings](introspection/screen-unit-context.md),
+[seed-1234 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
+and [seed-5678 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json).
+
+The next probe adds typed argument/result summaries and snapshots
+`COLORDEX`, `PREVDEX`, `HDEX`, `CDEX`, `SDEX`, and `RPLANE` at each random and
+color event. It will use fresh uninstrumented controls and keep FREE-PATH's
+unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

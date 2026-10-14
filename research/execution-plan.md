@@ -660,13 +660,22 @@ nine isolated cases, JS matches four and differs by one step in five. See the
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-The next target advances the incomplete scene-decision milestone: one natural
-`SCREEN-AND-STORE`/`PREP-LINE` drawing unit. Use a source-bound before/observer/
-after triplet with a fresh scene control. Capture the actual caller path and
-call/parent IDs, path inputs, brush/color/visibility and map context, RNG
-boundary, and full writer subtrace. Compare the complete writer byte range and
-relevant state changes in JavaScript; validate a second natural call or an
-independent holdout. Existing fixtures cover point-to-writer emission for the
-first eight units at two seeds, but not upstream color decisions, screen-unit
-RNG use, or map effects. If the path remains supplied because FREE-PATH is
-unresolved, label that dependency and do not claim milestone completion.
+Two complete natural screen-unit context triplets now bracket the first
+post-`RPARSE` `SCREEN-AND-STORE` call for seeds 1234 and 5678. In each sample,
+the captured points and `AARGB` decisions replay the exact original writer
+slice in JavaScript. The event report orders `RAN` calls, color writes, and
+`PREP-LINE`, but its random arguments are not type-annotated and it captures
+state only at unit entry/exit. The second color change follows
+`RAN(0,2)→1` and decrements HDEX in both samples; an additional identical
+return without a color event disproves that value as a sufficient condition.
+The [screen-unit findings](introspection/screen-unit-context.md) retain the
+source-bound triplets and limits. No upstream color contract or milestone
+completion is claimed.
+
+Next, run one fresh seed-1234 before/observer/after triplet with event-level
+snapshots for each `RAN`, `AARGB(HDEX=...)`, and `PREP-LINE`. Preserve Lisp
+argument/result types and record `COLORDEX`, `PREVDEX`, `HDEX`, `CDEX`, `SDEX`,
+and `RPLANE` at those boundaries. Require all fresh scene outputs and ordinary
+staged sources to match controls, then compare the snapshots to the current
+seed-1234 context. This targets the state behind color-event decisions while
+keeping the unresolved FREE-PATH and path-point inputs explicit.

@@ -92,13 +92,16 @@
               "NARROW" "VERTICAL" "HORIZONTAL" "WIDE" "OFFSET"
               "RIGHTMAX" "TOPMAX"))
       ;; A focused companion may request the writer boundaries, or those
-      ;; boundaries plus five colour/brush candidates. The default trace
-      ;; remains unchanged for existing fixtures.
+      ;; boundaries plus five colour/brush candidates, or the writer
+      ;; boundaries with BRUSH-STROKE for one screen-unit parent chain. The
+      ;; default trace remains unchanged for existing fixtures.
       (when (and (boundp 'aaron-planning-extra-targets)
                  (symbol-value 'aaron-planning-extra-targets))
         (unless (or
                  (equal (symbol-value 'aaron-planning-extra-targets)
                         '("PREP-LINE" "STORE-IN-FILE"))
+                 (equal (symbol-value 'aaron-planning-extra-targets)
+                        '("PREP-LINE" "STORE-IN-FILE" "BRUSH-STROKE"))
                  (equal (symbol-value 'aaron-planning-extra-targets)
                         '("PREP-LINE" "STORE-IN-FILE" "MAKE-DYETAB"
                           "COLORING" "ASSIGN-COLORS" "SELECT-BRUSH"
@@ -116,8 +119,10 @@
         (error "Unsupported planning trace return targets"))
       (when (and (boundp 'aaron-planning-quiet-targets)
                  (symbol-value 'aaron-planning-quiet-targets))
-        (unless (equal (symbol-value 'aaron-planning-quiet-targets)
-                       '("SCRIPT"))
+        (unless (or (equal (symbol-value 'aaron-planning-quiet-targets)
+                           '("SCRIPT"))
+                    (equal (symbol-value 'aaron-planning-quiet-targets)
+                           '("BRUSH-STROKE")))
           (error "Unsupported planning trace quiet targets"))
         (setf quiet-targets (symbol-value 'aaron-planning-quiet-targets)))
       ;; A narrowly scoped native-entry probe can preserve one original

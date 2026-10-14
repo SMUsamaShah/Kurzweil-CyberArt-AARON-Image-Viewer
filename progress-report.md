@@ -25,23 +25,22 @@ generation, and verify complete paintings against fresh original runs.
 
 ## Current focus
 
-FREE-PATH has a complete source-bound natural-caller triplet at 320×480. The
-first observed entry returned into `DRAW-CFORM` after its computed `CALL EDI`
-at offset `0x165`; the dynamic target remains unresolved. Two controlled
-triplets then measured the same vertical 0.2 single-float edge at seeds 150415
-and 46380. Both original runs selected 14 steps and consumed 12; JavaScript
-consumed 13 in each. The local step-sum candidate predicts 13 for both cases,
-source-to-emitted predicts 13 then 12, and step-times-wiggle predicts 12 for
-both. Of these three local candidates, only step-times-wiggle matches both
-observed counts; this two-case result does not recover a general stop rule.
-The v9 run was 768×1080; v8 was 320×480. Across nine isolated one-edge cases,
-JavaScript matches four and differs by one step in five. This adds no behavior
-contract: the 40-case matrix remains 26/30 matching, four mismatches and ten
-unclassified. See the [v8 evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v8.json),
-[v9 evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v9.json),
-and [FREE-PATH findings](research/introspection/free-path-native.md). The next
-target is one natural `SCREEN-AND-STORE`/`PREP-LINE` drawing unit, including
-its caller, color, RNG, map, and writer decisions.
+The latest screen-boundary work captured two complete source-bound natural
+`SCREEN-AND-STORE` units at 320×480. Their selected path and color events
+reproduce 324 original writer bytes, but the JS routine still receives those
+events as inputs. Both samples share the initial five `RAN` argument pairs;
+the second color change follows `RAN(0,2)→1` and lowers `HDEX` by one, while a
+later identical random return causes no color event. This is a clue, not a
+general rule. The observed parent labels differ (`BRUSH-STROKE` and
+`PAINT-FILL`) and do not prove direct callers. See the
+[screen-unit findings](research/introspection/screen-unit-context.md) and
+[portable evidence for seed 1234](research/introspection/evidence/screen-unit-context-seed1234-20261014.json)
+and [seed 5678](research/introspection/evidence/screen-unit-context-seed5678-20261014.json).
+
+Next, capture typed `RAN` inputs/results and `COLORDEX`/`PREVDEX`/`HDEX` state
+at each random and color event. The overall completion figures remain 30
+routine names / 31 bounded contracts, 1/5 milestones (20% by count), and zero
+whole-painting parity. There is still no defensible overall percentage.
 
 ## Follow the evidence
 

@@ -335,3 +335,20 @@ SHA-256 `e44761e8508c63ece41978d3741bb6b3702b70be3aa6890e6a601971aad59178`,
 and two independent derivations are byte-identical. The live entry was not
 reached in that one 320x480 scene, so no caller was identified. The REA dossier
 adds static navigation only; it adds no JavaScript behavior contract.
+
+## SCREEN-AND-STORE central dispatch call, 2026-10-14
+
+REA 6.4.0 / Ghidra 12.1.4 queried `resolve-native-call-targets` at
+`0x1fe24d12` in the exact-payload synthetic PE (SHA-256
+`d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686`). The
+pinned `SCREEN-AND-STORE` function listing identifies this site as `CALL EDI`;
+its decompile passes three values (`uVar7`, `local_40`, `local_44`) and then uses
+the returned value in subsequent control flow. REA reports `status: unresolved`,
+`mechanism: computed`, and `targets: []`. The complete report and request
+metadata are retained under
+[`screen-and-store-callsite-1fe24d12-20261014-b`](../artifacts/rea-tools/screen-and-store-callsite-1fe24d12-20261014-b/).
+
+This pins an unresolved computed-call boundary in the isolated static payload;
+it does not identify a runtime callee, establish that the site executes, or
+resolve a direct Lisp caller. The generated PE was not executed, and the
+archived entry address remains static context.
