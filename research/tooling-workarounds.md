@@ -864,6 +864,70 @@ that record before changing the helper or scheduling another fresh triplet.
 Do not weaken the instruction, operand, single-step, stack, thread, or cleanup
 checks to make a run pass.
 
+### PREMIUM triplet comparison exhausted memory after all runs, 2026-10-14
+
+The `premium-pick-v3-20261014-125028-65b3a9cc` before/observer/after oracle
+runs all completed and were archived, but Windows PowerShell 5.1 spent CPU and
+grew past 1.3 GB while the coordinator assembled `triplet-comparison.json`.
+The captures were safe; only the post-run coordinator was stopped after
+confirming no AARON process remained. The cause was the first-line AA0 value:
+Windows PowerShell 5.1 decorates `Get-Content` strings with `PSPath`, `PSDrive`,
+and `PSProvider` note properties. At JSON depth 1 the decorated line expanded
+to hundreds of characters; the coordinator's depth-18 serialization walked
+those provider objects once for the comparison and again in each run record.
+PowerShell 7 serializes the same value as a plain scalar, which hid the bug in
+some local checks.
+
+The coordinator now converts that header to a plain string before storing it:
+
+```powershell
+aa0Header = (Get-Content -LiteralPath (Join-Path $capture 'aa0') -TotalCount 1).ToString()
+```
+
+Reproducing the issue and checking the fix should use the actual Windows
+PowerShell 5.1 executable, not the default PowerShell 7 shell:
+
+```powershell
+$winPwsh = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+& $winPwsh -NoProfile -Command '$p="research/extracted/local-oracle/external-runs/premium-pick-v3-20261014-125028-65b3a9cc-before/capture/aa0"; $row=Get-Content -LiteralPath $p -TotalCount 1; $plain=$row.ToString(); "raw JSON chars=$((ConvertTo-Json -InputObject $row -Depth 1 -Compress).Length); plain=$((ConvertTo-Json -InputObject $plain -Depth 1 -Compress))"'
+```
+
+For a fully completed triplet whose coordinator was interrupted after capture,
+do not rerun AARON. First confirm the oracle and coordinator processes exited,
+preserve the three roots and their source hashes, then rebuild the small
+comparison offline with
+[`derive-premium-callsite-triplet-comparison.mjs`](tools/derive-premium-callsite-triplet-comparison.mjs).
+For the retained v3 roots, the exact invocation is:
+
+```powershell
+$id = 'premium-pick-v3-20261014-125028-65b3a9cc'
+$runsBefore = "research/extracted/local-oracle/external-runs/$id-before"
+$runsObserver = "research/extracted/local-oracle/external-runs/$id-observer"
+$runsAfter = "research/extracted/local-oracle/external-runs/$id-after"
+$log = "research/extracted/local-oracle/premium-callsite-triplet-v1-logs/$id"
+node research\tools\derive-premium-callsite-triplet-comparison.mjs `
+  --triplet-id $id `
+  --before-root $runsBefore `
+  --observer-root $runsObserver `
+  --after-root $runsAfter `
+  --diagnostics $log `
+  --out "$log/triplet-comparison.json" `
+  --coordinator-capture-snapshot research/introspection/evidence/source-snapshots/premium-callsite-pick-correlation-20261014-v3-coordinator.ps1
+node research\tools\derive-premium-callsite-pick-correlation-evidence.mjs `
+  --comparison "$log/triplet-comparison.json" --overwrite
+```
+
+The recovery script checks all three complete summaries, exact current runner
+and runtime identity, staged scene sources, five drawing/scene artifacts,
+before/after planning traces, observer READY/release/END markers, and source
+hashes before writing. The capture-source snapshot option is needed when the
+coordinator has been fixed since the captured report was produced; it records
+the historical coordinator hash separately from the current workspace hash.
+The portable evidence deriver validates the same complete report and correlation
+gates. Its output was byte-identical on two consecutive derivations. Preserve
+partial failed runs for diagnosis; this offline recovery is only for three
+complete, source-bound roots.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

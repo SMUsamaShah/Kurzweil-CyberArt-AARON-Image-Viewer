@@ -760,10 +760,32 @@ That run's direct CPU destination was `0x20000983`, not current PICK entry
 `0x1fe00e8c`. The target region was committed `MEM_MAPPED`/`PAGE_READWRITE`;
 the 32-byte window had no exact match in the captured PLL. REA statically
 decoded eight starts covering 22 bytes but created zero functions. Its
-conditional branch and out-of-window jump are static candidates only. For
-the follow-up, arm a one-shot DR0 breakpoint at the current PICK entry after
-the destination event, still on the measured thread. Capture the PICK entry
-before its prologue and compare thread ID, ESP, and `[ESP]` to the original
-call. Same ESP and callsite+3 would support a tail-transfer path through the
-anonymous code; a changed stack would require another bounded call-chain
-capture. Neither result by itself gives the anonymous code a Lisp name or ABI.
+conditional branch and out-of-window jump are static candidates only. A
+follow-up complete source-bound triplet did arm a one-shot DR0 breakpoint at
+PICK and DR1 at the original `callSite+3` continuation. PICK fired first on
+the same thread with matching ESP, EBP marker, and saved continuation. The
+intervening native instructions remain unobserved, so this does not prove a
+direct edge or identify an ABI/function. Its portable record is
+[`premium-callsite-pick-correlation-20261014-v1.json`](introspection/evidence/premium-callsite-pick-correlation-20261014-v1.json).
+
+The follow-up REA query set examined every byte start at offsets +18 through
++24 in the same captured window. These seven alternate code seeds all decode
+within the 32 captured bytes, but none reports a CALL; they do not establish
+instruction boundaries in the skipped bytes. An `xrefs` query for offset +25
+reports the static source at +14, matching the earlier conditional branch.
+The complete hashes and scope limits are in the
+[`REA follow-up evidence`](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
+
+The existing 32-byte capture still does not contain bytes at the out-of-window
+jump target. The next step is a fresh source-bound observer that reads a wider
+bounded region around the dynamically rediscovered destination, then runs REA
+on those exact bytes. If static analysis still cannot recover the route, use a
+bounded same-thread EIP trace from the anonymous destination until PICK or the
+original continuation. Revalidate current mappings and bytes before attaching,
+and retain fresh uninstrumented drawing/scene controls for the observer.
+
+The accepted follow-up run is
+`premium-pick-v3-20261014-125028-65b3a9cc`. Its three original runs completed;
+the comparison was rebuilt offline after the PowerShell 5.1 coordinator hit a
+post-capture serializer memory blowup. The exact source snapshot and recovery
+steps are recorded in the [tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).

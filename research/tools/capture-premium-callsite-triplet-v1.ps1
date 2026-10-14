@@ -16,12 +16,17 @@ param(
     [switch]$AllowMeasuredWriterStreamAt30MiB,
     [switch]$AllowMeasuredWriterStreamAt26MiB,
     [switch]$UseDestinationBreakpoint,
+    [switch]$FollowPickEntryCorrelation,
     [switch]$PreflightOnly
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if ($PauseSeconds -ge $RunSeconds) { throw 'PauseSeconds must be shorter than RunSeconds' }
+if ($UseDestinationBreakpoint -and $FollowPickEntryCorrelation) {
+    throw 'Select only one destination-breakpoint mode'
+}
+$UseDr0DestinationBreakpoint = [bool]$UseDestinationBreakpoint -or [bool]$FollowPickEntryCorrelation
 if ($AllowMeasuredWriterStreamAt30MiB -and $AllowMeasuredWriterStreamAt26MiB) {
     throw 'Select at most one measured staging allowance'
 }
@@ -30,7 +35,9 @@ $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $prepareScript = Join-Path $repoRoot 'research\tools\prepare-local-aaron-oracle-run.ps1'
 $runnerScript = Join-Path $repoRoot 'research\oracle\run-local-scene-state-required-probe.ps1'
 $probePath = Join-Path $repoRoot 'research\introspection\premium-callsite-metadata-v1.cl'
-$debuggerPath = if ($UseDestinationBreakpoint) {
+$debuggerPath = if ($FollowPickEntryCorrelation) {
+    Join-Path $repoRoot 'research\oracle\AaronPremiumCallsitePickCorrelationV1.cs'
+} elseif ($UseDestinationBreakpoint) {
     Join-Path $repoRoot 'research\oracle\AaronPremiumCallsiteDestinationBreakpointV1.cs'
 } else { Join-Path $repoRoot 'research\oracle\AaronPremiumCallsiteStepV1.cs' }
 $mapperPath = Join-Path $repoRoot 'research\tools\map-native-code-to-pll.mjs'
@@ -60,11 +67,11 @@ if (Get-Process -Name AARON -ErrorAction SilentlyContinue) {
     throw 'An AARON process is active; refusing to overlap original-runtime runs'
 }
 
-$captureSchema = if ($UseDestinationBreakpoint) { 'aaron-premium-callsite-destination-breakpoint-v1' } else { 'aaron-premium-callsite-step-v1' }
-$capturePrefix = if ($UseDestinationBreakpoint) { 'premium-callsite-destination-breakpoint-v1' } else { 'premium-callsite-step-v1' }
+$captureSchema = if ($FollowPickEntryCorrelation) { 'aaron-premium-callsite-pick-correlation-v1' } elseif ($UseDestinationBreakpoint) { 'aaron-premium-callsite-destination-breakpoint-v1' } else { 'aaron-premium-callsite-step-v1' }
+$capturePrefix = if ($FollowPickEntryCorrelation) { 'premium-callsite-pick-correlation-v1' } elseif ($UseDestinationBreakpoint) { 'premium-callsite-destination-breakpoint-v1' } else { 'premium-callsite-step-v1' }
 $captureBeginMarker = "BEGIN $capturePrefix"
 $probeName = 'aaron-premium-callsite-metadata-v1.txt'
-$stepOutputName = if ($UseDestinationBreakpoint) { 'aaron-premium-callsite-destination-breakpoint-v1.txt' } else { 'aaron-premium-callsite-step-v1.txt' }
+$stepOutputName = if ($FollowPickEntryCorrelation) { 'aaron-premium-callsite-pick-correlation-v1.txt' } elseif ($UseDestinationBreakpoint) { 'aaron-premium-callsite-destination-breakpoint-v1.txt' } else { 'aaron-premium-callsite-step-v1.txt' }
 $probeOutputNamesJson = ConvertTo-Json -InputObject @($probeName, $stepOutputName) -Compress
 $requiredEndMarker = "END $capturePrefix"
 $readyMarker = 'READY premium-callsite-metadata-v1'
@@ -85,6 +92,7 @@ if ($PauseSeconds -lt 90) {
 $baseFullPath = [IO.Path]::GetFullPath($BaseRoot)
 $mode = 'writer-stream-seed-1234'
 $runnerSha256 = (Get-FileHash -LiteralPath $runnerScript -Algorithm SHA256).Hash.ToLowerInvariant()
+$coordinatorSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $probeSha256 = (Get-FileHash -LiteralPath $probePath -Algorithm SHA256).Hash.ToLowerInvariant()
 $debuggerSha256 = (Get-FileHash -LiteralPath $debuggerPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $mapperSha256 = (Get-FileHash -LiteralPath $mapperPath -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -240,6 +248,25 @@ function Convert-Hex32([string]$Value, [string]$Label) {
     return [uint64][Convert]::ToUInt32($Value.Substring(2), 16)
 }
 
+function Test-PickCorrelationArmReadback($PickObservation, $Destination, [uint32]$PickEntry, [uint32]$Continuation) {
+    $readback = $PickObservation.armedContextReadback
+    if (-not $readback -or
+        [string]$readback.eip -ine [string]$Destination.targetEip -or
+        [string]$readback.esp -ine [string]$Destination.targetEsp -or
+        [string]$readback.dr0 -ine ('0x{0:x8}' -f $PickEntry) -or
+        [string]$readback.dr1 -ine ('0x{0:x8}' -f $Continuation) -or
+        [string]$readback.eflags -notmatch '^0x[0-9a-fA-F]{1,8}$' -or
+        [string]$readback.dr6 -notmatch '^0x[0-9a-fA-F]{1,8}$' -or
+        [string]$readback.dr7 -notmatch '^0x[0-9a-fA-F]{1,8}$') { return $false }
+    try {
+        $eflags = [Convert]::ToUInt32(([string]$readback.eflags).Substring(2), 16)
+        $dr6 = [Convert]::ToUInt32(([string]$readback.dr6).Substring(2), 16)
+        $dr7 = [Convert]::ToUInt32(([string]$readback.dr7).Substring(2), 16)
+    } catch { return $false }
+    return (($eflags -band 0x00000100) -eq 0 -and $dr6 -eq 0 -and
+        ($dr7 -band 0x00ff00ff) -eq 0x00000005)
+}
+
 function Read-FunctionWindows([uint32]$ProcessId, [string]$MetadataText, [string]$OutputRoot, [object]$MethodIndices) {
     if (-not ('AaronPremiumMetadataReaderV1' -as [type])) {
     Add-Type -TypeDefinition @'
@@ -390,7 +417,8 @@ function Assert-MetadataReady([string]$MetadataText) {
 
 function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [string]$MetadataText, [byte[]]$MetadataBytes) {
     $methodIndices = Assert-MetadataReady $MetadataText
-    if ((Get-FileHash -LiteralPath $debuggerPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $debuggerSha256 -or
+    if ((Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $coordinatorSha256 -or
+        (Get-FileHash -LiteralPath $debuggerPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $debuggerSha256 -or
         (Get-FileHash -LiteralPath $mapperPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $mapperSha256 -or
         (Get-FileHash -LiteralPath $reaCensusPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $reaCensusSha256) {
         throw 'A source-bound debugger, REA census, or mapper input changed during this run'
@@ -469,10 +497,13 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
         throw 'Derived current call site exceeds its complete PREMIUM payload or 32-bit address space'
     }
     $callAddress = [uint32]$callAddress64
-    $debuggerTypeName = if ($UseDestinationBreakpoint) { 'AaronPremiumCallsiteDestinationBreakpointV1' } else { 'AaronPremiumCallsiteStepV1' }
+    $debuggerTypeName = if ($FollowPickEntryCorrelation) { 'AaronPremiumCallsitePickCorrelationV1' } elseif ($UseDestinationBreakpoint) { 'AaronPremiumCallsiteDestinationBreakpointV1' } else { 'AaronPremiumCallsiteStepV1' }
     if (-not ($debuggerTypeName -as [type])) { Add-Type -Path $debuggerPath }
     try {
-        if ($UseDestinationBreakpoint) {
+        if ($FollowPickEntryCorrelation) {
+            $captureResult = [AaronPremiumCallsitePickCorrelationV1]::Capture(
+                [uint32]$Ready.process.Id, $callAddress, $pickEntry, $releasePath, $CaptureSeconds)
+        } elseif ($UseDestinationBreakpoint) {
             $captureResult = [AaronPremiumCallsiteDestinationBreakpointV1]::Capture(
                 [uint32]$Ready.process.Id, $callAddress, $pickEntry, $releasePath, $CaptureSeconds)
         } else {
@@ -492,10 +523,10 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
     $directToPick = $false
     $stackMatchesContinuation = $false
     $sameThread = $false
-    $destinationRecord = if ($UseDestinationBreakpoint) { $captureResult.destinationBreakpoint } else { $captureResult.singleStep }
+    $destinationRecord = if ($UseDr0DestinationBreakpoint) { $captureResult.destinationBreakpoint } else { $captureResult.singleStep }
     $destinationWindow = $destinationRecord.destinationWindow
-    $destinationRegisters = if ($UseDestinationBreakpoint) { $destinationRecord.targetRegisters } else { $destinationRecord.postStepRegisters }
-    $directEipText = if ($UseDestinationBreakpoint) { [string]$destinationRecord.targetEip } else { [string]$destinationRecord.postStepEip }
+    $destinationRegisters = if ($UseDr0DestinationBreakpoint) { $destinationRecord.targetRegisters } else { $destinationRecord.postStepRegisters }
+    $directEipText = if ($UseDr0DestinationBreakpoint) { [string]$destinationRecord.targetEip } else { [string]$destinationRecord.postStepEip }
     if ($null -ne $destinationRecord) {
         if ($directEipText -match '^0x[0-9a-fA-F]{1,8}$') {
             $directEip = [uint64][Convert]::ToUInt32($directEipText.Substring(2), 16)
@@ -512,7 +543,7 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
     $preCallEip = [string]$captureResult.call.preCallRegisters.eip
     $slotValue = [string]$captureResult.call.preCallDispatchSlot.value
     $debuggerAcceptanceFailed = $false
-    if ($UseDestinationBreakpoint) {
+    if ($UseDr0DestinationBreakpoint) {
         $debuggerAcceptanceFailed = $captureResult.schema -cne $captureSchema -or
             $captureResult.callSiteAddress -cne ('0x{0:x8}' -f $callAddress) -or
             -not $captureResult.callSiteValidation.matched -or
@@ -572,6 +603,89 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
             -not $stackMatchesContinuation -or
             ($directToPick -and -not $stackMatchesContinuation)
     }
+    $pickCorrelationAcceptanceFailed = $false
+    $pickCorrelationFailure = $null
+    if ($FollowPickEntryCorrelation) {
+        $pickObservation = $captureResult.pickEntryObservation
+        $continuationObservation = $captureResult.callContinuationObservation
+        $expectedPickEntryBytes = ([BitConverter]::ToString($pickPayload, 0, 16)).Replace('-', '').ToLowerInvariant()
+        $pickHit = $pickObservation.observed -eq $true
+        $continuationHit = $continuationObservation.observed -eq $true
+        if ($pickHit -and $continuationHit) {
+            $pickCorrelationAcceptanceFailed = $true
+            $pickCorrelationFailure = 'Both mutually exclusive PICK/continuation breakpoints were reported as hit'
+        } elseif ($pickHit) {
+            $pickCorrelationAcceptanceFailed =
+                $pickObservation.status -cne 'PICK-entry-hit-before-original-CALL-continuation' -or
+                $pickObservation.firstChance -ne $true -or $pickObservation.dr6B0Set -ne $true -or
+                $pickObservation.dr6B1Clear -ne $true -or
+                [string]$pickObservation.eip -ine ('0x{0:x8}' -f $pickEntry) -or
+                [string]$pickObservation.threadId -cne [string]$captureResult.call.threadId -or
+                $pickObservation.sameThreadAsCall -ne $true -or
+                $pickObservation.sameEspAsInitialDestination -ne $true -or
+                $pickObservation.sameReturnAddressAsInitialDestination -ne $true -or
+                $pickObservation.sameEbpAsInitialDestination -ne $true -or
+                $pickObservation.sameOriginalStackFrame -ne $true -or
+                -not (Test-PickCorrelationArmReadback $pickObservation $captureResult.destinationBreakpoint $pickEntry ($callAddress + 3)) -or
+                [string]$pickObservation.esp -ine [string]$captureResult.destinationBreakpoint.targetEsp -or
+                [string]$pickObservation.ebp -ine [string]$captureResult.destinationBreakpoint.targetRegisters.ebp -or
+                [string]$pickObservation.savedStackValue -ine [string]$captureResult.destinationBreakpoint.returnAddressAtEsp.value -or
+                $pickObservation.savedStackValueMatchesCallContinuation -ne $true -or
+                $continuationObservation.breakpointArmed -ne $true -or
+                $pickObservation.debugRegistersRestoredAtObservation -ne $true -or
+                [string]$pickObservation.entryBytesAtHit -cne $expectedPickEntryBytes -or
+                $continuationObservation.status -cne 'PICK-entry-hit-before-CALL-continuation'
+            if ($pickCorrelationAcceptanceFailed) {
+                $pickCorrelationFailure = 'PICK breakpoint did not satisfy live-entry, owner-thread, pre-continuation, code-byte, or restoration gates'
+            }
+        } elseif ($continuationHit) {
+            $pickCorrelationAcceptanceFailed =
+                $continuationObservation.status -cne 'CALL-continuation-address-reached-before-PICK-entry' -or
+                $continuationObservation.firstChance -ne $true -or
+                $continuationObservation.dr6B1Set -ne $true -or
+                $continuationObservation.dr6B0Clear -ne $true -or
+                [string]$continuationObservation.eip -ine ('0x{0:x8}' -f ($callAddress + 3)) -or
+                [string]$continuationObservation.threadId -cne [string]$captureResult.call.threadId -or
+                $continuationObservation.sameThreadAsCall -ne $true -or
+                $continuationObservation.debugRegistersRestoredAtObservation -ne $true -or
+                $pickObservation.status -cne 'CALL-continuation-address-reached-before-PICK-entry'
+            if ($pickCorrelationAcceptanceFailed) {
+                $pickCorrelationFailure = 'CALL-continuation guard did not satisfy exact-address, owner-thread, first-chance, B1, or restoration gates'
+            }
+        } else {
+            $acceptedPickNoHitStatuses = @('target-exited-before-PICK-entry',
+                'selected-thread-exited-before-PICK-entry', 'PICK-correlation-window-expired-before-entry',
+                'capture-window-expired-before-PICK-entry')
+            $acceptedContinuationNoHitStatuses = @('target-exited-before-CALL-continuation',
+                'selected-thread-exited-before-CALL-continuation', 'PICK-correlation-window-expired-before-CALL-continuation',
+                'capture-window-expired-before-CALL-continuation')
+            $boundedNoHit =
+                ($captureResult.targetExitEventObserved -eq $true -and $captureResult.captureError -eq $null) -or
+                ($captureResult.pickCorrelationWindowExpired -eq $true -and $captureResult.captureError -eq $null) -or
+                ($captureResult.captureWindowExpired -eq $true -and $captureResult.captureError -eq $null) -or
+                ([string]$pickObservation.status -eq 'selected-thread-exited-before-PICK-entry' -and
+                 [string]$continuationObservation.status -eq 'selected-thread-exited-before-CALL-continuation')
+            if (-not $boundedNoHit -or -not $pickObservation.breakpointArmed -or
+                -not $continuationObservation.breakpointArmed -or
+                [string]$pickObservation.status -notin $acceptedPickNoHitStatuses -or
+                [string]$continuationObservation.status -notin $acceptedContinuationNoHitStatuses) {
+                $pickCorrelationAcceptanceFailed = $true
+                $pickCorrelationFailure = 'Neither breakpoint produced an accepted hit or a bounded terminal no-hit status'
+            }
+        }
+        if ($captureResult.schema -cne $captureSchema -or
+            $captureResult.captureError -ne $null -or
+            $captureResult.pickCorrelationWindowSeconds -ne 20 -or
+            -not $captureResult.debugRegistersRestored -or
+            -not $captureResult.debugRegistersAndTrapFlagRestored -or
+            -not $captureResult.detached -or
+            -not $captureResult.readyPauseReleased -or
+            @($captureResult.cleanupErrors).Count -ne 0) {
+            $pickCorrelationAcceptanceFailed = $true
+            if (-not $pickCorrelationFailure) { $pickCorrelationFailure = 'PICK-correlation schema, deadline, or final cleanup gate failed' }
+        }
+        $debuggerAcceptanceFailed = $debuggerAcceptanceFailed -or $pickCorrelationAcceptanceFailed
+    }
     if ($debuggerAcceptanceFailed) {
         $diagnosticPath = Join-Path $live.root 'debugger-capture-diagnostic.json'
         $diagnostic = [ordered]@{
@@ -589,8 +703,11 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
                 callHit = $captureResult.call.hit
                 callSiteValidation = $captureResult.callSiteValidation
                 destinationStatus = $destinationRecord.status
-                destinationError = if ($UseDestinationBreakpoint) { $destinationRecord.error } else { $destinationRecord.stepError }
+                destinationError = if ($UseDr0DestinationBreakpoint) { $destinationRecord.error } else { $destinationRecord.stepError }
                 destinationCompleted = $destinationRecord.completed
+                pickCorrelationFailure = $pickCorrelationFailure
+                pickEntryObservation = if ($FollowPickEntryCorrelation) { $captureResult.pickEntryObservation } else { $null }
+                callContinuationObservation = if ($FollowPickEntryCorrelation) { $captureResult.callContinuationObservation } else { $null }
                 captureWindowSeconds = $captureResult.captureWindowSeconds
                 captureWindowExpired = $captureResult.captureWindowExpired
                 targetExitEventObserved = $captureResult.targetExitEventObserved
@@ -644,6 +761,7 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
             pickEntry = $pick[0].runtime.entry
             pickPayloadBytes = $pick[0].payloadBytes
             pickPayloadSha256 = $pick[0].payloadSha256
+            pickEntryBytesHex = ([BitConverter]::ToString($pickPayload, 0, 16)).Replace('-', '').ToLowerInvariant()
             pickObjectBytes = $pick[0].objectBytes
             pickObjectSha256 = $pick[0].objectSha256
             pickUniqueCompletePllMatch = $pick[0].uniqueCompleteObjectByteMatch
@@ -651,7 +769,9 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
             callSiteAddress = ('0x{0:x8}' -f $callAddress)
             callSiteBytesHex = 'ff5727'
         }
-        debuggerHelperPath = if ($UseDestinationBreakpoint) { 'research/oracle/AaronPremiumCallsiteDestinationBreakpointV1.cs' } else { 'research/oracle/AaronPremiumCallsiteStepV1.cs' }
+        coordinatorScriptPath = 'research/tools/capture-premium-callsite-triplet-v1.ps1'
+        coordinatorScriptSha256 = $coordinatorSha256
+        debuggerHelperPath = if ($FollowPickEntryCorrelation) { 'research/oracle/AaronPremiumCallsitePickCorrelationV1.cs' } elseif ($UseDestinationBreakpoint) { 'research/oracle/AaronPremiumCallsiteDestinationBreakpointV1.cs' } else { 'research/oracle/AaronPremiumCallsiteStepV1.cs' }
         debuggerHelperSha256 = $debuggerSha256
         directCpuDestination = [ordered]@{
             address = $directEipText
@@ -668,9 +788,13 @@ function Invoke-PremiumCapture([string]$OutputRoot, [string]$RunId, $Ready, [str
             expected = ('0x{0:x8}' -f ($callAddress + 3))
             matches = ($directToPick -and $sameThread -and $stackMatchesContinuation)
         }
+        pickEntryCorrelation = if ($FollowPickEntryCorrelation) { $captureResult.pickEntryObservation } else { $null }
+        callContinuationGuard = if ($FollowPickEntryCorrelation) { $captureResult.callContinuationObservation } else { $null }
         claims = [ordered]@{
             directCpuEdgeToPick = ($directToPick -and $stackMatchesContinuation -and $sameThread)
-            interpretation = if ($UseDestinationBreakpoint -and $directToPick) {
+            interpretation = if ($FollowPickEntryCorrelation) {
+                'The measured initial CALL destination is recorded separately. A same-thread DR0 current-PICK-entry breakpoint and DR1 callSite+3 continuation guard record which endpoint occurs first; neither endpoint names the anonymous intermediate target or recovers its instructions.'
+            } elseif ($UseDestinationBreakpoint -and $directToPick) {
                 'A DR0 execute breakpoint at the pre-CALL operand stopped the same thread at the independently mapped current PICK entry before its first instruction; the post-CALL stack dword equals callSite+3.'
             } elseif ($UseDestinationBreakpoint) {
                 'The DR0 destination breakpoint records the measured runtime target and post-CALL stack; no Lisp name is inferred unless the current target maps uniquely.'
@@ -794,12 +918,13 @@ function Read-Run([string]$Role, [string]$RunId, [string]$OutputRoot, [bool]$Obs
             $stepDocument.debugger.schema -cne $captureSchema -or
             $stepDocument.debugger.call.hit -ne $true -or
             $stepDocument.debugger.callSiteValidation.matched -ne $true -or
+            $stepDocument.debugger.captureError -ne $null -or
             $stepDocument.debugger.detached -ne $true -or
             $stepDocument.debugger.readyPauseReleased -ne $true -or
             @($stepDocument.debugger.cleanupErrors).Count -ne 0) {
-            throw 'Archived debugger output is not a source-bound completed one-step result'
+            throw 'Archived debugger output is not a source-bound completed result'
         }
-        if ($UseDestinationBreakpoint) {
+        if ($UseDr0DestinationBreakpoint) {
             $destination = $stepDocument.debugger.destinationBreakpoint
             if ($destination.attempted -ne $true -or $destination.hit -ne $true -or
                 $destination.completed -ne $true -or
@@ -819,6 +944,71 @@ function Read-Run([string]$Role, [string]$RunId, [string]$OutputRoot, [bool]$Obs
                 $stepDocument.pickEntryStackCheck.sameThreadAsMeasuredCall -ne $true -or
                 $stepDocument.pickEntryStackCheck.stackValue -ine $stepDocument.pickEntryStackCheck.expected) {
                 throw 'Archived DR0 destination evidence did not satisfy the independent target/stack/restoration gate'
+            }
+            if ($FollowPickEntryCorrelation) {
+                $pickObservation = $stepDocument.debugger.pickEntryObservation
+                $continuationObservation = $stepDocument.debugger.callContinuationObservation
+                $archivedCallSiteAddress = [uint32](Convert-Hex32 ([string]$stepDocument.mapping.callSiteAddress) 'Archived call-site address')
+                $archivedContinuationAddress = [uint32]($archivedCallSiteAddress + 3)
+                $pickHit = $pickObservation.observed -eq $true
+                $continuationHit = $continuationObservation.observed -eq $true
+                $validPickHit = $pickHit -and
+                    $pickObservation.status -ceq 'PICK-entry-hit-before-original-CALL-continuation' -and
+                    $pickObservation.firstChance -eq $true -and $pickObservation.dr6B0Set -eq $true -and
+                    $pickObservation.dr6B1Clear -eq $true -and
+                    $pickObservation.sameThreadAsCall -eq $true -and
+                    [string]$pickObservation.threadId -ceq [string]$stepDocument.debugger.call.threadId -and
+                    [string]$pickObservation.eip -ieq [string]$stepDocument.mapping.pickEntry -and
+                    [string]$pickObservation.esp -ieq [string]$destination.targetEsp -and
+                    [string]$pickObservation.ebp -ieq [string]$destination.targetRegisters.ebp -and
+                    [string]$pickObservation.savedStackValue -ieq [string]$destination.returnAddressAtEsp.value -and
+                    $pickObservation.savedStackValueMatchesCallContinuation -eq $true -and
+                    $pickObservation.sameEspAsInitialDestination -eq $true -and
+                    $pickObservation.sameReturnAddressAsInitialDestination -eq $true -and
+                    $pickObservation.sameEbpAsInitialDestination -eq $true -and
+                    $pickObservation.sameOriginalStackFrame -eq $true -and
+                    $continuationObservation.breakpointArmed -eq $true -and
+                    [string]$pickObservation.entryBytesAtHit -ceq [string]$stepDocument.mapping.pickEntryBytesHex -and
+                    (Test-PickCorrelationArmReadback $pickObservation $destination ([uint32](Convert-Hex32 ([string]$stepDocument.mapping.pickEntry) 'Archived PICK entry')) $archivedContinuationAddress) -and
+                    $pickObservation.debugRegistersRestoredAtObservation -eq $true -and
+                    $continuationObservation.status -ceq 'PICK-entry-hit-before-CALL-continuation'
+                $validContinuationHit = $continuationHit -and
+                    $continuationObservation.status -ceq 'CALL-continuation-address-reached-before-PICK-entry' -and
+                    $continuationObservation.firstChance -eq $true -and
+                    $continuationObservation.dr6B1Set -eq $true -and
+                    $continuationObservation.dr6B0Clear -eq $true -and
+                    $continuationObservation.sameThreadAsCall -eq $true -and
+                    [string]$continuationObservation.threadId -ceq [string]$stepDocument.debugger.call.threadId -and
+                    [string]$continuationObservation.eip -ieq ('0x{0:x8}' -f $archivedContinuationAddress) -and
+                    $continuationObservation.debugRegistersRestoredAtObservation -eq $true -and
+                    $pickObservation.status -ceq 'CALL-continuation-address-reached-before-PICK-entry'
+                $acceptedPickNoHitStatuses = @('target-exited-before-PICK-entry',
+                    'selected-thread-exited-before-PICK-entry', 'PICK-correlation-window-expired-before-entry',
+                    'capture-window-expired-before-PICK-entry')
+                $acceptedContinuationNoHitStatuses = @('target-exited-before-CALL-continuation',
+                    'selected-thread-exited-before-CALL-continuation', 'PICK-correlation-window-expired-before-CALL-continuation',
+                    'capture-window-expired-before-CALL-continuation')
+                $validBoundedNoHit = -not $pickHit -and -not $continuationHit -and
+                    $stepDocument.debugger.pickEntryObservation.breakpointArmed -eq $true -and
+                    $stepDocument.debugger.callContinuationObservation.breakpointArmed -eq $true -and
+                    ($stepDocument.debugger.pickCorrelationWindowExpired -eq $true -or
+                     $stepDocument.debugger.captureWindowExpired -eq $true -or
+                     $stepDocument.debugger.targetExitEventObserved -eq $true -or
+                     ([string]$pickObservation.status -eq 'selected-thread-exited-before-PICK-entry' -and
+                      [string]$continuationObservation.status -eq 'selected-thread-exited-before-CALL-continuation')) -and
+                    $stepDocument.debugger.captureError -eq $null -and
+                    ([string]$pickObservation.status -in $acceptedPickNoHitStatuses) -and
+                    ([string]$continuationObservation.status -in $acceptedContinuationNoHitStatuses)
+                if (($pickHit -and -not $validPickHit) -or
+                    ($continuationHit -and -not $validContinuationHit) -or
+                    (-not $pickHit -and -not $continuationHit -and -not $validBoundedNoHit) -or
+                    ($pickHit -and $continuationHit) -or
+                    $stepDocument.debugger.pickCorrelationWindowSeconds -ne 20 -or
+                    $stepDocument.debugger.debugRegistersRestored -ne $true -or
+                    $stepDocument.debugger.detached -ne $true -or
+                    $stepDocument.debugger.readyPauseReleased -ne $true) {
+                    throw 'Archived PICK/continuation correlation did not satisfy the exclusive hit or bounded no-hit gate'
+                }
             }
         } elseif (
             $stepDocument.debugger.singleStep.postStepEipEqualsPreCallSlotValue -ne $true -or
@@ -841,7 +1031,10 @@ function Read-Run([string]$Role, [string]$RunId, [string]$OutputRoot, [bool]$Obs
     }
     return [pscustomobject]@{
         role = $Role; runId = $RunId; root = $OutputRoot; summary = $summary; runtime = $runtime
-        aa0Header = (Get-Content -LiteralPath (Join-Path $capture 'aa0') -TotalCount 1)
+        # Get-Content strings carry PSPath/PSDrive/PSProvider note properties.
+        # Convert to a plain string before this value enters comparison JSON;
+        # ConvertTo-Json otherwise recursively serializes provider metadata.
+        aa0Header = (Get-Content -LiteralPath (Join-Path $capture 'aa0') -TotalCount 1).ToString()
         artifacts = $artifacts; sources = $sources; planningTrace = $trace
         probe = $probeRecord; debuggerResult = $stepRecord
     }
@@ -1013,12 +1206,15 @@ try {
     }
     $comparison = [ordered]@{
         schemaVersion = 1; tripletId = $tripletId; mode = $mode; aa0Header = $before.aa0Header
-        observerMethod = if ($UseDestinationBreakpoint) {
+        observerMethod = if ($FollowPickEntryCorrelation) {
+            'CLOS PREMIUM and PICK addresses rediscovered from this READY pause; both complete compiled objects matched the current run PLL before a same-thread DR0 destination capture followed by DR0 PICK-entry and DR1 call-continuation guards'
+        } elseif ($UseDestinationBreakpoint) {
             'CLOS PREMIUM and PICK addresses rediscovered from this READY pause; both complete compiled objects matched the current run PLL before a DR0 destination breakpoint was armed from the current PREMIUM CALL operand'
         } else {
             'CLOS PREMIUM and PICK addresses rediscovered from this READY pause; both complete compiled objects matched the current run PLL before single-stepping the current PREMIUM CALL'
         }
         sources = [ordered]@{
+            coordinator = [ordered]@{ path = 'research/tools/capture-premium-callsite-triplet-v1.ps1'; sha256 = $coordinatorSha256 }
             probe = [ordered]@{ path = 'research/introspection/premium-callsite-metadata-v1.cl'; sha256 = $probeSha256 }
             runner = [ordered]@{ path = 'research/oracle/run-local-scene-state-required-probe.ps1'; sha256 = $runnerSha256 }
             debuggerHelper = [ordered]@{ path = (& $relative $debuggerPath); sha256 = $debuggerSha256 }
@@ -1036,6 +1232,8 @@ try {
             callSiteAddress = $captureSummary.result.mapping.callSiteAddress
             directDestination = $captureSummary.result.directCpuDestination
             pickEntryStackCheck = $captureSummary.result.pickEntryStackCheck
+            pickEntryCorrelation = $captureSummary.result.pickEntryCorrelation
+            callContinuationGuard = $captureSummary.result.callContinuationGuard
             nativeMap = & $relative $captureSummary.mapPath
         }
         runs = @($runs | ForEach-Object {

@@ -34,8 +34,9 @@ this original return-site capture, the Lisp function name was unresolved and
 the full anonymous payload was not separately read from live memory. A later
 source-bound method census read the complete payload live in a separate run
 and matched its full payload/object hashes. The computed call target stored
-through `[EDI+0x27]` remains unresolved. Eight bounded EBP frame returns are
-recorded separately and do not identify additional callers.
+through `[EDI+0x27]` remained unresolved in this original entry-only capture.
+Eight bounded EBP frame returns are recorded separately and do not identify
+additional callers.
 
 REA reports seven computed calls in `PICK` without resolved targets. Nine
 static symbol-reference candidate bodies were examined; their 1,305 CALL
@@ -57,10 +58,12 @@ the instruction's CPU destination.
 A later independent source-bound capture did observe that CALL's actual CPU
 destination: the pre-call `[EDI+0x27]` value was `0x20000983`, and a separate
 DR0 execute breakpoint hit that address on the same thread before its first
-instruction. It is not the mapped PICK entry. The CALL stack return still
-matched `callsite+3`; the anonymous target-to-PICK route remains unobserved.
-See the [destination result](select-subject-methods.md#premium-call-destination-captured-with-a-separate-dr0-breakpoint-2026-10-14)
-and [portable evidence](evidence/premium-callsite-destination-breakpoint-20261014-v1.json).
+instruction. It is not the mapped PICK entry. A follow-up correlation then
+observed the same thread hit PICK with matching ESP, EBP marker, and saved
+continuation before the `callsite+3` guard. The intermediate native transfer
+remains unobserved; this is not a direct CPU edge from the anonymous target
+to PICK. See the [correlation findings](select-subject-methods.md#premium-call-destination-and-pick-entry-correlation-2026-10-14)
+and [portable evidence](evidence/premium-callsite-pick-correlation-20261014-v1.json).
 
 ## Reproduction and limits
 

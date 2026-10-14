@@ -43,22 +43,33 @@ other canvas regimes. REA's first static method dossiers leave their computed
 call targets unresolved. See the [active execution plan](execution-plan.md)
 for the next target and evidence gates.
 
-The PREMIUM method's call destination is now captured in a separate complete
-768×1080 triplet using a DR0 execute breakpoint at the pre-call slot value.
-The `CALL [EDI+0x27]` site was source-validated at payload offset 200; its slot
-held `0x20000983`. The same thread stopped at that address before its first
-instruction, with ESP reduced by four and `[ESP]=callsite+3`. All five
-drawing/scene artifacts, six staged sources, and planning traces match, and
-debugger state was restored before detach. The destination differs from the
-known PICK entry and has no named Lisp function or full function boundary.
-REA decoded 22 bytes from eight starts in the matching 32-byte window, but
-created zero functions. Next, re-arm a one-shot breakpoint at the current PICK
-entry on the same thread and test whether the anonymous target path reaches it
-with the original return and stack. This adds no behavior contract. See the
-[method findings](introspection/select-subject-methods.md#premium-call-destination-captured-with-a-separate-dr0-breakpoint-2026-10-14),
-[portable capture evidence](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
-[bounded REA evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json),
+The PREMIUM method's indirect-call destination is captured in a complete
+768×1080 triplet, and a follow-up same-thread observer saw the current PICK
+entry before the original call-continuation guard. The pre-call slot held
+`0x20000983`; at PICK entry the thread had the same ESP, EBP, and saved
+continuation (`0x1fe4c07f`). All five drawing/scene artifacts, six staged
+sources, and planning traces match. This associates the two observed points
+within one bounded run but does not capture the intervening instructions or
+prove a direct edge from `0x20000983` to PICK. The destination remains unnamed
+and has no recovered function boundary; REA's bounded static query created zero
+functions. Follow-up queries tested every alternative byte start in the
+remaining skipped area and confirmed the in-window xref back to the conditional
+branch, without finding a CALL or establishing new instruction boundaries.
+The next target is a wider source-bound live read around the dynamically
+rediscovered address, then a bounded EIP trace if REA still cannot resolve the
+transfer to PICK. This adds no behavior contract. See the
+[method findings](introspection/select-subject-methods.md#premium-call-destination-and-pick-entry-correlation-2026-10-14),
+[portable correlation evidence](introspection/evidence/premium-callsite-pick-correlation-20261014-v1.json),
+[prior destination evidence](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
+[REA follow-up](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json),
 and [the active execution plan](execution-plan.md).
+
+The accepted correlation triplet is `premium-pick-v3-20261014-125028-65b3a9cc`.
+Its three completed roots were recovered offline after a Windows PowerShell
+5.1 serialization issue stopped the coordinator after capture; the comparison
+and portable evidence now validate, and the evidence rebuild is byte-identical
+on repeat. The coordinator fix and exact recovery command are in
+[tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
 
 The earlier caller, screen-unit, and FREE-PATH checkpoints below remain useful
 historical evidence; their former “next” recommendations are superseded by

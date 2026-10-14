@@ -817,13 +817,38 @@ does not match a complete PLL function window. REA created zero functions;
 the in-window conditional branch and out-of-window jump are static only.
 See the [bounded REA record](introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json).
 
-Next, use the captured current PICK entry to arm a one-shot hardware
-breakpoint on the same thread immediately after the `0x20000983` hit. Stop
-before the PICK prologue and record EIP, ESP, and `[ESP]`. If PICK is reached,
-compare its thread, stack pointer, and return address with the call-site hit;
-this can distinguish a tail transfer through the anonymous target from a new
-call frame. If it is not reached, retain the bounded direct destination and
-select another unresolved dispatch site. Do not infer a Lisp name or ABI from
-the address or the short code window. This adds no routine or behavior
-contract and does not change the 1/5 milestone count or zero whole-painting
-parity.
+The follow-up correlation is complete. A second fresh source-bound 768×1080
+triplet armed DR0 at the current PICK entry and DR1 at the measured
+`callSite+3` continuation after the original CALL destination hit. PICK fired
+first on the same thread. At the PICK entry the captured EIP, ESP, EBP marker,
+and `[ESP]` value matched the measured destination frame; the saved value was
+still `0x1fe4c07f`. The continuation guard did not fire. This is a bounded
+same-thread/frame association, not a direct edge: the capture did not record
+the intervening native instructions, and stack reuse or another unobserved
+transfer is not ruled out. The complete triplet and limits are recorded in
+[portable correlation evidence](introspection/evidence/premium-callsite-pick-correlation-20261014-v1.json)
+and the [method findings](introspection/select-subject-methods.md#premium-call-destination-and-pick-entry-correlation-2026-10-14).
+It adds no routine or behavior contract and does not change the 1/5 milestone
+count or zero whole-painting parity. The accepted triplet is
+`premium-pick-v3-20261014-125028-65b3a9cc`; its comparison and portable evidence
+were recovered offline after all three oracle runs completed and the
+PowerShell 5.1 coordinator exhausted memory during JSON serialization. The
+fix and recovery procedure are in
+[tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
+REA has now queried all seven remaining byte starts (+18 through +24) in the
+captured 32-byte window and queried the xrefs for the in-window branch target
+at +25. The alternative decodes contain no CALL, and the sole xref source is
+the conditional branch at +14. These are static facts about the synthetic
+copy; the alternate starts do not establish instruction boundaries or runtime
+flow. See the [REA follow-up evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
+
+Next, capture a wider bounded memory region around the destination during a
+fresh source-bound observer run. Rediscover the direct CALL destination from
+the live `[EDI+0x27]` slot and validate the callsite and target bytes in that
+same pause; do not reuse the old numeric address as a debugger attachment
+address. Bind the wider read to fresh uninstrumented drawing and scene
+controls, then analyze only those exact captured bytes with REA. If that still
+does not recover the transfer, record same-thread EIPs from the destination
+until PICK entry or the original call continuation. Do not name the anonymous
+target, infer an ABI, or claim a direct edge from the current correlation.

@@ -1835,3 +1835,39 @@ REA decoded 22 bytes at eight explicitly queried instruction starts, created
 no functions, and did not resolve a function boundary. Re-derive the live
 record from its retained ignored triplet comparison with
 [`derive-premium-callsite-destination-breakpoint-evidence.mjs`](../../tools/derive-premium-callsite-destination-breakpoint-evidence.mjs).
+The planned PICK-entry correlation was captured in the follow-up record below.
+
+The [REA follow-up record](premium-callsite-destination-window-rea-20261014-v2.json)
+binds seven code-only queries at every byte start from offset +18 through +24,
+plus an xrefs query for the in-window target at +25. The alternate starts
+decode within the 32 captured bytes but none reports a CALL; they are not
+established instruction boundaries. The xrefs source is the conditional
+branch at +14. No new function or runtime flow is identified. The next step is
+to capture a wider live memory window around the dynamically rediscovered
+destination and run REA on those exact bytes.
+
+## PREMIUM destination-to-PICK correlation, 2026-10-14
+
+[`premium-callsite-pick-correlation-20261014-v1.json`](premium-callsite-pick-correlation-20261014-v1.json)
+binds a second complete source-bound 768×1080 triplet. After the measured
+PREMIUM `CALL [EDI+0x27]` reached `0x20000983`, same-thread DR0/DR1 guards
+observed the current PICK entry at `0x1fe00e8c` before the original
+`callSite+3` continuation. At PICK, the stack pointer, EBP comparison, and
+saved continuation matched the destination frame. The helper restored debug
+registers, detached, and released READY; five drawing/scene artifacts, six
+staged sources, and planning traces matched across controls.
+
+This bounded correlation does not record the intervening native instructions
+or prove a direct edge from `0x20000983` to PICK. The anonymous destination
+still lacks a recovered function boundary and Lisp name; the available REA
+window analysis created zero functions. The observation adds no behavior
+contract or painting-parity result. Rebuild the portable record from the
+retained ignored triplet comparison with
+[`derive-premium-callsite-pick-correlation-evidence.mjs`](../../tools/derive-premium-callsite-pick-correlation-evidence.mjs).
+
+The accepted triplet ID is `premium-pick-v3-20261014-125028-65b3a9cc`. Its
+comparison was reconstructed offline from all three complete roots after the
+Windows PowerShell 5.1 coordinator exhausted memory while serializing a
+decorated `Get-Content` string. The evidence deriver then produced the same
+portable JSON hash twice. The source snapshot, fix, and recovery command are
+documented in [tooling quick fixes](../../tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).

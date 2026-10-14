@@ -192,8 +192,51 @@ portable record is
 [`premium-callsite-destination-breakpoint-20261014-v1.json`](evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
 derived by
 [`derive-premium-callsite-destination-breakpoint-evidence.mjs`](../tools/derive-premium-callsite-destination-breakpoint-evidence.mjs).
-Its 32-byte hash matches the earlier bounded static REA record. The next
-capture should re-arm a one-shot breakpoint at the current PICK entry on the
-same thread after the `0x20000983` hit, then check whether the path reaches
-PICK with the original return address and stack. This adds no behavior
+Its 32-byte hash matches the earlier bounded static REA record. The follow-up
+same-thread PICK-entry correlation is documented below; it adds no behavior
 contract or painting-parity result.
+
+## PREMIUM call destination and PICK-entry correlation, 2026-10-14
+
+A follow-up complete source-bound 768×1080 triplet armed DR0 at the current
+PICK entry and DR1 at the measured call's `callSite+3` continuation after the
+pre-CALL slot and destination had been captured. The first endpoint was PICK:
+the same thread hit `0x1fe00e8c` before its first instruction, with DR6.B0 set.
+Its ESP matched the destination hit, its EBP comparison matched the original
+frame, and `[ESP]` remained `0x1fe4c07f`. The PICK bytes at the hit matched the
+unique current 114-byte PICK payload mapping. The continuation breakpoint had
+been armed but did not fire before PICK. The helper restored debug registers,
+detached, released READY, and reported no cleanup errors. The five
+drawing/scene artifacts, six staged sources, and planning traces matched in
+the before/observer/after controls.
+
+This shows that the observed path reached the current PICK entry on the same
+thread with matching stack/frame markers before the original continuation
+guard. It does not capture the intervening instructions or prove a direct
+edge from the anonymous CALL destination `0x20000983` to PICK. The retained
+markers reduce but do not eliminate stack-reuse ambiguity. The anonymous
+destination still has no recovered Lisp function identity or native boundary;
+the bounded REA analysis created no functions. No ABI, JavaScript behavior
+contract, or drawing parity follows. See the [portable correlation record](evidence/premium-callsite-pick-correlation-20261014-v1.json) and its
+[offline deriver](../tools/derive-premium-callsite-pick-correlation-evidence.mjs).
+
+The accepted follow-up triplet is
+`premium-pick-v3-20261014-125028-65b3a9cc`. Its comparison was rebuilt from
+the three completed roots after the PowerShell coordinator's post-capture JSON
+serialization exhausted memory; the observer and controls did not need to be
+rerun. The coordinator fix and recovery recipe are in
+[tooling quick fixes](../tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
+REA follow-up queries tested every byte start at offsets +18 through +24 in
+the same 32-byte window and queried xrefs for offset +25. None of the seven
+alternate decodes reports a CALL, and the xref source is the earlier branch
+at +14. These results are alternate byte alignments, not established
+instructions or proof of a reachable path; the out-of-window jump target
+still has no captured bytes. See the
+[portable REA follow-up](evidence/premium-callsite-destination-window-rea-20261014-v2.json).
+
+The next native-analysis target is a wider source-bound live read around the
+dynamically rediscovered destination, followed by REA on those exact bytes.
+If static analysis still leaves the route unresolved, record a bounded
+same-thread EIP trace until PICK or the original continuation. Revalidate
+addresses against the current mapping before any debugger attach.

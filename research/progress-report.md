@@ -647,9 +647,11 @@ payload in that original capture.
 REA 6.4.0 / Ghidra 12.1.4 reports seven unresolved computed calls in the PICK
 body. The later method census matched the complete 362-byte live payload to
 `SELECT-SUBJECT`'s method specialized on `PREMIUM`, associating the saved
-PICK-entry stack value with that method's continuation site. The CPU
-destination remains unobserved, and the site remains an indirect computed
-call with no statically resolved callee. The detailed findings are in
+PICK-entry stack value with that method's continuation site. In that earlier
+PICK-entry-only capture, the CPU destination was not observed; the site remains
+an indirect computed call with no statically resolved callee. The later
+destination and bounded PICK-entry correlation are documented below. The
+detailed findings are in
 [the PICK caller report](introspection/pick-native-caller.md),
 [the method identity report](introspection/select-subject-methods.md), and
 [the portable identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
@@ -794,11 +796,44 @@ remain unknown. See [portable capture evidence](introspection/evidence/premium-c
 [REA evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json),
 and the [method findings](introspection/select-subject-methods.md#premium-call-destination-captured-with-a-separate-dr0-breakpoint-2026-10-14).
 
-Next, arm a one-shot breakpoint at the current PICK entry on the same thread
-after the anonymous destination hit, then check whether it reaches PICK with
-the original stack and return address. This adds no routine or contract:
-31 names / 32 bounded contracts, 1/5 milestones, and zero whole-painting
-parity.
+## 2026-10-14 PREMIUM destination-to-PICK correlation
+
+A follow-up fresh source-bound 768×1080 triplet armed a DR0 execute breakpoint
+at the current PICK entry and a DR1 guard at the measured PREMIUM call's
+`callSite+3` continuation. The same thread hit PICK first. At that first
+instruction, EIP was `0x1fe00e8c`; ESP, EBP comparison, and `[ESP]` matched the
+earlier `0x20000983` destination observation, with `[ESP]=0x1fe4c07f`. The
+continuation guard had not fired. All three runs completed; five
+drawing/scene artifacts, six staged sources, and the planning traces matched.
+Debugger state was restored and the observer detached without cleanup errors.
+
+The correlation does not capture the instructions between `0x20000983` and
+PICK or prove a direct edge; the intermediate transfer and anonymous target
+identity remain unresolved. Matching frame markers reduce ambiguity but do
+not exclude every form of stack reuse or unobserved transfer. REA's previous
+bounded static analysis still has no recovered function boundary. This adds
+no routine or contract: 31 names / 32 bounded contracts, 1/5 milestones
+(20% by count), and zero whole-painting parity. See the [portable evidence](introspection/evidence/premium-callsite-pick-correlation-20261014-v1.json),
+[deriver](tools/derive-premium-callsite-pick-correlation-evidence.mjs), and
+[method findings](introspection/select-subject-methods.md#premium-call-destination-and-pick-entry-correlation-2026-10-14).
+
+The accepted follow-up is triplet
+`premium-pick-v3-20261014-125028-65b3a9cc`. Its three completed source-bound
+roots were compared offline after a Windows PowerShell 5.1 serialization issue
+stopped only the coordinator. The portable evidence rebuild produced the same
+SHA-256 on consecutive runs; no AARON rerun was needed. The plain-string fix
+and offline recovery command are documented in
+[tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
+Next, use a wider source-bound live read to supply bytes beyond the current
+32-byte window. REA queried every byte start at offsets +18 through +24 and
+the xref for +25; no alternate start reported a CALL, and the xref source was
+the conditional branch at +14. The alternate decodes do not establish
+instruction boundaries. If the wider static window still cannot recover the
+transfer, trace executed EIPs in one bounded same-thread observer. Do not
+infer a direct edge, ABI, or Lisp function name. The counts remain 31 routine
+names / 32 bounded contracts, 1/5 milestones, and zero whole-painting parity.
+See the [REA follow-up evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
 
 ## Links
 

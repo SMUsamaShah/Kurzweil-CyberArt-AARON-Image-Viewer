@@ -361,6 +361,13 @@ Never append a footer after END. The ready marker proves the helper may start;
 only the runner's terminal END check proves the probe finished its handshake.
 See the reproducible recipe in tooling-workarounds.md.
 
+If the original application and all three runs completed but the parent
+coordinator stalls while writing its comparison, first confirm the oracle
+process is gone and preserve the roots. The Windows PowerShell 5.1
+`Get-Content`/`ConvertTo-Json` serialization failure and its offline Node
+recovery command are documented in
+[`tooling-workarounds.md`](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
 Read the first AA0 header to determine the captured canvas; do not infer it
 from `summary.smallImage`. On 2026-10-13, three complete
 `writer-stream-seed-1234` runs from the required-probe runner reported

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "investigation": "PREMIUM anonymous CALL destination exact-window REA follow-up",
+  "status": "alternate-byte-starts-decoded; no CALL identified; original transfer path unresolved",
+  "baseEvidence": {
+    "path": "research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json",
+    "sha256": "7f62cc6adb4f9aa118ca99aa89e2f810ce0162a8e5f87823c802eaff1addaeee"
+  },
+  "window": {
+    "runtimeBase": "0x20000983",
+    "bytes": 32,
+    "bytesSha256": "eaa3cf34cd04bd79ab9eeb83a3e5489c43d04481f16e3898e1cb65427e64b57a",
+    "syntheticPe": {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.synthetic.exe",
+      "sha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+      "wasExecuted": false
+    },
+    "analystBase": "0x10001000"
+  },
+  "rea": {
+    "provider": "REA 6.4.0 / Ghidra 12.1.4",
+    "staticOnly": true,
+    "functionSeeds": 0,
+    "alternateStartQueries": [
+      {
+        "offset": 18,
+        "address": "0x10001012",
+        "mappedRuntimeCandidate": "0x20000995",
+        "bytes": "0900",
+        "length": 2,
+        "mnemonic": "OR",
+        "disassembly": "OR dword ptr [EAX],EAX",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-12.tsv",
+            "sha256": "c07afa8590c286698b3a38e0834f6e39bb800079064eb3370dc1f38fb85b64de",
+            "line": "0x10001012\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-12-v1/rea-invocation.json",
+            "sha256": "c87d9d9a7880cca6a62966a44064d07adbfb6de23cc2958de6107caa642a7157"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-12-v1/rea-result.json",
+            "sha256": "602a118b74594980e6e845f50d62adad4794ecf75e4d5b16994e08afb50617d3",
+            "bytes": 6197
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 19,
+        "address": "0x10001013",
+        "mappedRuntimeCandidate": "0x20000996",
+        "bytes": "0020",
+        "length": 2,
+        "mnemonic": "ADD",
+        "disassembly": "ADD byte ptr [EAX],AH",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-13.tsv",
+            "sha256": "77bdd003e2cbf02e2ae74433108b7531ac3e5289d33a9fce7613c24a0d2f08a0",
+            "line": "0x10001013\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-13-v1/rea-invocation.json",
+            "sha256": "bc42d7eade17d41c2aa9fabd07c1f53882726daa8d88e63bfec1dea6bd8fac8a"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-13-v1/rea-result.json",
+            "sha256": "31fed90f03db16d285747f7cc3b73bcfa2638d7735905aca9bdc8d26937e2d35",
+            "bytes": 6187
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 20,
+        "address": "0x10001014",
+        "mappedRuntimeCandidate": "0x20000997",
+        "bytes": "208509002089",
+        "length": 6,
+        "mnemonic": "AND",
+        "disassembly": "AND byte ptr [EBP + 0x89200009],AL",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-14.tsv",
+            "sha256": "5c2aa7ef16ac3c569aae37d99c44be8bf2605099301433b2dc93d15dff127da8",
+            "line": "0x10001014\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-14-v1/rea-invocation.json",
+            "sha256": "26cc1a3428c22aa6d9a223d7f29090236a779b1c14c3d1641c16948658057ebf"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-14-v1/rea-result.json",
+            "sha256": "ec94b417ca15b4e8cb64f33be5984382aa522351995ae355931c2f60be810d35",
+            "bytes": 6425
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 21,
+        "address": "0x10001015",
+        "mappedRuntimeCandidate": "0x20000998",
+        "bytes": "8509",
+        "length": 2,
+        "mnemonic": "TEST",
+        "disassembly": "TEST dword ptr [ECX],ECX",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-15.tsv",
+            "sha256": "3a29a5beedf5fa48c209763270feab3d140614c701b955a452d2364f5e80f040",
+            "line": "0x10001015\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-15-v1/rea-invocation.json",
+            "sha256": "d2295c6d1035a16c88640170c7135e05de7f0d1a3e5270f31a70052aa7023d93"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-15-v1/rea-result.json",
+            "sha256": "157bb0be42204857e1dd3f9ec22ba7a8c3ea3a85ded435bd95ed4efc945470e0",
+            "bytes": 6205
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 22,
+        "address": "0x10001016",
+        "mappedRuntimeCandidate": "0x20000999",
+        "bytes": "0900",
+        "length": 2,
+        "mnemonic": "OR",
+        "disassembly": "OR dword ptr [EAX],EAX",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-16.tsv",
+            "sha256": "8a0c312c1aaf44fbfc125e5b1bf166da3cbf309dd0b4d18fb36fc3a9575d71a6",
+            "line": "0x10001016\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-16-v1/rea-invocation.json",
+            "sha256": "e18e4d1759c93212b16e01405b1a2b950b281cc03e4de69ee7ce50f7a7d7a620"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-16-v1/rea-result.json",
+            "sha256": "f9b90aefeb8c0abe0ccb66917b8c4cf73b599339d0764287d0b1107b2b48dcd8",
+            "bytes": 6197
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 23,
+        "address": "0x10001017",
+        "mappedRuntimeCandidate": "0x2000099a",
+        "bytes": "0020",
+        "length": 2,
+        "mnemonic": "ADD",
+        "disassembly": "ADD byte ptr [EAX],AH",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-17.tsv",
+            "sha256": "9c2fc51c0dcca5aef934ccd0e1d34e3238916760a524252ba7d697a85b1376f1",
+            "line": "0x10001017\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-17-v1/rea-invocation.json",
+            "sha256": "21d36d8491e32e7732c4d251e3ba41132d6141cfc9116548ff8be8625dc5c949"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-17-v1/rea-result.json",
+            "sha256": "15d565b638346d0f30989de3e65a9205055a34528fdc1140c09f6a40047d0b73",
+            "bytes": 6187
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      },
+      {
+        "offset": 24,
+        "address": "0x10001018",
+        "mappedRuntimeCandidate": "0x2000099b",
+        "bytes": "208944240489",
+        "length": 6,
+        "mnemonic": "AND",
+        "disassembly": "AND byte ptr [ECX + 0x89042444],CL",
+        "interpretation": "alternate byte-start decoding only; not an established instruction boundary or reachable path",
+        "sources": {
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-seeds-v2/seed-18.tsv",
+            "sha256": "5531b41c28f8fe53af129b20ab911227678279af5f77803a27d8bc421e4508d0",
+            "line": "0x10001018\tcode"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-18-v1/rea-invocation.json",
+            "sha256": "9fa6eaf9ce86dae4d97fb9a20196b3cabae8f37e3891663dfcbbf8ad7a43bc6c"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-start-18-v1/rea-result.json",
+            "sha256": "d8dfc5d04e0a56d6ab4d342341b3bc970917c8c3e9f4182b29140eea2c002839",
+            "bytes": 6425
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        }
+      }
+    ],
+    "branchXref": {
+      "operation": "xrefs",
+      "targetAddress": "0x10001019",
+      "targetRuntimeCandidate": "0x2000099c",
+      "sourceAddresses": [
+        "0x1000100e"
+      ],
+      "sourceRuntimeCandidates": [
+        "0x20000991"
+      ],
+      "interpretation": "static Ghidra reference only; the branch outcome was not observed at runtime",
+      "sources": {
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.seeds.tsv",
+          "sha256": "4d11060f8271ec4720ac087d7a01b4646a39aa5f685f323fb2a2dc960ca91909",
+          "lines": [
+            "0x10001000\tcode"
+          ]
+        },
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-callsite-window-xrefs-target-v1/rea-invocation.json",
+          "sha256": "2d65615eff3ef448d7e1e0ae876afd20d4dd57924e3e87a5e937c9945ccaa5b0"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-callsite-window-xrefs-target-v1/rea-result.json",
+          "sha256": "04311b62bd6e5faf8aa00550c3eacddf2246c2d8ecf347c9f795b55a1a35a890",
+          "bytes": 4609
+        },
+        "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+        "functionSeedCount": 0,
+        "codeSeedCount": 1
+      }
+    }
+  },
+  "derivationSources": [
+    {
+      "path": "research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json",
+      "bytes": 22978,
+      "sha256": "7f62cc6adb4f9aa118ca99aa89e2f810ce0162a8e5f87823c802eaff1addaeee"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.binding.json",
+      "bytes": 2892,
+      "sha256": "4660a0bf9fac90e500fbdc9e88af0e5fa9567caaac354a9cf51b10eb85f5e882"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.synthetic.exe",
+      "bytes": 1024,
+      "sha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9"
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "bytes": 739,
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04"
+    },
+    {
+      "path": "research/tools/derive-premium-callsite-window-rea-followup-evidence.mjs",
+      "bytes": 14617,
+      "sha256": "6ef6397a8c85280aab7c2d61cf8d047ef4dcc2dc2bedb55946be0a2a7e8f645b"
+    },
+    {
+      "path": "research/tools/invoke-rea-ghidra-query.ps1",
+      "bytes": 9599,
+      "sha256": "ad8c89b48fe0d966b9877d9b0be3a0dade823b5d09926675cc9731267bdd5410"
+    }
+  ],
+  "findings": [
+    "The existing captured-window queries report a conditional branch from runtime candidate +14 to +25 and an unconditional jump from +16 to an address outside the 32-byte window.",
+    "The seven extra code-only queries at byte starts +18 through +24 each decoded within the captured bytes and none reported a CALL. These are alternate alignments in bytes skipped by the sequential path, not evidence that each offset begins an instruction.",
+    "REA xrefs for +25 returned the conditional branch at +14 as its sole source in the synthetic image. This is static reference evidence and does not establish the branch outcome or destination behavior.",
+    "The alternate-start queries and xrefs query created no functions and supplied no function-name seed. No Lisp name, function boundary, ABI, or behavior contract is recovered."
+  ],
+  "limitations": [
+    "Only the same 32 captured destination bytes were analyzed; there is still no byte evidence at the out-of-window jump target.",
+    "The synthetic PE copies exact captured bytes but its image layout and addresses are analyst context; it was not executed.",
+    "Alternate-start decodes are not control-flow evidence and may decode embedded data or operands.",
+    "No branch was observed executing, and the intervening transfer from 0x20000983 to PICK remains untraced."
+  ]
+}
