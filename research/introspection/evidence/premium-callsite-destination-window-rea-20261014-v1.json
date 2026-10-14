@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 1,
+  "investigation": "PREMIUM SELECT-SUBJECT CALL destination bounded REA instruction review",
+  "status": "static-window-decoded; source debugger captures remain diagnostic-only",
+  "originalRuntime": {
+    "completeBeforeObserverAfterTriplet": false,
+    "afterControlCaptured": false,
+    "acceptedCallsiteGate": false,
+    "repeatedRawNumericDestinationObservationCount": 2,
+    "acceptedCalleeIdentity": false,
+    "sameThreadPickEntryCorrelation": false,
+    "behaviorContractAdded": false
+  },
+  "diagnostics": [
+    {
+      "path": "research/extracted/local-oracle/external-runs/premium-callsite-triplet-v1-20261014-113903-579e54ff-observer/native-code/debugger-capture-diagnostic.json",
+      "sha256": "b12882f88f057ed94ae4626d64a8e3b0ffc90060e31b20f5d3ae89e18f39a3de",
+      "runId": "premium-callsite-triplet-v1-20261014-113903-579e54ff-observer",
+      "callSiteAddress": "0x1fe4c07c",
+      "callSiteBytes": "ff5727",
+      "preCallOperandValue": "0x20000983",
+      "postStepEip": "0x20000983",
+      "sameThreadId": 12592,
+      "espDecrementedByFour": true,
+      "savedReturnMatchesCallsitePlusThree": true,
+      "firstChanceSingleStepEvent": true,
+      "dr6BsReported": false,
+      "strictStepAccepted": false,
+      "destinationWindow": {
+        "eip": "0x20000983",
+        "bytesHex": "b10283e17f8b7315894df039679b7209eb850900208509002089442404895424",
+        "sha256": "eaa3cf34cd04bd79ab9eeb83a3e5489c43d04481f16e3898e1cb65427e64b57a",
+        "bytes": 32,
+        "protection": "0x00000004",
+        "type": "0x00040000"
+      }
+    },
+    {
+      "path": "research/extracted/local-oracle/external-runs/premium-callsite-triplet-v1-20261014-114556-77d0e6c5-observer/native-code/debugger-capture-diagnostic.json",
+      "sha256": "3fbdf6984913232285ec2a97c9840abc175e1ce9835d6a6c500c9b78acc95db7",
+      "runId": "premium-callsite-triplet-v1-20261014-114556-77d0e6c5-observer",
+      "callSiteAddress": "0x1fe4c07c",
+      "callSiteBytes": "ff5727",
+      "preCallOperandValue": "0x20000983",
+      "postStepEip": "0x20000983",
+      "sameThreadId": 18460,
+      "espDecrementedByFour": true,
+      "savedReturnMatchesCallsitePlusThree": true,
+      "firstChanceSingleStepEvent": true,
+      "dr6BsReported": false,
+      "strictStepAccepted": false,
+      "destinationWindow": {
+        "eip": "0x20000983",
+        "bytesHex": "b10283e17f8b7315894df039679b7209eb850900208509002089442404895424",
+        "sha256": "eaa3cf34cd04bd79ab9eeb83a3e5489c43d04481f16e3898e1cb65427e64b57a",
+        "bytes": 32,
+        "protection": "0x00000004",
+        "type": "0x00040000"
+      }
+    }
+  ],
+  "staticInput": {
+    "sourceDiagnostic": {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-source-v1/debugger-capture-diagnostic.json",
+      "sha256": "3fbdf6984913232285ec2a97c9840abc175e1ce9835d6a6c500c9b78acc95db7"
+    },
+    "binding": {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.binding.json",
+      "sha256": "4660a0bf9fac90e500fbdc9e88af0e5fa9567caaac354a9cf51b10eb85f5e882"
+    },
+    "windowBytesSha256": "eaa3cf34cd04bd79ab9eeb83a3e5489c43d04481f16e3898e1cb65427e64b57a",
+    "syntheticPe": {
+      "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.synthetic.exe",
+      "sha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+      "wasExecuted": false
+    },
+    "analystAddress": "0x10001000",
+    "mapping": {
+      "analystBase": "0x10001000",
+      "runtimeBase": "0x20000983",
+      "bytes": 32
+    }
+  },
+  "derivationSources": [
+    {
+      "path": "research/tools/derive-premium-callsite-window-rea-evidence.mjs",
+      "sha256": "2a8fd3954d64a3e9563fdd5baef7043e3c091cf90c2666ef40571ac2e147809d",
+      "bytes": 18980
+    },
+    {
+      "path": "research/tools/prepare-debugger-window-pe.mjs",
+      "sha256": "955b896f4ed94d59dfb386ebb10f952a7dd94ed1278ab023cdc9a43209e7ea7e",
+      "bytes": 10532
+    },
+    {
+      "path": "research/tools/invoke-rea-ghidra-query.ps1",
+      "sha256": "ad8c89b48fe0d966b9877d9b0be3a0dade823b5d09926675cc9731267bdd5410",
+      "bytes": 9599
+    },
+    {
+      "path": "research/native-analysis-workflow.md",
+      "sha256": "de7decb2c764baff447be19558024f46b5be1ebd985a092673a4d6371fdf0d9f",
+      "bytes": 45267
+    },
+    {
+      "path": "research/oracle/AaronPremiumCallsiteStepV1.cs",
+      "sha256": "21bdba4ddb8a016c73b1331af1b44cb05448ede7a013d4f1cd98d54e39352cc3",
+      "bytes": 57109
+    }
+  ],
+  "reaSummary": {
+    "provider": "REA 6.4.0 / Ghidra 12.1.4",
+    "queryCount": 8,
+    "functionSeeds": 0,
+    "codeSeeds": 8,
+    "decodedInstructionBytes": 22,
+    "staticOnly": true,
+    "generatedPeExecuted": false,
+    "instructions": [
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001000",
+          "offsetFromRuntimeEntry": 0,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-v2/rea-invocation.json",
+            "sha256": "11c6255d00138c351095c78baf5071b9ac39d4c060e49883647ecc3d63534e3f"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-v2/rea-result.json",
+            "sha256": "95856f261c99e65d2c6f1a3846a1968d56a5bd5cb2c7cd247bdffccf3a93744d",
+            "bytes": 6188
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window.seeds.tsv",
+            "sha256": "4d11060f8271ec4720ac087d7a01b4646a39aa5f685f323fb2a2dc960ca91909",
+            "line": "0x10001000\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001000",
+          "mappedRuntimeAddress": "0x20000983",
+          "bytes": "b102",
+          "length": 2,
+          "mnemonic": "MOV",
+          "disassembly": "MOV CL,0x2",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001002",
+          "offsetFromRuntimeEntry": 2,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-v3/rea-invocation.json",
+            "sha256": "e12b555b71114814e72a9ae47f78454e9b8c232a2c42b5bb032e043e9f2d9b93"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-v3/rea-result.json",
+            "sha256": "1ba58189fa5497304e8322f48661c3da1da9d967ac98ac6081660955ad7269e6",
+            "bytes": 6218
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-02.tsv",
+            "sha256": "89db4da7c8d6b8c71a402ac1241e2cf61ddd4a1228d4c4d50a724c1a60aa4786",
+            "line": "0x10001002\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001002",
+          "mappedRuntimeAddress": "0x20000985",
+          "bytes": "83e17f",
+          "length": 3,
+          "mnemonic": "AND",
+          "disassembly": "AND ECX,0x7f",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001005",
+          "offsetFromRuntimeEntry": 5,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-05/rea-invocation.json",
+            "sha256": "cf561a5c16377e9ef3da4c4e14aed929c1e5d9c3c78c1572ff57aa5fb6cec2ec"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-05/rea-result.json",
+            "sha256": "25a76d6f680bf331d05e3e9e4b3a921ae23e5caa1d1c54d9b39619aeb1a713b2",
+            "bytes": 6418
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-05.tsv",
+            "sha256": "cb2ee2a7d07ee49050d8a35c089bbaf10c92fe3e41afd09c7f467230e2dd0ee2",
+            "line": "0x10001005\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001005",
+          "mappedRuntimeAddress": "0x20000988",
+          "bytes": "8b7315",
+          "length": 3,
+          "mnemonic": "MOV",
+          "disassembly": "MOV ESI,dword ptr [EBX + 0x15]",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001008",
+          "offsetFromRuntimeEntry": 8,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-08/rea-invocation.json",
+            "sha256": "cc9ea544a2d7655d2df312ae82430ba5be6740b7af7d0eef3dccee176713af9a"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-08/rea-result.json",
+            "sha256": "63b1a78bf80923a77bb68ef5c7df859f0acdf4c77b0dd111c2a754c596469614",
+            "bytes": 6436
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-08.tsv",
+            "sha256": "ef89f241cd158ab2e74934e6c051cdbf1c4686545b2afc0f3f14c2c799d0cda4",
+            "line": "0x10001008\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001008",
+          "mappedRuntimeAddress": "0x2000098b",
+          "bytes": "894df0",
+          "length": 3,
+          "mnemonic": "MOV",
+          "disassembly": "MOV dword ptr [EBP + -0x10],ECX",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x1000100b",
+          "offsetFromRuntimeEntry": 11,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-0b/rea-invocation.json",
+            "sha256": "40346d48f241bcaab1f2034e9705eeffca95ee73b94a7f867941851f7d950329"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-0b/rea-result.json",
+            "sha256": "be32049e80e595b1b3af247865b9e6f420b343bc6a69e75392bf4da15f18b0b2",
+            "bytes": 6436
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-0b.tsv",
+            "sha256": "dcd6733b4e9a367cf8eab2015ddf791b304bd9a1be6aada4ff14475b891fe3f5",
+            "line": "0x1000100b\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x1000100b",
+          "mappedRuntimeAddress": "0x2000098e",
+          "bytes": "39679b",
+          "length": 3,
+          "mnemonic": "CMP",
+          "disassembly": "CMP dword ptr [EDI + -0x65],ESP",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x1000100e",
+          "offsetFromRuntimeEntry": 14,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-0e/rea-invocation.json",
+            "sha256": "375b60171e56458ade4a884cf1feb40e74b04abe57a7818b1827817018c2da14"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-0e/rea-result.json",
+            "sha256": "9ca3ce6b09b08ed73001a3e03dbcb3ee6aaa44c7d1623bb9cc37455526295a99",
+            "bytes": 6506
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-0e.tsv",
+            "sha256": "91be0572e08b74c9c3f6c16eba4e5ef0b274c1bdfc44050251c7f1664459079d",
+            "line": "0x1000100e\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x1000100e",
+          "mappedRuntimeAddress": "0x20000991",
+          "bytes": "7209",
+          "length": 2,
+          "mnemonic": "JC",
+          "disassembly": "JC 0x10001019",
+          "flow": {
+            "kind": "jump",
+            "conditional": true,
+            "computed": false,
+            "direct_destinations": [
+              "0x10001019"
+            ],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "CONDITIONAL_JUMP"
+              }
+            ]
+          },
+          "references": [
+            {
+              "target_address": "0x10001019",
+              "type": "CONDITIONAL_JUMP",
+              "call": false,
+              "jump": true,
+              "indirect": false,
+              "computed": false,
+              "operand_index": 0,
+              "source_address": "0x1000100e",
+              "data": false,
+              "read": false,
+              "write": false,
+              "primary": true,
+              "provenance": "ghidra-reference-manager",
+              "source": "default",
+              "translatedRuntimeCandidate": "0x2000099c",
+              "targetInsideCapturedWindow": true,
+              "branchExecutionObserved": false
+            }
+          ],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001010",
+          "offsetFromRuntimeEntry": 16,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-10/rea-invocation.json",
+            "sha256": "98d5502046e9ef1765058280398313c9a8a5382638d84ff2f521f425e9678db9"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-10/rea-result.json",
+            "sha256": "1da447f6faab8d306533a0f879307ff4175b830237a71ecb0c7d13558c39a6c6",
+            "bytes": 6520
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-10.tsv",
+            "sha256": "c7e9be78f3ea220e918f95fb00ed9250c6206f3053a316268b4a4f866f818ae5",
+            "line": "0x10001010\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001010",
+          "mappedRuntimeAddress": "0x20000993",
+          "bytes": "eb85",
+          "length": 2,
+          "mnemonic": "JMP",
+          "disassembly": "JMP 0x10000f97",
+          "flow": {
+            "kind": "jump",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [
+              "0x10000f97"
+            ],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "UNCONDITIONAL_JUMP"
+              }
+            ]
+          },
+          "references": [
+            {
+              "target_address": "0x10000f97",
+              "type": "UNCONDITIONAL_JUMP",
+              "call": false,
+              "jump": true,
+              "indirect": false,
+              "computed": false,
+              "operand_index": 0,
+              "source_address": "0x10001010",
+              "data": false,
+              "read": false,
+              "write": false,
+              "primary": true,
+              "provenance": "ghidra-reference-manager",
+              "source": "default",
+              "translatedRuntimeCandidate": "0x2000091a",
+              "targetInsideCapturedWindow": false,
+              "branchExecutionObserved": false
+            }
+          ],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      },
+      {
+        "query": {
+          "operation": "inspect-native-instruction",
+          "address": "0x10001019",
+          "offsetFromRuntimeEntry": 25,
+          "provider": "REA 6.4.0 / Ghidra 12.1.4"
+        },
+        "source": {
+          "invocation": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-19/rea-invocation.json",
+            "sha256": "1e061e713fe6f3b2a3024d1d69da25d24d6b7c5f8623b8d628c8e7439328246e"
+          },
+          "report": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-query-offset-19/rea-result.json",
+            "sha256": "7d098432045d32dd20afabbf0e74910b02e3fbb9e85c40665e0834209b7051d1",
+            "bytes": 6946
+          },
+          "seed": {
+            "path": "research/artifacts/rea-tools/premium-callsite-window-pe-v1/debugger-window-seed-19.tsv",
+            "sha256": "be69a3eb3463bac1178dd8b161d4d318f8438afe1c59de8e52a7763c3a9ea3ce",
+            "line": "0x10001019\tcode"
+          },
+          "inputPeSha256": "8fe536e8d4dda9cedf70a584f94141b10ea4ad630032d865773a52cb9caabbf9",
+          "functionSeedCount": 0,
+          "codeSeedCount": 1
+        },
+        "instruction": {
+          "address": "0x10001019",
+          "mappedRuntimeAddress": "0x2000099c",
+          "bytes": "89442404",
+          "length": 4,
+          "mnemonic": "MOV",
+          "disassembly": "MOV dword ptr [ESP + 0x4],EAX",
+          "flow": {
+            "kind": "fallthrough",
+            "conditional": false,
+            "computed": false,
+            "direct_destinations": [],
+            "classification_evidence": [
+              {
+                "source": "ghidra-listing-flow-type",
+                "value": "FALL_THROUGH"
+              }
+            ]
+          },
+          "references": [
+            {
+              "target_address": "stack:0x4",
+              "type": "WRITE",
+              "call": false,
+              "jump": false,
+              "indirect": false,
+              "computed": false,
+              "operand_index": 0,
+              "source_address": "0x10001019",
+              "data": true,
+              "read": false,
+              "write": true,
+              "primary": true,
+              "provenance": "ghidra-reference-manager",
+              "source": "analysis",
+              "translatedRuntimeCandidate": null
+            }
+          ],
+          "procedureFieldIsAnalystQueryContextOnly": true
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Both source-bound observer attempts failed the strict DR6.BS single-step acceptance gate and stopped before an after-control; their numeric target/stack observations are retained as diagnostics, not accepted direct-caller evidence.",
+    "The destination memory region was reported PAGE_READWRITE and MEM_MAPPED. REA analyzed a copy marked executable inside a synthetic PE; runtime page protection and static PE section flags are different evidence.",
+    "Each REA query used one code-only seed. No function-name seed was supplied and Ghidra reports zero functions created; procedure fields describe only the analyst query context.",
+    "Only eight instruction starts were queried. Bytes not covered by those rows are not classified, and any instruction crossing the 32-byte window boundary is excluded.",
+    "Relative destinations are translated only as static candidates using the known byte-offset mapping. No branch was observed executing and no bytes were read at destinations outside the captured window.",
+    "No Lisp function name, original function boundary, calling convention, ABI, source behavior, JavaScript contract, or whole-painting parity is established."
+  ]
+}

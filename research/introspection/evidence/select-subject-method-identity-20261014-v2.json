@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "status": "identified-live-direct-caller-method",
-  "question": "Which runtime CLOS method contains the measured return site from the first natural PICK entry?",
+  "status": "identified-method-for-saved-pick-entry-continuation",
+  "question": "Which runtime CLOS method contains the continuation matching the saved stack value at the first natural PICK entry?",
   "finding": {
     "genericFunction": {
       "name": "SELECT-SUBJECT",
@@ -108,7 +108,7 @@
         }
       }
     ],
-    "identifiedCaller": {
+    "associatedMethod": {
       "method": "SELECT-SUBJECT-METHOD-1",
       "dispatchSpecializer": {
         "kind": "EQL",
@@ -118,7 +118,7 @@
       "entry": "0x1fe4bfb4",
       "payloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae",
       "exactCompletePllObjectMatch": true,
-      "relationToPriorPICKCapture": "The prior live PICK return address and call-site bytes fall at the same offsets in this complete method payload; the payload hash and complete object hash are identical."
+      "relationToPriorPICKCapture": "The prior live PICK-entry stack value and call-site bytes map to the same offsets in this complete method payload; the payload hash and complete object hash are identical. This associates the entry with a continuation site but does not prove the CALL transferred directly to PICK."
     },
     "pickCallSite": {
       "address": "0x1fe4c07c",
@@ -126,8 +126,9 @@
       "liveBytesHex": "ff5727",
       "disassembly": "0x1fe4c07c: CALL dword ptr [EDI + 0x27]",
       "nextInstruction": "0x1fe4c07f: MOV EDX, EAX",
-      "returnAddress": "0x1fe4c07f",
-      "directlyObservedInPriorPICKEntryCapture": true
+      "continuationAddress": "0x1fe4c07f",
+      "savedStackValueMatchedInPriorPICKEntryCapture": true,
+      "directTransferObserved": false
     },
     "reaCallQuery": {
       "status": "unresolved",
@@ -581,7 +582,7 @@
   },
   "sourceBinding": {
     "runner": {
-      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "path": "research/oracle/run-local-scene-state-required-probe-20261014.ps1",
       "bytes": 27576,
       "sha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076"
     },
@@ -633,8 +634,8 @@
       },
       "oldPickEvidence": {
         "path": "research/introspection/evidence/pick-native-caller-live-site-20261014-v4.json",
-        "bytes": 26952,
-        "sha256": "17c7fba4112454969be5b7ff85a61c659314e8601766b553c30255312d2ae02a"
+        "bytes": 27210,
+        "sha256": "110243c1ba457f7be41da2fe3e4c8158b675354d672f0fc416776e9c90adc6fb"
       },
       "reaBinding": {
         "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.binding.json",
@@ -649,15 +650,15 @@
     },
     "deriver": {
       "path": "research/tools/derive-select-subject-method-identity-evidence.mjs",
-      "bytes": 27900,
-      "sha256": "23ebd8e43707380848451778b84162dc8e689f3b2491042df4664f5e727a38d3"
+      "bytes": 28709,
+      "sha256": "fb5449954928e0e4ad2401113435b82fbc5dc65ec89143e3e554f1240959dee5"
     }
   },
   "limits": [
-    "This identifies the direct caller for the captured natural PICK entry only; it does not establish an application-wide call graph or prove the method is the only caller.",
+    "This identifies the method containing the continuation matching the saved stack value at one natural PICK entry; it does not prove a direct CPU edge, an application-wide call graph, or that the method is the only possible caller.",
     "The captured method function is selected by the observed EQL PREMIUM specializer, but this probe did not invoke the generic or method and did not record the method return value or full argument state.",
     "The indirect target at [EDI+0x27] remains unresolved by REA; no target function name or Lisp ABI is inferred.",
     "The current method census and prior PICK-entry hit are from different source-bound runs and canvases; their linkage is through the same unique complete payload, object hash, runtime entry and call-site offset, not a same-process stack snapshot.",
-    "This adds a caller identity, not a JavaScript behavior contract or whole-painting parity result."
+    "This adds a return-site method association, not a CPU call-target identity, JavaScript behavior contract, or whole-painting parity result."
   ]
 }

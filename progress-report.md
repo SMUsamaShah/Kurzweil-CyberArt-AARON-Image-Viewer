@@ -7,8 +7,11 @@ and the running investigation history are linked below.
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
-| Newly resolved direct caller | One captured `PICK` call from `SELECT-SUBJECT` method `(EQL PREMIUM)` | Exact full method payload/object bytes match the earlier live return site; REA still cannot resolve the computed callee. This adds no behavior contract. |
+| PREMIUM indirect CALL destination | One accepted 768×1080 source-bound triplet captured pre-call `[EDI+0x27]=0x20000983`; same-thread DR0 breakpoint hit before the target instruction, and `[ESP]=callsite+3` | The target is not the named PICK entry; the anonymous target's function boundary and route to PICK remain unresolved. Adds no behavior contract. |
+| FREE-PATH indirect call-site sample | 2 of 3 selected sites hit | REA located two computed calls and their nearby branch. The same raw slot value was read at both hits, but remains unnamed and is not counted as a recovered function. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
+| FREE-PATH isolated one-edge stop cases | 10 captured; JS matches 4 and differs by one step in 6 | The v11 seed 456069 sample is a mismatch; step-times-wiggle matches the original counts across v8/v9/v11 only as a local replay hypothesis. |
+| SELECT-SUBJECT native call sites inventoried | 36/36 queried; all unresolved computed calls with no static targets | REA lists 17 FREE and 19 PREMIUM callsites. This is a static-analysis limit, not evidence that the calls lack runtime targets. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
 | Natural screen-unit context samples | 7 units across seeds 1234 and 5678 | Their selected paths replay 1,121 writer bytes. Units 2, 3, 5, and 6 provide 12 same-painting `PICK`/`PREVDEX` observations for `(27,28,29)`; seed-5678 unit 6 adds three observations for `(33,34,35)`. |
@@ -21,15 +24,21 @@ function-by-function coverage or whole-scene scoring system. The measured
 only to that finite canonical test subset.
 
 The first natural PICK entry was captured in a matched-runner 768×1080
-triplet. Its return maps to an anonymous 362-byte compiled PLL object at
-payload offset 203; live bytes `FF 57 27` at the call site match the PLL, and
-REA confirms the instruction boundary. A separate 320×480 method census then
-matched the complete live payload to
-`COMMON-GRAPHICS-USER::SELECT-SUBJECT` method `(EQL PREMIUM)`, resolving the
-direct caller for that captured PICK entry. REA still reports the indirect
-callee as unresolved. This adds no JS contract: counts remain 31 routine
-names / 32 bounded contracts, 1/5 milestones (20% by count), and zero
-whole-painting parity. There is no defensible overall completion percentage.
+triplet. Its saved stack value maps to payload offset 203 in an anonymous
+366-byte compiled PLL object containing a 362-byte payload; live bytes
+`FF 57 27` at the preceding call site match the PLL, and REA confirms the
+instruction boundary. A separate 320×480 method census then matched the
+complete live payload to `COMMON-GRAPHICS-USER::SELECT-SUBJECT` method
+`(EQL PREMIUM)`. This associates that PICK entry's saved return value with the
+method's continuation site. A later source-bound triplet captured the actual
+pre-call slot value and confirmed a direct CPU destination at `0x20000983`
+using an independent DR0 breakpoint. That target is not the named PICK entry;
+the anonymous target-to-PICK path remains open. REA's static indirect-call
+census still has no resolved targets. This adds no JS contract: counts remain
+31 routine names / 32 bounded contracts, 1/5 milestones (20% by count), and
+zero whole-painting parity. There is no defensible overall completion
+percentage. See the [destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json)
+and [bounded REA analysis](research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json).
 See the [caller findings](research/introspection/pick-native-caller.md),
 [method identity](research/introspection/select-subject-methods.md), and
 [portable evidence](research/introspection/evidence/select-subject-method-identity-20261014-v2.json).
@@ -56,6 +65,17 @@ but it is not yet a general reproduction of AARON. The main remaining work is
 to recover upstream random and drawing decisions, finish and connect the
 freehand/brush/fill/colour/clipping/output path, recover composition and object
 generation, and verify complete paintings against fresh original runs.
+
+REA-guided FREE-PATH call-site capture: in one complete source-bound 768×1080
+triplet, the native observer hit `FREE-PATH+0x3e4` and `+0x39a`, then the target
+exited before `+0x3ac`. Both calls read `0x20000983` from `[EDI+0x27]`; the
+same 16-byte preview was observed, but no function name, ABI, same-invocation
+relationship, or branch cause was established. The five drawing/scene
+artifacts, six staged sources, and before/after planning traces match their
+controls. This adds no function/contract count: 31 names / 32 bounded
+contracts, 1/5 milestones (20% by count), and zero whole-painting parity.
+See [FREE-PATH findings](research/introspection/free-path-native.md#bounded-live-reads-of-indirect-call-sites-2026-10-14)
+and [portable evidence](research/introspection/evidence/free-path-callsite-v1-20261014-084337-07112bc0-v2.json).
 
 ## Current focus
 
@@ -103,14 +123,31 @@ V16 changed the terminal third PICK's return from 33 to 34 while preserving
 match all six control outputs and seven ordinary Lisp sources. The new
 two-/four-argument explicit-call sample broadens PICK's bounded input envelope
 without changing counts: 31 routine names / 32 contracts, 1/5 milestones, and
-zero whole-painting parity. The next target is one independent FREE-PATH
-single-edge holdout selected locally to make the surviving stop-boundary
-candidates predict different uncapped counts. It will use the established
-source-bound triplet gates; do not promote one measured case to a general
-rule. See the [FREE-PATH evidence](research/introspection/free-path-native.md),
-[candidate search](research/tools/find-free-path-stop-boundary-v9-candidate.mjs),
-[controlled PICK arity checkpoint](research/progress-report.md#2026-10-14-controlled-pick-arity-extension),
-and [native analysis workflow](research/native-analysis-workflow.md).
+zero whole-painting parity. The v11 single-edge holdout is complete: seed
+456069 selected 13 steps; the original consumed 11, returned 14 points, and
+left next random 77059. JS returned 15 points and left 62900, so parity fails.
+Across ten isolated one-edge cases, JS matches four and differs by one step
+in six. This adds no general stop rule or behavior contract. See the
+[v11 evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v11-456069.json),
+[findings](research/introspection/free-path-native.md#seed-456069-discriminator-v11),
+and [candidate search](research/tools/find-free-path-stop-boundary-v11-candidate.mjs).
+
+REA queried all 36 computed indirect calls in the two SELECT-SUBJECT methods;
+all remain unresolved statically. A fresh source-bound 768×1080 destination
+triplet has now stopped before the PREMIUM method's `CALL [EDI+0x27]`, captured
+the pre-call operand `0x20000983`, and observed the same thread hit a separate
+DR0 execute breakpoint at that target before its first instruction. ESP fell
+by four and `[ESP]` matched the method continuation `callsite+3`. The five
+drawing/scene artifacts, six staged sources, planning traces, and runner/runtime
+identities match; debug registers were restored and there were no cleanup
+errors. The target is not the mapped PICK entry, and REA's bounded static
+review created no function or boundary. Next, arm PICK's current entry on that
+same thread after the target hit and determine whether the anonymous target
+routes there with the original stack. This adds no JavaScript contract or
+painting parity. See [destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
+[bounded REA evidence](research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json),
+[PICK findings](research/introspection/select-subject-methods.md), and the
+[tooling workarounds](research/tooling-workarounds.md).
 
 ## Follow the evidence
 
@@ -122,6 +159,7 @@ and [native analysis workflow](research/native-analysis-workflow.md).
 - [FREE-PATH caller evidence](research/introspection/evidence/free-path-native-caller-20261014.json)
 - [FREE-PATH v8 stop-boundary evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v8.json)
 - [FREE-PATH v9 stop-boundary evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v9.json)
+- [FREE-PATH v11 stop-boundary evidence](research/introspection/evidence/free-path-stop-boundary-20261014-v11-456069.json)
 - [FREE-PATH caller triplet tooling](research/tools/capture-free-path-caller-triplet.ps1)
 - [40-case JS comparison evidence](research/introspection/evidence/free-path-boundary-js-comparison-20261013.json)
 - [Tooling workarounds](research/tooling-workarounds.md)

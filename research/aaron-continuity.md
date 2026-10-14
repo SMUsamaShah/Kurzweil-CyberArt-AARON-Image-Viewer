@@ -23,6 +23,17 @@ parity remains zero. See the [new probe](introspection/pick-contract-arities-v1.
 [evidence](introspection/evidence/pick-contract-arities-seed1234-20261014.json),
 and [detailed progress](progress-report.md#2026-10-14-controlled-pick-arity-extension).
 
+The v11 FREE-PATH holdout is complete. At seed 456069, the source-bound
+320×480 capture selected 13 steps; the original consumed 11, while the JS
+comparison returned one extra point and left a different next random value.
+The three local stop candidates predicted 12/12/11, with only
+step-times-wiggle matching the original in this sample. Across ten isolated
+one-edge cases, JS matches four and differs by one step in six; this does not
+recover a general stop rule. Function and contract totals and milestone count
+remain unchanged. See the [v11 evidence]
+(introspection/evidence/free-path-stop-boundary-20261014-v11-456069.json)
+and the [detailed findings](introspection/free-path-native.md#seed-456069-discriminator-v11).
+
 A fresh natural observer in the 320×480 regime recorded no
 `SELECT-SUBJECT` entries; its six drawing/scene outputs and six ordinary
 staged sources match the fresh controls. The observer-only planning trace is
@@ -31,6 +42,23 @@ type. This is a bounded no-hit, not evidence about the FREE/PREMIUM methods or
 other canvas regimes. REA's first static method dossiers leave their computed
 call targets unresolved. See the [active execution plan](execution-plan.md)
 for the next target and evidence gates.
+
+The PREMIUM method's call destination is now captured in a separate complete
+768×1080 triplet using a DR0 execute breakpoint at the pre-call slot value.
+The `CALL [EDI+0x27]` site was source-validated at payload offset 200; its slot
+held `0x20000983`. The same thread stopped at that address before its first
+instruction, with ESP reduced by four and `[ESP]=callsite+3`. All five
+drawing/scene artifacts, six staged sources, and planning traces match, and
+debugger state was restored before detach. The destination differs from the
+known PICK entry and has no named Lisp function or full function boundary.
+REA decoded 22 bytes from eight starts in the matching 32-byte window, but
+created zero functions. Next, re-arm a one-shot breakpoint at the current PICK
+entry on the same thread and test whether the anonymous target path reaches it
+with the original return and stack. This adds no behavior contract. See the
+[method findings](introspection/select-subject-methods.md#premium-call-destination-captured-with-a-separate-dr0-breakpoint-2026-10-14),
+[portable capture evidence](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
+[bounded REA evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json),
+and [the active execution plan](execution-plan.md).
 
 The earlier caller, screen-unit, and FREE-PATH checkpoints below remain useful
 historical evidence; their former “next” recommendations are superseded by
@@ -109,14 +137,16 @@ or parity claim. See the [v15 evidence](introspection/evidence/pick-prevdex-retu
 [screen-unit findings](introspection/screen-unit-context.md), and
 [tooling workarounds](tooling-workarounds.md).
 
-The first natural `PICK` return came from the source-bound 768×1080
-seed-1234 triplet. Its return address `0x1fe4c07f` and live call bytes
-`FF 57 27` mapped to offset 203 in a 362-byte compiled object. A later
+The first natural `PICK` entry capture came from the source-bound 768×1080
+seed-1234 triplet. Its saved stack value `0x1fe4c07f` and preceding live call bytes
+`FF 57 27` mapped to offset 203 in a 362-byte payload within a 366-byte
+compiled object. A later
 read-only CLOS census in a separate source-bound 320×480 triplet captured
 both `SELECT-SUBJECT` methods and matched their complete live windows to
 unique PLL objects. The `(EQL PREMIUM)` method's full payload and object
-hashes match the earlier object, resolving the direct caller for that
-captured `PICK` entry. REA confirms `CALL [EDI+0x27]`, followed by
+hashes match the earlier object, associating the saved stack value at that
+captured `PICK` entry with the method's continuation site. The CALL's CPU
+destination was not observed. REA confirms `CALL [EDI+0x27]`, followed by
 `MOV EDX,EAX`, but leaves the computed target unresolved. The census did not
 invoke either method or measure its result and side effects. See the
 [caller findings](introspection/pick-native-caller.md),

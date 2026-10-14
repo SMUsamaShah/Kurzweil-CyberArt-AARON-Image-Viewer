@@ -1766,7 +1766,7 @@ triple candidate across two seeds. This remains bounded evidence and proves
 neither the direct Lisp caller nor a general rule, JS contract, or parity.
 Re-derive from the three retained ignored roots with the same helper listed
 above.
-## PICK native caller object, 2026-10-14
+## PICK-entry return-site object, 2026-10-14
 
 [`pick-native-caller-live-site-20261014-v4.json`](pick-native-caller-live-site-20261014-v4.json)
 binds the first natural PICK entry hit to a complete matched-runner 768×1080
@@ -1783,13 +1783,21 @@ capture, and the Lisp name was unresolved at that stage. Re-derive with
 then binds the complete live method payload to that same object. The CLOS
 census found two `SELECT-SUBJECT` methods; method 1 has an EQL `PREMIUM`
 specializer, and its unique 362-byte payload/object hashes equal the earlier
-anonymous caller object. Its call at payload offset 200 is the measured
-`FF 57 27` site, returning at offset 203. This resolves the direct caller for
-that captured PICK entry. REA confirms the computed dispatch target remains
-unresolved. The method census has its own fresh matched-runner 320×480 triplet;
+anonymous object. Its call at payload offset 200 is the measured
+`FF 57 27` site, followed by a continuation at offset 203. The saved stack
+value at the earlier PICK entry matches that continuation. This associates
+the entry with the PREMIUM method's return site; it does not establish that
+the CALL transferred directly to PICK. REA confirms the computed dispatch
+target remains unresolved. The method census has its own fresh matched-runner 320×480 triplet;
 all six outputs and six ordinary scene sources match. This adds no JavaScript
 behavior contract or whole-painting parity result. Re-derive with
 [`derive-select-subject-method-identity-evidence.mjs`](../../tools/derive-select-subject-method-identity-evidence.mjs).
+
+Earlier drafts labeled the saved stack value as a direct caller or as a
+confirmed return to PICK. Those labels overstate the evidence. The accepted
+v4/v2 records above associate the saved stack value with a PREMIUM method
+continuation and leave the CALL's CPU destination unresolved at that stage.
+Do not use the earlier labels as direct-caller findings.
 
 ## Controlled PICK arity extension, 2026-10-14
 
@@ -1808,3 +1816,22 @@ name or contract unit, a natural caller observation, general type/range
 coverage, or drawing parity. Re-derive from the three ignored run roots in the
 JSON with
 [`derive-pick-contract-arities-evidence.mjs`](../../tools/derive-pick-contract-arities-evidence.mjs).
+
+## PREMIUM call destination via DR0 execute breakpoint, 2026-10-14
+
+[`premium-callsite-destination-breakpoint-20261014-v1.json`](premium-callsite-destination-breakpoint-20261014-v1.json)
+binds the pre-call `[EDI+0x27]` value at the PREMIUM method's `FF 57 27` site
+to a first-chance DR0 execute breakpoint at `0x20000983` in the same thread.
+The event stopped before the target instruction, with ESP reduced by four and
+the saved return address equal to `callsite+3`. The helper restored its debug
+registers and detached cleanly. All three 768×1080 oracle runs completed, and
+the five drawing/scene artifacts, six staged sources, and planning traces
+match. The observed target differs from the named PICK entry; this does not
+prove the path from the anonymous target to PICK or identify a Lisp function.
+
+The 32-byte destination window hashes to the exact bytes analyzed in
+[`premium-callsite-destination-window-rea-20261014-v1.json`](premium-callsite-destination-window-rea-20261014-v1.json).
+REA decoded 22 bytes at eight explicitly queried instruction starts, created
+no functions, and did not resolve a function boundary. Re-derive the live
+record from its retained ignored triplet comparison with
+[`derive-premium-callsite-destination-breakpoint-evidence.mjs`](../../tools/derive-premium-callsite-destination-breakpoint-evidence.mjs).

@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('function', 'decompile', 'xrefs', 'resolve-native-call-targets')]
+    [ValidateSet('function', 'decompile', 'xrefs', 'resolve-native-call-targets', 'inspect-native-instruction')]
     [string]$Operation,
 
     [Parameter(Mandatory = $true)]
@@ -86,6 +86,23 @@ if ($SeedFile) {
     }
 }
 
+if ($Operation -eq 'inspect-native-instruction') {
+    if (-not $seed) {
+        throw 'inspect-native-instruction requires the bounded-window code seed; function-name seeds are not accepted'
+    }
+    if (-not $seed.StartsWith($toolchainRoot.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'The bounded-window code seed must stay beneath research/artifacts/rea-tools'
+    }
+    $seedLines = [IO.File]::ReadAllLines($seed)
+    if ($seedLines.Length -ne 1) {
+        throw 'The bounded-window seed must contain exactly one address<TAB>code line'
+    }
+    $seedFields = $seedLines[0].Split([char]9)
+    if ($seedFields.Length -ne 2 -or $seedFields[0] -ine $Address -or $seedFields[1] -cne 'code') {
+        throw 'The bounded-window seed must be exactly the requested address<TAB>code; function-name seeds are forbidden'
+    }
+}
+
 [void][IO.Directory]::CreateDirectory($outputDirectory)
 $reportPath = Join-Path $outputDirectory $ReportName
 $stderrPath = Join-Path $outputDirectory 'rea-stderr.txt'
@@ -117,8 +134,30 @@ try {
 
     $arguments = @($reaCli, $Operation, $inputFile, $Address, '--provider', 'ghidra', '--format', 'json')
     $process = Start-Process -FilePath $node -ArgumentList $arguments `
-        -WorkingDirectory $repoRoot -Wait -PassThru -NoNewWindow `
+        -WorkingDirectory $repoRoot -PassThru -NoNewWindow `
         -RedirectStandardOutput $reportPath -RedirectStandardError $stderrPath
+    $processHandle = $process.Handle
+    if ($processHandle -eq [IntPtr]::Zero) {
+        throw "Could not acquire a process handle for REA $Operation"
+    }
+    $waitTimeout = [TimeSpan]::FromMinutes(30)
+    if (-not $process.WaitForExit([int]$waitTimeout.TotalMilliseconds)) {
+        $cleanupFailure = $null
+        try {
+            if (-not $process.HasExited) { $process.Kill() }
+            $processStopped = $process.WaitForExit(5000)
+            if (-not $processStopped) { $cleanupFailure = 'the REA process did not stop within 5 seconds' }
+        } catch {
+            $cleanupFailure = $_.Exception.Message
+        }
+        $cleanupDiagnostic = if ($cleanupFailure) { " Cleanup failed: $cleanupFailure." } else { ' The timed-out REA process was stopped.' }
+        throw "REA $Operation timed out after $([int]$waitTimeout.TotalMinutes) minutes.$cleanupDiagnostic See $reportPath and $stderrPath"
+    }
+    $process.Refresh()
+    $processExitCode = if ($process.HasExited) { $process.ExitCode } else { $null }
+    if ($null -eq $processExitCode) {
+        throw "REA $Operation finished without a retrievable process exit code. See $reportPath and $stderrPath"
+    }
 
     $report = $null
     if (Test-Path -LiteralPath $reportPath -PathType Leaf) {
@@ -129,10 +168,10 @@ try {
         }
     }
     $reportHasError = $report -and ($report.PSObject.Properties.Name -contains 'error')
-    if ($process.ExitCode -ne 0 -or -not $report -or $reportHasError) {
+    if ($processExitCode -ne 0 -or -not $report -or $reportHasError) {
         $messageProperty = if ($report) { $report.PSObject.Properties['message'] } else { $null }
         $diagnostic = if ($messageProperty) { $messageProperty.Value } else { 'no structured diagnostic' }
-        throw "REA $Operation failed with exit code $($process.ExitCode): $diagnostic. See $reportPath and $stderrPath"
+        throw "REA $Operation failed with exit code $($processExitCode): $diagnostic. See $reportPath and $stderrPath"
     }
     if ($report.subject.digest.sha256 -ne $inputHash) {
         throw 'REA report subject hash does not match the exact input PE'

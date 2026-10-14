@@ -41,6 +41,120 @@ to 70 sources. Independent offline derivations are byte-identical. This static
 route does not replace the live rediscovery and byte checks required before
 debugger attachment below. Preserve the historical toolchain and raw reports.
 
+## OS-level tracing is a separate evidence layer
+
+For the installed REA 6.4.0 workflow, Windows Ghidra analysis is static.
+`trace-native-values` follows decompiler-derived values across statically
+resolved calls; unresolved computed calls stay unknown. REA's native call
+observer is an LLDB facility for launching Mach-O targets, and its process
+capture workflow is not available for native Windows processes. Neither
+feature provides an all-calls trace for this 32-bit AARON build. See REA's
+[native investigation guide](https://github.com/morluto/rea/blob/main/docs/native-investigation.md)
+and [process capture guide](https://github.com/morluto/rea/blob/main/docs/process-capture.md).
+
+Windows [Process Monitor](https://learn.microsoft.com/sysinternals/downloads/procmon)
+can show file-system, registry, and process/thread activity with stacks for
+those events. [ETW](https://learn.microsoft.com/en-us/windows/win32/etw/about-event-tracing)
+can collect kernel or application-defined events from enabled providers; its
+coverage depends on the chosen providers and can have gaps. These traces help
+answer questions about AARON's operating-system interactions, but do not show
+every AARON-internal Lisp call or return value.
+
+Microsoft also documents a Windows DTrace `syscall` provider with entry and
+return probes for NT system calls, plus a `pid` provider for user-mode process
+functions and offsets. That can answer selected OS-boundary questions and, on
+supported systems, instrument chosen user-mode addresses. It still does not
+automatically recover AARON's Lisp call graph or names for dynamically compiled
+functions. The current host reported Windows `10.0.19045.6466`, and
+`dtrace.exe` is not installed, so this task made no system tracing or tool
+installation attempt. See Microsoft's [DTrace provider documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/dtrace)
+and [WPR kernel event list](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/event).
+
+For internal AARON flow, first use REA on the exact PLL-mapped payload to find
+candidate instructions and value dependencies. Then rediscover the live code
+address and validate its bytes before using a bounded breakpoint capture. Add
+Process Monitor or ETW only when the investigation also needs file, registry,
+process, or other provider-reported OS activity; treat that as
+complementary evidence, not a substitute for function-level observation.
+
+## FREE-PATH indirect call-site capture, 2026-10-14
+
+Use REA first to inspect the exact mapped `FREE-PATH` payload, identify the
+computed calls and nearby data flow, and save the native-map identity. Here the
+static targets at `+0x39a` and `+0x3e4` remained unresolved, so the bounded live
+helper captured their first execution without patching AARON code. Before a
+new original-runtime run, read [the oracle protocol](oracle.md), use a fresh
+output root, and make sure no other AARON oracle is active.
+
+The successful serial triplet used the paired
+[`FREE-PATH` / `DRAW-CFORM` map](extracted/local-oracle/external-runs/freepath-caller-map-20261013-f/native-code/mapped/native-code-map.json)
+and these helpers:
+
+- [`capture-free-path-callsite-triplet-v1.ps1`](tools/capture-free-path-callsite-triplet-v1.ps1)
+- [`capture-free-path-callsite-v1.ps1`](tools/capture-free-path-callsite-v1.ps1)
+- [`AaronFreePathCallsitesV1.cs`](oracle/AaronFreePathCallsitesV1.cs)
+- [`free-path-caller-native-links.cl`](introspection/free-path-caller-native-links.cl)
+
+The original run used a 768×1080 before/observer/after triplet in
+`writer-stream-seed-1234`. All five drawing/scene artifacts and six staged
+sources match across runs. The observer hit `+0x3e4` and `+0x39a`; it exited
+before `+0x3ac`. It captured the same raw slot value at both calls but did not
+name it as a Lisp function or infer a call ABI. Keep the finding scoped to
+these first hits; do not infer they belong to one invocation or establish the
+branch condition. See the [FREE-PATH findings](introspection/free-path-native.md#bounded-live-reads-of-indirect-call-sites-2026-10-14)
+and [portable evidence](introspection/evidence/free-path-callsite-v1-20261014-084337-07112bc0-v2.json).
+
+## PREMIUM `[EDI+0x27]` dispatch slot at PICK entry, 2026-10-14
+
+REA/Ghidra queried every CALL in both `SELECT-SUBJECT` methods; all 36
+computed sites remain unresolved statically. For the PREMIUM method's known
+`[EDI+0x27]` site, a complete 768×1080 source-bound triplet captured a
+`PICK` entry with return address `0x1fe4c07f`. The live call bytes at
+`0x1fe4c07c` are `FF 57 27` and match the exact mapped PLL payload. At this
+pre-prologue PICK entry, EDI+0x27 held raw bytes `83 09 00 20`, or dword
+`0x20000983`; the mapped PICK entry is `0x1fe00e8c`. This slot read occurred
+after the CALL, so it does not prove the caller's operand; EDI may change
+before PICK entry.
+
+The triplet's five drawing/scene artifacts, six staged Lisp sources, and
+before/after planning traces match. The portable record
+[`pick-dispatch-slot-20261014-v1.json`](introspection/evidence/pick-dispatch-slot-20261014-v1.json)
+binds the observation to the complete controls, probe, map and source hashes.
+The caller's dynamic slot operand remains unknown. For the next pass, use
+REA's exact static callsite to guide a fresh live capture, rediscover and
+validate the current instruction bytes, stop immediately before the call,
+read its slot, then single-step that instruction and record the resulting EIP.
+Only then inspect a small bounded byte window at the destination and analyze
+those exact bytes with REA if they are executable. Do not infer a Lisp name,
+ABI, or JavaScript contract before that mapping succeeds.
+
+## Bounded destination-window analysis with REA 6.4
+
+When a `debugger-capture-diagnostic.json` contains a complete 32-byte
+`rawDebuggerResult.singleStep.destinationWindow`, the offline builder
+[`prepare-debugger-window-pe.mjs`](tools/prepare-debugger-window-pe.mjs) can
+place those exact bytes at the analyst address `0x10001000` in a minimal
+synthetic PE. Stage an unchanged copy of the diagnostic under the ignored
+`research/artifacts/rea-tools/` root first; the builder restricts its input and
+fresh output directory to that root, rejects partial or failed memory reads,
+and binds the diagnostic, copied bytes, generated PE, and seed with SHA-256
+hashes. It does not launch the PE or REA.
+
+The generated seed is exactly one `address<TAB>code` record at
+`0x10001000`; it supplies no function name. The safe wrapper
+[`invoke-rea-ghidra-query.ps1`](tools/invoke-rea-ghidra-query.ps1) accepts
+`inspect-native-instruction` only with that single code-only seed at the
+requested address. Run the query into a separate fresh directory beneath
+`research/artifacts/rea-tools/` if this analysis is needed.
+
+The code window is exactly 32 captured bytes. Any instruction that begins in
+the final bytes and extends past that boundary is excluded from captured-byte
+analysis; synthetic PE padding is not source evidence. The address and any
+relative branch or call destinations in this image are synthetic. A dynamic
+window disassembly cannot recover a Lisp function name, Lisp ABI, or original
+function boundary. Any Ghidra-inferred procedure boundary belongs only to the
+synthetic image and must not be attributed to AARON's original runtime.
+
 ## ZERO-EDGE compiled-constant reference census, 2026-10-13
 
 The read-only probe [`zero-edge-native-links.cl`](introspection/zero-edge-native-links.cl)
@@ -551,7 +665,7 @@ tool installations and REA bundles ignored. Publish probe/helper code,
 normalized compact evidence and behavioral conclusions. The historical
 selector implementation is unchanged by this investigation.
 
-## PICK immediate-return mapping, 2026-10-14
+## PICK-entry return-site association, 2026-10-14
 
 Use [`pick-native-links.cl`](introspection/pick-native-links.cl) to capture
 current metadata and complete native windows during the required-probe
@@ -590,16 +704,17 @@ accepts both Junction and SymbolicLink forms of the repository's external-run
 link when verifying process ownership, so the READY pause is not stranded by
 a canonical target path.
 
-For the completed matched-runner triplet, PICK returned to `0x1fe4c07f`. The
-eleven named live-to-PLL candidate matches share base `0x1fba0000`; the full
-indexed PLL maps the return to payload offset 203 of the anonymous 362-byte
-object at PLL offset `0x2abfb0`. The live bytes at `0x1fe4c07c` are `FF 57 27`
-and match the PLL. Entry-seeded REA/Ghidra disassembly of the same complete
-payload confirms `CALL [EDI+0x27]` followed by `MOV EDX,EAX` at the return.
-The targeted call query remains unresolved with no targets; the Lisp function
-name is also unresolved, and the full anonymous payload was not separately
-read from live memory. See the [caller findings](introspection/pick-native-caller.md)
-and [portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+The completed matched-runner triplet stopped at the first natural PICK entry
+and captured saved stack value `0x1fe4c07f`. Its preceding bytes at
+`0x1fe4c07c` are `FF 57 27`; entry-seeded REA/Ghidra disassembly confirms
+`CALL [EDI+0x27]`. A separate CLOS census and complete live-to-PLL method map
+match that saved value to offset 203 of the PREMIUM `SELECT-SUBJECT` method's
+362-byte payload inside a 366-byte object. This is a return-site association,
+not proof that the CPU destination of the CALL was PICK. The computed target
+remains unresolved until a source-bound pre-CALL single-step capture records
+the instruction's actual post-step EIP. See the [PICK findings](introspection/pick-native-caller.md),
+[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v4.json),
+and [method identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
 
 The successful matched-runner roots are
 `pick-caller-20261014-control-before-live-site-v2`,
@@ -611,8 +726,44 @@ the observer handshake, the live call-site read, the exact PLL object, and the
 REA instruction boundary and unresolved-call query:
 
 ```powershell
-node research\tools\derive-pick-native-caller-live-site-evidence.mjs
+node research\tools\derive-pick-native-caller-live-site-evidence.mjs --overwrite
 ```
 
 For another capture, use fresh run IDs and a fresh evidence output path; do
 not reuse those retained roots or overwrite their evidence.
+
+## PREMIUM CALL destination and same-thread follow-up
+
+The PREMIUM method's current native instruction remains the validated
+`CALL [EDI+0x27]` at payload offset 200. The original helper
+[`AaronPremiumCallsiteStepV1.cs`](oracle/AaronPremiumCallsiteStepV1.cs) keeps
+its strict TF/DR6.BS acceptance gate unchanged. If that gate rejects a capture,
+do not relax it. The separate
+[`AaronPremiumCallsiteDestinationBreakpointV1.cs`](oracle/AaronPremiumCallsiteDestinationBreakpointV1.cs)
+uses a fresh first-chance DR0 execute breakpoint: it stops at the current
+callsite, validates `FF 57 27`, reads the actual `[EDI+0x27]` dword, restores
+the callsite breakpoints, and arms DR0 at that value on the same thread. The
+capture is accepted only when the same thread hits B0 at the measured EIP,
+ESP decreases by four, `[ESP]` equals callsite+3, 32 destination bytes are
+read, and debug state is restored cleanly.
+
+Run the existing source-bound coordinator with `-UseDestinationBreakpoint`
+and a fresh run prefix. It rediscovers the PREMIUM and PICK entries from the
+READY metadata pause, verifies both complete live payloads against the current
+PLL, then runs fresh uninstrumented controls before and after the observer.
+The coordinator checks the five drawing/scene artifacts, six staged sources,
+planning trace, runtime identity, exact observer envelope, and cleanup fields.
+It keeps the v1 step gate separate. The accepted run is recorded in
+[`premium-callsite-destination-breakpoint-20261014-v1.json`](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json).
+
+That run's direct CPU destination was `0x20000983`, not current PICK entry
+`0x1fe00e8c`. The target region was committed `MEM_MAPPED`/`PAGE_READWRITE`;
+the 32-byte window had no exact match in the captured PLL. REA statically
+decoded eight starts covering 22 bytes but created zero functions. Its
+conditional branch and out-of-window jump are static candidates only. For
+the follow-up, arm a one-shot DR0 breakpoint at the current PICK entry after
+the destination event, still on the measured thread. Capture the PICK entry
+before its prologue and compare thread ID, ESP, and `[ESP]` to the original
+call. Same ESP and callsite+3 would support a tail-transfer path through the
+anonymous code; a changed stack would require another bounded call-chain
+capture. Neither result by itself gives the anonymous code a Lisp name or ABI.

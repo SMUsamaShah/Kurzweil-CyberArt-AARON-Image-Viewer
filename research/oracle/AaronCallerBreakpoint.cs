@@ -85,13 +85,27 @@ public static class AaronCallerBreakpoint
     }
 
     public static Dictionary<string, object> Capture(uint pid, uint entry, string releaseFile, int seconds) {
+        return CaptureCore(pid, entry, releaseFile, seconds, null);
+    }
+
+    // Optionally read one 32-bit indirect-call slot while stopped at the
+    // selected callee entry, before its first instruction executes. The
+    // register value and slot address are captured from the same context as
+    // the hardware-breakpoint hit.
+    public static Dictionary<string, object> CaptureRegisterSlot(uint pid, uint entry,
+        string releaseFile, int seconds, uint offsetFromEdi) {
+        return CaptureCore(pid, entry, releaseFile, seconds, offsetFromEdi);
+    }
+
+    static Dictionary<string, object> CaptureCore(uint pid, uint entry, string releaseFile,
+        int seconds, uint? offsetFromEdi) {
         Dictionary<string, object> result = null;
         Exception failure = null;
         // Windows binds the debug session and kill-on-exit policy to the
         // attaching thread. This thread always exits, even in an interactive
         // PowerShell session; a failure cannot leave a pending stop at a prompt.
         var debugger = new Thread(() => {
-            try { result = CaptureOnDebuggerThread(pid, entry, releaseFile, seconds); }
+            try { result = CaptureOnDebuggerThread(pid, entry, releaseFile, seconds, offsetFromEdi); }
             catch (Exception error) { failure = error; }
         });
         debugger.Name = "AARON caller breakpoint";
@@ -101,7 +115,8 @@ public static class AaronCallerBreakpoint
         return result;
     }
 
-    static Dictionary<string, object> CaptureOnDebuggerThread(uint pid, uint entry, string releaseFile, int seconds) {
+    static Dictionary<string, object> CaptureOnDebuggerThread(uint pid, uint entry, string releaseFile,
+        int seconds, uint? offsetFromEdi) {
         if (IntPtr.Size != 8) throw new InvalidOperationException("Use x64 PowerShell for the WOW64 debugger");
         // TERMINATE is reserved for aborting this disposable oracle if register
         // restoration fails; never resume an unclean armed debug context.
@@ -190,7 +205,7 @@ public static class AaronCallerBreakpoint
                                     frame = next;
                                 } catch (Win32Exception) { break; }
                             }
-                            result = new Dictionary<string, object> {
+                            var hit = new Dictionary<string, object> {
                                 { "processId", pid }, { "threadId", tid }, { "entry", Hex(entry) },
                                 { "exceptionCode", Hex(code) }, { "firstChance", first },
                                 { "eip", Hex(context.Eip) }, { "eax", Hex(context.Eax) },
@@ -207,6 +222,24 @@ public static class AaronCallerBreakpoint
                                 { "framesBeforeEntryPrologue", frames }, { "exceptions", exceptions },
                                 { "armedThreads", threads.Count }, { "elapsedSeconds", timer.Elapsed.TotalSeconds }
                             };
+                            if (offsetFromEdi.HasValue) {
+                                ulong slotAddress64 = (ulong)context.Edi + offsetFromEdi.Value;
+                                if (slotAddress64 > uint.MaxValue)
+                                    throw new InvalidOperationException("EDI-relative dispatch slot exceeds the 32-bit address space");
+                                uint slotAddress = (uint)slotAddress64;
+                                byte[] slotBytes = Read(process, slotAddress, 4);
+                                uint slotTarget = BitConverter.ToUInt32(slotBytes, 0);
+                                hit["ediRelativeSlotRead"] = new Dictionary<string, object> {
+                                    { "baseRegister", "EDI" },
+                                    { "baseValue", Hex(context.Edi) },
+                                    { "offset", Hex(offsetFromEdi.Value) },
+                                    { "address", Hex(slotAddress) },
+                                    { "bytesHex", BitConverter.ToString(slotBytes).Replace("-", "").ToLowerInvariant() },
+                                    { "targetValue", Hex(slotTarget) },
+                                    { "targetMatchesHitEntry", slotTarget == entry }
+                                };
+                            }
+                            result = hit;
                             // Restore every armed DR0 while this debug event
                             // holds the process stopped. Keep servicing debug
                             // events after the one-shot hit, but never arm a

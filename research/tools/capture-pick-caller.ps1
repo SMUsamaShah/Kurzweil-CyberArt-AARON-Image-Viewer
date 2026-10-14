@@ -5,6 +5,7 @@ param(
     [ValidateSet('writer-stream-seed-1234')]
     [string]$ExpectedMode = 'writer-stream-seed-1234',
     [ValidateRange(10, 180)] [int]$Seconds = 90,
+    [switch]$CaptureDispatchSlot,
     [string]$MetadataPath = 'C:\temp\aaron-pick-native-links.txt'
 )
 
@@ -88,9 +89,13 @@ function Resolve-ReturnAddress([string]$Address, [object[]]$Functions) {
 }
 
 $report = [ordered]@{
-    schemaVersion = 2
+    schemaVersion = if ($CaptureDispatchSlot) { 3 } else { 2 }
     targetFunction = 'PICK'
-    method = 'One WOW64 execute hardware breakpoint at the current PICK entry after every candidate payload was matched to the PLL and read back from this live process; also read the measured three-byte instruction at returnAddress-3 from the stopped process and match it to the address-translated current PLL'
+    method = if ($CaptureDispatchSlot) {
+        'One WOW64 execute hardware breakpoint at the current PICK entry after every candidate payload was matched to the PLL and read back from this live process; while stopped before the PICK prologue, record the raw dword at EDI+0x27 and also read returnAddress-3; neither PICK-entry value identifies the earlier CALL operand or its CPU destination'
+    } else {
+        'One WOW64 execute hardware breakpoint at the current PICK entry after every candidate payload was matched to the PLL and read back from this live process; also read the measured three-byte instruction at returnAddress-3 from the stopped process and match it to the address-translated current PLL'
+    }
     capturedAt = [DateTimeOffset]::UtcNow.ToString('o')
     outcome = $outcome
     oracleRunId = Split-Path -Leaf $output
@@ -111,13 +116,15 @@ $report = [ordered]@{
     hit = $null
     immediateReturn = $null
     immediateCallSite = $null
+    ediRelativeSlotRead = $null
     boundedFrameReturns = @()
     captureError = $null
     failure = $null
     limitations = @(
         'Only the first PICK entry hit in this bounded scene is observed.',
-        'A static constant reference is only a candidate; a direct caller is named only when the immediate return address uniquely falls inside a current live-validated candidate interval.',
-        'Bounded EBP frame returns are reported separately and do not identify a direct caller.',
+        'The immediate saved stack value is compared with current live-validated candidate intervals; an interval match associates an address with a payload but does not establish a direct CPU transfer or caller.',
+        'The EDI+0x27 dword is sampled at PICK entry, after the earlier CALL; its relation to that CALL operand or destination is unknown.',
+        'Bounded EBP frame returns are reported separately and do not establish a direct caller.',
         'The breakpoint temporarily changes thread debug registers, writes no code or process memory, and restores the registers before continuing.',
         'The result applies only to this source-bound run and does not establish a general call graph or JavaScript behavior contract.'
     )
@@ -370,10 +377,16 @@ try {
 
     $target = @($mappedFunctions | Where-Object { $_.name -ceq 'PICK' })
     if ($target.Count -ne 1) { throw 'Mapped live target PICK is missing or duplicated' }
+    $pickEntry = Convert-HexAddress ([string]$target[0].entry) 'Mapped PICK entry'
     $outcome = 'entry-hit'
     try {
-        $hit = [AaronCallerBreakpoint]::Capture($aaronProcessId,
-            [Convert]::ToUInt32($target[0].entry.Substring(2), 16), $release, $Seconds)
+        if ($CaptureDispatchSlot) {
+            $hit = [AaronCallerBreakpoint]::CaptureRegisterSlot($aaronProcessId,
+                [Convert]::ToUInt32($target[0].entry.Substring(2), 16), $release, $Seconds, [uint32]0x27)
+        } else {
+            $hit = [AaronCallerBreakpoint]::Capture($aaronProcessId,
+                [Convert]::ToUInt32($target[0].entry.Substring(2), 16), $release, $Seconds)
+        }
     } catch {
         $captureError = $_.Exception.Message
         if ($captureError -like '*No selected entry breakpoint observed within the deadline*') {
@@ -419,6 +432,33 @@ try {
             pllBytesHex = $pllSiteHex
             matchesCurrentPll = $true
             encoding = if ($siteHex -ceq 'ff5727') { 'x86 indirect near CALL [EDI+0x27]' } else { $null }
+        }
+        if ($CaptureDispatchSlot) {
+            if (-not $hit.ContainsKey('ediRelativeSlotRead')) { throw 'PICK breakpoint omitted the requested EDI-relative slot read' }
+            $slot = $hit['ediRelativeSlotRead']
+            $edi = Convert-HexAddress ([string]$hit['edi']) 'PICK breakpoint EDI'
+            $slotAddress = Convert-HexAddress ([string]$slot['address']) 'Captured EDI-relative slot address'
+            $slotTarget = Convert-HexAddress ([string]$slot['targetValue']) 'Captured indirect-call target'
+            if ($slot['baseRegister'] -cne 'EDI' -or $slot['baseValue'] -cne $hit['edi'] -or
+                $slot['offset'] -cne '0x00000027' -or $slotAddress -ne ($edi + 0x27) -or
+                [string]$slot['bytesHex'] -cnotmatch '^[0-9a-f]{8}$') {
+                throw 'Captured EDI-relative dispatch-slot metadata is inconsistent with the stopped register context'
+            }
+            $report.ediRelativeSlotRead = [ordered]@{
+                baseRegister = 'EDI'
+                baseValue = $hit['edi']
+                offset = '0x27'
+                address = '0x{0:x8}' -f $slotAddress
+                bytesHex = [string]$slot['bytesHex']
+                targetValue = '0x{0:x8}' -f $slotTarget
+                targetMatchesPickEntry = ($slotTarget -eq $pickEntry)
+                capturedAtPickEntryBeforePrologue = ($hit['eip'] -ceq $hit['entry'])
+                liveCallSite = $report.immediateCallSite
+            }
+            if (-not $report.ediRelativeSlotRead.capturedAtPickEntryBeforePrologue -or
+                $report.immediateCallSite.encoding -cne 'x86 indirect near CALL [EDI+0x27]') {
+                throw 'The dispatch-slot read is not bound to the expected live [EDI+0x27] PICK call site'
+            }
         }
         $report.boundedFrameReturns = @($hit['framesBeforeEntryPrologue'] | ForEach-Object {
             [ordered]@{

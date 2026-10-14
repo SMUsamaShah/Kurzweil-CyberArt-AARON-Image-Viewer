@@ -1,4 +1,4 @@
-# PICK native caller mapping, 2026-10-14
+# PICK-entry return-site mapping, 2026-10-14
 
 ## Result
 
@@ -8,7 +8,7 @@ observer report contains the full source-bound `BEGIN`, `READY`, native
 capture release, and `END` records. All six compared outputs and six ordinary
 staged scene sources match across the three complete runs.
 
-The direct return address was `0x1fe4c07f`. It falls outside all eleven
+The saved stack value was `0x1fe4c07f`. It falls outside all eleven
 named-function intervals whose complete payloads were matched to both the
 indexed PLL and live process memory. These matches establish one common
 runtime-to-PLL base, `0x1fba0000`. The return maps to payload offset 203 inside
@@ -44,13 +44,23 @@ not a call graph. The synthetic PE used for REA was not executed. Full REA
 reports, payloads, and tool output remain ignored under
 `research/artifacts/rea-tools/`.
 
-At the time of the original caller capture, its Lisp function name was
+At the time of the original PICK-entry capture, the continuation's Lisp function name was
 unresolved. The later read-only CLOS census in
 [`select-subject-methods.md`](select-subject-methods.md) matched the complete
 live method-1 payload and full PLL object hash to this same anonymous object.
-It resolves this captured direct caller as
+It associates the saved stack value with
 `COMMON-GRAPHICS-USER::SELECT-SUBJECT`'s method with an EQL `PREMIUM`
-specializer. The `CALL [EDI+0x27]` target itself remains unresolved.
+specializer. This does not prove that the preceding `CALL [EDI+0x27]` directly
+transferred control to PICK. The original entry-only capture did not observe
+the instruction's CPU destination.
+
+A later independent source-bound capture did observe that CALL's actual CPU
+destination: the pre-call `[EDI+0x27]` value was `0x20000983`, and a separate
+DR0 execute breakpoint hit that address on the same thread before its first
+instruction. It is not the mapped PICK entry. The CALL stack return still
+matched `callsite+3`; the anonymous target-to-PICK route remains unobserved.
+See the [destination result](select-subject-methods.md#premium-call-destination-captured-with-a-separate-dr0-breakpoint-2026-10-14)
+and [portable evidence](evidence/premium-callsite-destination-breakpoint-20261014-v1.json).
 
 ## Reproduction and limits
 
@@ -75,6 +85,7 @@ The matched-runner v2 triplet is retained under the ignored
 The original PICK-entry hit is from one source-bound 768×1080 seed-1234
 scene. Method identity was captured separately in a source-bound 320×480
 triplet and linked through the unique complete payload/object match and
-identical call-site offsets. This resolves one direct caller; it does not
-establish an application-wide call graph, add a JavaScript behavior contract,
-or prove drawing or whole-painting parity.
+identical call-site offsets. This identifies the method containing the
+continuation matching the saved stack value at one PICK entry. It does not
+establish a direct CPU edge, an application-wide call graph, a JavaScript
+behavior contract, or drawing or whole-painting parity.

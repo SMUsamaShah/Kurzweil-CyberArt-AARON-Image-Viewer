@@ -52,6 +52,24 @@ read-only wrapper call with scoped elevated permission and a fresh output
 folder. This is a user-profile write boundary; do not reinstall Java/Ghidra or
 change global settings. See the detailed [REA payload guide](introspection/rea-payload-analysis.md).
 
+### REA provider runtime probe fails only in the restricted process
+
+On 2026-10-14, a bounded `inspect-native-instruction` query through the
+wrapper failed in the restricted context with `provider_unavailable`,
+`runtime_missing`, and no reported Java version. The configured `java.exe
+-version` command itself succeeded and reported OpenJDK 21. The same exact
+read-only REA query succeeded when the wrapper was invoked with scoped
+elevation and a fresh output directory. This shows that the Java installation
+was present and that the failure was specific to the restricted provider
+startup path; the underlying Windows denial was not identified.
+
+For that exact symptom, preserve the failed invocation and diagnostics, then
+rerun the same wrapper command with scoped elevation at the command-tool
+boundary and a new `-OutputRoot`. Do not reinstall Java/REA, edit global
+`PATH`/`JAVA_HOME`, or reuse the failed output directory. This is distinct
+from the original AARON runner's HKCU registry permission, which has its own
+procedure below.
+
 The PE payload builder has a safe layout workaround for an entry that lands
 in the first 4 KiB page: it moves only the analyst-generated, 64 KiB-aligned
 image base down one 64 KiB unit, keeping the selected entry address and exact
@@ -71,6 +89,168 @@ elevation. Do not retarget the link, change ACLs, or remove unknown staged
 files. The runner also saves and restores the per-user AARON registry values;
 if that write is denied, retry the same invocation through scoped elevation.
 It preserves the prior values and cleans only its named staging files.
+
+### Multiple probe outputs through Windows PowerShell -File
+
+On 2026-10-14, the first PREMIUM pre-CALL triplet completed its uninstrumented
+before control, then the observer runner exited before AARON launched or the
+probe reached READY. The coordinator passed two filenames as separate values
+after the runner's string-array ProbeOutputNames parameter. Windows
+PowerShell 5.1 -File binding accepted the first and rejected the second as
+an unbound positional argument. The before-control and diagnostics are
+preserved under run ID
+premium-callsite-triplet-v1-20261014-111112-6da511a7.
+
+For a child -File invocation with multiple names, pass a JSON array in one
+argument using ProbeOutputNamesJson, for example
+["metadata.txt","capture.txt"]. The required-probe runner parses that
+array, checks each filename against its normal lowercase extension rules, and
+then records the normalized names in the usual source-bound request and
+summary. Passing the JSON through a direct call operator to powershell.exe
+stripped the embedded quotation marks on this host and made the child reject
+the value. Launch that child with Start-Process and the coordinator's
+ConvertTo-NativeArgument helper so the quotes survive Windows command-line
+parsing. Existing callers with one output can continue to use
+ProbeOutputNames name.txt.
+Run the PREMIUM coordinator with PreflightOnly to exercise both 64-bit child
+preflights and the exact JSON argument quoting without creating an oracle
+output root or launching AARON.
+
+### Windows PowerShell child cannot find `Get-FileHash`
+
+On 2026-10-14, a fresh triplet stopped before AARON launched: its no-profile
+Windows PowerShell child reported that `Get-FileHash` was not recognized at the
+runner's first source-hash step. A direct Windows PowerShell 5.1 check could
+resolve the utility command, so the failed child's module environment was not
+captured and the cause is not established. The failed run preserved its log at
+`research/extracted/local-oracle/free-path-callsite-v1-triplet-logs/free-path-callsite-v1-20261014-081951-67f537ea`;
+it created no oracle output root, did not launch AARON, and left the current
+`C:\temp` entries unchanged.
+
+The required-probe runner and its FREE-PATH capture helper now import
+`Microsoft.PowerShell.Utility` explicitly from `$PSHOME` before hashing source
+files. The call-site triplet first invokes the exact 64-bit Windows PowerShell
+5.1 runner with `-NoProfile -NonInteractive -PowerShellPreflightOnly`; it creates
+no output root and touches no staging files during this check. A passing
+`windows-powershell-preflight.json` is saved in the triplet log and checked by
+the evidence deriver. Do not change global `PSModulePath`, ACLs, or `C:\temp`
+to address this error.
+
+For a standalone read-only diagnostic, use:
+
+```powershell
+$winPwsh = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+& $winPwsh -NoProfile -NonInteractive -Command 'Import-Module -Name (Join-Path $PSHOME "Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1") -Force -ErrorAction Stop; Get-Command Get-FileHash -ErrorAction Stop'
+```
+
+### Windows PowerShell child reports a blank `ExitCode`
+
+On 2026-10-14, the first PICK dispatch-slot triplet's no-probe control
+completed successfully: its runner summary says `complete=true`, the six
+captured drawing/scene outputs and source hashes were present, and stderr was
+empty. The orchestrator nevertheless rejected it because
+`Start-Process -PassThru` had not opened the child `Process.Handle`; in this
+Windows PowerShell 5.1 case, `WaitForExit()` followed by `Refresh()` left
+`Process.ExitCode` as `$null`. Comparing `$null -ne 0` incorrectly treated that
+unknown status as a nonzero exit.
+
+Immediately materialize the handle after every `Start-Process -PassThru`
+whose exit status will be checked, including helper processes:
+
+```powershell
+$child = Start-Process -FilePath $winPwsh -ArgumentList $args -PassThru `
+  -WindowStyle Hidden -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+$null = $child.Handle
+if (-not $child.WaitForExit(300000)) { throw 'Child timed out; preserve its outputs' }
+$child.Refresh()
+$exitCode = $child.ExitCode
+if ($null -eq $exitCode) { throw 'Child exit status unavailable; inspect both logs' }
+if ($exitCode -ne 0) { throw "Child exited $exitCode; inspect stderr" }
+```
+
+The handle step was reproduced with harmless Windows PowerShell children that
+returned both 0 and 7; it recovered each actual exit code, while omitting the
+step produced `$null` for the zero-exit child. Keep the explicit null guard:
+do not cast `$null` to an integer or treat a complete summary as proof of
+successful process exit. The PICK and FREE-PATH triplet wrappers, the
+FREE-PATH native-map capture, and the REA query wrapper apply this fix to their
+redirected child processes. The standard oracle launcher also materializes
+the handle for its asynchronous AARON child before polling its exit status.
+The preserved first control remains a valid standalone control, but it is not
+part of an accepted triplet; use fresh roots for a retry.
+
+The installer launch in `run-oracle.ps1` intentionally retains
+`Start-Process -Wait -PassThru`. Harmless Windows PowerShell 5.1 checks showed
+that this form returns the correct root exit code and waits for the process
+tree; replacing it with asynchronous `WaitForExit()` shortened the wait and
+could leave descendants running. Its exit code now has an explicit null
+guard. Do not change the installer to a root-only wait.
+
+### Rebuild evidence against the runner and debugger sources that produced it
+
+The accepted October 14 PICK-entry and CLOS-method captures recorded runner
+SHA-256
+`44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076` and
+debugger-helper SHA-256
+`6daed00b18a2f3a4654d0238b2c181318c8587e914ae3f823d8f3f0c6bdd926b`. The
+current required-probe runner and debugger helper have since changed, so using
+their current hashes makes a valid old triplet fail source-binding checks.
+The exact archived sources are
+[`run-local-scene-state-required-probe-20261014.ps1`](oracle/run-local-scene-state-required-probe-20261014.ps1)
+and [`AaronCallerBreakpoint-20261014.cs`](oracle/AaronCallerBreakpoint-20261014.cs).
+They are evidence snapshots for offline re-derivation only; do not run them to
+launch a new oracle. The evidence derivations point to these snapshots. New
+captures use the current runner and current helpers with a fresh output root,
+and record those current hashes in their run summaries.
+
+### Keep paused probe metadata available through parent validation
+
+The next PICK triplet attempt reached the observer, captured a schema-v3
+`PICK` entry and `[EDI+0x27]` slot, and completed that runner, but stopped
+before the after-control. The helper's parent then tried to reopen
+`C:\temp\aaron-pick-native-links.txt` after releasing AARON. The required-probe
+runner had already archived the report under the run's `capture` directory and
+removed its staging copy. The result is preserved at
+`research/extracted/local-oracle/pick-caller-triplet-v1-logs/pick-dispatch-v2-20261014-102619-1d4c44af`;
+because the full triplet did not finish, it is not accepted standalone caller
+evidence.
+
+For a paused probe, snapshot the raw metadata bytes while READY is present and
+before the debugger helper writes its release marker. Validate the helper's
+metadata-prefix hash against that in-memory snapshot; after runner completion,
+repeat archival validation from `-OutputRoot/capture/<probe-output-name>`, not
+from `C:\temp`. The PICK triplet driver now uses both stable sources. Keep the
+runner's required END-marker gate and fresh before/after controls; do not treat
+the schema-v3 observer alone as an accepted triplet.
+
+### FREE-PATH triplet archival and JSON evidence
+
+The completed FREE-PATH call-site run exposed three distinct parser/watch
+issues after the oracle itself had finished:
+
+- The required-probe runner archives the observer metadata to the run's
+  `capture` directory and removes its named `C:\temp` staging file. A footer
+  watcher must check both locations, including after process exit; checking
+  only the staging path can report a false missing `END`.
+- The debugger helper hashes the exact raw metadata bytes through the `READY`
+  line, including Windows CRLF. The final archived file later has `WAIT`,
+  `COMPLETE`, and `END`; derive the prefix from its raw bytes before normalizing
+  line endings. Do not hash normalized LF text.
+- Windows PowerShell JSON files may start with UTF-8 BOM bytes. Node evidence
+  builders should use one JSON reader that strips a leading U+FEFF. REA trace
+  reports also put the analyzed trace in `normalized_result`; `raw_result` can
+  be null for that operation.
+
+These fixes are in
+[`capture-free-path-callsite-triplet-v1.ps1`](tools/capture-free-path-callsite-triplet-v1.ps1)
+and
+[`derive-free-path-callsite-v1-evidence.mjs`](tools/derive-free-path-callsite-v1-evidence.mjs).
+The triplet helper now records its own source hash for future runs. The
+2026-10-14 comparison predates that field, so its portable evidence explicitly
+marks the coordinator helper as not bound by that legacy comparison; its
+current source hash is recorded at derivation time only. The oracle summaries,
+source probe, native helper, mapped PLL payload, required markers, and control
+artifacts remain independently checked.
 
 The default staging-space gate is 32 MiB. If that gate alone rejects a
 `writer-stream-seed-1234` run near the threshold, the opt-in
@@ -648,6 +828,41 @@ the runner later times out. Preserve each failed output root for diagnosis,
 allow the runner's cleanup/watchdog path to finish, inspect for remaining
 AARON/oracle processes and staged files, then use a fresh root for the retry.
 Never overwrite a failed root or fill missing evidence with inferred results.
+
+### PRE-CALL metadata probe stopped before creating its report, 2026-10-14
+
+The first PREMIUM call-site observer never wrote `BEGIN` or `READY` because
+`premium-callsite-metadata-v1.cl` ended with one unclosed list. Common Lisp
+reads the complete top-level form before evaluating it, so the reader stopped
+at EOF before opening the report. The misplaced close also left the report
+stream open across the pause; close the metadata `with-open-file` immediately
+after flushing `READY`, before entering the release wait.
+
+Before spending an oracle run on a new or edited Lisp probe, check delimiter
+balance with the reusable scanner:
+
+```powershell
+node research\tools\check-lisp-paren-balance.mjs `
+  research\introspection\premium-callsite-metadata-v1.cl
+```
+
+The scanner ignores parentheses inside strings, line/block comments,
+escaped symbols, and character literals. A `BALANCED` result only rules out
+delimiter imbalance; it does not validate Lisp names, package availability,
+function contracts, or runtime behavior. Keep the failed observer root and use
+a fresh output root after correcting a probe.
+
+The corrected observer reached `READY`, completed its two-method CLOS census,
+and mapped the current PREMIUM and PICK bodies to unique complete PLL objects.
+Its first 768×1080 before-control matched the established seed-1234 output,
+but the debugger result did not pass the one-step gate, so the triplet stopped
+before an after-control and establishes no call destination. The earlier
+coordinator discarded that failed raw debugger return before throwing. It now
+preserves the full return object and a concise gate summary in
+`native-code/debugger-capture-diagnostic.json` on a rejected attempt; inspect
+that record before changing the helper or scheduling another fresh triplet.
+Do not weaken the instruction, operand, single-step, stack, thread, or cleanup
+checks to make a run pass.
 
 ## Discoverability
 

@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-// Offline derivation binding a live PICK return site to a CLOS method body.
-// This validates archived captures and static reports; it never launches AARON.
+// Offline derivation associating a saved PICK-entry stack value with a CLOS
+// method continuation. This does not prove the CALL's CPU destination. It
+// validates archived captures and static reports; it never launches AARON.
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const RUNNER_PATH = 'research/oracle/run-local-scene-state-required-probe.ps1';
+const RUNNER_PATH = 'research/oracle/run-local-scene-state-required-probe-20261014.ps1';
 const RUNTIME_MANIFEST_PATH = 'research/extracted/aaron/manifest.json';
 const PROBE_PATH = 'research/introspection/select-subject-methods.cl';
 const MAP_PATH = 'research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/native-code-map.json';
@@ -216,11 +217,14 @@ function parseReaInvocation(dirRel, expectedPeHash, expectedSeedPath) {
 }
 
 function main() {
-  const [outputArg, beforeArg, observerArg, afterArg, mapArg, ...extra] = process.argv.slice(2);
+  const argv = process.argv.slice(2);
+  const overwrite = argv.includes('--overwrite');
+  const positional = argv.filter(arg => arg !== '--overwrite');
+  const [outputArg, beforeArg, observerArg, afterArg, mapArg, ...extra] = positional;
   assert(extra.length === 0,
-    'Usage: node derive-select-subject-method-identity-evidence.mjs [output.json] [before-root] [observer-root] [after-root] [native-code-map.json]');
+    'Usage: node derive-select-subject-method-identity-evidence.mjs [output.json] [before-root] [observer-root] [after-root] [native-code-map.json] [--overwrite]');
   const output = repoPath(outputArg ?? 'research/introspection/evidence/select-subject-method-identity-20261014-v2.json');
-  assert(insideRoot(output) && !existsSync(output), `Evidence output must be fresh inside repository: ${relativePath(output)}`);
+  assert(insideRoot(output) && (overwrite || !existsSync(output)), `Evidence output must be fresh inside repository unless --overwrite is supplied: ${relativePath(output)}`);
 
   const runtimeManifest = readJson(repoPath(RUNTIME_MANIFEST_PATH));
   const runnerBytes = read(repoPath(RUNNER_PATH));
@@ -359,20 +363,22 @@ function main() {
   const pickEvidencePath = repoPath(PICK_EVIDENCE_PATH);
   const pickEvidenceBytes = read(pickEvidencePath);
   const pickEvidence = readJson(pickEvidencePath);
-  const previousCaller = pickEvidence.directCaller;
+  const previousReturnSite = pickEvidence.returnSiteObject;
   const method1 = mappedMethods.find(item => item.name === 'SELECT-SUBJECT-METHOD-1');
-  assert(method1 && previousCaller?.outcome === 'return-address-mapped-to-one-anonymous-compiled-object'
-    && previousCaller.lispFunctionName === null
-    && previousCaller.runtime.returnAddress === '0x1fe4c07f'
-    && previousCaller.runtime.entry === method1.runtimeEntry
-    && previousCaller.runtime.payloadOffset === 203
-    && previousCaller.pll.payloadSha256 === method1.pll.payloadSha256
-    && previousCaller.pll.objectSha256 === method1.pll.objectSha256
-    && previousCaller.callSite.runtimeAddress === '0x1fe4c07c'
-    && previousCaller.callSite.payloadOffset === 200
-    && previousCaller.callSite.bytesHex === 'ff5727'
-    && previousCaller.callSite.liveRead.matchesCurrentPll === true,
-  'Previously observed live PICK return/call site does not match the now-identified complete method payload');
+  assert(method1 && previousReturnSite?.outcome === 'saved-stack-value-mapped-to-one-anonymous-compiled-object'
+    && previousReturnSite.lispFunctionName === null
+    && previousReturnSite.runtime.savedStackValue === '0x1fe4c07f'
+    && previousReturnSite.runtime.entry === method1.runtimeEntry
+    && previousReturnSite.runtime.payloadOffset === 203
+    && previousReturnSite.pll.payloadSha256 === method1.pll.payloadSha256
+    && previousReturnSite.pll.objectSha256 === method1.pll.objectSha256
+    && previousReturnSite.callSite.runtimeAddress === '0x1fe4c07c'
+    && previousReturnSite.callSite.payloadOffset === 200
+    && previousReturnSite.callSite.bytesHex === 'ff5727'
+    && previousReturnSite.callSite.savedStackValueMatchesContinuation === true
+    && previousReturnSite.callSite.directTransferObserved === false
+    && previousReturnSite.callSite.liveRead.matchesCurrentPll === true,
+  'Previously observed PICK-entry stack value/call site does not match the now-identified complete method payload');
   assert(method1.payloadBytesAtCallSite === 'ff5727',
     'Mapped SELECT-SUBJECT premium method does not contain the measured CALL bytes at payload offset 200');
 
@@ -421,19 +427,19 @@ function main() {
 
   const evidence = {
     schemaVersion: 1,
-    status: 'identified-live-direct-caller-method',
-    question: 'Which runtime CLOS method contains the measured return site from the first natural PICK entry?',
+    status: 'identified-method-for-saved-pick-entry-continuation',
+    question: 'Which runtime CLOS method contains the continuation matching the saved stack value at the first natural PICK entry?',
     finding: {
       genericFunction: { name: 'SELECT-SUBJECT', package: 'COMMON-GRAPHICS-USER', type: 'STANDARD-GENERIC-FUNCTION', arglist: ['COMMON-GRAPHICS-USER::STATUS'] },
       methodCount: 2,
       methods: report.methods.map((method, index) => ({ ...method, mappedNativePayload: mappedMethods[index] })),
-      identifiedCaller: {
+      associatedMethod: {
         method: 'SELECT-SUBJECT-METHOD-1',
         dispatchSpecializer: { kind: 'EQL', package: 'COMMON-GRAPHICS-USER', symbol: 'PREMIUM' },
         entry: method1.runtimeEntry,
         payloadSha256: method1.pll.payloadSha256,
         exactCompletePllObjectMatch: true,
-        relationToPriorPICKCapture: 'The prior live PICK return address and call-site bytes fall at the same offsets in this complete method payload; the payload hash and complete object hash are identical.',
+        relationToPriorPICKCapture: 'The prior live PICK-entry stack value and call-site bytes map to the same offsets in this complete method payload; the payload hash and complete object hash are identical. This associates the entry with a continuation site but does not prove the CALL transferred directly to PICK.',
       },
       pickCallSite: {
         address: expectedCall,
@@ -441,8 +447,9 @@ function main() {
         liveBytesHex: 'ff5727',
         disassembly: callInstruction,
         nextInstruction: returnInstruction,
-        returnAddress: expectedReturn,
-        directlyObservedInPriorPICKEntryCapture: true,
+        continuationAddress: expectedReturn,
+        savedStackValueMatchedInPriorPICKEntryCapture: true,
+        directTransferObserved: false,
       },
       reaCallQuery: {
         status: callQuery.status,
@@ -484,15 +491,15 @@ function main() {
       deriver: fingerprint(fileURLToPath(import.meta.url)),
     },
     limits: [
-      'This identifies the direct caller for the captured natural PICK entry only; it does not establish an application-wide call graph or prove the method is the only caller.',
+      'This identifies the method containing the continuation matching the saved stack value at one natural PICK entry; it does not prove a direct CPU edge, an application-wide call graph, or that the method is the only possible caller.',
       'The captured method function is selected by the observed EQL PREMIUM specializer, but this probe did not invoke the generic or method and did not record the method return value or full argument state.',
       'The indirect target at [EDI+0x27] remains unresolved by REA; no target function name or Lisp ABI is inferred.',
       'The current method census and prior PICK-entry hit are from different source-bound runs and canvases; their linkage is through the same unique complete payload, object hash, runtime entry and call-site offset, not a same-process stack snapshot.',
-      'This adds a caller identity, not a JavaScript behavior contract or whole-painting parity result.',
+      'This adds a return-site method association, not a CPU call-target identity, JavaScript behavior contract, or whole-painting parity result.',
     ],
   };
-  writeFileSync(output, `${JSON.stringify(evidence, null, 2)}\n`, { flag: 'wx' });
-  process.stdout.write(`${JSON.stringify({ output: relativePath(output), sha256: sha256(read(output)), finding: evidence.finding.identifiedCaller, matchedControls: true }, null, 2)}\n`);
+  writeFileSync(output, `${JSON.stringify(evidence, null, 2)}\n`, { flag: overwrite ? 'w' : 'wx' });
+  process.stdout.write(`${JSON.stringify({ output: relativePath(output), sha256: sha256(read(output)), finding: evidence.finding.associatedMethod, matchedControls: true }, null, 2)}\n`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

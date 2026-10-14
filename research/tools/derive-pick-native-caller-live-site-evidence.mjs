@@ -12,11 +12,11 @@ import {
 } from './index-allegro-image.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const RUNNER_PATH = resolve(ROOT, 'research/oracle/run-local-scene-state-required-probe.ps1');
+const RUNNER_PATH = resolve(ROOT, 'research/oracle/run-local-scene-state-required-probe-20261014.ps1');
 const MANIFEST_PATH = resolve(ROOT, 'research/extracted/aaron/manifest.json');
 const EXECUTED_HELPER_PATH = resolve(ROOT, 'research/tools/capture-pick-caller-executed-20261014-live-site-v1.ps1');
 const CURRENT_HELPER_PATH = resolve(ROOT, 'research/tools/capture-pick-caller.ps1');
-const DEBUGGER_HELPER_PATH = resolve(ROOT, 'research/oracle/AaronCallerBreakpoint.cs');
+const DEBUGGER_HELPER_PATH = resolve(ROOT, 'research/oracle/AaronCallerBreakpoint-20261014.cs');
 const DEFAULT_RUNS = Object.freeze({
   before: 'research/extracted/local-oracle/external-runs/pick-caller-20261014-control-before-live-site-v2',
   observer: 'research/extracted/local-oracle/external-runs/pick-caller-20261014-observer-live-site-v2',
@@ -122,12 +122,14 @@ function summarizeRun(rootArg, role, manifest, runnerSha256) {
 }
 
 function main() {
-  const [outputArg, beforeArg, observerArg, afterArg, mapArg, ...extra] = process.argv.slice(2);
+  const argv = process.argv.slice(2);
+  const overwrite = argv.includes('--overwrite');
+  const positional = argv.filter(arg => arg !== '--overwrite');
+  const [outputArg, beforeArg, observerArg, afterArg, mapArg, ...extra] = positional;
   assert(extra.length === 0,
-    'Usage: node derive-pick-native-caller-evidence.mjs [output.json] [before-root] [observer-root] [after-root] [native-code-map.json]');
+    'Usage: node derive-pick-native-caller-live-site-evidence.mjs [output.json] [before-root] [observer-root] [after-root] [native-code-map.json] [--overwrite]');
   const output = resolve(ROOT, outputArg ?? 'research/introspection/evidence/pick-native-caller-live-site-20261014-v4.json');
-  assert(insideRoot(output), 'Evidence output must remain inside the repository');
-  assert(!existsSync(output), `Evidence output must be fresh: ${rel(output)}`);
+  assert(insideRoot(output) && (overwrite || !existsSync(output)), 'Evidence output must be fresh inside the repository unless --overwrite is supplied');
 
   const manifest = readJson(MANIFEST_PATH);
   const runnerSha256 = hash(read(RUNNER_PATH));
@@ -324,14 +326,14 @@ function main() {
   const failurePath = resolve(observerRoot, 'pick-native-caller-validation-failure-1.json');
   const evidence = {
     schemaVersion: 1,
-    status: 'measured-bounded-native-caller-object-live-callsite',
+    status: 'measured-bounded-pick-entry-return-site-mapping',
     scope: 'First natural PICK entry hit in one source-bound seed-1234 writer-stream scene at measured 768x1080',
-    directCaller: {
-      outcome: 'return-address-mapped-to-one-anonymous-compiled-object',
+    returnSiteObject: {
+      outcome: 'saved-stack-value-mapped-to-one-anonymous-compiled-object',
       lispFunctionName: null,
-      nameResolution: 'unresolved; the current metadata and static references do not uniquely name this compiled object',
+      nameResolution: 'unresolved in this PICK-entry capture; the later CLOS method census associates the same complete object with SELECT-SUBJECT method (EQL PREMIUM)',
       runtime: { addressBase: `0x${runtimeBase.toString(16)}`, entry: `0x${entry.toString(16)}`,
-        returnAddress: `0x${returnAddress.toString(16)}`, payloadOffset: returnOffset,
+        savedStackValue: `0x${returnAddress.toString(16)}`, payloadOffset: returnOffset,
         returnOutsideElevenNamedCandidates: true },
       pll: { sha256: sha256(pll), indexedObjectCount: index.objectCount,
         recordOffset: object.recordOffset, objectOffset: object.objectOffset, payloadOffset,
@@ -339,7 +341,7 @@ function main() {
         payloadSha256: sha256(payload), objectSha256: sha256(pll.subarray(object.objectOffset, object.rawEnd)) },
       callSite: { runtimeAddress: `0x${callAddress.toString(16)}`, payloadOffset: returnOffset - 3,
         bytesHex: callBytes.toString('hex'), encoding: 'x86 indirect near CALL [EDI+0x27]',
-        returnsToCapturedPickEntry: true, dynamicTargetResolved: false,
+        savedStackValueMatchesContinuation: true, directTransferObserved: false, dynamicTargetResolved: false,
         liveRead: { address: caller.immediateCallSite.address, bytesHex: caller.immediateCallSite.liveBytesHex,
           pllOffset: caller.immediateCallSite.pllOffset, matchesCurrentPll: true },
         boundary: { method: 'entry-seeded REA/Ghidra disassembly of the exact 362-byte PLL payload',
@@ -349,10 +351,10 @@ function main() {
           exactPayload: fingerprint(reaPayloadPath), syntheticPe: fingerprint(syntheticPePath),
           callResolution: 'unresolved-computed-targets-empty' } },
     },
-    callerCapture: {
+    pickEntryCapture: {
       report: fingerprint(callerPath), runId: observer.row.runId,
       entryAddress: caller.hit.entry, exceptionCode: caller.hit.exceptionCode,
-      firstChance: caller.hit.firstChance, returnAddress: caller.hit.returnAddress,
+      firstChance: caller.hit.firstChance, savedStackValue: caller.hit.returnAddress,
       callSiteAddress: caller.hit.immediateCallSiteAddress,
       callSiteBytesHex: caller.hit.immediateCallSiteBytesHex,
       debugRegistersRestored: caller.hit.debugRegistersRestored,
@@ -363,7 +365,7 @@ function main() {
       runs: runs.map(({ row }) => row),
       outputsMatchAcrossBeforeObserverAfter: equalArtifacts,
       ordinaryStagedSourcesMatchAcrossBeforeObserverAfter: equalSources,
-      callerWasSourceBoundToCompleteProbe: true,
+      pickEntryCaptureWasSourceBoundToCompleteProbe: true,
       aa0Dimensions: before.row.aa0Dimensions,
       sceneOutputsByteIdentical: true,
       sceneInputsByteIdentical: true,
@@ -386,19 +388,19 @@ function main() {
       ownBindings: 1347, compiledScanned: 1380, referenceCount: references.length,
       uniqueReferenceRoots: referenceNames,
       errors: 0, truncated: 0,
-      interpretation: 'Static symbol references identify candidates only; none establishes this direct caller.',
+      interpretation: 'Static symbol references identify candidates only; none establishes a direct CPU edge or uniquely names the compiled object.',
     },
     limitations: [
       'This result covers only the first PICK entry in this one 768x1080 seed-1234 scene.',
-      'The anonymous caller payload was identified through the shared address base and validated PLL object table; only the three bytes at its live call site were read back from the process in this capture, not its entire payload.',
-      'The call target stored through [EDI+0x27] was not recovered, and the containing Lisp function name remains unresolved.',
+      'The anonymous object containing the continuation matching the saved stack value was identified through the shared address base and validated PLL object table; only the three bytes at its call site were read back from the process in this capture, not its entire payload.',
+      'This does not establish that the CALL transferred directly to PICK. Its CPU target was not captured, and the containing Lisp function name was unresolved in this result.',
       'Eight bounded EBP frame returns do not identify further callers or a general call graph.',
       'This adds no JavaScript behavior contract and proves no scene or painting parity.',
     ],
   };
-  writeFileSync(output, `${JSON.stringify(evidence, null, 2)}\n`, { flag: 'wx' });
+  writeFileSync(output, `${JSON.stringify(evidence, null, 2)}\n`, { flag: overwrite ? 'w' : 'wx' });
   console.log(JSON.stringify({ output: rel(output), status: evidence.status,
-    callerObject: evidence.directCaller.runtime, callBytes: callBytes.toString('hex'),
+    returnSiteObject: evidence.returnSiteObject.runtime, callBytes: callBytes.toString('hex'),
     controlsMatch: true, evidenceSha256: hash(read(output)) }, null, 2));
 }
 

@@ -312,6 +312,7 @@ function Start-OracleRunner {
     $process = Start-Process -FilePath $powerShellExe -ArgumentList $argumentLine `
         -WorkingDirectory $repoRoot -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+    $null = $process.Handle
     return [pscustomobject]@{ Process = $process; Stdout = $stdout; Stderr = $stderr }
 }
 
@@ -329,8 +330,12 @@ function Wait-OracleRunner {
         throw "$Role runner exceeded its bounded wait; it and all evidence were left untouched"
     }
     $Runner.Process.Refresh()
-    if ($Runner.Process.ExitCode -ne 0) {
-        throw "$Role runner exited with code $($Runner.Process.ExitCode); inspect $($Runner.Stdout) and $($Runner.Stderr)"
+    $runnerExitCode = $Runner.Process.ExitCode
+    if ($null -eq $runnerExitCode) {
+        throw "$Role runner exited but its exit code was unavailable; inspect $($Runner.Stdout) and $($Runner.Stderr)"
+    }
+    if ($runnerExitCode -ne 0) {
+        throw "$Role runner exited with code $runnerExitCode; inspect $($Runner.Stdout) and $($Runner.Stderr)"
     }
     Assert-NoAaronProcess
 }
@@ -453,24 +458,29 @@ function Invoke-CallerCapture {
     $helperProcess = Start-Process -FilePath $powerShellExe -ArgumentList $helperArgumentLine `
         -WorkingDirectory $repoRoot -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput $helperStdout -RedirectStandardError $helperStderr
+    $null = $helperProcess.Handle
     $helperWaitMilliseconds = ($CaptureSeconds + 300) * 1000
     if (-not $helperProcess.WaitForExit($helperWaitMilliseconds)) {
         throw "Fresh x64 caller helper exceeded its bounded wait; logs are retained at $helperStdout and $helperStderr"
     }
     $helperProcess.Refresh()
+    $helperExitCode = $helperProcess.ExitCode
+    if ($null -eq $helperExitCode) {
+        throw "Fresh x64 caller helper exited but its exit code was unavailable; inspect $helperStdout and $helperStderr"
+    }
     $helperDiagnostics = [ordered]@{
         executable = $powerShellExe
         x64 = $true
         processId = $helperProcess.Id
-        exitStatus = $helperProcess.ExitCode
+        exitStatus = $helperExitCode
         sourcePath = $captureScript
         sourceSha256 = $captureHelperSha256
         stdout = Get-FileRecord $helperStdout
         stderr = Get-FileRecord $helperStderr
     }
     $script:callerHelperDiagnostics = $helperDiagnostics
-    if ($helperProcess.ExitCode -ne 0) {
-        throw "Fresh x64 caller helper exited with code $($helperProcess.ExitCode); inspect $helperStderr"
+    if ($helperExitCode -ne 0) {
+        throw "Fresh x64 caller helper exited with code $helperExitCode; inspect $helperStderr"
     }
 
     $callerReportPath = Join-Path $OutputRoot 'free-path-native-caller.json'

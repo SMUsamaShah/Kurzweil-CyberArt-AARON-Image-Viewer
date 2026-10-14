@@ -223,6 +223,10 @@ not delete an unknown `C:\temp` file just to start a run. A failure after
 attempt. The runner stages its own named files and normally copies them into
 the capture folder, then removes those staged copies in `finally`.
 
+The call-site triplet also verifies that its no-profile Windows PowerShell child
+can load `Get-FileHash` before creating run roots; see the
+[`tooling-workarounds.md` diagnostic](tooling-workarounds.md#windows-powershell-child-cannot-find-get-filehash).
+
 A cancelled tool call does not establish that the oracle stopped. Before
 starting another run, inspect the AARON process, reserved `C:\temp` files and
 the owned output root. The first FOOB run finished and archived a complete

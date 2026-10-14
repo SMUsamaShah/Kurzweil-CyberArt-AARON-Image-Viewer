@@ -302,6 +302,42 @@ focus the next controlled observation, not as evidence for a stop formula.
 The byte-checked FREE-PATH Ghidra report SHA-256 is
 `1a6d055f7a56971852ff5309eac932656d7f0232233e5f5a2c94ed2d1b6b62da`.
 
+## Bounded live reads of indirect call sites, 2026-10-14
+
+REA/Ghidra identified the three instruction addresses to observe in
+`FREE-PATH`: computed `CALL [EDI+0x27]` at `+0x39a`, `JG` at `+0x3ac`, and
+another computed `CALL [EDI+0x27]` at `+0x3e4`. A fresh 768×1080
+`writer-stream-seed-1234` triplet captured the first hit at each selected
+address. All three runner summaries and the observer's `INSTALL`, `READY`,
+`COMPLETE`, and `END` records validate. Five drawing/scene artifacts and six
+staged sources match across the triplet; the before/after planning traces also
+match byte-for-byte.
+
+The observer reached `+0x3e4` first, then `+0x39a`; it did not reach
+`+0x3ac` before the target exited. At both call sites, EDI was `0x20000985`,
+the slot address `[EDI+0x27]` was `0x200009ac`, and the raw four-byte slot
+value was `0x20000983`. A read-only 16-byte preview at that value was
+`b10283e17f8b7315894df039679b7209` at both sites. The exact preview sequence
+does not occur in the archived `AARON.pll`. This does not identify its memory
+region, function, or ABI, so the value remains an unresolved runtime target.
+
+REA's complete value trace has 623 nodes and 552 edges. It shows the
+`+0x39a` indirect-call result flowing through EAX into the comparison and
+branch at `+0x3ac`; the later `+0x3e4` call has no modeled output, and the
+computed targets remain unresolved. The live helper captured only the first
+hit at each address and did not single-step the branch. The observed
+`+0x3e4` then `+0x39a` order does not prove that those events belong to one
+FREE-PATH invocation or that either hit was caused by the branch.
+
+The capture is bounded call-site evidence, not a recovered helper name,
+general FREE-PATH call graph, stop rule, new JS contract, or painting parity.
+The [portable evidence](evidence/free-path-callsite-v1-20261014-084337-07112bc0-v2.json)
+has SHA-256
+`3d04dcd361fd6473a5fdd9c5722c0faa49dbf702550593a2f958357b1c51faa5`.
+Its [capture workflow](../native-analysis-workflow.md#free-path-indirect-call-site-capture-2026-10-14)
+and [triplet/parser workarounds](../tooling-workarounds.md#free-path-triplet-archival-and-json-evidence)
+preserve the exact setup and current limitations.
+
 ## Vertical single-float discriminator, v8
 
 The v8 source-bound `writer-stream-seed-1234` triplet measured 320×480.
@@ -380,6 +416,38 @@ claimed. Portable evidence SHA-256 is
 See [`free-path-stop-boundary-20261014-v9.json`](evidence/free-path-stop-boundary-20261014-v9.json),
 the [probe](free-path-stop-boundary-v9.cl), [serial capture helper](../tools/capture-free-path-stop-boundary-v9.ps1),
 and [strict evidence deriver](../tools/derive-free-path-stop-boundary-v9-evidence.mjs).
+
+## Seed-456069 discriminator, v11
+
+A fresh source-bound `writer-stream-seed-1234` triplet measured a vertical
+0.2 `SINGLE-FLOAT` edge at 320×480. The probe ran at the first successful
+`STORE-IN-FILE` exit (depth 7) and recorded selected steps 13, original
+consumption 11, 14 returned points, 34 `RAN` calls, and next random value
+77059. The checked-in probe and complete observer report hashes match the
+triplet. All five drawing/scene outputs and six ordinary staged sources
+match across the controls; the observer-only planning trace is diagnostic.
+
+Local single-float replay predicts 12 steps for step-sum, 12 for
+source-to-emitted-point, and 11 for step-times-wiggle. The minimum boundary
+margin exceeds one million Float32 ULPs. JavaScript makes 37 random calls,
+returns 15 points, and leaves next random value 62900, so this case does not
+match. The implied 12 JavaScript loop iterations are derived from its random
+call count and implementation structure; there is no named JavaScript
+consumed-step field in the evidence.
+
+With v8 and v9, step-times-wiggle is the only local replay candidate matching
+all three original counts. This supports only a bounded candidate comparison:
+the original internal progress variable is unobserved, and these samples do
+not establish a general stop rule, native ABI, or painting parity. Across ten
+isolated one-edge cases, JS matches four and differs by one step in six. The
+separate 40-case canonical matrix remains 26/30 matches, four mismatches,
+and ten unclassified. No new routine, contract, or milestone is claimed.
+Portable evidence SHA-256 is
+`0b9e5f6638881d371341fae7dd6cd451949c9d08f5cf35cb41f2a03baf90e422`.
+See the [evidence](evidence/free-path-stop-boundary-20261014-v11-456069.json),
+[probe](free-path-stop-boundary-v11.cl), [serial capture helper](../tools/capture-free-path-stop-boundary-v11.ps1),
+[strict deriver](../tools/derive-free-path-stop-boundary-v11-evidence.mjs), and
+[seed candidate search](../tools/find-free-path-stop-boundary-v11-candidate.mjs).
 
 ## Reproduction
 

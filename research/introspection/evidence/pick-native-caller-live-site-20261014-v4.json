@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "status": "measured-bounded-native-caller-object-live-callsite",
+  "status": "measured-bounded-pick-entry-return-site-mapping",
   "scope": "First natural PICK entry hit in one source-bound seed-1234 writer-stream scene at measured 768x1080",
-  "directCaller": {
-    "outcome": "return-address-mapped-to-one-anonymous-compiled-object",
+  "returnSiteObject": {
+    "outcome": "saved-stack-value-mapped-to-one-anonymous-compiled-object",
     "lispFunctionName": null,
-    "nameResolution": "unresolved; the current metadata and static references do not uniquely name this compiled object",
+    "nameResolution": "unresolved in this PICK-entry capture; the later CLOS method census associates the same complete object with SELECT-SUBJECT method (EQL PREMIUM)",
     "runtime": {
       "addressBase": "0x1fba0000",
       "entry": "0x1fe4bfb4",
-      "returnAddress": "0x1fe4c07f",
+      "savedStackValue": "0x1fe4c07f",
       "payloadOffset": 203,
       "returnOutsideElevenNamedCandidates": true
     },
@@ -30,7 +30,8 @@
       "payloadOffset": 200,
       "bytesHex": "ff5727",
       "encoding": "x86 indirect near CALL [EDI+0x27]",
-      "returnsToCapturedPickEntry": true,
+      "savedStackValueMatchesContinuation": true,
+      "directTransferObserved": false,
       "dynamicTargetResolved": false,
       "liveRead": {
         "address": "0x1fe4c07c",
@@ -70,7 +71,7 @@
       }
     }
   },
-  "callerCapture": {
+  "pickEntryCapture": {
     "report": {
       "path": "research/extracted/local-oracle/external-runs/pick-caller-20261014-observer-live-site-v2/pick-native-caller.json",
       "bytes": 21052,
@@ -80,7 +81,7 @@
     "entryAddress": "0x1fe00e8c",
     "exceptionCode": "0x4000001e",
     "firstChance": 1,
-    "returnAddress": "0x1fe4c07f",
+    "savedStackValue": "0x1fe4c07f",
     "callSiteAddress": "0x1fe4c07c",
     "callSiteBytesHex": "ff5727",
     "debugRegistersRestored": true,
@@ -432,7 +433,7 @@
         "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
       }
     ],
-    "callerWasSourceBoundToCompleteProbe": true,
+    "pickEntryCaptureWasSourceBoundToCompleteProbe": true,
     "aa0Dimensions": {
       "width": 768,
       "height": 1080,
@@ -478,11 +479,11 @@
     },
     "currentReusableCaptureHelper": {
       "path": "research/tools/capture-pick-caller.ps1",
-      "bytes": 26018,
-      "sha256": "135c9b112600a2d29ba6d45b5cd8f879c64beebb693c4dbe97bd229761ec0f5a"
+      "bytes": 28637,
+      "sha256": "661f7c928e02dd0374ab8d0bbdc0b3493b7825a08ac334a1e87a76ca73ff7d76"
     },
     "debuggerHelper": {
-      "path": "research/oracle/AaronCallerBreakpoint.cs",
+      "path": "research/oracle/AaronCallerBreakpoint-20261014.cs",
       "bytes": 19043,
       "sha256": "6daed00b18a2f3a4654d0238b2c181318c8587e914ae3f823d8f3f0c6bdd926b"
     },
@@ -505,12 +506,12 @@
     ],
     "errors": 0,
     "truncated": 0,
-    "interpretation": "Static symbol references identify candidates only; none establishes this direct caller."
+    "interpretation": "Static symbol references identify candidates only; none establishes a direct CPU edge or uniquely names the compiled object."
   },
   "limitations": [
     "This result covers only the first PICK entry in this one 768x1080 seed-1234 scene.",
-    "The anonymous caller payload was identified through the shared address base and validated PLL object table; only the three bytes at its live call site were read back from the process in this capture, not its entire payload.",
-    "The call target stored through [EDI+0x27] was not recovered, and the containing Lisp function name remains unresolved.",
+    "The anonymous object containing the continuation matching the saved stack value was identified through the shared address base and validated PLL object table; only the three bytes at its call site were read back from the process in this capture, not its entire payload.",
+    "This does not establish that the CALL transferred directly to PICK. Its CPU target was not captured, and the containing Lisp function name was unresolved in this result.",
     "Eight bounded EBP frame returns do not identify further callers or a general call graph.",
     "This adds no JavaScript behavior contract and proves no scene or painting parity."
   ]

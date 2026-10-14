@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-direct-runtime-destination; anonymous target identity unresolved",
+  "triplet": {
+    "id": "premium-destination-20261014-121303-a73bf9c8",
+    "mode": "writer-stream-seed-1234",
+    "canvas": "768 1080 148",
+    "roles": [
+      {
+        "role": "before",
+        "runId": "premium-destination-20261014-121303-a73bf9c8-before",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premium-destination-20261014-121303-a73bf9c8-before"
+      },
+      {
+        "role": "observer",
+        "runId": "premium-destination-20261014-121303-a73bf9c8-observer",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premium-destination-20261014-121303-a73bf9c8-observer"
+      },
+      {
+        "role": "after",
+        "runId": "premium-destination-20261014-121303-a73bf9c8-after",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premium-destination-20261014-121303-a73bf9c8-after"
+      }
+    ],
+    "controlsMatch": true,
+    "beforeAfterPlanningTraceMatch": true,
+    "matchingArtifacts": [
+      "aa0",
+      "image",
+      "image-id",
+      "aaron-scene-state-snapshot.txt",
+      "aaron-random-seed-loaded.txt"
+    ],
+    "matchingStagedSourceCount": 6,
+    "planningTrace": {
+      "bytes": 21295296,
+      "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+    },
+    "runnerSha256": "ddab2532b70d27c4d77085f9ac33da8e8fdeab28f6bad9cce1ebced067167244",
+    "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54"
+  },
+  "call": {
+    "sourceFunction": "COMMON-GRAPHICS-USER::SELECT-SUBJECT, method specialized on (EQL PREMIUM)",
+    "payloadOffset": 200,
+    "address": "0x1fe4c07c",
+    "bytes": "ff5727",
+    "instruction": "CALL dword ptr [EDI + 0x27]",
+    "threadId": 20380,
+    "preCallRegisters": {
+      "threadId": 20380,
+      "eip": "0x1fe4c07c",
+      "esp": "0x06b39358",
+      "eax": "0x202ebd5f",
+      "ebx": "0x2036a967",
+      "ecx": "0x206404c1",
+      "edx": "0x2037c94f",
+      "esi": "0x2025e9ea",
+      "edi": "0x20000985",
+      "ebp": "0x06b393d8",
+      "eflags": "0x00000206",
+      "dr6": "0xffff0ff1"
+    },
+    "dispatchSlotAddress": "0x200009ac",
+    "dispatchSlotBytes": "83090020",
+    "dispatchSlotValue": "0x20000983"
+  },
+  "destination": {
+    "address": "0x20000983",
+    "sameThreadAsCall": true,
+    "stoppedBeforeFirstDestinationInstruction": true,
+    "dr0ExecuteBreakpointHit": true,
+    "dr6B0Set": true,
+    "espDecrementedByFour": true,
+    "stackReturnAddress": "0x1fe4c07f",
+    "stackReturnMatchesCallContinuation": true,
+    "equalsCurrentPickEntry": false,
+    "directCpuEdgeToPick": false,
+    "region": {
+      "baseAddress": "0x0000000020000000",
+      "allocationBase": "0x0000000020000000",
+      "regionSize": "0x0000000000004000",
+      "state": "0x00001000",
+      "protection": "0x00000004",
+      "allocationProtection": "0x00000008",
+      "type": "0x00040000"
+    },
+    "bytesHex": "b10283e17f8b7315894df039679b7209eb850900208509002089442404895424",
+    "bytes": 32,
+    "sha256": "eaa3cf34cd04bd79ab9eeb83a3e5489c43d04481f16e3898e1cb65427e64b57a",
+    "exactWindowMatchesInCapturedPll": 0
+  },
+  "rea": {
+    "evidencePath": "research/introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json",
+    "evidenceSha256": "7f62cc6adb4f9aa118ca99aa89e2f810ce0162a8e5f87823c802eaff1addaeee",
+    "provider": "REA 6.4.0 / Ghidra 12.1.4",
+    "queryCount": 8,
+    "functionSeeds": 0,
+    "decodedInstructionBytes": 22,
+    "exactDestinationBytes": true,
+    "functionBoundaryRecovered": false
+  },
+  "provenance": {
+    "comparison": {
+      "path": "research/extracted/local-oracle/premium-callsite-triplet-v1-logs/premium-destination-20261014-121303-a73bf9c8/triplet-comparison.json",
+      "sha256": "6f233a579e315f938c4343e30cb79c96c40b8b4ec580ca8fbabbb22996e1aaed"
+    },
+    "debuggerReport": {
+      "path": "D:\\ReverseEngineerAaron\\research\\extracted\\local-oracle\\external-runs\\premium-destination-20261014-121303-a73bf9c8-observer\\capture\\aaron-premium-callsite-destination-breakpoint-v1.txt",
+      "sha256": "7d7857d443cf09dcaf92ce113f14c9f0e233042b9d8a2cf9a4816a925c03a97f"
+    },
+    "currentSources": [
+      {
+        "path": "research/introspection/premium-callsite-metadata-v1.cl",
+        "bytes": 10825,
+        "sha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3"
+      },
+      {
+        "path": "research/oracle/AaronPremiumCallsiteDestinationBreakpointV1.cs",
+        "bytes": 57039,
+        "sha256": "913d0a2eeb1a1543fa035b8180cda7b7d39beaf6a44c9055c977ad4d46eb8dce"
+      },
+      {
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "bytes": 29902,
+        "sha256": "ddab2532b70d27c4d77085f9ac33da8e8fdeab28f6bad9cce1ebced067167244"
+      },
+      {
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "bytes": 5906,
+        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+      },
+      {
+        "path": "research/introspection/evidence/select-subject-call-census-20261014-v1.json",
+        "bytes": 36524,
+        "sha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba"
+      },
+      {
+        "path": "research/extracted/aaron/manifest.json",
+        "bytes": 2817,
+        "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+      },
+      {
+        "path": "research/tools/derive-premium-callsite-destination-breakpoint-evidence.mjs",
+        "bytes": 19331,
+        "sha256": "d43a9b76896dbdf2ff9957f099fc20c1dda45784040c254075bcc1c253a21373"
+      }
+    ]
+  },
+  "limitations": [
+    "The direct CPU destination is an observed runtime address for this run; it is not mapped to a named Lisp function or complete native function boundary.",
+    "The destination differs from PICK entry. This capture does not show whether or how the target later transfers to PICK.",
+    "The destination region was reported committed MEM_MAPPED with PAGE_READWRITE; this protection is not itself proof of an executable section or file-backed mapping.",
+    "REA statically decoded only eight queried instruction starts, covering 22 bytes of the 32-byte window. It created zero functions and the generated PE was never executed.",
+    "The relative branch outside the window is a static candidate only; no branch execution or memory read at that external candidate was captured.",
+    "No Lisp behavior contract, ABI, calling convention, or whole-painting parity is established."
+  ]
+}

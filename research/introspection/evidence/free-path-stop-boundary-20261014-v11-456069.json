@@ -1,0 +1,603 @@
+{
+  "schema": "aaron-free-path-stop-boundary-evidence-v11",
+  "question": "Does one vertical, visibility-isolated 0.2 single-float edge distinguish the three surviving local FREE-PATH stop candidates when invoked at a traced STORE-IN-FILE return?",
+  "controls": {
+    "before": {
+      "runId": "freepath-v11-before-d6e7cd8f",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "probeCompletionSatisfied": true,
+      "smallImage": false,
+      "startedAt": "2026-10-14T09:05:37.5474147+00:00",
+      "finishedAt": "2026-10-14T09:05:52.0190745+00:00",
+      "runnerSha256": "169557d2293b4fbf47e712c6870f9d7910156cc4b32c97d4027683762c918489",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observer": {
+      "runId": "freepath-v11-observer-51a3826e",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "probeCompletionSatisfied": true,
+      "smallImage": false,
+      "startedAt": "2026-10-14T09:05:52.4655908+00:00",
+      "finishedAt": "2026-10-14T09:06:06.8679686+00:00",
+      "runnerSha256": "169557d2293b4fbf47e712c6870f9d7910156cc4b32c97d4027683762c918489",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "after": {
+      "runId": "freepath-v11-after-2df9ec5c",
+      "mode": "writer-stream-seed-1234",
+      "complete": true,
+      "probeCompletionSatisfied": true,
+      "smallImage": false,
+      "startedAt": "2026-10-14T09:06:07.1513667+00:00",
+      "finishedAt": "2026-10-14T09:06:21.4878133+00:00",
+      "runnerSha256": "169557d2293b4fbf47e712c6870f9d7910156cc4b32c97d4027683762c918489",
+      "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+      "aa0Sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "sceneReportSha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+    },
+    "observerProbeSha256": "1842454ae04554a4811917f3ac411cfccbdfac69321218e317575812cebbc138",
+    "checkedInProbePath": "research/introspection/free-path-stop-boundary-v11.cl",
+    "checkedInProbeSha256": "1842454ae04554a4811917f3ac411cfccbdfac69321218e317575812cebbc138",
+    "observerReportSha256": "7d686420c60aff03ba6fa8cbbf40f5d5a40431577822eb2536ec9e2b46bf7240",
+    "reportHashMatchesTripletVerifier": true,
+    "observerReportPath": "research/extracted/local-oracle/external-runs/freepath-v11-observer-51a3826e/capture/aaron-free-path-stop-boundary-v11.txt",
+    "requiredEndMarker": "END free-path-stop-boundary-v11",
+    "drawingAndSceneOutputHashes": {
+      "aa0": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "image": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "bracketingPlanningTraceSha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+    "observerPlanningTraceSha256": "4fcf05d879b07d6e3d0da0aa7a5e2dcb5866637364a4796172fb1f8fd1a84150",
+    "observerPlanningTraceIsDiagnosticOnly": true,
+    "sameRuntimeRecipeAcrossTriplet": true,
+    "bracketingControlsUninstrumented": true,
+    "observerSourceBoundByRunnerHash": true,
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    },
+    "allDrawingAndSceneOutputsAndOrdinarySourcesMatch": true,
+    "aa0Header": {
+      "width": 320,
+      "height": 480,
+      "headerBytes": 148
+    }
+  },
+  "captureChecks": {
+    "caseCount": 1,
+    "errorCount": 0,
+    "bracketingPlanningTracesMatch": true,
+    "observerPlanningTraceDiffers": true,
+    "ranAndXydistBindingsRestored": true,
+    "traceHook": {
+      "event": ":exit",
+      "name": "STORE-IN-FILE",
+      "depth": 7
+    },
+    "callbackStatus": "OK",
+    "inputPointValuesUnchangedAtSinglePrecision": true,
+    "inputPointObjectIdentityChecked": false,
+    "inputListStructureChecked": false,
+    "candidateReplayBoundaryMarginsMatched": true,
+    "oneForwardVisibleEdgeOnly": true,
+    "exactSeedPrefix": true
+  },
+  "case": {
+    "seed": 456069,
+    "name": "vertical-length-0-2-single-edge-holdout-456069",
+    "points": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0.2,
+        1
+      ]
+    ],
+    "pointTypes": "((FIXNUMFIXNUMFIXNUM)(FIXNUMSINGLE-FLOATFIXNUM))",
+    "precision": "single",
+    "fdex": 0,
+    "tdex": 1,
+    "from": 0,
+    "to": 1,
+    "distanceCall": {
+      "points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0.2,
+          1
+        ]
+      ],
+      "result": 0.2,
+      "resultType": "SINGLE-FLOAT"
+    },
+    "randomCalls": [
+      {
+        "args": [
+          8,
+          14
+        ],
+        "value": 13
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0417391
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.01968359
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.6388011
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2731364
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.01786995
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.9042088
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1332835
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.017112112
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.0571644
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1497071
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.020597283
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 1.8764498
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.23612
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.017806334
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 2.846882
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1970651
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.015400271
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.0143704
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1986723
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.024094794
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 3.6328216
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2777855
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.018385753
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.918006
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.1586444
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.029796144
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.94114006
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.2277157
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.02787441
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 4.848149
+      },
+      {
+        "args": [
+          0.7,
+          1.3
+        ],
+        "value": 1.0910857
+      },
+      {
+        "args": [
+          0.015,
+          0.03
+        ],
+        "value": 0.022567462
+      },
+      {
+        "args": [
+          0,
+          6.28
+        ],
+        "value": 0.5124069
+      }
+    ],
+    "result": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        -0.000021437232,
+        0.01634149,
+        1
+      ],
+      [
+        -0.00011455031,
+        0.03594421,
+        1
+      ],
+      [
+        -0.00029729152,
+        0.053073764,
+        1
+      ],
+      [
+        -0.00010963316,
+        0.07108384,
+        1
+      ],
+      [
+        -0.0003240316,
+        0.089852,
+        1
+      ],
+      [
+        -0.00018228585,
+        0.10795275,
+        1
+      ],
+      [
+        -0.00039179946,
+        0.12640154,
+        1
+      ],
+      [
+        0.0000737875,
+        0.14591557,
+        1
+      ],
+      [
+        0.00031275494,
+        0.16452396,
+        1
+      ],
+      [
+        0.00007124885,
+        0.18246098,
+        1
+      ],
+      [
+        0,
+        0.2,
+        1
+      ],
+      [
+        0,
+        0.2,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "nextRandom": {
+      "value": 77059,
+      "status": "OK"
+    },
+    "stopModelComparison": {
+      "selectedSteps": 13,
+      "originalConsumedSteps": 11,
+      "localRngPrefixMatchesCapture": true,
+      "predictions": {
+        "stepSum": 12,
+        "sourceToEmittedPoint": 12,
+        "stepTimesWiggle": 11
+      },
+      "allThreeUncapped": true,
+      "firstCrossingMargins": {
+        "stepSum": {
+          "step": 12,
+          "margin": 0.015810519456863403,
+          "comparisonUlp": 1.4901161193847656e-8,
+          "marginInFloat32Ulps": 1061026
+        },
+        "sourceToEmittedPoint": {
+          "step": 12,
+          "margin": 0.015554681420326233,
+          "comparisonUlp": 1.4901161193847656e-8,
+          "marginInFloat32Ulps": 1043857
+        },
+        "stepTimesWiggle": {
+          "step": 11,
+          "margin": 0.0000455109984613955,
+          "comparisonUlp": 2.9103830456733704e-11,
+          "marginInFloat32Ulps": 1563746
+        }
+      },
+      "minimumBoundaryMarginInFloat32Ulps": 1043857,
+      "reconstructedFinalSteps": [
+        {
+          "step": 10,
+          "scale": 1.2277157306671143,
+          "wiggle": 0.027874410152435303,
+          "angle": 4.848148822784424,
+          "progressed": 0.18298262357711792,
+          "point": [
+            0.00007124884723452851,
+            0.1824609786272049
+          ],
+          "fromStart": 0.1824609935283661,
+          "fromTarget": 0.017539169639348984,
+          "offsetLength": 0.0005264900391921401
+        },
+        {
+          "step": 11,
+          "scale": 1.09108567237854,
+          "wiggle": 0.02256746217608452,
+          "angle": 0.5124068856239319,
+          "progressed": 0.1997685581445694,
+          "point": [
+            0.0003301546967122704,
+            0.19995428621768951
+          ],
+          "fromStart": 0.199954554438591,
+          "fromTarget": 0.00033330489532090724,
+          "offsetLength": 0.00037881589378230274
+        },
+        {
+          "step": 12,
+          "scale": 1.0427277088165283,
+          "wiggle": 0.02801312878727913,
+          "angle": 3.74808406829834,
+          "progressed": 0.21581052243709564,
+          "point": [
+            -0.0003692484460771084,
+            0.2155543714761734
+          ],
+          "fromStart": 0.21555468440055847,
+          "fromTarget": 0.015558750368654728,
+          "offsetLength": 0.000449385610409081
+        }
+      ],
+      "traceBasis": "Local single-float replay checked against every captured RAN call; original internal variables are not observed."
+    },
+    "candidateReplayMarginsInFloat32Ulps": {
+      "stepSum": 1061026,
+      "sourceToEmittedPoint": 1043857,
+      "stepTimesWiggle": 1563746
+    },
+    "expectedCandidateReplayMarginsInFloat32Ulps": {
+      "stepSum": 1061026,
+      "sourceToEmittedPoint": 1043857,
+      "stepTimesWiggle": 1563746
+    },
+    "candidateReplayMinimumBoundaryMarginInFloat32Ulps": 1043857,
+    "localCandidatePredictions": {
+      "status": "hypotheses_only",
+      "selectedSteps": 13,
+      "predictedStopSteps": {
+        "stepSum": 12,
+        "sourceToEmittedPoint": 12,
+        "stepTimesWiggle": 11
+      },
+      "minimumBoundaryMarginInFloat32UlpsRounded": 1043857,
+      "originalCallForcedToMatchPrediction": false
+    },
+    "javascriptComparison": {
+      "randomCallsMatch": false,
+      "returnedPointsMatch": false,
+      "followingRandomMatches": false,
+      "followingRandom": {
+        "original": 77059,
+        "javascript": 62900
+      },
+      "originalRandomCallCount": 34,
+      "javascriptRandomCallCount": 37,
+      "originalResultPointCount": 14,
+      "javascriptResultPointCount": 15,
+      "boundedParity": false
+    }
+  },
+  "scope": {
+    "description": "One bounded controlled FREE-PATH case at the first successful traced STORE-IN-FILE exit.",
+    "caseCount": 1,
+    "seed": 456069,
+    "edge": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0.2,
+        1
+      ]
+    ],
+    "localPredictionsAreHypothesesOnly": true
+  },
+  "interpretation": [
+    "The one-XYDIST capture isolates the visible forward edge; the zero-visibility start suppresses the closing edge in this case.",
+    "The seed-456069 stop predictions are local single-float replay hypotheses; the probe records the original result and does not force or assume a predicted answer.",
+    "Stop predictions replay captured seeded random values with single-float arithmetic; they do not observe the original function internal variables.",
+    "One seed can discriminate local candidates but cannot establish a general stop rule.",
+    "Input preservation compares the captured point values after single-float rounding; point-object identity and list structure were not observed.",
+    "JavaScript parity is reported separately for captured random calls, returned points and the next random checkpoint."
+  ],
+  "limitations": [
+    "This is one fractional single-float, length-0.2 edge and one seed.",
+    "The controlled FREE-PATH case runs inside the first successful traced STORE-IN-FILE exit callback; it is not a natural FREE-PATH caller observation.",
+    "The post-event callback and one-shot flag remain installed until this disposable oracle process exits.",
+    "This does not establish the FREE-PATH domain, native Lisp ABI, or whole-painting parity."
+  ]
+}

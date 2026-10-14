@@ -160,10 +160,29 @@ observations of the compiled function's internal variables, this two-sample
 result does not establish a general stop rule. The v8 and v9 triplets also
 used 320×480 and 768×1080 scenes respectively.
 
-Across nine controlled one-edge cases, current JS matches four and differs by
-one step in five. The v9 source-bound evidence confirms the captured RNG calls,
+At the v9 checkpoint, across nine controlled one-edge cases, JS matched four
+and differed by one step in five. The v9 source-bound evidence confirms the captured RNG calls,
 returned points, next-random checkpoint, input-value comparison, complete
 observer lifecycle, matching runtime hashes, and fresh drawing/scene controls.
 It adds no recovered routine or general contract. See the [v9 evidence](evidence/free-path-stop-boundary-20261014-v9.json)
 and [detailed findings](free-path-native.md); do not widen the JS implementation
 from these finite cases alone.
+
+## v11 single-edge holdout
+
+A fresh source-bound 320×480 triplet measured seed 456069 on the vertical
+0.2 single-float edge. At the first successful STORE-IN-FILE exit (depth 7),
+the original had selected 13 steps and consumed 11, returned 14 points, made
+34 RAN calls, and left next random value 77059. Local replay predicted
+12/12/11 steps for step-sum, source-to-emitted-point, and step-times-wiggle;
+the smallest candidate-boundary margin exceeded one million Float32 ULPs.
+
+JavaScript made 37 RAN calls, returned 15 points, and left next random value
+62900, so parity fails. The derived extra iteration is not a named field in
+the evidence JSON. Across ten controlled one-edge cases, current JS matches
+four and differs by one step in six. The v8/v9/v11 original counts are each
+matched by step-times-wiggle in these local replays, but they do not reveal
+the compiled routine's internal progress variable or establish a general
+stop rule. No function, contract, or milestone count changes. See the [v11
+evidence](evidence/free-path-stop-boundary-20261014-v11-456069.json) and
+[detailed native findings](free-path-native.md).

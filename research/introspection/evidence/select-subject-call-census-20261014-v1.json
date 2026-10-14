@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "status": "validated-static-callsite-census-targets-unresolved",
+  "question": "Does REA resolve any computed indirect call target in either SELECT-SUBJECT method?",
+  "summary": {
+    "methodCount": 2,
+    "callsiteQueryCount": 36,
+    "freeCallsiteCount": 17,
+    "premiumCallsiteCount": 19,
+    "unresolvedComputedCount": 36,
+    "resolvedTargetCount": 0,
+    "perMethodPeAndSeedHashesConsistent": true,
+    "rawAndNormalizedResultsAgreeForEveryQuery": true,
+    "allInputsStaticOnlyAndNotExecuted": true
+  },
+  "methodIdentityDossier": {
+    "path": "research/introspection/evidence/select-subject-method-identity-20261014-v2.json",
+    "sha256": "8449af2ae2ad8a8c34f974698353b8eb99fd86e9bbb80d835fb8ea1b5e0fbf77"
+  },
+  "methods": [
+    {
+      "method": "SELECT-SUBJECT-METHOD-0",
+      "methodIndex": 0,
+      "specializer": {
+        "kind": "EQL",
+        "symbol": "FREE"
+      },
+      "entry": "0x1fe4be74",
+      "sourceBinding": {
+        "binding": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-input-v1/select-subject-method-0.binding.json",
+          "sha256": "06b8b623261675b23b5134e63388178f02137c988532e756855095db4319b4d4"
+        },
+        "sourceMap": {
+          "path": "research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/native-code-map.json",
+          "sha256": "a0be4b57948296b919c73a2f3991177c93cba013f9beecdddd098b0fda8c19dc"
+        },
+        "originalPll": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/runtime/AARON.pll",
+          "bytes": 4573464,
+          "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+        },
+        "originalCompiledObject": {
+          "offset": 2801264,
+          "bytes": 316,
+          "sha256": "8f68dd23a55a08b14ebf1e6656cd96bf5f39438f0f8220350b7d90f855bcf6d1"
+        },
+        "originalPayload": {
+          "offset": 2801268,
+          "bytes": 312,
+          "sha256": "9eab78b18686c5fdda04f4c40b157a879c3fbc579d4aae02a73239f8192f28b9"
+        },
+        "generatedPe": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-input-v1/select-subject-method-0.synthetic.exe",
+          "bytes": 4608,
+          "sha256": "eacc466eb3552387c0520521e2236766b0d4a388d7966c721d6f9d7a0af5ce30"
+        },
+        "generatedSeed": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-input-v1/select-subject-method-0.seeds.tsv",
+          "bytes": 44,
+          "sha256": "a073a38bb6dc03396352208316428a5920db6e54eb0d44726a1acfc61ba723e7"
+        },
+        "generatedPeExecuted": false
+      },
+      "functionDossier": {
+        "report": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-function-scoped-v1/rea-result.json",
+          "bytes": 134653,
+          "sha256": "b5ca6de8902d8786949c2a675628597c85333c59cfe6a567f1475c7849bb6c95"
+        },
+        "invocation": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-function-scoped-v1/rea-invocation.json",
+          "sha256": "22ab9d695ac62385068eb6f5eb951f417bbf010f62f48d5aa95cf56990d9f84b"
+        },
+        "callInstructionCount": 17
+      },
+      "calls": [
+        {
+          "address": "0x1fe4be80",
+          "instruction": "0x1fe4be80: CALL dword ptr [EDI + -0x45]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-target-probe-v1-free-be80-elevated",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-target-probe-v1-free-be80-elevated/rea-result.json",
+            "bytes": 5295,
+            "sha256": "801ce2ec0dc1807360e7bc2301da4200b63e21655b2062242f633fabbc32dc30"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-target-probe-v1-free-be80-elevated/rea-invocation.json",
+            "sha256": "23682e0b6c96dacabaa4c0357c25374574fda435cba7adde35d0cbd8da1b6373"
+          }
+        },
+        {
+          "address": "0x1fe4be89",
+          "instruction": "0x1fe4be89: CALL dword ptr [EDI + -0x35]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4be89",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4be89/rea-result.json",
+            "bytes": 5295,
+            "sha256": "4b4cd2278f09911d4f018928569172bcfba77cd0816ceef1f1ffb53c23dace19"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4be89/rea-invocation.json",
+            "sha256": "abd11646950880330c6b5cae972090d69e37c467ff2b3fc30b51fccf584fb934"
+          }
+        },
+        {
+          "address": "0x1fe4bea4",
+          "instruction": "0x1fe4bea4: CALL dword ptr [EDI + 0x63]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bea4",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bea4/rea-result.json",
+            "bytes": 5295,
+            "sha256": "71c9148f8bd75321418eda9a9de3542078b4fd6fa4ed5deaac9e04a767e178b0"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bea4/rea-invocation.json",
+            "sha256": "dd5f6738e436a4b2686c825d8526109fd4b0cd999e34a6ab4458b8f413af102b"
+          }
+        },
+        {
+          "address": "0x1fe4beac",
+          "instruction": "0x1fe4beac: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beac",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beac/rea-result.json",
+            "bytes": 5295,
+            "sha256": "a5fe494567e7560332a8f6b4d908d0c50c18f3b0b87102b82c047822b2d929e7"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beac/rea-invocation.json",
+            "sha256": "d8caa1337ed4daa48b0ad31795fdf9ce0fa9c91ed536d7a11319b7943dd4bbad"
+          }
+        },
+        {
+          "address": "0x1fe4beb7",
+          "instruction": "0x1fe4beb7: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beb7",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beb7/rea-result.json",
+            "bytes": 5295,
+            "sha256": "ecf0c9029dbb826b56d2544027d85e5fef95f43e565e9e7f07280dde242f661c"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beb7/rea-invocation.json",
+            "sha256": "455fdde7613e67d722fc81aded4332de29397694c72a8dc37db9e57fc60e142a"
+          }
+        },
+        {
+          "address": "0x1fe4bed7",
+          "instruction": "0x1fe4bed7: CALL dword ptr [EDI + 0x1d3]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bed7",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bed7/rea-result.json",
+            "bytes": 5295,
+            "sha256": "93cb1333f7e7f71ab4d4089e3dffcb477d781020af8eb29c40ac6d08dac3bde9"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bed7/rea-invocation.json",
+            "sha256": "e4930dab62cdbc7ae30f0b610ea7f26fc40711f0bde8bc84cd3bca69d6cb89ba"
+          }
+        },
+        {
+          "address": "0x1fe4bee2",
+          "instruction": "0x1fe4bee2: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bee2",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bee2/rea-result.json",
+            "bytes": 5295,
+            "sha256": "7da2e32f0e7aac6e2bd4051eb9c93392d133c05d90b121152fe36bd5866eb780"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bee2/rea-invocation.json",
+            "sha256": "1c479612f8f1c6c7e609e6674429ed7f66dfaedabff06df34d2c7854c8382e67"
+          }
+        },
+        {
+          "address": "0x1fe4beed",
+          "instruction": "0x1fe4beed: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beed",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beed/rea-result.json",
+            "bytes": 5295,
+            "sha256": "8cbb8cb1c4e64624ab5bc360c3a8a92982e2b3db2c34a94a2f8e1b86aea8a6af"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4beed/rea-invocation.json",
+            "sha256": "94667dfa47c43643ff49121a161e11bc435231160d29dfea4118307f03dcf3e9"
+          }
+        },
+        {
+          "address": "0x1fe4befc",
+          "instruction": "0x1fe4befc: CALL dword ptr [EDI + 0x27]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-method-20261014-method0-callsite-retry-elevated-v1",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-callsite-retry-elevated-v1/rea-result.json",
+            "bytes": 5295,
+            "sha256": "eefd2c0fb754564a9a78a4689b28a6a9ee80f1556bf0e08242ffac9703195753"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-method-20261014-method0-callsite-retry-elevated-v1/rea-invocation.json",
+            "sha256": "be86f7b057ff211aa2026691995a21291ec8d9882145e228bf248a3db2f8191c"
+          }
+        },
+        {
+          "address": "0x1fe4bf08",
+          "instruction": "0x1fe4bf08: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf08",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf08/rea-result.json",
+            "bytes": 5295,
+            "sha256": "7e7032e5f2953bf304b7c21627d910ecd4c1aef129605a19bbe6f87880aef3c6"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf08/rea-invocation.json",
+            "sha256": "38c7ae0dd7137883b864c610f539c34acc4e20ad56e926c6262745a9c0a57b75"
+          }
+        },
+        {
+          "address": "0x1fe4bf18",
+          "instruction": "0x1fe4bf18: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf18",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf18/rea-result.json",
+            "bytes": 5295,
+            "sha256": "2773644a076fd079936fd0f3b04f5d14d4b85b2890c69469bb7e4d3095fb1cc7"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf18/rea-invocation.json",
+            "sha256": "e585983243c61c31ed36908ed07294d0a0223f6b3af0787fe7446f06728b286d"
+          }
+        },
+        {
+          "address": "0x1fe4bf28",
+          "instruction": "0x1fe4bf28: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf28",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf28/rea-result.json",
+            "bytes": 5295,
+            "sha256": "100e475fc980ea441d80bb3236451925182e435a354c3ec8c30ddc610432d967"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf28/rea-invocation.json",
+            "sha256": "48767c8b96f1ac47f369b2699b0460948776f86e51702c6d769741335908d428"
+          }
+        },
+        {
+          "address": "0x1fe4bf38",
+          "instruction": "0x1fe4bf38: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf38",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf38/rea-result.json",
+            "bytes": 5295,
+            "sha256": "c3b794c51aadb6f16d316b46fe0a55e51b5be101c5832ca36c73b946fbeda96e"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf38/rea-invocation.json",
+            "sha256": "bd070933175c4a24bb238a16c6a6bf200ed2a40565572d4358f2ad79fe961aef"
+          }
+        },
+        {
+          "address": "0x1fe4bf48",
+          "instruction": "0x1fe4bf48: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf48",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf48/rea-result.json",
+            "bytes": 5295,
+            "sha256": "2e395e9a7120cc5fdf63142d8e82364a0c0a7d55753c4237ebeb26d989f58d98"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf48/rea-invocation.json",
+            "sha256": "716bd0efb573b4944c422e4591f2b3568ebdfb8c9e5896c127a0907d2ced51ec"
+          }
+        },
+        {
+          "address": "0x1fe4bf58",
+          "instruction": "0x1fe4bf58: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf58",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf58/rea-result.json",
+            "bytes": 5295,
+            "sha256": "b985b38850da997731c31a67ff301d045260768aa518c0155bf7a0c3b7bedbf8"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf58/rea-invocation.json",
+            "sha256": "0d6f4cceec7570c10c1b5fc2777bd7fb5e1f209aae63d95203cf64fe8dd9a2cc"
+          }
+        },
+        {
+          "address": "0x1fe4bf91",
+          "instruction": "0x1fe4bf91: CALL dword ptr [EDI + 0x1d3]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf91",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf91/rea-result.json",
+            "bytes": 5295,
+            "sha256": "ef4ebc57d642eaceb38aaa017dd6ace3d2ec2f10f753f3becd1a12e03867fdc5"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf91/rea-invocation.json",
+            "sha256": "be9426fac8e110224ecadeca727c3f1f04fc3c58be2c7561156ae3a4938cff0e"
+          }
+        },
+        {
+          "address": "0x1fe4bf9c",
+          "instruction": "0x1fe4bf9c: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf9c",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf9c/rea-result.json",
+            "bytes": 5295,
+            "sha256": "d325ae7d4a2b9b71565d1563cabe38feec8345b7e795cd860ea2b6966a1c0561"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-free-1fe4bf9c/rea-invocation.json",
+            "sha256": "de538d7c6504c5c387799467a0f197d3c4ac14413f06c13fc1a523896a65bd88"
+          }
+        }
+      ]
+    },
+    {
+      "method": "SELECT-SUBJECT-METHOD-1",
+      "methodIndex": 1,
+      "specializer": {
+        "kind": "EQL",
+        "symbol": "PREMIUM"
+      },
+      "entry": "0x1fe4bfb4",
+      "sourceBinding": {
+        "binding": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.binding.json",
+          "sha256": "d0660da3e92ab94be33986f35976a502dd3281dfe647aa147858081466d289c3"
+        },
+        "sourceMap": {
+          "path": "research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/native-code-map.json",
+          "sha256": "a0be4b57948296b919c73a2f3991177c93cba013f9beecdddd098b0fda8c19dc"
+        },
+        "originalPll": {
+          "path": "research/extracted/aaron/application/AARON.pll",
+          "bytes": 4573464,
+          "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+        },
+        "originalCompiledObject": {
+          "offset": 2801584,
+          "bytes": 366,
+          "sha256": "f161785f4fdf272a7a5c02b35df99b2741b138c64df79fd1e2329fe1ea751034"
+        },
+        "originalPayload": {
+          "offset": 2801588,
+          "bytes": 362,
+          "sha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae"
+        },
+        "generatedPe": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.synthetic.exe",
+          "bytes": 5120,
+          "sha256": "b974de1382a17f5ef30653802a960f9300183162cf996b8fd609b091df76cd70"
+        },
+        "generatedSeed": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.seeds.tsv",
+          "bytes": 44,
+          "sha256": "df2e73791e653560e71544d19f92bd58c9b2d69e40c1a86b847958b8d26e91bd"
+        },
+        "generatedPeExecuted": false
+      },
+      "functionDossier": {
+        "report": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-function-scoped-v2/rea-result.json",
+          "bytes": 155720,
+          "sha256": "85c0da0fbb13df4dbfdd6fb231074c6e65904e16843c83bcfe70d415adbc806b"
+        },
+        "invocation": {
+          "path": "research/artifacts/rea-tools/select-subject-method-20261014-function-scoped-v2/rea-invocation.json",
+          "sha256": "6582f9b07b1316ad85b3a9bfa7f5c5c2e132414e67537fa8dbbeb28fe072eba1"
+        },
+        "callInstructionCount": 19
+      },
+      "calls": [
+        {
+          "address": "0x1fe4bfc0",
+          "instruction": "0x1fe4bfc0: CALL dword ptr [EDI + -0x45]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc0",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc0/rea-result.json",
+            "bytes": 5240,
+            "sha256": "2fb4d53287d7859a2cfce7521d7e069781c53b1d53b34414ba256beedb77146a"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc0/rea-invocation.json",
+            "sha256": "a6ed4a80e11c5b85b3314dcef207c480f120fdb56ac8cccd7075f48b76cb65c0"
+          }
+        },
+        {
+          "address": "0x1fe4bfc9",
+          "instruction": "0x1fe4bfc9: CALL dword ptr [EDI + -0x35]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc9",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc9/rea-result.json",
+            "bytes": 5240,
+            "sha256": "528113a3d400c52c05d51dbf5bcb641a8c00dcdcc4f09afbfd11b9920cfc7e49"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfc9/rea-invocation.json",
+            "sha256": "463a12e83700c5c7dee0aca998260581b9859caf4b3c0949b25e51aa0209534f"
+          }
+        },
+        {
+          "address": "0x1fe4bfeb",
+          "instruction": "0x1fe4bfeb: CALL dword ptr [EDI + 0x1d3]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfeb",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfeb/rea-result.json",
+            "bytes": 5240,
+            "sha256": "eca61c349ec10d7de9df97c2656e53b15f995a11448354df0907ab641335e657"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bfeb/rea-invocation.json",
+            "sha256": "847d7db2715a12c13bad54f51eecb75064e14c9f737473231cc8554b947f31d6"
+          }
+        },
+        {
+          "address": "0x1fe4bff6",
+          "instruction": "0x1fe4bff6: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bff6",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bff6/rea-result.json",
+            "bytes": 5240,
+            "sha256": "00746595f064f5edab1a0b57b87c9a53adfc449917542dad01e5639638d029a3"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-bff6/rea-invocation.json",
+            "sha256": "0346374ac5e06c25fd6a856431449656ba958ee1492d4d30535b5a15197fb7b0"
+          }
+        },
+        {
+          "address": "0x1fe4c001",
+          "instruction": "0x1fe4c001: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c001",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c001/rea-result.json",
+            "bytes": 5240,
+            "sha256": "4fe87432ee4b366cf828ac5385c4249eb8ff09ed7716f8e47cdff063015a3d85"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c001/rea-invocation.json",
+            "sha256": "52b1e58db4f07cf4fd01fb4d473ce1bde16a8f612c3e19b8e14796a63f507671"
+          }
+        },
+        {
+          "address": "0x1fe4c026",
+          "instruction": "0x1fe4c026: CALL dword ptr [EDI + 0x1d3]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c026",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c026/rea-result.json",
+            "bytes": 5240,
+            "sha256": "2a5e0a49e5dd95cdbd8d207e4041c9fb33a3f30e0f75427ae4cc9c585217339f"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c026/rea-invocation.json",
+            "sha256": "46f695a1cae5b030e39d5f2f5ef72f9a66ff0c95226e49b2d9e0acd964c52741"
+          }
+        },
+        {
+          "address": "0x1fe4c031",
+          "instruction": "0x1fe4c031: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c031",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c031/rea-result.json",
+            "bytes": 5240,
+            "sha256": "b038be596b1e4ac90557bbcdc43c6e4356b3c54cb5194e696592f1e303c8d979"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c031/rea-invocation.json",
+            "sha256": "4efc6a30a86a72cd5e43da0ef2a9fbac825c5b8676ffa1e7f42fb5073ac800e6"
+          }
+        },
+        {
+          "address": "0x1fe4c03c",
+          "instruction": "0x1fe4c03c: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c03c",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c03c/rea-result.json",
+            "bytes": 5240,
+            "sha256": "ac91ec365c9e67902ee7067339829c03afc0695cf9de30fa11af1ba268f26308"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c03c/rea-invocation.json",
+            "sha256": "8f5e1bda5a9820a31e8fa23086f67aff0b5cc0fe93f0d80882dc10bfca171bd7"
+          }
+        },
+        {
+          "address": "0x1fe4c05a",
+          "instruction": "0x1fe4c05a: CALL dword ptr [EDI + 0x63]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c05a",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c05a/rea-result.json",
+            "bytes": 5240,
+            "sha256": "5892581d99c6e40d276cae01f231b8efc997579ba20239e400b4bc45c04c71db"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-a-c05a/rea-invocation.json",
+            "sha256": "8f0d9781327166bb8dd44205468fb7a4a0f41b1f21bb03321678b546cdfe56d7"
+          }
+        },
+        {
+          "address": "0x1fe4c062",
+          "instruction": "0x1fe4c062: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c062",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c062/rea-result.json",
+            "bytes": 5240,
+            "sha256": "5c9a661293e2b4c958155b540356e186dbfbca6026f655d1b6f7470d9aee28ba"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c062/rea-invocation.json",
+            "sha256": "facad2dd1c1e38367779e6e48608e3a4e0d5d6e592899a8e03214c5f755b54e7"
+          }
+        },
+        {
+          "address": "0x1fe4c06d",
+          "instruction": "0x1fe4c06d: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c06d",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c06d/rea-result.json",
+            "bytes": 5240,
+            "sha256": "dee1200f42db543ac772932332f0c9eeb159ebb9bd8432cb1b67904258900c15"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c06d/rea-invocation.json",
+            "sha256": "ed26e0e061da29f4cd4c9e4845999abad8c7c250d01aed0479d1287e688ef1f5"
+          }
+        },
+        {
+          "address": "0x1fe4c07c",
+          "instruction": "0x1fe4c07c: CALL dword ptr [EDI + 0x27]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-method-20261014-callsite-scoped-v1",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-method-20261014-callsite-scoped-v1/rea-result.json",
+            "bytes": 5240,
+            "sha256": "751cd38ca013d407b1d692dda868fd922c8ae461f969d4eea4cdea739adce2e0"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-method-20261014-callsite-scoped-v1/rea-invocation.json",
+            "sha256": "f155345983a4277684429e8ae4ec6512deabbdc06ac2791f571048ea60a8516c"
+          }
+        },
+        {
+          "address": "0x1fe4c088",
+          "instruction": "0x1fe4c088: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c088",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c088/rea-result.json",
+            "bytes": 5240,
+            "sha256": "4c70bf3d407d49dc81945ebc9bbc9aa5905006c07711218a9cde551a672b5a8e"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c088/rea-invocation.json",
+            "sha256": "8d3bceba6518dd5dd17df958c32ed4f84fef9bf0940305a335bb0668b21edaf9"
+          }
+        },
+        {
+          "address": "0x1fe4c098",
+          "instruction": "0x1fe4c098: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c098",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c098/rea-result.json",
+            "bytes": 5240,
+            "sha256": "295deee78e189fc07510569447ce7e9e32fe5dd314412795eea226d0e2872a92"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c098/rea-invocation.json",
+            "sha256": "9dfe993689add8900c0d190b7f1d3b9c0e4a81402d8be57e7db0fced2ea50236"
+          }
+        },
+        {
+          "address": "0x1fe4c0a8",
+          "instruction": "0x1fe4c0a8: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0a8",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0a8/rea-result.json",
+            "bytes": 5240,
+            "sha256": "7602eef17c38258be61dd6bbe625e6f8f5a19493a0c69fa29df31ccbe06eaf16"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0a8/rea-invocation.json",
+            "sha256": "b2f82846c07601e1377947250dbe90325426a289b238230c02bfa4de437fb398"
+          }
+        },
+        {
+          "address": "0x1fe4c0b8",
+          "instruction": "0x1fe4c0b8: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0b8",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0b8/rea-result.json",
+            "bytes": 5240,
+            "sha256": "9dfa9673702dfe52b1e286fe7bb89570490f317931ad30f2555dfabbd363d4a3"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0b8/rea-invocation.json",
+            "sha256": "2407c05313719512e49e5043bf98fe5c1a1d8956a8cf642d556fabb8e680b2f7"
+          }
+        },
+        {
+          "address": "0x1fe4c0cb",
+          "instruction": "0x1fe4c0cb: CALL dword ptr [EDI + 0x2f]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0cb",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0cb/rea-result.json",
+            "bytes": 5240,
+            "sha256": "40fe35c662b50092597a02d21637eee99efd8993a09d615061f8c9a8d4c1a71f"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c0cb/rea-invocation.json",
+            "sha256": "165ae821b42583083c78e4d6c56feaae6c4cb83573dd29b85e2bc88c48bdd598"
+          }
+        },
+        {
+          "address": "0x1fe4c104",
+          "instruction": "0x1fe4c104: CALL dword ptr [EDI + 0x1d3]",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c104",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c104/rea-result.json",
+            "bytes": 5240,
+            "sha256": "686f7d003f9479aa6a9ae5080a786ecf246e7516e4e2a41b6668575b4d456e7e"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c104/rea-invocation.json",
+            "sha256": "51a3aa9267d8ef73a4613811a0d9c652328023d05d10240178bb18117a217b79"
+          }
+        },
+        {
+          "address": "0x1fe4c10f",
+          "instruction": "0x1fe4c10f: CALL EDI",
+          "queryRoot": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c10f",
+          "status": "unresolved",
+          "mechanism": "computed",
+          "targets": [],
+          "report": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c10f/rea-result.json",
+            "bytes": 5240,
+            "sha256": "c1bc4a5581e914c0679834b8cfdeaf6caf7fd945f0dbd493d20b8e9e8b2a77c5"
+          },
+          "invocation": {
+            "path": "research/artifacts/rea-tools/select-subject-call-targets-v1-premium-b-1fe4c10f/rea-invocation.json",
+            "sha256": "76475cad1aa22f7b59e778c212d7f3f4764e599a1366524e3feefd9d278900df"
+          }
+        }
+      ]
+    }
+  ],
+  "interpretation": "All 36 calls are present in the REA function dossiers, and their targeted static queries report unresolved computed calls with no targets. This is a static-reference result only; it is not an application-wide runtime call graph.",
+  "limitations": [
+    "REA/Ghidra analyzed analyst-generated synthetic PE files containing exact copied AARON.pll method payloads plus generated headers and padding. The synthetic PE files were not executed.",
+    "The queries report static Ghidra call-reference observations. An unresolved computed call does not identify its runtime target, and no runtime execution or call target was captured by this census.",
+    "The census does not establish the Lisp calling convention, function names behind the indirect calls, or whole-program caller/callee behavior."
+  ]
+}

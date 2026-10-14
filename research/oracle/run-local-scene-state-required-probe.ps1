@@ -38,15 +38,27 @@ param(
     [ValidatePattern('^[a-z][a-z0-9-]*\.(txt|bin|json)$')]
     [string[]]$ProbeOutputNames = @(),
 
+    [string]$ProbeOutputNamesJson,
+
     [ValidatePattern('^[a-z][a-z0-9-]*\.txt$')]
     [string]$RequiredProbeOutputName,
 
     [ValidatePattern('^END [a-z0-9][a-z0-9-]{0,63}$')]
-    [string]$RequiredProbeEndMarker
+    [string]$RequiredProbeEndMarker,
+
+    [switch]$PowerShellPreflightOnly
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$utilityModuleManifest = Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1'
+try {
+    Import-Module -Name $utilityModuleManifest -Force -ErrorAction Stop -WarningAction SilentlyContinue
+    $null = Get-Command -Name Get-FileHash -ErrorAction Stop
+}
+catch {
+    throw "Unable to load the PowerShell utility module required for source hashing: $($_.Exception.Message)"
+}
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $extracted = (Resolve-Path -LiteralPath $ExtractedRoot).Path
@@ -55,6 +67,50 @@ $application = Join-Path $extracted 'application'
 $preSceneProbeSource = $null
 $stagedPreSceneProbeSha256 = $null
 $runnerSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($ProbeOutputNamesJson) {
+    if ($ProbeOutputNames.Count -gt 0 -or $ProbeOutputNamesJson -notmatch '^\s*\[.*\]\s*$') {
+        throw 'Supply either ProbeOutputNames or a JSON array through ProbeOutputNamesJson'
+    }
+    try {
+        $decodedProbeOutputNames = ConvertFrom-Json -InputObject $ProbeOutputNamesJson -ErrorAction Stop
+    }
+    catch {
+        throw "ProbeOutputNamesJson is invalid JSON: $($_.Exception.Message)"
+    }
+    if ($decodedProbeOutputNames -isnot [array]) {
+        $decodedProbeOutputNames = @($decodedProbeOutputNames)
+    }
+    if ($decodedProbeOutputNames.Count -eq 0) {
+        throw 'ProbeOutputNamesJson must contain at least one filename'
+    }
+    foreach ($name in $decodedProbeOutputNames) {
+        if ($name -isnot [string] -or $name -cnotmatch '^[a-z][a-z0-9-]*\.(txt|bin|json)$') {
+            throw 'ProbeOutputNamesJson entries must be lowercase .txt, .bin, or .json filenames'
+        }
+    }
+    $ProbeOutputNames = [string[]]$decodedProbeOutputNames
+}
+foreach ($name in $ProbeOutputNames) {
+    if ($name -cnotmatch '^[a-z][a-z0-9-]*\.(txt|bin|json)$') {
+        throw "ProbeOutputNames contains an invalid filename: $name"
+    }
+}
+if ($PowerShellPreflightOnly) {
+    [ordered]@{
+        schemaVersion = 1
+        status = 'ok'
+        preflightOnly = $true
+        runId = $RunId
+        probeOutputNames = @($ProbeOutputNames)
+        powershellVersion = $PSVersionTable.PSVersion.ToString()
+        is64BitProcess = [Environment]::Is64BitProcess
+        utilityModulePath = $utilityModuleManifest
+        utilityModuleSha256 = (Get-FileHash -LiteralPath $utilityModuleManifest -Algorithm SHA256).Hash.ToLowerInvariant()
+        getFileHashCommand = (Get-Command -Name Get-FileHash -ErrorAction Stop).Name
+        runnerSha256 = $runnerSha256
+    } | ConvertTo-Json -Compress
+    return
+}
 if ($PreSceneProbePath) {
     $preSceneProbeSource = (Resolve-Path -LiteralPath $PreSceneProbePath).Path
     if (-not (Test-Path -LiteralPath $preSceneProbeSource -PathType Leaf) -or

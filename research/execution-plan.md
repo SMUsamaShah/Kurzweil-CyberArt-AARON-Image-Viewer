@@ -428,12 +428,13 @@ checks all three paths independently of the ignored raw capture.
 
 **Current gate:** the FREE-PATH distance-stop boundary remains unresolved.
 JavaScript matches the three natural seed-1234 calls and one seed-5678 holdout.
-Across nine controlled one-edge cases, it matches four and differs by one
-iteration in five. The v8/v9 vertical single-float cases selected 14 steps and
-consumed 12 in the original versus 13 in JavaScript. Step-sum predicts 13/13,
-source-to-emitted predicts 13/12, and step-times-wiggle predicts 12/12. Only
-the last matches both observed counts, but this finite local replay does not
-establish a general rule. Do not widen the implementation from these samples.
+Across ten controlled one-edge cases, it matches four and differs by one
+iteration in six. The v8/v9/v11 vertical single-float cases selected 14/14/13
+steps; the original consumed 12/12/11, while JavaScript differs in each.
+Local step-sum predictions are 13/13/12, source-to-emitted predictions are
+13/12/12, and step-times-wiggle predicts 12/12/11. The last matches these
+three original counts, but it is still only a local replay hypothesis, not an
+observed internal variable or general rule. Do not widen the implementation.
 
 The first boundary matrix now contains 40 complete direct calls over 20 input
 shapes at seeds 1 and 1234. Its scene used the measured 768×1080 regime. The
@@ -731,10 +732,10 @@ than an ordinal rule. The v5 observer was configured for unit 5 and matched
 fresh controls; the completed v6 triplet now measures unit 6. Keep FREE-PATH
 and point-generation inputs explicit until independently established.
 
-## Current checkpoint: SELECT-SUBJECT direct caller, 2026-10-14
+## Checkpoint: SELECT-SUBJECT return-site association, 2026-10-14
 
 The first natural PICK entry was captured in a complete source-bound
-768×1080 seed-1234 triplet and returned to `0x1fe4c07f`. Its live call bytes
+768×1080 seed-1234 triplet with saved stack value `0x1fe4c07f`. Its live call bytes
 `FF 57 27` match the indexed PLL at payload offset 200; the return is offset
 203. Entry-seeded REA/Ghidra disassembly confirms `CALL [EDI+0x27]`, followed
 by `MOV EDX,EAX`. REA still cannot resolve the computed target.
@@ -742,10 +743,12 @@ by `MOV EDX,EAX`. REA still cannot resolve the computed target.
 A separate complete source-bound 320×480 triplet enumerated the two
 `SELECT-SUBJECT` methods, `(EQL FREE)` and `(EQL PREMIUM)`, captured both live
 native windows, and matched each to a unique complete PLL object. The PREMIUM
-method is the same 362-byte object as the prior PICK return: both complete
-payload and object hashes match, and the measured call/return offsets agree.
-This identifies the direct caller for that captured PICK entry. The census
-was read-only and did not invoke either method. See [PICK caller findings](introspection/pick-native-caller.md),
+method is the same 362-byte payload inside a 366-byte object as the one mapped
+from the saved stack value at PICK entry: both complete payload and object
+hashes match, and the measured callsite/continuation offsets agree.
+This associates the saved PICK-entry stack value with a continuation in the
+PREMIUM method. It does not prove that the CALL's CPU destination was PICK.
+The census was read-only and did not invoke either method. See [PICK caller findings](introspection/pick-native-caller.md),
 [method identity findings](introspection/select-subject-methods.md),
 [PICK evidence](introspection/evidence/pick-native-caller-live-site-20261014-v4.json),
 and [method identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
@@ -754,7 +757,7 @@ At this checkpoint the next proposed action was to inspect both native
 methods. That recommendation is superseded by the later 2026-10-14 checkpoint
 below; no method behavior was established here.
 
-## Current checkpoint: PICK arities and FREE-PATH holdout, 2026-10-14
+## Current checkpoint: PICK arities, FREE-PATH call sites, and holdout, 2026-10-14
 
 A source-bound explicit-call extension exercised `PICK` with two and four
 positive distinct fixnums, 16 seeds per arity. The 32 original returns and
@@ -774,12 +777,53 @@ describe method behavior or generalize to 768×1080. Initial REA dossiers for
 the FREE and PREMIUM methods remain straight-line bodies with computed call
 targets unresolved.
 
-The next target is an independent single-edge `FREE-PATH` holdout. Existing
-v8/v9 cases both match `step-times-wiggle`; v9 also fits `source-to-emitted`,
-so choose a fresh seed locally where the candidate model predicts distinct,
-uncapped consumed-step counts with a wide Float32 margin. Then capture only
-that case with complete source-bound before/observer/after runs, the required
-`INSTALL`, `READY`, `COMPLETE`, and `END` records, and fresh uninstrumented
-controls. Read [oracle safeguards](oracle.md) before running it. A match may
-support the selected stop-boundary slice, not a general `FREE-PATH` rule or
-painting parity. Keep the PICK counts and milestone status unchanged.
+A later REA-guided call-site triplet hit the computed `FREE-PATH+0x3e4` and
+`+0x39a` calls and read the same raw value from `[EDI+0x27]`; it exited before
+the intervening `+0x3ac` branch. REA still leaves the computed targets
+unresolved, and the captured value is not named as a Lisp function. The
+complete source-bound result and limits are recorded in
+[FREE-PATH findings](introspection/free-path-native.md#bounded-live-reads-of-indirect-call-sites-2026-10-14).
+This call-site result adds no function/contract count and does not change the
+next behavioral target.
+
+The independent FREE-PATH holdout is complete. Seed 456069 selected 13 steps;
+the original consumed 11 and returned 14 points, while JS returned 15 and
+left a different next random value. The v11 triplet and source/control gates
+passed. See the [v11 evidence](introspection/evidence/free-path-stop-boundary-20261014-v11-456069.json)
+and [findings](introspection/free-path-native.md#seed-456069-discriminator-v11).
+The static call census is complete: REA queried all 36 CALL sites and left
+each computed target unresolved. A later complete source-bound 768×1080 PICK
+triplet confirmed the return callsite at PREMIUM `SELECT-SUBJECT` payload
+offset 200 (`+0xc8`, bytes `FF 57 27`), but its `[EDI+0x27]` read was sampled
+after control reached PICK. That callee-entry dword (`0x20000983`) is not proven to be the caller's
+operand because EDI may change before PICK entry. The accepted result adds no
+function/contract count. See [PICK findings](introspection/select-subject-methods.md#premium-dispatch-slot-observation-at-pick-entry-2026-10-14)
+and [portable evidence](introspection/evidence/pick-dispatch-slot-20261014-v1.json).
+
+The PREMIUM call's actual runtime destination is now captured. A fresh
+source-bound 768×1080 triplet validated the complete current PREMIUM method
+and PICK entries against their unique PLL objects. At method entry+200, the
+pre-call `[EDI+0x27]` value was `0x20000983`; a separate DR0 execute
+breakpoint stopped the same thread at that value before the first destination
+instruction. ESP decreased by four, `[ESP]` matched callsite+3, and the helper
+restored debug registers and detached without cleanup errors. All three run
+summaries, five drawing/scene artifacts, six staged sources, and planning
+traces matched. See the [portable evidence](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json).
+
+REA 6.4/Ghidra 12.1.4 decoded eight starts (22 instruction bytes) from the
+exact 32-byte destination window. The target is in a committed
+`MEM_MAPPED`/`PAGE_READWRITE` region, does not match the named PICK entry, and
+does not match a complete PLL function window. REA created zero functions;
+the in-window conditional branch and out-of-window jump are static only.
+See the [bounded REA record](introspection/evidence/premium-callsite-destination-window-rea-20261014-v1.json).
+
+Next, use the captured current PICK entry to arm a one-shot hardware
+breakpoint on the same thread immediately after the `0x20000983` hit. Stop
+before the PICK prologue and record EIP, ESP, and `[ESP]`. If PICK is reached,
+compare its thread, stack pointer, and return address with the call-site hit;
+this can distinguish a tail transfer through the anonymous target from a new
+call frame. If it is not reached, retain the bounded direct destination and
+select another unresolved dispatch site. Do not infer a Lisp name or ABI from
+the address or the short code window. This adds no routine or behavior
+contract and does not change the 1/5 milestone count or zero whole-painting
+parity.

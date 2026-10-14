@@ -115,11 +115,17 @@ try {
         -ArgumentList $runnerArgumentLine -PassThru -WindowStyle Hidden `
         -RedirectStandardOutput $runnerStdout `
         -RedirectStandardError $runnerStderr
+    $null = $runnerProcess.Handle
 
     $startupDeadline = [DateTime]::UtcNow.AddSeconds(60)
     do {
         if ($runnerProcess.HasExited) {
-            throw "Oracle runner exited before the native metadata READY marker (exit $($runnerProcess.ExitCode))"
+            $runnerProcess.Refresh()
+            $startupExitCode = $runnerProcess.ExitCode
+            if ($null -eq $startupExitCode) {
+                throw 'Oracle runner exited before the native metadata READY marker, but its exit code was unavailable'
+            }
+            throw "Oracle runner exited before the native metadata READY marker (exit $startupExitCode)"
         }
         if ((Test-Path -LiteralPath $metadataPath -PathType Leaf) -and
             (Select-String -LiteralPath $metadataPath -SimpleMatch $ready -Quiet)) { break }
@@ -155,8 +161,13 @@ try {
     if (-not $runnerProcess.HasExited) {
         throw 'The source-bound AARON runner did not exit within its bounded deadline'
     }
-    if ($runnerProcess.ExitCode -ne 0) {
-        throw "The source-bound AARON runner failed (exit $($runnerProcess.ExitCode)); preserve $output for diagnosis"
+    $runnerProcess.Refresh()
+    $runnerExitCode = $runnerProcess.ExitCode
+    if ($null -eq $runnerExitCode) {
+        throw "The source-bound AARON runner exited but its exit code was unavailable; preserve $output for diagnosis"
+    }
+    if ($runnerExitCode -ne 0) {
+        throw "The source-bound AARON runner failed (exit $runnerExitCode); preserve $output for diagnosis"
     }
 
     $captureDir = Join-Path $output 'capture'
