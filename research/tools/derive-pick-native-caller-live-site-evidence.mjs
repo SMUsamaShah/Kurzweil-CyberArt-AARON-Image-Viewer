@@ -125,7 +125,7 @@ function main() {
   const [outputArg, beforeArg, observerArg, afterArg, mapArg, ...extra] = process.argv.slice(2);
   assert(extra.length === 0,
     'Usage: node derive-pick-native-caller-evidence.mjs [output.json] [before-root] [observer-root] [after-root] [native-code-map.json]');
-  const output = resolve(ROOT, outputArg ?? 'research/introspection/evidence/pick-native-caller-live-site-20261014-v3.json');
+  const output = resolve(ROOT, outputArg ?? 'research/introspection/evidence/pick-native-caller-live-site-20261014-v4.json');
   assert(insideRoot(output), 'Evidence output must remain inside the repository');
   assert(!existsSync(output), `Evidence output must be fresh: ${rel(output)}`);
 
@@ -325,7 +325,7 @@ function main() {
   const evidence = {
     schemaVersion: 1,
     status: 'measured-bounded-native-caller-object-live-callsite',
-    scope: 'First natural PICK entry hit in one source-bound seed-1234 writer-stream scene at measured 320x480',
+    scope: 'First natural PICK entry hit in one source-bound seed-1234 writer-stream scene at measured 768x1080',
     directCaller: {
       outcome: 'return-address-mapped-to-one-anonymous-compiled-object',
       lispFunctionName: null,
@@ -389,7 +389,7 @@ function main() {
       interpretation: 'Static symbol references identify candidates only; none establishes this direct caller.',
     },
     limitations: [
-      'This result covers only the first PICK entry in this one 320x480 seed-1234 scene.',
+      'This result covers only the first PICK entry in this one 768x1080 seed-1234 scene.',
       'The anonymous caller payload was identified through the shared address base and validated PLL object table; only the three bytes at its live call site were read back from the process in this capture, not its entire payload.',
       'The call target stored through [EDI+0x27] was not recovered, and the containing Lisp function name remains unresolved.',
       'Eight bounded EBP frame returns do not identify further callers or a general call graph.',

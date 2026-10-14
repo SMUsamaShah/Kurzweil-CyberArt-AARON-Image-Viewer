@@ -15,7 +15,7 @@ recovered behavior.
 | FREE-PATH isolated one-edge stop cases | 9 captured cases; JS matches 4 and differs by one step in 5 | Controlled inputs only. Of the three local candidates, only step-times-wiggle matches both v8/v9 counts; this does not establish a general rule. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
-| REA 6.4 static native payload dossiers | 6 named payloads | Structured native-code analysis; not six recovered Lisp functions, verified ABIs, or application-wide call graphs. |
+| REA 6.4 static native payload dossiers | 6 distinct payloads | Structured native-code analysis; one payload first seen anonymously at the PICK return site is now identified as a `SELECT-SUBJECT` method. This is not six recovered behaviors, verified ABIs, or application-wide call graphs. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
@@ -580,14 +580,16 @@ not a general rule, direct-caller proof, JS contract, or parity. See the
 [v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
 and [screen-unit findings](introspection/screen-unit-context.md).
 
-The first PICK caller object has now been measured in a matched-runner,
-source-bound triplet. The live process was stopped at PICK entry; the bytes
-at `0x1fe4c07c` are `FF 57 27`, match the same PLL offset, and entry-seeded
-REA disassembly confirms `CALL [EDI+0x27]` followed by `MOV EDX,EAX` at the
-captured return. REA's targeted resolution query still reports an unresolved
-computed target. The containing 362-byte object remains anonymous, and its
-full payload was not separately read live. See [PICK caller findings](introspection/pick-native-caller.md)
-and [portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+The first PICK caller object was captured in a matched-runner, source-bound
+768×1080 triplet. The live process was stopped at PICK entry; the bytes at
+`0x1fe4c07c` are `FF 57 27`, match the same PLL offset, and entry-seeded REA
+disassembly confirms `CALL [EDI+0x27]` followed by `MOV EDX,EAX` at the
+captured return. A later 320×480 source-bound method census matched the full
+live method payload to that same object and identified it as
+`SELECT-SUBJECT` method `(EQL PREMIUM)`. REA's targeted query still reports
+the computed callee unresolved. See [PICK caller findings](introspection/pick-native-caller.md),
+[method identity](introspection/select-subject-methods.md), and
+[portable evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
 
 The current generator is therefore a useful partial implementation and
 research harness, **not yet ready as a general reproduction of AARON**. A
@@ -599,10 +601,10 @@ exit conditions rather than imply precision we do not have.
 ## 2026-10-14 PICK native caller result
 
 The first natural `PICK` entry in a complete source-bound seed-1234
-writer-stream observer returned to `0x1fe4c07f`. The final matched-runner
-triplet has complete 320×480 before/observer/after runs; six compared outputs
-and six ordinary staged scene sources match across all three. The observer
-report has the required complete probe footer.
+writer-stream observer returned to `0x1fe4c07f`. Its matched-runner triplet
+has complete 768×1080 before/observer/after runs; six compared outputs and six
+ordinary staged scene sources match across all three. The observer report has
+the required complete probe footer.
 
 The return lies outside the 11 named function bodies that were matched to
 both the indexed PLL and live code. Those matches share runtime/PLL base
@@ -617,12 +619,30 @@ its Lisp function name or computed call target; the full anonymous payload
 was not separately read from live memory.
 
 REA 6.4.0 / Ghidra 12.1.4 reports seven unresolved computed calls in the PICK
-body. Across the nine static symbol-reference candidates, 1,305 analyzed
-CALL instructions are indirect and none has a resolved target; the static
-reference census therefore did not identify the caller. DXL name clues for
-the anonymous object remain ambiguous. The complete result and limitations
-are in [the PICK caller findings](introspection/pick-native-caller.md) and
-[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+body. The later method census matched the complete 362-byte live payload to
+`SELECT-SUBJECT`'s method specialized on `PREMIUM`; this resolves the direct
+caller for this captured entry. The site remains an indirect computed call
+with no statically resolved callee. The detailed findings are in
+[the PICK caller report](introspection/pick-native-caller.md),
+[the method identity report](introspection/select-subject-methods.md), and
+[the portable identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
+
+## 2026-10-14 SELECT-SUBJECT method identity
+
+A new read-only CLOS census in a complete source-bound 320×480 triplet found
+two `SELECT-SUBJECT` methods: `(EQL FREE)` and `(EQL PREMIUM)`. Both compiled
+method functions were captured from live memory and matched to unique complete
+objects in the indexed PLL. The `PREMIUM` method's payload and object hashes
+equal the anonymous object from the separate 768×1080 PICK-entry capture; the
+captured return/call-site offsets are 203/200 in that method payload. All six
+drawing/scene outputs and six ordinary staged sources match across the new
+before/observer/after triplet. REA confirms the callsite instruction but
+leaves its computed target unresolved. This resolves one direct caller, not a
+general call graph, behavior contract, or parity result; counts remain
+31 routine names / 32 bounded contracts, 1/5 milestones, and zero
+whole-painting parity. See
+[method findings](introspection/select-subject-methods.md) and
+[portable evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
 
 The strict evidence check rejected an initial mixed-runner triplet: its
 controls used the legacy runner, while the observer used the required-probe

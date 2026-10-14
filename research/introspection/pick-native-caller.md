@@ -3,7 +3,7 @@
 ## Result
 
 A matched-runner `writer-stream-seed-1234` before/observer/after triplet
-captured the first natural PICK entry hit in a measured 320×480 scene. The
+captured the first natural PICK entry hit in a measured 768×1080 scene. The
 observer report contains the full source-bound `BEGIN`, `READY`, native
 capture release, and `END` records. All six compared outputs and six ordinary
 staged scene sources match across the three complete runs.
@@ -29,12 +29,13 @@ body is 354 decoded bytes. REA's targeted call-resolution query still reports
 an unresolved computed call with no targets.
 
 The indexed PLL table contains 7,723 compiled objects and passes its tag,
-length, unique-offset, boundary, final-boundary, and zero-padding checks. The
-return is therefore bound to one compiled object, but its Lisp function name
-is unresolved. The three call-site bytes were read live; the full anonymous
-payload was not separately read from live memory. The computed call target
-stored through `[EDI+0x27]` is also unresolved. Eight bounded EBP frame
-returns are recorded separately and do not identify additional callers.
+length, unique-offset, boundary, final-boundary, and zero-padding checks. In
+this original return-site capture, the Lisp function name was unresolved and
+the full anonymous payload was not separately read from live memory. A later
+source-bound method census read the complete payload live in a separate run
+and matched its full payload/object hashes. The computed call target stored
+through `[EDI+0x27]` remains unresolved. Eight bounded EBP frame returns are
+recorded separately and do not identify additional callers.
 
 REA reports seven computed calls in `PICK` without resolved targets. Nine
 static symbol-reference candidate bodies were examined; their 1,305 CALL
@@ -43,10 +44,13 @@ not a call graph. The synthetic PE used for REA was not executed. Full REA
 reports, payloads, and tool output remain ignored under
 `research/artifacts/rea-tools/`.
 
-The DXL metadata scan has not uniquely resolved the object name. A generic or
-method association is only a candidate until its exact compiled body is
-matched to the anonymous PLL object and current live memory. Do not name the
-caller from event order, a colliding symbol key, or a nearby trace label.
+At the time of the original caller capture, its Lisp function name was
+unresolved. The later read-only CLOS census in
+[`select-subject-methods.md`](select-subject-methods.md) matched the complete
+live method-1 payload and full PLL object hash to this same anonymous object.
+It resolves this captured direct caller as
+`COMMON-GRAPHICS-USER::SELECT-SUBJECT`'s method with an EQL `PREMIUM`
+specializer. The `CALL [EDI+0x27]` target itself remains unresolved.
 
 ## Reproduction and limits
 
@@ -66,8 +70,11 @@ derivation helper is
 [`derive-pick-native-caller-live-site-evidence.mjs`](../tools/derive-pick-native-caller-live-site-evidence.mjs).
 The matched-runner v2 triplet is retained under the ignored
 `research/extracted/local-oracle/external-runs/` root. Its compact report is
-[`pick-native-caller-live-site-20261014-v3.json`](evidence/pick-native-caller-live-site-20261014-v3.json).
+[`pick-native-caller-live-site-20261014-v4.json`](evidence/pick-native-caller-live-site-20261014-v4.json).
 
-This result covers only the first PICK entry in one source-bound 320×480
-seed-1234 scene. It adds no JavaScript behavior contract, does not establish a
-general call graph, and proves no drawing or whole-painting parity.
+The original PICK-entry hit is from one source-bound 768×1080 seed-1234
+scene. Method identity was captured separately in a source-bound 320×480
+triplet and linked through the unique complete payload/object match and
+identical call-site offsets. This resolves one direct caller; it does not
+establish an application-wide call graph, add a JavaScript behavior contract,
+or prove drawing or whole-painting parity.

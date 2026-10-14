@@ -84,20 +84,24 @@ or parity claim. See the [v15 evidence](introspection/evidence/pick-prevdex-retu
 [screen-unit findings](introspection/screen-unit-context.md), and
 [tooling workarounds](tooling-workarounds.md).
 
-The first natural `PICK` return is now mapped to one anonymous 362-byte
-compiled PLL object at payload offset 203. Eleven named payloads were
-independently byte-matched to the PLL and live process, establishing shared
-runtime/PLL base `0x1fba0000`. The captured return `0x1fe4c07f` lies outside
-all 11 names and maps to the object at PLL offset `0x2abfb0`. In the fresh
-matched-runner triplet, the stopped process returned live bytes `FF 57 27` at
-`returnAddress - 3`, matching the same PLL address. Entry-seeded REA
-disassembly confirms the instruction boundary as `CALL [EDI+0x27]`, followed
-by `MOV EDX,EAX`. The full anonymous payload was not read from live process
-memory. Its Lisp function name and computed call target remain unresolved.
-The DXL method context is the next target; candidate names stay provisional
-until the exact live payload is bound. See the [caller findings](introspection/pick-native-caller.md),
-[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json),
-and [native workflow](native-analysis-workflow.md).
+The first natural `PICK` return came from the source-bound 768×1080
+seed-1234 triplet. Its return address `0x1fe4c07f` and live call bytes
+`FF 57 27` mapped to offset 203 in a 362-byte compiled object. A later
+read-only CLOS census in a separate source-bound 320×480 triplet captured
+both `SELECT-SUBJECT` methods and matched their complete live windows to
+unique PLL objects. The `(EQL PREMIUM)` method's full payload and object
+hashes match the earlier object, resolving the direct caller for that
+captured `PICK` entry. REA confirms `CALL [EDI+0x27]`, followed by
+`MOV EDX,EAX`, but leaves the computed target unresolved. The census did not
+invoke either method or measure its result and side effects. See the
+[caller findings](introspection/pick-native-caller.md),
+[method identity](introspection/select-subject-methods.md), and
+[portable evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
+
+Next, inspect the captured native bodies for both methods and design a
+bounded read-only probe of their outputs and observable state effects. Keep
+the FREE and PREMIUM cases separate, retain fresh same-runner controls, and
+do not turn one captured caller into a general call graph or behavior rule.
 
 This adds no JS behavior contract: coverage remains 31 routine names / 32
 bounded contracts, 1/5 milestones (20% by count), and zero whole-painting

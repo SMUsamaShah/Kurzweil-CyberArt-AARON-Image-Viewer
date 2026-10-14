@@ -1768,14 +1768,25 @@ Re-derive from the three retained ignored roots with the same helper listed
 above.
 ## PICK native caller object, 2026-10-14
 
-[`pick-native-caller-live-site-20261014-v3.json`](pick-native-caller-live-site-20261014-v3.json)
-binds the first natural PICK entry hit to a complete matched-runner 320×480
+[`pick-native-caller-live-site-20261014-v4.json`](pick-native-caller-live-site-20261014-v4.json)
+binds the first natural PICK entry hit to a complete matched-runner 768×1080
 before/observer/after triplet. All six output files and six ordinary scene
 sources match across the runs. At the stopped PICK entry, live bytes at
 `returnAddress - 3` equal `ff5727` and the same address-translated PLL bytes;
 entry-seeded REA disassembly confirms the instruction boundary as
 `CALL [EDI+0x27]`. The return maps to payload offset 203 in one anonymous
-indexed object. The Lisp name and computed target remain unresolved; the full
-anonymous payload was not read live. This adds no JS behavior contract or
-parity result. Re-derive with
+indexed object. The full payload was not live-matched in that original
+capture, and the Lisp name was unresolved at that stage. Re-derive with
 [`derive-pick-native-caller-live-site-evidence.mjs`](../../tools/derive-pick-native-caller-live-site-evidence.mjs).
+
+[`select-subject-method-identity-20261014-v2.json`](select-subject-method-identity-20261014-v2.json)
+then binds the complete live method payload to that same object. The CLOS
+census found two `SELECT-SUBJECT` methods; method 1 has an EQL `PREMIUM`
+specializer, and its unique 362-byte payload/object hashes equal the earlier
+anonymous caller object. Its call at payload offset 200 is the measured
+`FF 57 27` site, returning at offset 203. This resolves the direct caller for
+that captured PICK entry. REA confirms the computed dispatch target remains
+unresolved. The method census has its own fresh matched-runner 320×480 triplet;
+all six outputs and six ordinary scene sources match. This adds no JavaScript
+behavior contract or whole-painting parity result. Re-derive with
+[`derive-select-subject-method-identity-evidence.mjs`](../../tools/derive-select-subject-method-identity-evidence.mjs).

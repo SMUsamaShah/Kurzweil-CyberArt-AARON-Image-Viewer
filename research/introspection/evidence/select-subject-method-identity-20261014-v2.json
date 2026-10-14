@@ -1,0 +1,663 @@
+{
+  "schemaVersion": 1,
+  "status": "identified-live-direct-caller-method",
+  "question": "Which runtime CLOS method contains the measured return site from the first natural PICK entry?",
+  "finding": {
+    "genericFunction": {
+      "name": "SELECT-SUBJECT",
+      "package": "COMMON-GRAPHICS-USER",
+      "type": "STANDARD-GENERIC-FUNCTION",
+      "arglist": [
+        "COMMON-GRAPHICS-USER::STATUS"
+      ]
+    },
+    "methodCount": 2,
+    "methods": [
+      {
+        "index": 0,
+        "name": "SELECT-SUBJECT-METHOD-0",
+        "methodType": "STANDARD-METHOD",
+        "qualifiers": [],
+        "eqlSpecializer": {
+          "package": "COMMON-GRAPHICS-USER",
+          "symbol": "FREE"
+        },
+        "methodFunctionType": "COMPILED-FUNCTION",
+        "arglist": [
+          "COMMON-GRAPHICS-USER::STATUS"
+        ],
+        "functionObjectHeaderHex": "26204f583420f7583420010001000888110074bee41f18a30000d9c6492062bee41fd11434200000000000000000200000005fc83720a7c837201fa93620d7c8",
+        "nativeWindow": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/select-subject-method-0.native-window.bin",
+          "bytes": 16384,
+          "sha256": "1409ac8b763a7ea7c771ad3d44b799182ff777d1b30af2c90d1ea2ba7b94d13e"
+        },
+        "nativeEntryCandidate": "0x1fe4be74",
+        "mappedNativePayload": {
+          "name": "SELECT-SUBJECT-METHOD-0",
+          "eqlSpecializer": {
+            "package": "COMMON-GRAPHICS-USER",
+            "symbol": "FREE"
+          },
+          "runtimeEntry": "0x1fe4be74",
+          "runtimeAddressBase": "0x1fba0000",
+          "pll": {
+            "objectOffset": 2801264,
+            "payloadOffset": 2801268,
+            "rawEnd": 2801580,
+            "objectBytes": 316,
+            "objectSha256": "8f68dd23a55a08b14ebf1e6656cd96bf5f39438f0f8220350b7d90f855bcf6d1",
+            "payloadBytes": 312,
+            "payloadSha256": "9eab78b18686c5fdda04f4c40b157a879c3fbc579d4aae02a73239f8192f28b9"
+          },
+          "nativeWindow": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/select-subject-method-0.native-window.bin",
+            "bytes": 16384,
+            "sha256": "1409ac8b763a7ea7c771ad3d44b799182ff777d1b30af2c90d1ea2ba7b94d13e"
+          },
+          "completeUniquePllObjectMatch": true,
+          "payloadPath": "research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/select-subject-method-0.native-payload.bin",
+          "payloadBytesAtCallSite": null
+        }
+      },
+      {
+        "index": 1,
+        "name": "SELECT-SUBJECT-METHOD-1",
+        "methodType": "STANDARD-METHOD",
+        "qualifiers": [],
+        "eqlSpecializer": {
+          "package": "COMMON-GRAPHICS-USER",
+          "symbol": "PREMIUM"
+        },
+        "methodFunctionType": "COMPILED-FUNCTION",
+        "arglist": [
+          "COMMON-GRAPHICS-USER::STATUS"
+        ],
+        "functionObjectHeaderHex": "3720d7bd2e20c7d2372037c9372008881500b4bfe41f15a30000d1c64920a2bfe41fd11434200000000000000000200000005fc8372077c8372047c8372007c9",
+        "nativeWindow": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/select-subject-method-1.native-window.bin",
+          "bytes": 16384,
+          "sha256": "f6a474dc858d070cd0ef45d0875448f747142e4ce0d7058ca322794a52d6a4c4"
+        },
+        "nativeEntryCandidate": "0x1fe4bfb4",
+        "mappedNativePayload": {
+          "name": "SELECT-SUBJECT-METHOD-1",
+          "eqlSpecializer": {
+            "package": "COMMON-GRAPHICS-USER",
+            "symbol": "PREMIUM"
+          },
+          "runtimeEntry": "0x1fe4bfb4",
+          "runtimeAddressBase": "0x1fba0000",
+          "pll": {
+            "objectOffset": 2801584,
+            "payloadOffset": 2801588,
+            "rawEnd": 2801950,
+            "objectBytes": 366,
+            "objectSha256": "f161785f4fdf272a7a5c02b35df99b2741b138c64df79fd1e2329fe1ea751034",
+            "payloadBytes": 362,
+            "payloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae"
+          },
+          "nativeWindow": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/select-subject-method-1.native-window.bin",
+            "bytes": 16384,
+            "sha256": "f6a474dc858d070cd0ef45d0875448f747142e4ce0d7058ca322794a52d6a4c4"
+          },
+          "completeUniquePllObjectMatch": true,
+          "payloadPath": "research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/select-subject-method-1.native-payload.bin",
+          "payloadBytesAtCallSite": "ff5727"
+        }
+      }
+    ],
+    "identifiedCaller": {
+      "method": "SELECT-SUBJECT-METHOD-1",
+      "dispatchSpecializer": {
+        "kind": "EQL",
+        "package": "COMMON-GRAPHICS-USER",
+        "symbol": "PREMIUM"
+      },
+      "entry": "0x1fe4bfb4",
+      "payloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae",
+      "exactCompletePllObjectMatch": true,
+      "relationToPriorPICKCapture": "The prior live PICK return address and call-site bytes fall at the same offsets in this complete method payload; the payload hash and complete object hash are identical."
+    },
+    "pickCallSite": {
+      "address": "0x1fe4c07c",
+      "payloadOffset": 200,
+      "liveBytesHex": "ff5727",
+      "disassembly": "0x1fe4c07c: CALL dword ptr [EDI + 0x27]",
+      "nextInstruction": "0x1fe4c07f: MOV EDX, EAX",
+      "returnAddress": "0x1fe4c07f",
+      "directlyObservedInPriorPICKEntryCapture": true
+    },
+    "reaCallQuery": {
+      "status": "unresolved",
+      "mechanism": "computed",
+      "targets": [],
+      "interpretation": "REA confirms that the static instruction is a computed indirect call but does not resolve its target."
+    }
+  },
+  "controls": {
+    "mode": "writer-stream-seed-1234",
+    "canvas": {
+      "width": 320,
+      "height": 480,
+      "value": 148
+    },
+    "allSixDrawingAndSceneOutputsByteIdenticalAcrossBeforeObserverAfter": true,
+    "equalOutputs": [
+      {
+        "name": "aa0",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aa0",
+        "bytes": 126956,
+        "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+      },
+      {
+        "name": "image",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/image",
+        "bytes": 124575,
+        "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+      },
+      {
+        "name": "image-id",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/image-id",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      {
+        "name": "aaron-scene-state-snapshot.txt",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-scene-state-snapshot.txt",
+        "bytes": 25951,
+        "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+      },
+      {
+        "name": "aaron-planning-call-trace.txt",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-planning-call-trace.txt",
+        "bytes": 21287184,
+        "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+      },
+      {
+        "name": "aaron-random-seed-loaded.txt",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-random-seed-loaded.txt",
+        "bytes": 476,
+        "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+      }
+    ],
+    "allSixOrdinarySceneSourcesByteIdenticalAcrossBeforeObserverAfter": true,
+    "equalSceneSources": [
+      {
+        "name": "planning-call-trace.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/planning-call-trace.cl",
+        "bytes": 23059,
+        "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+      },
+      {
+        "name": "planning-random-seed-common.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/planning-random-seed-common.cl",
+        "bytes": 20476,
+        "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+      },
+      {
+        "name": "scene-state-snapshot-seeded-1234.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-seeded-1234.cl",
+        "bytes": 847,
+        "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+      },
+      {
+        "name": "scene-state-snapshot-writer-seeded-1234.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-writer-seeded-1234.cl",
+        "bytes": 579,
+        "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+      },
+      {
+        "name": "scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+        "bytes": 401,
+        "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+      },
+      {
+        "name": "scene-state-snapshot.cl",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot.cl",
+        "bytes": 41791,
+        "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+      }
+    ],
+    "runs": [
+      {
+        "runId": "select-subject-methods-20261014-control-before-v2",
+        "role": "fresh uninstrumented control before",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "runnerSha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runtime": {
+          "AARON.exe": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/runtime/AARON.exe",
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/runtime/AARON.pll",
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        },
+        "aa0Header": {
+          "width": 320,
+          "height": 480,
+          "value": 148
+        },
+        "summary": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/summary.json",
+          "bytes": 1036,
+          "sha256": "1e846848495f2bab0967cd12aafb22bd93e8dd83957c5dedcc21d39c08b5915b"
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/planning-call-trace.cl",
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-before-v2/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        },
+        "probe": {
+          "sourceSha256": null,
+          "outputNames": [],
+          "pauseSeconds": 0,
+          "requiredOutputName": "",
+          "requiredEndMarker": "",
+          "completionSatisfied": true,
+          "reportSha256": null
+        }
+      },
+      {
+        "runId": "select-subject-methods-20261014-observer-v2",
+        "role": "SELECT-SUBJECT method observer",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "runnerSha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runtime": {
+          "AARON.exe": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/runtime/AARON.exe",
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/runtime/AARON.pll",
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        },
+        "aa0Header": {
+          "width": 320,
+          "height": 480,
+          "value": 148
+        },
+        "summary": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/summary.json",
+          "bytes": 1258,
+          "sha256": "03c5497ea21223783d56dd679a1d21ea4bda061e617fd85fc1ea8ba63d6b7b4e"
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/planning-call-trace.cl",
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        },
+        "probe": {
+          "sourceSha256": "60437ae34794f011009c4431e9e834ec129465e09081d550c55236ebc0983403",
+          "outputNames": [
+            "aaron-select-subject-methods.txt"
+          ],
+          "pauseSeconds": 120,
+          "requiredOutputName": "aaron-select-subject-methods.txt",
+          "requiredEndMarker": "END select-subject-methods",
+          "completionSatisfied": true,
+          "reportSha256": "9dea70203c94c6b6d036d6d7a783b9324d579fc7f287f8bddf6dec464a4904fc"
+        }
+      },
+      {
+        "runId": "select-subject-methods-20261014-control-after-v2",
+        "role": "fresh uninstrumented control after",
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2",
+        "complete": true,
+        "mode": "writer-stream-seed-1234",
+        "smallImage": false,
+        "runnerSha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076",
+        "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+        "registryPatchSha256": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+        "licensePatchSha256": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9",
+        "runtime": {
+          "AARON.exe": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/runtime/AARON.exe",
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/runtime/AARON.pll",
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        },
+        "aa0Header": {
+          "width": 320,
+          "height": 480,
+          "value": 148
+        },
+        "summary": {
+          "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/summary.json",
+          "bytes": 1035,
+          "sha256": "b58637fcc9ea4e23cf9d87c55b9f44555f9147dd6ef45b37b5805d4c3b5bee24"
+        },
+        "files": {
+          "aa0": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/aa0",
+            "bytes": 126956,
+            "sha256": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1"
+          },
+          "image": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/image",
+            "bytes": 124575,
+            "sha256": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881"
+          },
+          "imageId": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/image-id",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "sceneSnapshot": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/aaron-scene-state-snapshot.txt",
+            "bytes": 25951,
+            "sha256": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415"
+          },
+          "planningTrace": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/aaron-planning-call-trace.txt",
+            "bytes": 21287184,
+            "sha256": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903"
+          },
+          "loadedSeed": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/aaron-random-seed-loaded.txt",
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "sceneSources": {
+          "planning-call-trace.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/planning-call-trace.cl",
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/planning-random-seed-common.cl",
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/scene-state-snapshot-seeded-1234.cl",
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/scene-state-snapshot-writer-seeded-1234.cl",
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/scene-state-snapshot-writer-stream-seeded-1234.cl",
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-control-after-v2/capture/scene-state-snapshot.cl",
+            "bytes": 41791,
+            "sha256": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+          }
+        },
+        "probe": {
+          "sourceSha256": null,
+          "outputNames": [],
+          "pauseSeconds": 0,
+          "requiredOutputName": "",
+          "requiredEndMarker": "",
+          "completionSatisfied": true,
+          "reportSha256": null
+        }
+      }
+    ]
+  },
+  "rea": {
+    "version": "6.4.0",
+    "ghidraVersion": "12.1.4",
+    "staticOnly": true,
+    "generatedPeExecuted": false,
+    "inputPeSha256": "b974de1382a17f5ef30653802a960f9300183162cf996b8fd609b091df76cd70",
+    "function": {
+      "invocation": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-function-scoped-v2/rea-invocation.json",
+        "bytes": 1138,
+        "sha256": "6582f9b07b1316ad85b3a9bfa7f5c5c2e132414e67537fa8dbbeb28fe072eba1"
+      },
+      "report": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-function-scoped-v2/rea-result.json",
+        "bytes": 155720,
+        "sha256": "85c0da0fbb13df4dbfdd6fb231074c6e65904e16843c83bcfe70d415adbc806b"
+      },
+      "bodyBytes": 354
+    },
+    "callQuery": {
+      "invocation": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-callsite-scoped-v1/rea-invocation.json",
+        "bytes": 1155,
+        "sha256": "f155345983a4277684429e8ae4ec6512deabbdc06ac2791f571048ea60a8516c"
+      },
+      "report": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-callsite-scoped-v1/rea-result.json",
+        "bytes": 5240,
+        "sha256": "751cd38ca013d407b1d692dda868fd922c8ae461f969d4eea4cdea739adce2e0"
+      }
+    }
+  },
+  "sourceBinding": {
+    "runner": {
+      "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+      "bytes": 27576,
+      "sha256": "44b83c0feca717952981844816602dfaf93e5836bdea11857d87ead65fd73076"
+    },
+    "runtimeManifest": {
+      "path": "research/extracted/aaron/manifest.json",
+      "bytes": 2817,
+      "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+    },
+    "pll": {
+      "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/runtime/AARON.pll",
+      "bytes": 4573464,
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    },
+    "files": {
+      "probe": {
+        "path": "research/introspection/select-subject-methods.cl",
+        "bytes": 11850,
+        "sha256": "60437ae34794f011009c4431e9e834ec129465e09081d550c55236ebc0983403"
+      },
+      "stagedProbe": {
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aaron-pre-scene-probe.cl",
+        "bytes": 11850,
+        "sha256": "60437ae34794f011009c4431e9e834ec129465e09081d550c55236ebc0983403"
+      },
+      "request": {
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/pre-scene-probe-request.json",
+        "bytes": 706,
+        "sha256": "bdc131f0f50d78f5df3c1fef697d1c144dced85bfac3be06357381fe5dd9270e"
+      },
+      "metadata": {
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/capture/aaron-select-subject-methods.txt",
+        "bytes": 1563,
+        "sha256": "9dea70203c94c6b6d036d6d7a783b9324d579fc7f287f8bddf6dec464a4904fc"
+      },
+      "nativeMetadataPrefix": {
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/function-object-metadata.txt",
+        "bytes": 1481,
+        "sha256": "6176ccdbe5a02523b8f50575a2b883e1a674103a95dcecab4961361e7e70cf24"
+      },
+      "captureManifest": {
+        "path": "research/extracted/local-oracle/external-runs/select-subject-methods-20261014-observer-v2/native-code/manifest.json",
+        "bytes": 1991,
+        "sha256": "65c84c2791e6f1b6a9360f80c1004b266684b186d1cea82358efd7363fcdc1be"
+      },
+      "mapping": {
+        "path": "research/extracted/local-oracle/select-subject-methods-native-map-20261014-v1/native-code-map.json",
+        "bytes": 3185,
+        "sha256": "a0be4b57948296b919c73a2f3991177c93cba013f9beecdddd098b0fda8c19dc"
+      },
+      "oldPickEvidence": {
+        "path": "research/introspection/evidence/pick-native-caller-live-site-20261014-v4.json",
+        "bytes": 26952,
+        "sha256": "17c7fba4112454969be5b7ff85a61c659314e8601766b553c30255312d2ae02a"
+      },
+      "reaBinding": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.binding.json",
+        "bytes": 2129,
+        "sha256": "d0660da3e92ab94be33986f35976a502dd3281dfe647aa147858081466d289c3"
+      },
+      "syntheticPe": {
+        "path": "research/artifacts/rea-tools/select-subject-method-20261014-input/select-subject-method-1.synthetic.exe",
+        "bytes": 5120,
+        "sha256": "b974de1382a17f5ef30653802a960f9300183162cf996b8fd609b091df76cd70"
+      }
+    },
+    "deriver": {
+      "path": "research/tools/derive-select-subject-method-identity-evidence.mjs",
+      "bytes": 27900,
+      "sha256": "23ebd8e43707380848451778b84162dc8e689f3b2491042df4664f5e727a38d3"
+    }
+  },
+  "limits": [
+    "This identifies the direct caller for the captured natural PICK entry only; it does not establish an application-wide call graph or prove the method is the only caller.",
+    "The captured method function is selected by the observed EQL PREMIUM specializer, but this probe did not invoke the generic or method and did not record the method return value or full argument state.",
+    "The indirect target at [EDI+0x27] remains unresolved by REA; no target function name or Lisp ABI is inferred.",
+    "The current method census and prior PICK-entry hit are from different source-bound runs and canvases; their linkage is through the same unique complete payload, object hash, runtime entry and call-site offset, not a same-process stack snapshot.",
+    "This adds a caller identity, not a JavaScript behavior contract or whole-painting parity result."
+  ]
+}

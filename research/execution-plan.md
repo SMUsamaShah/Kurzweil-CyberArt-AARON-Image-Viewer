@@ -731,26 +731,28 @@ than an ordinal rule. The v5 observer was configured for unit 5 and matched
 fresh controls; the completed v6 triplet now measures unit 6. Keep FREE-PATH
 and point-generation inputs explicit until independently established.
 
-## Current checkpoint: PICK native return object, 2026-10-14
+## Current checkpoint: SELECT-SUBJECT direct caller, 2026-10-14
 
-The first natural PICK entry in the 320×480 seed-1234 writer-stream scene
-returned to `0x1fe4c07f`. A fresh matched-runner before/observer/after triplet
-passes: the observer has the complete source-bound READY/capture/END report,
-and all six outputs and six ordinary scene sources match across the runs.
-The return maps outside eleven named, live-validated candidate bodies to
-payload offset 203 of one 362-byte indexed PLL object at `0x2abfb0`. While the
-process was stopped at PICK, the helper read `FF 57 27` at `returnAddress - 3`
-and confirmed those bytes against the address-translated PLL. Entry-seeded
-REA/Ghidra disassembly of the same complete payload confirms this boundary as
-`CALL [EDI+0x27]`, followed by `MOV EDX,EAX` at the return. REA's targeted
-query leaves the computed target unresolved. The full anonymous payload was
-not separately read from live memory, and its Lisp function name remains
-unresolved. Nine static-reference candidates did not identify the direct
-caller. See [PICK caller findings](introspection/pick-native-caller.md) and
-[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+The first natural PICK entry was captured in a complete source-bound
+768×1080 seed-1234 triplet and returned to `0x1fe4c07f`. Its live call bytes
+`FF 57 27` match the indexed PLL at payload offset 200; the return is offset
+203. Entry-seeded REA/Ghidra disassembly confirms `CALL [EDI+0x27]`, followed
+by `MOV EDX,EAX`. REA still cannot resolve the computed target.
 
-Next, resolve the anonymous compiled object's DXL method/generic context
-without relying on colliding symbol keys, then bind any candidate identity to
-the exact live payload before naming it. Revalidate current addresses before
-debugger attachment and keep the matched-runner controls. This adds no
-JavaScript behavior contract and proves no painting parity.
+A separate complete source-bound 320×480 triplet enumerated the two
+`SELECT-SUBJECT` methods, `(EQL FREE)` and `(EQL PREMIUM)`, captured both live
+native windows, and matched each to a unique complete PLL object. The PREMIUM
+method is the same 362-byte object as the prior PICK return: both complete
+payload and object hashes match, and the measured call/return offsets agree.
+This identifies the direct caller for that captured PICK entry. The census
+was read-only and did not invoke either method. See [PICK caller findings](introspection/pick-native-caller.md),
+[method identity findings](introspection/select-subject-methods.md),
+[PICK evidence](introspection/evidence/pick-native-caller-live-site-20261014-v4.json),
+and [method identity evidence](introspection/evidence/select-subject-method-identity-20261014-v2.json).
+
+Next inspect the two captured native method bodies, then design a bounded
+read-only probe for their outputs and observable state effects. Keep FREE and
+PREMIUM cases separate and require fresh same-runner controls. This adds no
+JavaScript behavior contract and proves no painting parity. Coverage remains
+31 routine names / 32 bounded contracts, 1/5 milestones (20% by count), and
+zero whole-painting parity; there is no defensible overall percentage.

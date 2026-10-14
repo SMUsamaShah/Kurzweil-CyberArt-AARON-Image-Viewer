@@ -7,6 +7,7 @@ and the running investigation history are linked below.
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
+| Newly resolved direct caller | One captured `PICK` call from `SELECT-SUBJECT` method `(EQL PREMIUM)` | Exact full method payload/object bytes match the earlier live return site; REA still cannot resolve the computed callee. This adds no behavior contract. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
@@ -19,16 +20,21 @@ function-by-function coverage or whole-scene scoring system. The measured
 20% applies only to milestone count. The 26/30 FREE-PATH match rate applies
 only to that finite canonical test subset.
 
-The latest PICK caller capture maps its first natural entry return to one
-anonymous 362-byte compiled PLL object at payload offset 203. In a fresh,
-matched-runner 320×480 triplet, the stopped process returned live bytes
-`FF 57 27` at `returnAddress - 3`; they match the same PLL address, and
-entry-seeded REA disassembly confirms the instruction boundary. The Lisp
-function name and computed call target remain unresolved; the whole anonymous
-payload was not read from live memory. This adds no JS contract, so the counts
-remain 31 names / 32 bounded contracts, 1/5 milestones (20% by count), and
-zero whole-painting parity. See the [PICK caller findings](research/introspection/pick-native-caller.md)
-and [portable evidence](research/introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+The first natural PICK entry was captured in a matched-runner 768×1080
+triplet. Its return maps to an anonymous 362-byte compiled PLL object at
+payload offset 203; live bytes `FF 57 27` at the call site match the PLL, and
+REA confirms the instruction boundary. A separate 320×480 method census then
+matched the complete live payload to
+`COMMON-GRAPHICS-USER::SELECT-SUBJECT` method `(EQL PREMIUM)`, resolving the
+direct caller for that captured PICK entry. REA still reports the indirect
+callee as unresolved. This adds no JS contract: counts remain 31 routine
+names / 32 bounded contracts, 1/5 milestones (20% by count), and zero
+whole-painting parity. There is no defensible overall completion percentage.
+See the [caller findings](research/introspection/pick-native-caller.md),
+[method identity](research/introspection/select-subject-methods.md), and
+[portable evidence](research/introspection/evidence/select-subject-method-identity-20261014-v2.json).
+Next, the native investigation will characterize the captured FREE and PREMIUM
+method bodies and design a bounded probe for their results and state effects.
 
 The JavaScript engine is a useful partial implementation and research harness,
 but it is not yet a general reproduction of AARON. The main remaining work is
