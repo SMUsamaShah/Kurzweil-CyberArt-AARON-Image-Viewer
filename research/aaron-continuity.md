@@ -84,11 +84,24 @@ or parity claim. See the [v15 evidence](introspection/evidence/pick-prevdex-retu
 [screen-unit findings](introspection/screen-unit-context.md), and
 [tooling workarounds](tooling-workarounds.md).
 
-Current target: identify the unresolved direct `PICK` caller/control-flow path
-using REA and the [native-analysis workflow](native-analysis-workflow.md).
-Re-resolve and validate live payload addresses before debugger attachment.
-Do not infer a direct caller from nearest-observed trace labels or event order.
-Keep FREE-PATH's unresolved path generation explicit.
+The first natural `PICK` return is now mapped to one anonymous 362-byte
+compiled PLL object at payload offset 203. Eleven named payloads were
+independently byte-matched to the PLL and live process, establishing shared
+runtime/PLL base `0x1fba0000`. The captured return `0x1fe4c07f` lies outside
+all 11 names and maps to the object at PLL offset `0x2abfb0`. In the fresh
+matched-runner triplet, the stopped process returned live bytes `FF 57 27` at
+`returnAddress - 3`, matching the same PLL address. Entry-seeded REA
+disassembly confirms the instruction boundary as `CALL [EDI+0x27]`, followed
+by `MOV EDX,EAX`. The full anonymous payload was not read from live process
+memory. Its Lisp function name and computed call target remain unresolved.
+The DXL method context is the next target; candidate names stay provisional
+until the exact live payload is bound. See the [caller findings](introspection/pick-native-caller.md),
+[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json),
+and [native workflow](native-analysis-workflow.md).
+
+This adds no JS behavior contract: coverage remains 31 routine names / 32
+bounded contracts, 1/5 milestones (20% by count), and zero whole-painting
+parity. No overall completion percentage is justified.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

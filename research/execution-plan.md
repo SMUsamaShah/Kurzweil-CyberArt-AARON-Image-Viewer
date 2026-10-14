@@ -719,10 +719,10 @@ parity. See the [v15 evidence](introspection/evidence/pick-prevdex-return-interv
 [v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
 and [screen-unit findings](introspection/screen-unit-context.md).
 
-Current target: identify the unresolved direct `PICK` caller/control-flow path
-using REA and the [native-analysis workflow](native-analysis-workflow.md).
-Re-resolve and validate live payload addresses before debugger attachment.
-Do not infer a direct caller from nearest-observed trace labels or event order.
+This earlier PICK-caller task is superseded by the
+[2026-10-14 native return-object checkpoint](#current-checkpoint-pick-native-return-object-2026-10-14)
+below. Keep the next step bounded to name resolution and live call-site
+validation; do not infer identity from nearest-observed labels or event order.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate
@@ -730,3 +730,27 @@ calls and correctly failed the color observer's nonempty gate. In a separate
 than an ordinal rule. The v5 observer was configured for unit 5 and matched
 fresh controls; the completed v6 triplet now measures unit 6. Keep FREE-PATH
 and point-generation inputs explicit until independently established.
+
+## Current checkpoint: PICK native return object, 2026-10-14
+
+The first natural PICK entry in the 320×480 seed-1234 writer-stream scene
+returned to `0x1fe4c07f`. A fresh matched-runner before/observer/after triplet
+passes: the observer has the complete source-bound READY/capture/END report,
+and all six outputs and six ordinary scene sources match across the runs.
+The return maps outside eleven named, live-validated candidate bodies to
+payload offset 203 of one 362-byte indexed PLL object at `0x2abfb0`. While the
+process was stopped at PICK, the helper read `FF 57 27` at `returnAddress - 3`
+and confirmed those bytes against the address-translated PLL. Entry-seeded
+REA/Ghidra disassembly of the same complete payload confirms this boundary as
+`CALL [EDI+0x27]`, followed by `MOV EDX,EAX` at the return. REA's targeted
+query leaves the computed target unresolved. The full anonymous payload was
+not separately read from live memory, and its Lisp function name remains
+unresolved. Nine static-reference candidates did not identify the direct
+caller. See [PICK caller findings](introspection/pick-native-caller.md) and
+[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+
+Next, resolve the anonymous compiled object's DXL method/generic context
+without relying on colliding symbol keys, then bind any candidate identity to
+the exact live payload before naming it. Revalidate current addresses before
+debugger attachment and keep the matched-runner controls. This adds no
+JavaScript behavior contract and proves no painting parity.

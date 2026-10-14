@@ -550,3 +550,69 @@ Keep original images, memory windows, payloads, complete decompiler reports,
 tool installations and REA bundles ignored. Publish probe/helper code,
 normalized compact evidence and behavioral conclusions. The historical
 selector implementation is unchanged by this investigation.
+
+## PICK immediate-return mapping, 2026-10-14
+
+Use [`pick-native-links.cl`](introspection/pick-native-links.cl) to capture
+current metadata and complete native windows during the required-probe
+`READY` pause. Build the indexed map before attaching the caller helper; check
+the runtime/PLL hash and all eleven named candidates in the exact output.
+Then run a fresh `writer-stream-seed-1234` before/observer/after triplet. The
+observer is held for 120 seconds and has a required
+`aaron-pick-native-links.txt` ending in `END pick-native-links`. The helper
+reads the currently staged source from `C:\temp\aaron-pre-scene-probe.cl`
+because the runner archives that file only after process exit; see the
+[staging recovery note](tooling-workarounds.md#pick-native-caller-helper-and-ready-staging-2026-10-14).
+
+The strict derivation requires the controls and observer to share one
+`runnerSha256`. Run all three with
+`run-local-scene-state-required-probe.ps1`; omit all probe parameters for each
+fresh uninstrumented control. A control made with the older
+`run-local-scene-state.ps1` can produce identical scene outputs but will fail
+the source-binding check because its summary does not carry the same runner
+hash. Re-run the whole triplet instead of loosening this check.
+
+For the observer, use a fresh root and the required `READY` pause. While it is
+paused, run the read-only helper against the same map and observer root:
+
+```powershell
+.\research\tools\capture-pick-caller.ps1 `
+  -OracleOutputRoot research\extracted\local-oracle\external-runs\pick-caller-new-observer `
+  -MapPath research\extracted\local-oracle\external-runs\pick-native-links-20261014-v1\native-code\mapped\native-code-map.json
+```
+
+The helper reads `returnAddress - 3` while the process is stopped, verifies
+those live bytes against the same address-translated PLL, restores thread
+debug registers, and lets the disposable oracle finish. Its three-byte read
+is specific to this measured call site; require the entry-seeded REA
+disassembly before treating those bytes as an instruction boundary. It also
+accepts both Junction and SymbolicLink forms of the repository's external-run
+link when verifying process ownership, so the READY pause is not stranded by
+a canonical target path.
+
+For the completed matched-runner triplet, PICK returned to `0x1fe4c07f`. The
+eleven named live-to-PLL candidate matches share base `0x1fba0000`; the full
+indexed PLL maps the return to payload offset 203 of the anonymous 362-byte
+object at PLL offset `0x2abfb0`. The live bytes at `0x1fe4c07c` are `FF 57 27`
+and match the PLL. Entry-seeded REA/Ghidra disassembly of the same complete
+payload confirms `CALL [EDI+0x27]` followed by `MOV EDX,EAX` at the return.
+The targeted call query remains unresolved with no targets; the Lisp function
+name is also unresolved, and the full anonymous payload was not separately
+read from live memory. See the [caller findings](introspection/pick-native-caller.md)
+and [portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+
+The successful matched-runner roots are
+`pick-caller-20261014-control-before-live-site-v2`,
+`pick-caller-20261014-observer-live-site-v2`, and
+`pick-caller-20261014-control-after-live-site-v2`, beneath
+`research/extracted/local-oracle/external-runs/`. The corresponding offline
+deriver verifies those three summaries, the six matching outputs and sources,
+the observer handshake, the live call-site read, the exact PLL object, and the
+REA instruction boundary and unresolved-call query:
+
+```powershell
+node research\tools\derive-pick-native-caller-live-site-evidence.mjs
+```
+
+For another capture, use fresh run IDs and a fresh evidence output path; do
+not reuse those retained roots or overwrite their evidence.

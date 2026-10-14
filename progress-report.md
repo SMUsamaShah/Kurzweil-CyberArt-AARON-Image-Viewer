@@ -19,6 +19,17 @@ function-by-function coverage or whole-scene scoring system. The measured
 20% applies only to milestone count. The 26/30 FREE-PATH match rate applies
 only to that finite canonical test subset.
 
+The latest PICK caller capture maps its first natural entry return to one
+anonymous 362-byte compiled PLL object at payload offset 203. In a fresh,
+matched-runner 320×480 triplet, the stopped process returned live bytes
+`FF 57 27` at `returnAddress - 3`; they match the same PLL address, and
+entry-seeded REA disassembly confirms the instruction boundary. The Lisp
+function name and computed call target remain unresolved; the whole anonymous
+payload was not read from live memory. This adds no JS contract, so the counts
+remain 31 names / 32 bounded contracts, 1/5 milestones (20% by count), and
+zero whole-painting parity. See the [PICK caller findings](research/introspection/pick-native-caller.md)
+and [portable evidence](research/introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+
 The JavaScript engine is a useful partial implementation and research harness,
 but it is not yet a general reproduction of AARON. The main remaining work is
 to recover upstream random and drawing decisions, finish and connect the

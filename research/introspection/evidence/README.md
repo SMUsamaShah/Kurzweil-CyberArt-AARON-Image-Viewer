@@ -1766,3 +1766,16 @@ triple candidate across two seeds. This remains bounded evidence and proves
 neither the direct Lisp caller nor a general rule, JS contract, or parity.
 Re-derive from the three retained ignored roots with the same helper listed
 above.
+## PICK native caller object, 2026-10-14
+
+[`pick-native-caller-live-site-20261014-v3.json`](pick-native-caller-live-site-20261014-v3.json)
+binds the first natural PICK entry hit to a complete matched-runner 320×480
+before/observer/after triplet. All six output files and six ordinary scene
+sources match across the runs. At the stopped PICK entry, live bytes at
+`returnAddress - 3` equal `ff5727` and the same address-translated PLL bytes;
+entry-seeded REA disassembly confirms the instruction boundary as
+`CALL [EDI+0x27]`. The return maps to payload offset 203 in one anonymous
+indexed object. The Lisp name and computed target remain unresolved; the full
+anonymous payload was not read live. This adds no JS behavior contract or
+parity result. Re-derive with
+[`derive-pick-native-caller-live-site-evidence.mjs`](../../tools/derive-pick-native-caller-live-site-evidence.mjs).

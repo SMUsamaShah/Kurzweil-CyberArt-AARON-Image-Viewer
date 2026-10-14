@@ -580,10 +580,14 @@ not a general rule, direct-caller proof, JS contract, or parity. See the
 [v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
 and [screen-unit findings](introspection/screen-unit-context.md).
 
-Next, investigate the direct `PICK` caller/control-flow path with REA and the
-[native-analysis workflow](native-analysis-workflow.md). Re-resolve and
-validate live native payload addresses before any debugger attachment; do not
-infer a direct caller from the nearest observed trace label or event order.
+The first PICK caller object has now been measured in a matched-runner,
+source-bound triplet. The live process was stopped at PICK entry; the bytes
+at `0x1fe4c07c` are `FF 57 27`, match the same PLL offset, and entry-seeded
+REA disassembly confirms `CALL [EDI+0x27]` followed by `MOV EDX,EAX` at the
+captured return. REA's targeted resolution query still reports an unresolved
+computed target. The containing 362-byte object remains anonymous, and its
+full payload was not separately read live. See [PICK caller findings](introspection/pick-native-caller.md)
+and [portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
 
 The current generator is therefore a useful partial implementation and
 research harness, **not yet ready as a general reproduction of AARON**. A
@@ -591,6 +595,49 @@ completion percentage will become meaningful after each function has a
 consistent status (unmeasured, bounded, partial, or complete) and whole-scene
 criteria are weighted. Until then, this page will report counts and concrete
 exit conditions rather than imply precision we do not have.
+
+## 2026-10-14 PICK native caller result
+
+The first natural `PICK` entry in a complete source-bound seed-1234
+writer-stream observer returned to `0x1fe4c07f`. The final matched-runner
+triplet has complete 320×480 before/observer/after runs; six compared outputs
+and six ordinary staged scene sources match across all three. The observer
+report has the required complete probe footer.
+
+The return lies outside the 11 named function bodies that were matched to
+both the indexed PLL and live code. Those matches share runtime/PLL base
+`0x1fba0000`. The return address maps to offset 203 of one anonymous 362-byte
+indexed compiled object at PLL offset `0x2abfb0`. While the process was
+stopped at PICK entry, the helper read `FF 57 27` at `returnAddress - 3` and
+confirmed those bytes against the address-translated PLL. Entry-seeded
+REA/Ghidra disassembly of the exact payload confirms this boundary as
+`CALL [EDI+0x27]`, followed by `MOV EDX,EAX` at the return. This identifies
+the immediate compiled object and instruction boundary, but does not resolve
+its Lisp function name or computed call target; the full anonymous payload
+was not separately read from live memory.
+
+REA 6.4.0 / Ghidra 12.1.4 reports seven unresolved computed calls in the PICK
+body. Across the nine static symbol-reference candidates, 1,305 analyzed
+CALL instructions are indirect and none has a resolved target; the static
+reference census therefore did not identify the caller. DXL name clues for
+the anonymous object remain ambiguous. The complete result and limitations
+are in [the PICK caller findings](introspection/pick-native-caller.md) and
+[portable evidence](introspection/evidence/pick-native-caller-live-site-20261014-v3.json).
+
+The strict evidence check rejected an initial mixed-runner triplet: its
+controls used the legacy runner, while the observer used the required-probe
+runner. A fresh before/observer/after triplet with one required-probe runner
+hash passed and supplies the linked evidence.
+
+No coverage counts change: 31 routine names / 32 bounded contracts, 1/5
+milestones (20% by count), and zero whole-painting parity. There is still no
+defensible overall completion percentage.
+
+The strict caller evidence check rejected the first mixed-runner triplet: its
+no-probe controls used the legacy runner, while the observer used the
+required-probe runner. Fresh controls and a second observer were then captured
+with the same required-probe runner hash; only that matched triplet is used in
+the portable result.
 
 ## Links
 

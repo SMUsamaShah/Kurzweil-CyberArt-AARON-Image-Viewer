@@ -166,6 +166,16 @@ public static class AaronCallerBreakpoint
                         if (context.Eip == entry && (context.Dr6 & 1) != 0) {
                             pendingStatus = 0x10002;
                             byte[] stack = Read(process, context.Esp, 64);
+                            uint returnAddress = BitConverter.ToUInt32(stack, 0);
+                            uint callSiteAddress = returnAddress >= 3 ? returnAddress - 3 : 0;
+                            byte[] callSiteBytes = null;
+                            string callSiteReadError = null;
+                            if (callSiteAddress == 0) {
+                                callSiteReadError = "Return address is below the three-byte call-site boundary";
+                            } else {
+                                try { callSiteBytes = Read(process, callSiteAddress, 3); }
+                                catch (Exception error) { callSiteReadError = error.GetType().Name + ": " + error.Message; }
+                            }
                             var frames = new List<Dictionary<string, object>>();
                             uint frame = context.Ebp;
                             for (int i = 0; i < 8 && frame != 0; i++) {
@@ -189,7 +199,10 @@ public static class AaronCallerBreakpoint
                                 { "edi", Hex(context.Edi) }, { "esp", Hex(context.Esp) },
                                 { "ebp", Hex(context.Ebp) }, { "eflags", Hex(context.Eflags) },
                                 { "dr6", Hex(context.Dr6) },
-                                { "returnAddress", Hex(BitConverter.ToUInt32(stack, 0)) },
+                                { "returnAddress", Hex(returnAddress) },
+                                { "immediateCallSiteAddress", Hex(callSiteAddress) },
+                                { "immediateCallSiteBytesHex", callSiteBytes == null ? null : BitConverter.ToString(callSiteBytes).Replace("-", "").ToLowerInvariant() },
+                                { "immediateCallSiteReadError", callSiteReadError },
                                 { "stack64Hex", BitConverter.ToString(stack).Replace("-", "").ToLowerInvariant() },
                                 { "framesBeforeEntryPrologue", frames }, { "exceptions", exceptions },
                                 { "armedThreads", threads.Count }, { "elapsedSeconds", timer.Elapsed.TotalSeconds }

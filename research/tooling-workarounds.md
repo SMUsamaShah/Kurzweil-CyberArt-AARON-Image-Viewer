@@ -555,6 +555,57 @@ capture.
 
 ## Probe and tooling recovery
 
+### PICK native caller helper and READY staging, 2026-10-14
+
+During a caller capture, the required-probe runner writes the source Lisp file
+to `C:\temp\aaron-pre-scene-probe.cl` and leaves it there while AARON is held
+at `READY`. It copies the staged source into the run's `capture` folder only
+after the runner exits. A helper that reads
+`output\capture\aaron-pre-scene-probe.cl` while `READY` is active will fail
+even though `C:\temp` is writable. The reusable
+[`capture-pick-caller.ps1`](tools/capture-pick-caller.ps1) reads the active
+staged source from `C:\temp`, checks the owned runtime and run request, and
+releases only that owned process while the expected `READY` marker is present.
+The exact helper bytes used in the captured run are preserved as
+[`capture-pick-caller-executed-20261014.ps1`](tools/capture-pick-caller-executed-20261014.ps1)
+and bound by SHA-256 in the evidence.
+
+Always use a fresh output root for each observer. The helper intentionally
+will not overwrite `pick-native-caller.json`; if an attempt wrote a failure
+report, preserve it under a distinct failure name before any retry, or start
+with a fresh root. Do not delete an unfamiliar report. Keep the before and
+after runs uninstrumented and serial, then use
+[`derive-pick-native-caller-evidence.mjs`](tools/derive-pick-native-caller-evidence.mjs)
+to check all three summaries, six output files, six staged sources, and the
+source-bound `READY`/`END` report. A successful helper result must also show
+that debugger registers were restored; target exit can end the debugger
+session before an explicit detach record is written.
+
+### PICK caller matched-runner controls and live call-site read, 2026-10-14
+
+The first live-site derivation correctly rejected a triplet whose uninstrumented
+controls used `run-local-scene-state.ps1` while its observer used
+`run-local-scene-state-required-probe.ps1`. The AA0 and scene hashes matched,
+but the source-binding gate requires one runner hash across all three runs.
+For this workflow, run all three through the required-probe runner: omit probe
+parameters for each fresh uninstrumented control, and use the source-bound
+probe and READY pause for the observer. Re-run the whole triplet instead of
+loosening the provenance check.
+
+The current caller helper recognizes both Junction and SymbolicLink targets
+for `research/extracted/local-oracle/external-runs` when verifying the owned
+process path. This prevents an otherwise valid READY pause from being left
+unreleased when Windows reports the link's canonical target as the executable
+path. If ownership still fails, inspect the link target and executable path
+before retrying; the helper must never release a different AARON process.
+
+The bounded live-site helper reads three bytes at the measured
+`returnAddress - 3` while PICK is stopped and compares them with the same PLL
+address. REA's entry-seeded disassembly verifies that this is the instruction
+boundary for the captured return. This is specific to this measured call site,
+not a general instruction-length detector. Preserve the full anonymous
+payload as unresolved unless its complete live bytes are captured separately.
+
 ### Seed-5678 screen-unit optional targets reset by the writer overlay
 
 The v6 seed-5678 screen-unit probe configures `BRUSH-STROKE` and `PICK` in
