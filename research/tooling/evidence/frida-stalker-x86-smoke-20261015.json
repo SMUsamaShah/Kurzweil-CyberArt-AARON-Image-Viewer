@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-fixture-only",
+  "capturedAtUtc": "2026-10-14T23:24:41.875702Z",
+  "scope": {
+    "processArchitecture": "IMAGE_FILE_MACHINE_I386",
+    "generatedCodeBytes": "b9d0070000e8090000004975f8b82a000000c3c3",
+    "iterationsPerInvocation": 2000,
+    "invocations": 5,
+    "expectedInternalCallReturnPairs": 10000,
+    "notAnAaronOracleRun": true
+  },
+  "toolchain": {
+    "frida": "17.23.3",
+    "fridaTools": "14.11.0",
+    "python": "3.12.10",
+    "fixtureSha256": "4ce8ce76baf107839ae4201dd33f63d2647fc9914ffe02c3b20c83e788dadcd9",
+    "fixtureSourceSha256": "9720f69a624c88c83e4a5032d3015ac8e6bb9f6816e44c4b3da2a10a8629c759",
+    "smokeScriptSha256": "a8f35f5ea5215822babac79fce768595eb58e2a488c4f5da131959248b9de23e",
+    "runnerScriptSha256": "031e7324c461ebca34db3e943a9a8f76fd2b9a567c3711dd5973c7d27b6bb195",
+    "compilerSha256": "bf26bfa321f45db027fdde1084d058e3f6f280d18da2bf1abb319dbc55bf453b"
+  },
+  "result": {
+    "instrumentedResult": "RESULT=42",
+    "uninstrumentedResult": "RESULT=42",
+    "instrumentedExitCode": 0,
+    "uninstrumentedExitCode": 0,
+    "batchCount": 31,
+    "targetCalls": 10005,
+    "targetReturns": 10005,
+    "internalCallEvents": 10000,
+    "internalReturnEvents": 10000,
+    "orderedInternalCallReturnPairs": 10000,
+    "internalSequenceErrors": 0,
+    "allAssertionsPassed": true
+  },
+  "rawRunRecord": "research/artifacts/frida-stalker-trial/runs/20261014-232438-c87062eb/smoke-result.json"
+}
