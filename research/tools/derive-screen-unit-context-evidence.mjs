@@ -45,7 +45,7 @@ function contextMapShape(context, name) {
 }
 
 function parseContextReport(text, probeTag) {
-  const capturesPickReturns = ['screen-unit-context-v6', 'screen-unit-context-v7', 'screen-unit-context-v8', 'screen-unit-context-v9', 'screen-unit-context-v10'].includes(probeTag);
+  const capturesPickReturns = ['screen-unit-context-v6', 'screen-unit-context-v7', 'screen-unit-context-v8', 'screen-unit-context-v9', 'screen-unit-context-v10', 'screen-unit-context-v11', 'screen-unit-context-v12'].includes(probeTag);
   const normalized = text.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').trimEnd();
   const lines = normalized.split('\n');
   assert.equal(lines[0], `BEGIN ${probeTag}`);
@@ -94,6 +94,8 @@ function parseContextReport(text, probeTag) {
     'screen-unit-context-v8': 5,
     'screen-unit-context-v9': 2,
     'screen-unit-context-v10': 3,
+    'screen-unit-context-v11': 2,
+    'screen-unit-context-v12': 2,
   }[probeTag];
   assert.ok(expectedOrdinal, `unexpected screen-unit context probe version: ${probeTag}`);
   assert.equal(selectedOrdinal, expectedOrdinal,
@@ -131,7 +133,13 @@ function parseContextReport(text, probeTag) {
   assert.ok(completeMatch, 'malformed COMPLETE marker');
   const [, completeId, prepText, storeText, firstText, lastText, ranText] = completeMatch;
   assert.equal(Number(completeId), unitId);
-  assert.equal(lines.at(-2), complete);
+  if (['screen-unit-context-v11', 'screen-unit-context-v12'].includes(probeTag)) {
+    assert.equal(lines.at(-3), complete,
+      'intervention COMPLETE marker must immediately precede the terminal substitution record');
+    assert.match(lines.at(-2), /^PICK-INTERVENTION-COMPLETE /);
+  } else {
+    assert.equal(lines.at(-2), complete);
+  }
 
   const callEnters = lines.filter((line) => line.startsWith('CALL-ENTER ')).map((line) => {
     const match = /^CALL-ENTER id=(\d+) parent-id=(NIL|\d+) name=([A-Z0-9-]+) trace-depth=(\d+) writer-ordinal=(NIL|\d+) args=(.*)$/.exec(line);
@@ -349,16 +357,19 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   const summaryText = readFileSync(path.join(observerPath, 'summary.json'), 'utf8')
     .replace(/^\uFEFF/, '');
   const observerSummary = JSON.parse(summaryText);
-  const capturesPickReturns = /^aaron-screen-unit-context-v(?:[6-9]|10)\.txt$/
+  const capturesPickReturns = /^aaron-screen-unit-context-v(?:[6-9]|10|11|12)\.txt$/
+    .test(observerSummary.requiredProbeOutputName ?? '');
+  const isPickIntervention = /^aaron-screen-unit-context-v(?:11|12)\.txt$/
     .test(observerSummary.requiredProbeOutputName ?? '');
   const observerOnlyOutputNames = ['aaron-planning-call-trace.txt'];
   if (capturesPickReturns) observerOnlyOutputNames.push('aaron-scene-state-snapshot.txt');
   const verified = await verifyLocalAaronTriplet(beforePath, observerPath, afterPath, {
     observerOnlyOutputNames,
+    intentionalDifferenceNames: isPickIntervention ? ['aa0', 'image', 'image-id'] : [],
   });
   const [before, observer, after] = verified.runs;
   assert.ok(['screen-unit-seed-1234', 'screen-unit-seed-5678'].includes(observer.summary.mode));
-  const probeMatch = /^aaron-(screen-unit-context-v(?:[1-9]|10))\.txt$/.exec(observer.summary.requiredProbeOutputName);
+  const probeMatch = /^aaron-(screen-unit-context-v(?:[1-9]|10|11|12))\.txt$/.exec(observer.summary.requiredProbeOutputName);
   assert.ok(probeMatch, 'unexpected screen-unit context probe output name');
   const probeTag = probeMatch[1];
   assert.equal(observer.summary.requiredProbeEndMarker, `END ${probeTag}`);
@@ -408,6 +419,9 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
           observerOnlyOutputHashes: verified.observerOnlyOutputHashes,
           ordinarySceneSourceHashes: verified.sourceHashes,
         } : {}),
+      ...(isPickIntervention
+        ? { intentionalObserverOutputHashes: verified.intentionalDifferenceOutputHashes }
+        : {}),
       matchedOrdinarySceneSources: Object.keys(verified.sourceHashes).length,
     },
     verifiedUnitByteReplay: {
@@ -428,6 +442,9 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
       'The JS screen writer still receives path points and color events as captured inputs; this evidence does not add an upstream JS contract.',
       ...(capturesPickReturns
         ? ['The observer-only scene report adds exactly one FIRST-PICK-RETURN snapshot block; it is hash-bound separately from the matching uninstrumented control reports.']
+        : []),
+      ...(isPickIntervention
+        ? ['The observer deliberately substitutes one caller-visible PICK return after retaining the natural return; output divergence is intentional and is not a parity result.']
         : []),
     ],
   };

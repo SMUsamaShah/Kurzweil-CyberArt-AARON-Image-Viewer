@@ -194,14 +194,27 @@ The v4 probe's third unit at 768×1080 was a successful but empty screen call.
 It had no `PREP-LINE` or writer calls, so the observer correctly emitted
 `INCOMPLETE`; keep that attempt as diagnostics only. In a separate 320×480 v5
 run, ordinal 3 is populated. This is run- and resolution-specific evidence,
-not an ordinal rule. The controlled probe now supports the fixed three-integer
+not an ordinal rule. The controlled probe supports the fixed three-integer
 `PICK(27,28,29)` contract across 16 seeds and matches the JS adapter 16/16.
-The next target is a controlled downstream discriminator. In fresh runs from
-the same seed-1234 state, let PICK consume its natural RAN draw, then substitute
-only the caller-visible return for the first or second unit-2 PICK: force 29
-where the natural return is 28 and `PREVDEX` is 28, then force 28 where the
-natural return is 27 and `PREVDEX` is 28. Record whether the following HDEX
-write matches the prediction. Treat output changes as the intended
-intervention, retain fresh uninstrumented controls, and do not call it parity.
-Do not promote the 12/12 same-painting candidate or extend the PICK contract
-to other inputs without a falsifying holdout.
+
+The v11 and v12 source-bound interventions targeted the first and second
+selected `PICK` calls in seed-1234 unit 2 at 768×1080. Each native return was
+different from the captured `PREVDEX`; the intervention preserved the nested
+`RAN(0,2)` draw and substituted the caller-visible return with `PREVDEX`.
+Neither selected call was followed by an HDEX write, matching the candidate's
+prediction. Fresh before/after controls match six outputs, ten ordinary staged
+sources match, and the observer's AA0 and preview image are separately hashed
+as intentional differences. Each observer has only a 50,000-call writer-tape
+prefix of 100,029 calls, but it covers the selected 12-call unit slice. These
+are two equality-side interventions in one seed and canvas regime. They do
+not test the opposite side, prove a direct Lisp caller, establish a general
+color rule, or add a JS contract. See the [v11 evidence](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json)
+and [v12 evidence](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
+
+Next, use the terminal third `PICK` in the 320×480 seed-1234 unit-6 evidence:
+its natural return 28 equals `PREVDEX=28`, and no HDEX write follows before
+unit end. Preserve its nested random draw, substitute caller-visible 27, and
+check whether `HDEX=27` appears before unit end. This is an opposite-side
+causal test in the existing seed/canvas regime, not an independent-seed
+holdout. Require a fresh source-bound triplet and controls, then add an
+independent seed before promoting the candidate.

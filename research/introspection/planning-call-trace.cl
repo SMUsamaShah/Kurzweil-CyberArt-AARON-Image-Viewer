@@ -2,11 +2,11 @@
 ;;;
 ;;; This probe does not call a planner with guessed arguments and does not
 ;;; manufacture an MPLAN object.  It installs transparent wrappers around the
-;;; real entry points before the normal screen-saver command runs.  Each
-;;; wrapper calls the saved function with the original arguments and preserves
-;;; all multiple values; it only records bounded argument, return, condition,
-;;; and binding-state summaries.  The process is disposable, so the wrappers
-;;; remain installed until the oracle terminates it.
+;;; real entry points before the normal screen-saver command runs.  By default
+;;; each wrapper calls the saved function once and preserves all multiple
+;;; values; an explicit experiment may transform a captured PICK result only
+;;; after its native return is reported.  The process is disposable, so the
+;;; wrappers remain installed until the oracle terminates it.
 (in-package :cl-user)
 
 (unless (boundp 'aaron-planning-call-trace-loaded)
@@ -61,7 +61,11 @@
           ;; Optional post-event callback for focused probes.  A companion
           ;; may bind the callback before this trace is loaded; the default
           ;; remains NIL and leaves ordinary captures unchanged.
-          (post-event-hook nil))
+          (post-event-hook nil)
+          ;; An explicit experiment may replace a captured PICK return after
+          ;; the native result has been reported.  This hook is opt-in and is
+          ;; never used by the ordinary tracing probes.
+          (return-transform-hook nil))
       ;; Keep the potentially implementation-specific initializers in the
       ;; body, after the stream checkpoint, so a loader failure is observable.
       (setf owner (find-package "COMMON-GRAPHICS-USER")
@@ -152,6 +156,15 @@
       (setf post-event-hook
             (and (boundp 'aaron-planning-post-event-hook)
                  (symbol-value 'aaron-planning-post-event-hook)))
+      (setf return-transform-hook
+            (and (boundp 'aaron-planning-return-transform-hook)
+                 (symbol-value 'aaron-planning-return-transform-hook)))
+      (when return-transform-hook
+        (unless (and (functionp return-transform-hook)
+                     (boundp 'aaron-planning-return-targets)
+                     (equal (symbol-value 'aaron-planning-return-targets)
+                            '("PICK")))
+          (error "PICK return transformer requires captured PICK returns")))
       (write-line "STAGE-2-LET-INITIALIZERS-REACHED" report)
       (finish-output report)
       (set 'aaron-trace-current-stack nil)
@@ -336,12 +349,25 @@
                                           (multiple-value-call
                                               (lambda (&rest results)
                                                 (scene-event :return name results entry-depth)
+                                                (let ((caller-results results))
+                                                  (when (and (string= name "PICK")
+                                                             (functionp return-transform-hook))
+                                                    (multiple-value-bind
+                                                          (replace-p replacement-results)
+                                                        (funcall return-transform-hook
+                                                                 name args results entry-depth)
+                                                      (when replace-p
+                                                        (unless (listp replacement-results)
+                                                          (error "PICK return transformer did not return a value list"))
+                                                        (setf caller-results replacement-results)
+                                                        (scene-event :caller-return name
+                                                                     caller-results entry-depth))))
                                                 (trace-exit name entry-depth)
                                                 (setf trace-stack (cdr trace-stack))
                                                 (set 'aaron-trace-current-stack
                                                      (copy-list trace-stack))
                                                 (decf depth)
-                                                (values-list results))
+                                                  (values-list caller-results)))
                                             (apply original args))
                                         (multiple-value-prog1
                                             (apply original args)

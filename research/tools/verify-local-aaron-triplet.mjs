@@ -26,6 +26,10 @@ const probeOnlySources = new Set([
   'aaron-probe-loader.cl',
 ]);
 
+// These outputs may change only for the explicitly gated PICK-return
+// intervention runner. Ordinary triplets remain byte-strict by default.
+const allowedIntentionalDivergenceOutputs = new Set(['aa0', 'image', 'image-id']);
+
 function fail(message) {
   console.error(`FAIL ${message}`);
   process.exitCode = 1;
@@ -110,6 +114,14 @@ async function stagedSources(run) {
 
 export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPath, options = {}) {
   const observerOnlyOutputNames = new Set(options.observerOnlyOutputNames ?? []);
+  const intentionalDifferenceNames = new Set(options.intentionalDifferenceNames ?? []);
+  for (const name of intentionalDifferenceNames) {
+    requireSafeName(name, 'intentional-difference output');
+    requireValue(allowedIntentionalDivergenceOutputs.has(name),
+      `intentional observer divergence is not allowed for ${name}`);
+    requireValue(!observerOnlyOutputNames.has(name),
+      `${name} cannot be both observer-only and an intentional divergence`);
+  }
   for (const name of observerOnlyOutputNames) {
     requireSafeName(name, 'observer-only output');
     requireValue(outputNames.includes(name),
@@ -150,6 +162,15 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     .trimEnd();
   requireValue(report.endsWith(endMarker),
     `required report does not end with ${JSON.stringify(endMarker)}`);
+  if (intentionalDifferenceNames.size > 0) {
+    requireValue(/^aaron-screen-unit-context-v(?:11|12)\.txt$/.test(requiredReport),
+      'intentional image divergence is reserved for the source-bound PICK intervention probes');
+    for (const marker of ['PICK-SUBSTITUTION ', 'PICK-CALLER-RETURN ',
+      'PICK-INTERVENTION-COMPLETE ']) {
+      requireValue(report.split('\n').filter((line) => line.startsWith(marker)).length === 1,
+        `intervention report must contain exactly one ${marker.trim()} record`);
+    }
+  }
 
   const sourceSets = await Promise.all(runs.map(stagedSources));
   const sourceNames = sourceSets[0];
@@ -160,6 +181,7 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
 
   const artifactHashes = [];
   const observerOnlyOutputHashes = {};
+  const intentionalDifferenceOutputHashes = {};
   for (const name of outputNames) {
     if (observerOnlyOutputNames.has(name)) {
       const controlHash = await compareNamedFile([before, after], name, 'bracketing control output');
@@ -172,12 +194,22 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
       }
       artifactHashes.push([name, controlHash]);
       observerOnlyOutputHashes[name] = observerHash;
+    } else if (intentionalDifferenceNames.has(name)) {
+      const controlHash = await compareNamedFile([before, after], name,
+        'bracketing control output');
+      const observerHash = await fileHash(path.join(observer.capturePath, name));
+      artifactHashes.push([name, controlHash]);
+      intentionalDifferenceOutputHashes[name] = observerHash;
     } else {
       artifactHashes.push([name, await compareNamedFile(runs, name, 'scene output')]);
     }
   }
   for (const run of runs) {
-    requireValue(run.summary.aa0Sha256 === artifactHashes.find(([name]) => name === 'aa0')[1],
+    const expectedAa0Hash = run.label === 'observer' &&
+      intentionalDifferenceOutputHashes.aa0
+      ? intentionalDifferenceOutputHashes.aa0
+      : artifactHashes.find(([name]) => name === 'aa0')[1];
+    requireValue(run.summary.aa0Sha256 === expectedAa0Hash,
       `${run.label} AA0 summary hash does not match its captured bytes`);
     const sceneReportHash = run.label === 'observer' &&
       observerOnlyOutputHashes['aaron-scene-state-snapshot.txt']
@@ -199,23 +231,36 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
     reportHash: await fileHash(path.join(observer.capturePath, requiredReport)),
     artifactHashes: Object.fromEntries(artifactHashes),
     observerOnlyOutputHashes,
+    intentionalDifferenceOutputHashes,
     sourceHashes: Object.fromEntries(sourceHashes),
   };
 }
 
 async function main() {
-  const [beforePath, observerPath, afterPath, ...observerOnlyOutputNames] = process.argv.slice(2);
+  const [beforePath, observerPath, afterPath, ...comparisonArgs] = process.argv.slice(2);
   if (!beforePath || !observerPath || !afterPath) {
     console.error(
       'Usage: node research/tools/verify-local-aaron-triplet.mjs ' +
       '<control-before-root> <observer-root> <control-after-root> ' +
-      '[observer-only-output-name ...]');
+      '[observer-only-output-name ...] [--allow-observer-difference=aa0|image|image-id]');
     process.exitCode = 2;
     return;
   }
 
+  const observerOnlyOutputNames = [];
+  const intentionalDifferenceNames = [];
+  for (const argument of comparisonArgs) {
+    if (argument.startsWith('--allow-observer-difference=')) {
+      intentionalDifferenceNames.push(argument.slice('--allow-observer-difference='.length));
+    } else if (argument.startsWith('--')) {
+      throw new Error(`Unknown triplet comparison option ${argument}`);
+    } else {
+      observerOnlyOutputNames.push(argument);
+    }
+  }
   const verified = await verifyLocalAaronTriplet(beforePath, observerPath, afterPath, {
     observerOnlyOutputNames,
+    intentionalDifferenceNames,
   });
   const [before, observer] = verified.runs;
 
@@ -227,6 +272,12 @@ async function main() {
     console.log(`PASS: ${Object.keys(verified.observerOnlyOutputHashes).length} observer-only outputs archived and hash-bound`);
     for (const [name, hash] of Object.entries(verified.observerOnlyOutputHashes)) {
       console.log(`  observer-only output ${name} ${hash}`);
+    }
+  }
+  if (Object.keys(verified.intentionalDifferenceOutputHashes).length) {
+    console.log('PASS fresh controls match; intervention observer outputs are separately hash-bound');
+    for (const [name, hash] of Object.entries(verified.intentionalDifferenceOutputHashes)) {
+      console.log(`INTERVENTION-OUTPUT ${name} ${hash}`);
     }
   }
   console.log(`PASS: ${Object.keys(verified.sourceHashes).length} ordinary staged Lisp sources match`);

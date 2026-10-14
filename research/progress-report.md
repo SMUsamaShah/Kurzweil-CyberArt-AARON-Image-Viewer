@@ -477,14 +477,11 @@ or JS contract. The natural-unit total is now six units and 837 writer bytes;
 routine/contract counts remain 31/32, milestone progress 1/5 (20% by count),
 and whole-painting parity 0.
 
-The next experiment is a paired return-substitution intervention on unit 2:
-after natural PICK consumes its RAN draw, force its caller-visible result to
-29 at the first PICK (natural 28, PREVDEX 28), then to 28 at the second PICK
-(natural 27, PREVDEX 28). Record the HDEX effect for each arm, label the
-intentional output change, and compare each run with fresh uninstrumented
-controls. See the [unit-3 evidence](introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
-[12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
-and [screen-unit findings](introspection/screen-unit-context.md).
+The planned first/second unit-2 return-substitution interventions are complete
+in a separate measured 768×1080 regime; both changed the caller-visible PICK
+return to equal PREVDEX and neither was followed by HDEX. See the newer
+[intervention findings](introspection/screen-unit-context.md), [v11 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+and [v12 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
 
 ## What remains before a general AARON-equivalent generator
 
@@ -496,6 +493,41 @@ occlusion; then generate complete paintings from declared inputs. The result
 must pass fresh uninstrumented controls and independent original-runtime
 holdouts. Existing isolated helpers, captured decisions, and deterministic
 output do not meet that end-to-end bar.
+
+## 2026-10-14 PICK/PREVDEX equality-side return interventions
+
+Two fresh source-bound before/observer/after triplets selected the first and
+second `PICK` calls in seed-1234 screen unit 2 at measured 768×1080. V11
+preserved the nested `RAN(0,2)` draw, then changed `(33 34 35) → 34` to a
+caller-visible 35 while `PREVDEX=35`. V12 targeted the next call and changed
+`(33 34 35) → 33` to caller-visible 34 while `PREVDEX=34`. Neither selected
+call was followed by an HDEX write, matching the equality-side candidate
+prediction in both cases.
+
+The two fresh uninstrumented controls match all six compared outputs, and the
+ten ordinary staged Lisp source hashes match. AA0 and preview-image changes
+in each observer are intentional and separately hash-bound; the image ID is
+unchanged. Each observer contains only a 50,000-call writer-tape prefix of
+100,029 total calls, but it covers the selected 12 writer calls. The evidence
+therefore supports only these two treatments in this one seed and canvas
+regime. It does not test the opposite side, establish a direct Lisp caller,
+recover a general color rule, add a JS contract, or count as parity. The
+function/contract totals remain 31/32, fully achieved milestones remain 1/5
+(20% by count), and whole-painting parity remains zero; no overall completion
+percentage is defensible. See [v11 intervention evidence]
+(introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+[v12 intervention evidence]
+(introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
+[screen-unit findings](introspection/screen-unit-context.md), and the
+[evidence index](introspection/evidence/README.md).
+
+The next target is the terminal third `PICK` in the 320×480 seed-1234 unit-6
+evidence: its natural return 28 equals `PREVDEX=28`, and no HDEX write follows
+before unit end. Preserve the nested random draw, substitute caller-visible
+27, and check for `HDEX=27` before unit end. This is the opposite-side causal
+test in the existing regime, not an independent-seed holdout. Require a fresh
+source-bound triplet and controls, then add an independent seed before
+promoting the candidate.
 
 The current generator is therefore a useful partial implementation and
 research harness, **not yet ready as a general reproduction of AARON**. A

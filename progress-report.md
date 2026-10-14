@@ -36,10 +36,16 @@ value matches the one-draw control; the JS adapter matches all 16 rows.
 Separately, 12 natural calls across units 2, 3, 5, and 6 fit one
 `PICK-return-differs-from-PREVDEX` candidate: eight differing returns are
 followed by matching HDEX writes and four equal returns have no following
-write. All four units come from the same seed-1234 painting, so this is not an
-independent-seed or controlled causal test and remains unimplemented. The
-next probe will change only the caller-visible return at selected unit-2 PICK
-calls to test the candidate's prediction. See the
+write. Those units are from the same seed-1234 painting. Two fresh 768×1080
+interventions then changed the first and second selected unit-2 PICK results
+to equal `PREVDEX`, leaving each natural random draw intact. Neither was
+followed by an HDEX write, as the candidate predicts. The source-bound
+before/observer/after triplets have matching controls and ten matching
+ordinary staged sources; their AA0 and preview image intentionally differ.
+The writer tape is a 50,000-call prefix
+of 100,029 total calls, but it covers the selected 12-call unit slice. These
+are two equality-side tests in one seed and regime, not a general color rule,
+independent-seed holdout, direct caller proof, or JS contract. See the
 [screen-unit findings](research/introspection/screen-unit-context.md) and
 [portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
@@ -48,7 +54,9 @@ calls to test the candidate's prediction. See the
 [seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
 [seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
 [12-case natural candidate](research/introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
-[controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
+[controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json),
+[first return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json), and
+[second return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
 
 The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
 correctly failed the observer's nonempty completion gate. The separate 320×480
@@ -60,8 +68,12 @@ with a complete typed observer and fresh controls; its extra `PICK` return
 target adds exactly one validated `FIRST-PICK-RETURN` snapshot to the observer
 scene report. Counts are now 31 routine names / 32 bounded contracts, 1/5
 milestones (20% by count), and zero whole-painting parity. There is still no
-defensible overall percentage. The next target is the controlled
-return-substitution discriminator described above.
+defensible overall percentage. The next target is the terminal third `PICK`
+in the 320×480 seed-1234 unit-6 evidence: natural return 28 equals
+`PREVDEX=28`. Preserve its nested random draw, substitute caller-visible 27,
+and check for `HDEX=27` before unit end. This is an opposite-side causal test
+for the candidate, not an independent-seed holdout; follow it with an
+independent seed and fresh controls.
 
 ## Follow the evidence
 

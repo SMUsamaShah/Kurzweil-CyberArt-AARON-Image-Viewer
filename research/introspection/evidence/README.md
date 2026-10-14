@@ -1669,3 +1669,25 @@ fixed three-integer input and tested seeds; it does not identify a Lisp caller,
 establish other arities/types, or explain the downstream color-write branch.
 Rebuild it with [`derive-pick-contract-evidence.mjs`](../../tools/derive-pick-contract-evidence.mjs)
 from the three retained ignored oracle roots documented in the JSON.
+
+## PICK/PREVDEX equality-side return interventions (2026-10-14)
+
+[`pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json`](pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json)
+and [`pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json`](pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json)
+record two source-bound before/observer/after triplets. Both target unit 2 in
+seed 1234 at measured 768×1080. V11 targets PICK ordinal 1: arguments
+`(33 34 35)`, native return 34, PREVDEX 35, caller-visible return 35. V12
+targets ordinal 2: the same arguments, native return 33, PREVDEX 34, and
+caller-visible return 34. The nested `RAN(0,2)` draw is retained in each case.
+Neither intervention is followed by an HDEX write, matching the equality-side
+candidate prediction for both selected calls.
+
+For each triplet, the two fresh uninstrumented controls match all six compared
+outputs, and the ten ordinary staged Lisp source hashes match. The observer's
+AA0 and preview image are recorded as intentional differences; the image ID
+matches. Each observer records a 50,000-call writer-tape prefix out of 100,029
+calls, while the prefix covers the selected 12 writer calls. This is bounded
+intervention evidence, not a full-tape capture, direct source caller proof,
+general color rule, independent-seed test, JavaScript contract, or parity
+result. Re-derive from the retained roots in each JSON's `source` object with
+[`derive-pick-return-intervention-evidence.mjs`](../../tools/derive-pick-return-intervention-evidence.mjs).

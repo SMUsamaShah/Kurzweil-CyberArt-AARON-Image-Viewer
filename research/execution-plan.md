@@ -677,10 +677,25 @@ and next random value match one `RAN(0,2)` draw, and the JS adapter matches all
 candidate](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 and [controlled PICK evidence]
 (introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
-The next target is a paired return-substitution intervention at unit 2's first
-and second PICK calls, holding natural RNG consumption fixed and observing the
-HDEX result. Preserve fresh controls and label changed output as intentional
-intervention, not parity.
+The planned first/second unit-2 return-substitution interventions are now
+complete in a measured 768×1080 regime. Both preserve the nested random draw,
+set the caller-visible return to `PREVDEX`, and show no following HDEX write.
+They are two equality-side cases in one seed, not an independent holdout or a
+general color rule. Fresh before/after controls and staged sources match; the
+observer AA0/preview outputs intentionally differ. The writer tape is a
+50,000-call prefix of 100,029 total calls but covers the selected unit slice.
+See the [v11 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+[v12 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
+and [screen-unit findings](introspection/screen-unit-context.md).
+
+Next, use the terminal third PICK in the 320×480 seed-1234 unit-6 evidence:
+natural return 28 equals `PREVDEX=28`, and no HDEX write follows before unit
+end. Preserve its native RAN draw, substitute caller-visible 27, and check
+for `HDEX=27` before unit end. This is an opposite-side causal test in the
+existing seed/canvas regime, not an independent-seed holdout. Require a fresh
+source-bound triplet and controls, then add an independent seed before
+promoting the candidate; do not alter the function or milestone counts from
+this intervention alone.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate

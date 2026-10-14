@@ -3,7 +3,7 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10')]
+    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
@@ -186,14 +186,24 @@ Invoke-TripletLeg -Role after
 
 $node = (Get-Command node -ErrorAction Stop).Source
 $observerOnlyOutputs = @('aaron-planning-call-trace.txt')
-if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10')) {
-    # PICK's requested return target causes the scene observer to append one
-    # FIRST-PICK-RETURN snapshot. The verifier compares the controls and
+if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12')) {
+    # PICK's requested return target causes the scene observer to append its
+    # bounded PICK-return snapshot. The verifier compares the controls and
     # requires that exact snapshot to be the only observer scene-report delta.
     $observerOnlyOutputs += 'aaron-scene-state-snapshot.txt'
 }
-& $node (Join-Path $repoRoot 'research\tools\verify-local-aaron-triplet.mjs') `
-    $runRoots.before $runRoots.observer $runRoots.after @observerOnlyOutputs
+$verifyArguments = @($runRoots.before, $runRoots.observer, $runRoots.after)
+if ($ProbeVersion -in @('v11', 'v12')) {
+    # The intervention is allowed to change the generated AA0 and rendered
+    # preview outputs. The
+    # verifier still requires byte-identical uninstrumented controls and
+    # source-bound observer records; it does not call the treatment parity.
+    $verifyArguments += @('--allow-observer-difference=aa0',
+                          '--allow-observer-difference=image',
+                          '--allow-observer-difference=image-id')
+}
+$verifyArguments += $observerOnlyOutputs
+& $node (Join-Path $repoRoot 'research\tools\verify-local-aaron-triplet.mjs') @verifyArguments
 if ($LASTEXITCODE -ne 0) {
     throw 'Source-bound triplet verification failed; all three roots were retained for inspection.'
 }
@@ -211,6 +221,11 @@ $requiredMarkers = @(
     '^UNIT-EXIT id=\d+ status=SUCCESS ',
     '^COMPLETE unit-id=\d+ prep-count=\d+ store-count=\d+ writer-first=\d+ writer-last=\d+ ran-count=\d+$'
 )
+if ($ProbeVersion -in @('v11', 'v12')) {
+    $interventionOrdinal = if ($ProbeVersion -eq 'v11') { 1 } else { 2 }
+    $requiredMarkers += '^PICK-INTERVENTION-COMPLETE target-ordinal=' + $interventionOrdinal +
+        ' selected-pick-count=\d+ substitution-count=1 target-call-id=\d+ native=-?\d+ caller=-?\d+ prevdex=-?\d+$'
+}
 foreach ($marker in $requiredMarkers) {
     if ($observerReport -notmatch "(?m)$marker") {
         throw "Observer report lacks required completion evidence ($marker); all roots were retained."
