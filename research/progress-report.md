@@ -565,14 +565,25 @@ The evidence file is
 
 The seed-1234 v14 treatment was stopped before the observer because its fresh
 control measured 768×1080 instead of the required 320×480. No setting changed.
-The v15 seed-5678 unit-6 treatment then preserved the natural second-PICK
-random draw and substituted caller-visible 35 for 34=`PREVDEX`. Exactly one
-`HDEX=35` write followed before the next PICK in a complete source-bound fresh
-triplet. This is a single controlled candidate match, not a general rule or
-parity. Next, target the terminal third PICK in the same natural unit and
-substitute 34=`PREVDEX` for natural return 33; check that no HDEX write follows
-before unit end. Require another fresh 768×1080 triplet and do not force the
-display mode or reuse old roots. See the [v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json).
+The v15 seed-5678 unit-6 treatment preserved the natural second-PICK random
+draw and substituted caller-visible 35 for 34=`PREVDEX`. Exactly one
+`HDEX=35` write followed before the next PICK. V16 targeted the terminal
+third PICK: its natural return 33 differed from `PREVDEX=34`; the preserved
+random result was 0, and substituting caller-visible 34 was followed by no
+HDEX write before unit end. Both complete source-bound fresh triplets measured
+768×1080, match all six control outputs, and match seven ordinary staged Lisp
+sources. The two interventions complete the equality/difference pair for
+seed-5678's shifted triple. Together with v11/v13, the candidate matches four
+controlled interventions across two seeds. This remains bounded evidence,
+not a general rule, direct-caller proof, JS contract, or parity. See the
+[v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json),
+[v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
+and [screen-unit findings](introspection/screen-unit-context.md).
+
+Next, investigate the direct `PICK` caller/control-flow path with REA and the
+[native-analysis workflow](native-analysis-workflow.md). Re-resolve and
+validate live native payload addresses before any debugger attachment; do not
+infer a direct caller from the nearest observed trace label or event order.
 
 The current generator is therefore a useful partial implementation and
 research harness, **not yet ready as a general reproduction of AARON**. A

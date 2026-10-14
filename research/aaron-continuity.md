@@ -67,25 +67,27 @@ installation record from a runtime unbound-function result. The corrected v6
 triplet completed with six matching outputs and seven ordinary Lisp sources.
 See [tooling workarounds](tooling-workarounds.md).
 
-The v15 source-bound treatment tested the shifted triple in seed-5678 unit 6 at
-768×1080. It targeted the second natural `PICK(33,34,35)`, returned 34 with
-`PREVDEX=34`, and nested `RAN(0,2)=1`. Replacing only the caller-visible value
-with 35 produced one `HDEX=35` before the next PICK. Fresh controls match all
-six compared outputs and seven ordinary Lisp sources match. The selected
-87-point path covers 90 writer calls and 291 output bytes. The 50,000-call tape
-is only a prefix of 100,821 total calls, but covers the selected interval. This
-is one controlled match for the shifted triple; it does not prove a direct
-caller, general rule, JS behavior contract, or parity. See the
-[v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json),
+The v15/v16 source-bound treatments tested both sides of the shifted triple in
+seed-5678 unit 6 at 768×1080. V15 targeted the second natural
+`PICK(33,34,35)`, returned 34 with `PREVDEX=34`, and nested `RAN(0,2)=1`;
+substituting caller-visible 35 produced one `HDEX=35` before the next PICK.
+V16 targeted the terminal third PICK, returned 33 with `PREVDEX=34`, and
+nested `RAN(0,2)=0`; substituting caller-visible 34 produced no HDEX write
+through unit end. Both fresh controls match all six compared outputs, and
+seven ordinary Lisp sources match. The selected intervals cover 90/88 writer
+calls and 291/277 bytes; each is within its observer's 50,000-call tape
+prefix (100,821/100,819 calls total). Together with v11/v13, the candidate
+matches four controlled return interventions across two seeds. This remains
+bounded evidence: no direct caller, general color rule, JS behavior contract,
+or parity claim. See the [v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json),
+[v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
 [screen-unit findings](introspection/screen-unit-context.md), and
 [tooling workarounds](tooling-workarounds.md).
 
-Current target: test the complementary equality-side result in the same
-seed-5678 natural unit. Its terminal third `PICK(33,34,35)` returns 33 with
-`PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute only caller-visible 34,
-and verify no HDEX write through unit end. Use a new fresh 768×1080
-before/observer/after triplet; stop before the observer if the fresh control
-measures another canvas. Never force display mode or reuse earlier roots.
+Current target: identify the unresolved direct `PICK` caller/control-flow path
+using REA and the [native-analysis workflow](native-analysis-workflow.md).
+Re-resolve and validate live payload addresses before debugger attachment.
+Do not infer a direct caller from nearest-observed trace labels or event order.
 Keep FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the

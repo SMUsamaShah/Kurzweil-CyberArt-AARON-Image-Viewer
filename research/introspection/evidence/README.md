@@ -1750,3 +1750,19 @@ probe source hashes are recorded in the JSON. This is not a general rule,
 direct caller proof, JavaScript contract, or parity result. Re-derive from the
 three retained ignored roots in `source` with
 [`derive-pick-return-intervention-evidence.mjs`](../../tools/derive-pick-return-intervention-evidence.mjs).
+
+[`pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json`](pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json)
+records the complementary terminal third-PICK case from a separate fresh
+768×1080 triplet. The natural `PICK(33,34,35)` return is 33 with
+`PREVDEX=34`; the retained nested `RAN(0,2)` result is 0. Substituting only
+the caller-visible return with 34 is followed by no HDEX write before unit
+end. The selected 87-point interval contains 88 writer calls and replays 277
+bytes (SHA-256
+`5a99648c7a9d108d30b3b89476e4782c0afc94849b283ec0336d4a74dabd287e`). Its
+writer interval is covered by the 50,000-call prefix of a 100,819-call tape.
+The fresh controls match all six outputs and seven ordinary Lisp sources.
+Together with v11 and v13, the v15/v16 cases match both sides of the shifted
+triple candidate across two seeds. This remains bounded evidence and proves
+neither the direct Lisp caller nor a general rule, JS contract, or parity.
+Re-derive from the three retained ignored roots with the same helper listed
+above.

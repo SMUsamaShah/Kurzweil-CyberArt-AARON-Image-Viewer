@@ -703,22 +703,26 @@ regime in the same seed, not an independent-seed holdout. Require a source-
 bound triplet, then collect an independent seed before promoting the
 candidate; do not alter the function or milestone counts from this evidence.
 
-The v15 source-bound treatment tested the shifted triple in seed-5678 unit 6
-at 768×1080. Its second natural `PICK(33,34,35)` returned 34 equal to
-`PREVDEX=34`, with nested `RAN(0,2)=1`. Substituting caller-visible 35 yielded
-one `HDEX=35` before the next PICK. The fresh controls match all six compared
-outputs and seven ordinary Lisp sources match. The selected interval covers
-90 writer calls and 291 bytes inside the 50,000-call prefix of a 100,821-call
-tape. This is one controlled candidate match for a shifted triple, not a
-general rule, direct caller proof, JS contract, or parity. See the
-[v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json).
+The v15/v16 source-bound treatments tested both sides of the shifted triple in
+seed-5678 unit 6 at 768×1080. V15 targeted the second natural
+`PICK(33,34,35)`, returned 34 with `PREVDEX=34`, and nested `RAN(0,2)=1`;
+substituting caller-visible 35 yielded one `HDEX=35` before the next PICK.
+V16 targeted the terminal third PICK, returned 33 with `PREVDEX=34`, and
+nested `RAN(0,2)=0`; substituting caller-visible 34 produced no HDEX write
+through unit end. Both fresh controls match all six compared outputs, and
+seven ordinary Lisp sources match. The selected intervals cover 90/88 writer
+calls and 291/277 bytes; each is within its observer's 50,000-call tape
+prefix (100,821/100,819 calls total). Together with v11/v13, the candidate
+matches four controlled return interventions across two seeds. This remains
+bounded evidence, not a direct caller proof, general rule, JS contract, or
+parity. See the [v15 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v15-20261014.json),
+[v16 evidence](introspection/evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json),
+and [screen-unit findings](introspection/screen-unit-context.md).
 
-Current target: test the complementary equality-side result in the same
-seed-5678 natural unit. Its terminal third `PICK(33,34,35)` returns 33 with
-`PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute only caller-visible 34,
-and verify no HDEX write through unit end. Use a new fresh 768×1080
-before/observer/after triplet; stop before the observer if the fresh control
-measures another canvas. Never force display mode or reuse earlier roots.
+Current target: identify the unresolved direct `PICK` caller/control-flow path
+using REA and the [native-analysis workflow](native-analysis-workflow.md).
+Re-resolve and validate live payload addresses before debugger attachment.
+Do not infer a direct caller from nearest-observed trace labels or event order.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate

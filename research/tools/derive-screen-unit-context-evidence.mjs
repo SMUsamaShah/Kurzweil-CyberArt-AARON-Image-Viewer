@@ -45,7 +45,7 @@ function contextMapShape(context, name) {
 }
 
 function parseContextReport(text, probeTag) {
-  const capturesPickReturns = ['screen-unit-context-v6', 'screen-unit-context-v7', 'screen-unit-context-v8', 'screen-unit-context-v9', 'screen-unit-context-v10', 'screen-unit-context-v11', 'screen-unit-context-v12', 'screen-unit-context-v13', 'screen-unit-context-v14', 'screen-unit-context-v15'].includes(probeTag);
+  const capturesPickReturns = ['screen-unit-context-v6', 'screen-unit-context-v7', 'screen-unit-context-v8', 'screen-unit-context-v9', 'screen-unit-context-v10', 'screen-unit-context-v11', 'screen-unit-context-v12', 'screen-unit-context-v13', 'screen-unit-context-v14', 'screen-unit-context-v15', 'screen-unit-context-v16'].includes(probeTag);
   const normalized = text.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').trimEnd();
   const lines = normalized.split('\n');
   assert.equal(lines[0], `BEGIN ${probeTag}`);
@@ -99,6 +99,7 @@ function parseContextReport(text, probeTag) {
     'screen-unit-context-v13': 2,
     'screen-unit-context-v14': 6,
     'screen-unit-context-v15': 6,
+    'screen-unit-context-v16': 6,
   }[probeTag];
   assert.ok(expectedOrdinal, `unexpected screen-unit context probe version: ${probeTag}`);
   assert.equal(selectedOrdinal, expectedOrdinal,
@@ -136,7 +137,7 @@ function parseContextReport(text, probeTag) {
   assert.ok(completeMatch, 'malformed COMPLETE marker');
   const [, completeId, prepText, storeText, firstText, lastText, ranText] = completeMatch;
   assert.equal(Number(completeId), unitId);
-  if (['screen-unit-context-v11', 'screen-unit-context-v12', 'screen-unit-context-v13', 'screen-unit-context-v14', 'screen-unit-context-v15'].includes(probeTag)) {
+  if (['screen-unit-context-v11', 'screen-unit-context-v12', 'screen-unit-context-v13', 'screen-unit-context-v14', 'screen-unit-context-v15', 'screen-unit-context-v16'].includes(probeTag)) {
     assert.equal(lines.at(-3), complete,
       'intervention COMPLETE marker must immediately precede the terminal substitution record');
     assert.match(lines.at(-2), /^PICK-INTERVENTION-COMPLETE /);
@@ -360,9 +361,9 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   const summaryText = readFileSync(path.join(observerPath, 'summary.json'), 'utf8')
     .replace(/^\uFEFF/, '');
   const observerSummary = JSON.parse(summaryText);
-  const capturesPickReturns = /^aaron-screen-unit-context-v(?:[6-9]|10|11|12|13|14|15)\.txt$/
+  const capturesPickReturns = /^aaron-screen-unit-context-v(?:[6-9]|10|11|12|13|14|15|16)\.txt$/
     .test(observerSummary.requiredProbeOutputName ?? '');
-  const isPickIntervention = /^aaron-screen-unit-context-v(?:11|12|13|14|15)\.txt$/
+  const isPickIntervention = /^aaron-screen-unit-context-v(?:11|12|13|14|15|16)\.txt$/
     .test(observerSummary.requiredProbeOutputName ?? '');
   const observerOnlyOutputNames = ['aaron-planning-call-trace.txt'];
   if (capturesPickReturns) observerOnlyOutputNames.push('aaron-scene-state-snapshot.txt');
@@ -372,7 +373,7 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   });
   const [before, observer, after] = verified.runs;
   assert.ok(['screen-unit-seed-1234', 'screen-unit-seed-5678'].includes(observer.summary.mode));
-  const probeMatch = /^aaron-(screen-unit-context-v(?:[1-9]|10|11|12|13|14|15))\.txt$/.exec(observer.summary.requiredProbeOutputName);
+  const probeMatch = /^aaron-(screen-unit-context-v(?:[1-9]|10|11|12|13|14|15|16))\.txt$/.exec(observer.summary.requiredProbeOutputName);
   assert.ok(probeMatch, 'unexpected screen-unit context probe output name');
   const probeTag = probeMatch[1];
   assert.equal(observer.summary.requiredProbeEndMarker, `END ${probeTag}`);

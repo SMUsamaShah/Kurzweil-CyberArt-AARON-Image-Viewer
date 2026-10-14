@@ -50,6 +50,18 @@ const expectedByProbe = {
     randomIndex: 1,
     requireFollowingPick: true,
   },
+  'screen-unit-context-v16': {
+    pickOrdinal: 3,
+    unitOrdinal: 6,
+    policy: 'force-fixed-34',
+    mode: 'screen-unit-seed-5678',
+    canvas: [768, 1080],
+    arguments: [33, 34, 35],
+    nativeReturn: 33,
+    prevdex: 34,
+    callerReturn: 34,
+    randomIndex: 0,
+  },
 };
 
 function one(lines, pattern, label) {
@@ -97,7 +109,7 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
     assert.equal(context.source.mode, expected.mode,
       `${context.source.probeVersion} intervention mode changed`);
   }
-  if (['screen-unit-context-v14', 'screen-unit-context-v15'].includes(context.source.probeVersion)) {
+  if (['screen-unit-context-v14', 'screen-unit-context-v15', 'screen-unit-context-v16'].includes(context.source.probeVersion)) {
     assert.match(context.source.requiredProbeOutputSha256 ?? '', /^[a-f0-9]{64}$/,
       `${context.source.probeVersion} intervention has no runner-recorded required-report hash`);
   }

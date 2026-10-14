@@ -37,20 +37,21 @@ different returns are followed by matching HDEX writes; the equal middle
 return has no HDEX write before the next PICK. This is a separate-seed,
 different-argument observation of the same candidate shape, but it is not a
 holdout for the existing `(27,28,29)` contract: the current 12-case analyzer
-is explicitly restricted to that list and seed 1234. The new sample suggests
-a shifted-triple extension to test; it remains one natural unit, not a general
-color rule or JS contract.
+is explicitly restricted to that list and seed 1234. This natural shifted
+triple remains one unit and is not by itself a holdout or general rule.
 
-The 12-case same-painting seed-1234 candidate and three seed-1234 unit-2
-interventions remain bounded evidence. The v11/v12 interventions changed two
-PICK results to equal `PREVDEX` with no following HDEX write. V13 changed a
-natural result 34 to 33 while `PREVDEX=35`; the preserved random index was 1
-and `HDEX=33` followed. None identifies the direct Lisp caller or establishes
-a general color rule. See the [screen-unit findings](research/introspection/screen-unit-context.md),
+The 12-case seed-1234 natural candidate remains bounded evidence. Four
+source-bound interventions on `PICK(33,34,35)` now match its two-sided
+prediction across seeds 1234 and 5678 at 768×1080: v11/v16 substitute a return
+equal to `PREVDEX` and have no following HDEX write; v13/v15 substitute a
+different return and observe one matching HDEX write. This supports the
+candidate for these four cases, but does not identify the direct Lisp caller,
+establish a general color rule, or add a JavaScript contract. See the
+[screen-unit findings](research/introspection/screen-unit-context.md),
 [seed-5678 unit-6 evidence](research/introspection/evidence/screen-unit-context-seed5678-unit6-20261014-v2.json),
 [12-case candidate](research/introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 [controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json),
-and [intervention evidence v11–v13](research/introspection/evidence/README.md).
+and [intervention evidence v11–v16](research/introspection/evidence/README.md).
 
 The v14 seed-1234 unit-6 intervention was correctly stopped after its fresh
 control measured 768×1080 rather than the required 320×480; no observer ran,
@@ -62,19 +63,19 @@ without inferring that the function was unbound or unused. The corrected fresh
 triplet passes with six matching outputs and seven matching ordinary scene
 sources. Tooling details are in the [workarounds](research/tooling-workarounds.md).
 
-There is still no defensible overall completion percentage. The seed-5678
-v15 treatment tested that shifted-triple extension in a fresh 768×1080 triplet.
-Its second `PICK(33,34,35)` naturally returned `34=PREVDEX`; the preserved
-nested `RAN(0,2)` index was 1. Substituting only the caller-visible result to
-35 was followed by one `HDEX=35` write before the next PICK. All six compared
-outputs match across fresh uninstrumented controls, and seven ordinary scene
-sources match. This supports one controlled candidate match, not a general
-rule or JavaScript contract. The next test targets the terminal third PICK in
-that natural unit: substitute caller-visible 34 for its natural 33 while
-`PREVDEX=34`, preserve nested random index 0, and check that no HDEX write
-follows before unit end. Require another fresh 768×1080 triplet; never force
-the display mode or reuse prior roots. See the [intervention evidence](research/introspection/evidence/README.md)
-and [screen-unit findings](research/introspection/screen-unit-context.md).
+There is still no defensible overall completion percentage. In seed-5678
+unit 6, v15 changed the second PICK's caller-visible return from 34 to 35
+while preserving `RAN(0,2)=1`; one `HDEX=35` followed before the next PICK.
+V16 changed the terminal third PICK's return from 33 to 34 while preserving
+`RAN(0,2)=0`; no HDEX followed before unit end. Both fresh 768×1080 triplets
+match all six control outputs and seven ordinary Lisp sources. These results
+do not change the measured 31 routine names / 32 bounded contracts, 1/5
+milestones, or zero whole-painting parity. The next target is the unresolved
+direct `PICK` caller/control-flow path using the native workflow and REA; do
+not infer it from nearest-observed trace labels. See the
+[intervention evidence](research/introspection/evidence/README.md),
+[screen-unit findings](research/introspection/screen-unit-context.md), and
+[native analysis workflow](research/native-analysis-workflow.md).
 
 ## Follow the evidence
 

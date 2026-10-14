@@ -211,6 +211,7 @@ See the [seed-1234 unit-1 evidence](evidence/screen-unit-context-seed1234-202610
 [capture observer v5](screen-unit-context-v5.cl),
 [capture observer v6](screen-unit-context-v6.cl),
 [capture observer v15](screen-unit-context-v15.cl),
+[capture observer v16](screen-unit-context-v16.cl),
 [triplet runner](../tools/capture-screen-unit-context-triplet.ps1), and
 [portable evidence derivation](../tools/derive-screen-unit-context-evidence.mjs).
 
@@ -261,10 +262,26 @@ writer interval. See the [v15 evidence](evidence/pick-prevdex-return-interventio
 This is one controlled match for the shifted triple, not a general rule, direct
 Lisp caller proof, JS behavior contract, or parity result.
 
-Next, test the complementary equality-side outcome in the same natural
-seed-5678 unit: target its terminal third `PICK(33,34,35)`, whose natural
-return 33 differs from `PREVDEX=34`; preserve nested `RAN(0,2)=0`, substitute
-only caller-visible 34, and check that no HDEX write follows before unit end.
-Use a new fresh 768×1080 before/observer/after triplet. If the new uninstrumented
-control measures another canvas, retain it and stop before the observer; do
-not force display mode or reuse earlier roots.
+V16 tested the complementary equality-side outcome in the same natural unit.
+Its terminal third `PICK(33,34,35)` returned 33 with `PREVDEX=34`; nested
+`RAN(0,2)=0` was preserved while only the caller-visible result changed to 34.
+No HDEX write followed through the selected unit's end. A new fresh
+768×1080 triplet matched all six control outputs and seven ordinary staged
+sources. The selected 87-point interval contains 88 writer calls and replays
+277 bytes (SHA-256
+`5a99648c7a9d108d30b3b89476e4782c0afc94849b283ec0336d4a74dabd287e`). Its
+50,000-call tape is a prefix of 100,819 calls but covers the selected writer
+interval. See [v16 evidence](evidence/pick-prevdex-return-intervention-seed5678-unit6-768x1080-v16-20261014.json).
+
+Across the shifted `(33,34,35)` choices, v11/v13 in seed 1234 and v15/v16 in
+seed 5678 now provide four controlled cases at measured 768×1080. Caller
+returns equal to PREVDEX (v11, v16) are followed by no HDEX write; caller
+returns differing from PREVDEX (v13, v15) are followed by one matching HDEX
+write before the next PICK or unit end. This is bounded candidate evidence,
+not a recovered general rule: the direct Lisp caller and broader scene
+behavior remain unknown, and no JavaScript contract or parity claim follows.
+
+Next, identify the unresolved direct caller/control-flow path around `PICK`
+using the native-analysis workflow and REA. Re-read and validate the live
+payload/address before any debugger attachment. Do not infer the direct caller
+from the nearest observed trace target or from event ordering.
