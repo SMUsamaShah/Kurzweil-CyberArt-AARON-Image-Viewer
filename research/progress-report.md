@@ -10,7 +10,7 @@ recovered behavior.
 | Measure | Current result | How to read it |
 |---|---:|---|
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |
-| Routines with documented, bounded JS/original comparisons | 30 routine names; 31 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, plus the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters. These are limited contracts, not 30 general-purpose source reconstructions. |
+| Routines with documented, bounded JS/original comparisons | 31 routine names; 32 contract units | Includes the separately counted CFORM and SUBFORM methods of `POST-FILL`, the bounded integer `IN-SUB-FRAME` predicate measured through natural caller adapters, and the three-integer `PICK` contract. These are limited contracts, not 31 general-purpose source reconstructions. |
 | FREE-PATH boundary-matrix comparison | 26 of 30 directly comparable cases match; 4 mismatch; 10 unclassified | Finite source-bound calls only. Eight noncanonical index cases and two signed-zero cases are unclassified; this is not a project completion percentage. |
 | FREE-PATH isolated one-edge stop cases | 9 captured cases; JS matches 4 and differs by one step in 5 | Controlled inputs only. Of the three local candidates, only step-times-wiggle matches both v8/v9 counts; this does not establish a general rule. |
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
@@ -20,15 +20,16 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths reproduce 705 writer bytes. Unit 6 records three `PICK(27,28,29)` results (29, 28, 28) alongside observed `RAN(0,2)` values (2, 1, 1); this is one bounded sample, not a general contract. |
+| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths reproduce 705 writer bytes. Unit 6 records three natural `PICK(27,28,29)` results; the separate controlled probe now has its own bounded result below. |
+| Controlled PICK comparison | 16 of 16 three-integer cases match the JS adapter | The original return and next random value match a single `RAN(0,2)` draw for these inputs and seeds. Other arities, types, and values remain uncharacterized. |
 
-The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
+The 31 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
 `DRAW-TO`, `VECTOR`, `FILL`, `FREE-PATH`, `INIT-MAPS`, `BRUSH-STROKE`,
 `SELECT-BRUSH`, `SET-MEDIANS`, `GOOD-START`, `FILL-STRATEGY`,
 `WRITE-LIST-TO-FILL-MAP`, `CLEAR-FILL-MAP`, `PATCH-EDGE`, `LIST-FRAME`,
-`SCAN-ROW`, `NEIGHBORS`, `POST-FILL`, `FOOB`, `BUFFER-FEATURE`, and
-`IN-SUB-FRAME`. Some records cover only selected inputs, a partial adapter, or
+`SCAN-ROW`, `NEIGHBORS`, `POST-FILL`, `FOOB`, `BUFFER-FEATURE`,
+`IN-SUB-FRAME`, and `PICK`. Some records cover only selected inputs, a partial adapter, or
 a helper that consumes captured upstream data. A routine's appearance here
 does not imply complete behavior for all inputs or integration into the
 generator.
@@ -398,9 +399,9 @@ captured path and color inputs, so this adds no JS contract. See the new
 [unit-6 findings](introspection/screen-unit-context.md) and
 [portable evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
 
-The next target is a bounded `PICK` probe across argument lengths and values,
-with random-state and return-shape capture. Keep its current three natural
-calls as one observation until the independent cases are measured.
+That controlled `PICK` investigation is now complete for one fixed three-
+integer argument list. The next target is the screen color-write decision
+that follows the natural screen-unit selection events.
 
 ## 2026-10-14 sixth natural SCREEN-AND-STORE unit
 
@@ -426,6 +427,33 @@ unwrapped helpers, a general PICK mapping, or a color-selection rule. The
 bounded evidence adds no JS contract. See the [findings](introspection/screen-unit-context.md),
 [portable evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
 and [observer](introspection/screen-unit-context-v6.cl).
+
+## 2026-10-14 bounded three-integer PICK contract
+
+A fresh source-bound before/observer/after triplet tested the fixed input
+`PICK(27,28,29)` at 16 isolated seeds. All three possible positions were
+selected. For every case, the returned argument matched the index from one
+direct `RAN(0,2)` draw, and the following `RAN(0,1000000)` matched the value
+after that one draw; the no-draw checkpoint differed in all 16 cases. The
+existing `Allegro501Random.pick` adapter plus its next random value matches all
+16 original rows. The six drawing/scene outputs and six ordinary staged Lisp
+sources match across fresh controls.
+
+This supports only the fixed positional three-integer contract over the
+recorded seeds. It does not establish other arities, types, values, hidden
+state, a source-level `PICK`-to-`RAN` call edge, or the caller that decides
+whether a color write follows. It adds the 31st routine name and 32nd bounded
+contract unit; milestone progress stays 1 of 5 (20% by count), and whole-
+painting parity remains 0. No overall completion percentage is defensible.
+See the [finding](introspection/screen-unit-context.md), [probe]
+(introspection/pick-contract-v1.cl), [portable evidence]
+(introspection/evidence/pick-contract-three-args-seed1234-20261014.json), and
+[evidence derivation helper](../tools/derive-pick-contract-evidence.mjs).
+
+The next target is to identify the control-flow boundary for paired
+`PREVDEX` neighbor writes versus unpaired `PICK`/`RAN` results, then design a
+probe that can falsify candidate state conditions without inferring a general
+color rule from the five natural units.
 
 ## What remains before a general AARON-equivalent generator
 

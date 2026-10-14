@@ -6,11 +6,12 @@ and the running investigation history are linked below.
 | Measure | Current status | What it means |
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
-| Routines with bounded JS/original comparisons | 30 names / 31 contracts | These are limited, measured behavior slices, not 30 complete function reconstructions. |
+| Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | Execution-plan milestones fully achieved | 1/5 (20% by milestone count) | Four are not yet fully achieved. Milestones are unequal in size, so this is not a project or time estimate. |
 | Whole-painting parity | 0 complete results | No full painting has passed an original-versus-JS equivalence check. |
-| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths replay 705 writer bytes. Unit 6 records three `PICK(27,28,29)` results (29, 28, 28) alongside observed `RAN(0,2)` values (2, 1, 1); this is one bounded sample, not a general contract. |
+| Natural screen-unit context samples | 5 units across seeds 1234 and 5678 | Their selected paths replay 705 writer bytes. Unit 6 records three natural `PICK(27,28,29)` results; separate controlled PICK evidence is summarized below. |
+| Controlled PICK comparison | 16/16 three-integer cases match the JS adapter | Across 16 seeds, each return and next random value match selection by one `RAN(0,2)` draw. Other arities, types, and argument values remain uncharacterized. |
 
 **There is no defensible overall completion percentage yet.** Function names
 are not an implementation denominator, and the project has no weighted
@@ -29,19 +30,23 @@ generation, and verify complete paintings against fresh original runs.
 The latest screen-boundary work captured five complete source-bound natural
 `SCREEN-AND-STORE` units at 320×480. Their selected paths and color events
 reproduce 705 original writer bytes, but the JS routine still receives those
-events as inputs. The seed-1234 sixth unit captures three `PICK(27,28,29)`
-returns (29, 28, 28) alongside nested observed `RAN(0,2)` values (2, 1, 1);
-the first two returns match HDEX writes and the third has no following color
-write. This does not establish a general `PICK` or color rule. Typed snapshots
-for units 2 and 5 retain paired `PREVDEX` neighbor transitions and unpaired
-random returns, so the branch condition remains unresolved. Observed parent
-labels include `BRUSH-STROKE` and `PAINT-FILL`; they do not prove direct callers. See the
+events as inputs. A controlled probe tested `PICK(27,28,29)` across 16 seeds:
+all results equal the argument selected by one `RAN(0,2)` draw, and the next
+random value matches the one-draw control. The JS adapter matches all 16 rows.
+This is a bounded three-integer contract; other arities and types remain
+uncharacterized, and it does not explain the screen color branch. Unit 6's
+natural calls still return 29, 28, 28; the first two values match HDEX writes
+and the third has no following color write. Typed snapshots for units 2 and 5
+retain paired `PREVDEX` neighbor transitions and unpaired random returns, so
+the branch condition remains unresolved. Observed parent labels include
+`BRUSH-STROKE` and `PAINT-FILL`; they do not prove direct callers. See the
 [screen-unit findings](research/introspection/screen-unit-context.md) and
 [portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed 1234 unit 2](research/introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json), and
-[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
+[seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
+[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
+[controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
 
 The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
 correctly failed the observer's nonempty completion gate. The separate 320×480
@@ -50,11 +55,11 @@ resolution-specific diagnostic evidence, not an ordinal rule. The v5 observer
 was configured for unit 5 and matched fresh controls. Unit 6 is now accepted
 with a complete typed observer and fresh controls; its extra `PICK` return
 target adds exactly one validated `FIRST-PICK-RETURN` snapshot to the observer
-scene report. Metrics remain 30 routine names / 31 bounded contracts, 1/5
+scene report. Counts are now 31 routine names / 32 bounded contracts, 1/5
 milestones (20% by count), and zero whole-painting parity. There is still no
-defensible overall percentage. The next target is a controlled `PICK` contract
-probe across argument lengths and values, without generalizing from its three
-natural calls.
+defensible overall percentage. The next target is the unresolved color-write
+branch: identify which state and control-flow boundary distinguishes paired
+`PREVDEX` neighbor writes from unpaired `PICK`/`RAN` results.
 
 ## Follow the evidence
 

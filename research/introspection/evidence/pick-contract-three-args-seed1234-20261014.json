@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "function": "PICK",
+  "evidenceLevel": "bounded original-runtime contract",
+  "scope": {
+    "positionalArgumentCount": 3,
+    "argumentValues": [
+      27,
+      28,
+      29
+    ],
+    "randomSeeds": [
+      1234,
+      5678,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      42,
+      77,
+      2026,
+      65535
+    ],
+    "cases": 16
+  },
+  "observedBehavior": {
+    "selectedCandidatePositionMatchesDirectRAN": true,
+    "directRANBounds": [
+      0,
+      2
+    ],
+    "nextRANStateMatchesOneDirectDraw": true,
+    "nextRANStateDiffersFromNoPick": "16/16",
+    "exercisedCandidatePositions": [
+      0,
+      1,
+      2
+    ],
+    "javascriptAdapter": "Allegro501Random.pick(array)",
+    "javascriptMatches": "16/16"
+  },
+  "provenance": {
+    "observerRunId": "pick-contract-v5-observer-20261014-9f2b1b",
+    "controlBeforeRunId": "pick-contract-v5-before-20261014-483e83",
+    "controlAfterRunId": "pick-contract-v5-after-20261014-33bc1e",
+    "mode": "writer-stream-seed-1234",
+    "requiredReport": "aaron-pick-contract.txt",
+    "requiredEndMarker": "END pick-contract-v1",
+    "probeSourcePath": "research/introspection/pick-contract-v1.cl",
+    "probeSourceSha256": "ad1789cabdb748952893e7dd9c2726391d89a8312ead7a708761bfd610122ada",
+    "reportSha256": "c4ef32a7ba169de5b6e12c3ae32e96dfbf4fdb9efc9e11e85d97b45ae8a0ce1e",
+    "runnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+    "currentRunnerSha256": "a20f6e072308b48066787d4235e5b14c63ffcf7ae3d1867f78de8914214bffc9",
+    "runtimeHashes": {
+      "installer": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54",
+      "registryPatch": "d44bfa3392692265f5975a08b6ce55dd2c9f1121463e7fa15b874e86d07598e8",
+      "licensePatch": "751930946a82b00f8da4e8316f09a2001c949caf8e30150f8857822b16346bd9"
+    },
+    "controlOutputHashes": {
+      "aa0": "0f1b148f9b39c1dc5981e10742252b89119dc022aa7ebec5f9e275d659b79dc1",
+      "image": "42189c06d4383884268ab1b4935a015b4fc70300869a195a7511044f18897881",
+      "image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "aaron-scene-state-snapshot.txt": "a2f17602ba33d0ac1b80544c1a70c0ae657c60dad9110c075f9ce43b21e8b415",
+      "aaron-planning-call-trace.txt": "b14f3d24fea2631494e6e13385d919e5e576fc64bfd6e263553c5a01517a0903",
+      "aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+    },
+    "ordinaryStagedSourceHashes": {
+      "planning-call-trace.cl": "a60dcb73be6679b83ece1ec1c9a02469ebf6e9c27a904f3bf1f9ab60ca28e5dc",
+      "planning-random-seed-common.cl": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b",
+      "scene-state-snapshot-seeded-1234.cl": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a",
+      "scene-state-snapshot-writer-seeded-1234.cl": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc",
+      "scene-state-snapshot-writer-stream-seeded-1234.cl": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4",
+      "scene-state-snapshot.cl": "591e2828364511895d1d3f0801998dbaeb1ecc448886f5a00011e2f68a2b007d"
+    }
+  },
+  "cases": [
+    {
+      "seed": 1234,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 505923,
+        "nextRANAfterDirectDraw": 505923,
+        "nextRANWithoutPick": 808789,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 505923,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5678,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 326921,
+        "nextRANAfterDirectDraw": 326921,
+        "nextRANWithoutPick": 723658,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 326921,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 1,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 28,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 262802,
+        "nextRANAfterDirectDraw": 262802,
+        "nextRANWithoutPick": 85593,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 28,
+        "nextRANAfterPick": 262802,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 393550,
+        "nextRANAfterDirectDraw": 393550,
+        "nextRANWithoutPick": 922437,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 393550,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 3,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 232483,
+        "nextRANAfterDirectDraw": 232483,
+        "nextRANWithoutPick": 288384,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 232483,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 4,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 603858,
+        "nextRANAfterDirectDraw": 603858,
+        "nextRANWithoutPick": 64447,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 603858,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 5,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 28,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 448873,
+        "nextRANAfterDirectDraw": 448873,
+        "nextRANWithoutPick": 425678,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 28,
+        "nextRANAfterPick": 448873,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 6,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 728506,
+        "nextRANAfterDirectDraw": 728506,
+        "nextRANWithoutPick": 428421,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 728506,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 7,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 717462,
+        "nextRANAfterDirectDraw": 717462,
+        "nextRANWithoutPick": 260119,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 717462,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 8,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 129163,
+        "nextRANAfterDirectDraw": 129163,
+        "nextRANWithoutPick": 502660,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 129163,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 9,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 27,
+        "directRANIndex": 0,
+        "nextRANAfterPick": 504665,
+        "nextRANAfterDirectDraw": 504665,
+        "nextRANWithoutPick": 554081,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 27,
+        "nextRANAfterPick": 504665,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 10,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 349649,
+        "nextRANAfterDirectDraw": 349649,
+        "nextRANWithoutPick": 634056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 349649,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 42,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 82659,
+        "nextRANAfterDirectDraw": 82659,
+        "nextRANWithoutPick": 502296,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 82659,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 77,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 956682,
+        "nextRANAfterDirectDraw": 956682,
+        "nextRANWithoutPick": 551821,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 956682,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 2026,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 29,
+        "directRANIndex": 2,
+        "nextRANAfterPick": 854610,
+        "nextRANAfterDirectDraw": 854610,
+        "nextRANWithoutPick": 174919,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 29,
+        "nextRANAfterPick": 854610,
+        "matchesOriginal": true
+      }
+    },
+    {
+      "seed": 65535,
+      "argc": 3,
+      "arguments": [
+        27,
+        28,
+        29
+      ],
+      "original": {
+        "returnValue": 28,
+        "directRANIndex": 1,
+        "nextRANAfterPick": 708308,
+        "nextRANAfterDirectDraw": 708308,
+        "nextRANWithoutPick": 457056,
+        "selectionMatchesDirectRAN": true,
+        "stateMatchesOneDirectRANDraw": true
+      },
+      "javascript": {
+        "returnValue": 28,
+        "nextRANAfterPick": 708308,
+        "matchesOriginal": true
+      }
+    }
+  ],
+  "limitations": [
+    "Only three positional fixnums (27, 28, 29) and 16 seeded states are covered.",
+    "Zero-argument, singleton, other arities, other value types, and non-seeded startup states are uncharacterized.",
+    "Matching one-draw state advancement does not prove a direct source-level PICK-to-RAN call edge.",
+    "This does not establish when PICK results are written as colors, a general color rule, or whole-painting parity."
+  ]
+}

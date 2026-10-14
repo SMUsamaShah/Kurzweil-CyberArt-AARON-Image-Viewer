@@ -669,12 +669,18 @@ traced `RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns
 match HDEX writes and the third has no later color write. The verifier requires
 the scene report's sole observer delta to be its complete `FIRST-PICK-RETURN`
 snapshot and still checks fresh controls and source hashes. Unwrapped helpers
-could intervene; no direct source-level call edge, general PICK/color contract,
-JS contract, or milestone completion is claimed. See the [screen-unit
-findings](introspection/screen-unit-context.md) and [portable unit-6 evidence]
-(introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
-The next target is a controlled PICK probe across argument lengths/values,
-random state, and return shape.
+could intervene; those natural observations do not prove a direct source-level
+call edge or a color rule. A separate source-bound controlled triplet now
+supports the fixed three-integer `PICK(27,28,29)` contract across 16 seeds:
+the return and next random value match one `RAN(0,2)` draw, and the JS adapter
+matches all 16 rows. Other arities and types remain open. See the
+[screen-unit findings](introspection/screen-unit-context.md), [unit-6
+evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
+and [controlled PICK evidence]
+(introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
+The next target is the screen color-write branch: identify a state/control-flow
+boundary separating paired `PREVDEX` neighbor writes from unpaired
+`PICK`/`RAN` results, then test that boundary with fresh controls.
 
 The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
 calls and correctly failed the color observer's nonempty gate. In a separate

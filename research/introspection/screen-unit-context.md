@@ -35,6 +35,33 @@ list and three draws do not establish `PICK`'s general contract or a general
 color-selection rule. The complete typed calls, returns, state summaries, and
 source/control hashes are retained in the [unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json).
 
+## Controlled three-integer `PICK` contract
+
+The follow-up probe fixed the arguments to `(27 28 29)` and ran 16 isolated
+seeds: `1234, 5678, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 42, 77, 2026, 65535`.
+All three positions were selected. For all 16 rows, the original return
+equals the argument at the index from one direct `RAN(0,2)` draw; the next
+`RAN(0,1000000)` equals the value after that same single draw. All 16 no-draw
+checkpoints differ. The existing `Allegro501Random.pick` adapter and following
+random call match the original row-by-row.
+
+The source-bound before/observer/after triplet passed: all six drawing/scene
+output hashes and all six ordinary staged Lisp source hashes match across
+fresh uninstrumented controls. The portable checker also validates all 16
+case markers, the probe and runner hashes, complete `INSTALL`/`READY`/
+`COMPLETE`/`END` records, selected positions, the random checkpoints, and the
+JavaScript comparison.
+
+This is a bounded contract for one three-integer argument list and these
+seeds. It does not establish other argument counts, numeric types, values,
+hidden state, a source-level `PICK`-to-`RAN` call edge, or the downstream
+screen color decision. The static REA dossier still reports the dispatch as
+computed `CALL EDI` with no resolved targets; this dynamic equivalence does not
+resolve that callsite or identify a direct Lisp caller. See the [probe]
+(pick-contract-v1.cl), [portable evidence]
+(evidence/pick-contract-three-args-seed1234-20261014.json), and [derivation
+helper](../tools/derive-pick-contract-evidence.mjs).
+
 ## Observed event order
 
 The first five `RAN` argument pairs match across the two seeds, but their
@@ -121,6 +148,7 @@ See the [seed-1234 unit-1 evidence](evidence/screen-unit-context-seed1234-202610
 [seed-1234 unit-2 evidence](evidence/screen-unit-context-seed1234-unit2-20261014.json),
 [seed-1234 unit-5 evidence](evidence/screen-unit-context-seed1234-unit5-20261014.json),
 [seed-1234 unit-6 evidence](evidence/screen-unit-context-seed1234-unit6-20261014.json),
+[controlled PICK evidence](evidence/pick-contract-three-args-seed1234-20261014.json),
 [capture observer v1](screen-unit-context-v1.cl),
 [capture observer v2](screen-unit-context-v2.cl),
 [capture observer v3](screen-unit-context-v3.cl),
@@ -135,9 +163,10 @@ The v4 probe's third unit at 768×1080 was a successful but empty screen call.
 It had no `PREP-LINE` or writer calls, so the observer correctly emitted
 `INCOMPLETE`; keep that attempt as diagnostics only. In a separate 320×480 v5
 run, ordinal 3 is populated. This is run- and resolution-specific evidence,
-not an ordinal rule. The sixth unit is now a complete typed sample, including
-three `PICK` returns. The next target is a controlled `PICK` contract probe:
-vary argument count and values while recording random-state consumption and
-return shape, with fresh uninstrumented controls. Keep the natural
-`PICK(27,28,29)` sample as one observation only, and do not implement a general
-color formula from these screen units.
+not an ordinal rule. The controlled probe now supports the fixed three-integer
+`PICK(27,28,29)` contract across 16 seeds and matches the JS adapter 16/16.
+The next target is the downstream color-write branch: use the paired and
+unpaired screen-unit events to identify a discriminating runtime state or
+control-flow boundary, then test it with fresh uninstrumented controls. Do not
+infer a general color rule from the five natural units or extend the PICK
+contract to untested arities.

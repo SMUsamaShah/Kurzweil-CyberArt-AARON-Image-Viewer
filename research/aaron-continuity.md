@@ -24,8 +24,8 @@ predicts 12/12. Only the last matches both observed counts, but these are
 finite local replays, not a recovered general rule. The captures used 320×480
 and 768×1080 scenes respectively. Across nine isolated one-edge cases, JS
 matches four and differs by one step in five. The canonical matrix remains
-26/30 matches, 4 mismatches, 10 unclassified. Counts remain 30 routine names /
-31 bounded contracts, 1/5 milestones (20% by count), and zero whole-painting
+26/30 matches, 4 mismatches, 10 unclassified. Counts are now 31 routine names /
+32 bounded contracts, 1/5 milestones (20% by count), and zero whole-painting
 parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-20261014-v8.json),
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json),
 [FREE-PATH findings](introspection/free-path-native.md), and the active
@@ -39,22 +39,28 @@ RAN returns leave the color branch unresolved. Unit 6 captures three natural
 `PICK(27,28,29)` calls returning 29, 28, and 28, each with a nearest-traced
 `RAN(0,2)` child returning 2, 1, and 1. The first two PICK returns match HDEX
 writes; the third has no later color write. Unwrapped helpers could intervene,
-so this is not proof of direct source-level call edges or a general PICK/color
-contract. The PICK return target adds one complete `FIRST-PICK-RETURN` block
-to the observer scene report; the strict verifier checks that the block is the
-only delta against matching fresh controls. No JS contract or milestone
-completion is claimed. See
+so this is not proof of direct source-level call edges or a general color
+contract. A separate controlled triplet tested `PICK(27,28,29)` at 16 seeds:
+all three positions occur, each return matches one `RAN(0,2)` draw, and the
+next random value matches one-draw state. The existing JS adapter matches
+16/16. This is limited to that three-integer list and does not prove a direct
+`PICK`-to-`RAN` call edge or the screen color decision. The PICK return target
+adds one complete `FIRST-PICK-RETURN` block to the observer scene report; the
+strict verifier checks that the block is the only delta against matching
+fresh controls. Counts are 31 routine names / 32 bounded contracts; milestone
+progress and whole-painting parity remain unchanged. See
 [screen-unit findings](introspection/screen-unit-context.md),
 [seed-1234 unit-1 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed-5678 unit-1 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed-1234 unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
-[seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json), and
-[seed-1234 unit-6 evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json).
+[seed-1234 unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
+[seed-1234 unit-6 evidence](introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
+[controlled PICK evidence](introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
 
-The next target is a controlled `PICK` contract probe across argument lengths
-and values, recording random-state consumption and return shape with fresh
-controls. Do not generalize from the three natural unit-6 calls. Keep
-FREE-PATH's unresolved path generation explicit.
+The next target is the unresolved screen color-write branch. Identify a
+state/control-flow boundary that separates paired `PREVDEX` neighbor writes
+from unpaired `PICK`/`RAN` results, then design a falsifiable probe with fresh
+controls. Keep FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

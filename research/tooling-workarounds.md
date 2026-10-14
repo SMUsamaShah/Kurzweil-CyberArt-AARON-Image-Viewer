@@ -514,6 +514,27 @@ v6c root can be revalidated offline with this stricter gate; a new original run
 is unnecessary if it passes and the typed evidence parser accepts the paired
 PICK calls.
 
+## Probe and tooling recovery
+
+### Pre-scene Lisp probe package resolution
+
+Some local probes are inserted before scene initialization, when the Lisp
+reader may not yet know the `EXCL` package. A reader-time form such as
+`EXCL:...` can therefore fail before the probe's `INSTALL` marker appears;
+this is a probe-source ordering issue, not a `C:\temp` or Java permission
+failure. Avoid package-qualified symbols in code read at that stage. Resolve
+the package and symbol dynamically inside the helper, after evaluation has
+begun; [`pick-contract-v1.cl`](introspection/pick-contract-v1.cl) uses
+`find-package`/`find-symbol` for this pattern.
+
+Treat the capture as valid only when its observer emits `INSTALL`, `READY`,
+per-case result rows, `COMPLETE`, and `END`. `READY` alone does not show that a
+case ran, and a missing row or terminal marker is an incomplete probe even if
+the runner later times out. Preserve each failed output root for diagnosis,
+allow the runner's cleanup/watchdog path to finish, inspect for remaining
+AARON/oracle processes and staged files, then use a fresh root for the retry.
+Never overwrite a failed root or fill missing evidence with inferred results.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

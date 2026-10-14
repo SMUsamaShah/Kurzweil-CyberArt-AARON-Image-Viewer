@@ -1625,3 +1625,18 @@ run- and resolution-specific difference, not an ordinal rule. See the
 [seed-1234 unit 2](screen-unit-context-seed1234-unit2-20261014.json), and
 [seed-1234 unit 5](screen-unit-context-seed1234-unit5-20261014.json), and
 [seed-1234 unit 6](screen-unit-context-seed1234-unit6-20261014.json).
+
+## Controlled three-integer PICK contract, 2026-10-14
+
+[`pick-contract-three-args-seed1234-20261014.json`](pick-contract-three-args-seed1234-20261014.json)
+binds 16 controlled `PICK(27,28,29)` cases to the checked-in probe and local
+runner hashes, complete source-bound before/observer/after controls, all 16
+per-case stage records, and the JavaScript adapter comparison. The original
+return matches the argument selected by one direct `RAN(0,2)` draw; the next
+random value matches the one-draw control in all 16 rows. `PICK` and the JS
+adapter agree on all rows. The six drawing/scene output hashes and six ordinary
+staged Lisp source hashes match across fresh controls. This is limited to the
+fixed three-integer input and tested seeds; it does not identify a Lisp caller,
+establish other arities/types, or explain the downstream color-write branch.
+Rebuild it with [`derive-pick-contract-evidence.mjs`](../../tools/derive-pick-contract-evidence.mjs)
+from the three retained ignored oracle roots documented in the JSON.
