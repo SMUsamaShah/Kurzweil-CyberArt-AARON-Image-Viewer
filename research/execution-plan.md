@@ -660,22 +660,24 @@ nine isolated cases, JS matches four and differs by one step in five. See the
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-Three complete natural screen-unit context triplets now cover the first
-post-`RPARSE` `SCREEN-AND-STORE` call for seeds 1234 and 5678, plus the second
-unit for seed 1234. Their captured points and `AARGB` decisions replay 427
-original writer bytes. The v3 observer adds typed `RAN` values and state
-snapshots at random, color-write, and `PREP-LINE` boundaries. In seed-1234
-unit 2, `RAN(0,2)→0` with `PREVDEX=28` precedes `HDEX=27`, then a return of 1
-with `PREVDEX=27` precedes `HDEX=28`. An earlier return of 1 in that unit has
-no HDEX write before the next random call; a later return of 1 in the
-seed-5678 unit has no further write before return. The random value alone is
-not a sufficient condition; no upstream color contract or milestone
-completion is claimed. The [screen-unit findings](introspection/screen-unit-context.md)
-retain the source-bound triplets and limits.
+Four complete natural screen-unit context triplets now cover seed-1234 units
+1, 2, and 5, plus seed-5678 unit 1 at 320×480. Their captured points and
+`AARGB` decisions replay 566 original writer bytes. Typed snapshots in
+seed-1234 units 2 and 5 repeat paired local transitions: `RAN(0,2)→0` with
+`PREVDEX=28` precedes `HDEX=27`, and `RAN(0,2)→1` with `PREVDEX=27` precedes
+`HDEX=28`. Unit 2 has an unpaired return of 1 and unit 5 an unpaired return of
+0. The random value alone is not a sufficient condition; no upstream color
+contract or milestone completion is claimed. The [screen-unit findings]
+(introspection/screen-unit-context.md) retain the source-bound triplets and
+limits.
 
-Next, capture the third post-`RPARSE` seed-1234 unit with the same v3 typed
-event-state observer. Compare the `PREVDEX`/`HDEX` transitions and random return
-values with the second unit in the same scene. Require fresh uninstrumented
-controls to match all scene outputs and ordinary staged sources. This remains
-a bounded observation of color decisions; keep FREE-PATH and point-generation
-inputs explicit until independently established.
+The v4 probe's third seed-1234 unit at 768×1080 had no `PREP-LINE` or writer
+calls and correctly failed the color observer's nonempty gate. In a separate
+320×480 v5 run, ordinal 3 is populated, so the v4 result is diagnostic rather
+than an ordinal rule. The v5 observer was configured for unit 5 and matched
+fresh controls. Its retained inventory identifies unit 6 as populated (39
+points, with color writes before points 0 and 14). The next capture will select
+unit 6 and observe `PICK`, a listed `SCREEN-AND-STORE` dependency, while
+retaining typed event snapshots and fresh source-bound controls. This candidate
+still requires its own triplet. Keep FREE-PATH and point-generation inputs
+explicit until independently established.

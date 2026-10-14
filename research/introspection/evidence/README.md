@@ -1606,3 +1606,19 @@ Recreate it with
 and the input report/probe documented in
 [`free-path-boundaries.md`](../free-path-boundaries.md). This is finite
 function evidence, not a general stop-rule or whole-painting parity result.
+
+## Natural screen-unit context samples, 2026-10-14
+
+Four source-bound before/observer/after triplets cover seed-1234 units 1, 2,
+and 5 plus seed-5678 unit 1. Their exact path/color slices total 566 writer
+bytes. Typed event snapshots in seed-1234 units 2 and 5 repeat two local
+`PREVDEX` neighbor transitions, while unpaired random returns show that
+`RAN(0,2)` alone does not determine whether a color write occurs. The v4
+768×1080 attempt selected an empty third unit and is excluded from the accepted
+set; a separate 320×480 v5 trace has a populated third unit. Treat that as a
+run- and resolution-specific difference, not an ordinal rule. See the
+[findings and limits](../screen-unit-context.md) and the portable captures:
+[seed-1234 unit 1](screen-unit-context-seed1234-20261014.json),
+[seed-5678 unit 1](screen-unit-context-seed5678-20261014.json),
+[seed-1234 unit 2](screen-unit-context-seed1234-unit2-20261014.json), and
+[seed-1234 unit 5](screen-unit-context-seed1234-unit5-20261014.json).

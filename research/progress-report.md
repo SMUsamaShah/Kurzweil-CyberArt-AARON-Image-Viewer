@@ -20,7 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 3 units across seeds 1234 and 5678 | Their selected paths reproduce 427 writer bytes total. Typed snapshots show two color-associated `PREVDEX` neighbor transitions in seed-1234 unit 2, but an unpaired identical RNG result leaves the branch condition unresolved; no JS contract is added. |
+| Natural screen-unit context samples | 4 units across seeds 1234 and 5678 | Their selected paths reproduce 566 writer bytes total. Typed snapshots repeat two local `PREVDEX` neighbor transitions in seed-1234 units 2 and 5, while unpaired `RAN(0,2)` returns leave the branch condition unresolved; no JS contract is added. The next candidate is a populated sixth unit, with a new `PICK` boundary capture planned. |
 
 The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -371,24 +371,27 @@ random result alone as a sufficient trigger. `COLORDEX`, `CDEX`, and `HDEX` are 
 inspected package state at the event boundaries; the color index is recorded
 as an `AARGB` writer argument. This does not recover the branch condition.
 
-Across the three selected units (seed 1234 units 1 and 2; seed 5678 unit 1),
-the exact path/color slices total 427 bytes. The JS screen adapter still
+Across the four accepted units (seed 1234 units 1, 2, and 5; seed 5678 unit 1),
+the exact path/color slices total 566 bytes. The JS screen adapter still
 consumes captured path points and color events, so counts remain 30 routine
 names / 31 bounded contracts, 1 of 5 milestones (20% by count), and zero
 whole-painting parity. See the [screen-unit findings](introspection/screen-unit-context.md),
 [unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json),
-and [typed observer](introspection/screen-unit-context-v3.cl).
+[unit-5 evidence](introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
+and [typed observer](introspection/screen-unit-context-v5.cl).
 
-The next discriminating capture is the third post-`RPARSE` seed-1234 unit,
-using the same typed event-state observer and fresh controls. Compare whether
-it repeats the `PREVDEX` neighbor transitions or produces a different
-random/state combination before the next color write.
+The v4 probe's third post-`RPARSE` unit at 768×1080 had no `PREP-LINE` or
+writer calls, so the observer rejected it. In a separate 320×480 v5 run,
+ordinal 3 is populated; do not treat the v4 outcome as an ordinal rule. The v5
+observer was configured for unit 5 and reproduced the same local neighbor
+transitions as unit 2, but each unit also contains an unpaired random result.
+This remains a bounded observation; it does not identify the branch condition.
 
-The next investigation is a natural `SCREEN-AND-STORE`/`PREP-LINE` drawing
-unit to advance the incomplete scene-decision milestone. Capture its caller
-path, color and brush context, RNG boundary, map state, and complete writer
-subtrace. The existing screen-unit fixtures establish point-to-writer bytes
-only; they do not establish those upstream decisions.
+The next investigation is seed-1234 unit 6 at 320×480, with a `PICK` trace
+added to the typed `RAN`, `AARGB`, and `PREP-LINE` observer. The retained v5
+inventory identifies two color changes in that unit, but fresh controls and a
+completed observer are still required. The existing screen-unit fixtures
+establish point-to-writer bytes only; they do not establish upstream decisions.
 
 ## What remains before a general AARON-equivalent generator
 
