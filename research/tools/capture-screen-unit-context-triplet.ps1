@@ -3,11 +3,13 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12')]
+    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
     [string]$RunPrefix,
+
+    [string]$ExistingBeforeRoot,
 
     [ValidateRange(30, 600)]
     [int]$RunSeconds = 180
@@ -22,6 +24,9 @@ $ErrorActionPreference = 'Stop'
 if (-not $PSBoundParameters.ContainsKey('RunPrefix')) {
     $RunPrefix = "screen-context-$ProbeVersion"
 }
+if ($ProbeVersion -eq 'v13' -and $Seed -ne '1234') {
+    throw 'Probe v13 is restricted to the seed-1234 unit-2 PICK evidence.'
+}
 if ($RunPrefix -notmatch '^[a-z0-9][a-z0-9-]{0,24}$') {
     throw 'RunPrefix must contain 1 to 25 lowercase letters, digits, or hyphens.'
 }
@@ -35,6 +40,45 @@ $mode = "screen-unit-seed-$Seed"
 $probeOutput = "aaron-$probeTag.txt"
 $probeEnd = "END $probeTag"
 $externalRoot = Join-Path $repoRoot 'research\extracted\local-oracle\external-runs'
+
+if ($ExistingBeforeRoot) {
+    if ($ProbeVersion -ne 'v13' -or $Seed -ne '1234') {
+        throw 'ExistingBeforeRoot is restricted to the v13 seed-1234 PICK intervention.'
+    }
+    $allowedBeforeParent = [IO.Path]::GetFullPath($externalRoot).TrimEnd('\') + '\'
+    $resolvedBeforeRoot = [IO.Path]::GetFullPath($ExistingBeforeRoot)
+    if (-not $resolvedBeforeRoot.StartsWith($allowedBeforeParent, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "ExistingBeforeRoot must be an archived run under $externalRoot; it was not modified."
+    }
+    if (-not (Test-Path -LiteralPath $resolvedBeforeRoot -PathType Container)) {
+        throw "ExistingBeforeRoot does not exist: $resolvedBeforeRoot"
+    }
+    $existingSummaryPath = Join-Path $resolvedBeforeRoot 'summary.json'
+    $existingAa0Path = Join-Path $resolvedBeforeRoot 'capture\aa0'
+    foreach ($requiredFile in @($existingSummaryPath, $existingAa0Path)) {
+        if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
+            throw "ExistingBeforeRoot is incomplete; missing $requiredFile"
+        }
+    }
+    $existingSummary = Get-Content -LiteralPath $existingSummaryPath -Raw | ConvertFrom-Json
+    $existingHeader = (Get-Content -LiteralPath $existingAa0Path -TotalCount 1).Trim()
+    $existingAa0Hash = (Get-FileHash -LiteralPath $existingAa0Path -Algorithm SHA256).Hash.ToLowerInvariant()
+    $existingFinishedAt = [DateTimeOffset]::Parse([string]$existingSummary.finishedAt)
+    $existingAge = [DateTimeOffset]::UtcNow - $existingFinishedAt
+    if (-not $existingSummary.complete -or
+        $existingSummary.mode -ne 'screen-unit-seed-1234' -or
+        $existingSummary.preSceneProbeSha256 -or
+        @($existingSummary.probeOutputNames).Count -ne 0 -or
+        $existingSummary.requiredProbeOutputName -or
+        -not $existingSummary.probeCompletionSatisfied -or
+        $existingAge.TotalMinutes -lt 0 -or $existingAge.TotalMinutes -gt 30 -or
+        $existingHeader -notmatch '^768\s+1080(?:\s|$)' -or
+        $existingAa0Hash -ne '405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a' -or
+        $existingSummary.aa0Sha256.ToLowerInvariant() -ne $existingAa0Hash) {
+        throw 'ExistingBeforeRoot failed the v13 fresh uninstrumented 768x1080 control gate; it was not modified.'
+    }
+    $ExistingBeforeRoot = $resolvedBeforeRoot
+}
 
 foreach ($path in @($prepareScript, $runnerScript, $probePath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -180,20 +224,37 @@ function Invoke-TripletLeg {
 }
 
 Assert-NoAaronProcess
-Invoke-TripletLeg -Role before
+if ($ExistingBeforeRoot) {
+    $runRoots.before = $ExistingBeforeRoot
+    $existingAa0Hash = (Get-Content -LiteralPath (Join-Path $ExistingBeforeRoot 'summary.json') -Raw | ConvertFrom-Json).aa0Sha256
+    Write-Output "before $ExistingBeforeRoot AA0=$existingAa0Hash (reused verified fresh uninstrumented control)"
+} else {
+    Invoke-TripletLeg -Role before
+}
+if ($ProbeVersion -eq 'v13') {
+    # This treatment is only interpretable against the measured
+    # seed-1234 unit-2 768x1080 case. Use the actual AA0 header and stop after
+    # the first control if the live runtime chooses another canvas; never set
+    # display preferences to force a match.
+    $beforeAa0Path = Join-Path $runRoots.before 'capture\aa0'
+    $beforeHeader = (Get-Content -LiteralPath $beforeAa0Path -TotalCount 1).Trim()
+    if ($beforeHeader -notmatch '^768\s+1080(?:\s|$)') {
+        throw "Probe v13 requires a fresh 768x1080 control; measured '$beforeHeader'. The before root was retained and no observer was launched."
+    }
+}
 Invoke-TripletLeg -Role observer
 Invoke-TripletLeg -Role after
 
 $node = (Get-Command node -ErrorAction Stop).Source
 $observerOnlyOutputs = @('aaron-planning-call-trace.txt')
-if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12')) {
+if ($ProbeVersion -in @('v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13')) {
     # PICK's requested return target causes the scene observer to append its
     # bounded PICK-return snapshot. The verifier compares the controls and
     # requires that exact snapshot to be the only observer scene-report delta.
     $observerOnlyOutputs += 'aaron-scene-state-snapshot.txt'
 }
 $verifyArguments = @($runRoots.before, $runRoots.observer, $runRoots.after)
-if ($ProbeVersion -in @('v11', 'v12')) {
+if ($ProbeVersion -in @('v11', 'v12', 'v13')) {
     # The intervention is allowed to change the generated AA0 and rendered
     # preview outputs. The
     # verifier still requires byte-identical uninstrumented controls and
@@ -221,8 +282,8 @@ $requiredMarkers = @(
     '^UNIT-EXIT id=\d+ status=SUCCESS ',
     '^COMPLETE unit-id=\d+ prep-count=\d+ store-count=\d+ writer-first=\d+ writer-last=\d+ ran-count=\d+$'
 )
-if ($ProbeVersion -in @('v11', 'v12')) {
-    $interventionOrdinal = if ($ProbeVersion -eq 'v11') { 1 } else { 2 }
+if ($ProbeVersion -in @('v11', 'v12', 'v13')) {
+    $interventionOrdinal = @{ v11 = 1; v12 = 2; v13 = 1 }[$ProbeVersion]
     $requiredMarkers += '^PICK-INTERVENTION-COMPLETE target-ordinal=' + $interventionOrdinal +
         ' selected-pick-count=\d+ substitution-count=1 target-call-id=\d+ native=-?\d+ caller=-?\d+ prevdex=-?\d+$'
 }

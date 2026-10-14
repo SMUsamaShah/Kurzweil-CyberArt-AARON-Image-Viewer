@@ -36,27 +36,35 @@ value matches the one-draw control; the JS adapter matches all 16 rows.
 Separately, 12 natural calls across units 2, 3, 5, and 6 fit one
 `PICK-return-differs-from-PREVDEX` candidate: eight differing returns are
 followed by matching HDEX writes and four equal returns have no following
-write. Those units are from the same seed-1234 painting. Two fresh 768×1080
-interventions then changed the first and second selected unit-2 PICK results
-to equal `PREVDEX`, leaving each natural random draw intact. Neither was
-followed by an HDEX write, as the candidate predicts. The source-bound
-before/observer/after triplets have matching controls and ten matching
-ordinary staged sources; their AA0 and preview image intentionally differ.
-The writer tape is a 50,000-call prefix
-of 100,029 total calls, but it covers the selected 12-call unit slice. These
-are two equality-side tests in one seed and regime, not a general color rule,
-independent-seed holdout, direct caller proof, or JS contract. See the
+write. Those units are from the same seed-1234 painting. Two source-bound
+768×1080 interventions then changed the first and second selected unit-2 PICK
+results to equal `PREVDEX`, leaving each natural random draw intact. Neither
+was followed by an HDEX write, as the candidate predicts.
+
+A third controlled intervention at the same measured 768×1080 unit changed
+the first PICK's caller-visible value from natural 34 to 33 while
+`PREVDEX=35`; its nested `RAN(0,2)` returned index 1 and was preserved. The
+next captured color write was `HDEX=33` at call 965 / writer ordinal 804,
+before the next PICK. This matches the candidate's opposite-side prediction
+in this one seed and unit. The complete source-bound observer has six matching
+control outputs and ten matching ordinary staged sources. Its reused fresh
+no-probe before root was captured shortly before the observer and was checked
+against the fresh after root; AA0 and image differ intentionally, while image
+ID is unchanged. The writer tape is a 50,000-call prefix of 100,029 calls, but
+covers the selected 12-call unit slice. This does not establish an independent
+seed rule, direct caller, general color rule, JS contract, or parity. See the
 [screen-unit findings](research/introspection/screen-unit-context.md) and
 [portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
 [seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
 [seed 1234 unit 2](research/introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json), and
 [seed 1234 unit 3](research/introspection/evidence/pick-prevdex-seed1234-unit3-20261014.json),
 [seed 1234 unit 5](research/introspection/evidence/screen-unit-context-seed1234-unit5-20261014.json),
-[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json), and
+[seed 1234 unit 6](research/introspection/evidence/screen-unit-context-seed1234-unit6-20261014.json),
 [12-case natural candidate](research/introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 [controlled PICK evidence](research/introspection/evidence/pick-contract-three-args-seed1234-20261014.json),
 [first return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json), and
-[second return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
+[second return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
+[opposite-side return intervention](research/introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json).
 
 The v4 probe's third unit at 768×1080 had no `PREP-LINE` or writer calls and
 correctly failed the observer's nonempty completion gate. The separate 320×480
@@ -71,9 +79,10 @@ milestones (20% by count), and zero whole-painting parity. There is still no
 defensible overall percentage. The next target is the terminal third `PICK`
 in the 320×480 seed-1234 unit-6 evidence: natural return 28 equals
 `PREVDEX=28`. Preserve its nested random draw, substitute caller-visible 27,
-and check for `HDEX=27` before unit end. This is an opposite-side causal test
-for the candidate, not an independent-seed holdout; follow it with an
-independent seed and fresh controls.
+and check for `HDEX=27` before unit end. Require a fresh control whose AA0
+header actually measures 320×480; never force the display mode. This is a
+second regime check in the same seed, not an independent-seed holdout; follow
+it with an independent seed and fresh controls.
 
 ## Follow the evidence
 

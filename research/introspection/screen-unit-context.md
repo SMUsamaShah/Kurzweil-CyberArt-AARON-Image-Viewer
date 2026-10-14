@@ -199,22 +199,30 @@ not an ordinal rule. The controlled probe supports the fixed three-integer
 
 The v11 and v12 source-bound interventions targeted the first and second
 selected `PICK` calls in seed-1234 unit 2 at 768×1080. Each native return was
-different from the captured `PREVDEX`; the intervention preserved the nested
-`RAN(0,2)` draw and substituted the caller-visible return with `PREVDEX`.
-Neither selected call was followed by an HDEX write, matching the candidate's
-prediction. Fresh before/after controls match six outputs, ten ordinary staged
-sources match, and the observer's AA0 and preview image are separately hashed
-as intentional differences. Each observer has only a 50,000-call writer-tape
-prefix of 100,029 calls, but it covers the selected 12-call unit slice. These
-are two equality-side interventions in one seed and canvas regime. They do
-not test the opposite side, prove a direct Lisp caller, establish a general
-color rule, or add a JS contract. See the [v11 evidence](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json)
-and [v12 evidence](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
+different from `PREVDEX`; each intervention preserved its nested `RAN(0,2)`
+draw and substituted caller-visible `PREVDEX`. Neither was followed by an
+HDEX write, matching the equality-side candidate prediction.
+
+V13 targeted the same unit's first `PICK(33,34,35)`. The natural return was
+34 with `PREVDEX=35`; nested `RAN(0,2)` selected index 1. Substituting only
+the caller-visible value to 33 was followed by `HDEX=33` at call 965 / writer
+ordinal 804, before the next PICK. This matches the candidate's opposite-side
+prediction for this case. Its complete observer report is source-hashed. A
+complete no-probe control captured just before the observer was reused; that
+control and the fresh after run match six outputs, and ten ordinary staged
+source hashes match. The observer's AA0 and image differ intentionally and
+are hash-bound; image ID is unchanged. Its writer tape is a 50,000-call
+prefix of 100,029 calls, but covers the selected unit's 12 writer calls.
+Together, v11–v13 are one-seed, one-regime evidence. They do not prove a
+direct Lisp caller, establish a general color rule, add a JS contract, or
+count as parity. See [v11](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+[v12](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json), and
+[v13](evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json).
 
 Next, use the terminal third `PICK` in the 320×480 seed-1234 unit-6 evidence:
 its natural return 28 equals `PREVDEX=28`, and no HDEX write follows before
 unit end. Preserve its nested random draw, substitute caller-visible 27, and
-check whether `HDEX=27` appears before unit end. This is an opposite-side
-causal test in the existing seed/canvas regime, not an independent-seed
-holdout. Require a fresh source-bound triplet and controls, then add an
-independent seed before promoting the candidate.
+check whether `HDEX=27` appears before unit end. Require a fresh uninstrumented
+control whose AA0 header measures 320×480; never force the display mode. This
+tests a second regime in the same seed, not an independent-seed holdout. Then
+capture an independent seed before promoting the candidate.

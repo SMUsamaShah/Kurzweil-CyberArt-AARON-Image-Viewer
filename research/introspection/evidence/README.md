@@ -1670,7 +1670,7 @@ establish other arities/types, or explain the downstream color-write branch.
 Rebuild it with [`derive-pick-contract-evidence.mjs`](../../tools/derive-pick-contract-evidence.mjs)
 from the three retained ignored oracle roots documented in the JSON.
 
-## PICK/PREVDEX equality-side return interventions (2026-10-14)
+## PICK/PREVDEX return interventions (2026-10-14)
 
 [`pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json`](pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json)
 and [`pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json`](pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json)
@@ -1691,3 +1691,18 @@ intervention evidence, not a full-tape capture, direct source caller proof,
 general color rule, independent-seed test, JavaScript contract, or parity
 result. Re-derive from the retained roots in each JSON's `source` object with
 [`derive-pick-return-intervention-evidence.mjs`](../../tools/derive-pick-return-intervention-evidence.mjs).
+
+[`pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json`](pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json)
+records the opposite-side treatment in the same measured seed-1234, unit-2,
+768×1080 context. The first `PICK(33,34,35)` naturally returns 34 while
+`PREVDEX=35`; its nested `RAN(0,2)` selects index 1. Substituting only the
+caller-visible return with 33 is followed by `HDEX=33` at call 965 / writer
+ordinal 804, before the next PICK. The 50,000-call tape prefix covers the
+selected unit's 12 writer calls. The source-bound observer matches six
+control outputs and ten ordinary Lisp sources; its AA0 and image differences
+are intentional and separately hash-bound, and image ID is unchanged. A
+complete no-probe before root from the immediate preflight was reused and
+checked against a fresh after control. This is one bounded candidate match,
+not a general rule, direct caller proof, independent-seed result, JavaScript
+contract, or parity. Re-derive from the three roots listed in the evidence
+file with [`derive-pick-return-intervention-evidence.mjs`](../../tools/derive-pick-return-intervention-evidence.mjs).

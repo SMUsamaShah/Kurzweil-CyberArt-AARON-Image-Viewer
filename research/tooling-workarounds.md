@@ -452,6 +452,27 @@ arguments. `capture-screen-unit-context-triplet.ps1` now uses this pattern;
 its run prefix also defaults from the selected probe version so a v5 capture
 cannot be mislabeled v1.
 
+### Reusing a retained v13 before control
+
+For the seed-1234 v13 PICK intervention only, the triplet runner accepts
+`-ExistingBeforeRoot` to reuse a just-captured complete no-probe control and
+avoid spending another oracle run on a redundant before leg. The runner
+restricts the path to the ignored `external-runs` tree, checks completion,
+mode, no observer instrumentation, a maximum age of 30 minutes, the measured
+768×1080 AA0 header, and its expected hash. It never edits the retained root.
+The usual after leg still runs fresh, and the strict triplet verifier compares
+all controls and ordinary staged sources; do not reuse a control if another
+oracle has run or its mode/hash gate fails. This does not force the display
+mode. Example:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass `
+  -File research\tools\capture-screen-unit-context-triplet.ps1 `
+  -Seed 1234 -ProbeVersion v13 -RunPrefix pickunit2diff `
+  -ExistingBeforeRoot 'research\extracted\local-oracle\external-runs\<run>-before' `
+  -RunSeconds 180
+```
+
 ### Empty natural screen units and capped writer prefixes
 
 The screen-unit observer can print a proper empty path as

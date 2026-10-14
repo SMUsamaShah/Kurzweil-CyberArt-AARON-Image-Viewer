@@ -163,7 +163,7 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
   requireValue(report.endsWith(endMarker),
     `required report does not end with ${JSON.stringify(endMarker)}`);
   if (intentionalDifferenceNames.size > 0) {
-    requireValue(/^aaron-screen-unit-context-v(?:11|12)\.txt$/.test(requiredReport),
+    requireValue(/^aaron-screen-unit-context-v(?:11|12|13)\.txt$/.test(requiredReport),
       'intentional image divergence is reserved for the source-bound PICK intervention probes');
     for (const marker of ['PICK-SUBSTITUTION ', 'PICK-CALLER-RETURN ',
       'PICK-INTERVENTION-COMPLETE ']) {

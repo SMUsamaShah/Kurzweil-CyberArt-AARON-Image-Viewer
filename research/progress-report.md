@@ -521,12 +521,34 @@ percentage is defensible. See [v11 intervention evidence]
 [screen-unit findings](introspection/screen-unit-context.md), and the
 [evidence index](introspection/evidence/README.md).
 
-The next target is the terminal third `PICK` in the 320×480 seed-1234 unit-6
-evidence: its natural return 28 equals `PREVDEX=28`, and no HDEX write follows
-before unit end. Preserve the nested random draw, substitute caller-visible
-27, and check for `HDEX=27` before unit end. This is the opposite-side causal
-test in the existing regime, not an independent-seed holdout. Require a fresh
-source-bound triplet and controls, then add an independent seed before
+## 2026-10-14 PICK return intervention to a different value
+
+A complete source-bound observer targeted the first PICK in seed-1234 unit 2
+at measured 768×1080. It preserved the natural `PICK(33,34,35)` result 34 and
+its nested `RAN(0,2)` index 1, then changed only the caller-visible result to
+33 while `PREVDEX=35`. Before the next PICK, the captured HDEX event was 33
+at call 965 / writer ordinal 804, matching the candidate's opposite-side
+prediction. The v11/v12 equality-side cases and this intervention together
+support both observed sides for this one seed and canvas; they do not establish
+a general rule, direct Lisp caller, independent-seed behavior, or JS contract.
+
+The observer's 50,000-call writer prefix covers the selected unit's 12 writer
+calls, although the full tape contains 100,029 calls. A complete no-probe
+control from the immediate v13 preflight was reused as the before leg and
+cross-checked against a fresh after control: six outputs and ten ordinary
+staged sources match. The observer's AA0 and image differ intentionally;
+image ID is unchanged. Function/contract totals remain 31/32, milestones
+remain 1/5 (20% by count), and whole-painting parity remains zero. See the
+[v13 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json),
+[screen-unit findings](introspection/screen-unit-context.md), and
+[evidence index](introspection/evidence/README.md).
+
+Next, test the terminal third `PICK` in seed-1234 unit 6 at 320×480: its
+natural result 28 equals `PREVDEX=28` with no following HDEX write before
+unit end. Preserve the random draw, substitute caller-visible 27, and check
+for `HDEX=27`. Require a fresh no-probe control whose AA0 header actually
+measures 320×480; do not force the display mode. This adds a second regime in
+the same seed, not an independent-seed holdout. Add an independent seed before
 promoting the candidate.
 
 The current generator is therefore a useful partial implementation and

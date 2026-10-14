@@ -60,23 +60,30 @@ and whole-painting parity remain unchanged. See
 [12-case candidate report](introspection/evidence/pick-prevdex-natural-candidate-units2-3-5-6-20261014-v2.json),
 [controlled PICK evidence](introspection/evidence/pick-contract-three-args-seed1234-20261014.json).
 
-Two source-bound seed-1234 unit-2 interventions at measured 768×1080 then
-changed the first and second selected PICK returns to equal `PREVDEX`, while
-preserving each nested `RAN(0,2)` draw. Neither selected call was followed by
-an HDEX write. Fresh controls match six outputs, ten ordinary staged sources
-match, and the intervention AA0/preview changes are separately hash-bound.
-The writer tape is a 50,000-call prefix of 100,029 calls but covers the
-selected writer slice. Both tests cover only the equality side in one seed;
-they do not establish the opposite side, direct Lisp caller, general color
-rule, JavaScript contract, or parity. See the [v11 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json)
-and [v12 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json).
+Two source-bound seed-1234 unit-2 interventions at measured 768×1080 changed
+the first and second selected PICK results to `PREVDEX`, preserving each
+nested `RAN(0,2)` draw. Neither was followed by an HDEX write. A third
+source-bound intervention kept the first natural return 34 and `PREVDEX=35`,
+but substituted caller-visible 33. Its nested random draw selected index 1;
+the following color event was `HDEX=33` at call 965 / writer ordinal 804,
+before the next PICK. This matches the opposite-side candidate prediction
+for that bounded case. The before control was a just-prior complete no-probe
+run retained by the v13 preflight; it and the new after control match six
+outputs, and all ten ordinary staged sources match. Observer AA0/image
+differences are hash-bound; image ID is unchanged. The writer tape is a
+50,000-call prefix of 100,029 calls but covers the selected unit slice. The
+result adds no JS contract, direct Lisp caller proof, general rule, independent
+seed, or parity. See the [v11 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v11-20261014.json),
+[v12 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v12-20261014.json),
+[v13 evidence](introspection/evidence/pick-prevdex-return-intervention-seed1234-unit2-768x1080-v13-20261014.json), and
+[screen-unit findings](introspection/screen-unit-context.md).
 
-The next target is the terminal third PICK in the 320×480 seed-1234 unit-6
-evidence: natural return 28 equals `PREVDEX=28`, with no HDEX write before
-unit end. Preserve the nested random draw, substitute caller-visible 27, and
-check for `HDEX=27` before unit end. This is an opposite-side causal test in
-the existing seed/canvas regime, not an independent-seed holdout. Require a
-fresh source-bound triplet and controls, then add an independent seed before
+Next, test the terminal third PICK in seed-1234 unit 6, whose captured
+320×480 natural return 28 equals `PREVDEX=28` and has no following HDEX write
+before unit end. Preserve its nested random draw, substitute caller-visible
+27, and check for `HDEX=27` before unit end. Require a fresh no-probe control
+whose AA0 header measures 320×480; do not force the display mode. This checks
+a second regime in the same seed, then add an independent-seed capture before
 promoting the candidate. Keep FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the

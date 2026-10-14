@@ -11,8 +11,19 @@ import { pathToFileURL } from 'node:url';
 import { deriveScreenUnitContextEvidence } from './derive-screen-unit-context-evidence.mjs';
 
 const expectedByProbe = {
-  'screen-unit-context-v11': { pickOrdinal: 1 },
-  'screen-unit-context-v12': { pickOrdinal: 2 },
+  'screen-unit-context-v11': { pickOrdinal: 1, unitOrdinal: 2, policy: 'toggle' },
+  'screen-unit-context-v12': { pickOrdinal: 2, unitOrdinal: 2, policy: 'toggle' },
+  'screen-unit-context-v13': {
+    pickOrdinal: 1,
+    unitOrdinal: 2,
+    policy: 'force-fixed-33',
+    canvas: [768, 1080],
+    arguments: [33, 34, 35],
+    nativeReturn: 34,
+    prevdex: 35,
+    callerReturn: 33,
+    randomIndex: 1,
+  },
 };
 
 function one(lines, pattern, label) {
@@ -54,8 +65,14 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
   const context = await deriveScreenUnitContextEvidence(beforePath, observerPath, afterPath);
   const expected = expectedByProbe[context.source.probeVersion];
   assert.ok(expected, `Unsupported intervention probe ${context.source.probeVersion}`);
-  assert.equal(context.selectedUnit.ordinal, 2,
-    'PICK intervention must be bound to post-RPARSE screen unit 2');
+  assert.equal(context.selectedUnit.ordinal, expected.unitOrdinal,
+    `PICK intervention must be bound to post-RPARSE screen unit ${expected.unitOrdinal}`);
+  if (context.source.probeVersion === 'screen-unit-context-v13') {
+    assert.equal(context.source.mode, 'screen-unit-seed-1234',
+      'v13 intervention is restricted to seed 1234');
+    assert.deepEqual(context.selectedUnit.entryContext.fillMap?.dimensions, expected.canvas,
+      'v13 intervention is limited to its measured 768x1080 canvas regime');
+  }
 
   const observerSummary = JSON.parse(
     readFileSync(path.join(observerPath, 'summary.json'), 'utf8').replace(/^\uFEFF/, ''),
@@ -69,9 +86,12 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
     'intervention report contains a failed or incomplete record');
 
   const transformInstalled = one(lines, /^PICK-TRANSFORM-INSTALLED /, 'transform installation marker');
-  assert.equal(transformInstalled,
-    `PICK-TRANSFORM-INSTALLED target-ordinal=${expected.pickOrdinal} ` +
-    'replacement-policy=toggle-PREVDEX-equality enabled=T');
+  const expectedTransformMarker = expected.policy === 'toggle'
+    ? `PICK-TRANSFORM-INSTALLED target-ordinal=${expected.pickOrdinal} ` +
+      'replacement-policy=toggle-PREVDEX-equality enabled=T'
+    : `PICK-TRANSFORM-INSTALLED target-ordinal=${expected.pickOrdinal} ` +
+      `replacement-policy=${expected.policy} canvas=${expected.canvas.join('x')} enabled=T`;
+  assert.equal(transformInstalled, expectedTransformMarker);
 
   const completion = one(lines, /^PICK-INTERVENTION-COMPLETE /, 'intervention completion marker');
   const completionMatch = /^PICK-INTERVENTION-COMPLETE target-ordinal=(\d+) selected-pick-count=(\d+) substitution-count=(\d+) target-call-id=(\d+) native=(-?\d+) caller=(-?\d+) prevdex=(-?\d+)$/.exec(completion);
@@ -116,12 +136,32 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
   assert.equal(substitution.callerReturnValues.length, 1);
   const [nativeReturn] = substitution.nativeReturnValues;
   const [callerReturn] = substitution.callerReturnValues;
-  const expectedCallerReturn = nativeReturn === substitution.prevdex
-    ? substitution.arguments.find((value) => value !== substitution.prevdex)
-    : substitution.prevdex;
-  const expectedPolicy = nativeReturn === substitution.prevdex
-    ? 'force-PREVDEX-difference'
-    : 'force-PREVDEX-equality';
+  const expectedCallerReturn = expected.policy === 'force-fixed-33'
+    ? expected.callerReturn
+    : expected.policy === 'force-PREVDEX-difference'
+      ? substitution.arguments.find((value) => value !== substitution.prevdex)
+    : nativeReturn === substitution.prevdex
+      ? substitution.arguments.find((value) => value !== substitution.prevdex)
+      : substitution.prevdex;
+  const expectedPolicy = expected.policy === 'force-fixed-33'
+    ? 'force-fixed-33'
+    : expected.policy === 'force-PREVDEX-difference'
+      ? 'force-PREVDEX-difference'
+    : nativeReturn === substitution.prevdex
+      ? 'force-PREVDEX-difference'
+      : 'force-PREVDEX-equality';
+  if (expected.policy === 'force-fixed-33') {
+    assert.deepEqual(substitution.arguments, expected.arguments,
+      'v13 target argument choices changed');
+    assert.equal(nativeReturn, expected.nativeReturn,
+      'v13 target native return changed');
+    assert.equal(substitution.prevdex, expected.prevdex,
+      'v13 target PREVDEX changed');
+  }
+  if (expected.policy === 'force-PREVDEX-difference') {
+    assert.equal(nativeReturn, substitution.prevdex,
+      'v13 target must be naturally equal to PREVDEX before substitution');
+  }
   assert.notEqual(expectedCallerReturn, undefined,
     'the three choices must contain a value distinct from PREVDEX');
   assert.equal(callerReturn, expectedCallerReturn,
@@ -165,6 +205,10 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
   assert.equal(prevdexAtRandomEntry, substitution.prevdex);
   const randomIndex = Number(random.values[0]);
   assert.ok(Number.isInteger(randomIndex) && randomIndex >= 0 && randomIndex <= 2);
+  if (expected.randomIndex !== undefined) {
+    assert.equal(randomIndex, expected.randomIndex,
+      'v13 nested RAN(0,2) must select the natural argument 34 at index 1');
+  }
   assert.equal(substitution.arguments[randomIndex], nativeReturn,
     'native PICK result does not match its natural RAN(0,2) index');
 
@@ -183,6 +227,15 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
   const outputHashComparisons = Object.fromEntries(Object.entries(treatmentHashes).map(([name, hash]) => [
     name, { controlSha256: controlHashes[name], interventionSha256: hash, differs: controlHashes[name] !== hash },
   ]));
+
+  const policyEvidenceField = expected.policy === 'toggle'
+    ? { equalityTogglePolicy: substitution.policy }
+    : { returnPolicy: substitution.policy };
+  const targetScopeLimitation = expected.policy === 'force-fixed-33'
+    ? 'The captured natural return and caller-visible substitute are tied to this one source-bound seed-1234 unit-2 intervention at the measured 768x1080 canvas regime.'
+    : expected.unitOrdinal === 6
+      ? 'The captured natural return and caller-visible substitute are tied to this one source-bound seed-1234 unit-6 intervention at the measured 320x480 canvas regime.'
+    : 'The captured natural return and caller-visible substitute are tied to this one source-bound seed-1234 unit-2 intervention and its measured canvas regime.';
 
   return {
     schemaVersion: 1,
@@ -210,7 +263,7 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
       prevdexAtNestedRandomEntry: prevdexAtRandomEntry,
       naturalRandomCallId: random.id,
       naturalRandomIndex: randomIndex,
-      equalityTogglePolicy: substitution.policy,
+      ...policyEvidenceField,
       predictedFollowingHdexWrite: predictsWrite,
       followingHdexWrites,
       candidateMatchesThisIntervention: observedCandidateMatch,
@@ -218,7 +271,7 @@ export async function derivePickReturnInterventionEvidence(beforePath, observerP
     },
     outputHashComparisons,
     limitations: [
-      'The captured natural return and caller-visible substitute are tied to this one source-bound seed-1234 unit-2 intervention and its measured canvas regime.',
+      targetScopeLimitation,
       'The observed caller label is a captured trace wrapper boundary; unwrapped helpers may intervene between the selected functions.',
       'A match or mismatch here does not establish a general color rule or a JavaScript color contract.',
       'Fresh uninstrumented controls establish a stable baseline; the intervention outputs are intentionally allowed to diverge.',
