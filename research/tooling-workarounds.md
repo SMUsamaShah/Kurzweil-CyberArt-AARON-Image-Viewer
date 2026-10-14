@@ -442,6 +442,32 @@ helper, then confirm the final repository status. Reserve Git mutations for
 the documented scoped-elevation PowerShell path; do not change ACLs to make a
 Node child process work.
 
+### Windows PowerShell 5.1 and Node ESM arguments
+
+PowerShell 5.1 strips quotes from JavaScript passed as inline `node -e` code
+through a child PowerShell invocation. Node then reports a syntax error at an
+otherwise quoted ESM import. Put the verifier in a `.mjs` file and invoke that
+file directly, passing paths and observer-only output names as ordinary
+arguments. `capture-screen-unit-context-triplet.ps1` now uses this pattern;
+its run prefix also defaults from the selected probe version so a v5 capture
+cannot be mislabeled v1.
+
+### Empty natural screen units and capped writer prefixes
+
+The screen-unit observer can print a proper empty path as
+`(:POINTS NIL :SHOWN 0 :TRUNCATED NIL :PROPER T :TAIL-TYPE NIL)`. This is a
+valid zero-point unit, not a malformed point list. A color-context sample with
+zero `PREP-LINE` and writer calls still remains `INCOMPLETE`; choose a later
+populated unit instead of weakening that completion gate. The retained v4
+attempt selected ordinal 3, which had zero writers, so it is diagnostic only.
+
+The full writer observer can hit its 50,000-call cap after early screen units.
+`derive-screen-unit-evidence.mjs` accepts the explicitly marked paired prefix
+only when every target unit ends at or before the final recorded output
+position, then still checks each unit's writer ordinals, points, and output
+bytes. Other writer consumers remain strict by default. This permits evidence
+for covered early units while leaving the later truncated portion unknown.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

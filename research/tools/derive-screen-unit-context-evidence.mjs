@@ -77,8 +77,16 @@ function parseContextReport(text, probeTag) {
   const selectedOrdinal = Number(ordinalText);
   const unitId = Number(idText);
   const parentId = Number(parentText);
-  assert.ok([1, 2].includes(selectedOrdinal),
-    'capture must use the first or second post-RPARSE screen unit');
+  const expectedOrdinal = {
+    'screen-unit-context-v1': 1,
+    'screen-unit-context-v2': 1,
+    'screen-unit-context-v3': 2,
+    'screen-unit-context-v4': 3,
+    'screen-unit-context-v5': 5,
+  }[probeTag];
+  assert.ok(expectedOrdinal, `unexpected screen-unit context probe version: ${probeTag}`);
+  assert.equal(selectedOrdinal, expectedOrdinal,
+    `${probeTag} must select post-RPARSE screen unit ${expectedOrdinal}`);
 
   const ancestors = [];
   for (const line of lines.filter((candidate) => candidate.startsWith('ANCESTOR '))) {
@@ -199,11 +207,11 @@ function parseContextReport(text, probeTag) {
       contextSummary: state?.contextSummary ?? null,
     }];
   });
-  if (probeTag === 'screen-unit-context-v3') {
+  if (['screen-unit-context-v3', 'screen-unit-context-v4'].includes(probeTag)) {
     assert.equal(colorStates.size, colors.length,
-      'v3 must snapshot every AARGB HDEX writer call');
+      'typed context probes must snapshot every AARGB HDEX writer call');
     assert.equal(prepStates.size, prepCalls.length,
-      'v3 must snapshot every PREP-LINE call');
+      'typed context probes must snapshot every PREP-LINE call');
   }
 
   const ranEnters = new Map(lines.filter((line) => line.startsWith('RAN-ENTER ')).map((line) => {
@@ -306,7 +314,7 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   });
   const [before, observer, after] = verified.runs;
   assert.ok(['screen-unit-seed-1234', 'screen-unit-seed-5678'].includes(observer.summary.mode));
-  const probeMatch = /^aaron-(screen-unit-context-v[123])\.txt$/.exec(observer.summary.requiredProbeOutputName);
+  const probeMatch = /^aaron-(screen-unit-context-v[12345])\.txt$/.exec(observer.summary.requiredProbeOutputName);
   assert.ok(probeMatch, 'unexpected screen-unit context probe output name');
   const probeTag = probeMatch[1];
   assert.equal(observer.summary.requiredProbeEndMarker, `END ${probeTag}`);
@@ -344,6 +352,10 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
       contextReportSha256: sha256(reportBytes),
       screenUnitReportSha256: sha256(screenBytes),
       writerTapeSha256: sha256(writerBytes),
+      writerTapeComplete: !screenEvidence.source.writerTapeOverflow,
+      writerTapeRecordedCalls: screenEvidence.source.writerTapeRecordedCalls,
+      writerTapeTotalCalls: screenEvidence.source.writerTapeTotalCalls,
+      writerTapeCoverageThroughOutputPosition: screenEvidence.source.writerTapeCoveredThroughOutputPosition,
       imageSha256: sha256(imageBytes),
       colorMapReportSha256: colorBytes ? sha256(colorBytes) : null,
       matchedControlOutputs: verified.artifactHashes,
@@ -361,8 +373,9 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
     ...contextEvidence,
     interpretation: [
       'Nearest observed target ancestry is not proof of a direct Lisp caller; unwrapped functions may intervene.',
-      'This is one first-screen unit from one controlled seed and the DISPLAY-COLOR-PATCHES path, not a general color-selection rule.',
+      'This is one selected natural screen unit from one controlled seed and the DISPLAY-COLOR-PATCHES path, not a general color-selection rule.',
       'The observer records current map dimensions and selected bindings, not full map contents or deltas.',
+      'A capped global writer tape is used only when the selected screen-unit byte interval is fully inside the recorded prefix; no behavior after that prefix is inferred.',
       'The JS screen writer still receives path points and color events as captured inputs; this evidence does not add an upstream JS contract.',
     ],
   };

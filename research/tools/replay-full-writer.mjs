@@ -58,8 +58,8 @@ function reportPosition(value, label, lineNumber, {allowClosed = false} = {}) {
   return parsed;
 }
 
-/** Parse the complete, bounded WRITER-FULL block from an oracle transcript. */
-export function parseWriterFullReport(text) {
+/** Parse a complete writer tape, or its paired prefix when explicitly allowed. */
+export function parseWriterFullReport(text, {allowOverflow = false} = {}) {
   if (typeof text !== 'string') throw new TypeError('writer-full report must be text');
   const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
   const begin = lines.flatMap((line, index) => line === 'BEGIN writer-full' ? [index] : []);
@@ -158,15 +158,25 @@ export function parseWriterFullReport(text) {
     throw new Error('writer-full records continue after END writer-full');
   }
   if (!summary) throw new Error('missing writer-full summary');
-  if (summary.overflow) throw new Error('writer-full tape is truncated (overflow=T)');
-  if (summary.total !== summary.recorded || summary.recorded !== calls.length) {
+  if (summary.overflow && !allowOverflow) {
+    throw new Error('writer-full tape is truncated (overflow=T)');
+  }
+  if (summary.recorded !== calls.length) {
+    throw new Error(`writer-full recorded count differs from parsed calls (recorded=${summary.recorded}, parsed=${calls.length})`);
+  }
+  if (summary.overflow
+    && (summary.recorded !== summary.limit || summary.total <= summary.recorded)) {
+    throw new Error('overflowed writer-full tape does not contain a full, capped prefix');
+  }
+  if (!summary.overflow && summary.total !== summary.recorded) {
     throw new Error(`writer-full tape is incomplete (total=${summary.total}, recorded=${summary.recorded}, parsed=${calls.length})`);
   }
-  if (summary.total > summary.limit) throw new Error('writer-full total exceeds its recording limit');
+  if (!summary.overflow && summary.total > summary.limit) throw new Error('writer-full total exceeds its recording limit');
   if (calls.length === 0) throw new Error('writer-full tape contains no calls');
-  if (calls.at(-1).selector !== 'END') throw new Error('writer-full tape does not end with END');
+  if (!summary.overflow && calls.at(-1).selector !== 'END') throw new Error('writer-full tape does not end with END');
   if (calls.slice(0, -1).some(({selector}) => selector === 'END')) throw new Error('END must be the final writer call');
-  if (calls.at(-1).exitPositionToken !== 'ERROR') throw new Error('final END exit must report position=ERROR after stream close');
+  if (summary.overflow && calls.at(-1).selector === 'END') throw new Error('overflowed writer-full prefix unexpectedly contains END');
+  if (!summary.overflow && calls.at(-1).exitPositionToken !== 'ERROR') throw new Error('final END exit must report position=ERROR after stream close');
   if (calls.slice(0, -1).some(({exitPositionToken}) => exitPositionToken === 'ERROR')) {
     throw new Error('only the final END call may have position=ERROR');
   }

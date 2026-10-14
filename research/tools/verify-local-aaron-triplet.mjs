@@ -170,16 +170,19 @@ export async function verifyLocalAaronTriplet(beforePath, observerPath, afterPat
 }
 
 async function main() {
-  const [beforePath, observerPath, afterPath] = process.argv.slice(2);
-  if (!beforePath || !observerPath || !afterPath || process.argv.length !== 5) {
+  const [beforePath, observerPath, afterPath, ...observerOnlyOutputNames] = process.argv.slice(2);
+  if (!beforePath || !observerPath || !afterPath) {
     console.error(
       'Usage: node research/tools/verify-local-aaron-triplet.mjs ' +
-      '<control-before-root> <observer-root> <control-after-root>');
+      '<control-before-root> <observer-root> <control-after-root> ' +
+      '[observer-only-output-name ...]');
     process.exitCode = 2;
     return;
   }
 
-  const verified = await verifyLocalAaronTriplet(beforePath, observerPath, afterPath);
+  const verified = await verifyLocalAaronTriplet(beforePath, observerPath, afterPath, {
+    observerOnlyOutputNames,
+  });
   const [before, observer] = verified.runs;
 
   console.log(`PASS: three complete ${before.summary.mode} runs`);

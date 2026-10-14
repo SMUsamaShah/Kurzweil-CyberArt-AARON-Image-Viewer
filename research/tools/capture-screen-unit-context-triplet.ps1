@@ -3,11 +3,11 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2', 'v3')]
+    [ValidateSet('v1', 'v2', 'v3', 'v4', 'v5')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
-    [string]$RunPrefix = 'screen-context-v1',
+    [string]$RunPrefix,
 
     [ValidateRange(30, 600)]
     [int]$RunSeconds = 180
@@ -19,6 +19,12 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if (-not $PSBoundParameters.ContainsKey('RunPrefix')) {
+    $RunPrefix = "screen-context-$ProbeVersion"
+}
+if ($RunPrefix -notmatch '^[a-z0-9][a-z0-9-]{0,24}$') {
+    throw 'RunPrefix must contain 1 to 25 lowercase letters, digits, or hyphens.'
+}
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $prepareScript = Join-Path $repoRoot 'research\tools\prepare-local-aaron-oracle-run.ps1'
@@ -179,20 +185,8 @@ Invoke-TripletLeg -Role observer
 Invoke-TripletLeg -Role after
 
 $node = (Get-Command node -ErrorAction Stop).Source
-$verifyCode = @'
-import { verifyLocalAaronTriplet } from "./research/tools/verify-local-aaron-triplet.mjs";
-const [before, observer, after] = process.argv.slice(1);
-const result = await verifyLocalAaronTriplet(before, observer, after, {
-  observerOnlyOutputNames: ["aaron-planning-call-trace.txt"],
-});
-console.log(JSON.stringify({
-  observerProbeSha256: result.probeSourceHash,
-  reportSha256: result.reportHash,
-  matchedOutputs: Object.keys(result.artifactHashes),
-  matchedOrdinarySources: Object.keys(result.sourceHashes).length,
-}, null, 2));
-'@
-& $node --input-type=module -e $verifyCode $runRoots.before $runRoots.observer $runRoots.after
+& $node (Join-Path $repoRoot 'research\tools\verify-local-aaron-triplet.mjs') `
+    $runRoots.before $runRoots.observer $runRoots.after 'aaron-planning-call-trace.txt'
 if ($LASTEXITCODE -ne 0) {
     throw 'Source-bound triplet verification failed; all three roots were retained for inspection.'
 }

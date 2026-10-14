@@ -24,6 +24,9 @@ function parsePath(line, startToken, endToken) {
   const end = line.indexOf(endToken, start + startToken.length);
   if (start < 0 || end < 0) throw new Error('Missing bounded path field');
   const fragment = line.slice(start + startToken.length, end);
+  if (/^\(:POINTS NIL :SHOWN 0 :TRUNCATED NIL :PROPER T :TAIL-TYPE NIL\)$/.test(fragment)) {
+    return [];
+  }
   const match = /^\(:POINTS \((.*)\) :SHOWN (\d+) :TRUNCATED NIL :PROPER T :TAIL-TYPE NIL\)$/.exec(fragment);
   if (!match) throw new Error('Path list is malformed or truncated');
   const points = [...match[1].matchAll(pointRecord)].map(item => ({
@@ -85,6 +88,17 @@ function parseScreenReport(text) {
 function originalWriterUnit(unit, writerCalls, imageBytes) {
   const calls = writerCalls.filter(call => call.enter >= unit.start
     && call.exitPosition !== null && call.exitPosition <= unit.end);
+  if (unit.points.length === 0 && unit.start === unit.end && calls.length === 0) {
+    const expected = imageBytes.subarray(unit.start, unit.end);
+    assert.equal(expected.length, 0, `empty screen unit ${unit.id} changed output bytes`);
+    return {
+      colorEvents: [],
+      writerOrdinals: [null, null],
+      writerCallCount: 0,
+      byteLength: 0,
+      byteSha256: sha256(expected),
+    };
+  }
   if (!calls.length || calls[0].enter !== unit.start || calls.at(-1).exitPosition !== unit.end) {
     throw new Error(`Writer calls do not cover screen unit ${unit.id}`);
   }
@@ -133,7 +147,17 @@ export function deriveScreenUnitEvidence(reportBytes, tapeBytes, imageBytes, sum
     throw new Error('Expected a completed controlled screen-unit run');
   }
   const units = parseScreenReport(reportBytes.toString('utf8'));
-  const tape = parseWriterFullReport(tapeBytes.toString('utf8'));
+  // The global writer tape may hit its fixed call cap after these first eight
+  // natural screen units. Per-unit byte/ordinal coverage below is still strict.
+  const tape = parseWriterFullReport(tapeBytes.toString('utf8'), {allowOverflow: true});
+  const tapeCoveredThrough = [...tape.calls].reverse()
+    .find(call => call.exitPosition !== null)?.exitPosition;
+  if (tapeCoveredThrough === undefined) {
+    throw new Error('writer-full prefix has no usable output-position boundary');
+  }
+  if (units.some(unit => unit.end > tapeCoveredThrough)) {
+    throw new Error(`screen-unit evidence extends beyond writer-full prefix coverage at ${tapeCoveredThrough}`);
+  }
   return {
     schemaVersion: 1,
     source: {
@@ -142,6 +166,11 @@ export function deriveScreenUnitEvidence(reportBytes, tapeBytes, imageBytes, sum
       aa0Sha256: summary.aa0Sha256,
       reportSha256: sha256(reportBytes),
       writerTapeSha256: sha256(tapeBytes),
+      writerTapeTotalCalls: tape.summary.total,
+      writerTapeRecordedCalls: tape.summary.recorded,
+      writerTapeLimit: tape.summary.limit,
+      writerTapeOverflow: tape.summary.overflow,
+      writerTapeCoveredThroughOutputPosition: tapeCoveredThrough,
       imageSha256: sha256(imageBytes),
       scope: 'first eight natural SCREEN-AND-STORE calls; AARGB decisions remain captured inputs',
     },
