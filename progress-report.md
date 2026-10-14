@@ -25,22 +25,24 @@ generation, and verify complete paintings against fresh original runs.
 
 ## Current focus
 
-The latest screen-boundary work captured two complete source-bound natural
-`SCREEN-AND-STORE` units at 320×480. Their selected path and color events
-reproduce 324 original writer bytes, but the JS routine still receives those
-events as inputs. Both samples share the initial five `RAN` argument pairs;
-the second color change follows `RAN(0,2)→1` and lowers `HDEX` by one, while a
-later identical random return causes no color event. This is a clue, not a
-general rule. The observed parent labels differ (`BRUSH-STROKE` and
-`PAINT-FILL`) and do not prove direct callers. See the
+The latest screen-boundary work captured three complete source-bound natural
+`SCREEN-AND-STORE` units at 320×480. Their selected paths and color events
+reproduce 427 original writer bytes, but the JS routine still receives those
+events as inputs. Typed snapshots for seed-1234 unit 2 show `RAN(0,2)→0` with
+`PREVDEX=28` before `HDEX=27`, then `RAN(0,2)→1` with `PREVDEX=27` before
+`HDEX=28`. An earlier return of 1 in that unit has no HDEX write before the
+next random call, so this is a bounded state correlation, not a general rule.
+The observed parent labels include `BRUSH-STROKE` and `PAINT-FILL`; they do not
+prove direct callers. See the
 [screen-unit findings](research/introspection/screen-unit-context.md) and
-[portable evidence for seed 1234](research/introspection/evidence/screen-unit-context-seed1234-20261014.json)
-and [seed 5678](research/introspection/evidence/screen-unit-context-seed5678-20261014.json).
+[portable evidence for seed 1234 unit 1](research/introspection/evidence/screen-unit-context-seed1234-20261014.json),
+[seed 5678 unit 1](research/introspection/evidence/screen-unit-context-seed5678-20261014.json),
+and [seed 1234 unit 2](research/introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json).
 
-Next, capture typed `RAN` inputs/results and `COLORDEX`/`PREVDEX`/`HDEX` state
-at each random and color event. The overall completion figures remain 30
-routine names / 31 bounded contracts, 1/5 milestones (20% by count), and zero
-whole-painting parity. There is still no defensible overall percentage.
+Next, capture the third post-`RPARSE` seed-1234 unit with the existing typed
+event-state observer. Metrics remain 30 routine names / 31 bounded contracts,
+1/5 milestones (20% by count), and zero whole-painting parity. There is still
+no defensible overall percentage.
 
 ## Follow the evidence
 

@@ -77,7 +77,8 @@ function parseContextReport(text, probeTag) {
   const selectedOrdinal = Number(ordinalText);
   const unitId = Number(idText);
   const parentId = Number(parentText);
-  assert.equal(selectedOrdinal, 1, 'capture must use the first post-RPARSE screen unit');
+  assert.ok([1, 2].includes(selectedOrdinal),
+    'capture must use the first or second post-RPARSE screen unit');
 
   const ancestors = [];
   for (const line of lines.filter((candidate) => candidate.startsWith('ANCESTOR '))) {
@@ -173,46 +174,95 @@ function parseContextReport(text, probeTag) {
   assert.ok(writerOrdinals.every((ordinal, index) => index === 0 || ordinal === writerOrdinals[index - 1] + 1),
     'writer ordinals are not contiguous');
 
+  const colorStates = new Map(lines.filter((line) => line.startsWith('COLOR-STATE ')).map((line) => {
+    const match = /^COLOR-STATE id=(\d+) writer-ordinal=(\d+) args=(.*?) context=(.*)$/.exec(line);
+    assert.ok(match, `malformed COLOR-STATE row: ${line.slice(0, 100)}`);
+    return [Number(match[1]), {
+      writerOrdinal: Number(match[2]), argsSummary: match[3], contextSummary: match[4],
+    }];
+  }));
+  const prepStates = new Map(lines.filter((line) => line.startsWith('PREP-STATE ')).map((line) => {
+    const match = /^PREP-STATE id=(\d+) args=(.*?) context=(.*)$/.exec(line);
+    assert.ok(match, `malformed PREP-STATE row: ${line.slice(0, 100)}`);
+    return [Number(match[1]), { argsSummary: match[2], contextSummary: match[3] }];
+  }));
   const colors = writerCalls.flatMap((call) => {
     const match = /\(:SYMBOL "COMMON-GRAPHICS-USER" "AARGB"\) \(:SYMBOL "KEYWORD" "HDEX"\) \(:NUMBER FIXNUM (-?\d+)\)/.exec(call.argsSummary);
-    return match ? [{ id: call.id, writerOrdinal: call.writerOrdinal, index: Number(match[1]) }] : [];
+    if (!match) return [];
+    const state = colorStates.get(call.id);
+    if (state) assert.equal(state.writerOrdinal, call.writerOrdinal);
+    return [{
+      id: call.id,
+      writerOrdinal: call.writerOrdinal,
+      index: Number(match[1]),
+      argsSummary: state?.argsSummary ?? null,
+      contextSummary: state?.contextSummary ?? null,
+    }];
   });
+  if (probeTag === 'screen-unit-context-v3') {
+    assert.equal(colorStates.size, colors.length,
+      'v3 must snapshot every AARGB HDEX writer call');
+    assert.equal(prepStates.size, prepCalls.length,
+      'v3 must snapshot every PREP-LINE call');
+  }
 
   const ranEnters = new Map(lines.filter((line) => line.startsWith('RAN-ENTER ')).map((line) => {
-    const match = /^RAN-ENTER id=(\d+) parent-id=(NIL|\d+) screen-id=(\d+) args=(\([^()]*\))$/.exec(line);
+    const match = /^RAN-ENTER id=(\d+) parent-id=(NIL|\d+) screen-id=(\d+) args=(\([^()]*\))(?: typed-args=(.*?) context=(.*))?$/.exec(line);
     assert.ok(match, `malformed RAN-ENTER row: ${line.slice(0, 100)}`);
     return [Number(match[1]), {
       parentId: match[2] === 'NIL' ? null : Number(match[2]),
       screenId: Number(match[3]),
       args: parseSimpleNumberList(match[4], 'RAN arguments'),
+      typedArgsSummary: match[5] ?? null,
+      entryContextSummary: match[6] ?? null,
     }];
   }));
   const ranReturns = new Map(lines.filter((line) => line.startsWith('RAN-RETURN ')).map((line) => {
-    const match = /^RAN-RETURN id=(\d+) values=(\([^()]*\))$/.exec(line);
+    const match = /^RAN-RETURN id=(\d+) values=(\([^()]*\))(?: typed-values=(.*?) context=(.*))?$/.exec(line);
     assert.ok(match, `malformed RAN-RETURN row: ${line.slice(0, 100)}`);
-    return [Number(match[1]), parseSimpleNumberList(match[2], 'RAN values')];
+    return [Number(match[1]), {
+      values: parseSimpleNumberList(match[2], 'RAN values'),
+      typedValuesSummary: match[3] ?? null,
+      returnContextSummary: match[4] ?? null,
+    }];
   }));
   assert.equal(ranEnters.size, Number(ranText));
   assert.equal(ranReturns.size, ranEnters.size);
   const randomCalls = [...ranEnters].map(([id, call]) => {
     assert.equal(call.screenId, unitId);
     assert.ok(ranReturns.has(id), `RAN call ${id} has no return`);
-    assert.equal(ranReturns.get(id).length, 1, `RAN call ${id} returned an unexpected number of values`);
-    return { id, parentId: call.parentId, args: call.args, values: ranReturns.get(id) };
+    const returned = ranReturns.get(id);
+    assert.equal(returned.values.length, 1, `RAN call ${id} returned an unexpected number of values`);
+    return {
+      id, parentId: call.parentId, args: call.args, values: returned.values,
+      typedArgsSummary: call.typedArgsSummary,
+      entryContextSummary: call.entryContextSummary,
+      typedValuesSummary: returned.typedValuesSummary,
+      returnContextSummary: returned.returnContextSummary,
+    };
   });
 
   const prepLineEvents = prepCalls.map((call) => {
     const match = /^\(:CONS \(\(:NUMBER FIXNUM (-?\d+)\)/.exec(call.argsSummary);
     assert.ok(match, `PREP-LINE call ${call.id} has no numeric color argument`);
-    return { id: call.id, colorIndex: Number(match[1]) };
+    const state = prepStates.get(call.id);
+    return {
+      id: call.id, colorIndex: Number(match[1]),
+      argsSummary: state?.argsSummary ?? null,
+      contextSummary: state?.contextSummary ?? null,
+    };
   });
   const decisionTimeline = [
-    ...randomCalls.map(({ id, args, values }) => ({ id, event: 'RAN', args, values })),
-    ...colors.map(({ id, writerOrdinal, index }) => ({
-      id, event: 'AARGB-HDEX', writerOrdinal, index,
+    ...randomCalls.map(({ id, args, values, typedArgsSummary, entryContextSummary,
+      typedValuesSummary, returnContextSummary }) => ({
+      id, event: 'RAN', args, values, typedArgsSummary, entryContextSummary,
+      typedValuesSummary, returnContextSummary,
     })),
-    ...prepLineEvents.map(({ id, colorIndex }) => ({
-      id, event: 'PREP-LINE', colorIndex,
+    ...colors.map(({ id, writerOrdinal, index, argsSummary, contextSummary }) => ({
+      id, event: 'AARGB-HDEX', writerOrdinal, index, argsSummary, contextSummary,
+    })),
+    ...prepLineEvents.map(({ id, colorIndex, argsSummary, contextSummary }) => ({
+      id, event: 'PREP-LINE', colorIndex, argsSummary, contextSummary,
     })),
   ].sort((a, b) => a.id - b.id);
 
@@ -256,7 +306,7 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
   });
   const [before, observer, after] = verified.runs;
   assert.ok(['screen-unit-seed-1234', 'screen-unit-seed-5678'].includes(observer.summary.mode));
-  const probeMatch = /^aaron-(screen-unit-context-v[12])\.txt$/.exec(observer.summary.requiredProbeOutputName);
+  const probeMatch = /^aaron-(screen-unit-context-v[123])\.txt$/.exec(observer.summary.requiredProbeOutputName);
   assert.ok(probeMatch, 'unexpected screen-unit context probe output name');
   const probeTag = probeMatch[1];
   assert.equal(observer.summary.requiredProbeEndMarker, `END ${probeTag}`);
@@ -272,12 +322,13 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
     screenBytes, writerBytes, imageBytes, observer.summary,
   );
   const contextEvidence = parseContextReport(reportBytes.toString('utf8'), probeTag);
-  const firstScreen = screenEvidence.units[0];
   const selected = contextEvidence.selectedUnit;
-  assert.deepEqual(selected.writerOrdinals, firstScreen.writerOrdinals);
-  assert.equal(selected.writerCalls, firstScreen.writerCallCount);
+  const correspondingScreen = screenEvidence.units[selected.ordinal - 1];
+  assert.ok(correspondingScreen, `screen report has no unit ordinal ${selected.ordinal}`);
+  assert.deepEqual(selected.writerOrdinals, correspondingScreen.writerOrdinals);
+  assert.equal(selected.writerCalls, correspondingScreen.writerCallCount);
   assert.deepEqual(selected.colorSelections.map((item) => item.index),
-    firstScreen.colorEvents.map((item) => item.index));
+    correspondingScreen.colorEvents.map((item) => item.index));
   assert.ok(selected.entryContext.fillMap?.rank > 0,
     'selected unit has no observable fill-map shape');
 
@@ -299,13 +350,13 @@ export async function deriveScreenUnitContextEvidence(beforePath, observerPath, 
       matchedOrdinarySceneSources: Object.keys(verified.sourceHashes).length,
     },
     verifiedUnitByteReplay: {
-      screenUnitOrdinal: firstScreen.id,
-      pointCount: firstScreen.points.length,
-      colorEvents: firstScreen.colorEvents,
-      writerCalls: firstScreen.writerCallCount,
-      writerOrdinals: firstScreen.writerOrdinals,
-      byteLength: firstScreen.byteLength,
-      byteSha256: firstScreen.byteSha256,
+      screenUnitOrdinal: selected.ordinal,
+      pointCount: correspondingScreen.points.length,
+      colorEvents: correspondingScreen.colorEvents,
+      writerCalls: correspondingScreen.writerCallCount,
+      writerOrdinals: correspondingScreen.writerOrdinals,
+      byteLength: correspondingScreen.byteLength,
+      byteSha256: correspondingScreen.byteSha256,
     },
     ...contextEvidence,
     interpretation: [

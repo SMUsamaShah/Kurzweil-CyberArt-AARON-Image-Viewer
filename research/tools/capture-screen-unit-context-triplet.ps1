@@ -3,7 +3,7 @@ param(
     [ValidateSet('1234', '5678')]
     [string]$Seed = '1234',
 
-    [ValidateSet('v1', 'v2')]
+    [ValidateSet('v1', 'v2', 'v3')]
     [string]$ProbeVersion = 'v1',
 
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]

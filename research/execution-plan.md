@@ -660,22 +660,22 @@ nine isolated cases, JS matches four and differs by one step in five. See the
 [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json)
 and [FREE-PATH findings](introspection/free-path-native.md).
 
-Two complete natural screen-unit context triplets now bracket the first
-post-`RPARSE` `SCREEN-AND-STORE` call for seeds 1234 and 5678. In each sample,
-the captured points and `AARGB` decisions replay the exact original writer
-slice in JavaScript. The event report orders `RAN` calls, color writes, and
-`PREP-LINE`, but its random arguments are not type-annotated and it captures
-state only at unit entry/exit. The second color change follows
-`RAN(0,2)→1` and decrements HDEX in both samples; an additional identical
-return without a color event disproves that value as a sufficient condition.
-The [screen-unit findings](introspection/screen-unit-context.md) retain the
-source-bound triplets and limits. No upstream color contract or milestone
-completion is claimed.
+Three complete natural screen-unit context triplets now cover the first
+post-`RPARSE` `SCREEN-AND-STORE` call for seeds 1234 and 5678, plus the second
+unit for seed 1234. Their captured points and `AARGB` decisions replay 427
+original writer bytes. The v3 observer adds typed `RAN` values and state
+snapshots at random, color-write, and `PREP-LINE` boundaries. In seed-1234
+unit 2, `RAN(0,2)→0` with `PREVDEX=28` precedes `HDEX=27`, then a return of 1
+with `PREVDEX=27` precedes `HDEX=28`. An earlier return of 1 in that unit has
+no HDEX write before the next random call; a later return of 1 in the
+seed-5678 unit has no further write before return. The random value alone is
+not a sufficient condition; no upstream color contract or milestone
+completion is claimed. The [screen-unit findings](introspection/screen-unit-context.md)
+retain the source-bound triplets and limits.
 
-Next, run one fresh seed-1234 before/observer/after triplet with event-level
-snapshots for each `RAN`, `AARGB(HDEX=...)`, and `PREP-LINE`. Preserve Lisp
-argument/result types and record `COLORDEX`, `PREVDEX`, `HDEX`, `CDEX`, `SDEX`,
-and `RPLANE` at those boundaries. Require all fresh scene outputs and ordinary
-staged sources to match controls, then compare the snapshots to the current
-seed-1234 context. This targets the state behind color-event decisions while
-keeping the unresolved FREE-PATH and path-point inputs explicit.
+Next, capture the third post-`RPARSE` seed-1234 unit with the same v3 typed
+event-state observer. Compare the `PREVDEX`/`HDEX` transitions and random return
+values with the second unit in the same scene. Require fresh uninstrumented
+controls to match all scene outputs and ordinary staged sources. This remains
+a bounded observation of color decisions; keep FREE-PATH and point-generation
+inputs explicit until independently established.

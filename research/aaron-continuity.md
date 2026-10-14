@@ -31,21 +31,25 @@ parity. See [v8 evidence](introspection/evidence/free-path-stop-boundary-2026101
 [FREE-PATH findings](introspection/free-path-native.md), and the active
 [execution plan](execution-plan.md).
 
-Two complete source-bound first-unit context triplets now cover seeds 1234
-and 5678 at 320×480. Their captured screen paths and color changes replay
-exactly 324 original writer bytes. The trace orders `RAN`, `AARGB(HDEX=...)`,
-and `PREP-LINE` events; in both captures a `RAN(0,2)→1` precedes the second
-color index decrement, but another such return without a color change means
-the value alone is not the rule. Nearest observed ancestry differs and is not
-proof of a direct caller. No new JS contract or milestone completion is
-claimed. See [screen-unit findings](introspection/screen-unit-context.md),
-[seed-1234 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
-and [seed-5678 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json).
+Three complete source-bound screen-unit context triplets now cover seed 1234
+units 1 and 2 plus seed 5678 unit 1 at 320×480. The selected screen paths and
+color changes replay 427 original writer bytes exactly. The v3 event snapshots
+show seed-1234 unit 2 using `RAN(0,2)→0` with `PREVDEX=28` before writing
+`HDEX=27`, then `RAN(0,2)→1` with `PREVDEX=27` before writing `HDEX=28`. An
+earlier return of 1 in that unit has no HDEX write before the next random call,
+so the random result alone does not determine a color transition. Nearest
+observed ancestry remains
+limited to installed trace targets and proves no direct caller. No new JS
+contract or milestone completion is claimed. See
+[screen-unit findings](introspection/screen-unit-context.md),
+[seed-1234 unit-1 evidence](introspection/evidence/screen-unit-context-seed1234-20261014.json),
+[seed-5678 unit-1 evidence](introspection/evidence/screen-unit-context-seed5678-20261014.json),
+and [seed-1234 unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json).
 
-The next probe adds typed argument/result summaries and snapshots
-`COLORDEX`, `PREVDEX`, `HDEX`, `CDEX`, `SDEX`, and `RPLANE` at each random and
-color event. It will use fresh uninstrumented controls and keep FREE-PATH's
-unresolved path generation explicit.
+Next, capture the third post-`RPARSE` seed-1234 unit using the v3 typed
+argument/result summaries and snapshots for `COLORDEX`, `PREVDEX`, `HDEX`,
+`CDEX`, `SDEX`, and `RPLANE`. Require fresh uninstrumented controls and keep
+FREE-PATH's unresolved path generation explicit.
 
 For local REA/Java, oracle, and Git permission recovery, start with the
 [tooling quick fixes](tooling-workarounds.md). Use the saved REA launcher and

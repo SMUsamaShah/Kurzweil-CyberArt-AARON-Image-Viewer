@@ -20,7 +20,7 @@ recovered behavior.
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
 | Additional screen-context observations | SET-UP-SCREEN-SIZE and SELECT-CANVAS observed in source-bound 320×480 and 768×1080 regimes | Two bounded original-only observations; the difference is unexplained and adds no JS contract. |
-| Natural screen-unit context samples | 2 first-unit captures, seeds 1234 and 5678 | Both reproduce their full path/color writer slices (324 bytes total). Event chronology narrows one color transition but does not establish a rule or add a JS contract. |
+| Natural screen-unit context samples | 3 units across seeds 1234 and 5678 | Their selected paths reproduce 427 writer bytes total. Typed snapshots show two color-associated `PREVDEX` neighbor transitions in seed-1234 unit 2, but an unpaired identical RNG result leaves the branch condition unresolved; no JS contract is added. |
 
 The 30 compared routine names are `RANDOM`, `RAN`, `ANGLE-RANGE`, `NORM-A`,
 `ANGLE-DIF`, `XYDIST`, `LOCK-WIGGLE`, `RAN-HAND`, `HOP-OR-DRAW`, `MOVE-TO`,
@@ -352,6 +352,37 @@ parity results; the canonical 40-case matrix remains 26/30 matches, four
 mismatches, and ten unclassified. See the [v9 evidence](introspection/evidence/free-path-stop-boundary-20261014-v9.json),
 [findings](introspection/free-path-native.md), [capture helper](tools/capture-free-path-stop-boundary-v9.ps1),
 and [evidence deriver](tools/derive-free-path-stop-boundary-v9-evidence.mjs).
+
+## 2026-10-14 second natural SCREEN-AND-STORE unit
+
+A third complete source-bound before/observer/after triplet selected the second
+post-`RPARSE` `SCREEN-AND-STORE` unit in the seed-1234 320×480 scene. All six
+drawing/scene outputs and ten ordinary staged Lisp sources match the two fresh
+uninstrumented controls. The selected path has 27 points and 29 writer calls;
+its 103 bytes match the corresponding original writer slice exactly
+(SHA-256 `48f9f1b3b2d6fa51907db8395b700408ef77c02c3d6408d259266006a579b0aa`).
+
+The typed event snapshots show `RAN(0,2)→0` at call 854 with `PREVDEX=28`,
+followed by `AARGB(HDEX=27)` before path point 10. Call 862 returns 1 with
+`PREVDEX=27`, followed by `AARGB(HDEX=28)` before point 15. An earlier
+`RAN(0,2)→1` at call 843 has no HDEX write before the next random call 854.
+This supports two color-associated neighboring indices but rules out the
+random result alone as a sufficient trigger. `COLORDEX`, `CDEX`, and `HDEX` are unbound in the
+inspected package state at the event boundaries; the color index is recorded
+as an `AARGB` writer argument. This does not recover the branch condition.
+
+Across the three selected units (seed 1234 units 1 and 2; seed 5678 unit 1),
+the exact path/color slices total 427 bytes. The JS screen adapter still
+consumes captured path points and color events, so counts remain 30 routine
+names / 31 bounded contracts, 1 of 5 milestones (20% by count), and zero
+whole-painting parity. See the [screen-unit findings](introspection/screen-unit-context.md),
+[unit-2 evidence](introspection/evidence/screen-unit-context-seed1234-unit2-20261014.json),
+and [typed observer](introspection/screen-unit-context-v3.cl).
+
+The next discriminating capture is the third post-`RPARSE` seed-1234 unit,
+using the same typed event-state observer and fresh controls. Compare whether
+it repeats the `PREVDEX` neighbor transitions or produces a different
+random/state combination before the next color write.
 
 The next investigation is a natural `SCREEN-AND-STORE`/`PREP-LINE` drawing
 unit to advance the incomplete scene-decision milestone. Capture its caller
