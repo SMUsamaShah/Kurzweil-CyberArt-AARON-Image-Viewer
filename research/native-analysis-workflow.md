@@ -146,12 +146,16 @@ For native mapping, continue to use REA on the exact PLL payload. The current
 AARON live route uses the source-bound no-TF hardware-breakpoint helper; do not
 attach Frida to a process controlled by the Windows debugger. The next target
 is the REA-identified `CALL [EDI+0x35f]` in the anonymous PREMIUM destination,
-which did not execute in either accepted 768×1080 seed-1234 capture. A clean
-same-scene repeat confirmed the tail jump to the mapped PICK entry and the
-zero-hit CALL; see the [portable evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json).
-Do not rerun the identical scene. First identify an existing source-bound
-scene or seed that may exercise the branch, then use fresh uninstrumented
-controls and rediscover the live code bytes.
+which did not execute in three accepted 768×1080 captures: two seed-1234
+writer-stream scenes and one seed-5678 full-writer scene. All three captured
+the anonymous destination's same-thread tail jump to the freshly mapped PICK
+entry. The full-writer control includes a 25,296,613-byte tape. See the
+[seed-1234 repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json)
+and [seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json).
+Do not repeat those conditions. First use REA's branch/data-flow view to
+identify a different existing source-bound scene likely to exercise the loop
+backedge, then use fresh uninstrumented controls and rediscover the live code
+bytes.
 
 The first no-TF attempt at the PREMIUM internal transfers reached the expected
 outer callsite but rejected the live 256-byte window hash before arming internal

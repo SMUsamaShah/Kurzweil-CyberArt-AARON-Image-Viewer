@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "accepted-complete-source-bound-repeat; no-new-behavior-contract",
+  "status": "accepted-complete-source-bound-native-triplet; no-JavaScript-contract",
   "triplet": {
     "id": "prem-internal-next-20261015-102743-42be241d",
     "mode": "writer-stream-seed-1234",
@@ -22,6 +22,14 @@
             "bytes": 426587,
             "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
           },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
           "image": {
             "bytes": 424205,
             "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
@@ -29,14 +37,6 @@
           "image-id": {
             "bytes": 3,
             "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
-          },
-          "aaron-scene-state-snapshot.txt": {
-            "bytes": 26120,
-            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
-          },
-          "aaron-random-seed-loaded.txt": {
-            "bytes": 476,
-            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
           }
         },
         "stagedSourceCount": 6,
@@ -93,6 +93,14 @@
             "bytes": 426587,
             "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
           },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
           "image": {
             "bytes": 424205,
             "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
@@ -100,14 +108,6 @@
           "image-id": {
             "bytes": 3,
             "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
-          },
-          "aaron-scene-state-snapshot.txt": {
-            "bytes": 26120,
-            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
-          },
-          "aaron-random-seed-loaded.txt": {
-            "bytes": 476,
-            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
           }
         },
         "stagedSourceCount": 6,
@@ -164,6 +164,14 @@
             "bytes": 426587,
             "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
           },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
           "image": {
             "bytes": 424205,
             "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
@@ -171,14 +179,6 @@
           "image-id": {
             "bytes": 3,
             "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
-          },
-          "aaron-scene-state-snapshot.txt": {
-            "bytes": 26120,
-            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
-          },
-          "aaron-random-seed-loaded.txt": {
-            "bytes": 476,
-            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
           }
         },
         "stagedSourceCount": 6,
@@ -226,42 +226,60 @@
     "currentSourceInputs": {
       "coordinator": {
         "path": "research/tools/capture-premium-internal-transfer-triplet-v3.ps1",
-        "bytes": 135998,
-        "sha256": "7a16d97a04b34fca4bb5a484e9328497a24bbf895549b34431500d8f0a95276a"
+        "bytes": 136761,
+        "capturedSha256": "7a16d97a04b34fca4bb5a484e9328497a24bbf895549b34431500d8f0a95276a",
+        "currentSha256": "1582b3e670a7341c2b931686bcea265fac745bbbd539e0d72cc729654ad80ce6",
+        "matchesCapture": false
       },
       "probe": {
         "path": "research/introspection/premium-callsite-metadata-v1.cl",
         "bytes": 10825,
-        "sha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3"
+        "capturedSha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3",
+        "currentSha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3",
+        "matchesCapture": true
       },
       "runner": {
         "path": "research/oracle/run-local-scene-state-required-probe.ps1",
         "bytes": 33992,
-        "sha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c"
+        "capturedSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+        "currentSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+        "matchesCapture": true
       },
       "debuggerHelper": {
         "path": "research/oracle/AaronPremiumInternalTransferBreakpointV2.cs",
         "bytes": 74825,
-        "sha256": "6630b8873eb58495455e6ec5a8bfddc4648f37118f4affa1efe2458120a97a6c"
+        "capturedSha256": "6630b8873eb58495455e6ec5a8bfddc4648f37118f4affa1efe2458120a97a6c",
+        "currentSha256": "6630b8873eb58495455e6ec5a8bfddc4648f37118f4affa1efe2458120a97a6c",
+        "matchesCapture": true
       },
       "mapper": {
         "path": "research/tools/map-native-code-to-pll.mjs",
         "bytes": 5906,
-        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+        "capturedSha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+        "currentSha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+        "matchesCapture": true
       },
       "reaStaticCensus": {
         "path": "research/introspection/evidence/select-subject-call-census-20261014-v1.json",
         "bytes": 36524,
-        "sha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba"
+        "capturedSha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba",
+        "currentSha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba",
+        "matchesCapture": true
       },
       "extractedManifest": {
         "path": "research/extracted/aaron/manifest.json",
         "bytes": 2817,
-        "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+        "capturedSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+        "currentSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+        "matchesCapture": true
       }
     }
   },
   "observation": {
+    "boundedScene": {
+      "mode": "writer-stream-seed-1234",
+      "canvas": "768 1080 148"
+    },
     "outerCall": {
       "address": "0x1fe4c07c",
       "destination": "0x20000983",
@@ -271,7 +289,9 @@
       "instruction": "CALL [EDI+0x35f]",
       "address": "0x2000091a",
       "hitCount": 0,
-      "destinationHitCount": 0
+      "destinationHitCount": 0,
+      "boundedNoHit": true,
+      "observedEvents": []
     },
     "tailJump": {
       "instruction": "JMP [ESI+0x12]",
@@ -282,11 +302,11 @@
       "sameThread": true
     },
     "limitations": [
-      "This repeats the same 768x1080 seed-1234 scene and does not test another scene, seed, or canvas regime.",
+      "This records one writer-stream-seed-1234 scene at 768 1080 148; it does not generalize to other seeds, scenes, or canvas regimes.",
       "The anonymous outer destination and its direct Lisp caller remain unidentified.",
       "The capture observes selected breakpoint edges, not a continuous instruction path.",
-      "The zero-hit CALL is a bounded no-hit in this scene only; it is not evidence that the site is unreachable.",
-      "The repeated native edge adds no JavaScript behavior contract or painting parity."
+      "A zero-hit CALL is a bounded no-hit in this scene only, not evidence that the site is unreachable.",
+      "The native edge does not add JavaScript behavior or painting parity."
     ]
   },
   "nativeCapture": {
@@ -327,6 +347,8 @@
   "provenance": {
     "comparison": "research/extracted/local-oracle/premium-internal-transfer-triplet-v3-logs/prem-internal-next-20261015-102743-42be241d/triplet-comparison.json",
     "nativeMapPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/native-code/mapped/native-code-map.json",
-    "nativeCaptureManifestPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/native-code/capture-manifest.json"
+    "nativeCaptureManifestPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/native-code/capture-manifest.json",
+    "deriverPath": "research/tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs",
+    "deriverSha256": "5473f870f647d6c949c73790f91557076b0aeaa14a8a1e63ed9efdb0c09ac6cb"
   }
 }

@@ -7,12 +7,15 @@ recovered behavior.
 
 ## Where we are
 
-Latest native caller checkpoint: two complete source-bound no-TF triplets of
-the same 768×1080 seed-1234 scene observed the anonymous PREMIUM destination's
-`JMP [ESI+0x12]` reaching the freshly mapped PICK entry. The separate
-`CALL [EDI+0x35f]` site at `+0x17` had zero hits in both runs, which is only a
-bounded no-hit for this scene. See the [finding](introspection/premium-internal-transfer-edge-v1.md)
-and [repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json).
+Latest native caller checkpoint: three complete source-bound no-TF triplets
+across seed-1234 writer-stream and seed-5678 full-writer scenes observed the
+anonymous PREMIUM destination's `JMP [ESI+0x12]` reaching the freshly mapped
+PICK entry. `CALL [EDI+0x35f]` at `+0x17` had zero hits in all three runs; this
+remains a bounded no-hit. The 25.3 MB seed-5678 writer tape matched across its
+before/observer/after controls. See the
+[finding](introspection/premium-internal-transfer-edge-v1.md),
+[repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json),
+and [seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json).
 
 | Measure | Current result | How to read it |
 |---|---:|---|

@@ -1,8 +1,8 @@
 # PREMIUM internal transfer reaches the current PICK entry
 
-**Status:** two accepted, complete source-bound 768×1080 triplets of the same
-seed-1234 scene. These record native CPU edges; they do not add a JavaScript
-behavior contract.
+**Status:** three accepted, complete source-bound 768×1080 triplets across
+seed-1234 and seed-5678 scenes. These record native CPU edges; they do not add
+a JavaScript behavior contract.
 
 ## Measurement
 
@@ -63,7 +63,7 @@ observer again measured the same outer call destination and a same-thread
 `JMP [ESI+0x12]` edge to the freshly mapped PICK entry. Its `CALL [EDI+0x35f]`
 breakpoint at `0x2000091a` had zero hits; the tail-jump source and destination
 each had one hit. See the [repeat evidence](evidence/premium-internal-transfer-repeat-20261015.json),
-derived by the [offline validator](../tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
+derived by the [offline validator](../tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs).
 
 This repeat uses the same seed and scene as the first capture. It confirms the
 measured edge in a fresh accepted triplet but does not expand scene, seed, or
@@ -71,6 +71,24 @@ canvas coverage. The zero-hit CALL remains a bounded no-hit, not an
 unreachable-code conclusion. The clean accepted run also shows the normal
 detach path; the coordinator's owner-bound recovery branch for the previously
 rejected detach error remains unexercised.
+
+## Full-writer seed-5678 scene
+
+Triplet `prem-internal-s5678-20261015-104044-22713a85` used
+`writer-full-seed-5678`. Before, observer, and after controls matched for the
+five standard drawing/scene artifacts, five staged Lisp sources, and the
+complete 25,296,613-byte writer tape (SHA-256
+`c4dc5e6e5c4ec9ff11c3a961c03482500322bdf98d1e910878a3ba4b3e8ef99b`). The
+observer freshly mapped the same PREMIUM and PICK objects. Its anonymous
+destination again reached the current PICK entry through a same-thread
+`JMP [ESI+0x12]`; `CALL [EDI+0x35f]` at offset `+0x17` again had zero hits.
+All 11 pinned instruction spans matched the REA profile, while the full
+256-byte window hash differed from the historical reference. See the
+[portable seed-5678 evidence](evidence/premium-internal-transfer-seed5678-20261015.json).
+
+This is one full-writer scene at a second seed, not broad scene coverage. The
+zero-hit CALL remains a bounded observation; the run does not establish that
+the site is unreachable or identify its target.
 
 A fresh corrected-source rerun,
 `prem-it-v3-final-20261015-062543-6f3ff028`, reached the same tail edge but
@@ -80,19 +98,21 @@ comparison was produced. Do not count it as a replication. The coordinator now
 stops only the exact source-bound AARON process after this specific rejection,
 allowing the runner to collect staging files and restore its registry snapshot
 without waiting the full run limit. See [tooling quick fixes](../tooling-workarounds.md#debugger-detach-failed-after-premium-edge-capture-2026-10-15).
-The cleanup change passed the no-launch preflight but has not yet been exercised
-by another original-runtime run.
+The cleanup change passed the no-launch preflight. Accepted subsequent runs
+used the normal clean-detach path, so the owner-bound recovery branch for this
+specific failure remains unexercised.
 
 ## Limits and next step
 
-This capture establishes one direct CPU tail-jump edge to the current PICK
-entry within one outer-call frame. It does not identify a direct Lisp caller,
-recover the anonymous block's function boundary, or trace every instruction
-between `0x20000983` and `0x200009a4`. It does not generalize to other seeds or
-canvas sizes and does not establish Lisp arguments, function behavior, a JS
-contract, or painting parity. The project counts remain 1,347 inventoried
-binding names, 31 routine names / 32 bounded JS contracts, 1/5 milestones by
-count, and zero complete whole-painting parity results.
+The three captures establish the same direct CPU tail-jump edge to the current
+PICK entry in their observed outer-call frames. They do not identify a direct
+Lisp caller, recover the anonymous block's function boundary, or trace every
+instruction between `0x20000983` and `0x200009a4`. These captures do not
+generalize to other seeds or canvas sizes and do not establish Lisp arguments,
+function behavior, a JS contract, or painting parity. The project counts
+remain 1,347 inventoried binding names, 31 routine names / 32 bounded JS
+contracts, 1/5 milestones by count, and zero complete whole-painting parity
+results.
 
 Frida is not a usable live route for this AARON runtime with the tested agent
 build. Two source-bound attach attempts crashed in the same `frida-agent.dll`
@@ -102,9 +122,10 @@ before script load, with exception `0xc0000409` at offset `0x00c0df07`. See the
 
 Next, keep REA as the static targeting tool and use the existing non-injecting
 no-TF hardware-breakpoint route to investigate the separate `CALL [EDI+0x35f]`
-at anonymous-window offset `+0x17`. It was not hit in either accepted
-seed-1234 triplet, so do not repeat that exact seed/scene. First locate an
-existing source-bound scene or seed that may exercise the branch; rediscover
-and verify the live addresses and bytes, then retain fresh uninstrumented
-controls. Keep both accepted triplets immutable; do not infer a function name
-or ABI from a captured destination alone.
+at anonymous-window offset `+0x17`. It was not hit in either seed-1234 triplet
+or the seed-5678 full-writer triplet, so do not repeat those conditions. Use
+REA's branch/data-flow view to identify a scene condition likely to continue
+through the loop backedge; then rediscover and verify the live addresses and
+bytes and retain fresh uninstrumented controls. Keep all three accepted
+triplets immutable; do not infer a function name or ABI from a captured
+destination alone.

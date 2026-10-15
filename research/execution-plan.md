@@ -908,8 +908,8 @@ stale report-sentence correction are in the [internal-transfer finding](introspe
 The fresh corrected-source rerun is rejected because its helper did not detach
 cleanly (`DebugActiveProcessStop` error 5), and it lacks an after-control. The
 new coordinator cleanup is owner- and diagnostic-bound; it does not lower the
-capture acceptance gate. Its no-launch preflight passed, but the early-stop
-branch has not yet been exercised by another AARON run.
+capture acceptance gate. Its no-launch preflight passed. Two later accepted
+triplets detached normally, so this specific recovery branch remains untested.
 
 REA remains the static targeting tool: it decoded the exact rejected window
 through an unexecuted synthetic PE. Frida 17.23.3 passed its x86 generated-code
@@ -924,15 +924,17 @@ The no-launch path and process-path workaround are in
 and [the Frida crash note](tooling-workarounds.md#frida-agent-crashes-aaron-before-the-script-loads-2026-10-15).
 
 Next, continue with REA and the existing non-injecting no-TF hardware
-breakpoint workflow. The accepted seed-1234 triplet captured the anonymous
-PREMIUM destination's tail-JMP to the current PICK entry. Its separate
-`CALL [EDI+0x35f]` site at anonymous-window offset `+0x17` did not execute.
-A clean second complete source-bound triplet of the same seed-1234 scene
-reproduced the tail edge and also recorded zero hits at that CALL. See the
-[repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json)
-and its [offline derivation](tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
-Do not repeat that exact seed/scene; locate an existing source-bound scene or
-seed that may exercise the unresolved transfer, then capture it with fresh
+breakpoint workflow. Three complete source-bound 768×1080 triplets—two
+seed-1234 writer-stream scenes and one seed-5678 full-writer scene—captured the
+anonymous PREMIUM destination's tail-JMP to the current PICK entry. The
+separate `CALL [EDI+0x35f]` site at anonymous-window offset `+0x17` had zero
+hits in all three. The seed-5678 tape was complete at 25,296,613 bytes. See the
+[seed-1234 repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json),
+[seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json),
+and shared [offline deriver](tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs).
+Treat the zero-hit results as bounded to these scenes. Do not repeat their
+conditions; use REA branch/data-flow evidence to select another source-bound
+scene likely to exercise the loop backedge, then capture it with fresh
 before/after controls.
 Read [`oracle.md`](oracle.md) first, use a fresh output root, and rediscover
 the current method, code region, and instruction bytes before attaching the

@@ -8,6 +8,8 @@ param(
     [string]$BaseRoot = 'C:\AaronOracleRuns',
     [ValidatePattern('^[a-z0-9][a-z0-9-]{0,24}$')]
     [string]$RunPrefix = 'prem-internal-transfer-v3',
+    [ValidateSet('writer-stream-seed-1234', 'writer-full-seed-5678')]
+    [string]$Mode = 'writer-stream-seed-1234',
     [ValidateRange(120, 600)] [int]$RunSeconds = 360,
     [ValidateRange(45, 300)] [int]$PauseSeconds = 150,
     [ValidateRange(10, 180)] [int]$CaptureSeconds = 180,
@@ -85,7 +87,7 @@ if ($PauseSeconds -lt 90) {
 }
 
 $baseFullPath = [IO.Path]::GetFullPath($BaseRoot)
-$mode = 'writer-stream-seed-1234'
+$mode = $Mode
 $runnerSha256 = (Get-FileHash -LiteralPath $runnerScript -Algorithm SHA256).Hash.ToLowerInvariant()
 $coordinatorSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $probeSha256 = (Get-FileHash -LiteralPath $probePath -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -1644,6 +1646,14 @@ function Read-Run([string]$Role, [string]$RunId, [string]$OutputRoot, [bool]$Obs
     foreach ($name in @('aa0', 'image', 'image-id', 'aaron-scene-state-snapshot.txt', 'aaron-random-seed-loaded.txt')) {
         $artifacts[$name] = Get-Record (Join-Path $capture $name)
     }
+    if ($mode -eq 'writer-full-seed-5678') {
+        $fullTapePath = Join-Path $capture 'aaron-writer-full.txt'
+        $fullTape = Get-Record $fullTapePath
+        if ((Get-Content -LiteralPath $fullTapePath -Tail 1) -cne 'END writer-full') {
+            throw "$Role full writer tape is incomplete"
+        }
+        $artifacts['aaron-writer-full.txt'] = $fullTape
+    }
     if ($summary.aa0Sha256 -cne $artifacts.aa0.sha256 -or
         $summary.sceneReportSha256 -cne $artifacts['aaron-scene-state-snapshot.txt'].sha256 -or
         (Get-Content -LiteralPath (Join-Path $capture 'aa0') -Tail 1) -cne 'end' -or
@@ -1654,9 +1664,13 @@ function Read-Run([string]$Role, [string]$RunId, [string]$OutputRoot, [bool]$Obs
         'planning-call-trace.cl' = Join-Path $repoRoot 'research\introspection\planning-call-trace.cl'
         'planning-random-seed-common.cl' = Join-Path $repoRoot 'research\oracle\planning-random-seed-common.cl'
         'scene-state-snapshot-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-seeded-1234.cl'
-        'scene-state-snapshot-writer-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-seeded-1234.cl'
-        'scene-state-snapshot-writer-stream-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-stream-seeded-1234.cl'
         'scene-state-snapshot.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot.cl'
+    }
+    if ($mode -eq 'writer-stream-seed-1234') {
+        $sourceMap['scene-state-snapshot-writer-seeded-1234.cl'] = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-seeded-1234.cl'
+        $sourceMap['scene-state-snapshot-writer-stream-seeded-1234.cl'] = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-stream-seeded-1234.cl'
+    } elseif ($mode -eq 'writer-full-seed-5678') {
+        $sourceMap['scene-state-snapshot-writer-full-seeded-5678.cl'] = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-full-seeded-5678.cl'
     }
     $sources = [ordered]@{}
     foreach ($name in $sourceMap.Keys) {

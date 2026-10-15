@@ -31,7 +31,15 @@ before/after planning traces matched; debug state restored exactly and detach
 completed without cleanup errors. `CALL [EDI+0x35f]` at `+0x17` remained a
 zero-hit site in both accepted captures. See the
 [repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json)
-and its [offline derivation](tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
+and its [offline derivation](tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs).
+
+A third accepted triplet, `prem-internal-s5678-20261015-104044-22713a85`, used
+the full-writer seed-5678 scene. All five standard drawing/scene artifacts,
+five staged sources, the 25,296,613-byte writer tape, and before/after planning
+traces matched. It reproduced the same-thread tail-JMP edge to the freshly
+mapped PICK entry; the `+0x17` CALL again had zero hits. See the
+[seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json)
+and the shared [offline deriver](tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs).
 
 A corrected-source rerun hit the same edge but failed clean debugger detach
 with `DebugActiveProcessStop` error 5. It is rejected and has no accepted
@@ -53,13 +61,14 @@ See the [crash evidence](introspection/evidence/frida-aaron-injection-crash-2026
 Do not repeat this agent/runtime combination.
 
 Next, use REA on the exact native bytes and the non-injecting no-TF hardware
-breakpoint workflow. Both accepted same-scene seed-1234 captures missed the
-separate `CALL [EDI+0x35f]` site at anonymous-window offset `+0x17`; find an
-existing source-bound scene or seed that may exercise this branch before
-running another capture. Preserve both accepted captures and the
-`JMP [ESI+0x12]` finding. Before any new original-runtime run, read
-[`oracle.md`](oracle.md), use fresh roots and uninstrumented controls, and
-rediscover and validate the live bytes. See the
+breakpoint workflow. All three accepted captures—two seed-1234 writer-stream
+runs and one seed-5678 full-writer run—missed the separate
+`CALL [EDI+0x35f]` site at anonymous-window offset `+0x17`. Do not repeat
+those conditions. Use REA's branch/data-flow evidence to choose a different
+source-bound scene likely to reach the loop backedge. Preserve all three
+accepted captures and the `JMP [ESI+0x12]` finding. Before any new
+original-runtime run, read [`oracle.md`](oracle.md), use fresh roots and
+uninstrumented controls, and rediscover and validate the live bytes. See the
 [native workflow](native-analysis-workflow.md) and [active plan](execution-plan.md).
 
 ### 2026-10-14 checkpoint

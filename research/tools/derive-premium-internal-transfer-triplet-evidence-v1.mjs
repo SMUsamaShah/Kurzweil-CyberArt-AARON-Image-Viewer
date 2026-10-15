@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-// Offline, source-bound validation for the 2026-10-15 repeat no-TF capture.
-// This records a repeat of an existing edge, not a new JavaScript contract.
+// Offline, source-bound validation for accepted PREMIUM no-TF triplets.
+// The report records measured native edges without inferring a Lisp ABI.
 
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -9,10 +9,26 @@ import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const TRIPLET_ID = 'prem-internal-next-20261015-102743-42be241d';
-const DEFAULT_COMPARISON = `research/extracted/local-oracle/premium-internal-transfer-triplet-v3-logs/${TRIPLET_ID}/triplet-comparison.json`;
+const DEFAULT_TRIPLET_ID = 'prem-internal-next-20261015-102743-42be241d';
+const DEFAULT_MODE = 'writer-stream-seed-1234';
+const DEFAULT_COMPARISON = `research/extracted/local-oracle/premium-internal-transfer-triplet-v3-logs/${DEFAULT_TRIPLET_ID}/triplet-comparison.json`;
 const DEFAULT_OUTPUT = 'research/introspection/evidence/premium-internal-transfer-repeat-20261015.json';
 const REQUIRED_ARTIFACTS = ['aa0', 'image', 'image-id', 'aaron-scene-state-snapshot.txt', 'aaron-random-seed-loaded.txt'];
+const REQUIRED_SOURCES = {
+  'writer-stream-seed-1234': [
+    'planning-call-trace.cl', 'planning-random-seed-common.cl', 'scene-state-snapshot-seeded-1234.cl',
+    'scene-state-snapshot-writer-seeded-1234.cl', 'scene-state-snapshot-writer-stream-seeded-1234.cl', 'scene-state-snapshot.cl',
+  ],
+  'writer-full-seed-5678': [
+    'planning-call-trace.cl', 'planning-random-seed-common.cl', 'scene-state-snapshot-seeded-1234.cl',
+    'scene-state-snapshot-writer-full-seeded-5678.cl', 'scene-state-snapshot.cl',
+  ],
+};
+const EXPECTED_WINDOW_PROFILE = [
+  [23, 'ff975f030000'], [128, 'b102'], [130, '83e17f'], [133, '8b7315'],
+  [136, '894df0'], [139, '39679b'], [142, '7209'], [144, 'eb85'],
+  [153, '89442404'], [157, '89542408'], [161, 'ff6612'],
+];
 const HEX64 = /^[0-9a-f]{64}$/u;
 
 function fail(message) { throw new Error(message); }
@@ -47,15 +63,18 @@ function jsonFile(path) {
   catch (error) { fail(`${path}: invalid JSON (${error.message})`); }
 }
 function parseArgs(argv) {
-  const args = { comparison: DEFAULT_COMPARISON, output: DEFAULT_OUTPUT, overwrite: false };
+  const args = { tripletId: DEFAULT_TRIPLET_ID, mode: DEFAULT_MODE, comparison: DEFAULT_COMPARISON, output: DEFAULT_OUTPUT, overwrite: false };
   for (let i = 0; i < argv.length; i += 1) {
-    if (argv[i] === '--comparison') args.comparison = argv[++i] ?? '';
-    else if (argv[i] === '--out') args.output = argv[++i] ?? '';
-    else if (argv[i] === '--overwrite') args.overwrite = true;
-    else if (argv[i] === '--help') {
-      process.stdout.write('Usage: node research/tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs [--comparison PATH] [--out PATH] [--overwrite]\n');
+    const key = argv[i];
+    if (key === '--triplet-id') args.tripletId = argv[++i] ?? '';
+    else if (key === '--mode') args.mode = argv[++i] ?? '';
+    else if (key === '--comparison') args.comparison = argv[++i] ?? '';
+    else if (key === '--out') args.output = argv[++i] ?? '';
+    else if (key === '--overwrite') args.overwrite = true;
+    else if (key === '--help') {
+      process.stdout.write('Usage: node research/tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs [--triplet-id ID] [--mode MODE] [--comparison PATH] [--out PATH] [--overwrite]\n');
       process.exit(0);
-    } else fail(`Unknown argument: ${argv[i]}`);
+    } else fail(`Unknown argument: ${key}`);
   }
   return args;
 }
@@ -73,8 +92,9 @@ function main() {
   const args = parseArgs(process.argv.slice(2));
   const comparisonFile = jsonFile(args.comparison);
   const comparison = comparisonFile.value;
-  assert(comparison.schemaVersion === 2 && comparison.tripletId === TRIPLET_ID &&
-    comparison.mode === 'writer-stream-seed-1234' && comparison.aa0Header === '768 1080 148',
+  assert(Object.hasOwn(REQUIRED_SOURCES, args.mode), `unsupported mode: ${args.mode}`);
+  assert(comparison.schemaVersion === 2 && comparison.tripletId === args.tripletId &&
+    comparison.mode === args.mode && comparison.aa0Header === '768 1080 148',
   'triplet identity, schema, mode, or canvas gate failed');
   assert(comparison.controlsMatch === true && comparison.beforeAfterPlanningTraceMatch === true,
     'fresh uninstrumented controls or planning traces differ');
@@ -82,9 +102,12 @@ function main() {
     'expected exactly before, observer, and after runs');
 
   const requiredRoles = ['before', 'observer', 'after'];
+  const requiredArtifacts = [...REQUIRED_ARTIFACTS];
+  if (args.mode === 'writer-full-seed-5678') requiredArtifacts.push('aaron-writer-full.txt');
+  const expectedArtifactNames = new Set();
   const roles = new Map();
   const firstArtifacts = new Map();
-  const firstSources = new Map();
+  let expectedSourceNames = null;
   const runRecords = [];
   for (let index = 0; index < requiredRoles.length; index += 1) {
     const run = comparison.runs[index];
@@ -102,8 +125,13 @@ function main() {
       summaryFile.value.mode === run.mode && summaryFile.value.runnerSha256 === run.runnerSha256,
     `${role}: on-disk summary does not match comparison`);
 
+    const artifactNames = Object.keys(run.artifacts ?? {}).sort();
+    assert(requiredArtifacts.every(name => artifactNames.includes(name)), `${role}: missing required drawing/scene artifacts`);
+    if (index === 0) artifactNames.forEach(name => expectedArtifactNames.add(name));
+    else assert(artifactNames.length === expectedArtifactNames.size && artifactNames.every(name => expectedArtifactNames.has(name)),
+      `${role}: artifact set differs from other triplet legs`);
     const artifacts = {};
-    for (const name of REQUIRED_ARTIFACTS) {
+    for (const name of artifactNames) {
       const artifact = fileRecord(run.artifacts?.[name], `${role} artifact ${name}`, runRoot);
       artifacts[name] = { bytes: artifact.bytes, sha256: artifact.sha256 };
       const old = firstArtifacts.get(name);
@@ -116,15 +144,22 @@ function main() {
     assert(/^768 1080 148(?:\r?\n)/u.test(aa0), `${role}: AA0 header mismatch`);
 
     const sources = run.sources ?? {};
-    assert(Object.keys(sources).length === 6, `${role}: expected six staged scene sources`);
+    const sourceNames = Object.keys(sources).sort();
+    const requiredSourceNames = [...REQUIRED_SOURCES[args.mode]].sort();
+    assert(sourceNames.length === requiredSourceNames.length && sourceNames.every((name, i) => name === requiredSourceNames[i]),
+      `${role}: staged scene source set differs from the expected ${args.mode} inputs`);
+    if (index === 0) expectedSourceNames = sourceNames;
+    else assert(sourceNames.length === expectedSourceNames.length && sourceNames.every((name, i) => name === expectedSourceNames[i]),
+      `${role}: staged source names differ across triplet legs`);
     for (const [name, record] of Object.entries(sources)) {
-      const source = fileRecord(record, `${role} staged source ${name}`, runRoot);
-      const key = `${name}:${source.sha256}`;
-      firstSources.set(key, true);
+      fileRecord(record, `${role} staged source ${name}`, runRoot);
+    }
+    if (args.mode === 'writer-full-seed-5678') {
+      const writerTape = fileRecord(run.artifacts['aaron-writer-full.txt'], `${role} full writer tape`, runRoot);
+      assert(writerTape.text.trimEnd().endsWith('END writer-full'), `${role}: full writer tape is incomplete`);
     }
     const trace = fileRecord(run.planningTrace, `${role} planning trace`, runRoot);
-    if (role === 'before') runRecords.push({ role, runId: run.runId, complete: run.complete, root: run.root, runnerSha256: run.runnerSha256, summarySha256: summaryFile.sha256, planningTrace: { bytes: trace.bytes, sha256: trace.sha256 }, artifacts, stagedSourceCount: Object.keys(sources).length });
-    else runRecords.push({ role, runId: run.runId, complete: run.complete, root: run.root, runnerSha256: run.runnerSha256, summarySha256: summaryFile.sha256, planningTrace: { bytes: trace.bytes, sha256: trace.sha256 }, artifacts, stagedSourceCount: Object.keys(sources).length });
+    runRecords.push({ role, runId: run.runId, complete: run.complete, root: run.root, runnerSha256: run.runnerSha256, summarySha256: summaryFile.sha256, planningTrace: { bytes: trace.bytes, sha256: trace.sha256 }, artifacts, stagedSourceCount: Object.keys(sources).length });
     runRecords.at(-1).sources = Object.fromEntries(Object.entries(sources).map(([name, record]) => {
       const source = fileRecord(record, `${role} staged source ${name}`, runRoot);
       return [name, { bytes: source.bytes, sha256: source.sha256 }];
@@ -150,7 +185,7 @@ function main() {
   const report = parseEnvelope(captureFile.text);
   const debugRecord = report.debugger;
   const mapping = report.mapping;
-  assert(report.tripletId === TRIPLET_ID && report.runId === roles.get('observer').runId &&
+  assert(report.tripletId === args.tripletId && report.runId === roles.get('observer').runId &&
     report.mode === comparison.mode, 'capture report identity differs from observer run');
   assert(debugRecord?.attached === true && debugRecord.attachSucceeded === true && debugRecord.detached === true &&
     debugRecord.readyPauseReleased === true && debugRecord.debugRegistersRestored === true &&
@@ -160,17 +195,53 @@ function main() {
   assert(Array.isArray(debugRecord.debugStateRestorations) && debugRecord.debugStateRestorations.length > 0 &&
     debugRecord.debugStateRestorations.every(row => row.exactMatch === true),
   'not every thread debug-register state was restored exactly');
-  assert(debugRecord.events?.length === 4 && debugRecord.events.every(event => event.threadId === debugRecord.selectedThreadId),
-    'expected four same-thread breakpoint events');
+  assert(Array.isArray(debugRecord.events) && debugRecord.events.length === debugRecord.eventCount &&
+    debugRecord.events.length >= 4 && debugRecord.events.every(event => event.threadId === debugRecord.selectedThreadId),
+  'breakpoint event count or selected-thread gate failed');
+  const window = debugRecord.targetWindow;
+  assert(window?.requestedBytes === 256 && window.bytesRead === 256 && typeof window.bytesHex === 'string' &&
+    /^[0-9a-f]{512}$/iu.test(window.bytesHex), 'target instruction window is incomplete');
+  const windowBytes = Buffer.from(window.bytesHex, 'hex');
+  checkHash(sha(windowBytes), window.bytesSha256, 'raw target-window bytes');
+  checkHash(window.bytesSha256, comparison.debuggerResult.targetWindowSha256, 'comparison target-window hash');
+  assert(window.historicalReferenceWindowBytesMatch === false &&
+    window.referenceWindowSha256 === comparison.debuggerResult.referenceWindowSha256 &&
+    window.instructionProfileMatches === true && mapping.instructionProfileMatches === true &&
+    window.instructionProfileSha256 === window.expectedInstructionProfileSha256 &&
+    mapping.instructionProfileSha256 === window.instructionProfileSha256,
+  'target-window reference/profile identity differs from comparison');
+  assert(Array.isArray(window.profileRecords) && window.profileRecords.length === EXPECTED_WINDOW_PROFILE.length,
+    'target-window REA instruction profile is incomplete');
+  for (let index = 0; index < EXPECTED_WINDOW_PROFILE.length; index += 1) {
+    const [offset, expectedHex] = EXPECTED_WINDOW_PROFILE[index];
+    const record = window.profileRecords[index];
+    const actualHex = windowBytes.subarray(offset, offset + expectedHex.length / 2).toString('hex');
+    assert(record.offset === offset && record.bytesHex === expectedHex && record.expectedBytesHex === expectedHex &&
+      record.matched === true && actualHex === expectedHex,
+    `target-window REA signature mismatch at offset ${offset}`);
+  }
   const sites = mapping.internalSites;
   const callSite = sites?.find(site => site.name === 'CALL-EDI+35F');
   const jumpSite = sites?.find(site => site.name === 'JMP-ESI+12');
-  assert(callSite?.address === '0x2000091a' && callSite.hitCount === 0 && callSite.destinationHitCount === 0,
-    'CALL [EDI+0x35f] did not satisfy the measured no-hit record');
-  assert(jumpSite?.address === '0x200009a4' && jumpSite.hitCount === 1 && jumpSite.destinationHitCount === 1,
+  assert(callSite?.offset === 23 && callSite.expectedBytesHex === 'ff975f030000' &&
+    Number.isInteger(callSite.hitCount) && callSite.hitCount >= 0 &&
+    callSite.destinationHitCount === callSite.hitCount,
+  'CALL [EDI+0x35f] hit/destination counts or source signature differ');
+  assert(jumpSite?.offset === 161 && jumpSite.expectedBytesHex === 'ff6612' &&
+    jumpSite.hitCount === 1 && jumpSite.destinationHitCount === 1,
     'JMP [ESI+0x12] edge count differs from capture');
-  assert(debugRecord.events[1].eip === mapping.measuredOuterDestination &&
-    debugRecord.events[2].eip === jumpSite.address && debugRecord.events[3].eip === mapping.tailJumpDestinationAddress &&
+  const findEvent = (kind, site) => debugRecord.events.find(event => event.kind === kind && event.site === site);
+  const outerCallEvent = findEvent('source-hit', 'PREMIUM-CALL-EDI+27');
+  const outerDestinationEvent = findEvent('destination-hit', 'PREMIUM-outer-destination');
+  const jumpSourceEvent = findEvent('source-hit', 'JMP-ESI+12');
+  const jumpDestinationEvent = findEvent('destination-hit', 'JMP-ESI+12');
+  const innerCallSourceEvents = debugRecord.events.filter(event => event.kind === 'source-hit' && event.site === 'CALL-EDI+35F');
+  const innerCallDestinationEvents = debugRecord.events.filter(event => event.kind === 'destination-hit' && event.site === 'CALL-EDI+35F');
+  assert(outerCallEvent?.eip === mapping.callSiteAddress && outerDestinationEvent?.eip === mapping.measuredOuterDestination &&
+    jumpSourceEvent?.eip === jumpSite.address && jumpDestinationEvent?.eip === mapping.tailJumpDestinationAddress &&
+    innerCallSourceEvents.length === callSite.hitCount && innerCallDestinationEvents.length === callSite.destinationHitCount &&
+    outerCallEvent.eventOrder < outerDestinationEvent.eventOrder &&
+    outerDestinationEvent.eventOrder < jumpSourceEvent.eventOrder && jumpSourceEvent.eventOrder < jumpDestinationEvent.eventOrder &&
     mapping.tailJumpDestinationEqualsCurrentPick === true &&
     mapping.tailJumpDestinationAddress === mapping.currentPickEntry,
   'outer destination / tail-jump / mapped PICK edge differs from capture');
@@ -195,15 +266,22 @@ function main() {
   const topSources = {};
   for (const [name, record] of Object.entries(comparison.sources ?? {})) {
     const source = readFile(record.path);
-    checkHash(source.sha256, record.sha256, `comparison source ${name}`);
-    topSources[name] = { path: source.path, bytes: source.bytes.length, sha256: source.sha256 };
+    const matchesCapture = source.sha256 === record.sha256;
+    if (name !== 'coordinator') checkHash(source.sha256, record.sha256, `comparison source ${name}`);
+    topSources[name] = {
+      path: source.path,
+      bytes: source.bytes.length,
+      capturedSha256: record.sha256,
+      currentSha256: source.sha256,
+      matchesCapture,
+    };
   }
 
   const result = {
     schemaVersion: 1,
-    status: 'accepted-complete-source-bound-repeat; no-new-behavior-contract',
+    status: 'accepted-complete-source-bound-native-triplet; no-JavaScript-contract',
     triplet: {
-      id: TRIPLET_ID,
+      id: args.tripletId,
       mode: comparison.mode,
       canvas: comparison.aa0Header,
       roles: runRecords,
@@ -213,15 +291,16 @@ function main() {
       currentSourceInputs: topSources,
     },
     observation: {
+      boundedScene: { mode: comparison.mode, canvas: comparison.aa0Header },
       outerCall: { address: mapping.callSiteAddress, destination: mapping.measuredOuterDestination, destinationRemainsAnonymous: true },
-      innerCall: { instruction: 'CALL [EDI+0x35f]', address: callSite.address, hitCount: callSite.hitCount, destinationHitCount: callSite.destinationHitCount },
+      innerCall: { instruction: 'CALL [EDI+0x35f]', address: callSite.address, hitCount: callSite.hitCount, destinationHitCount: callSite.destinationHitCount, boundedNoHit: callSite.hitCount === 0, observedEvents: innerCallSourceEvents.map((event, index) => ({ sourceOrder: event.eventOrder, destinationOrder: innerCallDestinationEvents[index]?.eventOrder, sourceEip: event.eip, destinationEip: innerCallDestinationEvents[index]?.eip })) },
       tailJump: { instruction: 'JMP [ESI+0x12]', address: jumpSite.address, hitCount: jumpSite.hitCount, destination: mapping.tailJumpDestinationAddress, currentMappedPickEntry: mapping.currentPickEntry, sameThread: true },
       limitations: [
-        'This repeats the same 768x1080 seed-1234 scene and does not test another scene, seed, or canvas regime.',
+        `This records one ${comparison.mode} scene at ${comparison.aa0Header}; it does not generalize to other seeds, scenes, or canvas regimes.`,
         'The anonymous outer destination and its direct Lisp caller remain unidentified.',
         'The capture observes selected breakpoint edges, not a continuous instruction path.',
-        'The zero-hit CALL is a bounded no-hit in this scene only; it is not evidence that the site is unreachable.',
-        'The repeated native edge adds no JavaScript behavior contract or painting parity.'
+        'A zero-hit CALL is a bounded no-hit in this scene only, not evidence that the site is unreachable.',
+        'The native edge does not add JavaScript behavior or painting parity.'
       ]
     },
     nativeCapture: {
@@ -236,19 +315,25 @@ function main() {
       eventCount: debugRecord.eventCount,
       targetWindowSha256: comparison.debuggerResult.targetWindowSha256,
       historicalReferenceWindowSha256: comparison.debuggerResult.referenceWindowSha256,
-      pinnedInstructionProfileMatches: true,
+      pinnedInstructionProfileMatches: window.instructionProfileMatches,
       nativeMapSha256: nativeMapHash,
       nativeCaptureManifestSha256: manifestHash,
       outerReturnGuard: debugRecord.outerReturnGuard,
     },
-    provenance: { comparison: comparisonFile.path, nativeMapPath: relative(REPO, nativeMapPath).split(sep).join('/'), nativeCaptureManifestPath: relative(REPO, manifestPath).split(sep).join('/') },
+    provenance: {
+      comparison: comparisonFile.path,
+      nativeMapPath: relative(REPO, nativeMapPath).split(sep).join('/'),
+      nativeCaptureManifestPath: relative(REPO, manifestPath).split(sep).join('/'),
+      deriverPath: relative(REPO, fileURLToPath(import.meta.url)).split(sep).join('/'),
+      deriverSha256: sha(readFileSync(fileURLToPath(import.meta.url))),
+    },
   };
   const output = resolve(REPO, args.output);
   assert(within(REPO, output), 'output must stay inside repository');
   assert(args.overwrite || !existsSync(output), `refusing to overwrite ${args.output}`);
   const bytes = Buffer.from(`${JSON.stringify(result, null, 2)}\n`);
   writeFileSync(output, bytes, { flag: args.overwrite ? 'w' : 'wx' });
-  process.stdout.write(`${JSON.stringify({ output: relative(REPO, output).split(sep).join('/'), sha256: sha(bytes), tripletId: TRIPLET_ID, controlsMatch: true, sourceBoundComplete: true, callHitCount: callSite.hitCount, jumpDestination: mapping.tailJumpDestinationAddress }, null, 2)}\n`);
+  process.stdout.write(`${JSON.stringify({ output: relative(REPO, output).split(sep).join('/'), sha256: sha(bytes), tripletId: args.tripletId, controlsMatch: true, sourceBoundComplete: true, callHitCount: callSite.hitCount, jumpDestination: mapping.tailJumpDestinationAddress }, null, 2)}\n`);
 }
 
 try { main(); }
