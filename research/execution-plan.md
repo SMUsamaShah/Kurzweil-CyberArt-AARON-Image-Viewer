@@ -949,3 +949,32 @@ Read [`oracle.md`](oracle.md) first, use a fresh output root, and rediscover
 the current method, code region, and instruction bytes before attaching the
 debugger. Keep the accepted triplet and evidence immutable. This is native
 caller investigation only; it adds no JavaScript contract or painting parity.
+
+## Current checkpoint: PREMIUM JC pre-instruction state, 2026-10-15
+
+The source-bound triplet
+`prem-jc-456069-r3-20261015-112943-78e0d290` completed with fresh matching
+before/after controls and a complete 25,840,962-byte writer tape. In its
+1920×1080 seed-456069 observer, the outer PREMIUM call reached anonymous
+destination `0x20000983`; a same-thread breakpoint then stopped at
+`JC rel8 +0x09` (`72 09`) at `0x20000991`, before execution. CF=1 predicts the
+target at window offset `+0x99` (`0x2000099c`). The captured comparison
+operands were `[EDI-0x65]=0x0619af40` and `ESP=0x06999354`. `[EDI+0x35f]`
+contained `0x6388bb08`, without target identity. The JC successor is unobserved;
+later CALL/JMP zero-hit counts are limited to the pre-instruction stop.
+
+REA 6.4/Ghidra 12.1.4 statically decoded the exact JC bytes from a synthetic,
+hash-bound PE; it did not execute the input. The live window hash differs from
+the historical reference, but all 11 pinned spans match. The helper restored
+all debugger state and detached without cleanup errors. See the [finding](introspection/premium-internal-transfer-jc-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json).
+
+Next, create a versioned no-TF helper/coordinator that records the actual first
+post-JC EIP. At the JC event reuse DR0 for fallthrough `+0x90` and DR3 for
+taken target `+0x99`, keeping DR1 on the tail JMP and DR2 on the outer-return
+guard. Verify all slot readbacks before resuming, then require one matching
+successor event and restore original debug state exactly. DR0 no longer watches
+the candidate CALL after JC, so do not claim that CALL result. Rediscover
+addresses and bytes in the fresh observer and keep source-bound full
+before/after controls. This native step adds no JavaScript contract or painting
+parity.

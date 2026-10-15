@@ -1,9 +1,11 @@
 # PREMIUM loop-backedge condition prediction
 
 **Status:** REA confirms one static xref from the `+0x90` jump to the `+0x17`
-call site. Three accepted runtime snapshots predict `JC +0x99` taken, but no
-capture observed that branch executing. This is an analysis aid for the next
-probe, not recovered control flow.
+call site. Three earlier accepted outer-destination snapshots predicted
+`JC +0x99` taken. A later pre-instruction breakpoint in a distinct full-writer
+seed-456069 scene recorded CF=1 at the branch itself. It still did not observe
+the branch's successor, so this remains an analysis aid, not recovered
+control flow.
 
 ## REA result
 
@@ -27,6 +29,17 @@ The recorded little-endian dword is less than ESP in each sample:
 | `prem-internal-next-20261015-102743-42be241d` | seed-1234 writer stream | `0x0619af40` | `0x06999354` | 1 / taken |
 | `prem-internal-s5678-20261015-104044-22713a85` | seed-5678 full writer | `0x0725af40` | `0x07a59354` | 1 / taken |
 
+The separate source-bound triplet
+`prem-jc-456069-r3-20261015-112943-78e0d290` used a 1920×1080 full-writer
+scene. Its same-thread observer stopped at `JC` address `0x20000991` before
+execution, captured bytes `72 09`, and recorded CF=1. The corresponding
+comparison was `[EDI-0x65]=0x0619af40` versus `ESP=0x06999354`. The predicted
+target is window offset `+0x99`, address `0x2000099c`. This directly measures
+the condition for this scene and supports the earlier predictions for this
+case; it does not show that the branch executed. The raw `[EDI+0x35f]` value
+was `0x6388bb08`, but its identity is unknown. Full details and source hashes
+are in the [JC finding](premium-internal-transfer-jc-v1.md).
+
 The preceding instructions leave EDI and ESP unchanged. The intervening
 `MOV [EBP-0x10],ECX` writes to a different address in all three captured
 register states. If those values remain stable until the `CMP`, the predicted
@@ -47,8 +60,10 @@ through the predicted branch to the tail jump. This does not name the anonymous
 block, resolve the indirect CALL target, add a JavaScript contract, or establish
 painting parity.
 
-Next, use a different source-bound scene and a no-TF breakpoint at the `JC`
-site to record CF before execution. At that same event, record `[EDI+0x35f]`
-and map the candidate pointer with REA. A taken/not-taken observation will
-test the prediction directly; the slot read will identify a possible target
-without claiming the CALL executed.
+Next, use a fresh source-bound triplet and a no-TF breakpoint phase to record
+the first instruction address after `JC`. At the branch event reuse DR0 for
+fallthrough `+0x90` and DR3 for taken target `+0x99`, preserving DR1 on the
+tail JMP and DR2 on the outer-return guard. Require exactly one matching
+successor event, validate live bytes and DR6, restore original state, and keep
+fresh uninstrumented controls. DR0 no longer monitors the inner CALL after JC;
+this step does not test whether that CALL executes.

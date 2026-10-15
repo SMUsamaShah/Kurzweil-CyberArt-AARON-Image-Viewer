@@ -1249,6 +1249,50 @@ The observer's no-attach self-test and its default post-crash refusal (exit 2)
 both ran correctly through the explicit interpreter. This command-resolution
 issue is separate from AARON or `C:\temp` permissions.
 
+### Writer-full-seed mode registry and JC triplet acceptance, 2026-10-15
+
+The new `writer-full-seed-456069` run mode was added to the local scene
+runner, but the shared root-preparation helper still rejected it during
+preflight. Mode additions must stay synchronized in both local scene runners,
+`prepare-local-aaron-oracle-run.ps1` (its `ValidateSet` and large-mode reserve
+list), the capture coordinator, and any evidence deriver that enforces a
+mode-specific AA0 header. Run the coordinator's `-PreflightOnly` path with a
+fresh short prefix before starting AARON.
+
+The prep helper also measures free space from `DriveInfo` on the resolved
+staging/output path roots. That keeps the estimate attached to the volume
+behind the `C:\temp` symlink instead of relying on PowerShell's drive view;
+the accepted 456069 preflight and triplet completed with this check enabled.
+
+The first v4 JC-only observer then completed its intended breakpoint capture,
+but the wrapper's stale unconditional error still required an internal CALL
+or tail-JMP edge. That assertion rejected a capture whose acceptance boundary
+was deliberately before JC execution and prevented the final completion
+record. The error is now restricted to the edge-capture contract; the JC-only
+path retains its exact branch-stop, source-binding, cleanup, and fresh-control
+gates. Preserve the rejected root as diagnostics; it is not an accepted
+triplet.
+
+The portable JC evidence deriver also had assumptions left over from prior
+seeds. It now gates `writer-full-seed-456069` on AA0 header `1920 1080 184`,
+reads breakpoint status from the raw debugger site record, and accepts the
+serialized numeric first-chance flag. It hashes every comparison source,
+including the coordinator, and binds the coordinator, debugger helper, READY
+metadata, and probe-source hashes in the capture report to those comparison
+records. Its default triplet ID now names the accepted r3 run. The output
+labels the opcode as `JC rel8 +0x09`; `+0x99` is separately named as the
+predicted offset within the captured code window. This distinction prevents
+confusing the encoded displacement with the resulting address.
+
+The accepted triplet is
+`prem-jc-456069-r3-20261015-112943-78e0d290`; the portable record and small
+REA input bundle are linked from the [evidence index](introspection/evidence/README.md).
+The observer's source-bound report, before/observer/after roots, and comparison
+remain under ignored `research/extracted/local-oracle/`; do not clean or reuse
+them. For another observation, use the no-launch preflight, read
+[`oracle.md`](oracle.md) and [`native-analysis-workflow.md`](native-analysis-workflow.md),
+and choose a fresh output root.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

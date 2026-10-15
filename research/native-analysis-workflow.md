@@ -907,3 +907,34 @@ The earlier accepted follow-up run is
 the comparison was rebuilt offline after the PowerShell 5.1 coordinator hit a
 post-capture serializer memory blowup. The exact source snapshot and recovery
 steps are recorded in the [tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
+## PREMIUM JC successor capture
+
+Triplet `prem-jc-456069-r3-20261015-112943-78e0d290` extended the
+non-injecting route to a pre-instruction breakpoint at `JC rel8 +0x09` in a
+1920×1080 full-writer seed-456069 scene. The actual observer recorded CF=1 at
+`0x20000991` and `[EDI+0x35f]=0x6388bb08`; it stopped before JC execution.
+This validates the branch condition for that scene, not the successor or an
+executed indirect CALL. The later internal sites had no hits only because the
+capture boundary preceded them.
+
+REA 6.4/Ghidra 12.1.4 decoded `72 09` from a hash-pinned synthetic PE and
+reported the static target. The synthetic input was never executed; keep REA
+in the role of static navigation. The runtime window had a different full
+hash from the historical reference while all 11 instruction spans matched.
+See the [JC finding](introspection/premium-internal-transfer-jc-v1.md),
+[portable evidence](introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json),
+and [retained REA inputs](introspection/evidence/rea-inputs/premium-jc-20261015/).
+
+The next observer must capture the first post-JC EIP without single-stepping
+through the block. Rediscover and validate the code window in the new observer.
+At the JC event, reuse DR0 for the fallthrough instruction at window offset
+`+0x90` and DR3 for the taken target at `+0x99`; retain DR1 on the tail JMP and
+DR2 on the outer-return guard. Check register readback before resuming JC, then
+require one successor event with matching EIP, sole DR6 cause, execute-only
+DR7 settings, clear TF/DR6.BS, and matching live bytes. DR0 no longer watches
+the candidate CALL after the branch; do not claim a later CALL result. Restore
+all original debug-register state exactly before continuing the successor
+event. If the helper cannot do this fail-closed, split the work into a helper
+change and no-launch preflight before a fresh controlled triplet. Never infer
+the successor solely from CF or REA.

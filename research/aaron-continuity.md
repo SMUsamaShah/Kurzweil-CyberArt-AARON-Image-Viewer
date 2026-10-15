@@ -11,7 +11,38 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-15
+## Latest checkpoint: 2026-10-15 — PREMIUM JC pre-instruction capture
+
+Accepted source-bound triplet
+`prem-jc-456069-r3-20261015-112943-78e0d290` used the full-writer
+seed-456069 scene at `1920 1080 184`. Before, observer, and after runs
+completed; five staged sources, six drawing/scene artifacts, the 25,840,962
+byte writer tape, and planning traces matched. The three ordered native events
+were outer `CALL [EDI+0x27]` at `0x1fe4c07c`, anonymous destination
+`0x20000983`, and a breakpoint at `JC` address `0x20000991` before execution.
+The live bytes were `72 09`; CF=1 predicts the taken target at window offset
+`+0x99` (`0x2000099c`), but the successor was not observed. The raw
+`[EDI+0x35f]` dword was `0x6388bb08`, with target identity unknown. Later
+CALL/JMP breakpoints had zero hits only because capture stopped before JC;
+they are not scene-level no-hits.
+
+The exact live 256-byte window SHA differs from its historical reference while
+all 11 pinned instruction spans match. The helper restored debug state,
+detached cleanly, and reported no cleanup errors. REA decoded the JC bytes and
+static target from a synthetic PE; that input was never executed. This adds no
+JavaScript behavior contract or painting parity. See the
+[JC finding](introspection/premium-internal-transfer-jc-v1.md) and
+[portable evidence](introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json).
+
+Next: use REA for static navigation, then build a versioned no-TF observer
+phase that captures the first post-JC EIP in a fresh source-bound triplet. At
+the JC event reuse DR0 for fallthrough `+0x90` and DR3 for taken target `+0x99`,
+retaining DR1 on the tail JMP and DR2 on the outer-return guard. Verify the
+readback, then require one matching successor event before restoring all saved
+debug state. DR0 will no longer watch the candidate CALL after JC; preserve
+that limit. Keep before/after controls and distinguish later sites from hits.
+
+## Earlier checkpoint: 2026-10-15 (superseded by JC capture below)
 
 The accepted triplet `prem-it-v3-crlf-20261015-062149-42409a0d` completed all
 three source-bound runs with matching drawing/scene artifacts, staged sources,

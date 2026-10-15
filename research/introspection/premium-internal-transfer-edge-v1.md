@@ -120,12 +120,22 @@ before script load, with exception `0xc0000409` at offset `0x00c0df07`. See the
 [crash evidence](evidence/frida-aaron-injection-crash-20261015.json) and
 [tooling note](../tooling-workarounds.md#frida-agent-crashes-aaron-before-the-script-loads-2026-10-15).
 
-Next, keep REA as the static targeting tool and use the existing non-injecting
-no-TF hardware-breakpoint route to investigate the separate `CALL [EDI+0x35f]`
-at anonymous-window offset `+0x17`. It was not hit in either seed-1234 triplet
-or the seed-5678 full-writer triplet, so do not repeat those conditions. Use
-REA's branch/data-flow view to identify a scene condition likely to continue
-through the loop backedge; then rediscover and verify the live addresses and
-bytes and retain fresh uninstrumented controls. Keep all three accepted
-triplets immutable; do not infer a function name or ABI from a captured
-destination alone.
+## Follow-up: JC state captured before execution
+
+A later accepted triplet stopped at the `JC` site before execution in a
+different 1920×1080 full-writer scene. It recorded CF=1 and the raw
+`[EDI+0x35f]` slot value, but not the branch successor. Because the helper
+stopped at the branch, its armed `CALL [EDI+0x35f]` and `JMP [ESI+0x12]`
+breakpoints having zero hits is not a scene-level no-hit. See the separate
+[JC finding](premium-internal-transfer-jc-v1.md) and
+[portable evidence](evidence/premium-internal-transfer-jc-seed456069-20261015.json).
+
+Next, keep REA as static navigation and use a versioned non-injecting no-TF
+observer to capture the actual first post-JC EIP in a fresh source-bound
+triplet. At JC, reuse DR0 for fallthrough `+0x90` and DR3 for taken target
+`+0x99`, retaining DR1 on the tail JMP and DR2 on the outer-return guard.
+Verify slot readbacks, require one matching successor event, then restore the
+saved debug state. DR0 will not monitor the candidate CALL after the JC event.
+Preserve fresh uninstrumented controls and the existing limits: the observed
+tail-JMP edge does not identify a direct Lisp caller or anonymous function
+boundary, and no native observation here adds a JS contract or painting parity.

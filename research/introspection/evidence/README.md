@@ -1871,3 +1871,21 @@ Windows PowerShell 5.1 coordinator exhausted memory while serializing a
 decorated `Get-Content` string. The evidence deriver then produced the same
 portable JSON hash twice. The source snapshot, fix, and recovery command are
 documented in [tooling quick fixes](../../tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
+
+## PREMIUM pre-JC state and candidate slot, 2026-10-15
+
+[`premium-internal-transfer-jc-seed456069-20261015.json`](premium-internal-transfer-jc-seed456069-20261015.json)
+records one complete source-bound 1920×1080 full-writer triplet. The observer
+captured CF=1 immediately before `JC rel8 +0x09` and read `[EDI+0x35f]` as the
+raw dword `0x6388bb08`. The predicted target is window offset `+0x99`, but the
+first successor EIP was not observed; later armed CALL/JMP breakpoints were
+outside this capture boundary. The record binds fresh matching controls,
+source and debugger hashes, the native map, and the REA static decode.
+
+The small REA input bundle is retained under
+[`rea-inputs/premium-jc-20261015/`](rea-inputs/premium-jc-20261015/): the
+synthetic PE, JC seed, raw REA result, and invocation metadata. REA's input was
+not executed. The full run roots and triplet comparison remain in ignored
+`research/extracted/local-oracle/`; preserve them for re-derivation. See the
+[finding](../premium-internal-transfer-jc-v1.md) and
+[tooling note](../../tooling-workarounds.md#writer-full-seed-mode-registry-and-jc-triplet-acceptance-2026-10-15).

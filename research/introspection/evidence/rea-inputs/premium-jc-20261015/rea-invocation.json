@@ -1,0 +1,32 @@
+{
+    "schemaVersion":  1,
+    "operation":  "inspect-native-instruction",
+    "address":  "0x1000108e",
+    "provider":  "ghidra",
+    "reaVersion":  "6.4.0",
+    "ghidraVersion":  "12.1.4",
+    "toolchain":  {
+                      "path":  "research/artifacts/rea-tools/toolchain-current.json",
+                      "sha256":  "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04"
+                  },
+    "input":  {
+                  "path":  "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.synthetic.exe",
+                  "sha256":  "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a"
+              },
+    "seed":  {
+                 "path":  "research/artifacts/rea-tools/premium-jc-rea-input-20261015-v1/jc-seed.txt",
+                 "sha256":  "261088b379dd45ac8488120a847da59c2fdf599af1c22a2186c158415751e050"
+             },
+    "report":  {
+                   "path":  "jc-instruction.json",
+                   "sha256":  "e9662323122cf8a843182f66fa71e043dfbf7ac2f4317bc8c84f93953fd81b8a",
+                   "bytes":  6543
+               },
+    "stderr":  {
+                   "path":  "rea-stderr.txt",
+                   "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                   "bytes":  0
+               },
+    "staticOnly":  true,
+    "inputWasExecuted":  false
+}

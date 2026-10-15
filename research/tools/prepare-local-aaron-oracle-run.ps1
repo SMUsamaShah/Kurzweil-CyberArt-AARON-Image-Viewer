@@ -8,7 +8,8 @@ param(
     [ValidateSet('baseline', 'seed-1234', 'writer-seed-1234',
                  'writer-stream-seed-1234', 'writer-sequence-seed-1234',
                  'writer-windows-seed-1234', 'writer-full-seed-1234',
-                 'writer-full-seed-5678', 'select-brush-matrix-seed-1234',
+                 'writer-full-seed-5678', 'writer-full-seed-456069',
+                 'select-brush-matrix-seed-1234',
                  'natural-free-path-seed-1234', 'natural-free-path-seed-5678',
                  'natural-free-path-ran-seed-1234', 'screen-unit-seed-1234',
                  'screen-unit-seed-5678', 'transition-seed-1234', 'plan-seed-1234')]
@@ -44,10 +45,10 @@ if ($temp.LinkType -in @('SymbolicLink', 'Junction')) {
 }
 $stagingDriveName = [IO.Path]::GetPathRoot($stagingPath).TrimEnd('\').TrimEnd(':')
 $outputDriveName = [IO.Path]::GetPathRoot($base).TrimEnd('\').TrimEnd(':')
-$stagingDrive = Get-PSDrive -Name $stagingDriveName -PSProvider FileSystem
-$outputDrive = Get-PSDrive -Name $outputDriveName -PSProvider FileSystem
+$stagingFreeBytes = ([IO.DriveInfo]::new([IO.Path]::GetPathRoot($stagingPath))).AvailableFreeSpace
+$outputFreeBytes = ([IO.DriveInfo]::new([IO.Path]::GetPathRoot($base))).AvailableFreeSpace
 $largeMode = $Mode -in @('writer-sequence-seed-1234', 'writer-windows-seed-1234',
-    'writer-full-seed-1234', 'writer-full-seed-5678',
+    'writer-full-seed-1234', 'writer-full-seed-5678', 'writer-full-seed-456069',
     'screen-unit-seed-1234', 'screen-unit-seed-5678')
 if ($AllowMeasuredWriterStreamAt30MiB -and $Mode -ne 'writer-stream-seed-1234') {
     throw 'The 30 MiB staging allowance is only valid for writer-stream-seed-1234'
@@ -69,14 +70,14 @@ $measuredWriterStreamMinimum = $writerStreamPeakBytes +
     $writerStreamProbeAllowance + $writerStreamSafetyMargin
 $minStaging = if ($largeMode) { 128MB } elseif ($AllowMeasuredWriterStreamAt26MiB) { $measuredWriterStreamMinimum } elseif ($AllowMeasuredWriterStreamAt30MiB) { 30MB } else { 32MB }
 $minOutput = if ($stagingDriveName -eq $outputDriveName) { 192MB } else { 128MB }
-if ($stagingDrive.Free -lt $minStaging) {
+if ($stagingFreeBytes -lt $minStaging) {
     throw ("C:\temp resolves to {0}: with {1:N1} MiB free; this mode needs at least {2:N0} MiB before launch. " -f `
-        $stagingPath, ($stagingDrive.Free / 1MB), ($minStaging / 1MB)) +
+        $stagingPath, ($stagingFreeBytes / 1MB), ($minStaging / 1MB)) +
         'Free only known interrupted-run staging files or use the documented exact-mode measured allowance; do not delete unrelated files.'
 }
-if ($outputDrive.Free -lt $minOutput) {
+if ($outputFreeBytes -lt $minOutput) {
     throw ("Output drive {0}: has {1:N1} MiB free; this mode needs at least {2:N0} MiB. " -f `
-        $outputDriveName, ($outputDrive.Free / 1MB), ($minOutput / 1MB)) +
+        $outputDriveName, ($outputFreeBytes / 1MB), ($minOutput / 1MB)) +
         'Use a dedicated output drive with enough free space.'
 }
 

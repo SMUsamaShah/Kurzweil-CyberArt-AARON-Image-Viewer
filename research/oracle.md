@@ -145,7 +145,10 @@ node research\tools\compose-full-aa0.mjs `
 ```
 
 `-Mode writer-full-seed-5678` applies the same observation to the established
-second calibration seed. Every run needs its own unused `-OutputRoot`.
+second calibration seed. `-Mode writer-full-seed-456069` uses a third full
+writer seed and produces the same bounded tape for a source-bound native
+observer triplet. All three full-writer modes still require a fresh unused
+`-OutputRoot` for every run.
 `-Mode select-brush-matrix-seed-1234` runs a one-shot, 25-input boundary
 matrix after the first natural `SELECT-BRUSH` return, using the already
 installed trace wrapper. It records result identity, brush binding, and cloned

@@ -13,7 +13,7 @@ param(
     [ValidateSet('baseline', 'seed-1234', 'writer-seed-1234',
                  'writer-stream-seed-1234', 'writer-sequence-seed-1234',
                  'writer-windows-seed-1234', 'writer-full-seed-1234',
-                 'writer-full-seed-5678',
+                 'writer-full-seed-5678', 'writer-full-seed-456069',
                  'select-brush-matrix-seed-1234',
                  'natural-free-path-seed-1234',
                  'natural-free-path-seed-5678',
@@ -70,6 +70,7 @@ $sourceName = switch ($Mode) {
     'writer-windows-seed-1234' { 'scene-state-snapshot-writer-windows-seeded-1234.cl' }
     'writer-full-seed-1234' { 'scene-state-snapshot-writer-full-seeded-1234.cl' }
     'writer-full-seed-5678' { 'scene-state-snapshot-writer-full-seeded-5678.cl' }
+    'writer-full-seed-456069' { 'scene-state-snapshot-writer-full-seeded-456069.cl' }
     'select-brush-matrix-seed-1234' { 'scene-state-snapshot-select-brush-matrix-seeded-1234.cl' }
     'natural-free-path-seed-1234' { 'scene-state-snapshot-natural-free-path-seeded-1234.cl' }
     'natural-free-path-seed-5678' { 'scene-state-snapshot-natural-free-path-seeded-5678.cl' }
@@ -95,6 +96,7 @@ $temporaryNames = @(
     'scene-state-snapshot-writer-windows-seeded-1234.cl',
     'scene-state-snapshot-writer-full-seeded-1234.cl',
     'scene-state-snapshot-writer-full-seeded-5678.cl',
+    'scene-state-snapshot-writer-full-seeded-456069.cl',
     'scene-state-snapshot-select-brush-matrix-seeded-1234.cl',
     'scene-state-snapshot-natural-free-path-seeded-1234.cl',
     'scene-state-snapshot-natural-free-path-seeded-5678.cl',
@@ -190,6 +192,7 @@ $sources = @{
     'scene-state-snapshot-writer-windows-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-windows-seeded-1234.cl'
     'scene-state-snapshot-writer-full-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-full-seeded-1234.cl'
     'scene-state-snapshot-writer-full-seeded-5678.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-full-seeded-5678.cl'
+    'scene-state-snapshot-writer-full-seeded-456069.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-writer-full-seeded-456069.cl'
     'scene-state-snapshot-select-brush-matrix-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-select-brush-matrix-seeded-1234.cl'
     'scene-state-snapshot-natural-free-path-seeded-1234.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-natural-free-path-seeded-1234.cl'
     'scene-state-snapshot-natural-free-path-seeded-5678.cl' = Join-Path $repoRoot 'research\introspection\scene-state-snapshot-natural-free-path-seeded-5678.cl'
@@ -240,6 +243,9 @@ if ($Mode -in @('writer-full-seed-1234', 'screen-unit-seed-1234')) {
 }
 if ($Mode -in @('writer-full-seed-5678', 'screen-unit-seed-5678')) {
     $stagedNames += 'scene-state-snapshot-writer-full-seeded-5678.cl'
+}
+if ($Mode -eq 'writer-full-seed-456069') {
+    $stagedNames += 'scene-state-snapshot-writer-full-seeded-456069.cl'
 }
 if ($Mode -in @('transition-seed-1234', 'select-brush-matrix-seed-1234')) {
     $stagedNames += 'scene-state-snapshot-transition-seeded-1234.cl'
@@ -404,7 +410,7 @@ $report = Join-Path $capture 'aaron-scene-state-snapshot.txt'
 if (-not $complete -or -not (Test-Path -LiteralPath $report)) {
     throw "The local scene-state run did not complete; inspect $output"
 }
-if ($Mode -in @('writer-full-seed-1234', 'writer-full-seed-5678',
+if ($Mode -in @('writer-full-seed-1234', 'writer-full-seed-5678', 'writer-full-seed-456069',
                'screen-unit-seed-1234', 'screen-unit-seed-5678')) {
     $fullTape = Join-Path $capture 'aaron-writer-full.txt'
     if (-not (Test-Path -LiteralPath $fullTape -PathType Leaf) -or
