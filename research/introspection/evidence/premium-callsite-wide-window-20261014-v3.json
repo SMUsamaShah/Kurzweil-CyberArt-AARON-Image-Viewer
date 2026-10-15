@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 2,
+  "status": "source-bound-wide-destination-captured",
+  "triplet": {
+    "id": "prem-v2-20261014e-20261014-170512-b228b66c",
+    "mode": "writer-stream-seed-1234",
+    "canvas": "768 1080 148",
+    "roles": [
+      {
+        "role": "before",
+        "runId": "prem-v2-20261014e-20261014-170512-b228b66c-before",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-v2-20261014e-20261014-170512-b228b66c-before"
+      },
+      {
+        "role": "observer",
+        "runId": "prem-v2-20261014e-20261014-170512-b228b66c-observer",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-v2-20261014e-20261014-170512-b228b66c-observer"
+      },
+      {
+        "role": "after",
+        "runId": "prem-v2-20261014e-20261014-170512-b228b66c-after",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-v2-20261014e-20261014-170512-b228b66c-after"
+      }
+    ],
+    "controlsMatch": true,
+    "beforeAfterPlanningTraceMatch": true,
+    "matchingDrawingSceneArtifacts": [
+      "aa0",
+      "image",
+      "image-id",
+      "aaron-scene-state-snapshot.txt",
+      "aaron-random-seed-loaded.txt"
+    ],
+    "matchingStagedSourceCount": 6,
+    "plannerTrace": {
+      "before": {
+        "bytes": 21295296,
+        "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+      },
+      "observer": {
+        "bytes": 21295296,
+        "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+      },
+      "after": {
+        "bytes": 21295296,
+        "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+      }
+    }
+  },
+  "mapping": {
+    "premiumEntry": "0x1fe4bfb4",
+    "premiumPayloadBytes": 362,
+    "premiumPayloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae",
+    "pickEntry": "0x1fe00e8c",
+    "pickPayloadBytes": 114,
+    "pickPayloadSha256": "3da60342fde83661ce10002d659fb5a0d691932c6c2af0c071856dacf4a4a30e",
+    "callPayloadOffset": 200,
+    "callSiteAddress": "0x1fe4c07c",
+    "callSiteBytesHex": "ff5727"
+  },
+  "call": {
+    "instruction": "CALL dword ptr [EDI + 0x27]",
+    "threadId": 1876,
+    "preCallRegisters": {
+      "threadId": 1876,
+      "eip": "0x1fe4c07c",
+      "esp": "0x06a29358",
+      "eax": "0x202ebd5f",
+      "ebx": "0x2036a967",
+      "ecx": "0x206404c1",
+      "edx": "0x2037c94f",
+      "esi": "0x2025e9ea",
+      "edi": "0x20000985",
+      "ebp": "0x06a293d8",
+      "eflags": "0x00000206",
+      "dr0": "0x1fe4c07c",
+      "dr1": "0x00000000",
+      "dr6": "0xffff0ff1",
+      "dr7": "0x00000001"
+    },
+    "dispatchSlot": {
+      "baseRegister": "EDI",
+      "baseValue": "0x20000985",
+      "offset": "0x00000027",
+      "address": "0x200009ac",
+      "value": "0x20000983",
+      "bytesHex": "83090020",
+      "readError": null
+    },
+    "directDestinationAddress": "0x20000983",
+    "directDestinationEqualsCurrentPickEntry": false,
+    "returnAddressAtDestination": "0x1fe4c07f",
+    "stoppedBeforeDestinationInstruction": true
+  },
+  "pickCorrelation": {
+    "firstEndpoint": "current-PICK-entry",
+    "pickObservation": {
+      "configuredEntryAddress": "0x1fe00e8c",
+      "status": "PICK-entry-hit-before-original-CALL-continuation",
+      "observed": true,
+      "threadId": 1876,
+      "sameThreadAsCall": true,
+      "eip": "0x1fe00e8c",
+      "esp": "0x06a29354",
+      "ebp": "0x06a293d8",
+      "eflags": "0x00000293",
+      "dr6": "0xffff0ff1",
+      "expectedSavedStackValue": "0x1fe4c07f",
+      "savedStackValue": "0x1fe4c07f",
+      "savedStackValueMatchesCallContinuation": true,
+      "stackReadError": null,
+      "observationPoint": "DR0 execute breakpoint before the first current PICK-entry instruction; DR1 continuation guard had not fired",
+      "error": null,
+      "dr6B0Set": true,
+      "dr6B1Clear": true,
+      "registersAtHit": {
+        "threadId": 1876,
+        "eip": "0x1fe00e8c",
+        "esp": "0x06a29354",
+        "eax": "0x202ebd5f",
+        "ebx": "0x2036a967",
+        "ecx": "0x00000002",
+        "edx": "0x2037c94f",
+        "esi": "0x201ad0a2",
+        "edi": "0x20000985",
+        "ebp": "0x06a293d8",
+        "eflags": "0x00000293",
+        "dr0": "0x1fe00e8c",
+        "dr1": "0x1fe4c07f",
+        "dr6": "0xffff0ff1",
+        "dr7": "0x00000005"
+      },
+      "sameEspAsInitialDestination": true,
+      "sameReturnAddressAsInitialDestination": true,
+      "sameEbpAsInitialDestination": true,
+      "sameOriginalStackFrame": true,
+      "entryBytesAtHit": "558bec5683ec2c89450889550c8d4508",
+      "breakpointArmed": true,
+      "debugRegistersRestoredAtObservation": true,
+      "deferredCorrelationEnabled": true,
+      "observationKind": "deferred-correlation-dr0",
+      "armedContextReadback": {
+        "threadId": 1876,
+        "eip": "0x20000983",
+        "esp": "0x06a29354",
+        "eax": "0x202ebd5f",
+        "ebx": "0x2036a967",
+        "ecx": "0x206404c1",
+        "edx": "0x2037c94f",
+        "esi": "0x2025e9ea",
+        "edi": "0x20000985",
+        "ebp": "0x06a293d8",
+        "eflags": "0x00000204",
+        "dr0": "0x1fe00e8c",
+        "dr1": "0x1fe4c07f",
+        "dr6": "0x00000000",
+        "dr7": "0x00000005"
+      },
+      "hitExceptionEvent": {
+        "code": "0x4000001e",
+        "flags": "0x00000000",
+        "exceptionRecord": "0x0000000000000000",
+        "exceptionAddress": "0x000000001fe00e8c",
+        "parameterCount": 0,
+        "information": [],
+        "firstChance": 1,
+        "threadId": 1876
+      },
+      "firstChance": true
+    },
+    "continuationObservation": {
+      "configuredAddress": "0x1fe4c07f",
+      "status": "PICK-entry-hit-before-CALL-continuation",
+      "observed": false,
+      "threadId": null,
+      "sameThreadAsCall": null,
+      "eip": null,
+      "esp": null,
+      "ebp": null,
+      "dr6": null,
+      "dr6B0Clear": false,
+      "registersAtHit": null,
+      "savedStackValue": null,
+      "stackReadError": null,
+      "breakpointArmed": true,
+      "debugRegistersRestoredAtObservation": true,
+      "observationKind": "deferred-correlation-dr1",
+      "armedContextReadback": {
+        "threadId": 1876,
+        "eip": "0x20000983",
+        "esp": "0x06a29354",
+        "eax": "0x202ebd5f",
+        "ebx": "0x2036a967",
+        "ecx": "0x206404c1",
+        "edx": "0x2037c94f",
+        "esi": "0x2025e9ea",
+        "edi": "0x20000985",
+        "ebp": "0x06a293d8",
+        "eflags": "0x00000204",
+        "dr0": "0x1fe00e8c",
+        "dr1": "0x1fe4c07f",
+        "dr6": "0x00000000",
+        "dr7": "0x00000005"
+      }
+    },
+    "directCpuEdgeToPick": false
+  },
+  "destinationWindow": {
+    "address": "0x20000983",
+    "windowStartAddress": "0x0000000020000903",
+    "windowEndExclusive": "0x0000000020000a03",
+    "eipOffset": 128,
+    "requestedBytes": 256,
+    "bytesRead": 256,
+    "bytesHex": "06000000008509002060b3a206490e8763f2ba88630000ff975f03000040af2206c7c04e2000000000afc04e2097c04e208509002085090020eeaa0000dcba8863290d0020f28b5d200897a206fdba886302180020c8000000c0010000da17002019e04e20026001547fc04e2067c04e204fc04e2037c04e201fc04e20909090b10283e17f8b7315894df039679b7209eb85090020850900208944240489542408ff6612908b0900208309002049b48863318a8763b3b68863746c88637f8d87633bac8863099a886334b78863678b87634c3388633aa188636bb4886389b48863548a8763838a8763f8428863e9b388638fb7886348ad8763a7b48863c9b488",
+    "bytesSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+    "maximumBytes": 256,
+    "centeringPolicy": "half-open [EIP-128,EIP+128), clipped to this VirtualQueryEx region and the WOW64 32-bit address space",
+    "includesPriorBranchCandidate": true,
+    "bytesAfterEip": 128,
+    "region": {
+      "baseAddress": "0x0000000020000000",
+      "allocationBase": "0x0000000020000000",
+      "regionSize": "0x0000000000004000",
+      "partitionId": 0,
+      "state": "0x00001000",
+      "protection": "0x00000004",
+      "allocationProtection": "0x00000008",
+      "type": "0x00040000"
+    }
+  },
+  "provenance": {
+    "comparison": {
+      "path": "research/extracted/local-oracle/premium-callsite-wide-window-triplet-v2-logs/prem-v2-20261014e-20261014-170512-b228b66c/triplet-comparison-offline.json",
+      "bytes": 30041,
+      "sha256": "f7c1701e8d4504f20e4d1fdbbfa18b4f8d616a36e79b2077019a7911a6dadcb4"
+    },
+    "debuggerReport": {
+      "path": "research/extracted/local-oracle/external-runs/prem-v2-20261014e-20261014-170512-b228b66c-observer/capture/aaron-premium-callsite-pick-correlation-v2.txt",
+      "bytes": 40478,
+      "sha256": "68eb3e17bd2fb059309642f54a3a03715d5c6f7d73faa605cb16df91409076a4"
+    },
+    "currentSources": [
+      {
+        "name": "coordinator",
+        "path": "research/tools/capture-premium-callsite-wide-window-triplet-v2.ps1",
+        "bytes": 94799,
+        "sha256": "67b369cd6aa66238584f5a28519f6f0db0e3614df8e6a5c0ed726bca331a67e8"
+      },
+      {
+        "name": "probe",
+        "path": "research/introspection/premium-callsite-metadata-v1.cl",
+        "bytes": 10825,
+        "sha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3"
+      },
+      {
+        "name": "runner",
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "bytes": 29902,
+        "sha256": "ddab2532b70d27c4d77085f9ac33da8e8fdeab28f6bad9cce1ebced067167244"
+      },
+      {
+        "name": "debuggerHelper",
+        "path": "research/oracle/AaronPremiumCallsitePickCorrelationV2.cs",
+        "bytes": 78268,
+        "sha256": "08161b439b62f09e1e2e18ecf17ee7815205935465c28f3c6440daca8d159905"
+      },
+      {
+        "name": "mapper",
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "bytes": 5906,
+        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+      },
+      {
+        "name": "reaStaticCensus",
+        "path": "research/introspection/evidence/select-subject-call-census-20261014-v1.json",
+        "bytes": 36524,
+        "sha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba"
+      },
+      {
+        "name": "extractedManifest",
+        "path": "research/extracted/aaron/manifest.json",
+        "bytes": 2817,
+        "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+      },
+      {
+        "name": "wideWindowValidator",
+        "path": "research/tools/validate-premium-callsite-wide-window-v2.mjs",
+        "bytes": 30521,
+        "sha256": "3a02b428f341575e38f21a694913caea4c2d413c022061974dc4883d7bfd8461"
+      },
+      {
+        "name": "comparisonDeriver",
+        "path": "research/tools/derive-premium-callsite-wide-window-triplet-comparison-v2.mjs",
+        "bytes": 17392,
+        "sha256": "48a21d0a0918d0196f3a1c84ce2a1536fcb4d63e295f07d8364f2c72c5836305"
+      },
+      {
+        "name": "evidenceDeriver",
+        "path": "research/tools/derive-premium-callsite-wide-window-evidence-v2.mjs",
+        "bytes": 18247,
+        "sha256": "47771ae1ad221036dcbf888c09467c2b9c1fa49f0e8e86ec10bcb9999836c216"
+      },
+      {
+        "name": "pePreparer",
+        "path": "research/tools/prepare-premium-callsite-wide-window-pe-v2.mjs",
+        "bytes": 15078,
+        "sha256": "59ae2ab92f06b34880ecfaf88a2171354aa498c31a15b6297d697e1794623e2d"
+      }
+    ]
+  },
+  "limitations": [
+    "This result describes one completed 768x1080 seed-1234 invocation and its matching no-probe controls; it is not a general call graph or behavior contract.",
+    "The direct CPU target and PICK/continuation endpoint are captured separately. A same-thread/frame observation does not reveal unobserved instructions between those addresses.",
+    "The captured bytes are only the exact centered/clipped memory interval recorded at the destination breakpoint. No address outside that interval is reconstructed.",
+    "If the window excludes the prior EIP-0x69 candidate, that static candidate is not covered by this capture.",
+    "No native ABI, Lisp argument meaning, anonymous function name, function boundary, JavaScript contract, or whole-painting parity is established."
+  ]
+}

@@ -13,25 +13,32 @@ conversation boundary.
 
 ## Latest checkpoint: 2026-10-15
 
-The PREMIUM internal-transfer no-TF attempt `prem-internal-1015c-20261014-234038-b80a2004`
-completed its before control and reached the expected outer callsite, but the
-observer rejected the exact 256-byte window hash before arming internal
-breakpoints. It did not produce a completed observer AA0/scene `END`, and the
-after control did not run. The captured bytes differ from the accepted sample
-at six offsets and from an earlier rejected sample at eight; the cause remains
-unknown. REA/Ghidra decoded the rejected bytes in a synthetic PE, which is
-static analysis only. See the [portable evidence](introspection/evidence/premium-internal-transfer-window-variant-20261015.json)
-and [finding](introspection/premium-internal-transfer-window-variant-20261015.md).
+The accepted triplet `prem-it-v3-crlf-20261015-062149-42409a0d` completed all
+three source-bound runs with matching drawing/scene artifacts, staged sources,
+AA0, and before/after planning traces. It measured a same-thread CPU edge from
+the anonymous PREMIUM destination's `JMP [ESI+0x12]` at `0x200009a4` to the
+freshly mapped current PICK entry at `0x1fe00e8c`. ESP was unchanged and `[ESP]`
+retained the original PREMIUM continuation. The report's prose incorrectly
+said this was not a PICK target, despite its equality field being true; the raw
+capture remains untouched and a separate evidence addendum corrects the
+interpretation. See the [finding](introspection/premium-internal-transfer-edge-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json).
 
-The new Frida Stalker tool is being used alongside REA, with different jobs:
-REA identifies exact static payloads and transfer candidates; Frida passed a
-32-bit generated-code fixture with 10,000 ordered internal call/return pairs.
-Frida has **not** been attached to AARON. The installed Frida Python API exposes
-`Device.spawn`, `attach`, and `resume`, but no AARON launch through that path has
-been attempted. Next, prepare a separate, bounded Frida observer that uses the
-existing disposable-runtime staging and fresh before/after controls. Keep it
-separate from the Windows debugger process; do not weaken the rejected exact
-window gate or claim an edge until the live trace and controls are complete.
+A corrected-source rerun hit the same edge but failed clean debugger detach
+with `DebugActiveProcessStop` error 5. It is rejected and has no accepted
+after-control. The v3 coordinator now stops only the exact run-bound AARON PID
+after this specific failure so the child runner can restore staging. This path
+passed the no-launch preflight but has not yet been exercised by another AARON
+run. This does not turn that run into accepted evidence; keep the full detach
+and control gates.
+
+REA remains the static targeting tool. Frida's attach fixture recorded 10,000
+ordered call/return pairs across 31 batches; a separate suspended-spawn fixture
+verified the spawn/attach/resume lifecycle and 10,000 pairs across 34 batches.
+Frida has **not** been attached to or used to spawn AARON. Next, continue the
+separate Frida Stalker observer using a disposable runtime, exact current code
+mappings, bounded event capture, and fresh uninstrumented before/after
+controls. Keep it separate from any Windows debugger-controlled AARON process.
 See the [Frida fixture record](tooling/frida-stalker-x86-smoke-20261015.md),
 [native workflow](native-analysis-workflow.md), and [active plan](execution-plan.md).
 

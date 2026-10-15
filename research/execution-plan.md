@@ -859,18 +859,26 @@ events arrived as `STATUS_WX86_SINGLE_STEP` with `DR6=0`, so they did not pass
 the required `DR6.BS` gate. Do not weaken that gate or spend another triplet
 on the same path.
 
-The next independent experiment is a no-TF hardware execute-breakpoint route
-guided by the accepted REA window. In every fresh observer run, rediscover the
-current target and exact 256-byte window; require exact byte signatures before
-deriving either candidate site address. Arm only available DR slots, record
-first-chance hardware breakpoint events on the same thread, read the live
-`[EDI+0x35f]` or `[ESI+0x12]` operand, and temporarily replace a free slot with
-that measured destination. For `CALL [EDI+0x35f]`, require the expected
-`ESP-4` and saved return `site+6`; for `JMP [ESI+0x12]`, require unchanged ESP.
-Record event order/counts and restore the thread's original debug context
-exactly. Reject missing or ambiguous hits, changed bytes, incomplete cleanup,
-and any triplet without fresh matching drawing/scene controls. The static REA
-transfers remain candidates until such a live hit is captured.
+The no-TF hardware route is now complete for the required tail-JMP edge. In
+accepted triplet `prem-it-v3-crlf-20261015-062149-42409a0d`, a live
+`JMP [ESI+0x12]` at `0x200009a4` transferred on the selected thread to
+`0x1fe00e8c`, the current PICK entry uniquely mapped from the observer PLL.
+The outer `CALL [EDI+0x27]` at `0x1fe4c07c` had entered anonymous code at
+`0x20000983`; the two internal execute-breakpoint events preserved ESP and
+`[ESP]=0x1fe4c07f`, before the armed outer-continuation guard. All three runs,
+five drawing/scene artifacts, six staged sources, and before/after planning
+traces matched. The 256-byte window hash differed from its historical reference
+while all 11 pinned spans matched. See the [finding](introspection/premium-internal-transfer-edge-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json).
+
+The first accepted report's summary sentence incorrectly denied that the
+measured edge reached PICK; its equality field and raw event records show the
+opposite. The raw capture remains unchanged and the evidence addendum records
+the correction. A later corrected-source rerun captured the same edge but
+failed `DebugActiveProcessStop` with error 5. It has no accepted after-control
+or comparison and is not a replication. The v3 coordinator now stops only the
+exact run-bound AARON process after this specific rejected detach so its runner
+can perform cleanup. Keep the detach and fresh-control gates intact.
 
 The Lisp-level PICK witness remains rejected. V2 stopped after `READY` without
 a witness footer or after-control. V3's before-control passed, but its observer
@@ -893,15 +901,15 @@ REA-guided internal capture.
 
 ## Current checkpoint: Frida Stalker observer route, 2026-10-15
 
-The planned no-TF hardware-breakpoint route was attempted in fresh triplet
-`prem-internal-1015c-20261014-234038-b80a2004`. Its before control completed
-and the observer reached the known outer callsite, but the live 256-byte
-window failed the pinned exact hash gate before any internal candidate was
-armed. There is no completed observer AA0/scene `END`, no after control, and
-no accepted comparison. Do not repeat that attempt unchanged or weaken the
-hash gate. The changed bytes avoid the three inspected instruction spans, but
-their cause is unknown. See the [portable result](introspection/evidence/premium-internal-transfer-window-variant-20261015.json)
-and [finding](introspection/premium-internal-transfer-window-variant-20261015.md).
+The earlier no-TF attempt `prem-internal-1015c-20261014-234038-b80a2004` was
+rejected at the exact 256-byte window gate. A later triplet completed and
+captured the direct tail-JMP edge to the current PICK entry; details and the
+stale report-sentence correction are in the [internal-transfer finding](introspection/premium-internal-transfer-edge-v1.md).
+The fresh corrected-source rerun is rejected because its helper did not detach
+cleanly (`DebugActiveProcessStop` error 5), and it lacks an after-control. The
+new coordinator cleanup is owner- and diagnostic-bound; it does not lower the
+capture acceptance gate. Its no-launch preflight passed, but the early-stop
+branch has not yet been exercised by another AARON run.
 
 REA remains the static targeting tool: it decoded this exact rejected window
 through an unexecuted synthetic PE. Frida 17.23.3 separately passed the x86
@@ -911,15 +919,14 @@ attached to AARON. A read-only check of the installed Python API confirmed
 and stdio options, with separate `attach` and `resume` methods. This API check
 does not demonstrate an AARON launch or trace.
 
-Next, build a dedicated Frida observer path that starts a **separate** AARON
-observer run, using the existing disposable runtime and captured environment.
-First verify the spawn/attach/resume sequence on the 32-bit fixture; then trace
-only a bounded thread and filter events to freshly rediscovered, source-mapped
-code regions and REA-selected transfer sites. Do not attach Frida to a process
-being controlled by the Windows debugger. For an AARON attempt, capture the
-same complete source/runtime identities and fresh uninstrumented before/after
-controls, retain a per-event cap and completeness/footer, and require the
-ordinary drawing/scene artifacts and staged sources to match. If any gate
-fails, report the attempt as incomplete and keep the REA candidates static.
-No JavaScript contract or painting parity follows from the fixture or the
-rejected 1015c observer.
+Next, continue the dedicated Frida observer path on a **separate** AARON run,
+using the existing disposable runtime and captured environment. The 32-bit
+generated-code fixture already verified the spawn/attach/resume sequence and
+10,000 ordered call/return pairs. For AARON, trace a bounded thread and filter
+events to freshly rediscovered, source-mapped code regions and REA-selected
+transfer sites. Do not attach Frida to a process being controlled by the
+Windows debugger. Require complete source/runtime identities, fresh
+uninstrumented before/after controls, event caps and a completeness footer,
+matching drawing/scene artifacts, and matching staged sources. If any gate
+fails, report the attempt as incomplete. The accepted tail edge adds no
+JavaScript contract or painting parity.

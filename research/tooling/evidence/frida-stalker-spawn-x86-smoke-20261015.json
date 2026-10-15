@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-fixture-only",
+  "capturedAtUtc": "2026-10-15T00:23:50.700718+00:00",
+  "scope": {
+    "processArchitecture": "IMAGE_FILE_MACHINE_I386",
+    "spawnedProcessArchitecture": "ia32",
+    "generatedCodeSizeBytes": 20,
+    "iterationsPerInvocation": 2000,
+    "invocations": 5,
+    "expectedInternalCallReturnPairs": 10000,
+    "notAnAaronOracleRun": true
+  },
+  "toolchain": {
+    "frida": "17.23.3",
+    "fridaTools": "14.11.0",
+    "python": "3.12.10",
+    "fixtureSha256": "53953a417d43fcd613b5037c03b9adb3afe43229dbbef95c95a22990c01de03f",
+    "fixtureSourceSha256": "f388827773849eb35890980afb0f3bd99fe5ecf5bb7301eea629dc72d726f963",
+    "observerPythonSha256": "d213aa011baa22294aed2b994836ddcc2e7b4104e61aabaf4afb257cfaa7aa6e",
+    "runnerPowerShellSha256": "866c0e7a62b1664607ad952af1df1b102d42e96c7e1cc51e0260ad3a397a77d2",
+    "compilerSha256": "bf26bfa321f45db027fdde1084d058e3f6f280d18da2bf1abb319dbc55bf453b",
+    "compilerIdentity": "%WINDIR%/Microsoft.NET/Framework/v4.0.30319/csc.exe"
+  },
+  "result": {
+    "plainControlResult": "RESULT=42",
+    "plainControlExitCode": 0,
+    "spawnedResult": "RESULT=42",
+    "spawnedExitCode": 0,
+    "workerExitConfirmed": "WORKER-EXITED",
+    "endMarker": "END",
+    "lifecycle": [
+      "output-handler-registered",
+      "spawn-returned-suspended-pid",
+      "session-attached",
+      "agent-loaded-before-resume",
+      "process-resumed",
+      "fixture-ready-output-received",
+      "stalker-armed-before-fixture-input",
+      "instrumented-fixture-result-received",
+      "traced-worker-exit-confirmed-by-join",
+      "stalker-flushed-and-unfollowed",
+      "stopped-event-queue-settled",
+      "fixture-end-output-received",
+      "process-exited-and-exit-code-read"
+    ],
+    "batchCount": 34,
+    "parsedEventTotal": 38506,
+    "targetCalls": 10005,
+    "targetReturns": 10005,
+    "internalCallEvents": 10000,
+    "internalReturnEvents": 10000,
+    "orderedInternalCallReturnPairs": 10000,
+    "internalSequenceErrors": 0,
+    "stoppedQuietPolls": 20,
+    "stoppedElapsedMs": 2150,
+    "allAssertionsPassed": true
+  },
+  "assertions": {
+    "spawnedProcessWasIa32": true,
+    "sameFixtureResultAndEnd": true,
+    "spawnedFixtureExitedZero": true,
+    "multipleOrderedStalkerBatches": true,
+    "generatedCallReturnPairsComplete": true,
+    "generatedCallReturnSequenceHasNoErrors": true
+  },
+  "rawRunRecord": "research/artifacts/frida-stalker-trial/spawn-runs/20261015-002344-bf0dc937/spawn-stalker-result.json"
+}

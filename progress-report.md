@@ -3,34 +3,42 @@
 Updated 2026-10-15. This is the compact project snapshot; technical evidence
 and the running investigation history are linked below.
 
-Latest AARON investigation: the 2026-10-15 PREMIUM internal-transfer observer
-was rejected at its exact source-window gate. Its before-control completed, and
-the observer reached the expected outer callsite, but the 256-byte window hash
-was `ec07d684…fba4e281` rather than the pinned `6e153e57…afa5693`. No internal
-breakpoint was armed; the observer produced no completed AA0/scene END, and the
-after-control did not run. There is no accepted triplet or new behavior claim.
-The changed bytes avoid the three decoded instruction spans, but their cause is
-unresolved. REA decoded those exact bytes in a synthetic PE for static review;
-this does not validate runtime execution or a caller. See the [portable
-evidence](research/introspection/evidence/premium-internal-transfer-window-variant-20261015.json),
-[finding](research/introspection/premium-internal-transfer-window-variant-20261015.md),
-and [execution plan](research/execution-plan.md).
+Latest AARON investigation: one accepted 768×1080 source-bound triplet,
+`prem-it-v3-crlf-20261015-062149-42409a0d`, observed the anonymous PREMIUM
+destination execute `JMP [ESI+0x12]` directly to the current, uniquely mapped
+PICK entry on the same thread and unchanged ESP. The thread retained the outer
+call continuation at `[ESP]`; its guard was armed and did not fire before the
+edge. This corrects an inaccurate sentence in the captured report, whose own
+measured `tailJumpDestinationEqualsCurrentPick` field is true. The raw capture
+is preserved; the [portable evidence](research/introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json)
+and [finding](research/introspection/premium-internal-transfer-edge-v1.md)
+state the corrected interpretation.
 
-Tooling update: REA/Ghidra was used on the exact rejected AARON window and
-decoded its call, branch, and indirect jump instructions from a synthetic PE.
-This is static-only analysis. Frida Stalker separately passed a 32-bit
-generated-code fixture with 10,000 ordered internal call/return pairs across
-31 batches; it has not been attached to AARON. REA remains the static targeting
-tool, while Frida is a potential live-tracing option still awaiting an AARON
-fixture/attachment. Behavior counts and whole-painting parity are unchanged.
-See the [REA finding](research/introspection/premium-internal-transfer-window-variant-20261015.md)
+A fresh corrected-source rerun reached the same edge but failed the clean
+debugger-detach gate with `DebugActiveProcessStop` error 5. It has no accepted
+after-control or comparison and is excluded as a replication. The first
+complete triplet remains the evidence; its 256-byte window hash differs from
+the historical reference, although all 11 pinned instruction spans matched.
+The coordinator now stops only the exact source-bound AARON process after this
+specific rejected detach so the runner can restore staging without waiting its
+full run limit; this path passed no-launch preflight and has not yet been
+exercised by another AARON run. See [tooling quick fixes](research/tooling-workarounds.md#debugger-detach-failed-after-premium-edge-capture-2026-10-15).
+
+Tooling update: REA/Ghidra decoded calls, branches, and an indirect jump from
+the exact rejected AARON window in a synthetic PE; this remains static-only
+analysis. Frida Stalker passed both an attach fixture and a suspended-spawn
+fixture. The latter verified the 32-bit spawn/attach/resume lifecycle and
+10,000 ordered internal call/return pairs across 34 batches. Frida has not been
+attached to or used to spawn AARON. REA remains the static targeting tool, and
+the next task is a separate, source-bound AARON trace. Behavior counts and
+whole-painting parity are unchanged. See the [REA finding](research/introspection/premium-internal-transfer-window-variant-20261015.md)
 and [Frida fixture findings](research/tooling/frida-stalker-x86-smoke-20261015.md).
 
 | Measure | Current status | What it means |
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
-| PREMIUM indirect CALL destination | One accepted 768×1080 source-bound triplet captured pre-call `[EDI+0x27]=0x20000983`; same-thread DR0 breakpoint hit before the target instruction, and `[ESP]=callsite+3` | The target is not the named PICK entry; the anonymous target's function boundary and route to PICK remain unresolved. Adds no behavior contract. |
+| PREMIUM indirect CALL destination and internal edge | One accepted 768×1080 source-bound triplet captured `[EDI+0x27]=0x20000983`; a same-thread `JMP [ESI+0x12]` edge then landed at the current mapped PICK entry with unchanged ESP and `[ESP]=0x1fe4c07f` | The outer destination remains anonymous and its Lisp caller is unknown; the capture does not prove a continuous instruction path. Adds no behavior contract. |
 | FREE-PATH indirect call-site sample | 2 of 3 selected sites hit | REA located two computed calls and their nearby branch. The same raw slot value was read at both hits, but remains unnamed and is not counted as a recovered function. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | FREE-PATH isolated one-edge stop cases | 10 captured; JS matches 4 and differs by one step in 6 | The v11 seed 456069 sample is a mismatch; step-times-wiggle matches the original counts across v8/v9/v11 only as a local replay hypothesis. |
@@ -55,9 +63,14 @@ complete live payload to `COMMON-GRAPHICS-USER::SELECT-SUBJECT` method
 `(EQL PREMIUM)`. This associates that PICK entry's saved return value with the
 method's continuation site. A later source-bound triplet captured the actual
 pre-call slot value and confirmed a direct CPU destination at `0x20000983`
-using an independent DR0 breakpoint. That target is not the named PICK entry;
-the anonymous target-to-PICK path remains open. REA's static indirect-call
-census still has no resolved targets. This adds no JS contract: counts remain
+using an independent DR0 breakpoint. A later complete no-TF capture measured
+the anonymous destination's `JMP [ESI+0x12]` source and destination on the same
+thread; its destination equals the current uniquely mapped PICK entry, with
+unchanged ESP and the same outer continuation at `[ESP]`. Thus a direct CPU
+tail-jump edge to PICK is observed in this one call frame. The capture does not
+identify the direct Lisp caller or establish every instruction between the
+outer destination and the jump. REA's static indirect-call census still has no
+resolved targets. This adds no JS contract: counts remain
 31 routine names / 32 bounded contracts, 1/5 milestones (20% by count), and
 zero whole-painting parity. There is no defensible overall completion
 percentage. See the [destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json)
@@ -156,25 +169,20 @@ in six. This adds no general stop rule or behavior contract. See the
 and [candidate search](research/tools/find-free-path-stop-boundary-v11-candidate.mjs).
 
 REA queried all 36 computed indirect calls in the two SELECT-SUBJECT methods;
-all remain unresolved statically. A fresh source-bound 768×1080 destination
-triplet has now stopped before the PREMIUM method's `CALL [EDI+0x27]`, captured
-the pre-call operand `0x20000983`, and observed the same thread hit a separate
-DR0 execute breakpoint at that target before its first instruction. ESP fell
-by four and `[ESP]` matched the method continuation `callsite+3`. The five
-drawing/scene artifacts, six staged sources, planning traces, and runner/runtime
-identities match; debug registers were restored and there were no cleanup
-errors. The target is not the mapped PICK entry, and REA's bounded static
-review created no function or boundary. A completed same-thread follow-up saw
-the current PICK entry before the continuation guard, with matching ESP, EBP,
-and saved continuation, but did not capture the intervening instructions or
-prove a direct edge. The wider REA window now identifies two unconfirmed
-indirect-transfer candidates. The next internal-flow attempt uses no-TF
-hardware execute breakpoints at freshly validated REA sites; see the
-[destination evidence](research/introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),
-[REA window](research/introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
-[PICK findings](research/introspection/select-subject-methods.md), and the
-[execution plan](research/execution-plan.md). These captures add no JavaScript
-contract or painting parity.
+all remain unresolved statically. The accepted source-bound triplet now records
+the outer `CALL [EDI+0x27]` at `0x1fe4c07c` targeting anonymous code at
+`0x20000983`, followed by a direct `JMP [ESI+0x12]` edge from `0x200009a4` to
+the observer's mapped PICK entry at `0x1fe00e8c`. Event order, same-thread
+register/stack evidence, the armed but unhit continuation guard, complete
+controls, and the 11 matching instruction spans are preserved in the
+[portable evidence](research/introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json).
+The raw 256-byte window hash differs from its historical reference. A later
+corrected-source rerun hit the edge but failed `DebugActiveProcessStop` with
+error 5, so it is diagnostic-only and did not produce an after-control. The
+newly documented cleanup stops only that exact owned process after this
+rejection. No direct Lisp caller, continuous instruction path, JS behavior
+contract, or painting parity is established. See the [finding](research/introspection/premium-internal-transfer-edge-v1.md)
+and [execution plan](research/execution-plan.md) for the next tracing target.
 
 ## Follow the evidence
 

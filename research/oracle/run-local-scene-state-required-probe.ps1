@@ -40,6 +40,8 @@ param(
 
     [string]$ProbeOutputNamesJson,
 
+    [string]$ProbeOutputNamesCsv,
+
     [ValidatePattern('^[a-z][a-z0-9-]*\.txt$')]
     [string]$RequiredProbeOutputName,
 
@@ -67,9 +69,12 @@ $application = Join-Path $extracted 'application'
 $preSceneProbeSource = $null
 $stagedPreSceneProbeSha256 = $null
 $runnerSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($ProbeOutputNamesJson -and $ProbeOutputNamesCsv) {
+    throw 'Supply only one probe output names input'
+}
 if ($ProbeOutputNamesJson) {
     if ($ProbeOutputNames.Count -gt 0 -or $ProbeOutputNamesJson -notmatch '^\s*\[.*\]\s*$') {
-        throw 'Supply either ProbeOutputNames or a JSON array through ProbeOutputNamesJson'
+        throw 'Supply either ProbeOutputNames, ProbeOutputNamesJson, or ProbeOutputNamesCsv'
     }
     try {
         $decodedProbeOutputNames = ConvertFrom-Json -InputObject $ProbeOutputNamesJson -ErrorAction Stop
@@ -86,6 +91,21 @@ if ($ProbeOutputNamesJson) {
     foreach ($name in $decodedProbeOutputNames) {
         if ($name -isnot [string] -or $name -cnotmatch '^[a-z][a-z0-9-]*\.(txt|bin|json)$') {
             throw 'ProbeOutputNamesJson entries must be lowercase .txt, .bin, or .json filenames'
+        }
+    }
+    $ProbeOutputNames = [string[]]$decodedProbeOutputNames
+}
+if ($ProbeOutputNamesCsv) {
+    if ($ProbeOutputNames.Count -gt 0) {
+        throw 'Supply either ProbeOutputNames, ProbeOutputNamesJson, or ProbeOutputNamesCsv'
+    }
+    $decodedProbeOutputNames = @($ProbeOutputNamesCsv.Split(','))
+    if ($decodedProbeOutputNames.Count -eq 0) {
+        throw 'ProbeOutputNamesCsv must contain at least one filename'
+    }
+    foreach ($name in $decodedProbeOutputNames) {
+        if ($name -isnot [string] -or $name -cnotmatch '^[a-z][a-z0-9-]*\.(txt|bin|json)$') {
+            throw 'ProbeOutputNamesCsv entries must be lowercase .txt, .bin, or .json filenames'
         }
     }
     $ProbeOutputNames = [string[]]$decodedProbeOutputNames

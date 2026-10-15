@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 1,
+  "investigation": "PREMIUM anonymous destination branch prediction from one captured state snapshot",
+  "status": "snapshot-predicts-JC-taken-if-values-remain-stable; runtime-branch-not-observed",
+  "sourceCapture": {
+    "evidencePath": "research/introspection/evidence/premium-callsite-wide-window-20261014-v3.json",
+    "evidenceSha256": "ea98b1f39094a11bd45313e930dc1341cfee7e22872185754678fa2e5b03104c",
+    "tripletId": "prem-v2-20261014e-20261014-170512-b228b66c",
+    "controlsMatch": true,
+    "canvas": "768 1080 148",
+    "runtimeWindowStart": "0x0000000020000903",
+    "runtimeDestination": "0x20000983",
+    "runtimeWindowBytes": 256,
+    "runtimeWindowSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+    "capturedBeforeDestinationInstruction": true,
+    "region": {
+      "baseAddress": "0x0000000020000000",
+      "allocationBase": "0x0000000020000000",
+      "regionSize": "0x0000000000004000",
+      "partitionId": 0,
+      "state": "0x00001000",
+      "protection": "0x00000004",
+      "allocationProtection": "0x00000008",
+      "type": "0x00040000"
+    },
+    "context": {
+      "eip": "0x20000983",
+      "threadId": 1876,
+      "esp": "0x06a29354",
+      "ebx": "0x2036a967",
+      "esiBeforeWindowCode": "0x2025e9ea",
+      "edi": "0x20000985",
+      "ebp": "0x06a293d8"
+    }
+  },
+  "staticAnalysis": {
+    "provider": "REA 6.4.0 / Ghidra 12.1.4",
+    "staticOnly": true,
+    "syntheticPeExecuted": false,
+    "syntheticPeSha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a",
+    "runtimeWindowStart": "0x0000000020000903",
+    "syntheticWindowStart": "0x10001000",
+    "recheckedQueries": [
+      {
+        "operation": "inspect-native-instruction",
+        "address": "0x10001085",
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-10001085/rea-invocation.json",
+          "bytes": 1198,
+          "sha256": "dc083a3161a843498b67be819ccbf6a54ad68db3e5f4d3da54a449324ca46bcb"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-10001085/rea-result.json",
+          "bytes": 6596,
+          "sha256": "c26039dfb20711c4a33a28c05866fe738f629bdcedfacda6814b36b9d1488bdd"
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-10001085.tsv",
+          "bytes": 17,
+          "sha256": "32c089aefadfa6a98709ad8773fd5fa394854d67b3a1a0db622dfac5da359836"
+        },
+        "result": {
+          "bytes": "8b7315",
+          "mnemonic": "MOV",
+          "disassembly": "MOV ESI,dword ptr [EBX + 0x15]"
+        }
+      },
+      {
+        "operation": "inspect-native-instruction",
+        "address": "0x1000108b",
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108b/rea-invocation.json",
+          "bytes": 1198,
+          "sha256": "635fa4cd6639bb6ff7e26a82ab96c2bbe1dccb22aad13639b6d3ad6ffbcb4500"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108b/rea-result.json",
+          "bytes": 6614,
+          "sha256": "dc19c5ea47a9360db0dfcdee997007d8a4cb86f5e9dd9b6fad84ae94e60441cb"
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-1000108b.tsv",
+          "bytes": 17,
+          "sha256": "28c63fd2c8832d5f19cb3c3672cd3c614a77a1c25af74344011ed6bca4172079"
+        },
+        "result": {
+          "bytes": "39679b",
+          "mnemonic": "CMP",
+          "disassembly": "CMP dword ptr [EDI + -0x65],ESP"
+        }
+      },
+      {
+        "operation": "inspect-native-instruction",
+        "address": "0x1000108e",
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108e/rea-invocation.json",
+          "bytes": 1198,
+          "sha256": "1eed9edf7692f676528161ffd9259a9dbf42e3b6b927f59aaee0412fbc7be52f"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108e/rea-result.json",
+          "bytes": 6684,
+          "sha256": "92a36d494c5f4bc4e9416b3c84ecab56f9ca9c4b67ad18f90b3b96542e8bea88"
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-1000108e.tsv",
+          "bytes": 17,
+          "sha256": "b12c8311bea6dc481f89ce97bff210fde3fd70c5c5b7f0953a9ecb8e4d63996e"
+        },
+        "result": {
+          "bytes": "7209",
+          "mnemonic": "JC",
+          "disassembly": "JC 0x10001099"
+        }
+      },
+      {
+        "operation": "xrefs",
+        "address": "0x10001099",
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/xrefs-10001099/rea-invocation.json",
+          "bytes": 956,
+          "sha256": "e6419c8a11ef163b653326519969683634031464a64408c7f196dad1c150f212"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/xrefs-10001099/rea-result.json",
+          "bytes": 3732,
+          "sha256": "1577398f011ada72b49ca8b5c7f75bf941f25255176b156a2e9ee0adf9dd7171"
+        },
+        "seed": null,
+        "result": {
+          "sources": [
+            "0x1000108e"
+          ]
+        }
+      },
+      {
+        "operation": "inspect-native-instruction",
+        "address": "0x100010a1",
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-100010a1/rea-invocation.json",
+          "bytes": 1198,
+          "sha256": "cfacc215f5cc3e496d0ea1419adb7c11fe44783f21da0da4c31e22438b78f493"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-100010a1/rea-result.json",
+          "bytes": 6264,
+          "sha256": "c66b41c256a7686903a3bdec93aa528623dbc9bf01183d66425d71fd826cd11c"
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-100010a1.tsv",
+          "bytes": 17,
+          "sha256": "51aa8c28955e77fdda7a2a57fda59e62e851c9a48d11a5fb5bba59aeac93ba94"
+        },
+        "result": {
+          "bytes": "ff6612",
+          "mnemonic": "JMP",
+          "disassembly": "JMP dword ptr [ESI + 0x12]"
+        }
+      }
+    ],
+    "instructions": [
+      {
+        "runtimeAddress": "0x2000091a",
+        "syntheticAddress": "0x10001017",
+        "bytes": "ff975f030000",
+        "disassembly": "CALL dword ptr [EDI + 0x35f]"
+      },
+      {
+        "runtimeAddress": "0x20000983",
+        "syntheticAddress": "0x10001080",
+        "bytes": "b102",
+        "disassembly": "MOV CL, 0x2"
+      },
+      {
+        "runtimeAddress": "0x20000985",
+        "syntheticAddress": "0x10001082",
+        "bytes": "83e17f",
+        "disassembly": "AND ECX, 0x7f"
+      },
+      {
+        "runtimeAddress": "0x20000988",
+        "syntheticAddress": "0x10001085",
+        "bytes": "8b7315",
+        "disassembly": "MOV ESI, dword ptr [EBX + 0x15]"
+      },
+      {
+        "runtimeAddress": "0x2000098b",
+        "syntheticAddress": "0x10001088",
+        "bytes": "894df0",
+        "disassembly": "MOV dword ptr [EBP - 0x10], ECX"
+      },
+      {
+        "runtimeAddress": "0x2000098e",
+        "syntheticAddress": "0x1000108b",
+        "bytes": "39679b",
+        "disassembly": "CMP dword ptr [EDI - 0x65], ESP"
+      },
+      {
+        "runtimeAddress": "0x20000991",
+        "syntheticAddress": "0x1000108e",
+        "bytes": "7209",
+        "disassembly": "JC 0x10001099"
+      },
+      {
+        "runtimeAddress": "0x20000993",
+        "syntheticAddress": "0x10001090",
+        "bytes": "eb85",
+        "disassembly": "JMP 0x10001017"
+      },
+      {
+        "runtimeAddress": "0x2000099c",
+        "syntheticAddress": "0x10001099",
+        "bytes": "89442404",
+        "disassembly": "MOV dword ptr [ESP + 0x4], EAX"
+      },
+      {
+        "runtimeAddress": "0x200009a0",
+        "syntheticAddress": "0x1000109d",
+        "bytes": "89542408",
+        "disassembly": "MOV dword ptr [ESP + 0x8], EDX"
+      },
+      {
+        "runtimeAddress": "0x200009a4",
+        "syntheticAddress": "0x100010a1",
+        "bytes": "ff6612",
+        "disassembly": "JMP dword ptr [ESI + 0x12]"
+      }
+    ]
+  },
+  "prediction": {
+    "status": "conditional-inference-only",
+    "compare": {
+      "instruction": "CMP dword ptr [EDI - 0x65], ESP",
+      "effectiveAddress": "0x20000920",
+      "capturedValue": "0x0622af40",
+      "esp": "0x06a29354",
+      "unsignedLessThan": true,
+      "predictedCarryFlag": true
+    },
+    "branch": {
+      "instruction": "JC +0x99",
+      "predictedTaken": true,
+      "predictedPath": "conditional branch to the block at runtime offset +0x99",
+      "runtimeBranchTarget": "0x2000099c",
+      "branchHitCaptured": false
+    },
+    "downstream": {
+      "esiPointerSourceAddress": "0x2036a97c",
+      "esiPointerValueCaptured": false,
+      "indirectCallSlotAddress": "0x20000ce4",
+      "indirectCallTargetCaptured": false,
+      "tailTransferInstruction": "JMP dword ptr [ESI + 0x12]",
+      "tailTransferOperandValueCaptured": false,
+      "dynamicDestinationCaptured": false,
+      "destinationEqualsPick": null
+    }
+  },
+  "claims": {
+    "observedBranchOutcome": false,
+    "directEdgeToPickProven": false,
+    "callerFunctionRecovered": false,
+    "behaviorContractAdded": false,
+    "parityClaimed": false
+  },
+  "limitations": [
+    "The instruction bytes are mapped into an analyst-generated PE; its addresses are synthetic static coordinates, not original executable addresses.",
+    "The branch outcome is predicted from one captured register and memory snapshot under the assumption that the compared values remain stable until CMP executes. The debugger stopped before the destination instruction, so the branch was not observed.",
+    "The captured code page was MEM_MAPPED/PAGE_READWRITE. Its full-window bytes changed in a separate rejected observer attempt; the changed offsets remain unexplained.",
+    "The value at [EBX+0x15] and the resulting [ESI+0x12] target are outside the captured window and unresolved.",
+    "The computed CALL [EDI+0x35f] operand is also outside the captured window; neither its execution nor target is known.",
+    "A same-thread/frame PICK observation after the original call does not establish a direct CPU edge from this destination to PICK.",
+    "No Lisp function name, native ABI, general call graph, JavaScript behavior contract, or whole-painting parity follows from this result."
+  ],
+  "recommendedNextCapture": {
+    "route": "existing no-TF hardware execute-breakpoint observer, not Frida Interceptor",
+    "sourceBoundTargets": [
+      "rediscover the PREMIUM CALL and direct destination in the observer runtime",
+      "read and bind the complete centered 256-byte window in that observer run",
+      "validate the full mapped instruction signature sequence at relative offsets 0x17, 0x80, 0x82, 0x85, 0x88, 0x8b, 0x8e, 0x90, 0x99, 0x9d, and 0xa1",
+      "observe the source site and computed destination for JMP [ESI+0x12], checking same thread, EIP, stack, return continuation, and debug-register restoration"
+    ],
+    "requireFreshUninstrumentedControls": true,
+    "requireCompleteSourceBoundTriplet": true
+  },
+  "sourceBindings": [
+    {
+      "path": "research/introspection/evidence/premium-callsite-wide-window-20261014-v3.json",
+      "bytes": 12124,
+      "sha256": "ea98b1f39094a11bd45313e930dc1341cfee7e22872185754678fa2e5b03104c"
+    },
+    {
+      "path": "research/introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json",
+      "bytes": 15653,
+      "sha256": "9734162bbdfc42ead70331e110ef17322506dc3f1a5355f6de9c26a8e36047d2"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.binding.json",
+      "bytes": 4718,
+      "sha256": "c93fc29f369e4cb87425e1760dec2c08a65c25e15eb698b0fc833b83e1785b83"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.synthetic.exe",
+      "bytes": 1024,
+      "sha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-function/premium-destination-window-v3-function.json",
+      "bytes": 40892,
+      "sha256": "19154b5ba94f15db10946c5d3c432f9d29d182f30b28feabe65d0791a74b14b6"
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "bytes": 739,
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-10001085/rea-invocation.json",
+      "bytes": 1198,
+      "sha256": "dc083a3161a843498b67be819ccbf6a54ad68db3e5f4d3da54a449324ca46bcb"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-10001085/rea-result.json",
+      "bytes": 6596,
+      "sha256": "c26039dfb20711c4a33a28c05866fe738f629bdcedfacda6814b36b9d1488bdd"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-10001085.tsv",
+      "bytes": 17,
+      "sha256": "32c089aefadfa6a98709ad8773fd5fa394854d67b3a1a0db622dfac5da359836"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108b/rea-invocation.json",
+      "bytes": 1198,
+      "sha256": "635fa4cd6639bb6ff7e26a82ab96c2bbe1dccb22aad13639b6d3ad6ffbcb4500"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108b/rea-result.json",
+      "bytes": 6614,
+      "sha256": "dc19c5ea47a9360db0dfcdee997007d8a4cb86f5e9dd9b6fad84ae94e60441cb"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-1000108b.tsv",
+      "bytes": 17,
+      "sha256": "28c63fd2c8832d5f19cb3c3672cd3c614a77a1c25af74344011ed6bca4172079"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108e/rea-invocation.json",
+      "bytes": 1198,
+      "sha256": "1eed9edf7692f676528161ffd9259a9dbf42e3b6b927f59aaee0412fbc7be52f"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-1000108e/rea-result.json",
+      "bytes": 6684,
+      "sha256": "92a36d494c5f4bc4e9416b3c84ecab56f9ca9c4b67ad18f90b3b96542e8bea88"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-1000108e.tsv",
+      "bytes": 17,
+      "sha256": "b12c8311bea6dc481f89ce97bff210fde3fd70c5c5b7f0953a9ecb8e4d63996e"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/xrefs-10001099/rea-invocation.json",
+      "bytes": 956,
+      "sha256": "e6419c8a11ef163b653326519969683634031464a64408c7f196dad1c150f212"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/xrefs-10001099/rea-result.json",
+      "bytes": 3732,
+      "sha256": "1577398f011ada72b49ca8b5c7f75bf941f25255176b156a2e9ee0adf9dd7171"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-100010a1/rea-invocation.json",
+      "bytes": 1198,
+      "sha256": "cfacc215f5cc3e496d0ea1419adb7c11fe44783f21da0da4c31e22438b78f493"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/inspect-100010a1/rea-result.json",
+      "bytes": 6264,
+      "sha256": "c66b41c256a7686903a3bdec93aa528623dbc9bf01183d66425d71fd826cd11c"
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-branch-recheck-elevated-20261015-936b84768de74c1ca570f54055b80d7f/seed-100010a1.tsv",
+      "bytes": 17,
+      "sha256": "51aa8c28955e77fdda7a2a57fda59e62e851c9a48d11a5fb5bba59aeac93ba94"
+    }
+  ],
+  "instructionProfile": {
+    "id": "premium-callsite-instruction-profile-v1",
+    "sha256": "25daebb65b53736fb37a208f44cc9a86162ec398f64703aa6bb86b351310fabe",
+    "referenceWindowSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+    "reaEvidenceSha256": "9734162bbdfc42ead70331e110ef17322506dc3f1a5355f6de9c26a8e36047d2",
+    "offsetsAndBytes": [
+      {
+        "offset": "0x17",
+        "bytes": "ff975f030000"
+      },
+      {
+        "offset": "0x80",
+        "bytes": "b102"
+      },
+      {
+        "offset": "0x82",
+        "bytes": "83e17f"
+      },
+      {
+        "offset": "0x85",
+        "bytes": "8b7315"
+      },
+      {
+        "offset": "0x88",
+        "bytes": "894df0"
+      },
+      {
+        "offset": "0x8b",
+        "bytes": "39679b"
+      },
+      {
+        "offset": "0x8e",
+        "bytes": "7209"
+      },
+      {
+        "offset": "0x90",
+        "bytes": "eb85"
+      },
+      {
+        "offset": "0x99",
+        "bytes": "89442404"
+      },
+      {
+        "offset": "0x9d",
+        "bytes": "89542408"
+      },
+      {
+        "offset": "0xa1",
+        "bytes": "ff6612"
+      }
+    ]
+  }
+}

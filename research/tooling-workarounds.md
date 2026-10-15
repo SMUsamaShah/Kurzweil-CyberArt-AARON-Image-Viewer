@@ -77,6 +77,27 @@ payload bytes unchanged. This gives Ghidra a nonzero section RVA. It does not
 modify the original PLL, and the generated PE must never be executed. The
 builder validates this layout in its binding JSON.
 
+## Frida Stalker fixture on Windows x86
+
+The validated fixture runner is
+[`run-frida-stalker-smoke.ps1`](tools/run-frida-stalker-smoke.ps1). It uses a
+project-local ignored virtual environment, builds an x86 executable from the
+tracked C# fixture, and preserves each run under a unique ignored directory.
+The 2026-10-15 result and limits are recorded in the
+[fixture report](tooling/frida-stalker-x86-smoke-20261015.md).
+
+The first unrestricted 10,000-call burst saturated Stalker's default
+16,384-event queue and yielded an incomplete trace. The passing fixture runs
+2,000 calls per invocation, five invocations total, with a 100 ms gap and a
+1 ms drain interval; it checks exact internal call/return counts and order.
+Keep those completeness checks when changing the workload or queue settings.
+
+One unprivileged Windows injection attempt failed during Frida's injector ACL
+setup; the bounded fixture succeeded from the authorized elevated shell. If
+that exact error recurs, run the fixture runner from an elevated shell. Do not
+change system ACLs or install Frida machine-wide to work around it. This is a
+fixture-only instruction: the smoke test does not attach to AARON.
+
 ## Original AARON oracle
 
 Read [`oracle.md`](oracle.md#ctemp-staging-and-permissions) before a run.
@@ -531,10 +552,22 @@ builder allows only the observer's `aaron-planning-call-trace.txt` to differ;
 it still compares that trace between the bracketing controls and requires the
 other drawing/scene outputs and ordinary sources to match.
 
-For a read-only disk-space check in this shell, use
-`Get-PSDrive -Name C,D | Select-Object Name,Free,Used`; the WMI
-`Get-CimInstance Win32_LogicalDisk` query may return Access Denied here. The
-runner's own staging preflight remains authoritative.
+Windows PowerShell 5.1 in this restricted session can report `Get-PSDrive.Free`
+as zero for a drive that has several GiB available; `Get-Volume` may also fail
+with `Access denied`. Do not use either result to conclude that a drive is
+full. Check the volume backing the resolved path with .NET instead:
+
+```powershell
+$path = 'D:\ReverseEngineerAaron\research\artifacts\temp'
+$volumeRoot = [IO.Path]::GetPathRoot([IO.Path]::GetFullPath($path))
+[IO.DriveInfo]::new($volumeRoot).AvailableFreeSpace
+```
+
+The shared oracle preparer and triplet coordinators use
+`[IO.DriveInfo]::AvailableFreeSpace` for their staging/output preflights. The
+preflight still checks each path's actual target volume, reserved names, and
+write access. Do not delete staged files to satisfy it; use the runner's
+measured reserve and recovery procedure below.
 
 If a run stopped after creating its output root, first confirm the named AARON
 process has exited. Then archive only staging files whose creation times match
@@ -551,6 +584,22 @@ It refuses to act while any AARON process is active. Keep the run root and the
 recovery archive for diagnosis; do not treat an archived `END` marker as a
 successful probe unless its error/truncation counts and runner summary also
 pass.
+
+When authoring a triplet verifier in PowerShell, optional no-probe fields in
+`summary.json` can be represented as nulls, empty strings, or an empty array.
+Test their normalized content rather than rejecting every non-null value; in
+particular, filter blank entries from `probeOutputNames` before checking that
+the uninstrumented control has no probe outputs. This avoids aborting a valid
+control after its AARON run while preserving the source/hash and instrumentation
+gates.
+
+Also wrap filtered single-line output in `@(...)` before indexing it. In
+Windows PowerShell 5.1, `($lines | Where-Object { ... })[0]` can index the first
+character of a scalar string, so a copied `COMPLETE ...` record may become
+just `C` in the comparison summary even when the captured report is intact.
+Use `$completeLines = @($lines | Where-Object { ... })` and then
+`$completeLines[0]`; for existing evidence, validate the original report and
+its hash rather than trusting a truncated summary projection.
 
 Windows Allegro's `~%` reports use CRLF. Normalize line endings before an
 exact `END` suffix check. Header bytes can be emitted in lowercase hex; parse
@@ -927,6 +976,155 @@ The portable evidence deriver validates the same complete report and correlation
 gates. Its output was byte-identical on two consecutive derivations. Preserve
 partial failed runs for diagnosis; this offline recovery is only for three
 complete, source-bound roots.
+
+### Scene observer ended on a failed first MAIN attempt, 2026-10-14
+
+One PREMIUM PICK-witness observer saw an initial `MAIN` attempt fail inside
+`DEVELOP-PLAN`, followed by the screensaver retrying `MAIN` and drawing
+normally. The scene snapshot hook treated both `MAIN :error` and `MAIN :exit`
+as terminal, wrote `END` at the first error, and then appended later scene
+records after that marker. The coordinator correctly rejected the run because
+content followed `END`; the run has no after-control or valid triplet
+comparison. Its missing `PREMIUM-ENTER` and `PICK-CALL` records are not
+behavioral evidence, and the aggregate error counter does not localize why
+those rows are absent.
+
+`research/introspection/scene-state-snapshot.cl` now keeps the observer active
+through a failed `MAIN` attempt and finalizes only on a normal `MAIN` return.
+If no retry succeeds, the runner's required `END` check times out and rejects
+the capture. This fixes the terminal-marker ordering; it does not repair or
+validate the old report. Any future claim from this probe needs a new complete
+before/observer/after triplet, the exact required witness rows, and fresh
+matching uninstrumented drawing/scene controls. Preserve the failed run as
+diagnostic material rather than treating it as a partial result.
+
+### PREMIUM PICK witness v3 had no footer, 2026-10-14
+
+The v2 witness observer at
+`research/extracted/local-oracle/external-runs/premium-pick-witness-v2-20261014-183422-701076b7-observer`
+reached `READY` but wrote no `COMPLETE` or `END`; its coordinator stopped
+before an after-control. Preserve it as a failed diagnostic root.
+
+The corrected v3 before/observer/after attempt is
+`pick-v3fix-20261014-20261014-185255-19f062cf`. Its before-control passed,
+but the observer did not complete, so no after-control or accepted triplet
+comparison exists. The observer's `image` is zero bytes. Its witness report
+contains `READY` and `PREMIUM-EXIT extent=1 completed=T`, but no
+`PREMIUM-ENTER`, `PICK-CALL`, `COMPLETE`, or `END`. The scene report writes
+`END scene-state-snapshot` and then appends `MAIN-ERROR type=COMMON-LISP::SIMPLE-ERROR`.
+The planning trace reached its 1,024-event cap; it cannot establish whether
+the later error belongs to the same MAIN invocation as the earlier exit.
+
+The scene hook conditionally calls the witness finalizer when `fboundp`
+succeeds, but v3 records neither that runtime result nor callback entry/return.
+The literal `callback=FBOUNDP` text on its `INSTALL` row is not a runtime
+check. No `MAIN-EXIT-CALLBACK-ERROR` row appears, but this still does not
+distinguish a missing callback binding from a finish/report failure. Treat the
+run as incomplete: it proves neither a PICK call nor a no-hit. Preserve both
+the failed run root and its captured output.
+
+If this Lisp route is resumed, add monotonically numbered MAIN enter/exit/error
+events and always append callback `fboundp`, callback-entry, and callback-return
+status to the scene report. Keep the required witness `COMPLETE`/`END` gate and
+require a fresh before/observer/after triplet with matching uninstrumented
+drawing/scene controls. Do not use the current partial capture to relax those
+gates.
+
+### Scene observer source failed delimiter validation, 2026-10-14
+
+The before leg of `prem-internal-transfer-v2-20261014-225215-8276a938` staged
+the current `scene-state-snapshot.cl`, but it contained one unmatched opening
+parenthesis at the outer `UNLESS` form. The observer never created its scene
+report. Since the runner waited only for both a completed AA0 and that report,
+AARON kept producing paintings until the coordinator's 360-second leg limit.
+The captured run contains 14 AA files but no scene report or complete summary;
+it is diagnostic only. The C:\temp symlink, write probe, and registry setup
+worked. Do not attribute this failure to directory permissions.
+
+The source now has the missing close. Before staging or launching AARON, the
+required-probe runner passes every selected `.cl` source through
+`research/tools/check-lisp-delimiters.mjs`. If the first AA0 finishes without
+the scene report, it stops the process and preserves the failed root
+immediately instead of consuming the full run limit. This is a delimiter
+preflight, not a full Common Lisp compiler check; each observer still needs a
+fresh complete triplet, its own READY/COMPLETE/END records, and matching
+uninstrumented controls.
+
+### Scene observer was balanced but still mis-scoped, 2026-10-15
+
+The first repair added the missing close at end-of-file. That balanced the
+source but left the `LABELS` definition list open: the following
+`set 'aaron-scene-state-hook`, nested `load`, and readiness check began at
+depth 4 instead of the labels body at depth 3. In the preserved
+`prem-internal-transfer-v2-20261014-230256-1eb52e7a-before` root, the planning
+trace reached `TRACE-READY`, while the scene report remained at
+`BEGIN scene-state-snapshot` and `SOURCE-ENTERED`; no observer events or
+terminal `END` were captured. I stopped only that run's verified AARON PID
+after confirming the control could not pass its completion gate. It has no
+complete summary or accepted triplet status.
+
+The close now ends the `LABELS` definitions list immediately after
+`SCENE-OBSERVER`, and the end-of-file close is restored. In addition to the
+delimiter check, the required-probe runner now checks that the observer
+definitions start at depth 4 and the hook installation, trace load, and
+readiness check start at depth 3. This catches balanced but mis-nested edits
+before registry mutation or AARON launch. These checks verify source shape,
+not full Lisp semantics; require the runtime `PROBE-READY` and terminal `END`
+records as well as fresh matching controls.
+
+After the first AA0 is complete, the runner also stops early if the scene
+report does not contain `PROBE-READY`, including the case where the report
+exists but initialization stopped after `SOURCE-ENTERED`. This diagnoses a
+failed or incomplete probe setup without consuming the full run limit; it does
+not establish why Lisp initialization stopped.
+
+### Debugger detach failed after PREMIUM edge capture, 2026-10-15
+
+The accepted source-bound triplet
+`prem-it-v3-crlf-20261015-062149-42409a0d` detached cleanly and recorded the
+tail-JMP edge to the current PICK entry. A corrected-source rerun,
+`prem-it-v3-final-20261015-062543-6f3ff028`, reached the same four debugger
+events but `DebugActiveProcessStop` returned error 5. The required capture was
+rejected because `detached=false` and cleanup errors were present. The
+coordinator therefore wrote no accepted capture report, and the after-control
+did not run. Do not use this failed rerun as a second observation or loosen the
+detach gate.
+
+The failed coordinator waited through the full 360-second runner limit because
+the runner was waiting for the required observer `END` file that the rejected
+capture correctly did not write. The runner eventually terminated its owned
+AARON process, collected the staged files, restored the registry snapshot, and
+removed its reserved `C:\temp` staging names. The `C:\temp` symlink write/read/delete
+preflight passed; this was a debugger-cleanup failure, not a staging-permission
+failure.
+
+`capture-premium-internal-transfer-triplet-v3.ps1` now has a narrowly gated
+early-cleanup path. It acts only when the persisted diagnostic belongs to the
+current triplet/run, identifies the exact disposable `runtime\AARON.exe` path
+and PID, confirms `DebugActiveProcessStop failed: 5`, and finds exactly one
+matching AARON process. It then stops only that process so the runner's `finally`
+block can collect staging files and restore the registry. If any binding is
+missing or changed, it leaves the process alone and preserves the diagnostics.
+This makes rejection cleanup faster; it does not make a failed capture
+acceptable. Continue to require `detached=true`, no cleanup errors, the
+observer-specific `COMPLETE`/`END`, and fresh matching before/after controls.
+
+Check without launching AARON:
+
+```powershell
+powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass `
+  -File research\tools\capture-premium-internal-transfer-triplet-v3.ps1 `
+  -PreflightOnly -RunPrefix prem-it-v3-preflight
+```
+
+The preflight verifies the `C:\temp` target, a unique write/read/delete probe,
+fresh prospective output roots, runner version, and absence of an active
+AARON process. The rejected diagnostic and accepted evidence are recorded in
+[the internal-transfer finding](introspection/premium-internal-transfer-edge-v1.md)
+and its [portable evidence](introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json).
+After this cleanup change, the no-launch preflight passed. The early-stop path
+has not yet been exercised by another AARON run; the failed run above still
+waited through the full limit because it predates the change.
 
 ## Discoverability
 

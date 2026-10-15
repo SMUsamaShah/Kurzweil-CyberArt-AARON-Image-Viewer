@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "investigation": "PREMIUM SELECT-SUBJECT destination-window exact REA instruction checks",
+  "status": "captured-byte-static-checks-complete; computed transfers unresolved",
+  "originalRuntime": {
+    "sourceBoundTriplet": "prem-v2-20261014e-20261014-170512-b228b66c",
+    "controlsMatch": true,
+    "initialDestinationInstructionExecutedDuringCapture": false,
+    "branchExecutionObserved": false,
+    "directCpuEdgeToPick": false,
+    "callerFunctionRecovered": false,
+    "behaviorContractAdded": false
+  },
+  "sourceCapture": {
+    "evidence": {
+      "path": "research/introspection/evidence/premium-callsite-wide-window-20261014-v3.json",
+      "sha256": "ea98b1f39094a11bd45313e930dc1341cfee7e22872185754678fa2e5b03104c"
+    },
+    "tripletId": "prem-v2-20261014e-20261014-170512-b228b66c",
+    "runtimeEip": "0x20000983",
+    "windowStart": "0x0000000020000903",
+    "windowEndExclusive": "0x0000000020000a03",
+    "bytes": 256,
+    "bytesSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd"
+  },
+  "analysisInput": {
+    "syntheticPe": {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.synthetic.exe",
+      "sha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a",
+      "bytes": 1024,
+      "executed": false
+    },
+    "binding": {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.binding.json",
+      "sha256": "c93fc29f369e4cb87425e1760dec2c08a65c25e15eb698b0fc833b83e1785b83"
+    },
+    "analystBase": "0x10001000",
+    "toolchain": {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04",
+      "reaVersion": "6.4.0",
+      "ghidraVersion": "12.1.4"
+    }
+  },
+  "instructions": [
+    {
+      "id": "branch-target-call",
+      "operation": "inspect-native-instruction",
+      "syntheticAddress": "0x10001017",
+      "capturedRuntimeAddress": "0x2000091a",
+      "capturedWindowOffset": 23,
+      "bytes": "ff975f030000",
+      "length": 6,
+      "mnemonic": "CALL",
+      "disassembly": "CALL dword ptr [EDI + 0x35f]",
+      "flow": {
+        "kind": "call",
+        "conditional": false,
+        "computed": true,
+        "direct_destinations": [],
+        "classification_evidence": [
+          {
+            "source": "ghidra-listing-flow-type",
+            "value": "COMPUTED_CALL"
+          }
+        ]
+      },
+      "references": [],
+      "source": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001017/rea-invocation.json",
+          "sha256": "6f7ea72a93abd5ffce83a605ce48f311a5bf6e48603d31ff7ce63277748c6d9e"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001017/premium-window-v3-inspect-10001017.json",
+          "sha256": "2282dfb416d4ec1a6b2439b977f6bb1c98c5ae577fb12e431934560ba27d3438",
+          "bytes": 6222
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001017/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/seed-10001017.tsv",
+          "sha256": "9c2fc51c0dcca5aef934ccd0e1d34e3238916760a524252ba7d697a85b1376f1",
+          "bytes": 16,
+          "record": "0x10001017\tcode"
+        },
+        "profileDigest": "1ab5084b478cf79b878943369e7a7a450514300e3e24b4e672b9e29814562eed",
+        "provider": "REA 6.4.0 / Ghidra 12.1.4"
+      }
+    },
+    {
+      "id": "short-branch",
+      "operation": "inspect-native-instruction",
+      "syntheticAddress": "0x10001090",
+      "capturedRuntimeAddress": "0x20000993",
+      "capturedWindowOffset": 144,
+      "bytes": "eb85",
+      "length": 2,
+      "mnemonic": "JMP",
+      "disassembly": "JMP 0x10001017",
+      "flow": {
+        "kind": "call",
+        "conditional": false,
+        "computed": false,
+        "direct_destinations": [
+          "0x10001017"
+        ],
+        "classification_evidence": [
+          {
+            "source": "ghidra-listing-flow-type",
+            "value": "CALL_TERMINATOR"
+          }
+        ]
+      },
+      "references": [
+        {
+          "target_address": "0x10001017",
+          "type": "UNCONDITIONAL_CALL",
+          "call": true,
+          "jump": false,
+          "indirect": false,
+          "computed": false,
+          "operand_index": 0,
+          "source_address": "0x10001090",
+          "data": false,
+          "read": false,
+          "write": false,
+          "primary": true,
+          "provenance": "ghidra-reference-manager",
+          "source": "default"
+        }
+      ],
+      "source": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001090/rea-invocation.json",
+          "sha256": "5a210d7508431635a6b6858229ed225bbd0744292b96477f856a5b220a92176a"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001090/premium-window-v3-inspect-10001090.json",
+          "sha256": "9b2eb98bf943d41ca0ca706bc41ebda48a480e9700af981c432bc9fc0f35b2e2",
+          "bytes": 6626
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-10001090/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/seed-10001090.tsv",
+          "sha256": "ea4c22b540621c67e5ce8198a6b9c7bdd8a6ae46b4c6086d0ee245ac9f9d87f5",
+          "bytes": 16,
+          "record": "0x10001090\tcode"
+        },
+        "profileDigest": "0d08aef55447e070c9556df71c20b75dcf7385f55e4d296ac6e36ba395eb8995",
+        "provider": "REA 6.4.0 / Ghidra 12.1.4"
+      }
+    },
+    {
+      "id": "tail-dispatch",
+      "operation": "inspect-native-instruction",
+      "syntheticAddress": "0x100010a1",
+      "capturedRuntimeAddress": "0x200009a4",
+      "capturedWindowOffset": 161,
+      "bytes": "ff6612",
+      "length": 3,
+      "mnemonic": "JMP",
+      "disassembly": "JMP dword ptr [ESI + 0x12]",
+      "flow": {
+        "kind": "jump",
+        "conditional": false,
+        "computed": true,
+        "direct_destinations": [],
+        "classification_evidence": [
+          {
+            "source": "ghidra-listing-flow-type",
+            "value": "COMPUTED_JUMP"
+          }
+        ]
+      },
+      "references": [],
+      "source": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-100010a1/rea-invocation.json",
+          "sha256": "1526813961db0a3189fd2e266b009da0efdbe1dbd5e32c77337d07058e7a8168"
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-100010a1/premium-window-v3-inspect-100010a1.json",
+          "sha256": "6da9511dd62ae43a07868f0acdcecef1a2b9d609954488309bbff7e811d17bd3",
+          "bytes": 6198
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-inspect-100010a1/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        "seed": {
+          "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/seed-100010a1.tsv",
+          "sha256": "89943b9e1717e39676ce78e31eb8eea1b9b68d61a72af0324511691a2b8ceeb5",
+          "bytes": 16,
+          "record": "0x100010a1\tcode"
+        },
+        "profileDigest": "831633b89c2a65d8a8e8266b930dc5ef8a1653acf0ef2d87cb9c2b57a1066bf7",
+        "provider": "REA 6.4.0 / Ghidra 12.1.4"
+      }
+    }
+  ],
+  "callResolution": {
+    "operation": "resolve-native-call-targets",
+    "syntheticCallSite": "0x10001017",
+    "status": "unresolved",
+    "mechanism": "computed",
+    "targets": [],
+    "limitations": [
+      "Targets are static Ghidra ReferenceManager call-reference observations. Computed calls without call references remain unresolved; a resolved reference is not proof of runtime execution.",
+      "Objective-C, Swift, vtable and closure mechanisms are not identified by this reference-only boundary."
+    ],
+    "source": {
+      "invocation": {
+        "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-resolve-call-10001017/rea-invocation.json",
+        "sha256": "4a9ba4519bc25a47007b8d081de70f6f7e20efc14f49f65474554be3f2d54793"
+      },
+      "report": {
+        "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-resolve-call-10001017/premium-window-v3-resolve-call-10001017.json",
+        "sha256": "8d58e799318ff7ca42154c8a163c8edf0be81e033dc4d750e65a9700d1598fda",
+        "bytes": 4288
+      },
+      "stderr": {
+        "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-resolve-call-10001017/rea-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "profileDigest": "a49d62235d0a27ba55ceea7d0f9f063f63daa7b9e76a952a236dbe841428f921"
+    }
+  },
+  "functionDossiers": [
+    {
+      "address": "0x10001080",
+      "ghidraName": "entry",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x10001080",
+            "end": "0x10001091"
+          },
+          {
+            "start": "0x10001099",
+            "end": "0x100010a3"
+          }
+        ],
+        "total_bytes": 29,
+        "span_bytes": 36,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "report": {
+        "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-function/premium-destination-window-v3-function.json",
+        "sha256": "19154b5ba94f15db10946c5d3c432f9d29d182f30b28feabe65d0791a74b14b6",
+        "bytes": 40892
+      },
+      "source": {
+        "invocation": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-function/rea-invocation.json",
+        "sha256": "7607f934577a6ceeb3d0458958be26ad09f544b647a7214a13eab85b159330cd"
+      },
+      "attribution": "synthetic-image inference only; not an original AARON function boundary"
+    },
+    {
+      "address": "0x10001017",
+      "ghidraName": "FUN_10001017",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x10001017",
+            "end": "0x1000107f"
+          }
+        ],
+        "total_bytes": 105,
+        "span_bytes": 105,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "report": {
+        "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-branch17/premium-destination-window-v3-branch17-function.json",
+        "sha256": "2a30f7d8da32eeb3c88a3ef66aea53685547a110f01664a35eddb63130310efd",
+        "bytes": 193184
+      },
+      "source": {
+        "invocation": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-rea-branch17/rea-invocation.json",
+        "sha256": "9f8e0dd3e2287314e032228b30d5d6ee45635e83f0df831cec7fa0c292799856"
+      },
+      "attribution": "synthetic-image inference only; not an original AARON function boundary"
+    }
+  ],
+  "interpretation": {
+    "directBranch": "Captured bytes at runtime offset +0x90 decode as JMP rel8 to offset +0x17. Ghidra flow/reference metadata labels this terminal JMP as a call; the evidence preserves the conflict rather than treating the reference type as authoritative.",
+    "branchTarget": "The captured bytes at runtime offset +0x17 decode as CALL dword ptr [EDI+0x35f]. REA call-target resolution reports an unresolved computed call with no targets.",
+    "terminalTransfer": "Captured bytes at runtime offset +0xa1 decode as JMP dword ptr [ESI+0x12], classified as a computed jump with no references.",
+    "scope": "These are static observations on an analyst-generated PE containing the exact captured bytes. The synthetic Ghidra function names and boundaries are not original AARON names or boundaries. No intervening runtime instruction trace establishes whether these branches execute or where either computed transfer lands."
+  },
+  "limitations": [
+    "The source capture stops before the destination instruction executes; the 256-byte range is a single read from one source-bound observer run.",
+    "The initial branch decision, register roles, runtime call target at [EDI+0x35f], and computed jump target at [ESI+0x12] are unresolved.",
+    "The direct JMP target is a static address inside the synthetic image; matching captured bytes establishes only the bounded byte mapping, not a general AARON code boundary.",
+    "Ghidra reports CALL_TERMINATOR and UNCONDITIONAL_CALL metadata for bytes decoded as JMP at 0x10001090; this is an explicit provider conflict.",
+    "No direct edge to PICK, Lisp function name, calling convention, general caller relation, or JavaScript behavior contract is established."
+  ],
+  "sourceBindings": [
+    {
+      "path": "research/introspection/evidence/premium-callsite-wide-window-20261014-v3.json",
+      "sha256": "ea98b1f39094a11bd45313e930dc1341cfee7e22872185754678fa2e5b03104c",
+      "bytes": 12124
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.binding.json",
+      "sha256": "c93fc29f369e4cb87425e1760dec2c08a65c25e15eb698b0fc833b83e1785b83",
+      "bytes": 4718
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.synthetic.exe",
+      "sha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a",
+      "bytes": 1024
+    },
+    {
+      "path": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.seeds.tsv",
+      "sha256": "182fa19a2e58578651d033ae716536f907b3a86ccbf4f1745588b587ddb0dab1",
+      "bytes": 16
+    },
+    {
+      "path": "research/artifacts/rea-tools/toolchain-current.json",
+      "sha256": "efa320886e71be20ddc1e0423d1d1f5c2fe43b921638678c2e5af8b3d0b96d04",
+      "bytes": 739
+    },
+    {
+      "path": "research/tools/prepare-premium-callsite-wide-window-pe-v2.mjs",
+      "sha256": "59ae2ab92f06b34880ecfaf88a2171354aa498c31a15b6297d697e1794623e2d",
+      "bytes": 15078
+    },
+    {
+      "path": "research/tools/invoke-rea-ghidra-query.ps1",
+      "sha256": "ad8c89b48fe0d966b9877d9b0be3a0dade823b5d09926675cc9731267bdd5410",
+      "bytes": 9599
+    },
+    {
+      "path": "research/tools/derive-premium-callsite-wide-window-evidence-v2.mjs",
+      "sha256": "47771ae1ad221036dcbf888c09467c2b9c1fa49f0e8e86ec10bcb9999836c216",
+      "bytes": 18247
+    },
+    {
+      "path": "research/tools/derive-premium-callsite-wide-window-rea-evidence-v3.mjs",
+      "sha256": "e6fe86247da188b3490111e010c578ce6ecaf2281f8a5e8953977ba89ace98b4",
+      "bytes": 21494
+    }
+  ]
+}

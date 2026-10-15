@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-complete-triplet; interpretation-addendum-corrects-stale-summary-sentence",
+  "triplet": {
+    "id": "prem-it-v3-crlf-20261015-062149-42409a0d",
+    "mode": "writer-stream-seed-1234",
+    "canvas": "768 1080 148",
+    "roles": [
+      {
+        "role": "before",
+        "runId": "prem-it-v3-crlf-20261015-062149-42409a0d-before",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-it-v3-crlf-20261015-062149-42409a0d-before"
+      },
+      {
+        "role": "observer",
+        "runId": "prem-it-v3-crlf-20261015-062149-42409a0d-observer",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-it-v3-crlf-20261015-062149-42409a0d-observer"
+      },
+      {
+        "role": "after",
+        "runId": "prem-it-v3-crlf-20261015-062149-42409a0d-after",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-it-v3-crlf-20261015-062149-42409a0d-after"
+      }
+    ],
+    "controlsMatch": true,
+    "beforeAfterPlanningTraceMatch": true,
+    "matchingArtifacts": {
+      "aa0": {
+        "bytes": 426587,
+        "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+      },
+      "image": {
+        "bytes": 424205,
+        "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+      },
+      "image-id": {
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "aaron-scene-state-snapshot.txt": {
+        "bytes": 26120,
+        "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+      },
+      "aaron-random-seed-loaded.txt": {
+        "bytes": 476,
+        "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+      }
+    },
+    "matchingStagedSourceCount": 6,
+    "planningTrace": {
+      "bytes": 21295296,
+      "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+    },
+    "runnerSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+    "installerSha256": "8a7717ce66c25540956de5b66a8331b0e904e43bc8bf1b16f8caf87865033a54"
+  },
+  "observedCallAndEdge": {
+    "outerCall": {
+      "payloadEntry": "0x1fe4bfb4",
+      "payloadOffset": 200,
+      "address": "0x1fe4c07c",
+      "bytes": "ff5727",
+      "destination": "0x20000983"
+    },
+    "innerTailJump": {
+      "instruction": "JMP [ESI+0x12]",
+      "source": "0x200009a4",
+      "destination": "0x1fe00e8c",
+      "destinationEqualsFreshlyMappedPickEntry": true,
+      "pickEntry": "0x1fe00e8c"
+    },
+    "eventOrder": [
+      {
+        "eventOrder": 1,
+        "kind": "source-hit",
+        "site": "PREMIUM-CALL-EDI+27",
+        "eip": "0x1fe4c07c",
+        "threadId": 21944
+      },
+      {
+        "eventOrder": 2,
+        "kind": "destination-hit",
+        "site": "PREMIUM-outer-destination",
+        "eip": "0x20000983",
+        "threadId": 21944
+      },
+      {
+        "eventOrder": 3,
+        "kind": "source-hit",
+        "site": "JMP-ESI+12",
+        "eip": "0x200009a4",
+        "threadId": 21944
+      },
+      {
+        "eventOrder": 4,
+        "kind": "destination-hit",
+        "site": "JMP-ESI+12",
+        "eip": "0x1fe00e8c",
+        "threadId": 21944
+      }
+    ],
+    "stack": {
+      "sameThread": true,
+      "espUnchanged": true,
+      "sourceEsp": "0x06a49354",
+      "destinationEsp": "0x06a49354",
+      "sourceStackDword": "0x1fe4c07f",
+      "destinationStackDword": "0x1fe4c07f",
+      "originalOuterContinuation": "0x1fe4c07f",
+      "continuationGuardHit": false
+    },
+    "instructionWindow": {
+      "start": "0x0000000020000903",
+      "eip": "0x20000983",
+      "bytes": 256,
+      "sha256": "e19ab00ae3ed25cb5ff9eb1502b18a4c1e50d3c6dac2613a1f4a8eb936e552aa",
+      "historicalReferenceSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+      "historicalReferenceBytesMatch": false,
+      "matchingSignatureSpans": 11,
+      "signatureSpanCount": 11
+    },
+    "mappedObjects": {
+      "premiumPayloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae",
+      "premiumObjectBytes": 366,
+      "premiumUniqueCompletePllMatch": true,
+      "pickPayloadSha256": "3da60342fde83661ce10002d659fb5a0d691932c6c2af0c071856dacf4a4a30e",
+      "pickObjectBytes": 118,
+      "pickUniqueCompletePllMatch": true,
+      "mapSha256": "5368c2050bcbb22519f9e3b21f5bf7d3914eb077bb8b0083de4e678103c13f62",
+      "independentlyRecomputedMapSha256": "5368c2050bcbb22519f9e3b21f5bf7d3914eb077bb8b0083de4e678103c13f62",
+      "pllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+    }
+  },
+  "interpretationCorrection": {
+    "rawAcceptedReportSentence": "The required JMP [ESI+0x12] source and destination were validated on the selected thread at the original outer destination ESP and return dword, before the armed outer-continuation guard could fire. This proves that bounded transfer edge within the original outer call frame, not continuous instructions between sites, a Lisp caller identity, or a PICK target.",
+    "rawSentenceContradictsMeasuredBoolean": true,
+    "correctedStatement": "The measured tail JMP destination equals the current PICK entry uniquely mapped from the same observer run PLL. The evidence shows this direct CPU edge in one outer-call frame; it does not identify a direct Lisp caller or prove continuous execution between all observed sites.",
+    "currentCoordinatorSha256": "7a16d97a04b34fca4bb5a484e9328497a24bbf895549b34431500d8f0a95276a",
+    "coordinatorSha256RecordedAtCapture": "860d952f21125e14938b67d2839597d790d2410b940cfde378a276a4cf4dea8a",
+    "historicalCoordinatorSourceIndependentlyRehashed": false,
+    "note": "The archived run and its comparison record the coordinator source hash used and accepted at run time. The exact historical coordinator bytes were not retained, so the old hash cannot be independently reconstructed from the current source."
+  },
+  "excludedRerun": {
+    "tripletId": "prem-it-v3-final-20261015-062543-6f3ff028",
+    "diagnosticPath": "research/extracted/local-oracle/external-runs/prem-it-v3-final-20261015-062543-6f3ff028-observer/native-code/debugger-capture-diagnostic.json",
+    "rejected": true,
+    "detached": false,
+    "cleanupErrors": [
+      "DebugActiveProcessStop failed: 5"
+    ],
+    "afterControlProduced": false,
+    "acceptedComparisonProduced": false,
+    "useForBehaviorClaims": false
+  },
+  "limitations": [
+    "This is one complete 768x1080 seed-1234 triplet; it does not establish repeatability across seeds or canvas regimes.",
+    "The destination of the outer PREMIUM CALL remains an anonymous dynamic block at 0x20000983; this capture does not recover its function boundary or Lisp caller identity.",
+    "The measured JMP [ESI+0x12] edge reaches the current mapped PICK entry, but the breakpoints do not record every instruction between the outer destination and that jump.",
+    "The 256-byte target-window hash differs from the historical reference, although all 11 pinned instruction spans match; do not treat other bytes or alignments as validated.",
+    "The separately identified CALL [EDI+0x35f] did not execute in the accepted capture.",
+    "No JavaScript behavior contract, caller policy, complete generator reconstruction, or painting parity follows from this native edge."
+  ],
+  "provenance": {
+    "comparison": {
+      "path": "research/extracted/local-oracle/premium-internal-transfer-triplet-v3-logs/prem-it-v3-crlf-20261015-062149-42409a0d/triplet-comparison.json",
+      "sha256": "6779766b714e37e63a959a5841870211cc6f1388e59e44f467a9fa1f4c96b543"
+    },
+    "captureReport": {
+      "path": "research/extracted/local-oracle/external-runs/prem-it-v3-crlf-20261015-062149-42409a0d-observer/capture/aaron-premium-internal-transfer-breakpoint-v2.txt",
+      "sha256": "62e7afa932e6895ba60e37bbece079a1959fdd3256890bd4f2957499a3779ab1"
+    },
+    "map": {
+      "path": "native-code/mapped/native-code-map.json",
+      "sha256": "5368c2050bcbb22519f9e3b21f5bf7d3914eb077bb8b0083de4e678103c13f62",
+      "independentlyRecomputedSha256": "5368c2050bcbb22519f9e3b21f5bf7d3914eb077bb8b0083de4e678103c13f62"
+    },
+    "currentFiles": [
+      {
+        "path": "research/tools/capture-premium-internal-transfer-triplet-v3.ps1",
+        "sha256": "7a16d97a04b34fca4bb5a484e9328497a24bbf895549b34431500d8f0a95276a"
+      },
+      {
+        "path": "research/oracle/AaronPremiumInternalTransferBreakpointV2.cs",
+        "sha256": "6630b8873eb58495455e6ec5a8bfddc4648f37118f4affa1efe2458120a97a6c"
+      },
+      {
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "sha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c"
+      },
+      {
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+      }
+    ]
+  }
+}
