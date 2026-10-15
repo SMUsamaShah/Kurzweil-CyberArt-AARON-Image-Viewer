@@ -757,7 +757,7 @@ At this checkpoint the next proposed action was to inspect both native
 methods. That recommendation is superseded by the later 2026-10-14 checkpoint
 below; no method behavior was established here.
 
-## Current checkpoint: PICK arities, FREE-PATH call sites, and holdout, 2026-10-14
+## 2026-10-14 checkpoint: PICK arities, FREE-PATH call sites, and holdout
 
 A source-bound explicit-call extension exercised `PICK` with two and four
 positive distinct fixnums, 16 seeds per arity. The 32 original returns and
@@ -836,19 +836,90 @@ PowerShell 5.1 coordinator exhausted memory during JSON serialization. The
 fix and recovery procedure are in
 [tooling quick fixes](tooling-workarounds.md#premium-triplet-comparison-exhausted-memory-after-all-runs-2026-10-14).
 
-REA has now queried all seven remaining byte starts (+18 through +24) in the
-captured 32-byte window and queried the xrefs for the in-window branch target
-at +25. The alternative decodes contain no CALL, and the sole xref source is
-the conditional branch at +14. These are static facts about the synthetic
-copy; the alternate starts do not establish instruction boundaries or runtime
-flow. See the [REA follow-up evidence](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
+The wider live-window step is complete. In triplet
+`premium-v2-20261014e-20261014-170512-b228b66c`, the observer rediscovered the
+PREMIUM dispatch destination and captured a 256-byte window at
+`0x20000903–0x20000a02`. All three runs, five drawing/scene artifacts, six
+ordinary staged sources, and planning traces matched. REA 6.4/Ghidra 12.1.4
+decoded the exact captured bytes and reported computed transfers at
+`0x2000091a` (`CALL [EDI+0x35f]`) and `0x200009a4` (`JMP [ESI+0x12]`). At
+`0x20000993`, the captured bytes are `EB 85`, which encode a relative jump
+back to `0x2000091a` even though provider flow metadata labels the row as a
+call terminator/unconditional call. Preserve that conflict; do not treat an
+alternate byte alignment or provider label as an executed edge. The separate
+static constant-slot scan found one `PICK` symbol reference but no
+function-valued constant in the PREMIUM method. Neither result names the
+anonymous destination or establishes a call graph. See the [window
+evidence](introspection/evidence/premium-callsite-wide-window-20261014-v3.json),
+[REA evidence](introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
+and [constant-slot evidence](introspection/evidence/premium-pick-constant-graph-20261014-v1.json).
 
-Next, capture a wider bounded memory region around the destination during a
-fresh source-bound observer run. Rediscover the direct CALL destination from
-the live `[EDI+0x27]` slot and validate the callsite and target bytes in that
-same pause; do not reuse the old numeric address as a debugger attachment
-address. Bind the wider read to fresh uninstrumented drawing and scene
-controls, then analyze only those exact captured bytes with REA. If that still
-does not recover the transfer, record same-thread EIPs from the destination
-until PICK entry or the original call continuation. Do not name the anonymous
-target, infer an ABI, or claim a direct edge from the current correlation.
+The unchanged TF/EIP approach is rejected for now: prior strict single-step
+events arrived as `STATUS_WX86_SINGLE_STEP` with `DR6=0`, so they did not pass
+the required `DR6.BS` gate. Do not weaken that gate or spend another triplet
+on the same path.
+
+The next independent experiment is a no-TF hardware execute-breakpoint route
+guided by the accepted REA window. In every fresh observer run, rediscover the
+current target and exact 256-byte window; require exact byte signatures before
+deriving either candidate site address. Arm only available DR slots, record
+first-chance hardware breakpoint events on the same thread, read the live
+`[EDI+0x35f]` or `[ESI+0x12]` operand, and temporarily replace a free slot with
+that measured destination. For `CALL [EDI+0x35f]`, require the expected
+`ESP-4` and saved return `site+6`; for `JMP [ESI+0x12]`, require unchanged ESP.
+Record event order/counts and restore the thread's original debug context
+exactly. Reject missing or ambiguous hits, changed bytes, incomplete cleanup,
+and any triplet without fresh matching drawing/scene controls. The static REA
+transfers remain candidates until such a live hit is captured.
+
+The Lisp-level PICK witness remains rejected. V2 stopped after `READY` without
+a witness footer or after-control. V3's before-control passed, but its observer
+had a zero-byte image, no after-control, no `PREMIUM-ENTER`/`PICK-CALL` or
+footer, and a scene report with `END` followed by `MAIN-ERROR`. The planning
+trace hit its 1,024-event cap, so those events cannot be paired to one MAIN
+invocation. The report does not log the callback's runtime `fboundp` result or
+completion, leaving the reason for the missing footer unresolved. Do not retry
+v3 unchanged; add callback checks and event sequence IDs if that route is
+resumed. No behavior contract or completion percentage follows from these
+failed captures.
+
+WPR was checked as a distinct OS-boundary method. The local `GPU.Verbose.Memory`
+profile enables the kernel `SystemCall` keyword and DxgKrnl/DXGI/Direct3D
+providers, but its stack list omits syscall entry/exit stacks. It cannot expose
+the `[EDI+0x27]` operand, the in-process dispatch edge, or the Lisp caller, so
+no WPR recording was spent on this question. Keep it as an option for a later
+GPU/kernel interaction investigation; it complements rather than replaces the
+REA-guided internal capture.
+
+## Current checkpoint: Frida Stalker observer route, 2026-10-15
+
+The planned no-TF hardware-breakpoint route was attempted in fresh triplet
+`prem-internal-1015c-20261014-234038-b80a2004`. Its before control completed
+and the observer reached the known outer callsite, but the live 256-byte
+window failed the pinned exact hash gate before any internal candidate was
+armed. There is no completed observer AA0/scene `END`, no after control, and
+no accepted comparison. Do not repeat that attempt unchanged or weaken the
+hash gate. The changed bytes avoid the three inspected instruction spans, but
+their cause is unknown. See the [portable result](introspection/evidence/premium-internal-transfer-window-variant-20261015.json)
+and [finding](introspection/premium-internal-transfer-window-variant-20261015.md).
+
+REA remains the static targeting tool: it decoded this exact rejected window
+through an unexecuted synthetic PE. Frida 17.23.3 separately passed the x86
+generated-code fixture with 10,000 ordered call/return pairs; it has not been
+attached to AARON. A read-only check of the installed Python API confirmed
+`Device.spawn` accepts executable arguments, environment, working directory,
+and stdio options, with separate `attach` and `resume` methods. This API check
+does not demonstrate an AARON launch or trace.
+
+Next, build a dedicated Frida observer path that starts a **separate** AARON
+observer run, using the existing disposable runtime and captured environment.
+First verify the spawn/attach/resume sequence on the 32-bit fixture; then trace
+only a bounded thread and filter events to freshly rediscovered, source-mapped
+code regions and REA-selected transfer sites. Do not attach Frida to a process
+being controlled by the Windows debugger. For an AARON attempt, capture the
+same complete source/runtime identities and fresh uninstrumented before/after
+controls, retain a per-event cap and completeness/footer, and require the
+ordinary drawing/scene artifacts and staged sources to match. If any gate
+fails, report the attempt as incomplete and keep the REA candidates static.
+No JavaScript contract or painting parity follows from the fixture or the
+rejected 1015c observer.

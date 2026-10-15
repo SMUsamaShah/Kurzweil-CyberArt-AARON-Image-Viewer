@@ -11,7 +11,31 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-14
+## Latest checkpoint: 2026-10-15
+
+The PREMIUM internal-transfer no-TF attempt `prem-internal-1015c-20261014-234038-b80a2004`
+completed its before control and reached the expected outer callsite, but the
+observer rejected the exact 256-byte window hash before arming internal
+breakpoints. It did not produce a completed observer AA0/scene `END`, and the
+after control did not run. The captured bytes differ from the accepted sample
+at six offsets and from an earlier rejected sample at eight; the cause remains
+unknown. REA/Ghidra decoded the rejected bytes in a synthetic PE, which is
+static analysis only. See the [portable evidence](introspection/evidence/premium-internal-transfer-window-variant-20261015.json)
+and [finding](introspection/premium-internal-transfer-window-variant-20261015.md).
+
+The new Frida Stalker tool is being used alongside REA, with different jobs:
+REA identifies exact static payloads and transfer candidates; Frida passed a
+32-bit generated-code fixture with 10,000 ordered internal call/return pairs.
+Frida has **not** been attached to AARON. The installed Frida Python API exposes
+`Device.spawn`, `attach`, and `resume`, but no AARON launch through that path has
+been attempted. Next, prepare a separate, bounded Frida observer that uses the
+existing disposable-runtime staging and fresh before/after controls. Keep it
+separate from the Windows debugger process; do not weaken the rejected exact
+window gate or claim an edge until the live trace and controls are complete.
+See the [Frida fixture record](tooling/frida-stalker-x86-smoke-20261015.md),
+[native workflow](native-analysis-workflow.md), and [active plan](execution-plan.md).
+
+### 2026-10-14 checkpoint
 
 The controlled `PICK` contract now has an explicit two-/four-argument
 extension: 16 seeds per arity, 32 positive-distinct-fixnum cases total.
@@ -43,6 +67,47 @@ other canvas regimes. REA's first static method dossiers leave their computed
 call targets unresolved. See the [active execution plan](execution-plan.md)
 for the next target and evidence gates.
 
+The PREMIUM anonymous destination now has a complete 256-byte live window
+bound to a source-matched 768×1080 triplet. REA 6.4/Ghidra 12.1.4 identified
+two computed transfers in that exact capture: `CALL [EDI+0x35f]` at
+`0x2000091a` and `JMP [ESI+0x12]` at `0x200009a4`; the provider's branch
+metadata conflicts with the bytes at `0x20000993` (`EB 85`, a relative jump
+back to the callsite). These are static candidates, not established runtime
+edges. A separate complete static constant-slot scan found one `PICK` symbol
+reference inside the PREMIUM `SELECT-SUBJECT` compiled method but no
+function-valued constant; it is not a call edge. See the [wide-window
+evidence](introspection/evidence/premium-callsite-wide-window-20261014-v3.json),
+[REA report](introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
+and [constant-slot evidence](introspection/evidence/premium-pick-constant-graph-20261014-v1.json).
+
+The Lisp-level PICK witness remains unaccepted. In the v2 observer, the witness
+reached `READY` but wrote no `COMPLETE`/`END`; there was no after-control. In
+the corrected v3 triplet, the before-control passed, but the observer produced
+a zero-byte image and no after-control. Its scene report wrote
+`END scene-state-snapshot` and later appended `MAIN-ERROR`; the trace reached
+its 1,024-event cap, so those rows cannot be assigned to the same `MAIN`
+invocation. The witness stopped at `READY` and `PREMIUM-EXIT`, with no
+`PREMIUM-ENTER`, `PICK-CALL`, or footer. This proves neither a PICK hit nor a
+no-hit. The callback's runtime `fboundp` result and the finish/report outcome
+were not logged, so the exact cause remains unresolved. See the [v3 tooling
+note](tooling-workarounds.md#premium-pick-witness-v3-had-no-footer-2026-10-14).
+
+Do not retry this Lisp witness unchanged. Its next useful diagnostic would
+record MAIN event sequence IDs, callback `fboundp`, callback entry, and callback
+return status while keeping the required footer gate. The current independent
+route is a no-TF native capture guided by REA: rediscover the live target,
+validate the exact 256-byte instruction window and signatures, then use
+hardware execute traps at candidate indirect transfers and their measured
+destinations. The two transfers in the saved window remain static candidates;
+neither has yet been confirmed as executed. Do not call the anonymous target a
+function or infer its ABI.
+
+The separate Windows WPR route was checked: its GPU profile includes kernel
+system-call and graphics providers, but does not list syscall entry/exit stack
+capture or expose the Lisp dispatch slot. No WPR trace was recorded because it
+cannot answer this caller question; see the
+[`native-analysis-workflow.md`](native-analysis-workflow.md#os-level-tracing-is-a-separate-evidence-layer).
+
 The PREMIUM method's indirect-call destination is captured in a complete
 768×1080 triplet, and a follow-up same-thread observer saw the current PICK
 entry before the original call-continuation guard. The pre-call slot held
@@ -55,9 +120,8 @@ and has no recovered function boundary; REA's bounded static query created zero
 functions. Follow-up queries tested every alternative byte start in the
 remaining skipped area and confirmed the in-window xref back to the conditional
 branch, without finding a CALL or establishing new instruction boundaries.
-The next target is a wider source-bound live read around the dynamically
-rediscovered address, then a bounded EIP trace if REA still cannot resolve the
-transfer to PICK. This adds no behavior contract. See the
+The wider-window triplet and current no-TF breakpoint route are described
+above; this earlier correlation still does not add a behavior contract. See the
 [method findings](introspection/select-subject-methods.md#premium-call-destination-and-pick-entry-correlation-2026-10-14),
 [portable correlation evidence](introspection/evidence/premium-callsite-pick-correlation-20261014-v1.json),
 [prior destination evidence](introspection/evidence/premium-callsite-destination-breakpoint-20261014-v1.json),

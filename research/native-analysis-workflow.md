@@ -65,10 +65,55 @@ return probes for NT system calls, plus a `pid` provider for user-mode process
 functions and offsets. That can answer selected OS-boundary questions and, on
 supported systems, instrument chosen user-mode addresses. It still does not
 automatically recover AARON's Lisp call graph or names for dynamically compiled
-functions. The current host reported Windows `10.0.19045.6466`, and
-`dtrace.exe` is not installed, so this task made no system tracing or tool
-installation attempt. See Microsoft's [DTrace provider documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/dtrace)
+functions. The current host reported Windows `10.0.19045.6466`; `dtrace.exe`
+is not installed.
+
+WPR is available. A read-only `wpr -profiledetails GPU` query resolves to
+`GPU.Verbose.Memory`, enables the kernel `SystemCall` keyword, and includes
+DxgKrnl, DXGI, Direct3D 11, and D3D10Level9 providers. Its listed system stack
+events are context switches, hard page faults, and sampled profiles; it does
+not list syscall entry/exit stackwalks. The profile can characterize selected
+kernel/GPU activity but does not expose the PREMIUM `[EDI+0x27]` Lisp dispatch
+slot or its in-process caller. No WPR trace session was started and no tool was
+installed. See Microsoft's [DTrace provider documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/dtrace)
 and [WPR kernel event list](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/event).
+
+## Alternative instruction-tracing methods checked, 2026-10-14
+
+The current host has no `windbg`, `windbgx`, `cdb`, `ttd`, `TTDReplay`,
+`pin`, `pin32`, `drrun`, or `frida` command, and no matching debugger directory
+or portable kit was found in the repository. The Windows 10 x64 shell is not
+elevated. WinDbg Time Travel Debugging (TTD) is a distinct future option: it
+records user-mode execution for forward/reverse replay, which could inspect the
+PREMIUM indirect call and its registers after the recording. It would still
+need the live address-to-bytes mapping for AARON's anonymous Lisp code, and the
+trace would need a bounded, dedicated output location. Microsoft documents
+[recording a TTD trace](https://learn.microsoft.com/en-us/windows-hardware/drivers/debuggercmds/time-travel-debugging-record)
+and [replaying one](https://learn.microsoft.com/en-us/windows-hardware/drivers/debuggercmds/time-travel-debugging-overview).
+No debugger was installed and no trace was recorded.
+
+Intel Pin is another separate option: its current Windows kits support IA-32
+and can instrument executed branches to record source and destination
+addresses. A narrowly filtered Pin tool could capture more of the transfer
+chain than the selected hardware breakpoints, but Pin is not installed and
+code-cache translation may alter timing. Compatibility with AARON's
+`MEM_MAPPED`/`PAGE_READWRITE` code region is unverified. If considered later,
+first run a known indirect-call 32-bit fixture, then compare fresh original
+controls before using it on AARON. See Intel's [Pin kit and platform list](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html)
+and [Pin 4.2 guide](https://software.intel.com/sites/landingpage/pintool/docs/99776/Pin/doc/html/index.html).
+
+Windows DTrace can trace selected NT syscalls and user-mode PID-provider
+functions or offsets, but `dtrace.exe` is absent here. Microsoft's current
+Windows instructions require enabling DTrace with `bcdedit` and rebooting; do
+not change boot configuration as part of an ordinary AARON probe. Intel PT is
+not exposed by this virtualized host: CPUID reports the hypervisor bit and
+clears the Intel PT capability bit. The physical host CPU may differ. The
+available WPR CPU profile is sampled rather than instruction-complete, while
+the GPU profile's syscall events have no listed syscall stackwalk. These
+methods therefore remain options for later, scoped tests; REA's exact-payload
+analysis plus the bounded no-TF hardware-breakpoint capture is the usable
+route on this host. See Microsoft's [DTrace enablement requirements](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/dtrace)
+and [Intel PT description](https://www.intel.com/content/www/us/en/support/articles/000059254/processors/intel-xeon-processors.html).
 
 For internal AARON flow, first use REA on the exact PLL-mapped payload to find
 candidate instructions and value dependencies. Then rediscover the live code
@@ -76,6 +121,38 @@ address and validate its bytes before using a bounded breakpoint capture. Add
 Process Monitor or ETW only when the investigation also needs file, registry,
 process, or other provider-reported OS activity; treat that as
 complementary evidence, not a substitute for function-level observation.
+
+## Frida Stalker x86 fixture validation, 2026-10-15
+
+Frida 17.23.3 Stalker passes a project-owned 32-bit generated-code fixture on
+this Windows host: 10,000 ordered internal call/return pairs were captured
+across 31 batches, and instrumented and uninstrumented runs returned the same
+value. The [trial report](tooling/frida-stalker-x86-smoke-20261015.md) records
+the exact scope, hashes, queue-overflow lesson, and permissions behavior; the
+[portable evidence](tooling/evidence/frida-stalker-x86-smoke-20261015.json)
+binds the tested sources and executable.
+
+This confirms the tracer can attach to an x86 fixture and follow runtime
+generated code here. AARON.exe is also a 32-bit process, but Frida has not yet
+been attached to an AARON run. The fixture does not establish AARON trace
+completeness or output parity. For native mapping, continue to use REA on the
+exact PLL payload. The current AARON live capture uses the source-bound no-TF
+hardware-breakpoint helper; do not attach Frida to that same process while the
+Windows debugger is attached. Any Frida AARON trial needs its own source-bound
+observer run with fresh uninstrumented controls and bounded, filtered output.
+
+The first no-TF attempt at the PREMIUM internal transfers reached the expected
+outer callsite but rejected the live 256-byte window hash before arming internal
+breakpoints; no after control followed. Its exact-window static REA decode is
+documented in the [variant finding](introspection/premium-internal-transfer-window-variant-20261015.md).
+The installed Frida Python API exposes `Device.spawn`, `attach`, and `resume`,
+including `cwd`/environment options, while the current local oracle runner
+launches with PowerShell `Start-Process`. The API shape has only been inspected;
+it has not yet spawned or traced AARON. The next route is a dedicated observer
+process that integrates with the disposable runtime setup, is not concurrent
+with the native debugger, and records bounded, filtered Stalker events between
+fresh uninstrumented controls. Verify the spawn/attach/resume lifecycle on the
+fixture before using it against AARON.
 
 ## FREE-PATH indirect call-site capture, 2026-10-14
 
@@ -776,15 +853,32 @@ reports the static source at +14, matching the earlier conditional branch.
 The complete hashes and scope limits are in the
 [`REA follow-up evidence`](introspection/evidence/premium-callsite-destination-window-rea-20261014-v2.json).
 
-The existing 32-byte capture still does not contain bytes at the out-of-window
-jump target. The next step is a fresh source-bound observer that reads a wider
-bounded region around the dynamically rediscovered destination, then runs REA
-on those exact bytes. If static analysis still cannot recover the route, use a
-bounded same-thread EIP trace from the anonymous destination until PICK or the
-original continuation. Revalidate current mappings and bytes before attaching,
-and retain fresh uninstrumented drawing/scene controls for the observer.
+The original 32-byte capture still does not contain the out-of-window jump
+target. A wider capture is now complete: triplet
+`premium-v2-20261014e-20261014-170512-b228b66c` rediscovered the destination
+and saved a 256-byte window at `0x20000903–0x20000a02`, with matching fresh
+controls. REA 6.4/Ghidra 12.1.4 decoded `CALL [EDI+0x35f]` at `0x2000091a` and
+`JMP [ESI+0x12]` at `0x200009a4`. At `0x20000993`, bytes `EB 85` encode a
+relative jump back to the callsite even though provider flow metadata labels
+the row as a call terminator/unconditional call. Preserve that discrepancy;
+neither candidate has been shown to execute. The independent constant-slot
+scan found a `PICK` symbol reference but no function-valued constant, so it
+does not add a call edge. See the [window evidence](introspection/evidence/premium-callsite-wide-window-20261014-v3.json),
+[REA report](introspection/evidence/premium-callsite-wide-window-rea-20261014-v3.json),
+and [constant-slot evidence](introspection/evidence/premium-pick-constant-graph-20261014-v1.json).
 
-The accepted follow-up run is
+The next internal-flow experiment is a no-TF hardware execute-breakpoint
+capture. Rediscover the target in each fresh observer, validate the complete
+256-byte window and instruction signatures before deriving site addresses,
+then capture the first-chance same-thread hardware event and its live operand.
+Temporarily trap the measured destination and enforce the CALL/JMP stack
+checks; restore all original debug state. Reject nonhits, changed bytes,
+ambiguous events, cleanup errors, or a triplet without fresh matching
+uninstrumented controls. Do not repeat the TF route after its strict
+`DR6.BS` gate rejected prior events. Preserve the anonymous target's status;
+do not infer a Lisp name, ABI, or direct PICK edge.
+
+The earlier accepted follow-up run is
 `premium-pick-v3-20261014-125028-65b3a9cc`. Its three original runs completed;
 the comparison was rebuilt offline after the PowerShell 5.1 coordinator hit a
 post-capture serializer memory blowup. The exact source snapshot and recovery
