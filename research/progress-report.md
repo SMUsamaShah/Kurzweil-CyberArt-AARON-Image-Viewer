@@ -17,6 +17,13 @@ before/observer/after controls. See the
 [repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json),
 and [seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json).
 
+REA's exact-window `xrefs` query returned `+0x90` as a static reference to the
+`+0x17` indirect CALL. The three accepted outer-destination snapshots predict
+the intervening `JC +0x99` taken, consistent with the call's bounded zero-hit.
+The branch was not observed, and selected breakpoint edges do not establish a
+continuous path. See the [prediction note](introspection/premium-loop-backedge-prediction-20261015.md)
+and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-20261015.json).
+
 | Measure | Current result | How to read it |
 |---|---:|---|
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |

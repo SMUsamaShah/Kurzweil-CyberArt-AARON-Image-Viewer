@@ -41,6 +41,13 @@ mapped PICK entry; the `+0x17` CALL again had zero hits. See the
 [seed-5678 evidence](introspection/evidence/premium-internal-transfer-seed5678-20261015.json)
 and the shared [offline deriver](tools/derive-premium-internal-transfer-triplet-evidence-v1.mjs).
 
+REA then confirmed one static xref from the `+0x90` jump back to the `+0x17`
+indirect CALL. The three accepted outer-destination register/window snapshots
+predict `JC +0x99` taken in each scene, which would bypass the backedge if the
+state stays stable until the compare. The branch was not observed. See the
+[prediction note](introspection/premium-loop-backedge-prediction-20261015.md)
+and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-20261015.json).
+
 A corrected-source rerun hit the same edge but failed clean debugger detach
 with `DebugActiveProcessStop` error 5. It is rejected and has no accepted
 after-control. The v3 coordinator now stops only the exact run-bound AARON PID
@@ -70,6 +77,9 @@ accepted captures and the `JMP [ESI+0x12]` finding. Before any new
 original-runtime run, read [`oracle.md`](oracle.md), use fresh roots and
 uninstrumented controls, and rediscover and validate the live bytes. See the
 [native workflow](native-analysis-workflow.md) and [active plan](execution-plan.md).
+Next, add a one-shot no-TF breakpoint at the `JC` source and capture the
+candidate `[EDI+0x35f]` pointer at that same state in a different scene. The
+pointer value alone will not count as an executed call.
 
 ### 2026-10-14 checkpoint
 

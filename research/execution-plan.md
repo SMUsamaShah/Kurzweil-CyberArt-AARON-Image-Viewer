@@ -936,6 +936,15 @@ Treat the zero-hit results as bounded to these scenes. Do not repeat their
 conditions; use REA branch/data-flow evidence to select another source-bound
 scene likely to exercise the loop backedge, then capture it with fresh
 before/after controls.
+REA's exact-window `xrefs` query returned the `+0x90` jump as a static source
+for `+0x17`. The accepted outer-destination states predict `JC +0x99` taken in
+all three scenes, based on `[EDI-0x65] < ESP`; this would skip the backedge if
+the state remains stable until the compare. The branch is still unobserved.
+The [prediction note](introspection/premium-loop-backedge-prediction-20261015.md)
+and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-20261015.json)
+preserve the assumptions and raw source bindings. Next, measure the branch
+directly and snapshot `[EDI+0x35f]` in a different source-bound scene to identify
+the possible call target without claiming execution.
 Read [`oracle.md`](oracle.md) first, use a fresh output root, and rediscover
 the current method, code region, and instruction bytes before attaching the
 debugger. Keep the accepted triplet and evidence immutable. This is native

@@ -16,6 +16,14 @@ bounded no-hit, not evidence that the site is unreachable. See the [same-scene
 repeat](research/introspection/evidence/premium-internal-transfer-repeat-20261015.json)
 and [seed-5678 evidence](research/introspection/evidence/premium-internal-transfer-seed5678-20261015.json).
 
+REA's xrefs query now confirms a static reference from the `+0x90` jump back to
+the `+0x17` indirect CALL. In all three accepted captures, the recorded value
+for `CMP [EDI-0x65],ESP` predicts `JC +0x99` taken, bypassing that backedge if
+the state is stable through the compare. The branch was not observed, and the
+captures do not prove a continuous path. See the
+[prediction note](research/introspection/premium-loop-backedge-prediction-20261015.md)
+and [portable evidence](research/introspection/evidence/premium-loop-backedge-prediction-20261015.json).
+
 A fresh corrected-source rerun reached the same edge but failed the clean
 debugger-detach gate with `DebugActiveProcessStop` error 5. It has no accepted
 after-control or comparison and is excluded as a replication. The three
@@ -47,6 +55,7 @@ and [AARON attach-crash evidence](research/introspection/evidence/frida-aaron-in
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
 | PREMIUM indirect CALL destination and internal edge | Three complete 768×1080 source-bound triplets across seed-1234 and seed-5678 scenes captured `[EDI+0x27]=0x20000983`; all recorded a same-thread `JMP [ESI+0x12]` edge to the freshly mapped PICK entry | The outer destination remains anonymous and its Lisp caller is unknown; the captures do not prove a continuous instruction path. `CALL [EDI+0x35f]` at `+0x17` was not hit in any run. Adds no behavior contract. |
+| PREMIUM loop-backedge branch prediction | 3/3 accepted snapshots predict `JC +0x99`; REA xrefs `+0x90` back to `+0x17` | The branch was not observed; prediction assumes captured state is stable until `CMP`. No behavior contract. |
 | AARON Frida attach attempts | 2 source-bound attempts crashed in the same `frida-agent.dll` before script load | No hook, scene completion, caller result, or after-control; the no-TF native breakpoint route remains usable. |
 | FREE-PATH indirect call-site sample | 2 of 3 selected sites hit | REA located two computed calls and their nearby branch. The same raw slot value was read at both hits, but remains unnamed and is not counted as a recovered function. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |

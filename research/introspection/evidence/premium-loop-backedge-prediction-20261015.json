@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "status": "source-bound-cross-capture-prediction; JC-outcome-not-observed",
+  "question": "Does the captured stack comparison route around the +0x90 loop-backedge and its +0x17 CALL?",
+  "reaStaticEvidence": {
+    "provider": "Ghidra 12.1.4",
+    "inputPe": "research/artifacts/rea-tools/premium-callsite-wide-window-v2-20261014-e-b228b66c/premium-callsite-wide-window-v2.synthetic.exe",
+    "inputPeSha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a",
+    "query": "xrefs 0x10001017",
+    "rawSources": [
+      "0x10001090"
+    ],
+    "normalizedSources": [
+      "0x10001090"
+    ],
+    "sourceAddress": "0x10001090",
+    "runtimeWindowStart": "0x20000903",
+    "runtimeBackedgeOffset": "+0x90",
+    "runtimeCallOffset": "+0x17",
+    "queryReport": {
+      "path": "research/artifacts/rea-tools/premium-backedge-xrefs-20261015-6805e58/premium-backedge-xrefs.json",
+      "sha256": "049231e261a05bb341ec27752762bc40e520780c1196ad623fdc18c5d675a383"
+    },
+    "invocation": {
+      "path": "research/artifacts/rea-tools/premium-backedge-xrefs-20261015-6805e58/rea-invocation.json",
+      "sha256": "c1f23772d272e20cbd2e69042c4399591a85bab294b5288a9d1da7977f3db162"
+    },
+    "originalBranchOutcomeObserved": false
+  },
+  "instructionSemantics": {
+    "cmp": {
+      "offset": "+0x8b",
+      "bytesHex": "39679b",
+      "text": "CMP dword ptr [EDI-0x65],ESP"
+    },
+    "branch": {
+      "offset": "+0x8e",
+      "bytesHex": "7209",
+      "text": "JC +0x99",
+      "condition": "CF=1",
+      "takenTarget": "+0x99"
+    },
+    "backedge": {
+      "offset": "+0x90",
+      "bytesHex": "eb85",
+      "text": "JMP +0x17"
+    },
+    "interveningStore": {
+      "offset": "+0x88",
+      "bytesHex": "894df0",
+      "text": "MOV [EBP-0x10],ECX"
+    },
+    "capturedStates": [
+      {
+        "evidence": {
+          "path": "research/introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json",
+          "sha256": "bd16093b833fcf583574c6835c7053272b15a8fbb79fa63f4f402fe1f281e4ab",
+          "tripletId": "prem-it-v3-crlf-20261015-062149-42409a0d",
+          "mode": "writer-stream-seed-1234",
+          "canvas": "768 1080 148"
+        },
+        "captureReport": {
+          "path": "research/extracted/local-oracle/external-runs/prem-it-v3-crlf-20261015-062149-42409a0d-observer/capture/aaron-premium-internal-transfer-breakpoint-v2.txt",
+          "sha256": "62e7afa932e6895ba60e37bbece079a1959fdd3256890bd4f2957499a3779ab1",
+          "threadId": 21944
+        },
+        "state": {
+          "eip": "0x20000983",
+          "edi": "0x20000985",
+          "esp": "0x06a49354",
+          "ebp": "0x06a493d8",
+          "compareAddress": "0x20000920",
+          "compareBytesHex": "40af2406",
+          "compareValue": "0x0624af40",
+          "cmpStoreAddress": "0x06a493c8",
+          "cmpStoreAliasesCompare": false,
+          "unsignedLessThan": true,
+          "predictedCarry": true,
+          "predictedJcTaken": true,
+          "branchOutcomeObserved": false,
+          "innerCallHitCount": 0,
+          "tailJumpHitCount": 1
+        }
+      },
+      {
+        "evidence": {
+          "path": "research/introspection/evidence/premium-internal-transfer-repeat-20261015.json",
+          "sha256": "c1d7545657f3c977bb46baf72c6b02b06c905e6d9ca8366519ac7d608ca7eacc",
+          "tripletId": "prem-internal-next-20261015-102743-42be241d",
+          "mode": "writer-stream-seed-1234",
+          "canvas": "768 1080 148"
+        },
+        "captureReport": {
+          "path": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/capture/aaron-premium-internal-transfer-breakpoint-v2.txt",
+          "sha256": "779a632b9c2be0c5d4d1c001e30f888f9cd60f626a5b3868210bd1d4b5646e73",
+          "threadId": 17304
+        },
+        "state": {
+          "eip": "0x20000983",
+          "edi": "0x20000985",
+          "esp": "0x06999354",
+          "ebp": "0x069993d8",
+          "compareAddress": "0x20000920",
+          "compareBytesHex": "40af1906",
+          "compareValue": "0x0619af40",
+          "cmpStoreAddress": "0x069993c8",
+          "cmpStoreAliasesCompare": false,
+          "unsignedLessThan": true,
+          "predictedCarry": true,
+          "predictedJcTaken": true,
+          "branchOutcomeObserved": false,
+          "innerCallHitCount": 0,
+          "tailJumpHitCount": 1
+        }
+      },
+      {
+        "evidence": {
+          "path": "research/introspection/evidence/premium-internal-transfer-seed5678-20261015.json",
+          "sha256": "c19e4350eca2f3ec4a05be1ec1278a251ffeec0e564923d73d498f1999e2a48e",
+          "tripletId": "prem-internal-s5678-20261015-104044-22713a85",
+          "mode": "writer-full-seed-5678",
+          "canvas": "768 1080 148"
+        },
+        "captureReport": {
+          "path": "research/extracted/local-oracle/external-runs/prem-internal-s5678-20261015-104044-22713a85-observer/capture/aaron-premium-internal-transfer-breakpoint-v2.txt",
+          "sha256": "e1ff45d51e47e59efd670ef5162704f17f3a3efd4babdd6ec9b9b93771062d74",
+          "threadId": 20348
+        },
+        "state": {
+          "eip": "0x20000983",
+          "edi": "0x20000985",
+          "esp": "0x07a59354",
+          "ebp": "0x07a593d8",
+          "compareAddress": "0x20000920",
+          "compareBytesHex": "40af2507",
+          "compareValue": "0x0725af40",
+          "cmpStoreAddress": "0x07a593c8",
+          "cmpStoreAliasesCompare": false,
+          "unsignedLessThan": true,
+          "predictedCarry": true,
+          "predictedJcTaken": true,
+          "branchOutcomeObserved": false,
+          "innerCallHitCount": 0,
+          "tailJumpHitCount": 1
+        }
+      }
+    ]
+  },
+  "interpretation": {
+    "predictedForAllThreeCapturedEntries": true,
+    "predictedRoute": "JC +0x99; the +0x90 JMP back to +0x17 is skipped under this prediction",
+    "consistency": "This prediction is consistent with the bounded zero-hit at CALL [EDI+0x35f] in these scenes.",
+    "assumptions": [
+      "The captured dword and EDI/ESP values remain stable between the outer-destination breakpoint and CMP.",
+      "The instruction sequence before CMP leaves EDI and ESP unchanged; the MOV [EBP-0x10],ECX destination was distinct from [EDI-0x65] in all three captures."
+    ],
+    "limitations": [
+      "The JC instruction was not directly observed; the derived outcome remains a prediction from captured state and static instruction bytes.",
+      "Selected hardware-breakpoint edges do not prove a continuous instruction path through CMP, JC, the backedge, or the tail jump.",
+      "The compared dword meaning is unidentified; this does not name the anonymous block or the conditional CALL target.",
+      "This adds no JavaScript behavior contract or painting parity."
+    ]
+  },
+  "provenance": {
+    "branchSnapshot": {
+      "path": "research/introspection/evidence/premium-callsite-branch-snapshot-20261015.json",
+      "sha256": "3e8380dbffdc89e3b34f4e9ad863b3c887a0f47b3446c9f4151f2a78ccdd3037"
+    },
+    "derivationScript": "research/tools/derive-premium-loop-backedge-prediction-v1.mjs",
+    "derivationScriptSha256": "fd5b42df3d5233a5b3f28cf16d08628826d3dd926abeb8d0fc27c1556e91e306"
+  }
+}

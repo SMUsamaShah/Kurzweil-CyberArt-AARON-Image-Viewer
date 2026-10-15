@@ -157,6 +157,15 @@ identify a different existing source-bound scene likely to exercise the loop
 backedge, then use fresh uninstrumented controls and rediscover the live code
 bytes.
 
+REA's exact-window xrefs query now returns runtime-window offset `+0x90` as a
+static source for `+0x17`. The three accepted outer-destination snapshots
+predict the `JC +0x99` branch taken, consistent with the bounded zero-hit at
+`+0x17`, but no runtime branch event was captured. Preserve this as a
+prediction only; see the [note](introspection/premium-loop-backedge-prediction-20261015.md)
+and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-20261015.json).
+The next capture should use another source-bound scene, break at the JC, and
+read the potential `[EDI+0x35f]` target slot at that event.
+
 The first no-TF attempt at the PREMIUM internal transfers reached the expected
 outer callsite but rejected the live 256-byte window hash before arming internal
 breakpoints; no after control followed. Its exact-window static REA decode is
