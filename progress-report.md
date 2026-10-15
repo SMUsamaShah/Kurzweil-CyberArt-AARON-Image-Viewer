@@ -3,16 +3,15 @@
 Updated 2026-10-15. This is the compact project snapshot; technical evidence
 and the running investigation history are linked below.
 
-Latest AARON investigation: one accepted 1920×1080 source-bound triplet
-reached the anonymous PREMIUM destination and stopped immediately before its
-`JC rel8 +0x09`. The live CF was 1, so the predicted target was window offset
-`+0x99` (`0x2000099c`); the successor instruction was not observed. The same
-event captured raw `[EDI+0x35f] = 0x6388bb08`, with target identity unknown.
-Fresh uninstrumented before/after controls and all artifacts matched. This
-confirms the branch condition at entry for one full-writer seed-456069 scene,
-but adds no JS contract or painting parity. See the
-[JC finding](research/introspection/premium-internal-transfer-jc-v1.md) and
-[portable evidence](research/introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json).
+Latest AARON investigation: an accepted 1920×1080 source-bound triplet
+observed the first instruction address after `JC rel8 +0x09` in the anonymous
+PREMIUM destination. CF=1 predicted window offset `+0x99` (`0x2000099c`), and
+DR3 observed that same address before its instruction with bytes `89 44 24 04`.
+The before/observer/after controls and all six drawing/scene artifacts,
+writer tape, and planning traces matched. The raw `[EDI+0x35f]` dword remains
+unidentified; no later CALL, direct Lisp caller, JS contract, or painting
+parity is established. See the [successor finding](research/introspection/premium-internal-transfer-jc-successor-v1.md)
+and [portable evidence](research/introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
 
 Earlier PREMIUM transfer result: three accepted 768×1080 source-bound no-TF triplets
 across seed-1234 writer-stream and seed-5678 full-writer scenes observed the
@@ -66,7 +65,7 @@ and [AARON attach-crash evidence](research/introspection/evidence/frida-aaron-in
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
 | PREMIUM indirect CALL destination and internal edge | Three complete 768×1080 source-bound triplets across seed-1234 and seed-5678 scenes captured `[EDI+0x27]=0x20000983`; all recorded a same-thread `JMP [ESI+0x12]` edge to the freshly mapped PICK entry | The outer destination remains anonymous and its Lisp caller is unknown; the captures do not prove a continuous instruction path. `CALL [EDI+0x35f]` at `+0x17` was not hit in any run. Adds no behavior contract. |
-| PREMIUM loop-backedge branch | One pre-JC breakpoint in a fresh full-writer seed-456069 scene recorded CF=1 at `0x20000991`; predicted target `0x2000099c` | The branch successor was not observed. Earlier three predictions used outer-destination snapshots; the raw candidate slot remains unidentified. No behavior contract. |
+| PREMIUM loop-backedge branch and successor | One source-bound seed-456069 scene observed CF=1 at `0x20000991` and the taken successor at `0x2000099c`, before execution | The bytes `89 44 24 04` match the live profile. This is one bounded native path; the candidate CALL target and direct Lisp caller remain unknown. No behavior contract. |
 | AARON Frida attach attempts | 2 source-bound attempts crashed in the same `frida-agent.dll` before script load | No hook, scene completion, caller result, or after-control; the no-TF native breakpoint route remains usable. |
 | FREE-PATH indirect call-site sample | 2 of 3 selected sites hit | REA located two computed calls and their nearby branch. The same raw slot value was read at both hits, but remains unnamed and is not counted as a recovered function. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |

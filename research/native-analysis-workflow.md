@@ -910,31 +910,37 @@ steps are recorded in the [tooling quick fixes](tooling-workarounds.md#premium-t
 
 ## PREMIUM JC successor capture
 
-Triplet `prem-jc-456069-r3-20261015-112943-78e0d290` extended the
-non-injecting route to a pre-instruction breakpoint at `JC rel8 +0x09` in a
-1920×1080 full-writer seed-456069 scene. The actual observer recorded CF=1 at
-`0x20000991` and `[EDI+0x35f]=0x6388bb08`; it stopped before JC execution.
-This validates the branch condition for that scene, not the successor or an
-executed indirect CALL. The later internal sites had no hits only because the
-capture boundary preceded them.
+The pre-instruction capture `prem-jc-456069-r3-20261015-112943-78e0d290`
+recorded CF=1 at `0x20000991` but did not observe the branch successor. Its
+follow-up, `premjcsucc3-20261015-121544-fd725a19`, used a fresh 1920×1080
+full-writer seed-456069 triplet and observed the first taken successor at
+`0x2000099c` (`+0x99`) before execution, with bytes `89 44 24 04`. The same
+thread produced the ordered outer CALL, anonymous destination, JC, and
+successor events. Six drawing/scene artifacts, five staged sources, the
+25,840,962-byte writer tape, and 21,296,429-byte before/after planning traces
+matched across the three legs.
+
+The capture validates this branch outcome in one scene, not a general branch
+rule or a later indirect CALL. `[EDI+0x35f]` still held unidentified value
+`0x6388bb08`; DR0 stopped monitoring its CALL site at the JC event. The later
+tail-JMP and outer-return guard had no hits before the bounded capture stop.
+All selected-thread debug registers were restored before a successful
+`DBG_CONTINUE`, detach succeeded, and cleanup errors were empty.
 
 REA 6.4/Ghidra 12.1.4 decoded `72 09` from a hash-pinned synthetic PE and
-reported the static target. The synthetic input was never executed; keep REA
-in the role of static navigation. The runtime window had a different full
-hash from the historical reference while all 11 instruction spans matched.
-See the [JC finding](introspection/premium-internal-transfer-jc-v1.md),
-[portable evidence](introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json),
+reported synthetic target `0x10001099`. The input was never executed; keep REA
+in the role of static navigation. The live window hash differs from its
+historical reference while all 11 pinned spans match. See the
+[successor finding](introspection/premium-internal-transfer-jc-successor-v1.md),
+[portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json),
+[pre-instruction finding](introspection/premium-internal-transfer-jc-v1.md),
 and [retained REA inputs](introspection/evidence/rea-inputs/premium-jc-20261015/).
 
-The next observer must capture the first post-JC EIP without single-stepping
-through the block. Rediscover and validate the code window in the new observer.
-At the JC event, reuse DR0 for the fallthrough instruction at window offset
-`+0x90` and DR3 for the taken target at `+0x99`; retain DR1 on the tail JMP and
-DR2 on the outer-return guard. Check register readback before resuming JC, then
-require one successor event with matching EIP, sole DR6 cause, execute-only
-DR7 settings, clear TF/DR6.BS, and matching live bytes. DR0 no longer watches
-the candidate CALL after the branch; do not claim a later CALL result. Restore
-all original debug-register state exactly before continuing the successor
-event. If the helper cannot do this fail-closed, split the work into a helper
-change and no-launch preflight before a fresh controlled triplet. Never infer
-the successor solely from CF or REA.
+The next investigation is REA-first: inspect the exact mapped
+`SCREEN-AND-STORE` payload around candidate `CALL EDI` return-use site
+`0x1fe24d12`, then inspect references around the mapped PICK. Revalidate current
+bytes before any debugger attachment. The runtime question is whether the
+caller-visible PICK result feeds the observed PREVDEX/HDEX choice in a natural
+screen unit. Treat that relationship as a hypothesis pending a fresh
+source-bound probe and holdout; preserve natural RAN draws and all established
+scene controls.

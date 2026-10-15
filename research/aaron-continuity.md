@@ -11,38 +11,37 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-15 — PREMIUM JC pre-instruction capture
+## Latest checkpoint: 2026-10-15 — PREMIUM JC successor observed
 
-Accepted source-bound triplet
-`prem-jc-456069-r3-20261015-112943-78e0d290` used the full-writer
-seed-456069 scene at `1920 1080 184`. Before, observer, and after runs
-completed; five staged sources, six drawing/scene artifacts, the 25,840,962
-byte writer tape, and planning traces matched. The three ordered native events
-were outer `CALL [EDI+0x27]` at `0x1fe4c07c`, anonymous destination
-`0x20000983`, and a breakpoint at `JC` address `0x20000991` before execution.
-The live bytes were `72 09`; CF=1 predicts the taken target at window offset
-`+0x99` (`0x2000099c`), but the successor was not observed. The raw
-`[EDI+0x35f]` dword was `0x6388bb08`, with target identity unknown. Later
-CALL/JMP breakpoints had zero hits only because capture stopped before JC;
-they are not scene-level no-hits.
+Accepted source-bound triplet `premjcsucc3-20261015-121544-fd725a19` used the
+full-writer seed-456069 scene at `1920 1080 184`. Before, observer, and after
+runs completed; all six drawing/scene artifacts, five staged sources, the
+25,840,962-byte writer tape, and 21,296,429-byte planning traces matched. Four
+ordered same-thread native events reached the anonymous PREMIUM destination,
+stopped at `JC` (`72 09`) at `0x20000991`, then observed its first taken
+successor at `0x2000099c` (`+0x99`) before that instruction executed. CF=1 and
+the captured `[EDI-0x65] < ESP` operands agree. The raw `[EDI+0x35f]` dword is
+`0x6388bb08`; target identity and the direct Lisp caller remain unknown.
 
-The exact live 256-byte window SHA differs from its historical reference while
-all 11 pinned instruction spans match. The helper restored debug state,
-detached cleanly, and reported no cleanup errors. REA decoded the JC bytes and
-static target from a synthetic PE; that input was never executed. This adds no
-JavaScript behavior contract or painting parity. See the
-[JC finding](introspection/premium-internal-transfer-jc-v1.md) and
-[portable evidence](introspection/evidence/premium-internal-transfer-jc-seed456069-20261015.json).
+The selected thread's original DR0–DR3/DR6/DR7 state was restored exactly
+before the successor event continued with `DBG_CONTINUE`. The receipt confirms
+success, the debugger detached, and cleanup errors were empty. REA decoded the
+JC bytes and static target from a hash-bound synthetic PE; that input was never
+executed. The live 256-byte window hash differs from its historical reference
+while all 11 pinned instruction spans match. Portable evidence derives
+byte-identically twice. This native result adds no JavaScript contract or
+painting parity. See the [successor finding](introspection/premium-internal-transfer-jc-successor-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
 
-Next: use REA for static navigation, then build a versioned no-TF observer
-phase that captures the first post-JC EIP in a fresh source-bound triplet. At
-the JC event reuse DR0 for fallthrough `+0x90` and DR3 for taken target `+0x99`,
-retaining DR1 on the tail JMP and DR2 on the outer-return guard. Verify the
-readback, then require one matching successor event before restoring all saved
-debug state. DR0 will no longer watch the candidate CALL after JC; preserve
-that limit. Keep before/after controls and distinguish later sites from hits.
+Next target: use REA on the exact mapped `SCREEN-AND-STORE` payload to inspect
+the `CALL EDI` return-use site around the existing candidate `0x1fe24d12` and
+xrefs around current PICK. Revalidate live addresses/bytes before any debugger
+attachment. The runtime question is whether the caller-visible PICK result
+feeds the observed PREVDEX/HDEX choice in a natural screen unit. Treat the
+candidate relationship as a hypothesis until a fresh source-bound probe and
+holdout support it; keep all existing controls and preserve natural RAN draws.
 
-## Earlier checkpoint: 2026-10-15 (superseded by JC capture below)
+## Earlier checkpoint: 2026-10-15 — pre-instruction JC state
 
 The accepted triplet `prem-it-v3-crlf-20261015-062149-42409a0d` completed all
 three source-bound runs with matching drawing/scene artifacts, staged sources,

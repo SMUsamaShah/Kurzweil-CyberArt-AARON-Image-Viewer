@@ -7,7 +7,16 @@ recovered behavior.
 
 ## Where we are
 
-Latest native caller checkpoint: three complete source-bound no-TF triplets
+Latest native checkpoint: one source-bound seed-456069 triplet observed the
+actual taken successor of `JC rel8 +0x09` before that instruction executed.
+Its before/observer/after controls match, all four ordered native events share
+one thread, and original debug state was restored before the successor event
+continued. This adds no JS behavior contract; the existing 31 routine names,
+32 bounded contracts, 1/5 milestones, and zero painting-parity counts remain
+unchanged. See the [successor finding](introspection/premium-internal-transfer-jc-successor-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
+
+Earlier native caller checkpoint: three complete source-bound no-TF triplets
 across seed-1234 writer-stream and seed-5678 full-writer scenes observed the
 anonymous PREMIUM destination's `JMP [ESI+0x12]` reaching the freshly mapped
 PICK entry. `CALL [EDI+0x35f]` at `+0x17` had zero hits in all three runs; this
@@ -59,6 +68,27 @@ milestones fully achieved by count**. Milestone 1 replays the complete writer
 stream from original-supplied decisions; it does not generate those decisions.
 Four milestones remain incomplete or not yet achieved. This does not mean 80%
 of the work or elapsed time remains.
+
+## PREMIUM JC successor native observation (2026-10-15)
+
+Triplet `premjcsucc3-20261015-121544-fd725a19` completed a matched
+before/observer/after sequence for the full-writer seed-456069 1920×1080
+scene. The observer recorded the same-thread outer CALL, anonymous destination,
+JC event, then its actual taken successor at `0x2000099c` before execution.
+CF=1 and the operand comparison agree; the live successor bytes are
+`89 44 24 04`. Six drawing/scene artifacts, five staged Lisp sources, the
+25,840,962-byte writer tape, and the 21,296,429-byte planning trace match
+across all three runs. Metadata, seven comparison source bindings, exact
+debug-state restoration, and a successful `DBG_CONTINUE` receipt pass the
+offline source-bound deriver twice byte-identically. See the
+[native finding](introspection/premium-internal-transfer-jc-successor-v1.md)
+and [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
+
+The capture ends before the successor instruction runs. The raw
+`[EDI+0x35f]` value remains unidentified, and the direct Lisp caller is
+unknown. This records one native branch outcome but does not add a behavior
+contract. Counts remain 31 routine names / 32 bounded contracts, one of five
+milestones (20% by count), and zero whole-painting parity results.
 
 ## IN-SUB-FRAME bounded predicate investigation
 

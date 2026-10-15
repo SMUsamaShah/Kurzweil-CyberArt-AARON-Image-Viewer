@@ -1,5 +1,9 @@
 # PREMIUM internal transfer pre-JC state
 
+**Historical checkpoint:** this note records the earlier stop before `JC`.
+The first post-JC successor was captured later; see the
+[successor finding](premium-internal-transfer-jc-successor-v1.md).
+
 **Status:** one complete, source-bound 1920×1080 triplet captures the
 anonymous PREMIUM destination immediately before a short conditional branch.
 The event records CF=1 and the predicted taken target, but the branch's first
@@ -46,7 +50,7 @@ different from the historical reference hash
 All 11 pinned instruction spans matched. The helper detached cleanly, restored
 all thread debug-register state exactly, and reported no cleanup errors.
 
-## Limits and next observation
+## Limits of this earlier capture
 
 This capture confirms CF=1 immediately before `JC` for one full-writer scene;
 it does not show that the instruction executed or establish its successor. It
@@ -56,14 +60,7 @@ painting parity. Earlier captures of other seed/canvas regimes predicted the
 same branch condition from an earlier outer-destination snapshot; they remain
 predictions based on state that was not sampled at the branch.
 
-Next, use a fresh source-bound triplet and a no-TF observer with a distinct
-successor phase. At the JC event, retain the current pre-branch data, then
-reuse DR0 for the fallthrough address at window offset `+0x90` and DR3 for the
-taken address at `+0x99`; keep DR1 on the tail JMP and DR2 on the outer-return
-guard. DR0 will no longer monitor the candidate CALL after the branch, so this
-capture will not establish whether that CALL executes. Require one first-chance
-successor event whose EIP and DR6 identify the actual path and whose bytes
-match the live profile. Compare the observed path with CF, restore original
-debug state exactly, and keep fresh before/after drawing and scene controls.
-Do not treat a branch prediction as a hit or the candidate dword as a function
-address.
+This earlier triplet stopped before `JC` executed. The later successor capture
+observed one first-chance taken successor and is documented separately. The
+next investigation is the unresolved PICK/PREVDEX/HDEX decision path; use REA
+on the exact mapped payloads to choose the next bounded source-bound probe.

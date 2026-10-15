@@ -1,0 +1,980 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-complete-source-bound-native-triplet; jc-successor-observed; no-JavaScript-contract",
+  "triplet": {
+    "id": "premjcsucc3-20261015-121544-fd725a19",
+    "mode": "writer-full-seed-456069",
+    "canvas": "1920 1080 184",
+    "roles": [
+      {
+        "role": "before",
+        "runId": "premjcsucc3-20261015-121544-fd725a19-before",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-before",
+        "runnerSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+        "summarySha256": "a45ec822869d4400beed54cb303306dd6cfa73ab27d906c6983fb82a3ee9a5fe",
+        "planningTrace": {
+          "bytes": 21296429,
+          "sha256": "ea64b66cbe6d5b138923ed003eee07f5fe43813f8f4c437c3c7cdc595fbbbfa1"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 992520,
+            "sha256": "fe1cc845016560ac292bf49159ce5e90c1428fe7e5aee0e1eee4ff6390032e4a"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 478,
+            "sha256": "7d31bcff4d77db6ab9bee18c430901db42615f4072f9644c143c9c390d08137e"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 25981,
+            "sha256": "379f7a31be1f3108ab841f15ca943b3ebfeb074c7fb3d622718f4d74ce9d647e"
+          },
+          "aaron-writer-full.txt": {
+            "bytes": 25840962,
+            "sha256": "878ba4246b38d8219539f351c57552cd199edb10045f9b1d60866baca599de4b"
+          },
+          "image": {
+            "bytes": 989561,
+            "sha256": "a2b3daedcf1f6a5fe14b980b5f57244ffe195337505a856bcc526e39b11059ab"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          }
+        },
+        "stagedSourceCount": 5,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          },
+          "scene-state-snapshot-writer-full-seeded-456069.cl": {
+            "bytes": 1065,
+            "sha256": "1cff45fa450e7486b8818a7b9d5d6cfa576fd71c62dcb2d56bf5ea34260d9ea2"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      },
+      {
+        "role": "observer",
+        "runId": "premjcsucc3-20261015-121544-fd725a19-observer",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-observer",
+        "runnerSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+        "summarySha256": "a0fbe968b6841cce9c625d577b10ebc18146cbd62c4be2b3459a0ccd473f5b29",
+        "planningTrace": {
+          "bytes": 21296429,
+          "sha256": "ea64b66cbe6d5b138923ed003eee07f5fe43813f8f4c437c3c7cdc595fbbbfa1"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 992520,
+            "sha256": "fe1cc845016560ac292bf49159ce5e90c1428fe7e5aee0e1eee4ff6390032e4a"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 478,
+            "sha256": "7d31bcff4d77db6ab9bee18c430901db42615f4072f9644c143c9c390d08137e"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 25981,
+            "sha256": "379f7a31be1f3108ab841f15ca943b3ebfeb074c7fb3d622718f4d74ce9d647e"
+          },
+          "aaron-writer-full.txt": {
+            "bytes": 25840962,
+            "sha256": "878ba4246b38d8219539f351c57552cd199edb10045f9b1d60866baca599de4b"
+          },
+          "image": {
+            "bytes": 989561,
+            "sha256": "a2b3daedcf1f6a5fe14b980b5f57244ffe195337505a856bcc526e39b11059ab"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          }
+        },
+        "stagedSourceCount": 5,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          },
+          "scene-state-snapshot-writer-full-seeded-456069.cl": {
+            "bytes": 1065,
+            "sha256": "1cff45fa450e7486b8818a7b9d5d6cfa576fd71c62dcb2d56bf5ea34260d9ea2"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      },
+      {
+        "role": "after",
+        "runId": "premjcsucc3-20261015-121544-fd725a19-after",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-after",
+        "runnerSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+        "summarySha256": "f767a81ee15e20b82ebcdf3eb58fc793c3b883b85187116608e9fe10b05f9f87",
+        "planningTrace": {
+          "bytes": 21296429,
+          "sha256": "ea64b66cbe6d5b138923ed003eee07f5fe43813f8f4c437c3c7cdc595fbbbfa1"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 992520,
+            "sha256": "fe1cc845016560ac292bf49159ce5e90c1428fe7e5aee0e1eee4ff6390032e4a"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 478,
+            "sha256": "7d31bcff4d77db6ab9bee18c430901db42615f4072f9644c143c9c390d08137e"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 25981,
+            "sha256": "379f7a31be1f3108ab841f15ca943b3ebfeb074c7fb3d622718f4d74ce9d647e"
+          },
+          "aaron-writer-full.txt": {
+            "bytes": 25840962,
+            "sha256": "878ba4246b38d8219539f351c57552cd199edb10045f9b1d60866baca599de4b"
+          },
+          "image": {
+            "bytes": 989561,
+            "sha256": "a2b3daedcf1f6a5fe14b980b5f57244ffe195337505a856bcc526e39b11059ab"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          }
+        },
+        "stagedSourceCount": 5,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          },
+          "scene-state-snapshot-writer-full-seeded-456069.cl": {
+            "bytes": 1065,
+            "sha256": "1cff45fa450e7486b8818a7b9d5d6cfa576fd71c62dcb2d56bf5ea34260d9ea2"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      }
+    ],
+    "controlsMatch": true,
+    "beforeAfterPlanningTraceMatch": true,
+    "comparisonSha256": "98ac16994468f30ffed7f7393c36b1f2add805023df45761bc2668ed4b682c4e",
+    "currentSourceInputs": {
+      "coordinator": {
+        "path": "research/tools/capture-premium-internal-transfer-triplet-v5.ps1",
+        "bytes": 160409,
+        "capturedSha256": "5c7029e0b62800c36db304066cf5cf3d30f04a729df40ca9b713150fe363f6bd",
+        "currentSha256": "5c7029e0b62800c36db304066cf5cf3d30f04a729df40ca9b713150fe363f6bd",
+        "matchesCapture": true
+      },
+      "probe": {
+        "path": "research/introspection/premium-callsite-metadata-v1.cl",
+        "bytes": 10825,
+        "capturedSha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3",
+        "currentSha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3",
+        "matchesCapture": true
+      },
+      "runner": {
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "bytes": 34459,
+        "capturedSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+        "currentSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+        "matchesCapture": true
+      },
+      "debuggerHelper": {
+        "path": "research/oracle/AaronPremiumInternalTransferBreakpointV4.cs",
+        "bytes": 108117,
+        "capturedSha256": "44c00f47d026a75b5dd1ade3928d50c92b05740a81130ef0371fd59822c84c60",
+        "currentSha256": "44c00f47d026a75b5dd1ade3928d50c92b05740a81130ef0371fd59822c84c60",
+        "matchesCapture": true
+      },
+      "mapper": {
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "bytes": 5906,
+        "capturedSha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+        "currentSha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49",
+        "matchesCapture": true
+      },
+      "reaStaticCensus": {
+        "path": "research/introspection/evidence/select-subject-call-census-20261014-v1.json",
+        "bytes": 36524,
+        "capturedSha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba",
+        "currentSha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba",
+        "matchesCapture": true
+      },
+      "extractedManifest": {
+        "path": "research/extracted/aaron/manifest.json",
+        "bytes": 2817,
+        "capturedSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+        "currentSha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b",
+        "matchesCapture": true
+      }
+    }
+  },
+  "observation": {
+    "boundedScene": {
+      "mode": "writer-full-seed-456069",
+      "canvas": "1920 1080 184"
+    },
+    "outerCall": {
+      "address": "0x1fe4c07c",
+      "destination": "0x20000983",
+      "destinationRemainsAnonymous": true
+    },
+    "branch": {
+      "instruction": "JC rel8 +0x09",
+      "address": "0x20000991",
+      "bytesHex": "7209",
+      "predictedTargetWindowOffset": "0x00000099",
+      "carryFlag": 1,
+      "condition": "JC-taken",
+      "reaStaticTakenTarget": {
+        "syntheticAddress": "0x10001099",
+        "runtimeAddress": "0x2000099c",
+        "evidenceOnlyForTakenCase": true
+      },
+      "cmpOperand": {
+        "instruction": "CMP [EDI-0x65],ESP",
+        "baseRegister": "EDI",
+        "baseValue": "0x20000985",
+        "offset": "-0x00000065",
+        "address": "0x20000920",
+        "bytesHex": "40af3d06",
+        "value": "0x063daf40",
+        "esp": "0x06bd9354",
+        "readError": null,
+        "instructionBytesHex": "39679b",
+        "unsignedLessThan": true,
+        "carryMatchesUnsignedComparison": true
+      },
+      "predictedSuccessorAddress": "0x2000099c",
+      "successorObserved": true,
+      "branchOutcomeObserved": true,
+      "observedSuccessorAddress": "0x2000099c",
+      "observedSuccessorWindowOffset": "0x00000099",
+      "observedSuccessorBytesHex": "89442404",
+      "observedSuccessorEventOrder": 4,
+      "observedSuccessorSlot": 3,
+      "dr0FallthroughArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x20000991",
+        "dr6": "0x00000000",
+        "dr7": "0x00000015"
+      },
+      "dr3TakenArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      },
+      "successorArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      },
+      "dr0SuccessorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000054"
+      },
+      "dr3SuccessorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000014"
+      },
+      "successorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000014"
+      },
+      "observedSuccessor": {
+        "address": "0x2000099c",
+        "windowOffset": "0x00000099",
+        "bytesHex": "89442404",
+        "site": "JC-SUCCESSOR-TAKEN",
+        "eventOrder": 4,
+        "slot": 3,
+        "armReadback": {
+          "threadId": 20008,
+          "eip": "0x20000991",
+          "esp": "0x06bd9354",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000291",
+          "dr0": "0x20000993",
+          "dr1": "0x200009a4",
+          "dr2": "0x1fe4c07f",
+          "dr3": "0x2000099c",
+          "dr6": "0x00000000",
+          "dr7": "0x00000055"
+        },
+        "disableReadback": {
+          "threadId": 20008,
+          "eip": "0x2000099c",
+          "esp": "0x06bd9354",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000291",
+          "dr0": "0x20000993",
+          "dr1": "0x200009a4",
+          "dr2": "0x1fe4c07f",
+          "dr3": "0x2000099c",
+          "dr6": "0x00000000",
+          "dr7": "0x00000014"
+        }
+      },
+      "candidateCallSlot": {
+        "instruction": "[EDI+0x35f]",
+        "address": "0x20000ce4",
+        "bytesHex": "08bb8863",
+        "rawValue": "0x6388bb08",
+        "targetIdentityEstablished": false
+      }
+    },
+    "innerCall": {
+      "instruction": "CALL [EDI+0x35f]",
+      "address": "0x2000091a",
+      "sourceBreakpointStatusAtCaptureEnd": "armed",
+      "callExecutionEstablished": false,
+      "targetIdentityEstablished": false,
+      "status": "not monitored through the JC successor event; no CALL edge or target identity is established",
+      "monitoringStatusAfterJC": "DR0 reassigned to JC successors; CALL [EDI+0x35f] no longer monitored after JC"
+    },
+    "tailJump": {
+      "instruction": "JMP [ESI+0x12]",
+      "address": "0x200009a4",
+      "status": "not-observed-before-successor-breakpoint"
+    },
+    "limitations": [
+      "This records one JC event and its first successor in one writer-full-seed-456069 scene at 1920 1080 184; it does not generalize to other seeds, scenes, or canvas regimes.",
+      "The anonymous outer destination and its direct Lisp caller remain unidentified.",
+      "The observed successor agrees with the CF-derived JC condition; the successor instruction itself was stopped before execution.",
+      "The [EDI+0x35f] value is a raw candidate slot; CALL execution and target identity are not established.",
+      "The prior CALL source breakpoint may have been repurposed after JC; its later site status is not a CALL hit or no-hit result.",
+      "Instructions and transfer sites after the observed successor remain outside this capture.",
+      "This native capture adds no JavaScript behavior contract or painting parity."
+    ]
+  },
+  "claims": {
+    "observedOuterCall": true,
+    "observedInnerCallDestinationEdge": false,
+    "observedInnerJumpDestinationEdge": false,
+    "jcConditionObservedBeforeInstruction": true,
+    "jcSuccessorObserved": true,
+    "candidateInnerCallSlotCaptured": true,
+    "tailJumpEdgeBeforeOuterContinuation": false,
+    "continuousInstructionPathProven": false,
+    "directLispCallerProven": false,
+    "candidateCallExecutionEstablished": false,
+    "candidateCallTargetIdentityEstablished": false
+  },
+  "nativeCapture": {
+    "reportPath": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-observer/capture/aaron-premium-internal-transfer-breakpoint-v4.txt",
+    "reportSha256": "0c8f9e1db49b7b6ab60247a4d562e9b53a492465510156c4b369cbdd830f2e50",
+    "readyMetadataSha256": "11b306c36404d5f3a3477727ceb4e9567f8887c1dc225fadaa9b40201b7af22c",
+    "metadataProbe": {
+      "path": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-observer/capture/aaron-premium-callsite-metadata-v1.txt",
+      "bytes": 1615,
+      "sha256": "a7d8650f4293d4d4f2f31cdf37075d4255450c83fe6e455a102647bd841252a6",
+      "readyPrefixSha256": "11b306c36404d5f3a3477727ceb4e9567f8887c1dc225fadaa9b40201b7af22c",
+      "requiredRecords": [
+        "BEGIN premium-callsite-metadata-v1",
+        "INSTALL target=SELECT-SUBJECT+PICK mode=READ-ONLY-METADATA",
+        "READY premium-callsite-metadata-v1",
+        "CAPTURE-WAIT released=T",
+        "COMPLETE execution=finished",
+        "END premium-callsite-metadata-v1"
+      ]
+    },
+    "debuggerDetached": true,
+    "cleanupErrors": [],
+    "debuggerRegistersRestored": true,
+    "debugStateRestorationsExact": true,
+    "selectedThreadRestoration": {
+      "threadId": 20008,
+      "saved": {
+        "threadId": 20008,
+        "dr0": "0x00000000",
+        "dr1": "0x00000000",
+        "dr2": "0x00000000",
+        "dr3": "0x00000000",
+        "dr6": "0x00000000",
+        "dr7": "0x00000000"
+      },
+      "restored": {
+        "threadId": 20008,
+        "dr0": "0x00000000",
+        "dr1": "0x00000000",
+        "dr2": "0x00000000",
+        "dr3": "0x00000000",
+        "dr6": "0x00000000",
+        "dr7": "0x00000000"
+      },
+      "exactMatch": true,
+      "previousSuspendCount": 0
+    },
+    "successorContinueReceipt": {
+      "successorEventRecognized": true,
+      "eventOrder": 4,
+      "threadId": 20008,
+      "slot": 3,
+      "eip": "0x2000099c",
+      "firstChance": true,
+      "restoreCompletedBeforeContinue": true,
+      "selectedOwnerRestoreExact": true,
+      "selectedOwnerRestoreRecord": {
+        "threadId": 20008,
+        "saved": {
+          "threadId": 20008,
+          "dr0": "0x00000000",
+          "dr1": "0x00000000",
+          "dr2": "0x00000000",
+          "dr3": "0x00000000",
+          "dr6": "0x00000000",
+          "dr7": "0x00000000"
+        },
+        "restored": {
+          "threadId": 20008,
+          "dr0": "0x00000000",
+          "dr1": "0x00000000",
+          "dr2": "0x00000000",
+          "dr3": "0x00000000",
+          "dr6": "0x00000000",
+          "dr7": "0x00000000"
+        },
+        "exactMatch": true,
+        "previousSuspendCount": 0
+      },
+      "continueStatus": "DBG_CONTINUE",
+      "continueCalled": true,
+      "continueSucceeded": true
+    },
+    "selectedThreadId": 20008,
+    "eventCount": 4,
+    "events": [
+      {
+        "eventOrder": 1,
+        "kind": "source-hit",
+        "site": "PREMIUM-CALL-EDI+27",
+        "slot": 0,
+        "threadId": 20008,
+        "eip": "0x1fe4c07c",
+        "registers": {
+          "threadId": 20008,
+          "eip": "0x1fe4c07c",
+          "esp": "0x06bd9358",
+          "eax": "0x202ebd5f",
+          "ebx": "0x2036a967",
+          "ecx": "0x206404e1",
+          "edx": "0x2037c94f",
+          "esi": "0x2025e9ea",
+          "edi": "0x20000985",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000202",
+          "dr0": "0x1fe4c07c",
+          "dr1": "0x00000000",
+          "dr2": "0x00000000",
+          "dr3": "0x00000000",
+          "dr6": "0xffff0ff1",
+          "dr7": "0x00000001"
+        },
+        "liveBytesHex": "ff5727",
+        "firstChance": true,
+        "exceptionEvent": {
+          "code": "0x4000001e",
+          "flags": "0x00000000",
+          "exceptionRecord": "0x0000000000000000",
+          "exceptionAddress": "0x000000001fe4c07c",
+          "parameterCount": 0,
+          "information": [],
+          "firstChance": 1,
+          "threadId": 20008
+        },
+        "operand": {
+          "baseRegister": "EDI",
+          "baseValue": "0x20000985",
+          "offset": "0x00000027",
+          "address": "0x200009ac",
+          "value": "0x20000983",
+          "bytesHex": "83090020",
+          "readError": null
+        }
+      },
+      {
+        "eventOrder": 2,
+        "kind": "destination-hit",
+        "site": "PREMIUM-outer-destination",
+        "slot": 0,
+        "threadId": 20008,
+        "eip": "0x20000983",
+        "registers": {
+          "threadId": 20008,
+          "eip": "0x20000983",
+          "esp": "0x06bd9354",
+          "eax": "0x202ebd5f",
+          "ebx": "0x2036a967",
+          "ecx": "0x206404e1",
+          "edx": "0x2037c94f",
+          "esi": "0x2025e9ea",
+          "edi": "0x20000985",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000202",
+          "dr0": "0x20000983",
+          "dr1": "0x00000000",
+          "dr2": "0x00000000",
+          "dr3": "0x00000000",
+          "dr6": "0xffff0ff1",
+          "dr7": "0x00000001"
+        },
+        "liveBytesHex": "b10283e17f8b7315894df039679b7209",
+        "firstChance": true,
+        "exceptionEvent": {
+          "code": "0x4000001e",
+          "flags": "0x00000000",
+          "exceptionRecord": "0x0000000000000000",
+          "exceptionAddress": "0x0000000020000983",
+          "parameterCount": 0,
+          "information": [],
+          "firstChance": 1,
+          "threadId": 20008
+        },
+        "targetPage": {
+          "address": "0x20000983",
+          "bytesHex": "b10283e17f8b7315894df039679b7209",
+          "bytesRead": 16,
+          "region": {
+            "baseAddress": "0x0000000020000000",
+            "allocationBase": "0x0000000020000000",
+            "regionSize": "0x0000000000004000",
+            "state": "0x00001000",
+            "protection": "0x00000004",
+            "allocationProtection": "0x00000008",
+            "type": "0x00040000"
+          }
+        },
+        "returnAddressAtEsp": {
+          "address": "0x06bd9354",
+          "bytesHex": "7fc0e41f",
+          "value": "0x1fe4c07f",
+          "readError": null
+        }
+      },
+      {
+        "eventOrder": 3,
+        "kind": "branch-hit",
+        "site": "JC+8E",
+        "slot": 3,
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "registers": {
+          "threadId": 20008,
+          "eip": "0x20000991",
+          "esp": "0x06bd9354",
+          "eax": "0x202ebd5f",
+          "ebx": "0x2036a967",
+          "ecx": "0x00000002",
+          "edx": "0x2037c94f",
+          "esi": "0x201ad0a2",
+          "edi": "0x20000985",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000293",
+          "dr0": "0x2000091a",
+          "dr1": "0x200009a4",
+          "dr2": "0x1fe4c07f",
+          "dr3": "0x20000991",
+          "dr6": "0xffff0ff8",
+          "dr7": "0x00000055"
+        },
+        "liveBytesHex": "7209",
+        "firstChance": true,
+        "exceptionEvent": {
+          "code": "0x4000001e",
+          "flags": "0x00000000",
+          "exceptionRecord": "0x0000000000000000",
+          "exceptionAddress": "0x0000000020000991",
+          "parameterCount": 0,
+          "information": [],
+          "firstChance": 1,
+          "threadId": 20008
+        },
+        "carryFlag": 1,
+        "condition": "JC-taken",
+        "predictedSuccessorAddress": "0x2000099c",
+        "branchOutcomeObserved": false,
+        "compareOperand": {
+          "instruction": "CMP [EDI-0x65],ESP",
+          "baseRegister": "EDI",
+          "baseValue": "0x20000985",
+          "offset": "-0x00000065",
+          "address": "0x20000920",
+          "bytesHex": "40af3d06",
+          "value": "0x063daf40",
+          "esp": "0x06bd9354",
+          "readError": null,
+          "instructionBytesHex": "39679b",
+          "unsignedLessThan": true,
+          "carryMatchesUnsignedComparison": true
+        },
+        "candidateCallOperand": {
+          "baseRegister": "EDI",
+          "baseValue": "0x20000985",
+          "offset": "0x0000035f",
+          "address": "0x20000ce4",
+          "value": "0x6388bb08",
+          "bytesHex": "08bb8863",
+          "readError": null
+        },
+        "candidateCallTarget": "0x6388bb08"
+      },
+      {
+        "eventOrder": 4,
+        "kind": "successor-hit",
+        "site": "JC-SUCCESSOR-TAKEN",
+        "slot": 3,
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "registers": {
+          "threadId": 20008,
+          "eip": "0x2000099c",
+          "esp": "0x06bd9354",
+          "eax": "0x202ebd5f",
+          "ebx": "0x2036a967",
+          "ecx": "0x00000002",
+          "edx": "0x2037c94f",
+          "esi": "0x201ad0a2",
+          "edi": "0x20000985",
+          "ebp": "0x06bd93d8",
+          "eflags": "0x00000293",
+          "dr0": "0x20000993",
+          "dr1": "0x200009a4",
+          "dr2": "0x1fe4c07f",
+          "dr3": "0x2000099c",
+          "dr6": "0xffff0ff8",
+          "dr7": "0x00000055"
+        },
+        "liveBytesHex": "89442404",
+        "firstChance": true,
+        "exceptionEvent": {
+          "code": "0x4000001e",
+          "flags": "0x00000000",
+          "exceptionRecord": "0x0000000000000000",
+          "exceptionAddress": "0x000000002000099c",
+          "parameterCount": 0,
+          "information": [],
+          "firstChance": 1,
+          "threadId": 20008
+        },
+        "observedSuccessorAddress": "0x2000099c",
+        "observedSuccessorWindowOffset": "0x00000099",
+        "observedSuccessorBytesHex": "89442404",
+        "expectedSuccessorBytesHex": "89442404",
+        "liveBytesMatchProfile": true,
+        "predictedSuccessorAddress": "0x2000099c",
+        "matchesCfPrediction": true,
+        "branchOutcomeObserved": true
+      }
+    ],
+    "branchObservation": {
+      "armed": true,
+      "hit": true,
+      "status": "first-jc-successor-observed-before-instruction",
+      "address": "0x20000991",
+      "carryFlag": 1,
+      "condition": "JC-taken",
+      "predictedSuccessorAddress": "0x2000099c",
+      "compareOperand": {
+        "instruction": "CMP [EDI-0x65],ESP",
+        "baseRegister": "EDI",
+        "baseValue": "0x20000985",
+        "offset": "-0x00000065",
+        "address": "0x20000920",
+        "bytesHex": "40af3d06",
+        "value": "0x063daf40",
+        "esp": "0x06bd9354",
+        "readError": null,
+        "instructionBytesHex": "39679b",
+        "unsignedLessThan": true,
+        "carryMatchesUnsignedComparison": true
+      },
+      "candidateCallOperand": {
+        "baseRegister": "EDI",
+        "baseValue": "0x20000985",
+        "offset": "0x0000035f",
+        "address": "0x20000ce4",
+        "value": "0x6388bb08",
+        "bytesHex": "08bb8863",
+        "readError": null
+      },
+      "candidateCallTarget": "0x6388bb08",
+      "branchOutcomeObserved": true,
+      "successorObserved": true,
+      "observedSuccessorAddress": "0x2000099c",
+      "observedSuccessorWindowOffset": "0x00000099",
+      "observedSuccessorBytesHex": "89442404",
+      "observedSuccessorEventOrder": 4,
+      "observedSuccessorSlot": 3,
+      "successorMatchesCfPrediction": true,
+      "exactFourEventOrderMatched": true,
+      "oneShotBreakpointDisabled": true,
+      "disableReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x2000091a",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x20000991",
+        "dr6": "0x00000000",
+        "dr7": "0x00000015"
+      },
+      "dr0FallthroughArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x20000991",
+        "dr6": "0x00000000",
+        "dr7": "0x00000015"
+      },
+      "dr3TakenArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      },
+      "successorArmReadback": {
+        "threadId": 20008,
+        "eip": "0x20000991",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      },
+      "successorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000014"
+      },
+      "dr0SuccessorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000054"
+      },
+      "dr3SuccessorDisableReadback": {
+        "threadId": 20008,
+        "eip": "0x2000099c",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000291",
+        "dr0": "0x20000993",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x2000099c",
+        "dr6": "0x00000000",
+        "dr7": "0x00000014"
+      },
+      "successorBreakpointsDisabled": true,
+      "fallthroughSuccessorAddress": "0x20000993",
+      "takenSuccessorAddress": "0x2000099c",
+      "fallthroughSuccessorExpectedBytesHex": "eb85",
+      "takenSuccessorExpectedBytesHex": "89442404",
+      "dr0ReassignedFromCandidateCallAfterJC": true,
+      "armReadback": {
+        "threadId": 20008,
+        "eip": "0x20000983",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000200",
+        "dr0": "0x2000091a",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x20000991",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      }
+    },
+    "targetWindowSha256": "fc671ca09436db97aa33edf495d8b88d60d6afa861f80e8bf322b42f4f69b0cf",
+    "historicalReferenceWindowSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+    "pinnedInstructionProfileMatches": true,
+    "nativeMapSha256": "7c2a777328573b2681d8a696c36296dd75632dbd01811e94979b369de7ac0415",
+    "nativeCaptureManifestSha256": "56ad66e71f26b382570977958f4ad84435fa1d1df47720a28b13eac733ac77eb",
+    "outerReturnGuard": {
+      "address": "0x1fe4c07f",
+      "armed": true,
+      "armReadback": {
+        "threadId": 20008,
+        "eip": "0x20000983",
+        "esp": "0x06bd9354",
+        "ebp": "0x06bd93d8",
+        "eflags": "0x00000200",
+        "dr0": "0x2000091a",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x20000991",
+        "dr6": "0x00000000",
+        "dr7": "0x00000055"
+      },
+      "hit": false,
+      "status": "armed-not-observed-before-JC-successor-capture"
+    }
+  },
+  "provenance": {
+    "comparison": "research/extracted/local-oracle/premium-internal-transfer-triplet-v5-logs/premjcsucc3-20261015-121544-fd725a19/triplet-comparison.json",
+    "reaStaticInstruction": {
+      "inputPe": "research/introspection/evidence/rea-inputs/premium-jc-20261015/premium-callsite-wide-window-v2.synthetic.bin",
+      "inputPeSha256": "88a5324f12cbab910c610327b2b667bfd4449244bb8baa54b786db4bce20be4a",
+      "seed": "research/introspection/evidence/rea-inputs/premium-jc-20261015/jc-seed.txt",
+      "seedSha256": "261088b379dd45ac8488120a847da59c2fdf599af1c22a2186c158415751e050",
+      "report": "research/introspection/evidence/rea-inputs/premium-jc-20261015/jc-instruction.json",
+      "reportSha256": "e9662323122cf8a843182f66fa71e043dfbf7ac2f4317bc8c84f93953fd81b8a",
+      "invocation": "research/introspection/evidence/rea-inputs/premium-jc-20261015/rea-invocation.json",
+      "invocationSha256": "a9598c707bb215e1ccd2588b9c2960055597b7005993521e46e559dd19c820c5"
+    },
+    "nativeMapPath": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-observer/native-code/mapped/native-code-map.json",
+    "nativeCaptureManifestPath": "research/extracted/local-oracle/external-runs/premjcsucc3-20261015-121544-fd725a19-observer/native-code/capture-manifest.json",
+    "deriverPath": "research/tools/derive-premium-internal-transfer-triplet-evidence-v3.mjs",
+    "deriverSha256": "1fcffcc53d330eb50d8c0ee2db8ea62749ba057eb509835e0a52c64d23532a3b"
+  }
+}
