@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-only-no-caller-result",
+  "finding": "Two source-bound Frida attach attempts crashed the disposable AARON process in frida-agent.dll before the observer script loaded.",
+  "tool": {
+    "name": "Frida",
+    "version": "17.23.3",
+    "agentArchitecture": "x86",
+    "agentBytes": 18276864,
+    "agentPeTimestamp": "0x6ac93a54",
+    "agentSha256": "5f27af64a26d0d65b5c1477584ffe44b6a4f421b49781fa7e8816ae2639cc741"
+  },
+  "runtime": {
+    "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+    "premiumPayloadSha256": "80c35cab667f0b8ad615ca03339ad9ada8747a45d4ceb98ce70fa4581a6636ae",
+    "pickPayloadSha256": "3da60342fde83661ce10002d659fb5a0d691932c6c2af0c071856dacf4a4a30e"
+  },
+  "attempts": [
+    {
+      "tripletId": "fridatrip-20261015-070609-b8f89b62",
+      "observerRunId": "fridatrip-20261015-070647-9b6581a7-observer",
+      "processId": 16664,
+      "applicationErrorRecordId": 13978,
+      "applicationErrorEventId": 1000,
+      "applicationErrorTimeUtc": "2026-10-15T07:06:53.5928913Z",
+      "werReportId": "40c69259-7706-4582-897b-3eace7887e75",
+      "faultingModule": "frida-agent.dll",
+      "exceptionCode": "0xc0000409",
+      "faultOffset": "0x00c0df07",
+      "observerRequestSha256": "a3fe5f3ba11580d3ec11ef2fd5fc9bb583f1c4f9275336341a16969d1c9ab367",
+      "sourceEvidenceSha256": "cb10eebc4b44de302039fcfdf0a79c89e9a166bd30f3700b793c45f7059aa657",
+      "observerDiagnosticsSha256": "c604f03a53d0dc3339d10a892fceb734c03b6de92eb1f38290440a7f9107d4a0",
+      "observerOutputRoot": "research/extracted/local-oracle/external-runs/fridatrip-20261015-070647-9b6581a7-observer",
+      "lifecycle": {
+        "attached": true,
+        "scriptLoaded": false,
+        "agentArmed": false,
+        "hookInstalled": false,
+        "sceneComplete": false,
+        "aa0Complete": false,
+        "endWritten": false
+      }
+    },
+    {
+      "tripletId": "fridatrip-20261015-070934-aa79179e",
+      "observerRunId": "fridatrip-20261015-071013-9dd54c94-observer",
+      "processId": 20332,
+      "applicationErrorRecordId": 13980,
+      "applicationErrorEventId": 1000,
+      "applicationErrorTimeUtc": "2026-10-15T07:10:20.0029005Z",
+      "werReportId": "b2b4102b-5b98-4152-aee3-96cf08c2bed7",
+      "faultingModule": "frida-agent.dll",
+      "exceptionCode": "0xc0000409",
+      "faultOffset": "0x00c0df07",
+      "observerRequestSha256": "7cca941680142a72db048a077ed3b6e2034d3db60e2f0440c2f78e46a138d834",
+      "sourceEvidenceSha256": "56c36ac56f0932b58cb1c87574ee85bb753ea366c1afc913d510a4a4d7f789a5",
+      "observerDiagnosticsSha256": "213adadf65d0941f2f0eaf69a3775bba018cd42fb6163d28310e6e557919712c",
+      "observerOutputRoot": "research/extracted/local-oracle/external-runs/fridatrip-20261015-071013-9dd54c94-observer",
+      "lifecycle": {
+        "attached": true,
+        "scriptLoaded": false,
+        "agentArmed": false,
+        "hookInstalled": false,
+        "sceneComplete": false,
+        "aa0Complete": false,
+        "endWritten": false
+      }
+    }
+  ],
+  "interpretation": "Both AARON processes faulted in the same hashed x86 Frida agent at the same exception code and offset. The observer reached the Frida attach stage, but neither script loaded nor hook armed.",
+  "limitations": [
+    "The event records establish the faulting module, exception code, and offset, not the underlying Frida defect or compatibility cause.",
+    "Neither attempt reached scene or AA0 completion, emitted the report END marker, or had an after-control; neither is a valid caller trace or behavioral observation.",
+    "This does not rule out using a different Frida build or a different host configuration; do not repeat this agent build against AARON without a material change."
+  ]
+}

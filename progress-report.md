@@ -3,16 +3,18 @@
 Updated 2026-10-15. This is the compact project snapshot; technical evidence
 and the running investigation history are linked below.
 
-Latest AARON investigation: one accepted 768×1080 source-bound triplet,
-`prem-it-v3-crlf-20261015-062149-42409a0d`, observed the anonymous PREMIUM
-destination execute `JMP [ESI+0x12]` directly to the current, uniquely mapped
-PICK entry on the same thread and unchanged ESP. The thread retained the outer
-call continuation at `[ESP]`; its guard was armed and did not fire before the
-edge. This corrects an inaccurate sentence in the captured report, whose own
-measured `tailJumpDestinationEqualsCurrentPick` field is true. The raw capture
-is preserved; the [portable evidence](research/introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json)
-and [finding](research/introspection/premium-internal-transfer-edge-v1.md)
-state the corrected interpretation.
+Latest AARON investigation: two accepted 768×1080 source-bound triplets of the
+same seed-1234 scene observed the anonymous PREMIUM destination execute
+`JMP [ESI+0x12]` to the freshly mapped PICK entry. The first capture also
+records unchanged ESP and the original outer call continuation at `[ESP]`;
+its report sentence was stale and is corrected in the
+[portable evidence](research/introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json)
+and [finding](research/introspection/premium-internal-transfer-edge-v1.md).
+The clean repeat, `prem-internal-next-20261015-102743-42be241d`, independently
+re-observed the edge in a fresh process. `CALL [EDI+0x35f]` at anonymous-window
+offset `+0x17` remained a zero-hit site in both same-scene captures; that is a
+bounded no-hit, not evidence that it is unreachable. See the
+[repeat evidence](research/introspection/evidence/premium-internal-transfer-repeat-20261015.json).
 
 A fresh corrected-source rerun reached the same edge but failed the clean
 debugger-detach gate with `DebugActiveProcessStop` error 5. It has no accepted
@@ -28,17 +30,22 @@ Tooling update: REA/Ghidra decoded calls, branches, and an indirect jump from
 the exact rejected AARON window in a synthetic PE; this remains static-only
 analysis. Frida Stalker passed both an attach fixture and a suspended-spawn
 fixture. The latter verified the 32-bit spawn/attach/resume lifecycle and
-10,000 ordered internal call/return pairs across 34 batches. Frida has not been
-attached to or used to spawn AARON. REA remains the static targeting tool, and
-the next task is a separate, source-bound AARON trace. Behavior counts and
-whole-painting parity are unchanged. See the [REA finding](research/introspection/premium-internal-transfer-window-variant-20261015.md)
-and [Frida fixture findings](research/tooling/frida-stalker-x86-smoke-20261015.md).
+10,000 ordered internal call/return pairs across 34 batches. Two source-bound
+Frida attach attempts against disposable AARON runs then crashed in the same
+`frida-agent.dll` at exception `0xc0000409`, before the script loaded or a hook
+armed. Those attempts are diagnostic-only, not caller results. Do not repeat
+this agent/runtime combination; continue with REA and the existing no-TF native
+breakpoint workflow. Behavior counts and whole-painting parity are unchanged.
+See the [REA finding](research/introspection/premium-internal-transfer-window-variant-20261015.md),
+[Frida fixture findings](research/tooling/frida-stalker-x86-smoke-20261015.md),
+and [AARON attach-crash evidence](research/introspection/evidence/frida-aaron-injection-crash-20261015.json).
 
 | Measure | Current status | What it means |
 |---|---:|---|
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
-| PREMIUM indirect CALL destination and internal edge | One accepted 768×1080 source-bound triplet captured `[EDI+0x27]=0x20000983`; a same-thread `JMP [ESI+0x12]` edge then landed at the current mapped PICK entry with unchanged ESP and `[ESP]=0x1fe4c07f` | The outer destination remains anonymous and its Lisp caller is unknown; the capture does not prove a continuous instruction path. Adds no behavior contract. |
+| PREMIUM indirect CALL destination and internal edge | Two complete 768×1080 source-bound triplets of the same seed-1234 scene captured `[EDI+0x27]=0x20000983`; both recorded a same-thread `JMP [ESI+0x12]` edge to the freshly mapped PICK entry | The outer destination remains anonymous and its Lisp caller is unknown; the captures do not prove a continuous instruction path. `CALL [EDI+0x35f]` at `+0x17` was not hit in either run. Adds no behavior contract. |
+| AARON Frida attach attempts | 2 source-bound attempts crashed in the same `frida-agent.dll` before script load | No hook, scene completion, caller result, or after-control; the no-TF native breakpoint route remains usable. |
 | FREE-PATH indirect call-site sample | 2 of 3 selected sites hit | REA located two computed calls and their nearby branch. The same raw slot value was read at both hits, but remains unnamed and is not counted as a recovered function. |
 | FREE-PATH matrix rows compared to JS | 26/30 directly comparable match; 4 mismatch; 10 unclassified | 40 captured cases total; eight use index settings the API cannot express, and two source `-0.0d0` values were captured as `+0.0`. |
 | FREE-PATH isolated one-edge stop cases | 10 captured; JS matches 4 and differs by one step in 6 | The v11 seed 456069 sample is a mismatch; step-times-wiggle matches the original counts across v8/v9/v11 only as a local replay hypothesis. |

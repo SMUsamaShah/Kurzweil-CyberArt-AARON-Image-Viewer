@@ -133,13 +133,25 @@ the exact scope, hashes, queue-overflow lesson, and permissions behavior; the
 binds the tested sources and executable.
 
 This confirms the tracer can attach to an x86 fixture and follow runtime
-generated code here. AARON.exe is also a 32-bit process, but Frida has not yet
-been attached to an AARON run. The fixture does not establish AARON trace
-completeness or output parity. For native mapping, continue to use REA on the
-exact PLL payload. The current AARON live capture uses the source-bound no-TF
-hardware-breakpoint helper; do not attach Frida to that same process while the
-Windows debugger is attached. Any Frida AARON trial needs its own source-bound
-observer run with fresh uninstrumented controls and bounded, filtered output.
+generated code here. Two later source-bound Frida 17.23.3 attach attempts on
+separate disposable AARON runs crashed in the same x86 `frida-agent.dll`
+(SHA-256 `5f27af64a26d0d65b5c1477584ffe44b6a4f421b49781fa7e8816ae2639cc741`)
+with exception `0xc0000409` at offset `0x00c0df07`. Windows Error Reporting
+confirms the faulting module; neither observer script loaded nor armed. This
+is not a no-hit or behavior result. Keep the
+[portable crash record](introspection/evidence/frida-aaron-injection-crash-20261015.json)
+and do not retry this agent/runtime combination without a material change.
+
+For native mapping, continue to use REA on the exact PLL payload. The current
+AARON live route uses the source-bound no-TF hardware-breakpoint helper; do not
+attach Frida to a process controlled by the Windows debugger. The next target
+is the REA-identified `CALL [EDI+0x35f]` in the anonymous PREMIUM destination,
+which did not execute in either accepted 768×1080 seed-1234 capture. A clean
+same-scene repeat confirmed the tail jump to the mapped PICK entry and the
+zero-hit CALL; see the [portable evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json).
+Do not rerun the identical scene. First identify an existing source-bound
+scene or seed that may exercise the branch, then use fresh uninstrumented
+controls and rediscover the live code bytes.
 
 The first no-TF attempt at the PREMIUM internal transfers reached the expected
 outer callsite but rejected the live 256-byte window hash before arming internal
@@ -147,12 +159,11 @@ breakpoints; no after control followed. Its exact-window static REA decode is
 documented in the [variant finding](introspection/premium-internal-transfer-window-variant-20261015.md).
 The installed Frida Python API exposes `Device.spawn`, `attach`, and `resume`,
 including `cwd`/environment options, while the current local oracle runner
-launches with PowerShell `Start-Process`. The API shape has only been inspected;
-it has not yet spawned or traced AARON. The next route is a dedicated observer
-process that integrates with the disposable runtime setup, is not concurrent
-with the native debugger, and records bounded, filtered Stalker events between
-fresh uninstrumented controls. Verify the spawn/attach/resume lifecycle on the
-fixture before using it against AARON.
+launches with PowerShell `Start-Process`. The fixture validated the lifecycle,
+but the two AARON attaches crashed before script load; no AARON trace was
+produced. Keep the current live route on REA plus the non-injecting no-TF
+breakpoint helper. Reconsider Frida only after a materially changed agent or
+runtime passes a fixture and its own source-bound AARON preflight.
 
 ## FREE-PATH indirect call-site capture, 2026-10-14
 

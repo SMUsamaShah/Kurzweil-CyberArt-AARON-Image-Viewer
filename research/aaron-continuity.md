@@ -24,6 +24,15 @@ capture remains untouched and a separate evidence addendum corrects the
 interpretation. See the [finding](introspection/premium-internal-transfer-edge-v1.md)
 and [portable evidence](introspection/evidence/premium-internal-transfer-triplet-v3-20261015.json).
 
+A clean repeat triplet `prem-internal-next-20261015-102743-42be241d` used the
+same seed-1234 scene and reproduced the tail-JMP destination at the current
+mapped PICK entry. All five drawing/scene artifacts, six staged sources, and
+before/after planning traces matched; debug state restored exactly and detach
+completed without cleanup errors. `CALL [EDI+0x35f]` at `+0x17` remained a
+zero-hit site in both accepted captures. See the
+[repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json)
+and its [offline derivation](tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
+
 A corrected-source rerun hit the same edge but failed clean debugger detach
 with `DebugActiveProcessStop` error 5. It is rejected and has no accepted
 after-control. The v3 coordinator now stops only the exact run-bound AARON PID
@@ -35,12 +44,23 @@ and control gates.
 REA remains the static targeting tool. Frida's attach fixture recorded 10,000
 ordered call/return pairs across 31 batches; a separate suspended-spawn fixture
 verified the spawn/attach/resume lifecycle and 10,000 pairs across 34 batches.
-Frida has **not** been attached to or used to spawn AARON. Next, continue the
-separate Frida Stalker observer using a disposable runtime, exact current code
-mappings, bounded event capture, and fresh uninstrumented before/after
-controls. Keep it separate from any Windows debugger-controlled AARON process.
-See the [Frida fixture record](tooling/frida-stalker-x86-smoke-20261015.md),
-[native workflow](native-analysis-workflow.md), and [active plan](execution-plan.md).
+Two source-bound Frida 17.23.3 attach attempts against disposable AARON runs
+then crashed `AARON.exe` in the same x86 `frida-agent.dll` image, SHA-256
+`5f27af64a26d0d65b5c1477584ffe44b6a4f421b49781fa7e8816ae2639cc741`, with
+exception `0xc0000409` at offset `0x00c0df07`. Neither observer script loaded
+nor armed its hook; both runs lack a completed scene/AA0 and after-control.
+See the [crash evidence](introspection/evidence/frida-aaron-injection-crash-20261015.json).
+Do not repeat this agent/runtime combination.
+
+Next, use REA on the exact native bytes and the non-injecting no-TF hardware
+breakpoint workflow. Both accepted same-scene seed-1234 captures missed the
+separate `CALL [EDI+0x35f]` site at anonymous-window offset `+0x17`; find an
+existing source-bound scene or seed that may exercise this branch before
+running another capture. Preserve both accepted captures and the
+`JMP [ESI+0x12]` finding. Before any new original-runtime run, read
+[`oracle.md`](oracle.md), use fresh roots and uninstrumented controls, and
+rediscover and validate the live bytes. See the
+[native workflow](native-analysis-workflow.md) and [active plan](execution-plan.md).
 
 ### 2026-10-14 checkpoint
 

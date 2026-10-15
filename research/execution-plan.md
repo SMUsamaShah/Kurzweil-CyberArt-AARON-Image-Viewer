@@ -899,7 +899,7 @@ no WPR recording was spent on this question. Keep it as an option for a later
 GPU/kernel interaction investigation; it complements rather than replaces the
 REA-guided internal capture.
 
-## Current checkpoint: Frida Stalker observer route, 2026-10-15
+## Current checkpoint: Frida AARON injection failure, native route next, 2026-10-15
 
 The earlier no-TF attempt `prem-internal-1015c-20261014-234038-b80a2004` was
 rejected at the exact 256-byte window gate. A later triplet completed and
@@ -911,22 +911,30 @@ new coordinator cleanup is owner- and diagnostic-bound; it does not lower the
 capture acceptance gate. Its no-launch preflight passed, but the early-stop
 branch has not yet been exercised by another AARON run.
 
-REA remains the static targeting tool: it decoded this exact rejected window
-through an unexecuted synthetic PE. Frida 17.23.3 separately passed the x86
-generated-code fixture with 10,000 ordered call/return pairs; it has not been
-attached to AARON. A read-only check of the installed Python API confirmed
-`Device.spawn` accepts executable arguments, environment, working directory,
-and stdio options, with separate `attach` and `resume` methods. This API check
-does not demonstrate an AARON launch or trace.
+REA remains the static targeting tool: it decoded the exact rejected window
+through an unexecuted synthetic PE. Frida 17.23.3 passed its x86 generated-code
+fixture with 10,000 ordered call/return pairs, but two source-bound attach
+attempts against separate disposable AARON runs crashed in the same
+`frida-agent.dll` image. Windows Application Error records show exception
+`0xc0000409` at offset `0x00c0df07`; neither script loaded or armed. The
+[portable diagnostic](introspection/evidence/frida-aaron-injection-crash-20261015.json)
+binds both requests and reports. Do not repeat this agent/runtime combination.
+The no-launch path and process-path workaround are in
+[tooling quick fixes](tooling-workarounds.md#preserve-the-launch-path-when-a-child-process-exits-quickly-2026-10-15)
+and [the Frida crash note](tooling-workarounds.md#frida-agent-crashes-aaron-before-the-script-loads-2026-10-15).
 
-Next, continue the dedicated Frida observer path on a **separate** AARON run,
-using the existing disposable runtime and captured environment. The 32-bit
-generated-code fixture already verified the spawn/attach/resume sequence and
-10,000 ordered call/return pairs. For AARON, trace a bounded thread and filter
-events to freshly rediscovered, source-mapped code regions and REA-selected
-transfer sites. Do not attach Frida to a process being controlled by the
-Windows debugger. Require complete source/runtime identities, fresh
-uninstrumented before/after controls, event caps and a completeness footer,
-matching drawing/scene artifacts, and matching staged sources. If any gate
-fails, report the attempt as incomplete. The accepted tail edge adds no
-JavaScript contract or painting parity.
+Next, continue with REA and the existing non-injecting no-TF hardware
+breakpoint workflow. The accepted seed-1234 triplet captured the anonymous
+PREMIUM destination's tail-JMP to the current PICK entry. Its separate
+`CALL [EDI+0x35f]` site at anonymous-window offset `+0x17` did not execute.
+A clean second complete source-bound triplet of the same seed-1234 scene
+reproduced the tail edge and also recorded zero hits at that CALL. See the
+[repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json)
+and its [offline derivation](tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
+Do not repeat that exact seed/scene; locate an existing source-bound scene or
+seed that may exercise the unresolved transfer, then capture it with fresh
+before/after controls.
+Read [`oracle.md`](oracle.md) first, use a fresh output root, and rediscover
+the current method, code region, and instruction bytes before attaching the
+debugger. Keep the accepted triplet and evidence immutable. This is native
+caller investigation only; it adds no JavaScript contract or painting parity.

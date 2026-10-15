@@ -7,6 +7,13 @@ recovered behavior.
 
 ## Where we are
 
+Latest native caller checkpoint: two complete source-bound no-TF triplets of
+the same 768×1080 seed-1234 scene observed the anonymous PREMIUM destination's
+`JMP [ESI+0x12]` reaching the freshly mapped PICK entry. The separate
+`CALL [EDI+0x35f]` site at `+0x17` had zero hits in both runs, which is only a
+bounded no-hit for this scene. See the [finding](introspection/premium-internal-transfer-edge-v1.md)
+and [repeat evidence](introspection/evidence/premium-internal-transfer-repeat-20261015.json).
+
 | Measure | Current result | How to read it |
 |---|---:|---|
 | AARON Lisp function bindings inventoried | 1,347 unique names | Two completed snapshots contain 2,694 records with `FBOUNDP` true in `COMMON-GRAPHICS-USER`, including accessors and UI/host routines. This is not 1,347 recovered algorithms. |
@@ -861,11 +868,26 @@ an earlier rejected sample; the changes avoid the three instruction spans
 decoded by REA, but their cause is unknown. Do not label them relocations or
 benign data. REA/Ghidra decoded the exact rejected bytes in an unexecuted
 synthetic PE; this yielded static instruction decodes only. Frida's successful
-32-bit fixture is separate and Frida has not attached to AARON. The 31-name /
-32-contract counts, 1/5 milestone count, and zero whole-painting parity remain
-unchanged. See the [portable evidence](introspection/evidence/premium-internal-transfer-window-variant-20261015.json),
+32-bit fixture is separate; the later source-bound AARON attach attempts failed
+as documented below. The 31-name / 32-contract counts, 1/5 milestone count,
+and zero whole-painting parity remain unchanged. See the [portable evidence](introspection/evidence/premium-internal-transfer-window-variant-20261015.json),
 [finding](introspection/premium-internal-transfer-window-variant-20261015.md),
 and [Frida fixture result](tooling/frida-stalker-x86-smoke-20261015.md).
+
+## 2026-10-15 Frida AARON attach crash
+
+Two fresh source-bound observer attempts reached READY and mapped the current
+PREMIUM/PICK objects, then crashed `AARON.exe` in the same x86 `frida-agent.dll`
+before its script loaded or the hook armed. Windows Application Error records
+13978 and 13980 report exception `0xc0000409` at offset `0x00c0df07`; the
+agent image hash matches across both runs. Neither attempt completed a scene,
+AA0, report END, or after-control. This is a repeatable instrumentation failure,
+not caller or behavior evidence. Stop using this Frida agent/runtime
+combination and continue through the REA-targeted no-TF native path. The
+function/contract counts, 1/5 milestone count, and whole-painting parity remain
+unchanged. See the [portable crash evidence](introspection/evidence/frida-aaron-injection-crash-20261015.json),
+[tooling workaround](tooling-workarounds.md#frida-agent-crashes-aaron-before-the-script-loads-2026-10-15),
+and [active execution plan](execution-plan.md).
 
 ## Links
 

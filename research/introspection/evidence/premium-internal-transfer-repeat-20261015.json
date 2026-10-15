@@ -1,0 +1,332 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-complete-source-bound-repeat; no-new-behavior-contract",
+  "triplet": {
+    "id": "prem-internal-next-20261015-102743-42be241d",
+    "mode": "writer-stream-seed-1234",
+    "canvas": "768 1080 148",
+    "roles": [
+      {
+        "role": "before",
+        "runId": "prem-internal-next-20261015-102743-42be241d-before",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-before",
+        "runnerSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+        "summarySha256": "0b1bbfa33e4d41e60466d787ba9ffa8829cebaaff9351e139a9f670253cfe4c8",
+        "planningTrace": {
+          "bytes": 21295296,
+          "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 426587,
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+          },
+          "image": {
+            "bytes": 424205,
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "stagedSourceCount": 6,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      },
+      {
+        "role": "observer",
+        "runId": "prem-internal-next-20261015-102743-42be241d-observer",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer",
+        "runnerSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+        "summarySha256": "5b43cada7ee667a70348f3c09f0794d8aca7a5aee3962fb86d5ef595d2260213",
+        "planningTrace": {
+          "bytes": 21295296,
+          "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 426587,
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+          },
+          "image": {
+            "bytes": 424205,
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "stagedSourceCount": 6,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      },
+      {
+        "role": "after",
+        "runId": "prem-internal-next-20261015-102743-42be241d-after",
+        "complete": true,
+        "root": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-after",
+        "runnerSha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c",
+        "summarySha256": "ed13873d49ee20664692d3fdd99063afa031958eb60b08a5cd5a7a5f3c5cfe2f",
+        "planningTrace": {
+          "bytes": 21295296,
+          "sha256": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6"
+        },
+        "artifacts": {
+          "aa0": {
+            "bytes": 426587,
+            "sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a"
+          },
+          "image": {
+            "bytes": 424205,
+            "sha256": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e"
+          },
+          "image-id": {
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+          },
+          "aaron-scene-state-snapshot.txt": {
+            "bytes": 26120,
+            "sha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+          },
+          "aaron-random-seed-loaded.txt": {
+            "bytes": 476,
+            "sha256": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551"
+          }
+        },
+        "stagedSourceCount": 6,
+        "sources": {
+          "planning-call-trace.cl": {
+            "bytes": 23059,
+            "sha256": "55317d147b807c236075a44fd4b6e1321949f36c4fa2e5e11cc17f41661bbea6"
+          },
+          "planning-random-seed-common.cl": {
+            "bytes": 20476,
+            "sha256": "a59905e1e5aab24d12645691d98fc463087c04ab467e6cf55b9475e912ee8e8b"
+          },
+          "scene-state-snapshot-seeded-1234.cl": {
+            "bytes": 847,
+            "sha256": "9eeda3d6d9bcddcdaa38f415d1121f7713c976347d9eca400f204ad8342d600a"
+          },
+          "scene-state-snapshot-writer-seeded-1234.cl": {
+            "bytes": 579,
+            "sha256": "f05a90f7470165b8da3a770817f2d3b1c6138c66a068e97fdd1ac1366268c0fc"
+          },
+          "scene-state-snapshot-writer-stream-seeded-1234.cl": {
+            "bytes": 401,
+            "sha256": "5202d300f6d3f27354eea0dad96ea22a403152ee06ec5e0e3372c5723515e7d4"
+          },
+          "scene-state-snapshot.cl": {
+            "bytes": 45007,
+            "sha256": "42f8e4a4e151047f861af8bd7da085efb9ebde5c72d03c78c32efdc40a28c7e3"
+          }
+        },
+        "runtime": {
+          "AARON.exe": {
+            "bytes": 36864,
+            "sha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d"
+          },
+          "AARON.pll": {
+            "bytes": 4573464,
+            "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c"
+          }
+        }
+      }
+    ],
+    "controlsMatch": true,
+    "beforeAfterPlanningTraceMatch": true,
+    "comparisonSha256": "9dd164b5f340ed8f7487f14c7c615c803b1a5ac480aff426557cf90c9772eab7",
+    "currentSourceInputs": {
+      "coordinator": {
+        "path": "research/tools/capture-premium-internal-transfer-triplet-v3.ps1",
+        "bytes": 135998,
+        "sha256": "7a16d97a04b34fca4bb5a484e9328497a24bbf895549b34431500d8f0a95276a"
+      },
+      "probe": {
+        "path": "research/introspection/premium-callsite-metadata-v1.cl",
+        "bytes": 10825,
+        "sha256": "db05f2004401c6718ffaf6aa8b00bed04300932e4ec98ea6bf24d1d7474088d3"
+      },
+      "runner": {
+        "path": "research/oracle/run-local-scene-state-required-probe.ps1",
+        "bytes": 33992,
+        "sha256": "ba4990e928b5facdf9d01c4a4b7b60173829f6554383a39b8951daf75416c08c"
+      },
+      "debuggerHelper": {
+        "path": "research/oracle/AaronPremiumInternalTransferBreakpointV2.cs",
+        "bytes": 74825,
+        "sha256": "6630b8873eb58495455e6ec5a8bfddc4648f37118f4affa1efe2458120a97a6c"
+      },
+      "mapper": {
+        "path": "research/tools/map-native-code-to-pll.mjs",
+        "bytes": 5906,
+        "sha256": "5e801be689ff5f682360d4c078356966d6ae7c4401f28f84ab1ecc04b36c1e49"
+      },
+      "reaStaticCensus": {
+        "path": "research/introspection/evidence/select-subject-call-census-20261014-v1.json",
+        "bytes": 36524,
+        "sha256": "a4a7ff000e5f830c06777fc2c62f1875c282d465f79f71aae667c4efbcac07ba"
+      },
+      "extractedManifest": {
+        "path": "research/extracted/aaron/manifest.json",
+        "bytes": 2817,
+        "sha256": "dafbb62cc06a8f42c5a5880ecdb0aad730cc1d62da01de667d3664d94c9ec22b"
+      }
+    }
+  },
+  "observation": {
+    "outerCall": {
+      "address": "0x1fe4c07c",
+      "destination": "0x20000983",
+      "destinationRemainsAnonymous": true
+    },
+    "innerCall": {
+      "instruction": "CALL [EDI+0x35f]",
+      "address": "0x2000091a",
+      "hitCount": 0,
+      "destinationHitCount": 0
+    },
+    "tailJump": {
+      "instruction": "JMP [ESI+0x12]",
+      "address": "0x200009a4",
+      "hitCount": 1,
+      "destination": "0x1fe00e8c",
+      "currentMappedPickEntry": "0x1fe00e8c",
+      "sameThread": true
+    },
+    "limitations": [
+      "This repeats the same 768x1080 seed-1234 scene and does not test another scene, seed, or canvas regime.",
+      "The anonymous outer destination and its direct Lisp caller remain unidentified.",
+      "The capture observes selected breakpoint edges, not a continuous instruction path.",
+      "The zero-hit CALL is a bounded no-hit in this scene only; it is not evidence that the site is unreachable.",
+      "The repeated native edge adds no JavaScript behavior contract or painting parity."
+    ]
+  },
+  "nativeCapture": {
+    "reportPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/capture/aaron-premium-internal-transfer-breakpoint-v2.txt",
+    "reportSha256": "779a632b9c2be0c5d4d1c001e30f888f9cd60f626a5b3868210bd1d4b5646e73",
+    "readyMetadataSha256": "11b306c36404d5f3a3477727ceb4e9567f8887c1dc225fadaa9b40201b7af22c",
+    "debuggerDetached": true,
+    "cleanupErrors": [],
+    "debuggerRegistersRestored": true,
+    "debugStateRestorationsExact": true,
+    "selectedThreadId": 17304,
+    "eventCount": 4,
+    "targetWindowSha256": "2889e6606367fb59b2b6fc36c0a027a8be9d7118b0b0bf7c415f56d6c4e37487",
+    "historicalReferenceWindowSha256": "39463cf987721fcc34745e23dbc3e9baab215baf05f9971ee94537446bff8abd",
+    "pinnedInstructionProfileMatches": true,
+    "nativeMapSha256": "1fed16919f68dd8d79162066b1deeab0f7e2bb7001bb9efd004e2b69ce85ff8c",
+    "nativeCaptureManifestSha256": "0882cef7dec5188eadad6bf8ba2a431b3adef263e2c3908cba70a491f6a100bb",
+    "outerReturnGuard": {
+      "address": "0x1fe4c07f",
+      "armed": true,
+      "armReadback": {
+        "threadId": 17304,
+        "eip": "0x20000983",
+        "esp": "0x06999354",
+        "ebp": "0x069993d8",
+        "eflags": "0x00000200",
+        "dr0": "0x2000091a",
+        "dr1": "0x200009a4",
+        "dr2": "0x1fe4c07f",
+        "dr3": "0x00000000",
+        "dr6": "0x00000000",
+        "dr7": "0x00000015"
+      },
+      "hit": false,
+      "status": "not-hit-before-accepted-tail-edge"
+    }
+  },
+  "provenance": {
+    "comparison": "research/extracted/local-oracle/premium-internal-transfer-triplet-v3-logs/prem-internal-next-20261015-102743-42be241d/triplet-comparison.json",
+    "nativeMapPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/native-code/mapped/native-code-map.json",
+    "nativeCaptureManifestPath": "research/extracted/local-oracle/external-runs/prem-internal-next-20261015-102743-42be241d-observer/native-code/capture-manifest.json"
+  }
+}

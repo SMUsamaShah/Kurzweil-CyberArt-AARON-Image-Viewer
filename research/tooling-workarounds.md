@@ -1126,6 +1126,129 @@ After this cleanup change, the no-launch preflight passed. The early-stop path
 has not yet been exercised by another AARON run; the failed run above still
 waited through the full limit because it predates the change.
 
+### Strict-mode exit status after PowerShell helper calls, 2026-10-15
+
+`$LASTEXITCODE` is set by native executables, not by a PowerShell `.ps1`
+script. Under `Set-StrictMode -Version Latest`, reading it after invoking a
+PowerShell helper that has not run a native executable raises “The variable
+`$LASTEXITCODE` cannot be retrieved because it has not been set.” The Frida
+observer coordinator made this mistake after calling
+`prepare-local-aaron-oracle-run.ps1`; its earlier `-PreflightOnly` path did not
+exercise the root-preparation helper, so the bug escaped that check.
+
+The observer coordinator now accepts only the helper's one returned fresh
+path and its no-launch preflight calls that same helper with a unique run ID,
+then confirms the output root was not created. The serial triplet wrapper
+invokes native child processes synchronously and reads `$LASTEXITCODE`
+immediately after each native call. Do not test `.ps1` success using
+`$LASTEXITCODE`; allow terminating errors to propagate and validate the
+expected output.
+
+The first wrapper attempt completed a fresh before-control, then rejected it
+because its `Start-Process` result exposed an empty exit-code value. That root
+is preserved but was not used in a triplet. The synchronous wrapper completed
+a second before-control, then stopped before launching its Frida observer at
+the nested helper bug above. It left no AARON process and no reserved
+`C:\temp` files; both incomplete triplet attempts and their complete control
+roots remain under ignored `research/extracted/local-oracle/`. Neither attempt
+is behavioral evidence.
+
+The no-launch triplet preflight now checks the observer helper, the control
+runner, current REA-bound `FF 57 27` bytes, Frida imports/self-test, staging
+write/read/delete, available disk space, empty reserved paths, and no active
+AARON process. Re-run it with a fresh short prefix before an oracle triplet:
+
+```powershell
+powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass `
+  -File research\tools\capture-premium-pick-frida-triplet-v1.ps1 `
+  -PreflightOnly -RunPrefix fridapre
+```
+
+Only `status=preflight-ok` with `oracleLaunched=false` permits the next step.
+
+### Preserve the launch path when a child process exits quickly, 2026-10-15
+
+Triplet attempt `fridatrip-20261015-070609-b8f89b62` completed its before
+control, then failed during the Frida observer leg. The observer reached
+source-bound READY and mapped the current PREMIUM and PICK PLL objects, but its
+driver did not report an armed hook. The retained
+`C:\temp\aaron-frida-observers\fridatrip-20261015-070647-9b6581a7` diagnostics
+show `TransportError: the connection is closed`, with no agent message, no
+scene or AA0 completion, and no report END. There is no caller result from this
+attempt; no after control ran.
+
+The coordinator surfaced a malformed-path error while handling the child
+failure. A quick local process check confirmed that Windows PowerShell's
+`Start-Process` object can return an empty `.Path` after that process exits;
+`[IO.Path]::GetFullPath('')` then throws and can obscure the original driver
+failure. The observer coordinator now records the already normalized executable
+path passed to `Start-Process` for both its Python driver and PowerShell runner.
+Cleanup still checks the live process ID, start time, and actual image path
+before terminating an active child. If the process already exited, cleanup
+returns without querying its path.
+
+The empty `.Path` behavior is confirmed; it is not yet confirmed that it caused
+the first driver's connection failure. The changed coordinator removes that
+diagnostic failure mode. The subsequent fresh run exposed the repeated AARON
+injection crash documented below. Keep both failed roots and diagnostics: they
+include complete before controls, READY mappings, and incomplete observer
+records. Do not promote them to a triplet or caller finding. No AARON process
+or reserved `C:\temp` staging files remained after cleanup.
+
+### Frida agent crashes AARON before the script loads, 2026-10-15
+
+Two fresh, source-bound observer runs crashed the disposable AARON process
+while Frida was attaching. Windows Application Error records 13978 and 13980
+show `AARON.exe` faulting in the same x86 `frida-agent.dll` image, SHA-256
+`5f27af64a26d0d65b5c1477584ffe44b6a4f421b49781fa7e8816ae2639cc741`, with
+exception `0xc0000409` at offset `0x00c0df07`. The runs used Frida 17.23.3 and
+the same source-bound `AARON.exe`, PREMIUM payload, and PICK payload. In both
+reports, Frida attached to the process, but the agent script did not load, no
+hook armed, and no scene, AA0, or report END completed.
+
+The triplet IDs are `fridatrip-20261015-070609-b8f89b62` and
+`fridatrip-20261015-070934-aa79179e`. The source-bound requests and observer
+diagnostics remain in the per-run `C:\temp\aaron-frida-observers` folders;
+both incomplete output roots and the two Windows Error Reporting records are
+preserved. The compact record is
+[`frida-aaron-injection-crash-20261015.json`](introspection/evidence/frida-aaron-injection-crash-20261015.json).
+
+Treat this as a repeatable failure of this Frida agent build on this AARON
+runtime, not as a no-hit or a Lisp behavior observation. The event records
+identify the crashing module and offset but do not establish the underlying
+Frida defect. Do not repeat this injection route without changing the agent
+build or host/runtime conditions. Both PowerShell coordinators and the Python
+driver now refuse an actual AARON attach by default; their no-launch
+preflight/self-test paths remain available. The explicit
+`-AllowAARONInjectionAfterCrash` / `--allow-aaron-injection-after-crash`
+overrides are only for a materially changed and validated agent/runtime
+configuration. Continue native caller work with REA's exact payload mapping
+and the existing no-TF hardware-breakpoint path; it does not inject
+`frida-agent.dll` into AARON.
+
+### PowerShell resolves `python` to a nonstandard launcher, 2026-10-15
+
+In this workspace, `Get-Command python -All` lists `C:\cosmos\python` first.
+Calling that command with the Frida observer script returned without running
+it, leaving `$LASTEXITCODE` empty and making the guard check look like a
+failure. An installed interpreter is also available at
+`C:\Users\Aroosa\AppData\Local\Programs\Python\Python312\python.exe`.
+Resolve and invoke an actual `python.exe` explicitly when a script's result
+matters:
+
+```powershell
+$PythonExe = (Get-Command python.exe -All |
+    Where-Object { $_.Source -like '*\Python312\python.exe' } |
+    Select-Object -First 1 -ExpandProperty Source)
+if (-not $PythonExe) { throw 'Python 3.12 interpreter not found' }
+& $PythonExe research\tools\frida-aaron-premium-callsite-observer.py --self-test
+$PythonExitCode = $LASTEXITCODE
+```
+
+The observer's no-attach self-test and its default post-crash refusal (exit 2)
+both ran correctly through the explicit interpreter. This command-resolution
+issue is separate from AARON or `C:\temp` permissions.
+
 ## Discoverability
 
 This page is linked from the [execution plan](execution-plan.md) and

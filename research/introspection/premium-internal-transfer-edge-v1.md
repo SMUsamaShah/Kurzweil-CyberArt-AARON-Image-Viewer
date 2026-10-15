@@ -1,7 +1,8 @@
 # PREMIUM internal transfer reaches the current PICK entry
 
-**Status:** one accepted, complete source-bound 768×1080 seed-1234 triplet.
-This records a native CPU edge; it does not add a JavaScript behavior contract.
+**Status:** two accepted, complete source-bound 768×1080 triplets of the same
+seed-1234 scene. These record native CPU edges; they do not add a JavaScript
+behavior contract.
 
 ## Measurement
 
@@ -52,6 +53,25 @@ could not be independently reconstructed from the edited working copy. The
 derivation records this source-history limitation instead of claiming a
 current-source hash match.
 
+## Clean same-scene repeat
+
+Triplet `prem-internal-next-20261015-102743-42be241d` completed fresh
+before/observer/after runs with matching five drawing/scene artifacts, six
+staged scene sources, and before/after planning traces. The helper detached,
+restored debug-register state exactly, and reported no cleanup errors. The
+observer again measured the same outer call destination and a same-thread
+`JMP [ESI+0x12]` edge to the freshly mapped PICK entry. Its `CALL [EDI+0x35f]`
+breakpoint at `0x2000091a` had zero hits; the tail-jump source and destination
+each had one hit. See the [repeat evidence](evidence/premium-internal-transfer-repeat-20261015.json),
+derived by the [offline validator](../tools/derive-premium-internal-transfer-repeat-evidence-v1.mjs).
+
+This repeat uses the same seed and scene as the first capture. It confirms the
+measured edge in a fresh accepted triplet but does not expand scene, seed, or
+canvas coverage. The zero-hit CALL remains a bounded no-hit, not an
+unreachable-code conclusion. The clean accepted run also shows the normal
+detach path; the coordinator's owner-bound recovery branch for the previously
+rejected detach error remains unexercised.
+
 A fresh corrected-source rerun,
 `prem-it-v3-final-20261015-062543-6f3ff028`, reached the same tail edge but
 failed the clean-detach gate: `DebugActiveProcessStop` returned error 5. Its
@@ -74,8 +94,17 @@ contract, or painting parity. The project counts remain 1,347 inventoried
 binding names, 31 routine names / 32 bounded JS contracts, 1/5 milestones by
 count, and zero complete whole-painting parity results.
 
-Next, keep REA as the static targeting tool and continue the separate Frida
-Stalker route on a fresh disposable AARON process. Filter the bounded live trace
-to the exact mapped PREMIUM and PICK regions and the REA-selected transfer
-sites, and retain complete before/observer/after controls. Do not attach Frida
-to a process controlled by the Windows debugger.
+Frida is not a usable live route for this AARON runtime with the tested agent
+build. Two source-bound attach attempts crashed in the same `frida-agent.dll`
+before script load, with exception `0xc0000409` at offset `0x00c0df07`. See the
+[crash evidence](evidence/frida-aaron-injection-crash-20261015.json) and
+[tooling note](../tooling-workarounds.md#frida-agent-crashes-aaron-before-the-script-loads-2026-10-15).
+
+Next, keep REA as the static targeting tool and use the existing non-injecting
+no-TF hardware-breakpoint route to investigate the separate `CALL [EDI+0x35f]`
+at anonymous-window offset `+0x17`. It was not hit in either accepted
+seed-1234 triplet, so do not repeat that exact seed/scene. First locate an
+existing source-bound scene or seed that may exercise the branch; rediscover
+and verify the live addresses and bytes, then retain fresh uninstrumented
+controls. Keep both accepted triplets immutable; do not infer a function name
+or ABI from a captured destination alone.
