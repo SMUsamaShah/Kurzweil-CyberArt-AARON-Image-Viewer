@@ -33,13 +33,20 @@ byte-identically twice. This native result adds no JavaScript contract or
 painting parity. See the [successor finding](introspection/premium-internal-transfer-jc-successor-v1.md)
 and [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
 
-Next target: use REA on the exact mapped `SCREEN-AND-STORE` payload to inspect
-the `CALL EDI` return-use site around the existing candidate `0x1fe24d12` and
-xrefs around current PICK. Revalidate live addresses/bytes before any debugger
-attachment. The runtime question is whether the caller-visible PICK result
-feeds the observed PREVDEX/HDEX choice in a natural screen unit. Treat the
-candidate relationship as a hypothesis until a fresh source-bound probe and
-holdout support it; keep all existing controls and preserve natural RAN draws.
+The new static PICK dossier records the exact machine predicate following its
+computed `CALL EDI`: `(AL & 3) != 0` or signed overflow from 32-bit `EAX - 4`.
+The call target is unresolved and no runtime branch was observed. See the
+[REA finding](introspection/rea-payload-analysis.md#pick-branch-and-computed-call-flow-2026-10-15)
+and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.json).
+
+Next: complete offline portable evidence for the retained REA
+`SCREEN-AND-STORE` function report at `0x1fe24a6c`, especially the `CALL EDI`
+return-use site at `0x1fe24d12`. Static flow shows its EAX result is saved and
+reloaded; a conditional later computed call can replace EAX before the low-tag
+checks. This does not identify either callee or a Lisp caller. Then implement
+a separate no-TF live capture helper. Re-derive live addresses and validate
+complete payload bytes before attaching a debugger; preserve fresh
+before/observer/after controls and natural RAN draws.
 
 ## Earlier checkpoint: 2026-10-15 — pre-instruction JC state
 

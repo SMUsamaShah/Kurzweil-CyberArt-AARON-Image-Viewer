@@ -352,3 +352,32 @@ This pins an unresolved computed-call boundary in the isolated static payload;
 it does not identify a runtime callee, establish that the site executes, or
 resolve a direct Lisp caller. The generated PE was not executed, and the
 archived entry address remains static context.
+
+## PICK branch and computed-call flow, 2026-10-15
+
+REA 6.4.0 / Ghidra 12.1.4 analyzed a synthetic PE containing the exact mapped
+114-byte `PICK` payload (SHA-256
+`3da60342fde83661ce10002d659fb5a0d691932c6c2af0c071856dacf4a4a30e`). The
+complete 118-byte object uniquely matches the original PLL at offset 2,494,088.
+The generated 4,608-byte PE was queried statically and never executed. The
+seeded `PICK` function label is an analyst assertion; `0x1fe00e8c` is archived
+static mapping context, not a current live address. The inferred Ghidra body is
+105 bytes, nine bytes shorter than the payload.
+
+The body contains `CALL EDI` at `0x1fe00eba`, followed by `TEST AL,3` and
+`JNZ 0x1fe00ee8`; the other path subtracts 4 from EAX and branches to the same
+destination on signed overflow (`JO`). The bounded static branch condition is
+`(AL & 3) != 0` OR overflow from 32-bit `EAX - 4`.
+The high-p-code report has 46 operations and 37 def-use edges, with no reported
+truncation or omitted inputs/edges. It shows the computed call's EAX output
+feeding both tests. The targeted call-resolution query remains unresolved with
+no targets; the xrefs query reports only those two conditional branches to the
+destination.
+
+The source-bound [portable evidence](evidence/pick-native-flow-rea-20261015-v1.json)
+is derived by the offline [evidence helper](../tools/derive-pick-native-flow-evidence-v1.mjs).
+This establishes static bytes, instruction flow and references in the
+analyst-generated image only. It does not establish runtime branch outcomes,
+the computed callee, a direct Lisp caller, native ABI, Lisp source, or new
+JavaScript behavior. Routine and contract totals, milestone count, and
+whole-painting parity are unchanged.

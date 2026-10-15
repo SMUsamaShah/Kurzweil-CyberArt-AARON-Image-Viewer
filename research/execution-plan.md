@@ -962,9 +962,15 @@ finding](introspection/premium-internal-transfer-jc-successor-v1.md) and
 [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
 
 This is one bounded native branch outcome. The candidate indirect CALL target,
-direct Lisp caller, JS contract, and painting parity remain unresolved. Next,
-use REA on the exact mapped `SCREEN-AND-STORE` payload around candidate
-`CALL EDI` return-use site `0x1fe24d12` and references around PICK. Revalidate
-live bytes before attaching a debugger. Investigate whether caller-visible
+direct Lisp caller, JS contract, and painting parity remain unresolved. REA
+has now analyzed the exact mapped `PICK` payload: its EAX result reaches the
+`TEST AL,3` and signed-overflow check after `CALL EDI`; both branches target
+`0x1fe00ee8`, and the computed call remains unresolved. See the [PICK finding](introspection/rea-payload-analysis.md#pick-branch-and-computed-call-flow-2026-10-15)
+and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.json).
+
+Next, complete offline portable evidence for the retained REA function report
+on exact `SCREEN-AND-STORE` bytes, including call-result use at `0x1fe24d12`.
+Then build a separate no-TF live helper. Revalidate live addresses and complete
+payload bytes before attaching a debugger. Investigate whether caller-visible
 PICK return feeds PREVDEX/HDEX in a natural screen unit; preserve natural RAN
 draws and fresh controls, and require a holdout before generalizing.
