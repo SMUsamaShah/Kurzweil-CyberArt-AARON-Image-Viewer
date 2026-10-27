@@ -381,3 +381,43 @@ analyst-generated image only. It does not establish runtime branch outcomes,
 the computed callee, a direct Lisp caller, native ABI, Lisp source, or new
 JavaScript behavior. Routine and contract totals, milestone count, and
 whole-painting parity are unchanged.
+
+## SCREEN-AND-STORE return-use rerun, 2026-10-27
+
+REA 6.8.0 / Ghidra 12.1.4 repeated the function query at `0x1fe24a6c` and the
+`resolve-native-call-targets` query at `0x1fe24d12` using the same synthetic PE
+(SHA-256
+`d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686`) and
+one-function seed (SHA-256
+`569c180e2e14d5749aa1b6dec777783b888df8e18a1957ead89cfd0c2999fa79`). Both
+invocations record static-only analysis and `inputWasExecuted: false`. The
+function name is a seeded user-defined label, not recovered Lisp source.
+
+The Ghidra function body spans 1,216 bytes and contains 424 assembly
+instructions, 79 basic blocks, 755 high-p-code operations, 799 def-use links,
+and 215 effect records. The p-code report is untruncated and reports no
+omitted operations, inputs, or edges. At `0x1fe24d12`, `CALL EDI` returns through
+EAX; the listing stores and reloads EAX, then compares `EDX` with a value at
+`[EDI - 0x41]`. A conditional branch at `0x1fe24d23` gates another indirect
+call at `0x1fe24d25` (`CALL [EDI - 0x71]`), followed by `TEST BL, 3`. Both
+computed-call queries are unresolved with no target addresses. The function
+report has 72 unresolved indirect-call sites and no caller or callee
+relationships. Its single incoming reference is a non-call `DATA` reference
+from `0x1fe200a8`.
+
+This rerun confirms the REA 6.4.0 result for this exact input: pseudocode,
+assembly, basic blocks, high-p-code operations, def-use links, and effect
+records match the earlier report exactly. REA 6.8.0 adds an explicit
+`unresolved_calls` inventory; neither version resolves the computed target.
+This is scoped report compatibility, not a general REA 6.4/6.8 schema or API
+compatibility claim.
+
+The [source binding](../artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.binding.json)
+and [native-code map](../extracted/local-oracle/external-runs/pick-native-links-20261014-v1/native-code/mapped/native-code-map.json)
+identify a unique exact match for the complete 1,228-byte PLL object and its
+1,224-byte payload. The Ghidra body is 8 bytes shorter than that payload; the
+p-code completeness claim applies to the reported function body. The generated
+PE was not executed, and its seeded name and address context do not identify a
+runtime callee, a direct Lisp caller, or original ABI/source. See the
+[portable evidence](evidence/screen-and-store-call-return-flow-rea-20261027-v1.json)
+for the bound report pair and source identities.

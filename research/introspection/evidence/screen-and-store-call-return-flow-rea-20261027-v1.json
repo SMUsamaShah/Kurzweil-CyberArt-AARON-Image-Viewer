@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "investigation": "SCREEN-AND-STORE computed-call return and following conditional flow from retained REA static reports",
+  "status": "static synthetic-input evidence validated",
+  "sourceBinding": {
+    "functionName": "SCREEN-AND-STORE",
+    "attribution": "The SCREEN-AND-STORE name and mapping label are analyst assertions; object and payload bytes were independently rechecked.",
+    "sourceMap": {
+      "path": "research/extracted/local-oracle/external-runs/pick-native-links-20261014-v1/native-code/mapped/native-code-map.json",
+      "sha256": "5ac2fcf6ee9b87daa3100dc903b6555799523ce0d5ec48442a372ed60f4d4177",
+      "bytes": 14096
+    },
+    "originalPll": {
+      "path": "research/extracted/aaron/application/AARON.pll",
+      "sha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+      "bytes": 4573464
+    },
+    "completeObject": {
+      "offset": 2640488,
+      "payloadOffset": 2640492,
+      "endExclusive": 2641716,
+      "bytes": 1228,
+      "sha256": "f96487d52953a1e8d5748d6d5b0d168a8eca65d0ab83eb2cecab478c80c0b54a",
+      "uniquePllMatches": 1
+    },
+    "payload": {
+      "path": "research/extracted/local-oracle/external-runs/pick-native-links-20261014-v1/native-code/mapped/screen-and-store.native-payload.bin",
+      "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+      "bytes": 1224,
+      "pllSliceMatchesPayloadFile": true,
+      "mappedPrefixHex": "558bec5683ec7cff77d78f45f883f903"
+    }
+  },
+  "analysisInput": {
+    "syntheticPe": {
+      "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.synthetic.exe",
+      "sha256": "d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686",
+      "bytes": 4608,
+      "executed": false,
+      "layout": {
+        "architecture": "x86",
+        "format": "PE32",
+        "imageBase": "0x1fe20000",
+        "entryRva": "0x4a6c",
+        "entry": "0x1fe24a6c",
+        "section": {
+          "name": ".text",
+          "virtualAddress": "0x4000",
+          "virtualSize": 3892,
+          "rawPointer": 512,
+          "rawSize": 4096
+        },
+        "copiedPayloadFileOffset": 3180,
+        "generatedPrefixBytes": 2668,
+        "copiedPayloadBytes": 1224,
+        "generatedSuffixBytes": 204
+      },
+      "copiedPayloadMatchesOriginal": true
+    },
+    "analystSeed": {
+      "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.seeds.tsv",
+      "sha256": "569c180e2e14d5749aa1b6dec777783b888df8e18a1957ead89cfd0c2999fa79",
+      "bytes": 37,
+      "record": "0x1fe24a6c\tfunction\tSCREEN_AND_STORE",
+      "nameIsAnalystAssertion": true
+    },
+    "toolchain": {
+      "path": "research/artifacts/rea-tools/toolchain-6.8.0-20261027.json",
+      "sha256": "3e84aceb7c23ea8b04a83c9ba9d969f1a07fbcecd4ed3c5f338fe0aec28a7490",
+      "reaVersion": "6.8.0",
+      "releaseTag": "rea-agents-6.8.0",
+      "releaseCommitShort": "160d821",
+      "ghidraVersion": "12.1.4"
+    },
+    "binding": {
+      "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.binding.json",
+      "sha256": "9182783e41dcc7b611716090ca28541e062b55067d91b420f6b29fad5c0c3200",
+      "bytes": 2138
+    }
+  },
+  "queryEvidence": [
+    {
+      "id": "screen-and-store-function",
+      "operation": "function",
+      "address": "0x1fe24a6c",
+      "staticOnly": true,
+      "inputWasExecuted": false,
+      "input": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.synthetic.exe",
+        "sha256": "d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686"
+      },
+      "seed": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.seeds.tsv",
+        "sha256": "569c180e2e14d5749aa1b6dec777783b888df8e18a1957ead89cfd0c2999fa79"
+      },
+      "toolchain": {
+        "path": "research/artifacts/rea-tools/toolchain-6.8.0-20261027.json",
+        "sha256": "3e84aceb7c23ea8b04a83c9ba9d969f1a07fbcecd4ed3c5f338fe0aec28a7490"
+      },
+      "profileDigest": "8cdf13b3543954fbea5d3ca573e7cc0eaebf3502bb0f332ee33656eb90c50951",
+      "sourceFiles": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/function/rea-invocation.json",
+          "sha256": "d8e36b1f41ad73cfd192f2de53b5adaff4dacd2f8014b0bb2ee7019b17e54f5c",
+          "bytes": 1425
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/function/rea-result.json",
+          "sha256": "72a6c018c782c3e0b80e99bbae8abb27350b44210b9c0695a0ab1570778a9a5b",
+          "bytes": 563503
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/function/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      }
+    },
+    {
+      "id": "screen-and-store-call-target",
+      "operation": "resolve-native-call-targets",
+      "address": "0x1fe24d12",
+      "staticOnly": true,
+      "inputWasExecuted": false,
+      "input": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.synthetic.exe",
+        "sha256": "d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686"
+      },
+      "seed": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.seeds.tsv",
+        "sha256": "569c180e2e14d5749aa1b6dec777783b888df8e18a1957ead89cfd0c2999fa79"
+      },
+      "toolchain": {
+        "path": "research/artifacts/rea-tools/toolchain-6.8.0-20261027.json",
+        "sha256": "3e84aceb7c23ea8b04a83c9ba9d969f1a07fbcecd4ed3c5f338fe0aec28a7490"
+      },
+      "profileDigest": "8cdf13b3543954fbea5d3ca573e7cc0eaebf3502bb0f332ee33656eb90c50951",
+      "sourceFiles": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/call-target/rea-invocation.json",
+          "sha256": "35b9f297abe300e8b291eb5592c0cf034f1a4612fbc4053e684c8f1dbc6acfb4",
+          "bytes": 1442
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/call-target/rea-result.json",
+          "sha256": "625945b46bff8ae86e9be97899f43714bfb10e8b7e8aaf30efd1f6bd7d0b7383",
+          "bytes": 5445
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/call-target/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      }
+    },
+    {
+      "id": "screen-and-store-later-call-target",
+      "operation": "resolve-native-call-targets",
+      "address": "0x1fe24d25",
+      "staticOnly": true,
+      "inputWasExecuted": false,
+      "input": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.synthetic.exe",
+        "sha256": "d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686"
+      },
+      "seed": {
+        "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.seeds.tsv",
+        "sha256": "569c180e2e14d5749aa1b6dec777783b888df8e18a1957ead89cfd0c2999fa79"
+      },
+      "toolchain": {
+        "path": "research/artifacts/rea-tools/toolchain-6.8.0-20261027.json",
+        "sha256": "3e84aceb7c23ea8b04a83c9ba9d969f1a07fbcecd4ed3c5f338fe0aec28a7490"
+      },
+      "profileDigest": "8cdf13b3543954fbea5d3ca573e7cc0eaebf3502bb0f332ee33656eb90c50951",
+      "sourceFiles": {
+        "invocation": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/second-call-target/rea-invocation.json",
+          "sha256": "37788dcef82ba9f6ba80d74259602d8756cd2d31b2bb851adc046b930b96c3fe",
+          "bytes": 1442
+        },
+        "report": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/second-call-target/rea-result.json",
+          "sha256": "186937cfbfd8cb6bb776be53f114af4d7eccf07e7137a76e2174392c52b28a08",
+          "bytes": 5445
+        },
+        "stderr": {
+          "path": "research/artifacts/rea-tools/screen-store-return-flow-20261027-rea68-a/second-call-target/rea-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      }
+    }
+  ],
+  "function": {
+    "procedure": {
+      "syntheticAddress": "0x1fe24a6c",
+      "seededLabel": "SCREEN_AND_STORE",
+      "labelIsAnalystAssertion": true,
+      "body": {
+        "available": true,
+        "ranges": [
+          {
+            "start": "0x1fe24a6c",
+            "end": "0x1fe24f2b"
+          }
+        ],
+        "totalBytes": 1216,
+        "spanBytes": 1216,
+        "contiguous": true,
+        "containsEntry": true
+      },
+      "instructionCount": 424,
+      "basicBlockCount": 79
+    },
+    "sourceLengthComparison": {
+      "payloadBytes": 1224,
+      "bodyBytes": 1216,
+      "payloadMinusBodyBytes": 8
+    },
+    "referenceInventory": {
+      "callerCount": 0,
+      "calleeCount": 0,
+      "unresolvedCallCount": 72,
+      "incomingReferences": [
+        {
+          "sourceAddress": "0x1fe200a8",
+          "targetAddress": "0x1fe24a6c",
+          "type": "DATA",
+          "call": false,
+          "data": true,
+          "classification": "non-call static data reference; not a caller"
+        }
+      ]
+    },
+    "callReturnAndFollowingFlow": {
+      "assembly": [
+        "0x1fe24d12: CALL EDI",
+        "0x1fe24d14: MOV dword ptr [EBP + -0x44], EAX",
+        "0x1fe24d17: MOV EAX, dword ptr [EBP + -0x44]",
+        "0x1fe24d20: CMP EDX, dword ptr [EDI + -0x41]",
+        "0x1fe24d23: JNZ 0x1fe24d28",
+        "0x1fe24d25: CALL dword ptr [EDI + -0x71]",
+        "0x1fe24d2c: TEST BL, 0x3",
+        "0x1fe24d2f: JNZ 0x1fe24d90"
+      ],
+      "instructionIndices": [
+        258,
+        259,
+        260,
+        263,
+        264,
+        265,
+        268,
+        269
+      ],
+      "callReturnBytes": [
+        {
+          "address": "0x1fe24d12",
+          "payloadOffset": 678,
+          "bytes": "ffd7",
+          "sourceAndCopiedPeBytesMatch": true,
+          "disassembly": "CALL EDI"
+        },
+        {
+          "address": "0x1fe24d14",
+          "payloadOffset": 680,
+          "bytes": "8945bc",
+          "sourceAndCopiedPeBytesMatch": true,
+          "disassembly": "MOV dword ptr [EBP + -0x44], EAX"
+        },
+        {
+          "address": "0x1fe24d17",
+          "payloadOffset": 683,
+          "bytes": "8b45bc",
+          "sourceAndCopiedPeBytesMatch": true,
+          "disassembly": "MOV EAX, dword ptr [EBP + -0x44]"
+        }
+      ],
+      "callOperation": {
+        "id": "0x1fe24d12#1005",
+        "opcode": "CALLIND",
+        "inputs": [
+          {
+            "kind": "register",
+            "size_bytes": 4,
+            "location": "register:0x1c",
+            "constant_hex": null
+          },
+          {
+            "kind": "register",
+            "size_bytes": 4,
+            "location": "register:0x0",
+            "constant_hex": null
+          },
+          {
+            "kind": "other",
+            "size_bytes": 4,
+            "location": "stack:0xffffffffffffffc0",
+            "constant_hex": null
+          },
+          {
+            "kind": "other",
+            "size_bytes": 4,
+            "location": "stack:0xffffffffffffffbc",
+            "constant_hex": null
+          }
+        ],
+        "output": {
+          "kind": "register",
+          "size_bytes": 4,
+          "location": "register:0x0",
+          "constant_hex": null
+        }
+      },
+      "laterCallTargetOperations": [
+        {
+          "id": "0x1fe24d25#1032",
+          "opcode": "PTRADD",
+          "inputs": [
+            {
+              "kind": "register",
+              "size_bytes": 4,
+              "location": "register:0x1c",
+              "constant_hex": null
+            },
+            {
+              "kind": "constant",
+              "size_bytes": 4,
+              "location": null,
+              "constant_hex": "ffffff8f"
+            },
+            {
+              "kind": "constant",
+              "size_bytes": 4,
+              "location": null,
+              "constant_hex": "1"
+            }
+          ],
+          "output": {
+            "kind": "unique",
+            "size_bytes": 4,
+            "location": "unique:0x6600",
+            "constant_hex": null
+          }
+        },
+        {
+          "id": "0x1fe24d25#6352",
+          "opcode": "CAST",
+          "inputs": [
+            {
+              "kind": "unique",
+              "size_bytes": 4,
+              "location": "unique:0x6600",
+              "constant_hex": null
+            }
+          ],
+          "output": {
+            "kind": "unique",
+            "size_bytes": 4,
+            "location": "unique:0x10000507",
+            "constant_hex": null
+          }
+        },
+        {
+          "id": "0x1fe24d25#1033",
+          "opcode": "LOAD",
+          "inputs": [
+            {
+              "kind": "constant",
+              "size_bytes": 4,
+              "location": null,
+              "constant_hex": "1a1"
+            },
+            {
+              "kind": "unique",
+              "size_bytes": 4,
+              "location": "unique:0x10000507",
+              "constant_hex": null
+            }
+          ],
+          "output": {
+            "kind": "unique",
+            "size_bytes": 4,
+            "location": "unique:0x17200",
+            "constant_hex": null
+          }
+        },
+        {
+          "id": "0x1fe24d25#1037",
+          "opcode": "CALLIND",
+          "inputs": [
+            {
+              "kind": "unique",
+              "size_bytes": 4,
+              "location": "unique:0x17200",
+              "constant_hex": null
+            }
+          ],
+          "output": {
+            "kind": "other",
+            "size_bytes": 8,
+            "location": "VARIABLE:0x0",
+            "constant_hex": null
+          }
+        }
+      ],
+      "conditionalBranchOperation": {
+        "id": "0x1fe24d23#1031",
+        "opcode": "CBRANCH",
+        "inputs": [
+          {
+            "kind": "address",
+            "size_bytes": 1,
+            "location": "0x1fe24d28",
+            "constant_hex": null
+          },
+          {
+            "kind": "register",
+            "size_bytes": 1,
+            "location": "register:0x206",
+            "constant_hex": null
+          }
+        ]
+      },
+      "lowTagOperations": [
+        {
+          "id": "0x1fe24d2c#3435",
+          "opcode": "INT_AND",
+          "inputs": [
+            {
+              "kind": "register",
+              "size_bytes": 4,
+              "location": "register:0xc",
+              "constant_hex": null
+            },
+            {
+              "kind": "constant",
+              "size_bytes": 4,
+              "location": null,
+              "constant_hex": "3"
+            }
+          ],
+          "output": {
+            "kind": "unique",
+            "size_bytes": 4,
+            "location": "unique:0x100002cd",
+            "constant_hex": null
+          }
+        },
+        {
+          "id": "0x1fe24d2c#1052",
+          "opcode": "INT_EQUAL",
+          "inputs": [
+            {
+              "kind": "unique",
+              "size_bytes": 4,
+              "location": "unique:0x100002cd",
+              "constant_hex": null
+            },
+            {
+              "kind": "constant",
+              "size_bytes": 4,
+              "location": null,
+              "constant_hex": "0"
+            }
+          ],
+          "output": {
+            "kind": "register",
+            "size_bytes": 1,
+            "location": "register:0x206",
+            "constant_hex": null
+          }
+        },
+        {
+          "id": "0x1fe24d2f#1058",
+          "opcode": "CBRANCH",
+          "inputs": [
+            {
+              "kind": "address",
+              "size_bytes": 1,
+              "location": "0x1fe24d90",
+              "constant_hex": null
+            },
+            {
+              "kind": "register",
+              "size_bytes": 1,
+              "location": "register:0x206",
+              "constant_hex": null
+            }
+          ],
+          "output": null
+        }
+      ],
+      "defUse": [
+        {
+          "definition": "0x1fe24d20#1025",
+          "use": "0x1fe24d23#1031",
+          "inputIndex": 1
+        },
+        {
+          "definition": "0x1fe24d25#1032",
+          "use": "0x1fe24d25#6352",
+          "inputIndex": 0
+        },
+        {
+          "definition": "0x1fe24d25#6352",
+          "use": "0x1fe24d25#1033",
+          "inputIndex": 1
+        },
+        {
+          "definition": "0x1fe24d25#1033",
+          "use": "0x1fe24d25#1037",
+          "inputIndex": 0
+        },
+        {
+          "definition": "0x1fe24d2a#1041",
+          "use": "0x1fe24d2c#3435",
+          "inputIndex": 0
+        },
+        {
+          "definition": "0x1fe24d2c#3435",
+          "use": "0x1fe24d2c#1052",
+          "inputIndex": 0
+        },
+        {
+          "definition": "0x1fe24d2c#1052",
+          "use": "0x1fe24d2f#1058",
+          "inputIndex": 1
+        }
+      ],
+      "branchBytes": [
+        {
+          "address": "0x1fe24d23",
+          "payloadOffset": 695,
+          "bytes": "7503",
+          "sourceAndCopiedPeBytesMatch": true,
+          "disassembly": "JNZ 0x1fe24d28"
+        },
+        {
+          "address": "0x1fe24d2f",
+          "payloadOffset": 707,
+          "bytes": "755f",
+          "sourceAndCopiedPeBytesMatch": true,
+          "disassembly": "JNZ 0x1fe24d90"
+        }
+      ]
+    },
+    "highPcodeCompleteness": {
+      "available": true,
+      "provenance": "ghidra-high-pcode",
+      "truncated": false,
+      "operations": 755,
+      "defUseEdges": 799,
+      "omittedOperationsLowerBound": 0,
+      "knownOmittedInputs": 0,
+      "knownOmittedEdges": 0,
+      "uniqueOperationIds": 755,
+      "allDefUseReferencesValid": true
+    }
+  },
+  "computedCall": {
+    "callSite": "0x1fe24d12",
+    "procedure": "0x1fe24a6c",
+    "status": "unresolved",
+    "mechanism": "computed",
+    "targets": []
+  },
+  "conditionalLaterCall": {
+    "callSite": "0x1fe24d25",
+    "procedure": "0x1fe24a6c",
+    "status": "unresolved",
+    "mechanism": "computed",
+    "targets": []
+  },
+  "sourceBytesRechecked": {
+    "pllPayloadSha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+    "syntheticCopiedPayloadSha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+    "originalPllPayloadEqualsSyntheticCopy": true,
+    "branchBytes": [
+      {
+        "address": "0x1fe24d23",
+        "payloadOffset": 695,
+        "bytes": "7503",
+        "sourceAndCopiedPeBytesMatch": true,
+        "disassembly": "JNZ 0x1fe24d28"
+      },
+      {
+        "address": "0x1fe24d2f",
+        "payloadOffset": 707,
+        "bytes": "755f",
+        "sourceAndCopiedPeBytesMatch": true,
+        "disassembly": "JNZ 0x1fe24d90"
+      }
+    ]
+  },
+  "limits": [
+    "The static analysis input is an analyst-generated synthetic PE containing copied SCREEN-AND-STORE payload bytes; the PE and reports assert static-only analysis and inputWasExecuted=false.",
+    "The seeded SCREEN-AND-STORE label and source-map function name are analyst assertions; the reported function body is a Ghidra boundary on the synthetic image, not a recovered original-source boundary.",
+    "The disassembly shows CALL EDI followed by a return-value save and reload, then a conditional later indirect call before the low-tag test; no runtime path or branch outcome was observed.",
+    "Both computed calls remain unresolved with no static target addresses; no runtime call target was recovered.",
+    "No direct Lisp caller, runtime identity or behavior, native ABI, or calling convention was established."
+  ],
+  "derivedBy": {
+    "path": "research/tools/derive-screen-and-store-call-return-flow-rea-v1.mjs",
+    "sha256": "1c3f7b7385884d5ff6d58e1bdb1cf18f92f020c4f5b6a6c05e5e54dd119de9b1",
+    "bytes": 44909
+  }
+}

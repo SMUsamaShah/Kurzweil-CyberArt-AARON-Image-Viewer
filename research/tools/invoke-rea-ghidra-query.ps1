@@ -17,7 +17,9 @@ param(
     [ValidatePattern('^[a-z0-9][a-z0-9-]*\.json$')]
     [string]$ReportName = 'rea-result.json',
 
-    [string]$SeedFile
+    [string]$SeedFile,
+
+    [string]$ToolchainFile
 )
 
 Set-StrictMode -Version Latest
@@ -26,7 +28,26 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $toolchainPath = Join-Path $repoRoot 'research\artifacts\rea-tools\toolchain-current.json'
 $toolchainRoot = [IO.Path]::GetFullPath((Join-Path $repoRoot 'research\artifacts\rea-tools'))
-if (-not (Test-Path -LiteralPath $toolchainPath -PathType Leaf)) {
+if ($PSBoundParameters.ContainsKey('ToolchainFile')) {
+    if ([string]::IsNullOrWhiteSpace($ToolchainFile)) {
+        throw 'ToolchainFile must be a .json file beneath research/artifacts/rea-tools'
+    }
+    $toolchainCandidate = if ([IO.Path]::IsPathRooted($ToolchainFile)) {
+        $ToolchainFile
+    }
+    else {
+        Join-Path $repoRoot $ToolchainFile
+    }
+    $toolchainPath = [IO.Path]::GetFullPath($toolchainCandidate)
+    if ([IO.Path]::GetExtension($toolchainPath) -ine '.json' -or
+        -not $toolchainPath.StartsWith($toolchainRoot.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'ToolchainFile must be a .json file beneath research/artifacts/rea-tools'
+    }
+    if (-not (Test-Path -LiteralPath $toolchainPath -PathType Leaf)) {
+        throw "REA toolchain file is missing: $toolchainPath"
+    }
+}
+elseif (-not (Test-Path -LiteralPath $toolchainPath -PathType Leaf)) {
     throw "Current REA toolchain is missing: $toolchainPath"
 }
 $toolchain = Get-Content -LiteralPath $toolchainPath -Raw | ConvertFrom-Json
@@ -120,7 +141,7 @@ $oldEnvironment = @{}
 foreach ($name in $environmentNames) { $oldEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process') }
 
 try {
-    # toolchain-current.json stores the executable paths, but REA's Windows
+    # The selected toolchain JSON stores the executable paths, but REA's Windows
     # provider discovers Ghidra and Java from process environment variables.
     $env:GHIDRA_INSTALL_DIR = $ghidra
     $env:JAVA_HOME = $javaHome
@@ -186,7 +207,7 @@ try {
         provider = 'ghidra'
         reaVersion = $toolchain.reaVersion
         ghidraVersion = '12.1.4'
-        toolchain = [ordered]@{ path = 'research/artifacts/rea-tools/toolchain-current.json'; sha256 = $toolchainHash }
+        toolchain = [ordered]@{ path = (Get-RepoRelativePath $toolchainPath); sha256 = $toolchainHash }
         input = [ordered]@{ path = (Get-RepoRelativePath $inputFile); sha256 = $inputHash }
         seed = if ($seed) { [ordered]@{ path = (Get-RepoRelativePath $seed); sha256 = $seedHash } } else { $null }
         report = [ordered]@{ path = $ReportName; sha256 = $reportHash; bytes = (Get-Item -LiteralPath $reportPath).Length }

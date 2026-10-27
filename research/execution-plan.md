@@ -7,7 +7,7 @@ Before local REA, oracle, or Git operations, use the central
 [tooling quick fixes](tooling-workarounds.md). The reusable REA wrapper sets
 the configured Ghidra/Java environment and retains query diagnostics.
 
-Prepared 2026-09-27; updated 2026-10-15. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-27. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
@@ -19,6 +19,14 @@ The old toolchain remains pinned for historical evidence. See
 [the update record](rea-update-20261011.md). The ZERO-EDGE constructor helper
 now derives identical portable evidence independently, with all 140 source
 bindings revalidated. The subsequent explicit-call milestones follow below.
+
+REA 6.8.0 is installed side by side with 6.4.0 and has repeated the
+SCREEN-AND-STORE function and computed-call queries on the exact same synthetic
+PE. The retained reports match for this input, while 6.8 explicitly reports
+72 unresolved indirect-call sites. See the [6.8 update record](rea-update-20261027.md)
+and [portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
+Keep using the explicit 6.8 toolchain manifest for this rerun; preserve the
+historical toolchain for older evidence.
 
 The two-input milestone now completes: PERIM 3 at START (3,3,1) on the
 zero 7x7 map returns five points (3,3,3), (4,2,5), (5,3,7), (4,4,1),
@@ -968,9 +976,10 @@ has now analyzed the exact mapped `PICK` payload: its EAX result reaches the
 `0x1fe00ee8`, and the computed call remains unresolved. See the [PICK finding](introspection/rea-payload-analysis.md#pick-branch-and-computed-call-flow-2026-10-15)
 and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.json).
 
-Next, complete offline portable evidence for the retained REA function report
-on exact `SCREEN-AND-STORE` bytes, including call-result use at `0x1fe24d12`.
-Then build a separate no-TF live helper. Revalidate live addresses and complete
-payload bytes before attaching a debugger. Investigate whether caller-visible
-PICK return feeds PREVDEX/HDEX in a natural screen unit; preserve natural RAN
-draws and fresh controls, and require a holdout before generalizing.
+The offline portable evidence for the retained REA function report is complete
+and derives byte-identically twice. The separate no-TF live helper is in
+progress. Next, revalidate the live entry and all 1,224 payload bytes in the
+same owned READY pause, then capture `CALL EDI` at `+0x2a6`, its EDI target, and
+the continuation at `+0x2a8` on one frame without assuming the return stack
+adjustment. Preserve the natural RAN draw sequence and require a fresh
+source-bound before/observer/after triplet before accepting runtime evidence.

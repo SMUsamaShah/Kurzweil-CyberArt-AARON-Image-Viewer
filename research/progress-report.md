@@ -1,11 +1,22 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-15. This is the detailed count-based checkpoint log. The compact
+Updated 2026-10-27. This is the detailed count-based checkpoint log. The compact
 current snapshot is in the [root progress report](../progress-report.md).
 It reports measured scope and keeps function-name counts separate from
 recovered behavior.
 
 ## Where we are
+
+Latest tool-analysis checkpoint: REA 6.8.0 repeated the retained
+SCREEN-AND-STORE function and computed-call queries on the same unexecuted
+synthetic PE used by REA 6.4.0. The function body remains 1,216 bytes versus
+the exact 1,224-byte mapped payload; the report contains 72 unresolved
+indirect-call sites and no caller/callee relationships. Both the `CALL EDI` at
+`0x1fe24d12` and the later conditional call at `0x1fe24d25` remain unresolved.
+This adds no JS contract; the totals remain 31 routine names, 32 bounded
+contracts, 1/5 milestones (20% by count), and zero whole-painting parity.
+See the [static finding](introspection/rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27)
+and [portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
 
 Latest native checkpoint: one source-bound seed-456069 triplet observed the
 actual taken successor of `JC rel8 +0x09` before that instruction executed.
@@ -42,6 +53,7 @@ and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-
 | Additional original-only bounded observations | `IN-SUB-FRAME`: 2,813 accepted calls in one VALUE=0 stroke; 224 NIL results in a separate 1,400-call scene window | The extra scene window retains 128 false rows but has no per-call frame identity; it applies only to the matched 768×1080 composite-loader setup. |
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
 | REA 6.4 static native payload dossiers | 7 distinct payloads | Structured native-code analysis; one payload first seen through a continuation matching the saved stack value at PICK entry is now identified as a SELECT-SUBJECT method. The PICK dossier adds one bounded native branch/data-flow observation. This is not seven recovered behaviors, verified ABIs, or application-wide call graphs. |
+| REA 6.8 SCREEN-AND-STORE compatibility rerun | Same payload analyzed by REA 6.4; function and call-target output compared | Static reports match for the analyzed input, while 6.8 exposes its 72 unresolved call sites. This does not add a distinct payload, caller, ABI, or JS behavior contract. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |

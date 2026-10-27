@@ -11,7 +11,29 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-15 — PREMIUM JC successor observed
+## Latest checkpoint: 2026-10-27 — REA 6.8 SCREEN-AND-STORE rerun
+
+REA 6.8.0 repeated the retained SCREEN-AND-STORE function and call-target
+queries on the same hash-bound synthetic PE used for the REA 6.4 analysis.
+The 1,216-byte Ghidra function body is eight bytes shorter than the exact
+1,224-byte PLL payload; the report is untruncated and lists 72 unresolved
+indirect calls. `CALL EDI` at `0x1fe24d12` and the conditional call at
+`0x1fe24d25` remain unresolved, with no caller/callee relationship. The
+synthetic PE was not executed. This adds no JS contract or painting parity;
+the count-based status remains 31 names, 32 bounded contracts, one of five
+milestones, and zero whole-painting parity. See the [REA finding](introspection/rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27),
+[portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json),
+and [REA update record](rea-update-20261027.md).
+
+Next: finish the separate no-TF source/callee/continuation capture helper,
+then run a fresh matched before/observer/after triplet only after its
+source-bound mapping, pause/release ownership, debugger cleanup, and no-launch
+preflight pass. The return-site stop is before `MOV [EBP-0x44],EAX`, so it
+captures the raw word about to be stored. It cannot yet establish the Lisp
+result type, subsequent branch, multiple-value behavior, a PICK identity, or a
+direct Lisp caller.
+
+## Earlier checkpoint: 2026-10-15 — PREMIUM JC successor observed
 
 Accepted source-bound triplet `premjcsucc3-20261015-121544-fd725a19` used the
 full-writer seed-456069 scene at `1920 1080 184`. Before, observer, and after
