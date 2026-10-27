@@ -18,14 +18,15 @@ contracts, 1/5 milestones (20% by count), and zero whole-painting parity.
 See the [static finding](introspection/rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27)
 and [portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
 
-Latest native checkpoint: one source-bound seed-456069 triplet observed the
-actual taken successor of `JC rel8 +0x09` before that instruction executed.
-Its before/observer/after controls match, all four ordered native events share
-one thread, and original debug state was restored before the successor event
-continued. This adds no JS behavior contract; the existing 31 routine names,
-32 bounded contracts, 1/5 milestones, and zero painting-parity counts remain
-unchanged. See the [successor finding](introspection/premium-internal-transfer-jc-successor-v1.md)
-and [portable evidence](introspection/evidence/premium-internal-transfer-jc-successor-premjcsucc3-20261015-121544-fd725a19.json).
+Latest native checkpoint: accepted triplet `sstore27f-20261027-093231-4740a8ed`
+observed one `SCREEN-AND-STORE` `CALL EDI` at `+0x2a6`, target entry at raw
+address `0x20000985`, and return at `+0x2a8` with raw `EAX=0x8c`. All three
+fresh controls matched, and original debug state was restored before detach.
+The following local-store instruction was not executed by the capture. This
+adds no JS behavior contract; the existing 31 routine names, 32 bounded
+contracts, 1/5 milestones, and zero painting-parity counts remain unchanged.
+See the [finding](introspection/screen-and-store-call-return.md) and
+[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
 
 Earlier native caller checkpoint: three complete source-bound no-TF triplets
 across seed-1234 writer-stream and seed-5678 full-writer scenes observed the
@@ -54,6 +55,7 @@ and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
 | REA 6.4 static native payload dossiers | 7 distinct payloads | Structured native-code analysis; one payload first seen through a continuation matching the saved stack value at PICK entry is now identified as a SELECT-SUBJECT method. The PICK dossier adds one bounded native branch/data-flow observation. This is not seven recovered behaviors, verified ABIs, or application-wide call graphs. |
 | REA 6.8 SCREEN-AND-STORE compatibility rerun | Same payload analyzed by REA 6.4; function and call-target output compared | Static reports match for the analyzed input, while 6.8 exposes its 72 unresolved call sites. This does not add a distinct payload, caller, ABI, or JS behavior contract. |
+| SCREEN-AND-STORE live call/return | One accepted source-bound triplet with three same-thread hardware-breakpoint events | Runtime target `0x20000985` and raw return EAX `0x8c` were observed at one `CALL EDI`; the target remains unnamed, the next store did not execute under the breakpoint, and no JS contract or caller identity was added. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
@@ -80,6 +82,29 @@ milestones fully achieved by count**. Milestone 1 replays the complete writer
 stream from original-supplied decisions; it does not generate those decisions.
 Four milestones remain incomplete or not yet achieved. This does not mean 80%
 of the work or elapsed time remains.
+
+## SCREEN-AND-STORE indirect call/return native observation (2026-10-27)
+
+Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed three fresh,
+serialized `screen-unit-seed-1234` runs. The observer's compiled-function
+metadata, complete 1,224-byte payload map, and original PLL hash bind
+`COMMON-GRAPHICS-USER::SCREEN-AND-STORE` at live entry `0x1fe24a6c`. On one
+thread, the payload executed `CALL EDI` at `+0x2a6` (`0x1fe24d12`) with raw
+`EDI=0x20000985`; the target entry had `[ESP]=0x1fe24d14`, ESP was the
+pre-call value minus four, and EBP matched the source frame. The target
+returned to `+0x2a8` with raw EAX `0x0000008c`, pre-call ESP restored, and EBP
+unchanged. The breakpoint stopped before `89 45 BC` executed.
+
+All scene, drawing, planning, writer, screen-unit, screen-color, staged-source,
+and AA0 controls passed. The original thread's debug state was restored,
+detach succeeded, and cleanup errors were empty. A preceding attempt exposed a
+missing `DBG_CONTINUE` after target-entry validation; the focused fix is
+recorded in [tooling notes](tooling-workarounds.md#screen-and-store-breakpoint-event-must-be-handled).
+It adds no function/contract count, milestone, or parity result. The raw
+callee address, ABI, semantic type of EAX, direct Lisp caller, subsequent
+conditional branch, and JavaScript behavior remain unresolved. See the
+[finding](introspection/screen-and-store-call-return.md) and
+[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
 
 ## PREMIUM JC successor native observation (2026-10-15)
 

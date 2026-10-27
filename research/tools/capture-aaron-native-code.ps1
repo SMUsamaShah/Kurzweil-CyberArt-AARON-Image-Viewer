@@ -1,12 +1,33 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)] [string]$OracleOutputRoot,
+    [string]$OracleOutputRoot,
     [string]$MetadataPath = 'C:\temp\aaron-select-brush-native-links.txt',
     [string]$MetadataEndMarker = 'END select-brush-native-links',
-    [ValidateRange(1, 64)] [int]$ExpectedFunctionCount = 5
+    [ValidateRange(1, 64)] [int]$ExpectedFunctionCount = 5,
+    [switch]$DeferRelease,
+    [switch]$PowerShellPreflightOnly
 )
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$utilityModuleManifest = Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1'
+try {
+    Import-Module -Name $utilityModuleManifest -Force -ErrorAction Stop -WarningAction SilentlyContinue
+    $hashCommand = Get-Command -Name Get-FileHash -ErrorAction Stop
+} catch {
+    throw "Unable to load the PowerShell utility module required for source hashing: $($_.Exception.Message)"
+}
+if ($PowerShellPreflightOnly) {
+    [pscustomobject]@{
+        status = 'ok'
+        preflightOnly = $true
+        powershellVersion = $PSVersionTable.PSVersion.ToString()
+        is64BitProcess = [Environment]::Is64BitProcess
+        getFileHashCommand = $hashCommand.Name
+        utilityModuleManifest = $utilityModuleManifest
+    } | ConvertTo-Json -Compress
+    return
+}
+if ([string]::IsNullOrWhiteSpace($OracleOutputRoot)) { throw 'OracleOutputRoot is required outside PowerShell preflight mode.' }
 $output = (Resolve-Path -LiteralPath $OracleOutputRoot).Path
 $expectedRuntime = Join-Path $output 'runtime\AARON.exe'
 $metadataFullPath = [IO.Path]::GetFullPath($MetadataPath)
@@ -23,6 +44,7 @@ $processes = @(Get-Process AARON -ErrorAction SilentlyContinue | Where-Object {
 })
 if ($processes.Count -ne 1) { throw 'Expected exactly one AARON process in this oracle output directory' }
 $aaronProcessId = $processes[0].Id
+$captureComplete = $false
 try {
     $deadline = [DateTime]::UtcNow.AddSeconds(20)
     while ([DateTime]::UtcNow -lt $deadline) {
@@ -131,12 +153,18 @@ public static class AaronNativeCodeReader {
         functions = $records
     }
     [IO.File]::WriteAllText((Join-Path $captureRoot 'manifest.json'), ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+    $captureComplete = $true
     $manifest | ConvertTo-Json -Depth 8
 } finally {
     $stillOwned = Get-Process -Id $aaronProcessId -ErrorAction SilentlyContinue | Where-Object {
         $_.Path -eq $expectedRuntime
     }
-    if ($stillOwned -and -not (Test-Path -LiteralPath $request.releaseFile)) {
+    # Defer only after a complete capture. The serialized caller must build its
+    # exact PLL map, arm its own debugger, and own release/cleanup of this same
+    # runner request. Any capture/setup failure retains the historical
+    # fail-safe release behavior.
+    if ($stillOwned -and -not (Test-Path -LiteralPath $request.releaseFile) -and
+        -not ($DeferRelease -and $captureComplete)) {
         [IO.File]::WriteAllText($request.releaseFile, 'Native code snapshot parent finished')
     }
 }

@@ -11,7 +11,16 @@ call remain unresolved. This is static-only and adds no caller, ABI, or JS
 behavior contract. See the [REA 6.8 finding](research/introspection/rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27)
 and [portable evidence](research/introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
 
-Latest AARON investigation: an accepted 1920×1080 source-bound triplet
+Latest AARON investigation: accepted source-bound triplet
+`sstore27f-20261027-093231-4740a8ed` observed one live call/return inside
+`SCREEN-AND-STORE`: `CALL EDI` at payload offset `+0x2a6` used raw target
+`0x20000985` and returned to `+0x2a8` with raw `EAX=0x8c`. All three fresh
+controls and staged sources matched. The target has no recovered name or ABI;
+the stop precedes the following local store. This adds no JS contract or
+painting parity. See the [finding](research/introspection/screen-and-store-call-return.md)
+and [portable evidence](research/introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+Previous AARON investigation: an accepted 1920×1080 source-bound triplet
 observed the first instruction address after `JC rel8 +0x09` in the anonymous
 PREMIUM destination. CF=1 predicted window offset `+0x99` (`0x2000099c`), and
 DR3 observed that same address before its instruction with bytes `89 44 24 04`.
@@ -73,7 +82,8 @@ and [AARON attach-crash evidence](research/introspection/evidence/frida-aaron-in
 | Distinct Lisp function binding names inventoried | 1,347 | Includes accessors and UI/host routines; it is not a count of recovered algorithms. |
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
 | REA 6.4 static native payload dossiers | 7 distinct payloads | The PICK dossier adds a bounded native branch/data-flow observation. Static dossiers do not add JS behavior contracts or establish recovered ABIs. |
-| REA 6.8 SCREEN-AND-STORE rerun | Same synthetic PE and payload as the retained 6.4 analysis; exact static reports were compared | This is a tool-version compatibility check, not an additional payload or behavior contract. Both computed-call targets remain unresolved; the synthetic PE was not executed. |
+| REA 6.8 SCREEN-AND-STORE rerun | Same synthetic PE and payload as the retained 6.4 analysis; exact static reports were compared | This is a tool-version compatibility check. Static targets remain unresolved; one separate runtime capture observed `CALL EDI` reach raw address `0x20000985`. The target remains unnamed, and the synthetic PE was not executed. |
+| SCREEN-AND-STORE live call/return | One accepted source-bound triplet; three same-thread native events and fresh matched controls | `CALL EDI` at `+0x2a6` reached `0x20000985` and returned with raw EAX `0x8c` before `MOV [EBP-0x44],EAX`. No callee name, ABI, JS behavior contract, direct Lisp caller, or painting parity is established. |
 | PREMIUM indirect CALL destination and internal edge | Three complete 768×1080 source-bound triplets across seed-1234 and seed-5678 scenes captured `[EDI+0x27]=0x20000983`; all recorded a same-thread `JMP [ESI+0x12]` edge to the freshly mapped PICK entry | The outer destination remains anonymous and its Lisp caller is unknown; the captures do not prove a continuous instruction path. `CALL [EDI+0x35f]` at `+0x17` was not hit in any run. Adds no behavior contract. |
 | PREMIUM loop-backedge branch and successor | One source-bound seed-456069 scene observed CF=1 at `0x20000991` and the taken successor at `0x2000099c`, before execution | The bytes `89 44 24 04` match the live profile. This is one bounded native path; the candidate CALL target and direct Lisp caller remain unknown. No behavior contract. |
 | AARON Frida attach attempts | 2 source-bound attempts crashed in the same `frida-agent.dll` before script load | No hook, scene completion, caller result, or after-control; the no-TF native breakpoint route remains usable. |

@@ -111,6 +111,73 @@ files. The runner also saves and restores the per-user AARON registry values;
 if that write is denied, retry the same invocation through scoped elevation.
 It preserves the prior values and cleans only its named staging files.
 
+### Preserve the SCREEN-AND-STORE READY pause across native mapping
+
+`capture-aaron-native-code.ps1` normally writes the runner release marker in
+`finally`. For the SCREEN-AND-STORE call/return capture, the native windows
+must be read and mapped from the same run before the no-TF debugger attaches.
+The serialized triplet coordinator therefore uses
+`capture-aaron-native-code.ps1 -DeferRelease` only after a successful read,
+maps against that run's `runtime/AARON.pll`, and then calls the dedicated
+[`SCREEN-AND-STORE breakpoint launcher`](tools/capture-screen-store-call-return-v1.ps1).
+The launcher releases only after it rechecks the exact 1,224-byte payload, the
+`FF D7` CALL, the `89 45 BC` continuation, process identity, and armed debug
+registers. Do not use `-DeferRelease` by itself or call the launcher after the
+release marker exists. If setup or mapping fails, the coordinator may write a
+fallback release only after rechecking the current run request, probe hash,
+PID, process creation time, and image path; it must not recreate a marker for
+a dead or reused process.
+
+The 2026-10-27 `sstore27b` observer reached READY and mapped the complete live
+payload, but the no-TF helper rejected its image-path check before attaching.
+The report omitted the raw `QueryFullProcessImageNameW` result, so the exact
+reported path is unknown. The checkout's `external-runs` path is a junction to
+`C:\AaronOracleRuns`; a no-launch diagnostic confirmed that the D: junction path
+and C: target path for the same archived executable have the same volume/file
+identity, while `AARON.exe` and `AARON.pll` have different identities. The
+helper now records the actual process image path and compares read-only volume
+serial/file-index identities both before attaching and immediately before
+release. It also requires the initial and pre-release file identities to remain
+the same. The accepted `sstore27f` run confirmed that this junction setup can
+report `C:\AaronOracleRuns` for the process image while the runner supplies the
+equivalent D: path; their file identities matched at both checks. The earlier
+`sstore27b` report omitted its raw observed path, so its exact rejection cause
+remains unproven. Its root is still a failed triplet with no after-control or
+call events and must not be upgraded. Keep rejecting mismatches unless the
+read-only file identities match and remain stable; do not substitute basename
+or hash equality.
+
+The passive probe reads only the 64-byte compiled function header and waits
+for the runner-owned release file. It sets a CL-USER one-shot guard only after
+writing the first READY header, so a later LOAD cannot supersede that
+source-bound report after scene observers replace the target binding. The
+guard does not alter scene variables. Its source and the two debugger files are
+[`screen-store-call-return-metadata-v1.cl`](introspection/screen-store-call-return-metadata-v1.cl),
+[`capture-screen-store-call-return-v1.ps1`](tools/capture-screen-store-call-return-v1.ps1),
+and [`AaronScreenStoreCallReturnBreakpointV1.cs`](oracle/AaronScreenStoreCallReturnBreakpointV1.cs).
+
+### SCREEN-AND-STORE breakpoint event must be handled
+
+The rejected `sstore27e-20261027-092828-62b4014c` observer captured the
+source-hit and target-entry events, then saw the same target-entry
+single-step exception a second time. `CaptureOnDebuggerThread` reset each
+pending event to `DBG_EXCEPTION_NOT_HANDLED`; its validated target-entry branch
+disarmed DR0 and advanced the state machine without replacing that default.
+Windows therefore redelivered the helper's own hardware-breakpoint event as a
+second chance, which the fail-closed logic correctly rejected. The failure
+receipt has no return event and no accepted after-control.
+
+After all target-entry checks and `DisableDr0` succeed, the helper now sets
+`pendingStatus = DBG_CONTINUE`. Keep this assignment after validation and
+disarm; if either fails, the catch path must continue to reject the exception.
+The 6.1 Sol High review confirmed the other branches keep their existing
+handling. The corrected helper passed the no-launch compile preflight, and the
+fresh `sstore27f-20261027-093231-4740a8ed` triplet accepted source-hit,
+target-entry, and call-return events with debug-state restoration, detach, and
+all control comparisons passing. See the
+[call/return finding](introspection/screen-and-store-call-return.md) and
+[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
 ### Multiple probe outputs through Windows PowerShell -File
 
 On 2026-10-14, the first PREMIUM pre-CALL triplet completed its uninstrumented
@@ -156,6 +223,27 @@ no output root and touches no staging files during this check. A passing
 `windows-powershell-preflight.json` is saved in the triplet log and checked by
 the evidence deriver. Do not change global `PSModulePath`, ACLs, or `C:\temp`
 to address this error.
+
+On 2026-10-27, the same missing-command error was reproduced after AARON had
+started: the no-profile `capture-aaron-native-code.ps1` child read and saved a
+16 KiB live window, then failed when it called `Get-FileHash` to finalize its
+manifest. The outer runner's Utility import was not enough for this separate
+child process. The native reader and SCREEN-AND-STORE breakpoint launcher now
+import the module explicitly and verify `Get-FileHash`; both provide
+`-PowerShellPreflightOnly`, and the launcher preflight also compiles the current
+C# debugger helper. Before another oracle launch, the SCREEN-AND-STORE
+coordinator runs both exact 64-bit, `-NoProfile` child checks alongside the
+runner preflight. Keep the failed output root as diagnostics; its
+window supports a separately labeled static recovery, but it lacks the
+runtime-region facts needed to recreate the original capture manifest and is
+not an accepted triplet.
+
+The first no-launch SCREEN-AND-STORE preflight also exposed a separate
+PowerShell StrictMode issue: `$LASTEXITCODE` was read after a native version
+query without first being initialized in that shell. Initialize it before the
+`node --version` call and capture the exit status immediately, before piping
+the version text through `Select-Object`. The coordinator now does this; the
+rejected preflight created no oracle root.
 
 For a standalone read-only diagnostic, use:
 

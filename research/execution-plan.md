@@ -907,7 +907,7 @@ no WPR recording was spent on this question. Keep it as an option for a later
 GPU/kernel interaction investigation; it complements rather than replaces the
 REA-guided internal capture.
 
-## Current checkpoint: Frida AARON injection failure, native route next, 2026-10-15
+## Earlier checkpoint: Frida AARON injection failure, native route next, 2026-10-15
 
 The earlier no-TF attempt `prem-internal-1015c-20261014-234038-b80a2004` was
 rejected at the exact 256-byte window gate. A later triplet completed and
@@ -944,10 +944,10 @@ for `+0x17`. The older captures predicted `JC +0x99` from earlier snapshots;
 the source-bound branch/successor capture below records the actual taken path
 for one seed-456069 scene. The [prediction note](introspection/premium-loop-backedge-prediction-20261015.md)
 and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-20261015.json)
-retain the prior assumptions and raw bindings. Continue with the REA-first
-PICK/PREVDEX/HDEX return-use investigation in the current checkpoint below.
+retain the prior assumptions and raw bindings. The 2026-10-15
+PICK/PREVDEX/HDEX direction was superseded by the SCREEN-AND-STORE work below.
 
-## Current checkpoint: PREMIUM JC successor observed, 2026-10-15
+## Earlier checkpoint: PREMIUM JC successor observed, 2026-10-15
 
 The source-bound triplet `premjcsucc3-20261015-121544-fd725a19` completed its
 before, observer, and after runs for the 1920×1080 full-writer seed-456069
@@ -976,10 +976,37 @@ has now analyzed the exact mapped `PICK` payload: its EAX result reaches the
 `0x1fe00ee8`, and the computed call remains unresolved. See the [PICK finding](introspection/rea-payload-analysis.md#pick-branch-and-computed-call-flow-2026-10-15)
 and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.json).
 
-The offline portable evidence for the retained REA function report is complete
-and derives byte-identically twice. The separate no-TF live helper is in
-progress. Next, revalidate the live entry and all 1,224 payload bytes in the
-same owned READY pause, then capture `CALL EDI` at `+0x2a6`, its EDI target, and
-the continuation at `+0x2a8` on one frame without assuming the return stack
-adjustment. Preserve the natural RAN draw sequence and require a fresh
-source-bound before/observer/after triplet before accepting runtime evidence.
+The `CALL EDI` return-use capture described as future work at this checkpoint
+was completed in the later 2026-10-27 triplet below.
+
+## Current checkpoint: SCREEN-AND-STORE call/return observed, 2026-10-27
+
+Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh,
+serialized before/observer/after runs. The source-bound observer mapped the
+complete 1,224-byte `SCREEN-AND-STORE` payload at `0x1fe24a6c` and captured
+same-thread `CALL EDI` at `+0x2a6`, raw target `0x20000985`, target entry, and
+return to `+0x2a8` with `EAX=0x0000008c`. All scene, drawing, planning,
+writer, screen-unit, screen-color, and staged-source controls matched; debug
+registers were restored and detach succeeded without cleanup errors. The
+capture stopped before `89 45 BC`, so no local store or result type is claimed.
+The target remains unnamed and this adds no JS contract or painting parity.
+See the [finding](introspection/screen-and-store-call-return.md) and
+[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+A failed first retry exposed the missing `DBG_CONTINUE` after a validated
+target-entry hardware breakpoint. The focused fix passed no-launch compilation,
+independent 6.1 Sol High review, and the accepted fresh triplet. The junction
+reported a C: image path for the D: request while file identities matched;
+retain the identity checks and failure diagnostics documented in
+[tooling workarounds](tooling-workarounds.md).
+
+Next: extend the no-TF observer to the `JNZ` at payload offset `+0x2b7`
+(`0x1fe24d23`). Record the source flags and frame operands, then arm and
+validate both immediate successors: fall-through `+0x2b9` before
+`CALL [EDI-0x71]`, or taken destination `+0x2bc`. A pre-branch flags snapshot
+predicts direction; only a validated same-thread successor establishes the
+observed edge. If the call site is reached, record `[EDI-0x71]` as a raw
+candidate pointer; a separate same-thread target-entry and return sequence is
+required to claim that call executed or to identify its target. Recompute all
+live addresses and byte checks from the fresh READY pause and keep the full
+source-bound triplet and cleanup gates.

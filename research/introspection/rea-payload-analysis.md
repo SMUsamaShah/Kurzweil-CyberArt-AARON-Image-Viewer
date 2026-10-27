@@ -421,3 +421,17 @@ PE was not executed, and its seeded name and address context do not identify a
 runtime callee, a direct Lisp caller, or original ABI/source. See the
 [portable evidence](evidence/screen-and-store-call-return-flow-rea-20261027-v1.json)
 for the bound report pair and source identities.
+
+A separate accepted source-bound runtime triplet subsequently observed this
+`CALL EDI` site once: at the rebased live call address, EDI was
+`0x20000985`, and the same thread returned to the continuation with raw
+`EAX=0x0000008c`. This adds a dynamic target address for that one execution;
+the target remains unnamed and no ABI, Lisp result type, direct Lisp caller,
+or JavaScript behavior is established. The capture stopped before the next
+instruction, `MOV [EBP-0x44],EAX`. See the [runtime finding](screen-and-store-call-return.md)
+and [portable evidence](evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+The next unresolved native question is the `JNZ` at payload offset `+0x2b7`
+(`0x1fe24d23`) and its first same-thread successor. REA places the conditional
+`CALL [EDI-0x71]` at `+0x2b9`; a call-site hit would expose only a candidate
+pointer until a target-entry and return are also observed.

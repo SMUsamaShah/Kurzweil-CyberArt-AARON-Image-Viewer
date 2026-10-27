@@ -11,7 +11,43 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-27 — REA 6.8 SCREEN-AND-STORE rerun
+## Latest checkpoint: 2026-10-27 — SCREEN-AND-STORE call/return observed
+
+Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh
+before/observer/after `screen-unit-seed-1234` runs. Scene, drawing, planning,
+writer, screen-unit, screen-color, and staged-source checks passed. A
+source-bound native observer confirmed that the compiled
+`COMMON-GRAPHICS-USER::SCREEN-AND-STORE` payload at `0x1fe24a6c` executed
+`CALL EDI` at `+0x2a6` (`0x1fe24d12`) with `EDI=0x20000985`; that same thread
+entered the raw target and returned to `+0x2a8` with `EAX=0x0000008c`, the
+pre-call ESP restored, and EBP unchanged. The return stop is before
+`89 45 BC` (`MOV [EBP-0x44],EAX`), so it does not prove the local store ran or
+identify the EAX word's Lisp type. The target address remains unnamed. This
+does not identify the direct Lisp caller of `SCREEN-AND-STORE` or
+`SELECT-BRUSH`, add a JS contract, or establish painting parity. See the
+[runtime finding](introspection/screen-and-store-call-return.md) and
+[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+The first retry, `sstore27e-20261027-092828-62b4014c`, exposed a missing
+`DBG_CONTINUE` after target-entry validation. The helper now marks that
+first-chance breakpoint handled only after validation and disarm. Its
+no-launch compile preflight passed, and the accepted `sstore27f` run confirms
+the source/target/return sequence and debugger cleanup. The image path was
+reported under `C:\AaronOracleRuns` while the request used its D: junction
+path; stable volume/file identity matched. Keep the exact failed `sstore27e`
+run rejected. See [tooling notes](tooling-workarounds.md#screen-and-store-breakpoint-event-must-be-handled).
+
+Next: use the REA 6.8 listing to capture the conditional `JNZ` at payload
+offset `+0x2b7` (`0x1fe24d23`) and validate its first successor on the same
+thread: fall-through `+0x2b9` or taken target `+0x2bc`. The branch source alone
+only predicts direction; a validated successor establishes the observed
+direction. If fall-through reaches `CALL [EDI-0x71]` at `+0x2b9`, sample its
+pointer there but do not call it a function until a same-thread target-entry
+and return edge are observed. Re-derive all addresses and payload bytes from
+the fresh READY pause, use fresh serialized controls, and keep direct Lisp
+caller and JS behavior claims open.
+
+## Previous tool checkpoint: 2026-10-27 — REA 6.8 SCREEN-AND-STORE rerun
 
 REA 6.8.0 repeated the retained SCREEN-AND-STORE function and call-target
 queries on the same hash-bound synthetic PE used for the REA 6.4 analysis.
@@ -25,13 +61,9 @@ milestones, and zero whole-painting parity. See the [REA finding](introspection/
 [portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json),
 and [REA update record](rea-update-20261027.md).
 
-Next: finish the separate no-TF source/callee/continuation capture helper,
-then run a fresh matched before/observer/after triplet only after its
-source-bound mapping, pause/release ownership, debugger cleanup, and no-launch
-preflight pass. The return-site stop is before `MOV [EBP-0x44],EAX`, so it
-captures the raw word about to be stored. It cannot yet establish the Lisp
-result type, subsequent branch, multiple-value behavior, a PICK identity, or a
-direct Lisp caller.
+This was static-only analysis on an unexecuted synthetic PE. The runtime
+follow-up is recorded above; REA still does not name the dynamic callee or a
+direct Lisp caller, and it does not establish a JavaScript behavior contract.
 
 ## Earlier checkpoint: 2026-10-15 — PREMIUM JC successor observed
 
