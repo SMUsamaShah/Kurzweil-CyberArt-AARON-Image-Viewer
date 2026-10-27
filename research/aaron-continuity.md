@@ -11,7 +11,7 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-27 — SCREEN-AND-STORE call/return observed
+## Latest checkpoint: 2026-10-27 — SCREEN-AND-STORE branch successor observed
 
 Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh
 before/observer/after `screen-unit-seed-1234` runs. Scene, drawing, planning,
@@ -26,7 +26,7 @@ identify the EAX word's Lisp type. The target address remains unnamed. This
 does not identify the direct Lisp caller of `SCREEN-AND-STORE` or
 `SELECT-BRUSH`, add a JS contract, or establish painting parity. See the
 [runtime finding](introspection/screen-and-store-call-return.md) and
-[portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+[call/return evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
 
 The first retry, `sstore27e-20261027-092828-62b4014c`, exposed a missing
 `DBG_CONTINUE` after target-entry validation. The helper now marks that
@@ -37,15 +37,21 @@ reported under `C:\AaronOracleRuns` while the request used its D: junction
 path; stable volume/file identity matched. Keep the exact failed `sstore27e`
 run rejected. See [tooling notes](tooling-workarounds.md#screen-and-store-breakpoint-event-must-be-handled).
 
-Next: use the REA 6.8 listing to capture the conditional `JNZ` at payload
-offset `+0x2b7` (`0x1fe24d23`) and validate its first successor on the same
-thread: fall-through `+0x2b9` or taken target `+0x2bc`. The branch source alone
-only predicts direction; a validated successor establishes the observed
-direction. If fall-through reaches `CALL [EDI-0x71]` at `+0x2b9`, sample its
-pointer there but do not call it a function until a same-thread target-entry
-and return edge are observed. Re-derive all addresses and payload bytes from
-the fresh READY pause, use fresh serialized controls, and keep direct Lisp
-caller and JS behavior claims open.
+The follow-up triplet `sstorebranch-v1-20261027-100218-35655b8e` captured that
+branch and its actual taken successor. At `+0x2b7`, the same-thread observer
+recorded ZF clear and then hit `+0x2bc` before its first instruction. The
+fresh triplet controls passed, six complete-payload rechecks matched, and
+debugger state was restored. See the [branch finding](introspection/screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27)
+and [portable evidence](introspection/evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json).
+
+Next: follow the static path through the `JNZ` at payload `+0x2c3` and the
+`JZ` at `+0x2c7`, requiring each actual same-thread successor before claiming
+the edge. The saved `EAX=0x8c` and `EDX=0xfffffffc` predict both branches are
+not taken in the retained REA 6.8 listing; this has not been observed. If the
+`+0x2cd` jump is reached, require a real `+0x331` hit before tracing the
+second `CALL EDI` at `+0x34a` to a same-thread target entry and `+0x34c`
+return. Re-derive addresses and bytes from the fresh READY pause, use fresh
+serialized controls, and keep direct Lisp caller and JS behavior claims open.
 
 ## Previous tool checkpoint: 2026-10-27 — REA 6.8 SCREEN-AND-STORE rerun
 
@@ -64,6 +70,9 @@ and [REA update record](rea-update-20261027.md).
 This was static-only analysis on an unexecuted synthetic PE. The runtime
 follow-up is recorded above; REA still does not name the dynamic callee or a
 direct Lisp caller, and it does not establish a JavaScript behavior contract.
+The post-successor REA query leaves `CALL EDI` at `+0x34a` unresolved and lists
+the `+0x2cd` jump as the static incoming reference to `+0x331`; the predicted
+later path remains unobserved. See the [follow-up analysis](introspection/rea-payload-analysis.md#rea-68-taken-successor-follow-up-2026-10-27).
 
 ## Earlier checkpoint: 2026-10-15 — PREMIUM JC successor observed
 

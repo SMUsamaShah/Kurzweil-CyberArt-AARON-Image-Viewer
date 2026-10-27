@@ -431,7 +431,24 @@ or JavaScript behavior is established. The capture stopped before the next
 instruction, `MOV [EBP-0x44],EAX`. See the [runtime finding](screen-and-store-call-return.md)
 and [portable evidence](evidence/screen-and-store-call-return-sstore27f-20261027.json).
 
-The next unresolved native question is the `JNZ` at payload offset `+0x2b7`
-(`0x1fe24d23`) and its first same-thread successor. REA places the conditional
-`CALL [EDI-0x71]` at `+0x2b9`; a call-site hit would expose only a candidate
-pointer until a target-entry and return are also observed.
+## REA 6.8 taken-successor follow-up, 2026-10-27
+
+After the live observer recorded `SCREEN-AND-STORE+0x2b7` taking its `+0x2bc`
+successor, REA 6.8.0 / Ghidra 12.1.4 was queried on the same unexecuted
+synthetic PE. `resolve-native-call-targets` at `0x1fe24db6` (payload `+0x34a`,
+`CALL EDI`) reports `status=unresolved` and no targets. The retained query
+report SHA-256 is
+`d004ff1004c81c2964de41001318ce171ed5839c08579abe498c07d71734d82c`. The
+incoming-reference query for `0x1fe24d9d` (payload `+0x331`) lists one static
+source, `0x1fe24d39` (`+0x2cd`, `JMP 0x1fe24d9d`); its report SHA-256 is
+`8d89695a2aa3cc2ac067043d3a4508367285a9df3878ff046ae7822c1ac8b4c3`.
+
+The retained listing predicts that the saved `EAX=0x8c` and `EDX=0xfffffffc`
+values make the `JNZ` at `+0x2c3` fall through and the `JZ` at `+0x2c7` fall
+through, after which the `+0x2cd` jump reaches `+0x331`. That block contains
+`PUSH [EBP-0x44]` at `+0x33d` and `CALL EDI` at `+0x34a`. This is static
+instruction-flow interpretation for one captured register sample; none of
+those later outcomes or the second call was observed. The call target,
+function identity, ABI, direct Lisp caller, JavaScript behavior, and painting
+parity remain unresolved. See the [portable static follow-up record](evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json)
+and [live finding](screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27).

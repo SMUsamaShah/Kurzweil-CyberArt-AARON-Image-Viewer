@@ -1889,3 +1889,16 @@ not executed. The full run roots and triplet comparison remain in ignored
 `research/extracted/local-oracle/`; preserve them for re-derivation. See the
 [finding](../premium-internal-transfer-jc-v1.md) and
 [tooling note](../../tooling-workarounds.md#writer-full-seed-mode-registry-and-jc-triplet-acceptance-2026-10-15).
+
+## SCREEN-AND-STORE taken branch successor, 2026-10-27
+
+[`screen-and-store-branch-successor-sstorebranch-v1-20261027.json`](screen-and-store-branch-successor-sstorebranch-v1-20261027.json)
+records a fresh source-bound triplet in which five ordered same-thread events
+reached the `JNZ` at payload `+0x2b7` and then its taken successor `+0x2bc`.
+The full 1,224-byte mapped payload matched at all six capture phases; fresh
+drawing, scene, planning, writer, screen-unit, screen-color, and staged-source
+controls passed. It also binds REA 6.8 queries that leave the later `CALL EDI`
+at `+0x34a` unresolved and list the `+0x2cd` jump as the static incoming
+reference to `+0x331`. Later branches and calls are predicted only, not
+observed. No JS behavior contract, direct Lisp caller, or painting parity is
+established. See the [finding](../screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27).

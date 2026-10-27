@@ -683,6 +683,15 @@ function Assert-NoTfCaptureAccepted([string]$OutputRoot, $Ready, [string]$Manife
     $expectedRequestHash = [string]$Ready.requestSha256
     $expectedRequestPath = [IO.Path]::GetFullPath((Join-Path $OutputRoot 'pre-scene-probe-request.json'))
     $expectedReleasePath = [IO.Path]::GetFullPath($releasePath)
+    $nativeMap = Get-Content -LiteralPath $MapPath -Raw | ConvertFrom-Json
+    $mappedScreenStore = @($nativeMap.functions | Where-Object { $_.name -ceq 'SCREEN-AND-STORE' })
+    if ($mappedScreenStore.Count -ne 1 -or $nativeMap.functions.Count -ne 1 -or
+        $mappedScreenStore[0].uniqueCompleteObjectByteMatch -ne $true -or
+        [int]$mappedScreenStore[0].payloadBytes -ne 1224) {
+        throw 'No-TF acceptance cannot bind the receipt to one complete mapped SCREEN-AND-STORE payload.'
+    }
+    $mappedEntry = [string]$mappedScreenStore[0].runtime.entry
+    $mappedEntryValue = [Convert]::ToUInt32($mappedEntry.Substring(2), 16)
     if ($report.schemaVersion -ne 1 -or $report.target -cne 'SCREEN-AND-STORE' -or
         $report.accepted -ne $true -or $report.setupError -or
         [int]$report.processId -ne [int]$Ready.processId -or
@@ -696,6 +705,7 @@ function Assert-NoTfCaptureAccepted([string]$OutputRoot, $Ready, [string]$Manife
         [string]$report.sources.metadata.sha256 -cne (Get-Sha256 (Join-Path $OutputRoot 'native-code\function-object-metadata.txt')) -or
         [string]$report.sources.metadata.stagedSha256 -cne [string]$report.sources.metadata.sha256 -or
         [string]$report.inputs.executablePath -cne [string]$Ready.runtimePath -or
+        [string]$report.inputs.liveEntry -cne $mappedEntry -or
         [string]$report.sources.captureManifest.sha256 -cne (Get-Sha256 $ManifestPathForRun) -or
         [string]$report.sources.nativeMap.sha256 -cne (Get-Sha256 $MapPath) -or
         [string]$report.sources.mappedPayloadSha256 -cne (Get-Sha256 $PayloadPath) -or
@@ -703,6 +713,7 @@ function Assert-NoTfCaptureAccepted([string]$OutputRoot, $Ready, [string]$Manife
         [string]$report.sources.runtimePllSha256 -cne (Get-Sha256 (Join-Path $OutputRoot 'runtime\AARON.pll')) -or
         [string]$report.sources.requiredProbeRunnerSha256 -cne (Get-Sha256 $runnerPath) -or
         [string]$debug.runId -cne (Split-Path -Leaf $OutputRoot) -or
+        [string]$debug.liveEntry -cne $mappedEntry -or
         [string]$debug.requestSha256 -cne $expectedRequestHash -or
         [int]$debug.processId -ne [int]$Ready.processId -or
         -not [string]::Equals([string]$debug.expectedRuntimePath, [string]$Ready.runtimePath, [StringComparison]::OrdinalIgnoreCase) -or
@@ -727,13 +738,111 @@ function Assert-NoTfCaptureAccepted([string]$OutputRoot, $Ready, [string]$Manife
         $debug.captureCompleted -ne $true -or $debug.breakpointsArmedBeforeRelease -ne $true -or
         $debug.readyPauseReleased -ne $true -or $debug.debugRegistersRestored -ne $true -or
         $debug.detachSucceeded -ne $true -or @($debug.cleanupErrors).Count -ne 0 -or
-        @($debug.events).Count -ne 3 -or
+        @($debug.events).Count -ne 5 -or
         $debug.events[0].kind -cne 'source-hit' -or
         $debug.events[1].kind -cne 'target-entry' -or
         $debug.events[2].kind -cne 'call-return' -or
-        $debug.events[0].order -ne 1 -or $debug.events[1].order -ne 2 -or $debug.events[2].order -ne 3 -or
+        $debug.events[3].kind -cne 'branch-hit' -or
+        $debug.events[4].kind -cne 'branch-successor' -or
+        $debug.events[0].order -ne 1 -or $debug.events[1].order -ne 2 -or
+        $debug.events[2].order -ne 3 -or $debug.events[3].order -ne 4 -or $debug.events[4].order -ne 5 -or
+        $debug.events[0].slot -ne 0 -or $debug.events[1].slot -ne 0 -or
+        $debug.events[2].slot -ne 1 -or $debug.events[3].slot -ne 0 -or
         $debug.cleanupReceipt.releaseMarkerCreated -ne $true) {
-        throw 'No-TF capture receipt failed its source, run, event-order, release, restore, detach, or cleanup gates.'
+        throw 'No-TF capture receipt failed its source, run, five-event order, release, restore, detach, or cleanup gates.'
+    }
+    $entry = $mappedEntryValue
+    $expectedBranchAddress = [uint32]($entry + 0x2b7)
+    $expectedFallthroughAddress = [uint32]($entry + 0x2b9)
+    $expectedTakenAddress = [uint32]($entry + 0x2bc)
+    $branchEvent = $debug.events[3]
+    $successorEvent = $debug.events[4]
+    $branchDetails = $branchEvent.details
+    $successorDetails = $successorEvent.details
+    if ([string]$debug.branchAddress -cne ('0x{0:x8}' -f $expectedBranchAddress) -or
+        [string]$debug.fallthroughAddress -cne ('0x{0:x8}' -f $expectedFallthroughAddress) -or
+        [string]$debug.takenAddress -cne ('0x{0:x8}' -f $expectedTakenAddress) -or
+        [string]$branchDetails.branchAddress -cne [string]$debug.branchAddress -or
+        [string]$branchDetails.branchBytesHex -cne '7503' -or
+        [string]$branchDetails.fallthroughBytesHex -cne 'ff578f' -or
+        [string]$branchDetails.branchEflags -cne [string]$branchEvent.registers.eflags -or
+        [string]$debug.branchEflags -cne [string]$branchEvent.registers.eflags -or
+        [string]$branchEvent.registers.eip -cne [string]$debug.branchAddress -or
+        [string]$branchEvent.registers.dr0 -cne [string]$debug.branchAddress -or
+        [string]$branchEvent.registers.dr1 -cne '0x00000000' -or
+        (([Convert]::ToUInt32(([string]$branchEvent.registers.dr7).Substring(2), 16) -band 0xff) -ne 0x01) -or
+        (([Convert]::ToUInt32(([string]$branchEvent.registers.dr7).Substring(2), 16) -band 0xffff0000) -ne 0) -or
+        (([Convert]::ToUInt32(([string]$branchEvent.registers.dr6).Substring(2), 16) -band 0xe00f) -ne 0x01) -or
+        (([Convert]::ToUInt32(([string]$branchEvent.registers.eflags).Substring(2), 16) -band 0x100) -ne 0)) {
+        throw 'No-TF capture receipt does not bind the branch breakpoint to the mapped JNZ instruction with TF clear.'
+    }
+    $branchFlags = [Convert]::ToUInt32(([string]$branchDetails.branchEflags).Substring(2), 16)
+    $zeroFlag = (($branchFlags -band 0x40) -ne 0)
+    $predictedSlot = if ($zeroFlag) { 0 } else { 1 }
+    $predictedAddress = if ($zeroFlag) { $expectedFallthroughAddress } else { $expectedTakenAddress }
+    if ([bool]$branchDetails.zeroFlag -ne $zeroFlag -or
+        [bool]$debug.branchZeroFlag -ne $zeroFlag -or
+        [int]$branchDetails.predictedSuccessorSlot -ne $predictedSlot -or
+        [string]$branchDetails.predictedSuccessorAddress -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [string]$debug.predictedSuccessorAddress -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [int]$successorEvent.slot -ne $predictedSlot -or
+        [int]$successorDetails.observedSuccessorSlot -ne $predictedSlot -or
+        [string]$successorDetails.branchEflags -cne [string]$branchEvent.registers.eflags -or
+        [bool]$successorDetails.zeroFlagAtBranch -ne $zeroFlag -or
+        [string]$successorDetails.predictedSuccessorAddress -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [string]$successorDetails.observedSuccessorAddress -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [string]$successorDetails.fallthroughAddress -cne ('0x{0:x8}' -f $expectedFallthroughAddress) -or
+        [string]$successorDetails.takenAddress -cne ('0x{0:x8}' -f $expectedTakenAddress) -or
+        [string]$debug.observedSuccessorAddress -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [int]$debug.observedSuccessorSlot -ne $predictedSlot -or
+        [string]$successorEvent.registers.eip -cne ('0x{0:x8}' -f $predictedAddress) -or
+        [string]$successorEvent.registers.dr0 -cne ('0x{0:x8}' -f $expectedFallthroughAddress) -or
+        [string]$successorEvent.registers.dr1 -cne ('0x{0:x8}' -f $expectedTakenAddress) -or
+        $successorDetails.observedEdgeMatchesPrediction -ne $true -or
+        (([Convert]::ToUInt32(([string]$successorEvent.registers.dr7).Substring(2), 16) -band 0xff) -ne 0x05) -or
+        (([Convert]::ToUInt32(([string]$successorEvent.registers.dr7).Substring(2), 16) -band 0xffff0000) -ne 0) -or
+        (([Convert]::ToUInt32(([string]$successorEvent.registers.dr6).Substring(2), 16) -band 0xe00f) -ne (1 -shl $predictedSlot)) -or
+        (([Convert]::ToUInt32(([string]$successorEvent.registers.eflags).Substring(2), 16) -band 0x100) -ne 0)) {
+        throw 'No-TF capture receipt does not prove that the observed same-thread successor matches the JNZ ZF prediction.'
+    }
+    $expectedPayloadPhases = @('immediately-before-arm', 'source-hit', 'target-entry', 'call-return', 'branch-hit', 'branch-successor')
+    $payloadChecks = @($debug.payloadRechecks)
+    if ($payloadChecks.Count -ne $expectedPayloadPhases.Count) {
+        throw 'No-TF capture receipt is missing full live-payload rechecks at one or more call/branch events.'
+    }
+    for ($index = 0; $index -lt $expectedPayloadPhases.Count; $index++) {
+        if ($payloadChecks[$index].phase -cne $expectedPayloadPhases[$index] -or $payloadChecks[$index].exactMatch -ne $true) {
+            throw 'No-TF capture receipt contains a mismatching or unordered full-payload recheck.'
+        }
+    }
+    $transitions = @($debug.debugStateTransitions)
+    if ($transitions.Count -ne 2 -or
+        $transitions[0].phase -cne 'return-to-branch' -or
+        [int]$transitions[0].threadId -ne [int]$debug.selectedThreadId -or
+        $transitions[0].oldDr0 -cne [string]$debug.ediTarget -or
+        $transitions[0].oldDr1 -cne ('0x{0:x8}' -f ($entry + 0x2a8)) -or
+        $transitions[0].oldDr7LowByte -cne '0x00000004' -or
+        $transitions[0].newDr0 -cne [string]$debug.branchAddress -or
+        $transitions[0].newDr1 -cne '0x00000000' -or
+        $transitions[0].newDr7LowByte -cne '0x00000001' -or
+        (([Convert]::ToUInt32(([string]$transitions[0].newDr7).Substring(2), 16) -band 0xff) -ne
+            [Convert]::ToUInt32(([string]$transitions[0].newDr7LowByte).Substring(2), 16)) -or
+        (([Convert]::ToUInt32(([string]$transitions[0].newDr7).Substring(2), 16) -band 0xffff0000) -ne 0) -or
+        (([Convert]::ToUInt32(([string]$transitions[0].newDr6).Substring(2), 16) -band 0xe00f) -ne 0) -or
+        $transitions[1].phase -cne 'branch-to-successors' -or
+        [int]$transitions[1].threadId -ne [int]$debug.selectedThreadId -or
+        $transitions[1].oldDr0 -cne [string]$debug.branchAddress -or
+        $transitions[1].oldDr1 -cne '0x00000000' -or
+        $transitions[1].oldDr7LowByte -cne '0x00000001' -or
+        $transitions[1].newDr0 -cne ('0x{0:x8}' -f $expectedFallthroughAddress) -or
+        $transitions[1].newDr1 -cne ('0x{0:x8}' -f $expectedTakenAddress) -or
+        $transitions[1].newDr7LowByte -cne '0x00000005' -or
+        (([Convert]::ToUInt32(([string]$transitions[1].newDr7).Substring(2), 16) -band 0xff) -ne
+            [Convert]::ToUInt32(([string]$transitions[1].newDr7LowByte).Substring(2), 16)) -or
+        (([Convert]::ToUInt32(([string]$transitions[1].newDr7).Substring(2), 16) -band 0xffff0000) -ne 0) -or
+        (([Convert]::ToUInt32(([string]$transitions[1].newDr6).Substring(2), 16) -band 0xe00f) -ne 0) -or
+        $transitions[0].trapFlagClear -ne $true -or $transitions[1].trapFlagClear -ne $true) {
+        throw 'No-TF capture receipt is missing verified debug-register transitions for the branch and its successors.'
     }
     $eventThreads = @($debug.events | ForEach-Object { [int]$_.threadId } | Select-Object -Unique)
     $eventProcesses = @($debug.events | ForEach-Object { [int]$_.processId } | Select-Object -Unique)
@@ -1054,6 +1163,13 @@ try {
             probeSha256 = $capture.sources.requiredProbeSource.sha256
             debuggerGates = [ordered]@{
                 events = @($capture.debuggerResult.events | ForEach-Object { $_.kind })
+                branchAddress = $capture.debuggerResult.branchAddress
+                branchEflags = $capture.debuggerResult.branchEflags
+                branchZeroFlag = $capture.debuggerResult.branchZeroFlag
+                predictedSuccessorAddress = $capture.debuggerResult.predictedSuccessorAddress
+                observedSuccessorAddress = $capture.debuggerResult.observedSuccessorAddress
+                observedSuccessorSlot = $capture.debuggerResult.observedSuccessorSlot
+                observedEdgeMatchesPrediction = $capture.debuggerResult.events[4].details.observedEdgeMatchesPrediction
                 processImageIdentityMatchesAtInitialCheck = $capture.debuggerResult.initialFileIdentityMatches
                 processImageIdentityMatchesBeforeRelease = $capture.debuggerResult.preReleaseFileIdentityMatches
                 processImageIdentityStableFromInitial = $capture.debuggerResult.preReleaseSameIdentityAsInitial
@@ -1067,7 +1183,9 @@ try {
         }
         capturedAt = [DateTimeOffset]::UtcNow.ToString('o')
         limitations = @(
-            'The continuation breakpoint stops before 89 45 BC executes; no local-store effect is claimed.',
+            'The call-return event is before 89 45 BC; the capture then resumes through that store to reach the JNZ successor, without reading back or interpreting the store result.',
+            'The branch direction is specific to this captured call; ZF predicts the edge and the same-thread successor hit confirms it.',
+            'The fall-through successor is before FF 57 8F executes. Its indirect pointer slot may be sampled, but that alone does not prove the call target or execution.',
             'The EDI value remains a raw CPU target; no Lisp name, ABI, or direct caller is inferred.',
             'Acceptance applies only to this source-bound process and bounded triplet.'
         )

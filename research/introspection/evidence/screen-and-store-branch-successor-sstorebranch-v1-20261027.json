@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "investigation": "Source-bound SCREEN-AND-STORE JNZ and actual successor observation",
+  "status": "accepted-bounded-native-observation; no-JavaScript-contract",
+  "triplet": {
+    "id": "sstorebranch-v1-20261027-100218-35655b8e",
+    "mode": "screen-unit-seed-1234",
+    "allThreeRunsFresh": true,
+    "serialized": true,
+    "runs": {
+      "before": {
+        "complete": true,
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+      },
+      "observer": {
+        "complete": true,
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+      },
+      "after": {
+        "complete": true,
+        "aa0Sha256": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+        "sceneReportSha256": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235"
+      }
+    },
+    "verifierPassed": true,
+    "comparedControlHashes": {
+      "capture/aa0": "405745c3bb2f31ec5423a1e42f23fa569c0e691418fcb9864869fb564364267a",
+      "capture/image": "457793c43166f822d8ded53b1570c8cdc1b7db9da794425344b8669b0d8b5e8e",
+      "capture/image-id": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "capture/aaron-scene-state-snapshot.txt": "13aff33e06660f5c88723b62186c1aeb8a3fa9f97443fda1792e5c3ef57ae235",
+      "capture/aaron-planning-call-trace.txt": "a6dc91384e869ef446f7580d0698db0fa3b90121f90d79bac9846a8d156fe1a6",
+      "capture/aaron-random-seed-loaded.txt": "205572d836240f040192b1f9c053335b3e8d5749491ad358fe6bf689648b0551",
+      "capture/aaron-writer-full.txt": "e09414a80347c837fcc03a5b2f496eb30d4fdc2909e09bc696907af94601d002",
+      "capture/aaron-screen-units.txt": "6ffdc26d7f614912586cc0daa015d786335e819d45f020bf69f7db418ae08b36",
+      "capture/aaron-screen-color-data.txt": "d8aab80ed5d47ab6d72a3cf2f1e757a79eee5cb0e3b409d1566e3cda5a7020e1"
+    },
+    "stagedSourceCount": 10
+  },
+  "sourceBinding": {
+    "runtimeExecutableSha256": "348e88f145f47adfa12a83cded6cff56b57d88e9f11d1d3a94fa48f52a19305d",
+    "runtimePllSha256": "7ffc7dc9e3e62b1c5ba3612630b8747778324fa674dac42916be3e90bb96504c",
+    "functionObject": {
+      "name": "COMMON-GRAPHICS-USER::SCREEN-AND-STORE",
+      "type": "COMPILED-FUNCTION",
+      "metadataSha256": "4e2301083ac762122461c433db7ecf7b1dea69e183fa9774bafae4b78c7c7acf",
+      "readyPrefixSha256": "434e225c1754a13352842c2da1b7e6f9d512eadb0178197fd5aa9c0bede64af9",
+      "endMarkerObserved": true
+    },
+    "mappedNativePayload": {
+      "liveEntry": "0x1fe24a6c",
+      "bytes": 1224,
+      "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+      "nativeMapSha256": "c5177498589d06e385507e6e1c94da1a7af1fd96bc0b5867f2e1340a7bbe434e",
+      "rawWindowSha256": "38d636f56b905291c0d19afe5ec05bd8084347a7fd95f0978dce1de1d2a06e20",
+      "pllObjectOffset": 2640488,
+      "pllPayloadOffset": 2640492,
+      "objectBytes": 1228,
+      "objectSha256": "f96487d52953a1e8d5748d6d5b0d168a8eca65d0ab83eb2cecab478c80c0b54a",
+      "uniqueCompleteObjectByteMatch": true
+    },
+    "captureSources": {
+      "coordinatorSha256": "d56c3c64a6a035d82c68f87afb55b38c531d713446cd92cc1de79ead46750077",
+      "requiredProbeRunnerSha256": "ea40ed24d91e98015d7b55dd26589974c7ba9cd5ac07f448408910c54b2db542",
+      "probeSourceSha256": "f4a4aded29c2493dff8acafbe432e5b8ded167eef88ee7d35511d831859b13da",
+      "nativeReaderSha256": "edfa524d691581d1047e8a4b19f4e1fa32a345cb2e20b2124446a5c979d333ef",
+      "noTfLauncherSha256": "da16d9c1ed0b1adb15d69d967d562366340c0e3a9fc1860ba30425929f6d06cb",
+      "noTfDebuggerHelperSha256": "4b992f3845d19bb59a94005b7e6a4645c37622ddc00c606ce53f67c0d92b1b41",
+      "tripletVerifierSha256": "14a07b912365da6d01d4a0576039f763a9c04a7373c19abe3a2999234e24ba25",
+      "sceneParserSha256": "b4dbc61fd3ee6424a8e50fcb9c3de470b7d2d69b5a4ba3b7e4548d69d9e305c1",
+      "requestSha256": "c4ff4d3f199ee05cfa2e12f860855699958056ef8c2de9b14d1e3be3e30065b2",
+      "captureManifestSha256": "ef02db4daa7c520926beb505b2af6ba3e5e4d31811558c11736da6c52f52b668"
+    },
+    "originalArtifacts": {
+      "tripletSummary": {
+        "path": "research/extracted/local-oracle/screen-store-call-return-triplet-v1-logs/sstorebranch-v1-20261027-100218-35655b8e/source-bound-triplet-summary.json",
+        "sha256": "52c6f4ab507ff648b1cd993f3e9474873355a9416c35ee5973b34f04eee325b5"
+      },
+      "noTfCaptureReport": {
+        "path": "research/extracted/local-oracle/external-runs/sstorebranch-v1-20261027-100218-35655b8e-observer/capture/screen-store-call-return-no-tf-v1.json",
+        "sha256": "ecd913bf487f347e76bd1039dfd18e7ae93a5599e8fe784119271c7355584883"
+      }
+    }
+  },
+  "observation": {
+    "events": [
+      {
+        "order": 1,
+        "kind": "source-hit",
+        "threadId": 21444,
+        "address": "0x1fe24d12",
+        "bytesHex": "ffd7",
+        "instruction": "CALL EDI",
+        "registers": {
+          "esp": "0x06ac88e8",
+          "ebp": "0x06ac8968",
+          "eax": "0x00000084",
+          "edi": "0x20000985"
+        }
+      },
+      {
+        "order": 2,
+        "kind": "target-entry",
+        "threadId": 21444,
+        "address": "0x20000985",
+        "registers": {
+          "esp": "0x06ac88e4",
+          "ebp": "0x06ac8968",
+          "eax": "0x00000084",
+          "edi": "0x20000985"
+        },
+        "returnAddressAtEsp": "0x1fe24d14",
+        "targetWindowHex": "83e17f8b7315894df039679b7209eb85"
+      },
+      {
+        "order": 3,
+        "kind": "call-return",
+        "threadId": 21444,
+        "address": "0x1fe24d14",
+        "continuationBytesHex": "8945bc",
+        "registers": {
+          "esp": "0x06ac88e8",
+          "ebp": "0x06ac8968",
+          "eax": "0x0000008c"
+        },
+        "returnEspEqualsPreCallEsp": true,
+        "captureBeforeContinuationInstruction": true
+      },
+      {
+        "order": 4,
+        "kind": "branch-hit",
+        "threadId": 21444,
+        "address": "0x1fe24d23",
+        "payloadOffset": "0x2b7",
+        "bytesHex": "7503",
+        "instruction": "JNZ rel8 +3",
+        "eflags": "0x00000282",
+        "zeroFlag": false,
+        "predictedSuccessorAddress": "0x1fe24d28",
+        "predictedSuccessorSlot": 1
+      },
+      {
+        "order": 5,
+        "kind": "branch-successor",
+        "threadId": 21444,
+        "slot": 1,
+        "address": "0x1fe24d28",
+        "payloadOffset": "0x2bc",
+        "bytesHex": "8bd8",
+        "instruction": "MOV EBX,EAX",
+        "eflagsAtBranch": "0x00000282",
+        "observedEdgeMatchesPrediction": true,
+        "registers": {
+          "eax": "0x0000008c",
+          "edx": "0xfffffffc",
+          "esp": "0x06ac88e8",
+          "ebp": "0x06ac8968"
+        }
+      }
+    ],
+    "sameThread": true,
+    "sameProcess": true,
+    "completePayloadRechecks": {
+      "count": 6,
+      "allExact": true,
+      "sha256": "1ac15580adf6ea0ead549a875d8d442b25d10fd267fb558d891bd919d46da872",
+      "phases": [
+        "immediately-before-arm",
+        "source-hit",
+        "target-entry",
+        "call-return",
+        "branch-hit",
+        "branch-successor"
+      ]
+    },
+    "instructionRechecks": {
+      "callAddress": "0x1fe24d12",
+      "callBytesHex": "ffd7",
+      "returnAddress": "0x1fe24d14",
+      "returnBytesHex": "8945bc",
+      "branchAddress": "0x1fe24d23",
+      "branchBytesHex": "7503",
+      "fallthroughAddress": "0x1fe24d25",
+      "fallthroughBytesHex": "ff578f",
+      "takenAddress": "0x1fe24d28",
+      "takenBytesHex": "8bd8"
+    },
+    "registerTransitions": [
+      {
+        "phase": "return-to-branch",
+        "threadId": 21444,
+        "oldDr0": "0x20000985",
+        "oldDr1": "0x1fe24d14",
+        "oldDr7LowByte": "0x00000004",
+        "newDr0": "0x1fe24d23",
+        "newDr1": "0x00000000",
+        "newDr7": "0x00000001",
+        "newDr6": "0x00000000",
+        "trapFlagClear": true
+      },
+      {
+        "phase": "branch-to-successors",
+        "threadId": 21444,
+        "oldDr0": "0x1fe24d23",
+        "oldDr1": "0x00000000",
+        "oldDr7LowByte": "0x00000001",
+        "newDr0": "0x1fe24d25",
+        "newDr1": "0x1fe24d28",
+        "newDr7": "0x00000005",
+        "newDr6": "0x00000000",
+        "trapFlagClear": true
+      }
+    ],
+    "debugger": {
+      "processId": 27304,
+      "initialPathStringMatchedSuppliedPath": false,
+      "fileIdentityMatchedAndStayedStable": true,
+      "breakpointsArmedBeforeRelease": true,
+      "readyPauseReleased": true,
+      "debugRegistersRestored": true,
+      "detached": true,
+      "cleanupErrors": []
+    }
+  },
+  "rea6_8StaticFollowup": {
+    "toolchainSha256": "3e84aceb7c23ea8b04a83c9ba9d969f1a07fbcecd4ed3c5f338fe0aec28a7490",
+    "ghidraVersion": "12.1.4",
+    "syntheticPe": {
+      "path": "research/artifacts/rea-tools/screen-store-return-flow-20261015-a/screen-and-store.synthetic.exe",
+      "sha256": "d083595b441640a47ec15cb29cf016729f1db3d89e8f25ffd1ff9fe5fdccb686",
+      "executed": false
+    },
+    "secondCallResolution": {
+      "address": "0x1fe24db6",
+      "payloadOffset": "0x34a",
+      "instruction": "CALL EDI",
+      "status": "unresolved",
+      "targets": [],
+      "queryReportPath": "research/artifacts/rea-tools/screen-store-taken-path-20261027-rea68-a/call-34a-elevated/rea-result.json",
+      "queryReportSha256": "d004ff1004c81c2964de41001318ce171ed5839c08579abe498c07d71734d82c"
+    },
+    "pushBlockIncomingReferences": {
+      "address": "0x1fe24d9d",
+      "payloadOffset": "0x331",
+      "sourceAddresses": ["0x1fe24d39"],
+      "sourceOffset": "0x2cd",
+      "sourceInstruction": "JMP 0x1fe24d9d",
+      "queryReportPath": "research/artifacts/rea-tools/screen-store-taken-path-20261027-rea68-a/xrefs-331-elevated/rea-result.json",
+      "queryReportSha256": "8d89695a2aa3cc2ac067043d3a4508367285a9df3878ff046ae7822c1ac8b4c3"
+    },
+    "staticPathFromCapturedRegisters": {
+      "capturedEax": "0x0000008c",
+      "capturedEdx": "0xfffffffc",
+      "predictions": [
+        "After the observed +0x2bc MOV EBX,EAX, OR EBX,EDX yields low two bits 0; the JNZ at +0x2c3 is predicted not taken to +0x2c5.",
+        "CMP EAX,EDX compares 0x8c with 0xfffffffc; the JZ at +0x2c7 is predicted not taken to the JMP at +0x2cd.",
+        "The +0x2cd JMP is predicted to reach +0x331, whose block contains PUSH [EBP-0x44] at +0x33d and CALL EDI at +0x34a."
+      ],
+      "executionObserved": false
+    }
+  },
+  "scope": {
+    "proves": [
+      "One source-bound SCREEN-AND-STORE call at +0x2a6 reached a raw dynamic EDI target and returned to +0x2a8 on the same thread.",
+      "At +0x2b7, the captured ZF=0 predicted the taken JNZ edge to +0x2bc, and the same thread hit that successor before its instruction executed.",
+      "The six full live-payload comparisons matched the exact 1,224-byte PLL-mapped payload throughout the capture.",
+      "REA 6.8 reports the later CALL EDI at +0x34a as a computed call with no statically resolved target, and the static xrefs query lists +0x2cd as the incoming reference to the +0x331 block."
+    ],
+    "doesNotProve": [
+      "A Lisp name, source body, ABI, or semantic type for dynamic address 0x20000985 or raw EAX 0x0000008c.",
+      "The exact memory value/effect of MOV [EBP-0x44],EAX at the later branch; the call-return stop was before it and no local-value readback was made.",
+      "Execution of the +0x2c3 or +0x2c7 branch, the +0x2cd jump, the +0x331 block, or the second CALL EDI at +0x34a.",
+      "Execution of the fall-through CALL [EDI-0x71] at +0x2b9 in this triplet.",
+      "A direct Lisp caller relationship, JavaScript behavior contract, or whole-painting parity."
+    ]
+  }
+}

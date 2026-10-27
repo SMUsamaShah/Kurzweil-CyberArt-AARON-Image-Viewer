@@ -979,7 +979,7 @@ and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.
 The `CALL EDI` return-use capture described as future work at this checkpoint
 was completed in the later 2026-10-27 triplet below.
 
-## Current checkpoint: SCREEN-AND-STORE call/return observed, 2026-10-27
+## Current checkpoint: SCREEN-AND-STORE branch successor observed, 2026-10-27
 
 Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh,
 serialized before/observer/after runs. The source-bound observer mapped the
@@ -987,11 +987,22 @@ complete 1,224-byte `SCREEN-AND-STORE` payload at `0x1fe24a6c` and captured
 same-thread `CALL EDI` at `+0x2a6`, raw target `0x20000985`, target entry, and
 return to `+0x2a8` with `EAX=0x0000008c`. All scene, drawing, planning,
 writer, screen-unit, screen-color, and staged-source controls matched; debug
-registers were restored and detach succeeded without cleanup errors. The
-capture stopped before `89 45 BC`, so no local store or result type is claimed.
-The target remains unnamed and this adds no JS contract or painting parity.
+registers were restored and detach succeeded without cleanup errors. In this
+return-only triplet, the breakpoint stopped before `89 45 BC`; it did not
+measure the later local value or establish a result type. The target remains
+unnamed and this adds no JS contract or painting parity.
 See the [finding](introspection/screen-and-store-call-return.md) and
 [portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+A separate accepted triplet, `sstorebranch-v1-20261027-100218-35655b8e`,
+extended the observer through the conditional branch at payload `+0x2b7`.
+ZF was clear at `JNZ rel8 +3`, and a same-thread execute breakpoint observed
+the taken successor `+0x2bc` before `MOV EBX,EAX`. All six complete payload
+rechecks and fresh before/observer/after controls passed, with debugger state
+restored and clean detach. The branch evidence is linked from the
+[runtime finding](introspection/screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27).
+This is a separate invocation from `sstore27f`; it does not combine the two
+captures into one trace.
 
 A failed first retry exposed the missing `DBG_CONTINUE` after a validated
 target-entry hardware breakpoint. The focused fix passed no-launch compilation,
@@ -1000,13 +1011,12 @@ reported a C: image path for the D: request while file identities matched;
 retain the identity checks and failure diagnostics documented in
 [tooling workarounds](tooling-workarounds.md).
 
-Next: extend the no-TF observer to the `JNZ` at payload offset `+0x2b7`
-(`0x1fe24d23`). Record the source flags and frame operands, then arm and
-validate both immediate successors: fall-through `+0x2b9` before
-`CALL [EDI-0x71]`, or taken destination `+0x2bc`. A pre-branch flags snapshot
-predicts direction; only a validated same-thread successor establishes the
-observed edge. If the call site is reached, record `[EDI-0x71]` as a raw
-candidate pointer; a separate same-thread target-entry and return sequence is
-required to claim that call executed or to identify its target. Recompute all
-live addresses and byte checks from the fresh READY pause and keep the full
-source-bound triplet and cleanup gates.
+Next: extend the no-TF observer from the accepted `+0x2bc` successor through
+the REA-listed `JNZ` at `+0x2c3` and `JZ` at `+0x2c7`, recording each branch
+and validating its immediate same-thread successor. If the `+0x2cd` jump is
+reached, require an actual `+0x331` event before tracing the `CALL EDI` at
+`+0x34a`, its same-thread target entry, and return to `+0x34c`. Captured
+`EAX=0x8c` and `EDX=0xfffffffc` predict a not-taken outcome for both
+conditions in the retained REA listing, but do not prove the path executes.
+Recompute live addresses and bytes from the fresh READY pause and keep the
+full source-bound triplet, fresh controls, and cleanup gates.

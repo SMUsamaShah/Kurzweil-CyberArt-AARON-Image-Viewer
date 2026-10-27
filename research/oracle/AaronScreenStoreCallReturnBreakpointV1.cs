@@ -11,8 +11,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 // Read-only, site-specific no-TF capture for SCREEN-AND-STORE's mapped
-// CALL EDI at payload offset 0x2a6. Only per-thread WOW64 debug registers are
-// changed; the helper writes no AARON code or process memory.
+// CALL EDI at +0x2a6, its return, and the JNZ successor at +0x2b7.
+// Only per-thread WOW64 debug registers are changed; the helper writes no
+// AARON code or process memory.
 public static class AaronScreenStoreCallReturnBreakpointV1
 {
     const uint DBG_CONTINUE = 0x00010002;
@@ -24,6 +25,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
     const uint CONTEXT_DEBUG_REGISTERS = 0x00010010;
     const uint CONTEXT_CONTROL_INTEGER_DEBUG = 0x00010013;
     const uint EFLAGS_TF = 0x00000100;
+    const uint EFLAGS_ZF = 0x00000040;
     const uint MEM_COMMIT = 0x00001000;
     const uint PAGE_GUARD = 0x00000100;
     const uint PROCESS_ACCESS = 0x00100411; // SYNCHRONIZE | TERMINATE | VM_READ | QUERY_INFORMATION
@@ -40,15 +42,21 @@ public static class AaronScreenStoreCallReturnBreakpointV1
     const int PAYLOAD_BYTES = 1224;
     const uint CALL_SITE_OFFSET = 0x2a6;
     const uint CONTINUATION_OFFSET = 0x2a8;
+    const uint BRANCH_OFFSET = 0x2b7;
+    const uint FALLTHROUGH_OFFSET = 0x2b9;
     const int TARGET_WINDOW_BYTES = 16;
     const int STACK_WINDOW_BYTES = 32;
     const int MAX_DEBUG_EVENTS = 4096;
     const int PHASE_WAIT_SOURCE = 0;
     const int PHASE_WAIT_TARGET = 1;
     const int PHASE_WAIT_RETURN = 2;
-    const int PHASE_COMPLETE = 3;
+    const int PHASE_WAIT_BRANCH = 3;
+    const int PHASE_WAIT_SUCCESSOR = 4;
+    const int PHASE_COMPLETE = 5;
     static readonly byte[] ExpectedCallBytes = { 0xff, 0xd7 };
     static readonly byte[] ExpectedContinuationBytes = { 0x89, 0x45, 0xbc };
+    static readonly byte[] ExpectedBranchBytes = { 0x75, 0x03 };
+    static readonly byte[] ExpectedFallthroughBytes = { 0xff, 0x57, 0x8f };
 
     [StructLayout(LayoutKind.Explicit, Size = 716)]
     struct Wow64Context
@@ -448,7 +456,8 @@ public static class AaronScreenStoreCallReturnBreakpointV1
     }
 
     static Dictionary<string, object> NewResult(uint pid, string runtimePath, string processPath,
-        ulong expectedCreationFileTimeUtc, uint liveEntry, string payloadPath, string payloadSha256, uint callSite, string releaseFile,
+        ulong expectedCreationFileTimeUtc, uint liveEntry, string payloadPath, string payloadSha256,
+        uint callSite, uint branchAddress, uint fallthroughAddress, uint takenAddress, string releaseFile,
         string requestPath, string requestSha256, string runId, int seconds)
     {
         return new Dictionary<string, object> {
@@ -469,6 +478,16 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             { "continuationOffset", Hex(CONTINUATION_OFFSET) },
             { "continuationAddress", Hex(callSite + 2u) },
             { "continuationBytesHex", BytesHex(ExpectedContinuationBytes) },
+            { "branchOffset", Hex(BRANCH_OFFSET) }, { "branchAddress", Hex(branchAddress) },
+            { "branchBytesHex", BytesHex(ExpectedBranchBytes) },
+            { "fallthroughOffset", Hex(FALLTHROUGH_OFFSET) },
+            { "fallthroughAddress", Hex(fallthroughAddress) },
+            { "fallthroughBytesHex", BytesHex(ExpectedFallthroughBytes) },
+            { "takenAddress", Hex(takenAddress) },
+            { "branchDisplacementHex", "0x" + ExpectedBranchBytes[1].ToString("x2", CultureInfo.InvariantCulture) },
+            { "branchEflags", null }, { "branchZeroFlag", null },
+            { "predictedSuccessorAddress", null }, { "observedSuccessorAddress", null },
+            { "observedSuccessorSlot", null },
             { "releaseMarkerPath", releaseFile }, { "requestPath", requestPath },
             { "requestSha256", requestSha256 }, { "runId", runId },
             { "captureSeconds", seconds }, { "debuggerAttached", false },
@@ -479,6 +498,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             { "accepted", false }, { "terminalReason", "preflight" }, { "captureError", null },
             { "preArmPayloadComparison", null },
             { "events", new List<Dictionary<string, object>>() },
+            { "debugStateTransitions", new List<Dictionary<string, object>>() },
             { "debugEvents", new List<Dictionary<string, object>>() },
             { "threadStateSnapshots", new List<Dictionary<string, object>>() },
             { "debugStateRestorations", new List<Dictionary<string, object>>() },
@@ -531,6 +551,30 @@ public static class AaronScreenStoreCallReturnBreakpointV1
         Dictionary<string, object> record = new Dictionary<string, object> {
             { "phase", phase }, { "callAddress", Hex(callSite) }, { "callBytesHex", BytesHex(call) },
             { "continuationAddress", Hex(callSite + 2u) }, { "continuationBytesHex", BytesHex(continuation) }
+        };
+        List<Dictionary<string, object>> checks = (List<Dictionary<string, object>>)result["instructionRechecks"];
+        checks.Add(record);
+    }
+
+    static void VerifyBranchSequence(IntPtr process, uint branchAddress, uint fallthroughAddress,
+        uint takenAddress, Dictionary<string, object> result, string phase)
+    {
+        byte[] branch = ReadExact(process, branchAddress, ExpectedBranchBytes.Length);
+        byte[] fallthrough = ReadExact(process, fallthroughAddress, ExpectedFallthroughBytes.Length);
+        int displacement = unchecked((sbyte)branch[1]);
+        long derivedTaken = (long)branchAddress + branch.Length + displacement;
+        if (BytesHex(branch) != BytesHex(ExpectedBranchBytes) ||
+            BytesHex(fallthrough) != BytesHex(ExpectedFallthroughBytes) ||
+            fallthroughAddress != checked(branchAddress + (uint)branch.Length) ||
+            derivedTaken < 0 || derivedTaken > UInt32.MaxValue || (uint)derivedTaken != takenAddress)
+            throw new InvalidOperationException("Live JNZ or its first fall-through instruction differs from the mapped payload at " + phase);
+        Dictionary<string, object> record = new Dictionary<string, object> {
+            { "phase", phase }, { "branchAddress", Hex(branchAddress) },
+            { "branchBytesHex", BytesHex(branch) }, { "branchLength", branch.Length },
+            { "fallthroughAddress", Hex(fallthroughAddress) },
+            { "fallthroughBytesHex", BytesHex(fallthrough) },
+            { "signedDisplacement", displacement }, { "derivedTakenAddress", Hex((uint)derivedTaken) },
+            { "expectedTakenAddress", Hex(takenAddress) }
         };
         List<Dictionary<string, object>> checks = (List<Dictionary<string, object>>)result["instructionRechecks"];
         checks.Add(record);
@@ -626,6 +670,52 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             { "dr6", Hex(readback.Dr6) }, { "dr7", Hex(readback.Dr7) },
             { "targetSlotDisabled", true }, { "returnGuardStillArmed", true }
         };
+    }
+
+    static Dictionary<string, object> TransitionSlots(ThreadState state, uint tid,
+        uint expectedLow, uint expectedDr0, uint expectedDr1,
+        uint newDr0, uint newDr1, bool useDr1, string phase,
+        Dictionary<string, object> result)
+    {
+        Wow64Context c = GetContext(state.Handle, CONTEXT_CONTROL_INTEGER_DEBUG);
+        if ((c.EFlags & EFLAGS_TF) != 0)
+            throw new InvalidOperationException("Thread trap flag became set during a breakpoint transition");
+        bool expectedSlot0 = (expectedLow & 0x03u) != 0;
+        bool expectedSlot1 = (expectedLow & 0x0cu) != 0;
+        if (!state.Modified || (c.Dr7 & 0xffu) != expectedLow ||
+            (c.Dr7 & 0xffff0000u) != 0 || GetDr(c, 0) != expectedDr0 || GetDr(c, 1) != expectedDr1 ||
+            state.Breakpoints[0] != (expectedSlot0 ? expectedDr0 : 0u) ||
+            state.Breakpoints[1] != (expectedSlot1 ? expectedDr1 : 0u))
+            throw new InvalidOperationException("Breakpoint transition did not start from the exact helper-owned debug-register state at " + phase);
+
+        c.Dr7 &= ~0xffu;
+        c.Dr7 &= 0x0000ffffu;
+        c.Dr7 &= ~(0xffff0000u);
+        SetDr(ref c, 0, newDr0);
+        SetDr(ref c, 1, useDr1 ? newDr1 : 0u);
+        c.Dr6 = 0;
+        c.Dr7 |= 0x01u;
+        if (useDr1) c.Dr7 |= 0x04u;
+        state.Breakpoints[0] = newDr0;
+        state.Breakpoints[1] = useDr1 ? newDr1 : 0u;
+        SetDebugContext(state.Handle, c);
+
+        Wow64Context readback = GetContext(state.Handle, CONTEXT_CONTROL_INTEGER_DEBUG);
+        uint newLow = useDr1 ? 0x05u : 0x01u;
+        if (GetDr(readback, 0) != newDr0 || GetDr(readback, 1) != (useDr1 ? newDr1 : 0u) ||
+            (readback.Dr7 & 0xffu) != newLow || (readback.Dr7 & 0xffff0000u) != 0 ||
+            (readback.Dr6 & 0xe00fu) != 0 || (readback.EFlags & EFLAGS_TF) != 0)
+            throw new InvalidOperationException("Breakpoint transition readback did not match the requested local-only slots at " + phase);
+        Dictionary<string, object> record = new Dictionary<string, object> {
+            { "phase", phase }, { "threadId", tid },
+            { "oldDr0", Hex(expectedDr0) }, { "oldDr1", Hex(expectedDr1) },
+            { "oldDr7LowByte", Hex(expectedLow) },
+            { "newDr0", Hex(readback.Dr0) }, { "newDr1", Hex(readback.Dr1) },
+            { "newDr6", Hex(readback.Dr6) }, { "newDr7", Hex(readback.Dr7) },
+            { "newDr7LowByte", Hex(newLow) }, { "trapFlagClear", true }
+        };
+        ((List<Dictionary<string, object>>)result["debugStateTransitions"]).Add(record);
+        return record;
     }
 
     static void CheckBreakpointCause(Wow64Context c, int slot, uint expectedLow,
@@ -818,17 +908,32 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             throw new InvalidOperationException("Live function payload exceeds the WOW64 address space");
         if (BytesHex(new byte[] { payload[CALL_SITE_OFFSET], payload[CALL_SITE_OFFSET + 1] }) != BytesHex(ExpectedCallBytes) ||
             BytesHex(new byte[] { payload[CONTINUATION_OFFSET], payload[CONTINUATION_OFFSET + 1], payload[CONTINUATION_OFFSET + 2] }) !=
-                BytesHex(ExpectedContinuationBytes))
-            throw new InvalidOperationException("Mapped payload does not contain the exact call and continuation instruction signatures");
+                BytesHex(ExpectedContinuationBytes) ||
+            BytesHex(new byte[] { payload[BRANCH_OFFSET], payload[BRANCH_OFFSET + 1] }) != BytesHex(ExpectedBranchBytes) ||
+            BytesHex(new byte[] { payload[FALLTHROUGH_OFFSET], payload[FALLTHROUGH_OFFSET + 1], payload[FALLTHROUGH_OFFSET + 2] }) !=
+                BytesHex(ExpectedFallthroughBytes))
+            throw new InvalidOperationException("Mapped payload does not contain the exact call, continuation, JNZ and fall-through instruction signatures");
         uint callAddress = checked(liveEntry + CALL_SITE_OFFSET);
+        uint branchAddress = checked(liveEntry + BRANCH_OFFSET);
+        uint fallthroughAddress = checked(liveEntry + FALLTHROUGH_OFFSET);
+        int branchDisplacement = unchecked((sbyte)payload[BRANCH_OFFSET + 1]);
+        long takenAddressLong = (long)branchAddress + ExpectedBranchBytes.Length + branchDisplacement;
+        if (fallthroughAddress != checked(branchAddress + (uint)ExpectedBranchBytes.Length) ||
+            takenAddressLong < 0 || takenAddressLong > UInt32.MaxValue)
+            throw new InvalidOperationException("Mapped JNZ successor address is outside the WOW64 address space");
+        uint takenAddress = (uint)takenAddressLong;
         if ((ulong)callAddress + 5UL > 0x100000000UL)
             throw new InvalidOperationException("Call/continuation boundary exceeds the WOW64 address space");
+        if ((ulong)branchAddress + (ulong)ExpectedBranchBytes.Length > 0x100000000UL ||
+            (ulong)fallthroughAddress + (ulong)ExpectedFallthroughBytes.Length > 0x100000000UL)
+            throw new InvalidOperationException("JNZ/successor boundary exceeds the WOW64 address space");
         if (File.Exists(releaseFile))
             throw new IOException("READY release marker already exists; preserving it");
 
         Dictionary<string, object> result = NewResult(pid, Path.GetFullPath(expectedRuntimePath),
             Path.GetFullPath(processImagePath), expectedCreationFileTimeUtc, liveEntry, Path.GetFullPath(payloadPath),
-            payloadSha256, callAddress, Path.GetFullPath(releaseFile), Path.GetFullPath(requestPath),
+            payloadSha256, callAddress, branchAddress, fallthroughAddress, takenAddress,
+            Path.GetFullPath(releaseFile), Path.GetFullPath(requestPath),
             requestSha256, runId, seconds);
         result["payloadRechecks"] = new List<Dictionary<string, object>>();
         result["instructionRechecks"] = new List<Dictionary<string, object>>();
@@ -836,12 +941,13 @@ public static class AaronScreenStoreCallReturnBreakpointV1
         Thread debugger = new Thread(delegate() {
             try {
                 CaptureOnDebuggerThread(pid, expectedRuntimePath, processImagePath, requestPath,
-                    requestSha256, runId, expectedCreationFileTimeUtc, liveEntry, payload, callAddress, releaseFile, seconds, result);
+                    requestSha256, runId, expectedCreationFileTimeUtc, liveEntry, payload, callAddress,
+                    branchAddress, fallthroughAddress, takenAddress, releaseFile, seconds, result);
             } catch (Exception error) {
                 failure = error;
             }
         });
-        debugger.Name = "AARON SCREEN-AND-STORE CALL EDI no-TF capture v1";
+        debugger.Name = "AARON SCREEN-AND-STORE call-return-branch no-TF capture v1";
         debugger.IsBackground = true;
         debugger.Start();
         debugger.Join();
@@ -852,7 +958,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
         List<string> cleanupErrors = (List<string>)result["cleanupErrors"];
         result["accepted"] = result["captureCompleted"].Equals(true) &&
             result["readyPauseReleased"].Equals(true) && result["debugRegistersRestored"].Equals(true) &&
-            result["detachSucceeded"].Equals(true) && cleanupErrors.Count == 0 && events.Count == 3;
+            result["detachSucceeded"].Equals(true) && cleanupErrors.Count == 0 && events.Count == 5;
         if (!result["accepted"].Equals(true) && result["terminalReason"].Equals("capturing"))
             result["terminalReason"] = "incomplete";
         return result;
@@ -861,7 +967,8 @@ public static class AaronScreenStoreCallReturnBreakpointV1
     static void CaptureOnDebuggerThread(uint pid, string expectedRuntimePath,
         string processImagePath, string requestPath, string requestSha256, string runId,
         ulong expectedCreationFileTimeUtc,
-        uint liveEntry, byte[] payload, uint callAddress, string releaseFile, int seconds,
+        uint liveEntry, byte[] payload, uint callAddress, uint branchAddress,
+        uint fallthroughAddress, uint takenAddress, string releaseFile, int seconds,
         Dictionary<string, object> result)
     {
         IntPtr process = IntPtr.Zero;
@@ -881,6 +988,9 @@ public static class AaronScreenStoreCallReturnBreakpointV1
         bool attached = false, released = false, processExited = false;
         bool pending = false, anyModified = false, restoreSucceeded = false;
         bool restorationFailure = false, terminationConfirmed = false;
+        bool restoreBeforeRejectedEvent = false;
+        uint branchEflags = 0, expectedSuccessorAddress = 0;
+        int expectedSuccessorSlot = -1;
         uint pendingPid = 0, pendingTid = 0, pendingStatus = DBG_EXCEPTION_NOT_HANDLED;
         int phase = PHASE_WAIT_SOURCE, debugEventCount = 0;
         uint ownerTid = 0, sourceEsp = 0, sourceEbp = 0, targetAddress = 0;
@@ -907,6 +1017,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
 
             VerifyPayload(process, liveEntry, payload, result, "before-attach");
             VerifyCallAndContinuation(process, callAddress, result, "before-attach");
+            VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "before-attach");
             debugEvent = Marshal.AllocHGlobal(1024);
             Check(DebugActiveProcess(pid));
             attached = true;
@@ -922,6 +1033,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                     throw new Win32Exception(waitError);
                 }
                 pending = true;
+                bool validatedOwnedBreakpointEvent = false;
                 pendingPid = ReadU32(debugEvent, 4);
                 pendingTid = ReadU32(debugEvent, 8);
                 pendingStatus = DBG_EXCEPTION_NOT_HANDLED;
@@ -950,13 +1062,13 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                             state.Handle = IntPtr.Zero;
                             threads.Remove(pendingTid);
                             if (pendingTid == ownerTid && ownerTid != 0)
-                                throw new InvalidOperationException("Selected thread exited before the call-return event");
+                                throw new InvalidOperationException("Selected thread exited before the branch-successor event");
                         }
                         pendingStatus = DBG_CONTINUE;
                     } else if (eventKind == 5) {
                         processExited = true;
                         result["terminalReason"] = "process-exit";
-                        SetFailure(result, "AARON exited before the call-return capture completed", "process-exit");
+                        SetFailure(result, "AARON exited before the branch-successor capture completed", "process-exit");
                         pendingStatus = DBG_CONTINUE;
                     } else if (eventKind == 1) {
                         uint exceptionCode = ReadU32(debugEvent, 16);
@@ -968,6 +1080,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                                 throw new InvalidOperationException("No AARON threads were available to arm");
                             VerifyPayload(process, liveEntry, payload, result, "immediately-before-arm");
                             VerifyCallAndContinuation(process, callAddress, result, "immediately-before-arm");
+                            VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "immediately-before-arm");
                             int armedCount = 0;
                             foreach (KeyValuePair<uint, ThreadState> item in threads) {
                                 if (item.Value.Exited || item.Value.Handle == IntPtr.Zero) continue;
@@ -1009,11 +1122,13 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                                 if (!released || !state.Modified || state.Breakpoints[0] != callAddress)
                                     throw new InvalidOperationException("Source event arrived before release or without this helper's source breakpoint");
                                 CheckBreakpointCause(c, 0, 0x01u, callAddress, 0);
+                                validatedOwnedBreakpointEvent = true;
                                 if (c.Eip != callAddress)
                                     throw new InvalidOperationException("Source event EIP differs from the live CALL EDI address");
                                 pendingStatus = DBG_CONTINUE;
                                 VerifyPayload(process, liveEntry, payload, result, "source-hit");
                                 VerifyCallAndContinuation(process, callAddress, result, "source-hit");
+                                VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "source-hit");
                                 if (c.Esp < 4u)
                                     throw new InvalidOperationException("Pre-call ESP cannot hold the CALL return address");
                                 targetAddress = c.Edi;
@@ -1056,10 +1171,13 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                             } else if (pendingTid != ownerTid) {
                                 throw new InvalidOperationException("Hardware event came from a thread other than the selected source thread");
                             } else if (phase == PHASE_WAIT_TARGET) {
+                                CheckBreakpointCause(c, 0, 0x05u, targetAddress, continuation);
+                                validatedOwnedBreakpointEvent = true;
                                 if (c.Eip != targetAddress)
                                     throw new InvalidOperationException("Target-entry EIP differs from the sampled pre-call EDI");
-                                CheckBreakpointCause(c, 0, 0x05u, targetAddress, continuation);
+                                VerifyPayload(process, liveEntry, payload, result, "target-entry");
                                 VerifyCallAndContinuation(process, callAddress, result, "target-entry");
+                                VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "target-entry");
                                 if (sourceEsp < 4u || c.Esp != sourceEsp - 4u)
                                     throw new InvalidOperationException("Target-entry ESP is not exactly source ESP minus the pushed return address");
                                 if (c.Ebp != sourceEbp)
@@ -1092,12 +1210,15 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                                 phase = PHASE_WAIT_RETURN;
                                 result["terminalReason"] = "target-entry-awaiting-return";
                             } else if (phase == PHASE_WAIT_RETURN) {
+                                CheckBreakpointCause(c, 1, 0x04u, targetAddress, continuation);
+                                validatedOwnedBreakpointEvent = true;
                                 if (c.Eip != continuation)
                                     throw new InvalidOperationException("Return event EIP differs from callsite+2");
-                                CheckBreakpointCause(c, 1, 0x04u, targetAddress, continuation);
                                 if (c.Ebp != sourceEbp)
                                     throw new InvalidOperationException("Call continuation EBP differs from the original caller-frame marker");
+                                VerifyPayload(process, liveEntry, payload, result, "call-return");
                                 VerifyCallAndContinuation(process, callAddress, result, "call-return");
+                                VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "call-return");
                                 string returnStack = ReadStackHex(process, c.Esp, STACK_WINDOW_BYTES);
                                 Dictionary<string, object> details = new Dictionary<string, object> {
                                     { "callAddress", Hex(callAddress) }, { "continuationAddress", Hex(continuation) },
@@ -1111,8 +1232,94 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                                     { "eaxReturnValue", Hex(c.Eax) }, { "eflagsAtReturn", Hex(c.EFlags) }
                                 };
                                 AddBreakpointEvent(result, "call-return", 1, pendingTid, debugEvent, c, returnStack, details);
+                                TransitionSlots(state, ownerTid, 0x04u, targetAddress, continuation,
+                                    branchAddress, 0, false, "return-to-branch", result);
+                                phase = PHASE_WAIT_BRANCH;
+                                result["terminalReason"] = "call-return-awaiting-branch";
+                                pendingStatus = DBG_CONTINUE;
+                            } else if (phase == PHASE_WAIT_BRANCH) {
+                                CheckBreakpointCause(c, 0, 0x01u, branchAddress, 0);
+                                validatedOwnedBreakpointEvent = true;
+                                if (c.Eip != branchAddress)
+                                    throw new InvalidOperationException("JNZ event EIP differs from SCREEN-AND-STORE +0x2b7");
+                                if (c.Ebp != sourceEbp)
+                                    throw new InvalidOperationException("JNZ caller-frame EBP differs from the original source frame");
+                                VerifyPayload(process, liveEntry, payload, result, "branch-hit");
+                                VerifyCallAndContinuation(process, callAddress, result, "branch-hit");
+                                VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "branch-hit");
+                                branchEflags = c.EFlags;
+                                bool zeroFlag = (branchEflags & EFLAGS_ZF) != 0;
+                                expectedSuccessorSlot = zeroFlag ? 0 : 1;
+                                expectedSuccessorAddress = zeroFlag ? fallthroughAddress : takenAddress;
+                                result["branchEflags"] = Hex(branchEflags);
+                                result["branchZeroFlag"] = zeroFlag;
+                                result["predictedSuccessorAddress"] = Hex(expectedSuccessorAddress);
+                                string branchStack = ReadStackHex(process, c.Esp, STACK_WINDOW_BYTES);
+                                Dictionary<string, object> details = new Dictionary<string, object> {
+                                    { "branchAddress", Hex(branchAddress) },
+                                    { "branchBytesHex", BytesHex(ExpectedBranchBytes) },
+                                    { "branchEflags", Hex(branchEflags) }, { "zeroFlag", zeroFlag },
+                                    { "predictedSuccessorAddress", Hex(expectedSuccessorAddress) },
+                                    { "predictedSuccessorSlot", expectedSuccessorSlot },
+                                    { "fallthroughAddress", Hex(fallthroughAddress) },
+                                    { "fallthroughBytesHex", BytesHex(ExpectedFallthroughBytes) },
+                                    { "takenAddress", Hex(takenAddress) },
+                                    { "signedDisplacement", unchecked((sbyte)ExpectedBranchBytes[1]) },
+                                    { "callerFrameEbp", Hex(sourceEbp) }, { "branchEbp", Hex(c.Ebp) },
+                                    { "branchEsp", Hex(c.Esp) }, { "ediAtBranch", Hex(c.Edi) }
+                                };
+                                AddBreakpointEvent(result, "branch-hit", 0, pendingTid, debugEvent, c, branchStack, details);
+                                TransitionSlots(state, ownerTid, 0x01u, branchAddress, 0,
+                                    fallthroughAddress, takenAddress, true, "branch-to-successors", result);
+                                phase = PHASE_WAIT_SUCCESSOR;
+                                result["terminalReason"] = "branch-hit-awaiting-successor";
+                                pendingStatus = DBG_CONTINUE;
+                            } else if (phase == PHASE_WAIT_SUCCESSOR) {
+                                uint fired = c.Dr6 & 0x03u;
+                                int observedSlot = fired == 0x01u ? 0 : (fired == 0x02u ? 1 : -1);
+                                if (observedSlot < 0)
+                                    throw new InvalidOperationException("Successor event did not identify exactly one owned DR0/DR1 cause");
+                                CheckBreakpointCause(c, observedSlot, 0x05u, fallthroughAddress, takenAddress);
+                                validatedOwnedBreakpointEvent = true;
+                                if (observedSlot != expectedSuccessorSlot || c.Eip != expectedSuccessorAddress)
+                                    throw new InvalidOperationException("Observed successor EIP/slot disagrees with the JNZ ZF-predicted edge");
+                                if (c.Ebp != sourceEbp)
+                                    throw new InvalidOperationException("JNZ successor caller-frame EBP differs from the original source frame");
+                                VerifyPayload(process, liveEntry, payload, result, "branch-successor");
+                                VerifyCallAndContinuation(process, callAddress, result, "branch-successor");
+                                VerifyBranchSequence(process, branchAddress, fallthroughAddress, takenAddress, result, "branch-successor");
+                                string successorStack = ReadStackHex(process, c.Esp, STACK_WINDOW_BYTES);
+                                Dictionary<string, object> details = new Dictionary<string, object> {
+                                    { "branchAddress", Hex(branchAddress) },
+                                    { "branchEflags", Hex(branchEflags) },
+                                    { "zeroFlagAtBranch", (branchEflags & EFLAGS_ZF) != 0 },
+                                    { "predictedSuccessorAddress", Hex(expectedSuccessorAddress) },
+                                    { "predictedSuccessorSlot", expectedSuccessorSlot },
+                                    { "observedSuccessorAddress", Hex(c.Eip) },
+                                    { "observedSuccessorSlot", observedSlot },
+                                    { "observedEdgeMatchesPrediction", true },
+                                    { "callerFrameEbp", Hex(sourceEbp) }, { "successorEbp", Hex(c.Ebp) },
+                                    { "successorEsp", Hex(c.Esp) }, { "ediAtSuccessor", Hex(c.Edi) },
+                                    { "fallthroughAddress", Hex(fallthroughAddress) },
+                                    { "takenAddress", Hex(takenAddress) }
+                                };
+                                if (c.Eip == fallthroughAddress) {
+                                    uint pointerSlotAddress = unchecked(c.Edi - 0x71u);
+                                    details["indirectCallPointerSlotAddress"] = Hex(pointerSlotAddress);
+                                    try {
+                                        byte[] pointerBytes = ReadExact(process, pointerSlotAddress, 4);
+                                        details["indirectCallPointerBytesHex"] = BytesHex(pointerBytes);
+                                        details["indirectCallTargetCandidate"] = Hex(BitConverter.ToUInt32(pointerBytes, 0));
+                                        details["indirectCallTargetProvenExecuted"] = false;
+                                    } catch (Exception pointerReadError) {
+                                        details["indirectCallPointerReadError"] = pointerReadError.GetType().Name + ": " + pointerReadError.Message;
+                                    }
+                                }
+                                AddBreakpointEvent(result, "branch-successor", observedSlot, pendingTid, debugEvent, c, successorStack, details);
+                                result["observedSuccessorAddress"] = Hex(c.Eip);
+                                result["observedSuccessorSlot"] = observedSlot;
                                 result["captureCompleted"] = true;
-                                result["terminalReason"] = "call-return-captured";
+                                result["terminalReason"] = "branch-successor-captured";
                                 phase = PHASE_COMPLETE;
                                 pendingStatus = DBG_CONTINUE;
                             } else {
@@ -1128,20 +1335,29 @@ public static class AaronScreenStoreCallReturnBreakpointV1
                     }
                 } catch (Exception eventError) {
                     SetFailure(result, eventError.GetType().Name + ": " + eventError.Message, "event-rejected");
-                    if (IsSingleStep(ReadU32(debugEvent, 16)))
-                        pendingStatus = DBG_EXCEPTION_NOT_HANDLED;
+                    uint failedEventKind = ReadU32(debugEvent, 0);
+                    bool failedSingleStep = failedEventKind == 1 && IsSingleStep(ReadU32(debugEvent, 16));
+                    if (failedSingleStep) {
+                        // Preserve NOT_HANDLED for an unvalidated exception. An owned hardware
+                        // event is continued only after its saved DR state has been restored.
+                        pendingStatus = validatedOwnedBreakpointEvent ? DBG_CONTINUE : DBG_EXCEPTION_NOT_HANDLED;
+                    } else if (failedEventKind != 1) {
+                        pendingStatus = DBG_CONTINUE;
+                    }
+                    if (anyModified) restoreBeforeRejectedEvent = true;
                 }
 
-                if (phase == PHASE_COMPLETE && result["captureCompleted"].Equals(true)) {
+                if ((phase == PHASE_COMPLETE && result["captureCompleted"].Equals(true)) || restoreBeforeRejectedEvent) {
                     try {
                         cleanup["restoreAttempted"] = true;
                         RestoreThreadsSafely(process, threads, 0, true, restorations);
                         restoreSucceeded = true;
                         result["debugRegistersRestored"] = true;
                         cleanup["restoreSucceeded"] = true;
+                        restoreBeforeRejectedEvent = false;
                     } catch (Exception restoreError) {
                         restorationFailure = true;
-                        AddCleanupError(result, "Restore before call-return continue failed: " + restoreError.Message);
+                        AddCleanupError(result, "Restore before owned hardware-event continue failed: " + restoreError.Message);
                         SetFailure(result, restoreError.Message, "debug-state-restore-failed");
                     }
                 }
@@ -1178,8 +1394,8 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             if (result["captureError"] == null && !result["captureCompleted"].Equals(true)) {
                 string reason = timer.Elapsed.TotalSeconds >= seconds ? "wall-clock-cap" : "incomplete";
                 SetFailure(result, timer.Elapsed.TotalSeconds >= seconds
-                    ? "Bounded capture timed out before the call-return event"
-                    : "Process ended before the call-return event", reason);
+                    ? "Bounded capture timed out before the JNZ successor event"
+                    : "Process ended before the JNZ successor event", reason);
             }
         } catch (Exception error) {
             SetFailure(result, error.GetType().Name + ": " + error.Message, "capture-error");
@@ -1231,7 +1447,7 @@ public static class AaronScreenStoreCallReturnBreakpointV1
             if (pending && !processExited && !restorationFailure) {
                 try {
                     uint status = pendingStatus;
-                    if (result["captureCompleted"].Equals(true) || cleanupErrors.Count != 0)
+                    if (result["captureCompleted"].Equals(true))
                         status = DBG_CONTINUE;
                     ReleaseAndContinuePending(debugEvent, pid, pendingTid, status, result);
                     pending = false;

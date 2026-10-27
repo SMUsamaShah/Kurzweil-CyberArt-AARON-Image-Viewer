@@ -6,19 +6,23 @@ and the running investigation history are linked below.
 Latest static-analysis checkpoint: REA 6.8.0 reran the retained
 SCREEN-AND-STORE function and computed-call queries on the same synthetic PE
 previously analyzed with REA 6.4.0. The complete function report still has 72
-unresolved indirect calls; `CALL EDI` at `0x1fe24d12` and a later conditional
-call remain unresolved. This is static-only and adds no caller, ABI, or JS
-behavior contract. See the [REA 6.8 finding](research/introspection/rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27)
-and [portable evidence](research/introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
+unresolved indirect calls; the `CALL EDI` at `0x1fe24d12` and later
+`CALL EDI` at `+0x34a` have no statically resolved targets. An incoming-
+reference query lists the `+0x2cd` jump to `+0x331`. The listing predicts the
+later branch path from the captured registers, but those edges remain
+unobserved. This static analysis adds no caller, ABI, or JS behavior contract.
+See the [REA 6.8 finding](research/introspection/rea-payload-analysis.md#rea-68-taken-successor-follow-up-2026-10-27)
+and [portable evidence](research/introspection/evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json).
 
 Latest AARON investigation: accepted source-bound triplet
-`sstore27f-20261027-093231-4740a8ed` observed one live call/return inside
-`SCREEN-AND-STORE`: `CALL EDI` at payload offset `+0x2a6` used raw target
-`0x20000985` and returned to `+0x2a8` with raw `EAX=0x8c`. All three fresh
-controls and staged sources matched. The target has no recovered name or ABI;
-the stop precedes the following local store. This adds no JS contract or
-painting parity. See the [finding](research/introspection/screen-and-store-call-return.md)
-and [portable evidence](research/introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+`sstorebranch-v1-20261027-100218-35655b8e` extended the earlier
+`sstore27f` call/return observation through `SCREEN-AND-STORE`'s `JNZ` at
+`+0x2b7`. It recorded ZF clear and a same-thread hit at the taken successor
+`+0x2bc` before that instruction executed. Six complete live-payload checks
+matched, and the fresh before/observer/after controls passed. This adds no JS
+contract, direct caller, or painting parity. See the
+[finding](research/introspection/screen-and-store-call-return.md) and
+[branch evidence](research/introspection/evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json).
 
 Previous AARON investigation: an accepted 1920×1080 source-bound triplet
 observed the first instruction address after `JC rel8 +0x09` in the anonymous
@@ -83,7 +87,7 @@ and [AARON attach-crash evidence](research/introspection/evidence/frida-aaron-in
 | Routines with bounded JS/original comparisons | 31 names / 32 contracts | These are limited, measured behavior slices, not 31 complete function reconstructions. |
 | REA 6.4 static native payload dossiers | 7 distinct payloads | The PICK dossier adds a bounded native branch/data-flow observation. Static dossiers do not add JS behavior contracts or establish recovered ABIs. |
 | REA 6.8 SCREEN-AND-STORE rerun | Same synthetic PE and payload as the retained 6.4 analysis; exact static reports were compared | This is a tool-version compatibility check. Static targets remain unresolved; one separate runtime capture observed `CALL EDI` reach raw address `0x20000985`. The target remains unnamed, and the synthetic PE was not executed. |
-| SCREEN-AND-STORE live call/return | One accepted source-bound triplet; three same-thread native events and fresh matched controls | `CALL EDI` at `+0x2a6` reached `0x20000985` and returned with raw EAX `0x8c` before `MOV [EBP-0x44],EAX`. No callee name, ABI, JS behavior contract, direct Lisp caller, or painting parity is established. |
+| SCREEN-AND-STORE live call/return and branch | Two accepted source-bound triplets; the latest observer captured five ordered same-thread events and fresh matched controls | The first triplet observed `CALL EDI` at `+0x2a6` reach raw `0x20000985` and return with EAX `0x8c`. A separate triplet observed the `+0x2b7` JNZ take its `+0x2bc` successor. No callee name, ABI, direct Lisp caller, JS contract, or painting parity is established. |
 | PREMIUM indirect CALL destination and internal edge | Three complete 768×1080 source-bound triplets across seed-1234 and seed-5678 scenes captured `[EDI+0x27]=0x20000983`; all recorded a same-thread `JMP [ESI+0x12]` edge to the freshly mapped PICK entry | The outer destination remains anonymous and its Lisp caller is unknown; the captures do not prove a continuous instruction path. `CALL [EDI+0x35f]` at `+0x17` was not hit in any run. Adds no behavior contract. |
 | PREMIUM loop-backedge branch and successor | One source-bound seed-456069 scene observed CF=1 at `0x20000991` and the taken successor at `0x2000099c`, before execution | The bytes `89 44 24 04` match the live profile. This is one bounded native path; the candidate CALL target and direct Lisp caller remain unknown. No behavior contract. |
 | AARON Frida attach attempts | 2 source-bound attempts crashed in the same `frida-agent.dll` before script load | No hook, scene completion, caller result, or after-control; the no-TF native breakpoint route remains usable. |

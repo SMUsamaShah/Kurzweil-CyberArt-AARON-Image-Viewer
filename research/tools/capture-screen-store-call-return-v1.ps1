@@ -72,7 +72,7 @@ $continuationBytesValue = ($ContinuationBytes -replace '[\s-]', '').ToLowerInvar
 $creationFileTimeValue = [UInt64]::Parse($ExpectedProcessCreationFileTimeUtc, [Globalization.CultureInfo]::InvariantCulture)
 
 if ($callOffsetValue -ne 0x2A6 -or $callBytesValue -cne 'ffd7' -or $continuationBytesValue -cne '8945bc') {
-    throw 'This helper is pinned to callSiteOffset=0x2A6, CALL bytes FF D7, and continuation bytes 89 45 BC.'
+    throw 'This helper is pinned to callSiteOffset=0x2A6, CALL bytes FF D7, and continuation bytes 89 45 BC; its branch target is fixed at +0x2b7.'
 }
 if ([IntPtr]::Size -ne 8) { throw 'Run this launcher from a fresh 64-bit PowerShell process for WOW64 debugging.' }
 if (-not (Test-Path -LiteralPath $expectedRuntime -PathType Leaf) -or
@@ -124,6 +124,11 @@ $report = [ordered]@{
         callBytesHex = 'ffd7'
         continuationOffset = '0x2a8'
         continuationBytesHex = '8945bc'
+        branchOffset = '0x2b7'
+        branchBytesHex = '7503'
+        fallthroughOffset = '0x2b9'
+        fallthroughBytesHex = 'ff578f'
+        takenOffset = '0x2bc'
         releaseMarkerPath = $releaseFullPath
         readyMarker = $ReadyMarker
         outputPath = $outputFullPath
@@ -134,7 +139,9 @@ $report = [ordered]@{
     debuggerResult = $null
     setupError = $null
     limitations = @(
-        'The continuation breakpoint stops before 89 45 BC executes; no local-store effect is claimed.',
+        'The call-return event is before 89 45 BC; capture then resumes through that store to reach the JNZ successor, without reading back or interpreting the store result.',
+        'The branch direction is observed only for this captured call; ZF predicts the edge and the same-thread successor hit confirms it.',
+        'The fall-through successor is before FF 57 8F executes. Its indirect pointer slot may be sampled, but that alone does not prove the call target or execution.',
         'The EDI value is recorded as a raw CPU target; no Lisp function name, ABI, or direct caller is inferred.',
         'The return ESP is recorded without assuming caller or callee stack cleanup.',
         'The result applies to this process and this bounded capture only.'
