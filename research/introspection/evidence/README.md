@@ -1,5 +1,18 @@
 # Original-engine report excerpts
 
+## SCREEN-AND-STORE direct route through +0x331, 2026-10-27
+
+[`screen-and-store-direct-route-sstore-v2-20261027.json`](screen-and-store-direct-route-sstore-v2-20261027.json)
+records the accepted V2 source-bound triplet. Ten ordered same-thread events
+observed the `+0x2b7` taken edge, `+0x2c3` and `+0x2c7` fall-through edges,
+the `+0x2cd` jump, and the `+0x331` target before its instruction. The
+complete triplet matched nine compared output artifacts and ten staged
+sources; all 11 full-payload checks, 12 route-byte rechecks, and cleanup gates
+passed. It does not capture the second call at `+0x34a`. Rebuild and validate
+the portable record with
+[`derive-screen-store-direct-route-v2-evidence.mjs`](../../tools/derive-screen-store-direct-route-v2-evidence.mjs).
+See the [finding](../screen-and-store-call-return.md#accepted-direct-route-through-0x331-2026-10-27).
+
 ## ZERO-EDGE compiled-constant reference census, 2026-10-13
 
 [`zero-edge-native-links-20261013.json`](zero-edge-native-links-20261013.json)

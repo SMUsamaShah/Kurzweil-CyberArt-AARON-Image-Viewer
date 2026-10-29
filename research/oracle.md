@@ -180,6 +180,11 @@ then creates and removes a uniquely named write-probe file before it creates
 `-OutputRoot`. This catches the case where `C:\temp` exists but the current
 execution context cannot write there.
 
+If PowerShell refuses to load a reviewed project helper before it runs, use
+the process-scoped execution-policy workaround in
+[`tooling-workarounds.md`](tooling-workarounds.md#windows-powershell-execution-policy-blocks-a-local-helper-before-it-loads).
+Do not change the persistent user or machine policy.
+
 On this Codex workspace, the physical `C:\temp` directory was outside the
 default writable area and staging failed with `Access Denied`. On 2026-09-27,
 `C:\temp` was changed to a symbolic link targeting

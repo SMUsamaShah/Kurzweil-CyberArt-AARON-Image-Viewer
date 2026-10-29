@@ -446,9 +446,13 @@ source, `0x1fe24d39` (`+0x2cd`, `JMP 0x1fe24d9d`); its report SHA-256 is
 The retained listing predicts that the saved `EAX=0x8c` and `EDX=0xfffffffc`
 values make the `JNZ` at `+0x2c3` fall through and the `JZ` at `+0x2c7` fall
 through, after which the `+0x2cd` jump reaches `+0x331`. That block contains
-`PUSH [EBP-0x44]` at `+0x33d` and `CALL EDI` at `+0x34a`. This is static
-instruction-flow interpretation for one captured register sample; none of
-those later outcomes or the second call was observed. The call target,
-function identity, ABI, direct Lisp caller, JavaScript behavior, and painting
-parity remain unresolved. See the [portable static follow-up record](evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json)
-and [live finding](screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27).
+`PUSH [EBP-0x44]` at `+0x33d` and `CALL EDI` at `+0x34a`. These were static
+predictions at the time of the earlier branch capture. A later independent,
+source-bound V2 triplet directly observed the `+0x2c3` and `+0x2c7`
+fall-through edges and the `+0x2cd` jump reaching `+0x331`; it stopped before
+the first instruction at `+0x331`. The second call remains unobserved and
+statically unresolved. The call target, function identity, ABI, direct Lisp
+caller, JavaScript behavior, and painting parity remain unresolved. See the
+[portable V2 runtime evidence](evidence/screen-and-store-direct-route-sstore-v2-20261027.json),
+[earlier static record](evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json),
+and [live finding](screen-and-store-call-return.md#accepted-direct-route-through-0x331-2026-10-27).

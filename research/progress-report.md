@@ -1,6 +1,6 @@
 # AARON reverse-engineering progress
 
-Updated 2026-10-27. This is the detailed count-based checkpoint log. The compact
+Updated 2026-10-29. This is the detailed count-based checkpoint log. The compact
 current snapshot is in the [root progress report](../progress-report.md).
 It reports measured scope and keeps function-name counts separate from
 recovered behavior.
@@ -19,17 +19,17 @@ See the [static finding](introspection/rea-payload-analysis.md#screen-and-store-
 and [portable evidence](introspection/evidence/screen-and-store-call-return-flow-rea-20261027-v1.json).
 
 Latest native checkpoint: accepted triplet
-`sstorebranch-v1-20261027-100218-35655b8e` followed the earlier
-`sstore27f` `CALL EDI` return capture and observed the same-thread taken edge
-from `SCREEN-AND-STORE+0x2b7` to `+0x2bc`. ZF was clear at the JNZ, and the
-successor breakpoint stopped before its first instruction. All three fresh
-controls matched, six complete-payload rechecks agreed, and original debug
-state was restored before detach. The two observations are separate
-invocations; later branches and the +0x34a call remain unobserved. This adds
-no JS behavior contract; the existing 31 routine names, 32 bounded
-contracts, 1/5 milestones, and zero painting-parity counts remain unchanged.
-See the [finding](introspection/screen-and-store-call-return.md) and
-[branch evidence](introspection/evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json).
+`sstore-v2-20261027-104238-18bd6013` observed ten ordered same-thread events
+through the actual `SCREEN-AND-STORE+0x331` jump target. It captured the
+`+0x2b7` taken edge, `+0x2c3` and `+0x2c7` fall-through edges, and `+0x2cd`
+jump. The target breakpoint stopped before the `+0x331` instruction. Eleven
+complete-payload checks, twelve instruction-recheck groups, nine output
+artifacts, ten staged sources, fresh controls, debug-state restoration,
+detach, and cleanup passed. The `+0x34a` call remains uncaptured. This adds no
+JS behavior contract; the 31 routine names, 32 bounded contracts, 1/5
+milestones, and zero painting-parity counts remain unchanged. See the
+[finding](introspection/screen-and-store-call-return.md#accepted-direct-route-through-0x331-2026-10-27)
+and [V2 evidence](introspection/evidence/screen-and-store-direct-route-sstore-v2-20261027.json).
 
 Earlier native caller checkpoint: three complete source-bound no-TF triplets
 across seed-1234 writer-stream and seed-5678 full-writer scenes observed the
@@ -58,7 +58,7 @@ and [portable evidence](introspection/evidence/premium-loop-backedge-prediction-
 | Engine JavaScript surface (`engine/src`) | 32 modules, 70 exported functions, 9 classes, 10 constants | Source/API counts only; they do not measure parity. |
 | REA 6.4 static native payload dossiers | 7 distinct payloads | Structured native-code analysis; one payload first seen through a continuation matching the saved stack value at PICK entry is now identified as a SELECT-SUBJECT method. The PICK dossier adds one bounded native branch/data-flow observation. This is not seven recovered behaviors, verified ABIs, or application-wide call graphs. |
 | REA 6.8 SCREEN-AND-STORE compatibility rerun | Same payload analyzed by REA 6.4; function and call-target output compared | Static reports match for the analyzed input, while 6.8 exposes its 72 unresolved call sites. This does not add a distinct payload, caller, ABI, or JS behavior contract. |
-| SCREEN-AND-STORE live call/return and branch | Two accepted source-bound triplets; five ordered same-thread events in the latest observer | The first capture observed raw target `0x20000985` and return EAX `0x8c`; a separate capture observed the `+0x2b7` JNZ reach `+0x2bc`. Later branches and calls remain unobserved. No target name, direct Lisp caller, ABI, JS contract, or painting parity was added. |
+| SCREEN-AND-STORE live call/return and branch | Three accepted source-bound triplets; ten ordered same-thread events in the latest observer | The latest capture observed the route through `+0x331` but stopped before its instruction; `+0x34a` remains unobserved. No target name, direct Lisp caller, ABI, JS contract, or painting parity was added. |
 | Execution-plan milestones fully achieved | 1 of 5 (**20% by milestone count**) | Four milestones remain incomplete or not yet achieved. Milestones differ greatly in size, so 20% is not a time estimate or behavior-coverage score. |
 | Roadmap phases | 1 complete, 1 mostly complete, 7 in progress, 1 later | Ten phases total; phases are not equal-sized. |
 | Whole-painting generator parity | 0 complete results | The generator runs deterministically, but no full painting has passed an original-versus-JS equivalence check. |
@@ -108,6 +108,15 @@ callee address, ABI, semantic type of EAX, direct Lisp caller, subsequent
 conditional branch, and JavaScript behavior remain unresolved. See the
 [finding](introspection/screen-and-store-call-return.md) and
 [portable evidence](introspection/evidence/screen-and-store-call-return-sstore27f-20261027.json).
+
+The later V2 triplet `sstore-v2-20261027-104238-18bd6013` observed the route
+through `+0x331` in one same-thread sequence: `+0x2b7` taken, `+0x2c3` and
+`+0x2c7` fall through, `+0x2cd` jumps, then `+0x331` is reached before its
+instruction. All 11 full-payload checks, 12 route-byte groups, nine compared
+outputs, ten staged sources, and debugger cleanup gates passed. The second
+call at `+0x34a` remains the next native target. See the [updated finding](introspection/screen-and-store-call-return.md#accepted-direct-route-through-0x331-2026-10-27),
+[portable evidence](introspection/evidence/screen-and-store-direct-route-sstore-v2-20261027.json),
+and [evidence deriver](tools/derive-screen-store-direct-route-v2-evidence.mjs).
 
 ## PREMIUM JC successor native observation (2026-10-15)
 

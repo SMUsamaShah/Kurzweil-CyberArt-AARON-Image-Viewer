@@ -11,7 +11,7 @@ agents. The full technical roadmap remains in
 the current state, constraints, and next move easy to find after a
 conversation boundary.
 
-## Latest checkpoint: 2026-10-27 — SCREEN-AND-STORE branch successor observed
+## Latest checkpoint: 2026-10-27 — SCREEN-AND-STORE route observed through +0x331
 
 Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh
 before/observer/after `screen-unit-seed-1234` runs. Scene, drawing, planning,
@@ -44,14 +44,23 @@ fresh triplet controls passed, six complete-payload rechecks matched, and
 debugger state was restored. See the [branch finding](introspection/screen-and-store-call-return.md#accepted-branch-successor-follow-up-2026-10-27)
 and [portable evidence](introspection/evidence/screen-and-store-branch-successor-sstorebranch-v1-20261027.json).
 
-Next: follow the static path through the `JNZ` at payload `+0x2c3` and the
-`JZ` at `+0x2c7`, requiring each actual same-thread successor before claiming
-the edge. The saved `EAX=0x8c` and `EDX=0xfffffffc` predict both branches are
-not taken in the retained REA 6.8 listing; this has not been observed. If the
-`+0x2cd` jump is reached, require a real `+0x331` hit before tracing the
-second `CALL EDI` at `+0x34a` to a same-thread target entry and `+0x34c`
-return. Re-derive addresses and bytes from the fresh READY pause, use fresh
-serialized controls, and keep direct Lisp caller and JS behavior claims open.
+The accepted V2 triplet `sstore-v2-20261027-104238-18bd6013` then captured ten
+ordered events in one process, thread, and EBP frame. It observed the actual
+`+0x2b7` taken successor, `+0x2c3` and `+0x2c7` fall-through successors, the
+`+0x2cd` jump, and the actual `+0x331` target before its first instruction.
+All eleven full-payload checks, twelve route-instruction rechecks, nine
+compared outputs, ten staged sources, and cleanup gates passed. The portable
+[V2 record](introspection/evidence/screen-and-store-direct-route-sstore-v2-20261027.json)
+can be regenerated with
+[`derive-screen-store-direct-route-v2-evidence.mjs`](tools/derive-screen-store-direct-route-v2-evidence.mjs).
+This remains one bounded path; it does not capture `+0x331`'s instruction or
+the second call at `+0x34a`.
+
+Next: extend the no-TF observer from the `+0x331` event through the second
+`CALL EDI` at `+0x34a`, its same-thread target entry, and return at `+0x34c`.
+Recompute addresses and bytes from a fresh READY pause, use fresh serialized
+controls, preserve debugger state, and keep direct Lisp caller and JS behavior
+claims open.
 
 ## Previous tool checkpoint: 2026-10-27 — REA 6.8 SCREEN-AND-STORE rerun
 
@@ -71,8 +80,9 @@ This was static-only analysis on an unexecuted synthetic PE. The runtime
 follow-up is recorded above; REA still does not name the dynamic callee or a
 direct Lisp caller, and it does not establish a JavaScript behavior contract.
 The post-successor REA query leaves `CALL EDI` at `+0x34a` unresolved and lists
-the `+0x2cd` jump as the static incoming reference to `+0x331`; the predicted
-later path remains unobserved. See the [follow-up analysis](introspection/rea-payload-analysis.md#rea-68-taken-successor-follow-up-2026-10-27).
+the `+0x2cd` jump as the static incoming reference to `+0x331`. The later V2
+capture above observes that route through `+0x331`; the second call remains
+uncaptured. See the [follow-up analysis](introspection/rea-payload-analysis.md#rea-68-taken-successor-follow-up-2026-10-27).
 
 ## Earlier checkpoint: 2026-10-15 — PREMIUM JC successor observed
 

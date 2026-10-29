@@ -70,6 +70,43 @@ The follow-up therefore establishes only the single `+0x2b7` to `+0x2bc`
 edge for this invocation. It adds no function or JavaScript behavior
 contract, no direct Lisp caller, and no painting-parity result.
 
+## Accepted direct route through `+0x331`, 2026-10-27
+
+A third fresh, serialized source-bound triplet,
+`sstore-v2-20261027-104238-18bd6013`, extended the capture through the later
+branches and the `+0x2cd` jump. The portable [V2 evidence](evidence/screen-and-store-direct-route-sstore-v2-20261027.json)
+is rebuilt and checked with
+[`derive-screen-store-direct-route-v2-evidence.mjs`](../tools/derive-screen-store-direct-route-v2-evidence.mjs).
+The three runs were complete; the coordinator accepted the scene, drawing,
+planning, writer, screen-unit, screen-color, and staged-source comparisons.
+Nine compared output artifacts and ten staged sources match across the three
+run roots.
+
+Ten ordered events in one process, thread, and EBP frame first recorded the
+existing `CALL EDI` at `+0x2a6`, raw target `0x20000985`, its target entry, and
+return to `+0x2a8` with `EAX=0x8c`. The captured `JNZ` at `+0x2b7` had ZF clear
+and reached `+0x2bc`; the `JNZ` at `+0x2c3` had ZF set and reached its
+fall-through `+0x2c5`; the `JZ` at `+0x2c7` had ZF clear and reached
+`+0x2cd`; and the short jump bytes `EB 62` at `+0x2cd` reached `+0x331`
+(`0x1fe24d9d`). The final event stopped before `8B 46 7E` (`MOV EAX,[ESI+0x7e]`)
+executed. Eleven complete-payload checks and twelve route-instruction recheck
+groups passed. The original debug state was restored, detach succeeded, and
+cleanup errors were empty.
+
+This V2 trace directly observes the route through `+0x331` for that one
+invocation; it supersedes the earlier predictions for these particular
+branches. The observation ends before the `+0x331` instruction and does not
+capture the second `CALL EDI` at `+0x34a`, its target entry, or its return at `+0x34c`. The
+initial `+0x2a6` return stop was before `89 45 BC`, and no local-value readback
+was made. No direct Lisp caller, callee name, ABI, JavaScript contract, or
+painting parity is established.
+
+Next: extend the source-bound no-TF capture from the actual `+0x331` event
+through the `+0x34a` callsite, its sampled raw EDI target, same-thread target
+entry with `[ESP]=+0x34c`, and the return at `+0x34c` before its continuation
+executes. Keep target-entry and return ESP values as observations; do not infer
+an ABI from them.
+
 ## Rejected run and debugger fix
 
 The first fresh attempt, `sstore27e-20261027-092828-62b4014c`, reached the
@@ -82,6 +119,6 @@ event `DBG_CONTINUE` only after the disarm succeeds. A separate
 The rejected run remains diagnostic-only and is not part of the accepted
 observation.
 
-See the [tooling workaround](tooling-workarounds.md#screen-and-store-breakpoint-event-must-be-handled),
+See the [tooling workaround](../tooling-workarounds.md#screen-and-store-breakpoint-event-must-be-handled),
 the [REA 6.8 static analysis](rea-payload-analysis.md#screen-and-store-return-use-rerun-2026-10-27),
-and the [active execution plan](execution-plan.md).
+and the [active execution plan](../execution-plan.md).

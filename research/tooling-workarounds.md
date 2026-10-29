@@ -111,6 +111,23 @@ files. The runner also saves and restores the per-user AARON registry values;
 if that write is denied, retry the same invocation through scoped elevation.
 It preserves the prior values and cleans only its named staging files.
 
+### Windows PowerShell execution policy blocks a local helper before it loads
+
+On 2026-10-27, the default `powershell.exe -NoProfile -File ...` invocation
+was rejected by the host's script execution policy before the project helper
+loaded. Re-run that exact, reviewed repository script with a process-scoped
+override, for example:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File `
+  .\research\tools\capture-screen-store-call-return-triplet-v2.ps1 `
+  -PreflightOnly
+```
+
+`-ExecutionPolicy Bypass` applies only to that PowerShell process; it does not
+change the user or machine policy. Keep the normal no-launch preflight and
+source checks, and do not persistently lower execution policy as a workaround.
+
 ### Preserve the SCREEN-AND-STORE READY pause across native mapping
 
 `capture-aaron-native-code.ps1` normally writes the runner release marker in
@@ -749,6 +766,13 @@ and branch `git push` in one scoped elevated command. Keep the existing branch
 and review `git status` before staging; do not stop at the first denied call.
 The failed staging attempt in this session created no lock; the verified v6
 milestone then pushed successfully as `2233ff3`.
+
+Source-bound capture scripts may retain CRLF bytes with `core.autocrlf=false`.
+If `git diff --cached --check` flags every CRLF line as trailing whitespace,
+use `git -c core.whitespace=cr-at-eol diff --cached --check`. This one-command
+setting still checks actual whitespace errors while preserving the exact
+source bytes recorded in capture hashes; do not normalize archived sources
+just to remove CR-at-EOL diagnostics.
 
 When a Node evidence helper needs to verify an ignored output path, do not
 assume it can spawn Git: in this workspace, `spawnSync('git', ...)` returned

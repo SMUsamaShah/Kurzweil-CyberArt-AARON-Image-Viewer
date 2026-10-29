@@ -7,7 +7,7 @@ Before local REA, oracle, or Git operations, use the central
 [tooling quick fixes](tooling-workarounds.md). The reusable REA wrapper sets
 the configured Ghidra/Java environment and retains query diagnostics.
 
-Prepared 2026-09-27; updated 2026-10-27. This is the active work order; the older investigation
+Prepared 2026-09-27; updated 2026-10-29. This is the active work order; the older investigation
 queue in [the roadmap](reverse-engineering-plan.md) is historical reference.
 
 REA 6.4.0 is installed and verified for x86 PE inspection. Its Windows provider
@@ -979,7 +979,7 @@ and [portable evidence](introspection/evidence/pick-native-flow-rea-20261015-v1.
 The `CALL EDI` return-use capture described as future work at this checkpoint
 was completed in the later 2026-10-27 triplet below.
 
-## Current checkpoint: SCREEN-AND-STORE branch successor observed, 2026-10-27
+## Current checkpoint: SCREEN-AND-STORE route observed through +0x331, 2026-10-27
 
 Accepted triplet `sstore27f-20261027-093231-4740a8ed` completed fresh,
 serialized before/observer/after runs. The source-bound observer mapped the
@@ -1011,12 +1011,21 @@ reported a C: image path for the D: request while file identities matched;
 retain the identity checks and failure diagnostics documented in
 [tooling workarounds](tooling-workarounds.md).
 
-Next: extend the no-TF observer from the accepted `+0x2bc` successor through
-the REA-listed `JNZ` at `+0x2c3` and `JZ` at `+0x2c7`, recording each branch
-and validating its immediate same-thread successor. If the `+0x2cd` jump is
-reached, require an actual `+0x331` event before tracing the `CALL EDI` at
-`+0x34a`, its same-thread target entry, and return to `+0x34c`. Captured
-`EAX=0x8c` and `EDX=0xfffffffc` predict a not-taken outcome for both
-conditions in the retained REA listing, but do not prove the path executes.
-Recompute live addresses and bytes from the fresh READY pause and keep the
-full source-bound triplet, fresh controls, and cleanup gates.
+The accepted `sstore-v2-20261027-104238-18bd6013` triplet extended that
+separate route observation: in ten ordered events, the same thread followed
+the actual `+0x2b7` taken edge, `+0x2c3` and `+0x2c7` fall-through edges, and
+the `+0x2cd` jump to `+0x331`. The final breakpoint stopped before the first
+`+0x331` instruction. All eleven complete-payload checks, twelve route-byte
+recheck groups, nine compared output artifacts, ten staged sources, and
+debugger cleanup gates passed. See the [runtime finding](introspection/screen-and-store-call-return.md#accepted-direct-route-through-0x331-2026-10-27)
+and [portable evidence](introspection/evidence/screen-and-store-direct-route-sstore-v2-20261027.json).
+
+Next: extend the no-TF capture from the actual `+0x331` event through the
+`CALL EDI` at `+0x34a`, its sampled raw EDI target, same-thread target entry,
+and return at `+0x34c`. Validate the full payload and each call/continuation
+site from a fresh READY pause. For the second target entry require the actual
+return address at `[ESP]` to be `+0x34c` and target-entry ESP to equal the
+second pre-call ESP minus four; record return ESP/EBP without imposing a
+stack-cleanup ABI. Stop before executing `+0x34c`'s continuation instruction.
+If this next capture reaches `+0x34a`, it still establishes only one bounded
+route and does not name a Lisp caller or add JS behavior or painting parity.
